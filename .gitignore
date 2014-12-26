@@ -8,6 +8,8 @@ common-tmp
 *.tgz
 docs/build
 bower_components
+# compiled output
+dist
 
 # Logs
 logs
