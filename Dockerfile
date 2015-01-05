@@ -27,4 +27,4 @@ WORKDIR /app/
 USER web
 
 # Default command to run when this container is run.
-CMD ["ember", "server"]
+CMD ["ember", "server", "--watcher=polling"]
