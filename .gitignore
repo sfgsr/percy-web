@@ -5,6 +5,7 @@ tmp*
 _posts
 _site
 common-tmp
+.DS_Store
 *.tgz
 docs/build
 bower_components

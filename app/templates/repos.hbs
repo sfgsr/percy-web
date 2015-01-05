@@ -1,0 +1,18 @@
+{{outlet}}
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Private</th>
+    <th>Description</th>
+    <th>Created</th>
+  </tr>
+  {{#each repo in model}}
+    <tr>
+      <td><a {{bind-attr href=repo.html_url}}>{{repo.full_name}}</a></td>
+      <td>{{repo.private}}</td>
+      <td>{{repo.description}}</td>
+      <td>{{repo.createdAt}}</td>
+    </tr>
+  {{/each}}
+</table>
