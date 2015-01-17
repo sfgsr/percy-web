@@ -1,0 +1,43 @@
+/************************/
+/******* Globals ********/
+/************************/
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: open_sanslight;
+  font-size: 16px;
+}
+
+.section {
+  padding: 20px 30px 30px;
+
+  &:nth-child(even) {
+    background-color: whitesmoke;
+  }
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  padding: 15px 20px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1rem;
+  background-image: linear-gradient(rgb(138, 221, 109), rgb(96, 176, 68));
+  cursor: pointer;
+  outline: 0;
+}
+
+
+/************************/
+/***** NOT Globals ******/
+/************************/
+.authButton {
+  margin-top: 20px;
+  background-image: linear-gradient(#FE6042, #CB2626);
+  font-family: open_sanssemibold;
+
+  &:active {
+    background-image: linear-gradient(#CB2626, #FE6042);
+  }
+}
