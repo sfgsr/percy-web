@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('login');
   this.resource('repos', {path: '/repos/:repo_id'}, function(){
     this.route('screenshots');
   });
