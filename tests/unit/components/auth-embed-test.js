@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('auth-sso', 'AuthSsoComponent', {
+moduleForComponent('auth-embed', 'AuthEmbedComponent', {
   // specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
 });
