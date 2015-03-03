@@ -1,7 +1,0 @@
-<h1>Screenshots Page</h1>
-
-{{#each screenshot in model}}
-  <div>{{screenshot.name}}</div>
-  <div>{{screenshot.image.url}}</div>
-  <div><img {{bind-attr src=screenshot.image.url}} width="400" height="300"></div>
-{{/each}}
