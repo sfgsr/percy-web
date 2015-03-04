@@ -1,0 +1,26 @@
+.AccountCard
+  position: relative
+  box-sizing: border-box
+  width: 100%
+  border: 1px solid #ededed
+  background: #ededed
+  padding: 20px
+
+  &.AccountCard--active
+    background: #dedede
+
+  &.AccountCard--linked
+    cursor: pointer
+
+    &:hover
+      border: 1px solid #cdcdcd
+
+  .AccountCard-arrow
+    position: absolute
+    top: 25px
+    right: -18px
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 18px solid #cdcdcd;

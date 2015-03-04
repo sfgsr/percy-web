@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'client',
+    modulePrefix: 'perceptual-ui',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
@@ -25,9 +25,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-    ENV.API_URI = 'http://localhost:3000';
-    ENV.BASE_AUTHENTICATION_PATH = ENV.API_URI + '/auth/github';
   }
 
   if (environment === 'test') {
