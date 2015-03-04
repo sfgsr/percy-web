@@ -1,0 +1,46 @@
+<div class="Header Header--small">
+  {{#link-to "repos" class="Button Header-loginButton u-full-width u-pull-right"}}
+    Apps
+  {{/link-to}}
+  <div class="Header-logo">
+    {{#link-to "index"}}
+      <img src="/images/logo-medium.png" height="50">
+    {{/link-to}}
+  </div>
+</div>
+<div class="Panel">
+  <strong>Accounts</strong>
+  <div class="AccountCard AccountCard--linked AccountCard--active">
+    <div><a href="#">fotinakis</a></div>
+    <div>Last updated: today</div>
+    <div class="AccountCard-arrow"></div>
+  </div>
+  <div class="AccountCard AccountCard--linked">
+    <div><a href="#">perceptual-ci</a></div>
+    <div>Last updated: yesterday</div>
+  </div>
+</div>
+<div class="container container--withPanel">
+  <h4>Repositories</h4>
+  <p>Enable a repository below to get started:</p>
+  <table class="u-full-width">
+    <tr>
+      <th>Repository</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>{{#link-to "repos.foo"}}bashrc{{/link-to}}</td>
+      <td>{{#link-to "repos.foo" class="button u-pull-right"}}Enable{{/link-to}}</td>
+    </tr>
+    <tr>
+      <td>{{#link-to "repos.foo"}}perceptual-ci{{/link-to}}</td>
+      <td>{{#link-to "repos.foo" class="button u-pull-right"}}Enable{{/link-to}}</td>
+    </tr>    <tr>
+      <td>{{#link-to "repos.foo"}}perceptual-ui{{/link-to}}</td>
+      <td>{{#link-to "repos.foo" class="button button-primary u-pull-right"}}Disable{{/link-to}}</td>
+    </tr>    <tr>
+      <td>{{#link-to "repos.foo"}}perceptual-api{{/link-to}}</td>
+      <td>{{#link-to "repos.foo" class="button u-pull-right"}}Enable{{/link-to}}</td>
+    </tr>
+  </table>
+</div>
