@@ -1,29 +1,37 @@
 .Header
   background-color: #582A64
   color: #fefefe
-  height: 400px
-  text-align: center
   padding: 10px
-  margin-bottom: 50px
   // box-shadow: 0px 2px 2px #888888
+
+  &.Header--large
+    height: 400px
+    margin-bottom: 50px
+    text-align: center
+
+    & h1
+      margin-bottom: 1rem
+
+    & h2
+      font-size: 2.4rem
+      line-height: 1.5
+      letter-spacing: -.05rem
 
   .Header-loginButton,
   .Header-loginButton:hover,
   .Header-loginButton:focus,
     color: #fff
-    margin-top: 20px
     font-size: 1.3rem
+    margin-top: 10px
 
   .Header-logo
-    padding-top: 100px
+    padding-top: 80px
 
   .Button
     color: #fff
 
   &.Header--small
-    text-align: inherit
     height: 40px
-    margin-bottom: 0
 
   &.Header--small .Header-logo
     padding-top: 0px

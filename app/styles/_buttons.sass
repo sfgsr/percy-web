@@ -3,6 +3,7 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
+  position: relative
   display: inline-block
   height: 38px
   padding: 0 30px
@@ -21,42 +22,22 @@ input[type="button"],
   cursor: pointer
   box-sizing: border-box
 
-.Button:hover,
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover,
-.Button:focus,
-button:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus,
-input[type="button"]:focus,
-  color: #333
-  border-color: #c593d2
-  outline: 0
+  &:hover,
+  &:focus,
+    color: #333
+    border-color: #c593d2
+    outline: 0
 
-.Button.Button--primary,
-button.Button--primary,
-input[type="submit"].Button--primary,
-input[type="reset"].Button--primary,
-input[type="button"].Button--primary,
-  color: #FFF
-  background-color: #582a64
-  border-color: #451b51
+  &.Button--primary,
+    color: #FFF
+    background-color: #582a64
+    border-color: #451b51
 
-.Button.Button-primary:hover,
-button.Button--primary:hover,
-input[type="submit"].Button--primary:hover,
-input[type="reset"].Button--primary:hover,
-input[type="button"].Button--primary:hover,
-.Button.Button--primary:focus,
-button.Button--primary:focus,
-input[type="submit"].Button--primary:focus,
-input[type="reset"].Button--primary:focus,
-input[type="button"].Button--primary:focus,
-  color: #FFF
-  background-color: #793989
-  border-color: #451b51
+    &:hover,
+    &:focus,
+      color: #FFF
+      background-color: #793989
+      border-color: #451b51
 
 
 /**
@@ -66,7 +47,15 @@ button,
 .Button
   margin-bottom: 1rem
 
+  &.Button--withLeftIcon
+    padding: 0 30px 0 50px
+
+  .fa--left
+    position: absolute
+    left: 16px
+    top: 6px
+    font-size: 2.5rem
+
 table button,
 table .Button,
   margin-bottom: 0
-
