@@ -10,4 +10,6 @@ export default DS.Model.extend({
   description: DS.attr(),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
+
+  builds: DS.hasMany('build', {async: true}),
 });

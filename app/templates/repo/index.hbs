@@ -1,5 +1,5 @@
 <div class="Header Header--small">
-  {{#link-to "repo.index" 'fotinakis' class="Button u-pull-right"}}
+  {{#link-to "repo.index" ownerLogin class="Button u-pull-right"}}
     Apps
   {{/link-to}}
   <div class="Header-logo">
@@ -11,7 +11,7 @@
 <div class="Panel">
 </div>
 <div class="container container--withPanel">
-  <h4>fotinakis / foo</h4>
+  <h4>{{fullName}}</h4>
   <table class="u-full-width">
     <tr>
       <th>Build</th>
@@ -21,39 +21,44 @@
       <th>Status</th>
     </tr>
     <tr>
-      <td>{{#link-to "builds.build" 'fotinakis' 'foo' 123}}Pull Request #121{{/link-to}}</td>
+      <td>{{#link-to "builds.build" ownerLogin name 123}}Pull Request #121{{/link-to}}</td>
       <td>Initial commit of new fancy things</td>
       <td>a2b33c1 (master)</td>
       <td><a href="#">Mike Fotinakis</a></td>
       <td>Last updated 1 min ago</td>
     </tr>
     <tr>
-      <td>{{#link-to "builds.build" 'fotinakis' 'foo' 123}}Pull Request #123{{/link-to}}</td>
+      <td>{{#link-to "builds.build" ownerLogin name 123}}Pull Request #123{{/link-to}}</td>
       <td>consolidated v2.0 spec support, added v2.0 spec links</td>
       <td>e947971 (refactor-branch)</td>
       <td><a href="#">Mike Fotinakis</a></td>
       <td>Last updated 1 min ago</td>
     </tr>
     <tr>
-      <td>{{#link-to "builds.build" 'fotinakis' 'foo' 123}}Pull Request #122{{/link-to}}</td>
+      <td>{{#link-to "builds.build" ownerLogin name 123}}Pull Request #122{{/link-to}}</td>
       <td>Make backwards compatible with ruby 1.9.3</td>
       <td>a123971 (master)</td>
       <td><a href="#">Mike Fotinakis</a></td>
       <td>Finished 10 min ago</td>
     </tr>
     <tr>
-      <td>{{#link-to "builds.build" 'fotinakis' 'foo' 123}}Pull Request #121{{/link-to}}</td>
+      <td>{{#link-to "builds.build" ownerLogin name 123}}Pull Request #121{{/link-to}}</td>
       <td>Initial commit of new fancy things</td>
       <td>a2b33c1 (master)</td>
       <td><a href="#">Mike Fotinakis</a></td>
       <td>Finished 10 min ago</td>
     </tr>
     <tr>
-      <td>{{#link-to "builds.build" 'fotinakis' 'foo' 123}}Pull Request #120{{/link-to}}</td>
+      <td>{{#link-to "builds.build" ownerLogin name 123}}Pull Request #120{{/link-to}}</td>
       <td>Remove cruft and refactor blah blurgers.</td>
       <td>e947971 (master)</td>
       <td><a href="#">Mike Fotinakis</a></td>
       <td>Finished 10 min ago</td>
     </tr>
   </table>
+  {{#each build in builds}}
+    <strong>{{#link-to "builds.build" ownerLogin name build.id}}Build #{{build.id}}{{/link-to}}</strong><br>
+    {{build.state}}<br>
+    {{build.version}}<br>
+  {{/each}}
 </div>

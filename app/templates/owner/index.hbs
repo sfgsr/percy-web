@@ -28,21 +28,15 @@
       <th>Repository</th>
       <th></th>
     </tr>
+    <tr>
+      <td>{{#link-to "repo.index" "fotinakis" "foo"}}perceptual-ui{{/link-to}}</td>
+      <td>{{#link-to "repo.index" "fotinakis" "foo" class="Button Button--primary u-pull-right"}}Disable{{/link-to}}</td>
+    </tr>
     {{#each repo in repos}}
       <tr>
         <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.name}}{{/link-to}}</td>
         <td>{{#link-to "repo.index" repo.ownerLogin repo.name class="Button u-pull-right"}}Enable{{/link-to}}</td>
       </tr>
     {{/each}}
-    <tr>
-      <td>{{#link-to "repo.index" "fotinakis" "foo"}}perceptual-ci{{/link-to}}</td>
-      <td>{{#link-to "repo.index" "fotinakis" "foo" class="Button u-pull-right"}}Enable{{/link-to}}</td>
-    </tr>    <tr>
-      <td>{{#link-to "repo.index" "fotinakis" "foo"}}perceptual-ui{{/link-to}}</td>
-      <td>{{#link-to "repo.index" "fotinakis" "foo" class="Button Button--primary u-pull-right"}}Disable{{/link-to}}</td>
-    </tr>    <tr>
-      <td>{{#link-to "repo.index" "fotinakis" "foo"}}perceptual-api{{/link-to}}</td>
-      <td>{{#link-to "repo.index" "fotinakis" "foo" class="Button u-pull-right"}}Enable{{/link-to}}</td>
-    </tr>
   </table>
 </div>
