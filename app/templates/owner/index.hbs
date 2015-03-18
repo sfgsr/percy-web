@@ -28,10 +28,12 @@
       <th>Repository</th>
       <th></th>
     </tr>
-    <tr>
-      <td>{{#link-to "repo.index" "fotinakis" "bashrc"}}bashrc{{/link-to}}</td>
-      <td>{{#link-to "repo.index" "fotinakis" "foo" class="Button u-pull-right"}}Enable{{/link-to}}</td>
-    </tr>
+    {{#each repo in repos}}
+      <tr>
+        <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.name}}{{/link-to}}</td>
+        <td>{{#link-to "repo.index" repo.ownerLogin repo.name class="Button u-pull-right"}}Enable{{/link-to}}</td>
+      </tr>
+    {{/each}}
     <tr>
       <td>{{#link-to "repo.index" "fotinakis" "foo"}}perceptual-ci{{/link-to}}</td>
       <td>{{#link-to "repo.index" "fotinakis" "foo" class="Button u-pull-right"}}Enable{{/link-to}}</td>
