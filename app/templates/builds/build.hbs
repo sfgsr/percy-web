@@ -12,13 +12,16 @@
 </div>
 <div class="container container--withPanel">
   <h4>{{repo.fullName}}: build #{{id}}</h4>
-  ###
   {{#each comparison in comparisons}}
-    <img src={{unbound comparison.pdiff.baseScreenshot.image.url}}>
-    <img src={{unbound comparison.pdiff.otherScreenshot.image.url}}>
-    <img src={{unbound comparison.pdiff.diffImage.url}}>
+    <strong>Version:</strong> {{comparison.build.version}}<br>
+    <strong>URL:</strong> {{comparison.baseResource.originalUrl}}<br>
+    <div style="height: 3030px" class="row">
+      {{pdiff-image-overlay pdiff=comparison.pdiff}}
+    </div>
+    <div class="row">
+      {{pdiff-image-viewer pdiff=comparison.pdiff}}
+    </div>
   {{/each}}
-  ###
   <table class="u-full-width">
     <tr>
       <td>Initial commit of new fancy things</td>

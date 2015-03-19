@@ -1,0 +1,19 @@
+.PdiffImageOverlay
+  img
+    width: 70%
+    border: 1px solid #cdcdcd
+    position: absolute
+    top: 0
+    left: 0
+
+  &.PdiffImageOverlay--hideBaseScreenshot
+    .PdiffImageOverlay-baseScreenshot
+      display: none
+
+  &.PdiffImageOverlay--hideOtherScreenshot
+    .PdiffImageOverlay-otherScreenshot
+      display: none
+
+  &.PdiffImageOverlay--hideDiff
+    .PdiffImageOverlay-diffImage
+      display: none
