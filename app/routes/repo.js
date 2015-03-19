@@ -8,9 +8,13 @@ export default Ember.Route.extend({
     var self = this;
     var promise = new Ember.RSVP.Promise(function(resolve, reject) {
       var repoParams = {repo: params.repo_id, owner: self.modelFor('owner').id};
-      self.store.find('repo', repoParams).then(function(repos) {
-        resolve(repos.content[0]);
-      });
+      self.store.find('repo', repoParams).then(
+        function(repos) {
+          resolve(repos.content[0]);
+        },
+        function() {
+          reject.apply(this, arguments);
+        });
     });
     return promise;
   },

@@ -2,6 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: true}),
+  comparisons: DS.hasMany('comparison', {async: true}),
   state: DS.attr(),
   version: DS.attr(),
   createdAt: DS.attr('date'),
