@@ -1,13 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'button',
-  classNames: ['Button', 'ToggleButton'],
-  classNameBindings: ['enabled:Button--primary'],
   enabled: false,
-  disabled: Ember.computed.not('enabled'),
+  classes: null,
   enabledText: 'Disable',
   disabledText: 'Enable',
+
+  disabled: Ember.computed.not('enabled'),
+  tagName: 'button',
+  classNames: ['Button', 'ToggleButton'],
+  classNameBindings: ['enabled:Button--primary', 'classes'],
+
   text: function() {
     if (this.get('enabled')) {
       return this.get('enabledText');

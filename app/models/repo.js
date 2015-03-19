@@ -6,6 +6,7 @@ export default DS.Model.extend({
   ownerLogin: DS.attr(),
   fullName: DS.attr(),
   isPrivate: DS.attr('boolean'),
+  isEnabled: DS.attr('boolean'),
   htmlUrl: DS.attr(),
   description: DS.attr(),
   createdAt: DS.attr('date'),
