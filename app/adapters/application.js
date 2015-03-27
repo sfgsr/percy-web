@@ -1,6 +1,6 @@
-import DS from "ember-data";
+import JsonApiAdapter from 'ember-json-api/json-api-adapter';
 
-export default DS.ActiveModelAdapter.extend({
+export default JsonApiAdapter.extend({
   // TODO(fotinakis): #hardcoding.
   host: 'http://localhost:3000',
   namespace: 'v1',
