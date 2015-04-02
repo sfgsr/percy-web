@@ -1,7 +1,9 @@
 <div class="Panel">
 </div>
 <div class="container container--withPanel">
-  <h4>{{repo.fullName}}: build #{{id}}</h4>
+  <h4>{{repo.slug}}: build #{{id}}</h4>
+
+  {{!--
   {{#each comparison in comparisons}}
     <strong>Version:</strong> {{comparison.build.version}}<br>
     <strong>URL:</strong> {{comparison.baseResource.originalUrl}}<br>
@@ -12,22 +14,30 @@
       {{pdiff-image-viewer pdiff=comparison.pdiff}}
     </div>
   {{/each}}
-  <table class="u-full-width">
-    <tr>
-      <td>Initial commit of new fancy things</td>
-      <td>a2b33c1 (master)</td>
-      <td><a href="#">Mike Fotinakis</a></td>
-      <td>Last updated 1 min ago</td>
-    </tr>
+   --}}
+
+  <table>
+    {{#each resource in resources}}
+      <tr>
+        <td>
+          <strong>isRoot</strong> {{resource.isRoot}}<br>
+          <strong>pageUrl</strong> {{resource.pageUrl}}<br>
+          <strong>resourceUrl</strong> {{resource.resourceUrl}}<br>
+          <strong>mimetype</strong> {{resource.mimetype}}<br>
+          <strong>sha</strong> {{resource.sha}}<br>
+          <strong>createdAt</strong> {{resource.createdAt}}<br>
+          <strong>updatedAt</strong> {{resource.updatedAt}}<br>
+        </td>
+        <td>
+        {{#if resource.screenshots}}
+          {{#each screenshot in resource.screenshots}}
+            <img src={{unbound screenshot.image.url}} width="200">
+          {{/each}}
+        {{else}}
+          No screenshots.
+        {{/if}}
+        </td>
+      </tr>
+    {{/each}}
   </table>
-  <div class="DiffOverviewCard">
-    <img class="DiffOverviewCard-thumbnail" src="/images/prototype/diff.png">
-    <img class="DiffOverviewCard-thumbnail" src="/images/prototype/first.png">
-    <img class="DiffOverviewCard-thumbnail" src="/images/prototype/second.png">
-  </div>
-  <div class="DiffOverviewCard">
-    <img class="DiffOverviewCard-thumbnail" src="/images/prototype/diff.png">
-    <img class="DiffOverviewCard-thumbnail" src="/images/prototype/first.png">
-    <img class="DiffOverviewCard-thumbnail" src="/images/prototype/second.png">
-  </div>
 </div>

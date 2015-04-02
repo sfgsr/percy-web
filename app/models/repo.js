@@ -4,7 +4,7 @@ export default DS.Model.extend({
   githubId: DS.attr('number'),
   name: DS.attr(),
   ownerLogin: DS.attr(),
-  fullName: DS.attr(),
+  slug: DS.attr(),
   isPrivate: DS.attr('boolean'),
   isEnabled: DS.attr('boolean'),
   htmlUrl: DS.attr(),

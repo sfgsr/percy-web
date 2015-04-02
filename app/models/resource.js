@@ -1,11 +1,13 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+  isRoot: DS.attr('boolean'),
   build: DS.belongsTo('build'),
-  basePageUrl: DS.attr(),
-  originalUrl: DS.attr(),
+  screenshots: DS.hasMany('screenshot', {async: true}),
+  pageUrl: DS.attr(),
+  resourceUrl: DS.attr(),
   mimetype: DS.attr(),
-  md5Hash: DS.attr(),
+  sha: DS.attr(),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 });

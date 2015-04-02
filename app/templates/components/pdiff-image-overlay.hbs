@@ -1,9 +1,9 @@
 {{toggle-button action="toggleBase" enabled=showBase enabledText="Hide Base" disabledText="Show Base"}}
-{{toggle-button action="toggleOther" enabled=showOther enabledText="Hide New" disabledText="Show New"}}
+{{toggle-button action="toggleHead" enabled=showHead enabledText="Hide New" disabledText="Show New"}}
 {{toggle-button action="toggleDiff" enabled=showDiff enabledText="Hide Diff" disabledText="Show Diff"}}
 
 <div style="position: relative">
   <img class="PdiffImageOverlay-baseScreenshot" src={{unbound pdiff.baseScreenshot.image.url}}>
-  <img class="PdiffImageOverlay-otherScreenshot" src={{unbound pdiff.otherScreenshot.image.url}}>
+  <img class="PdiffImageOverlay-headScreenshot" src={{unbound pdiff.headScreenshot.image.url}}>
   <img class="PdiffImageOverlay-diffImage" src={{unbound pdiff.diffImage.url}}>
 </div>

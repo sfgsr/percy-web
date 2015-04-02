@@ -4,20 +4,20 @@ export default Ember.Component.extend({
   classNames: ['PdiffImageOverlay'],
   classNameBindings: [
     'showBase::PdiffImageOverlay--hideBaseScreenshot',
-    'showOther::PdiffImageOverlay--hideOtherScreenshot',
+    'showHead::PdiffImageOverlay--hideHeadScreenshot',
     'showDiff::PdiffImageOverlay--hideDiff',
   ],
 
   showBase: true,
-  showOther: false,
+  showHead: false,
   showDiff: true,
 
   actions: {
     toggleBase: function() {
       this.set('showBase', !this.get('showBase'));
     },
-    toggleOther: function() {
-      this.set('showOther', !this.get('showOther'));
+    toggleHead: function() {
+      this.set('showHead', !this.get('showHead'));
     },
     toggleDiff: function() {
       this.set('showDiff', !this.get('showDiff'));

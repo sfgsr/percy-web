@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  md5Hash: DS.attr(),
+  sha: DS.attr(),
   mimetype: DS.attr(),
   url: DS.attr(),
   width: DS.attr('number'),
