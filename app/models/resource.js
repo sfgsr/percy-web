@@ -1,8 +1,9 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  isRoot: DS.attr('boolean'),
+  name: DS.attr(),
   build: DS.belongsTo('build'),
+  isRoot: DS.attr('boolean'),
   screenshots: DS.hasMany('screenshot', {async: true}),
   pageUrl: DS.attr(),
   resourceUrl: DS.attr(),

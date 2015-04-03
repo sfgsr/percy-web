@@ -1,12 +1,13 @@
 <div class="Panel">
 </div>
 <div class="container container--withPanel">
-  <h4>{{repo.slug}}: build #{{id}}</h4>
+  <h4>{{model.repo.slug}}: build #{{model.id}}</h4>
 
-  <h5>comparisons ({{comparisons.length}})</h5>
-  {{#each comparison in comparisons}}
-    <strong>Version:</strong> {{comparison.build.version}}<br>
-    <strong>URL:</strong> {{comparison.baseResource.originalUrl}}<br>
+  <h5>comparisons ({{model.comparisons.length}})</h5>
+  {{#each comparison in model.comparisons}}
+    <strong>Version:</strong> {{comparison.build.commit.sha}}<br>
+    <strong>URL:</strong> {{comparison.baseResource.name}}<br>
+
     <div style="height: 3030px" class="row">
       {{pdiff-image-overlay pdiff=comparison.pdiff}}
     </div>
@@ -15,9 +16,9 @@
     </div>
   {{/each}}
 
-  <h5>resources ({{resources.length}})</h5>
+  <h5>resources ({{model.resources.length}})</h5>
   <table>
-    {{#each resource in resources}}
+    {{#each resource in model.resources}}
       <tr>
         <td>
           <strong>isRoot</strong> {{resource.isRoot}}<br>
