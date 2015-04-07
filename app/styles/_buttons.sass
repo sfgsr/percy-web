@@ -5,6 +5,7 @@ input[type="reset"],
 input[type="button"],
   position: relative
   display: inline-block
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif
   height: 38px
   padding: 0 30px
   color: #555
@@ -34,10 +35,28 @@ input[type="button"],
     border-color: #451b51
 
     &:hover,
-    &:focus,
-      color: #FFF
       background-color: #793989
+
+    &:focus,
       border-color: #451b51
+
+    &:active
+      box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75);
+
+  &.Button--onDark,
+    color: #FFF
+    background-color: #582a64
+
+
+    &:hover,
+      background-color: #793989
+      border-color: #c593d2
+
+    &:focus,
+      border-color: #c593d2
+
+    &:active
+      box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75);
 
 
 /**

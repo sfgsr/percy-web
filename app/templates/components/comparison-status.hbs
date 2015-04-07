@@ -1,0 +1,20 @@
+{{#if comparison.baseResource}}
+  {{#if comparison.headResource}}
+    {{! Both base and head exist. }}
+    {{#if comparison.isDifferent}}
+      {{comparison.pdiff.diffPercentage}}% different
+      {{fa-icon "square"}}
+    {{else}}
+      {{fa-icon "square"}}
+    {{/if}}
+  {{else}}
+    {{! Resource existed in the last build but has been removed. }}
+    {{fa-icon "minus-square"}}
+  {{/if}}
+{{else}}
+  {{#if comparison.headResource}}
+    {{! Resources exists in current build but did not exist in the base. }}
+    New resource
+    {{fa-icon "plus-square"}}
+  {{/if}}
+{{/if}}

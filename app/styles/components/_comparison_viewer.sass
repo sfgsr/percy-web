@@ -1,0 +1,32 @@
+.ComparisonViewer
+  position: relative
+  margin-top: 20px
+  border: 1px solid #ddd
+  border-radius: 3px
+
+  .ComparisonViewer-header
+    padding: 5px 10px;
+    background-color: #f7f7f7
+    border-bottom: 1px solid #d8d8d8
+    border-top-left-radius: 2px
+    border-top-right-radius: 2px
+
+  .ComparisonViewer-pdiffSection
+    padding: 7px
+
+    .ComparisonViewer-oneThirdColumn
+      float: left
+      box-sizing: border-box
+      padding: 15px
+      width: 33.33%
+
+    .ComparisonViewer-pdiffImage
+      width: 100%
+      float: left
+      border: 1px solid #d0d0d0
+      box-shadow: 5px 5px 10px #eaeaea
+
+    &.ComparisonViewer-pdiffSection--noDiffs
+      color: $gray
+      font-style: italic
+      text-align: center

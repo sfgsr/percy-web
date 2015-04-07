@@ -1,23 +1,21 @@
 <div class="Panel">
 </div>
-<div class="container container--withPanel">
+<div class="container container--forContent container--withPanel">
   <h4>{{slug}} {{unbound fa-icon "github"}}</h4>
   <table class="u-full-width">
     <tr>
       <th>Build</th>
-      <th>State</th>
       <th>Commit</th>
-      <th>Message</th>
       <th>Committed By</th>
+      <th>Message</th>
       <th>Committed At</th>
     </tr>
     {{#each build in builds}}
       <tr>
         <td><strong>{{#link-to "builds.build" ownerLogin name build.id}}Build #{{build.id}}{{/link-to}}</strong><br></td>
-        <td>{{build.state}}</td>
-        <td>{{build.commit.sha}}</td>
-        <td>{{build.commit.message}}</td>
+        <td>{{build.commit.shaShort}}</td>
         <td>{{build.commit.authorName}}</td>
+        <td>{{build.commit.message}}</td>
         <td>{{build.commit.committedAt}}</td>
       </tr>
     {{/each}}

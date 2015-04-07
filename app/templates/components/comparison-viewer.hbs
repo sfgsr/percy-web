@@ -1,0 +1,42 @@
+<div class="ComparisonViewer-header row">
+  <strong>{{comparison.headResource.name}}</strong>
+  {{comparison-status comparison=comparison classes="u-pull-right"}}
+</div>
+{{#if comparison.isDifferent}}
+  {{#if comparison.pdiff}}
+    <div class="row ComparisonViewer-pdiffSection">
+      <div class="row ComparisonViewer-pdiffSection">
+        <div class="ComparisonViewer-oneThirdColumn">
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
+        </div>
+        <div class="ComparisonViewer-oneThirdColumn">
+          {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.headScreenshot.image.url}}">
+        </div>
+        <div class="ComparisonViewer-oneThirdColumn">
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.diffImage.url}}">
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{#if comparison.headResource}}
+      {{! New resource. }}
+      <div class="row ComparisonViewer-pdiffSection">
+        <div class="ComparisonViewer-oneThirdColumn">
+          <img class="ComparisonViewer-pdiffImage" src="">
+        </div>
+        <div class="ComparisonViewer-oneThirdColumn">
+          {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
+        </div>
+        <div class="ComparisonViewer-oneThirdColumn">
+          <img class="ComparisonViewer-pdiffImage" src="">
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+{{else}}
+  <div class="row ComparisonViewer-pdiffSection ComparisonViewer-pdiffSection--noDiffs">
+    Phew! No diffs found.
+  </div>
+{{/if}}

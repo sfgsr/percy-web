@@ -1,44 +1,11 @@
-<div class="Panel">
-</div>
-<div class="container container--withPanel">
-  <h4>{{model.repo.slug}}: build #{{model.id}}</h4>
+<div class="container container--forContent">
+  {{approval-button build=model classes="u-pull-right"}}
+  <h5>
+    {{#link-to "owner.index" model.repo.ownerLogin}}{{model.repo.ownerLogin}}{{/link-to}} / {{#link-to "repo.index" model.repo.ownerLogin model.repo.name}}{{model.repo.name}}{{/link-to}}: build #{{model.id}}
+  </h5>
+  <strong>Compared to build:</strong> {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.id}}{{/link-to}}<br>
+  <strong>Commit:</strong> {{model.commit.sha}}<br>
 
-  <h5>comparisons ({{model.comparisons.length}})</h5>
-  {{#each comparison in model.comparisons}}
-    <strong>Version:</strong> {{comparison.build.commit.sha}}<br>
-    <strong>URL:</strong> {{comparison.baseResource.name}}<br>
-
-    <div style="height: 3030px" class="row">
-      {{pdiff-image-overlay pdiff=comparison.pdiff}}
-    </div>
-    <div class="row">
-      {{pdiff-image-viewer pdiff=comparison.pdiff}}
-    </div>
-  {{/each}}
-
-  <h5>resources ({{model.resources.length}})</h5>
-  <table>
-    {{#each resource in model.resources}}
-      <tr>
-        <td>
-          <strong>isRoot</strong> {{resource.isRoot}}<br>
-          <strong>pageUrl</strong> {{resource.pageUrl}}<br>
-          <strong>resourceUrl</strong> {{resource.resourceUrl}}<br>
-          <strong>mimetype</strong> {{resource.mimetype}}<br>
-          <strong>sha</strong> {{resource.sha}}<br>
-          <strong>createdAt</strong> {{resource.createdAt}}<br>
-          <strong>updatedAt</strong> {{resource.updatedAt}}<br>
-        </td>
-        <td>
-        {{#if resource.screenshots}}
-          {{#each screenshot in resource.screenshots}}
-            <img src={{unbound screenshot.image.url}} width="200">
-          {{/each}}
-        {{else}}
-          No screenshots.
-        {{/if}}
-        </td>
-      </tr>
-    {{/each}}
-  </table>
+  <h5>Resources ({{model.comparisons.length}})</h5>
+  {{comparison-list comparisons=model.comparisons}}
 </div>
