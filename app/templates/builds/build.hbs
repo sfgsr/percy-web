@@ -1,5 +1,5 @@
 <div class="container container--forContent">
-  {{approval-button build=model classes="u-pull-right"}}
+  {{approval-section build=model classes="u-pull-right"}}
   <h5>
     {{#link-to "owner.index" model.repo.ownerLogin}}{{model.repo.ownerLogin}}{{/link-to}} / {{#link-to "repo.index" model.repo.ownerLogin model.repo.name}}{{model.repo.name}}{{/link-to}}: build #{{model.id}}
   </h5>
