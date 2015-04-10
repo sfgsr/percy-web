@@ -14,8 +14,17 @@ module.exports = function(environment) {
     },
 
     APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
+      // Don't use these directly; use utils.buildApiUrl instead.
+      apiUrls: {
+        base: null,  // Set by environment.
+
+        login: '/auth/github',
+        postMessageIframe: '/auth/post_message/iframe.html',
+
+        resources: '/v1/resources/',
+        builds: '/v1/builds/',
+        approveBuild: '/v1/builds/%@/approve',
+      }
     }
   };
 
@@ -25,6 +34,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.apiUrls.base = 'http://localhost:3000'
   }
 
   if (environment === 'test') {
@@ -40,7 +50,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.APP.apiUrls.baseURL = 'https://api.perceptual-ci.com'
   }
 
   return ENV;

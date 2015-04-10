@@ -18,7 +18,7 @@
       <th>Repository</th>
       <th></th>
     </tr>
-    {{#each repo in repos}}
+    {{#each repo in model.repos}}
       <tr>
         <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.name}}{{/link-to}}</td>
         <td>{{toggle-button classes="u-pull-right" enabled=repo.isEnabled enabledText="Disable Repo" disabledText="Enable Repo"}}</td>

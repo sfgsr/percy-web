@@ -1,7 +1,7 @@
 <div class="Panel">
 </div>
 <div class="container container--forContent container--withPanel">
-  <h4>{{slug}} {{unbound fa-icon "github"}}</h4>
+  <h4>{{model.slug}} {{unbound fa-icon "github"}}</h4>
   <table class="u-full-width">
     <tr>
       <th>Build</th>
@@ -10,7 +10,7 @@
       <th>Message</th>
       <th>Committed At</th>
     </tr>
-    {{#each build in builds}}
+    {{#each build in model.builds}}
       <tr>
         <td><strong>{{#link-to "builds.build" ownerLogin name build.id}}Build #{{build.id}}{{/link-to}}</strong><br></td>
         <td>{{build.commit.shaShort}}</td>
