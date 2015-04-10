@@ -17,12 +17,6 @@
       line-height: 1.5
       letter-spacing: -.05rem
 
-  .Header-loginButton,
-  .Header-loginButton:hover,
-  .Header-loginButton:focus,
-    font-size: 1.3rem
-    margin-top: 10px
-
   .Header-logo
     padding-top: 70px
 
@@ -41,6 +35,12 @@
   &.Header--small .Header-logo
     padding-top: 0px
 
+  .LoginButton
+    margin-top: 10px
+    width: 100%
+
 @media (min-width: 550px)
-  .Header .Header-loginButton
-    width: auto
+  .Header
+    &.Header--large
+      .LoginButton
+        width: auto

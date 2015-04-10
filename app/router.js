@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('login');
   this.resource('owner', {path: '/:owner_id'}, function() {
     this.resource('repo', {path: '/:repo_id'}, function() {
       this.resource('builds', function() {

@@ -10,7 +10,7 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
+      },
     },
 
     APP: {
@@ -24,8 +24,8 @@ module.exports = function(environment) {
         resources: '/v1/resources/',
         builds: '/v1/builds/',
         approveBuild: '/v1/builds/%@/approve',
-      }
-    }
+      },
+    },
   };
 
   if (environment === 'development') {

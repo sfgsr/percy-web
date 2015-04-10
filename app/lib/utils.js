@@ -21,6 +21,10 @@ export default {
     }
 
     var path = config.APP.apiUrls[key];
+    if (!path) {
+      Ember.Logger.error('API path not found for key: ' + key);
+      return;
+    }
 
     // If the path requires formatting, make sure the right number of args have been given.
     var numFormatsRequired = (path.match(/%@/g) || []).length;
@@ -30,11 +34,6 @@ export default {
       return;
     } else {
       path = path.fmt.apply(path, otherArgs);
-    }
-
-    if (!path) {
-      Ember.Logger.error('API path not found for key: ' + key);
-      return;
     }
     return config.APP.apiUrls.base + path + queryParams;
   },
