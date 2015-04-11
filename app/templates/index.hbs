@@ -7,9 +7,9 @@
   <h2>Visual regression testing for web applications</h2>
 
   {{#if session.isAuthenticated}}
-    {{#link-to 'owner.index' session.secure.user.login classNames="Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
   {{else}}
-    {{login-button}}
+    {{login-button classes="Header-cta"}}
   {{/if}}
 </div>
 <div class="container container--fixedWidth">
