@@ -1,14 +1,16 @@
 <div class="Header Header--large">
-  <div class="Header-logo"><img src="/images/percy.svg" width="200"></div>
+  {{#if session.isAuthenticated}}
+    {{nav-menu user=session.secure.user classes="u-pull-right u-clear-floats"}}
+  {{/if}}
+  <div class="Header-logo"><img src="/images/percy.svg"></div>
   <h1>Perceptual CI</h1>
   <h2>Visual regression testing for web applications</h2>
 
   {{#if session.isAuthenticated}}
-    <a {{ action 'invalidateSession' }}>Logout</a>
+    {{#link-to 'owner.index' session.secure.user.login classNames="Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
   {{else}}
     {{login-button}}
   {{/if}}
-
 </div>
 <div class="container container--fixedWidth">
   <h3>Get notified <em>before</em> launching a broken site</h3>

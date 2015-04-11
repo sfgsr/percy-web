@@ -12,7 +12,7 @@
     </tr>
     {{#each build in model.builds}}
       <tr>
-        <td><strong>{{#link-to "builds.build" ownerLogin name build.id}}Build #{{build.id}}{{/link-to}}</strong><br></td>
+        <td><strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.id}}{{/link-to}}</strong><br></td>
         <td>{{build.commit.shaShort}}</td>
         <td>{{build.commit.authorName}}</td>
         <td>{{build.commit.message}}</td>

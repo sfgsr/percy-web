@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
   disabled: Ember.computed.not('enabled'),
   tagName: 'button',
-  classNames: ['Button', 'ToggleButton'],
+  classNames: ['ToggleButton', 'Button'],
   classNameBindings: ['enabled:Button--primary', 'classes'],
 
   text: function() {

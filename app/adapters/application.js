@@ -1,10 +1,15 @@
 import JsonApiAdapter from 'ember-json-api/json-api-adapter';
 import utils from '../lib/utils';
+import Configuration from 'simple-auth/configuration';
 
 export default JsonApiAdapter.extend({
   host: utils.buildApiUrl('base'),
   namespace: 'v1',
-  headers: {
-    'Authorization': 'Token token=' + window.sessionStorage.getItem('user_token'),
-  },
+  headers: function() {
+    var token = this.get('session.secure.token');
+    if (token) {
+      return {'Authorization': 'Token token=' + token};
+    }
+    return {};
+  }.property(),
 });

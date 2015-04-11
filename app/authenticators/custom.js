@@ -4,8 +4,7 @@ import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
   restore: function(data) {
-    debugger
-    if (data.userToken) {
+    if (data.token && data.user) {
       return Ember.RSVP.resolve(data);
     }
     return Ember.RSVP.reject();
@@ -14,14 +13,18 @@ export default Base.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       // First, declare a message receiver for the postMessage events.
       var receiveMessage = function(event) {
-        Ember.Logger.warn('event', event);
-        Ember.Logger.warn('options', options);
+        // For security reasons, only accept postMessage events from the API origin.
         if (event.origin !== utils.buildApiUrl('base')) {
           return;
         }
-        if (event.data.token) {
-          resolve({userToken: event.data.token});
+        if (event.data.token && event.data.user) {
+          // Success! Store the token and user in the session.
+          var serializer = this.get('store').serializerFor('user');
+          var user = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
+
+          resolve({token: event.data.token, user: user});
         } else if (event.data === 'unauthenticated') {
+          // Redirect to GitHub auth.
           if (options.doRedirect) {
             var params = {redirect_to: window.location.origin};
             window.location = utils.buildApiUrl('login', {params: params});
@@ -30,15 +33,14 @@ export default Base.extend({
           Ember.Logger.warn('Unhandled iframe message data:', event.data);
           reject();
         }
-      };
+      }.bind(this);
       window.addEventListener('message', receiveMessage, false);
 
       // Second, inject the iframe into the page, which will trigger the postMessage events.
       var iframe = $('<iframe width="0" height="0" frameborder="0">');
       iframe = iframe.attr('src', utils.buildApiUrl('postMessageIframe'));
       iframe.appendTo('body');
-    });
-    return Ember.RSVP.resolve({token: token});
+    }.bind(this));
   },
   invalidate: function(data) {
     // TODO: logout

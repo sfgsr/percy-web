@@ -1,7 +1,7 @@
 .Header
+  position: relative
   background-color: #582A64
   color: #fefefe
-  padding: 10px
   // box-shadow: 0px 2px 2px #888888
 
   &.Header--large
@@ -16,15 +16,31 @@
       font-size: 2rem
       line-height: 1.5
       letter-spacing: -.05rem
+      margin-bottom: 30px
+
+    .Header-logo
+      img
+        margin-top: 60px
+        width: 200px
+        padding: 0
 
   .Header-logo
-    padding-top: 70px
+    img
+      width: 70px
+      padding: 6px 0 0 12px
+
+  .Header-title
+    font-family: $fancy-font
+    font-size: 2rem
+    line-height: 4.5rem
+    padding: 10px
+    font-weight: lighter
 
   .Button
     color: #fff
 
   &.Header--small
-    height: 40px
+    height: 60px
 
   &.Header--fixedTop
     position: fixed
@@ -32,12 +48,15 @@
     left: 0
     z-index: 1000
 
-  &.Header--small .Header-logo
-    padding-top: 0px
-
   .LoginButton
-    margin-top: 10px
     width: 100%
+
+  a
+    color: $white
+    text-decoration: none
+  a:hover
+    color: $lightpurple
+
 
 @media (min-width: 550px)
   .Header
