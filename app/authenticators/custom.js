@@ -37,7 +37,7 @@ export default Base.extend({
       window.addEventListener('message', receiveMessage, false);
 
       // Second, inject the iframe into the page, which will trigger the postMessage events.
-      var iframe = $('<iframe width="0" height="0" frameborder="0">');
+      var iframe = Ember.$('<iframe width="0" height="0" frameborder="0">');
       iframe = iframe.attr('src', utils.buildApiUrl('postMessageIframe'));
       iframe.appendTo('body');
     }.bind(this));

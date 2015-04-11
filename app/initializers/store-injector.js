@@ -1,6 +1,3 @@
-
-import DS from 'ember-data';
-
 export default {
   name: 'store-injector',
   after: 'store',
