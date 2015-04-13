@@ -42,7 +42,7 @@ export default Base.extend({
       iframe.appendTo('body');
     }.bind(this));
   },
-  invalidate: function(data) {
+  invalidate: function() {
     // TODO: logout
     return Ember.RSVP.resolve({});
   }

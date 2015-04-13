@@ -1,6 +1,5 @@
 import JsonApiAdapter from 'ember-json-api/json-api-adapter';
 import utils from '../lib/utils';
-import Configuration from 'simple-auth/configuration';
 
 export default JsonApiAdapter.extend({
   host: utils.buildApiUrl('base'),
