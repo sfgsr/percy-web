@@ -1,30 +1,29 @@
 # Base image.
-FROM fotinakis/baseimage-nodejs:0.10.33
+# Check for new versions: https://github.com/phusion/passenger-docker/blob/master/Changelog.md
+FROM phusion/passenger-nodejs:0.9.15
 
-# Add 'web' user which will run the application.
-RUN adduser web --home /home/web --shell /bin/bash --disabled-password --gecos ""
-ENV HOME /home/web
-USER web
+RUN apt-get update
+RUN apt-get upgrade -y
 
-# Make npm packages be installed as the non-root web user.
-ENV NPM_PACKAGES $HOME/.npm-packages
-RUN mkdir -p $NPM_PACKAGES
-RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
-ENV NODE_PATH $NPM_PACKAGES/lib/node_modules
-ENV PATH $NPM_PACKAGES/bin:$PATH
+# Set correct environment variables.
+ENV HOME /root
 
-# Install the binaries we need.
 RUN npm install -g ember-cli bower
+ADD . /home/app/
+WORKDIR /home/app/
+RUN npm rebuild
+RUN ember build --environment=production
 
-# Add directory where all application code will live and own it by the web user.
-USER root
-RUN mkdir /app
-# Add the whole application source to the image and own it all by web:web.
-# Note: this is overwritten in development because fig mounts a shared volume at /app.
-ADD . /app/
-RUN chown -R web:web /app
-WORKDIR /app/
-USER web
+# Configure nginx to serve dist directory.
+RUN rm /etc/nginx/sites-enabled/default
+ADD ./config/server/nginx-site.conf /etc/nginx/sites-enabled/nginx-site.conf
 
-# Default command to run when this container is run.
-CMD ["ember", "server", "--watcher=polling"]
+# Nginx is disabled by default. Enable it (see https://github.com/phusion/passenger-docker).
+RUN rm -f /etc/service/nginx/down
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Default command to run when this container is run (use baseimage-docker's init process).
+# DO NOT CHANGE. See: http://phusion.github.io/baseimage-docker/
+CMD ["/sbin/my_init"]
