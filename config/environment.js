@@ -34,7 +34,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.apiUrls.base = 'http://localhost:3000'
+    ENV.APP.apiUrls.base = 'http://localhost:3000';
   }
 
   if (environment === 'test') {
@@ -50,7 +50,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.apiUrls.baseURL = 'https://api.perceptual-ci.com'
+    ENV.APP.apiUrls.base = 'https://api.perceptual-ci.com';
   }
 
   return ENV;
