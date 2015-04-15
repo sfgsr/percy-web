@@ -8,6 +8,7 @@ RUN apt-get upgrade -y
 # Set correct environment variables.
 ENV HOME /root
 
+# Setup the app directory and build the ember app.
 RUN npm install -g ember-cli bower
 ADD . /home/app/
 WORKDIR /home/app/
