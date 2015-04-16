@@ -4,34 +4,32 @@
 </div>
 {{#if comparison.isDifferent}}
   {{#if comparison.pdiff}}
-    <div class="row ComparisonViewer-pdiffSection">
-      <div class="row ComparisonViewer-pdiffSection">
-        <div class="ComparisonViewer-halfColumn">
-          <div class="ComparisonViewer-pdiffImageBox">
-            <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
-          </div>
+    <div class="row">
+      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
+        <div class="ComparisonViewer-pdiffImageBox">
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
         </div>
-        <div class="ComparisonViewer-halfColumn">
-          {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
-          <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
-            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.image.url}}">
-            {{#if isOverlayEnabled}}
-              <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
-            {{/if}}
-          </div>
+      </div>
+      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
+        {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
+        <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
+          <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.image.url}}">
+          {{#if isOverlayEnabled}}
+            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
+          {{/if}}
         </div>
       </div>
     </div>
   {{else}}
     {{#if comparison.headResource}}
       {{! New resource. }}
-      <div class="row ComparisonViewer-pdiffSection">
-        <div class="ComparisonViewer-halfColumn">
+      <div class="row">
+        <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
           <div class="ComparisonViewer-resourceMissing">
             {{fa-icon "remove"}}
           </div>
         </div>
-        <div class="ComparisonViewer-halfColumn">
+        <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           <div class="ComparisonViewer-pdiffImageBox">
             <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
           </div>
@@ -40,7 +38,7 @@
     {{/if}}
   {{/if}}
 {{else}}
-  <div class="row ComparisonViewer-pdiffSection ComparisonViewer-pdiffSection--noDiffs">
+  <div class="row ComparisonViewer-noDiffBox">
     Phew! No diffs found.
   </div>
 {{/if}}
