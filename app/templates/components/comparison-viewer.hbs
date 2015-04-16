@@ -6,15 +6,19 @@
   {{#if comparison.pdiff}}
     <div class="row ComparisonViewer-pdiffSection">
       <div class="row ComparisonViewer-pdiffSection">
-        <div class="ComparisonViewer-oneThirdColumn">
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
+        <div class="ComparisonViewer-halfColumn">
+          <div class="ComparisonViewer-pdiffImageBox">
+            <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
+          </div>
         </div>
-        <div class="ComparisonViewer-oneThirdColumn">
+        <div class="ComparisonViewer-halfColumn">
           {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.headScreenshot.image.url}}">
-        </div>
-        <div class="ComparisonViewer-oneThirdColumn">
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.diffImage.url}}">
+          <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
+            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.image.url}}">
+            {{#if isOverlayEnabled}}
+              <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>
@@ -22,15 +26,15 @@
     {{#if comparison.headResource}}
       {{! New resource. }}
       <div class="row ComparisonViewer-pdiffSection">
-        <div class="ComparisonViewer-oneThirdColumn">
-          <img class="ComparisonViewer-pdiffImage" src="">
+        <div class="ComparisonViewer-halfColumn">
+          <div class="ComparisonViewer-resourceMissing">
+            {{fa-icon "remove"}}
+          </div>
         </div>
-        <div class="ComparisonViewer-oneThirdColumn">
-          {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
-        </div>
-        <div class="ComparisonViewer-oneThirdColumn">
-          <img class="ComparisonViewer-pdiffImage" src="">
+        <div class="ComparisonViewer-halfColumn">
+          <div class="ComparisonViewer-pdiffImageBox">
+            <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
+          </div>
         </div>
       </div>
     {{/if}}

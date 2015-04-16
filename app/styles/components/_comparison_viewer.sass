@@ -6,25 +6,59 @@
 
   .ComparisonViewer-header
     padding: 5px 10px;
-    background-color: #f7f7f7
-    border-bottom: 1px solid #d8d8d8
+    background-color: $lightgray
+    border-bottom: $grayborder
     border-top-left-radius: 2px
     border-top-right-radius: 2px
 
   .ComparisonViewer-pdiffSection
     padding: 7px
 
-    .ComparisonViewer-oneThirdColumn
+    .ComparisonViewer-halfColumn
       float: left
       box-sizing: border-box
       padding: 15px
-      width: 33.33%
+      width: 50%
 
-    .ComparisonViewer-pdiffImage
-      width: 100%
+    .ComparisonViewer-pdiffImageBox
+      @include unselectable
       float: left
+      margin: 15px
+      position: relative
       border: 1px solid #d0d0d0
       box-shadow: 5px 5px 10px #eaeaea
+
+      img
+        @include unselectable
+        width: 100%
+
+    .ComparisonViewer-pdiffImageBox--actionable
+      @include unselectable
+      cursor: pointer
+
+      &:hover
+        border: $grayborderhover
+
+    .ComparisonViewer-pdiffImageOverlay
+      @include unselectable
+      cursor: pointer
+      position: absolute
+      top: 0
+      left: 0
+      background-color: rgba(255, 255, 255, .8)
+
+    .ComparisonViewer-resourceMissing
+      box-sizing: border-box
+      margin: 15px
+      height: 200px
+      text-align: center
+      padding-top: 50px
+      border: $grayborder
+
+      .fa
+        font-size: 10rem
+        color: $lightgray
+        text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray;
 
     &.ComparisonViewer-pdiffSection--noDiffs
       color: $gray
