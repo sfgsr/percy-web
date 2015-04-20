@@ -19,5 +19,11 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  isApproved: Ember.computed.equal('state', 'approved'),
+  isPending: Ember.computed.equal('state', 'pending'),
+  isFinalized: Ember.computed.equal('state', 'finalized'),
+  isFinished: Ember.computed.equal('state', 'finished'),
+
+  isApproved: function() {
+    return !!this.get('approvedAt');
+  }.property('approvedAt'),
 });

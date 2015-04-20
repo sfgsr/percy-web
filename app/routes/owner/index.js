@@ -7,4 +7,9 @@ export default Ember.Route.extend({
       repos: this.store.find('repo'),
     });
   },
+  actions: {
+    selectOwner: function(owner) {
+      this.transitionTo('owner.index', owner.login);
+    },
+  },
 });

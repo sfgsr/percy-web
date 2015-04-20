@@ -1,26 +1,37 @@
-.AccountCard
+.OwnerCard
   position: relative
   box-sizing: border-box
   width: 100%
   border: 1px solid #ededed
+  border-bottom: 1px solid $lightgray
   background: #ededed
-  padding: 20px
+  padding: 10px
+  color: $gray
 
-  &.AccountCard--active
-    background: #dedede
+  &.OwnerCard--active
+    background: $lightgray
+    font-weight: bold
+    color: $darkgray
 
-  &.AccountCard--linked
+    .OwnerCard-arrow
+      display: block
+
+  &.OwnerCard--linked
     cursor: pointer
 
     &:hover
-      border: 1px solid #cdcdcd
+      background: $lightgray
 
-  .AccountCard-arrow
+      .OwnerCard-arrow
+        display: block
+
+  .OwnerCard-arrow
+    display: none
     position: absolute
-    top: 25px
+    top: 2px
     right: -18px
     width: 0;
     height: 0;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    border-left: 18px solid #cdcdcd;
+    border-left: 18px solid $lightgray;

@@ -1,28 +1,7 @@
 <div class="Panel">
-  <strong>Accounts</strong>
-  <div class="AccountCard AccountCard--linked AccountCard--active">
-    <div><a href="#">fotinakis</a></div>
-    <div>Last updated: today</div>
-    <div class="AccountCard-arrow"></div>
-  </div>
-  <div class="AccountCard AccountCard--linked">
-    <div><a href="#">perceptual-ci</a></div>
-    <div>Last updated: yesterday</div>
-  </div>
+  {{owner-list repos=model.repos currentOwner=model.owner selectOwner="selectOwner"}}
 </div>
 <div class="container container--forContent container--withPanel">
-  <h4>Repositories</h4>
-  <p>Enable a repository below to get started:</p>
-  <table class="u-full-width">
-    <tr>
-      <th>Repository</th>
-      <th></th>
-    </tr>
-    {{#each repo in model.repos}}
-      <tr>
-        <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.name}}{{/link-to}}</td>
-        <td>{{toggle-button classes="u-pull-right" enabled=repo.isEnabled enabledText="Disable Repo" disabledText="Enable Repo"}}</td>
-      </tr>
-    {{/each}}
-  </table>
+  <h5>Repositories</h5>
+  {{repo-list repos=model.repos filterByOwner=model.owner}}
 </div>

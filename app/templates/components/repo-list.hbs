@@ -1,0 +1,8 @@
+<table class="u-full-width">
+  {{#each repo in filteredRepos}}
+    <tr>
+      <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.slug}}{{/link-to}}</td>
+      <td>{{toggle-button classes="u-pull-right" enabled=repo.isEnabled enabledText="Disable" disabledText="Enable"}}</td>
+    </tr>
+  {{/each}}
+</table>

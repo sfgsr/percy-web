@@ -3,6 +3,6 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(params) {
-    return {id: params.owner_id};
+    return Ember.Object.create({login: params.owner_id});
   },
 });
