@@ -26,4 +26,20 @@ export default DS.Model.extend({
   isApproved: function() {
     return !!this.get('approvedAt');
   }.property('approvedAt'),
+
+  reloadAll: function() {
+    // TODO(fotinakis): crazy jsonapi, this is duped from the build route. Fix this insanity.
+    this.store.findOne('build', this.get('id'), {
+      include: [
+        'approved-by',
+        'commit',
+        'base-build',
+        'base-build.commit',
+        'comparisons',
+        'comparisons.pdiff',
+        'comparisons.base-resource',
+        'comparisons.head-resource',
+      ].join(',')
+    });
+  },
 });

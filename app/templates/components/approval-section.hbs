@@ -1,6 +1,8 @@
-<div class="row">
-  {{approval-button build=build}}
-</div>
+{{#if build.isPullRequest}}
+  <div class="row">
+    {{approval-button build=build}}
+  </div>
+{{/if}}
 <div class="row">
   {{#if build.isPullRequest}}
     <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">Pull Request #{{build.pullRequestNumber}}</a>
