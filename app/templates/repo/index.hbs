@@ -14,7 +14,15 @@
     {{#each build in model.builds}}
       <tr>
         <td><strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.id}}{{/link-to}}</strong><br></td>
-        <td>{{build.state}}</td>
+        <td>
+          {{build.state}}
+          {{#if build.isPending}}
+            {{fa-icon 'fa-spinner fa-pulse'}}
+          {{/if}}
+          {{#if build.isFinalized}}
+            {{fa-icon 'fa-spinner fa-pulse'}}
+          {{/if}}
+        </td>
         <td>{{build.commit.shaShort}}</td>
         <td>{{build.commit.authorName}}</td>
         <td>{{build.commit.message}}</td>

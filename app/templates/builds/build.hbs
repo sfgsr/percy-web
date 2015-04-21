@@ -6,6 +6,6 @@
   <strong>Compared to build:</strong> {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.id}}{{/link-to}}<br>
   <strong>Commit:</strong> {{model.commit.sha}}<br>
 
-  <h5>Resources ({{model.comparisons.length}})</h5>
+  <h5>Pages ({{model.comparisons.length}})</h5>
   {{comparison-list comparisons=model.comparisons}}
 </div>
