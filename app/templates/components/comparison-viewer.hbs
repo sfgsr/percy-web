@@ -40,5 +40,26 @@
 {{else}}
   <div class="row ComparisonViewer-noDiffBox">
     Phew! No diffs found.
+
+    {{#if showNoDiffResource}}
+      <a {{action "toggleNoDiffResource"}} href="#">Hide resource</a>
+    {{else}}
+      <a {{action "toggleNoDiffResource"}} href="#">View resource</a>
+    {{/if}}
   </div>
+
+  {{#if showNoDiffResource}}
+    <div class="row">
+      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
+        <div class="ComparisonViewer-resourceMissing">
+          {{fa-icon "arrows-h"}}
+        </div>
+      </div>
+      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
+        <div class="ComparisonViewer-pdiffImageBox">
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
+        </div>
+      </div>
+    </div>
+  {{/if}}
 {{/if}}
