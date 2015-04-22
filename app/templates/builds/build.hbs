@@ -3,8 +3,13 @@
   <h5>
     {{#link-to "owner.index" model.repo.ownerLogin}}{{model.repo.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.repo.ownerLogin model.repo.name}}{{model.repo.name}}{{/link-to}} <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a> Build #{{model.id}}
   </h5>
-  <strong>Compared to build:</strong> {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.id}}{{/link-to}}<br>
-  <strong>Commit:</strong> {{model.commit.sha}}<br>
+  <strong>Base:</strong>
+  {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.id}}{{/link-to}}
+  <br>
+  <strong>Commit:</strong>
+  <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
+  <br>
+  <br>
 
   <h5>Pages ({{model.comparisons.length}})</h5>
   {{comparison-list comparisons=model.comparisons}}

@@ -2,15 +2,13 @@
   <div class="row">
     {{approval-button build=build}}
   </div>
-{{/if}}
-<div class="row">
-  {{#if build.isPullRequest}}
-    <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">Pull Request #{{build.pullRequestNumber}}</a>
-    {{build.commit.branch}} --> {{build.baseBuild.commit.branch}}
-  {{/if}}
-</div>
-{{#if build.isApproved}}
   <div class="row">
-    Last approved by @{{build.approvedBy.login}}
+    <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">Pull Request #{{build.pullRequestNumber}}</a>
+      {{build.commit.branch}} --> {{build.baseBuild.commit.branch}}
   </div>
+  {{#if build.isApproved}}
+    <div class="row">
+      Last approved by @{{build.approvedBy.login}}
+    </div>
+  {{/if}}
 {{/if}}
