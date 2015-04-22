@@ -1,4 +1,17 @@
 <div class="container container--forContent">
+  <style>
+    .TruncatedCommitMessage {
+      max-width: 500px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 1200px) {
+      .TruncatedCommitMessage {
+        max-width: 200px;
+      }
+    }
+  </style>
   <h5>
     {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{model.name}} <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a>
   </h5>
@@ -23,9 +36,9 @@
             {{fa-icon 'fa-spinner fa-pulse'}}
           {{/if}}
         </td>
-        <td>{{build.commit.shaShort}}</td>
+        <td><a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a></td>
         <td>{{build.commit.authorName}}</td>
-        <td>{{build.commit.message}}</td>
+        <td class="TruncatedCommitMessage">{{build.commit.message}}</td>
         <td>{{build.commit.committedAt}}</td>
       </tr>
     {{/each}}

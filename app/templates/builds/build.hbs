@@ -8,9 +8,8 @@
   <br>
   <strong>Commit:</strong>
   <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
-  <br>
-  <br>
+  <p>{{model.commit.message}}</p>
 
-  <h5>Pages ({{model.comparisons.length}})</h5>
+  <h5>{{model.comparisons.length}} comparisons:</h5>
   {{comparison-list comparisons=model.comparisons}}
 </div>
