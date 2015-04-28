@@ -26,7 +26,7 @@ export default Base.extend({
         } else if (event.data === 'unauthenticated') {
           // Redirect to GitHub auth.
           if (options.doRedirect) {
-            var params = {redirect_to: window.location.origin};
+            var params = {redirect_to: window.location.href};
             window.location = utils.buildApiUrl('login', {params: params});
           }
         } else {
