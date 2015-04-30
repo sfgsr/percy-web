@@ -2,8 +2,8 @@
 # Check for new versions: https://github.com/phusion/passenger-docker/blob/master/Changelog.md
 FROM phusion/passenger-nodejs:0.9.15
 
-RUN apt-get update
-RUN apt-get -o Dpkg::Options::="--force-confnew" upgrade -y
+# RUN apt-get update
+# RUN apt-get -o Dpkg::Options::="--force-confnew" upgrade -y
 
 # Set correct environment variables.
 ENV HOME /root
