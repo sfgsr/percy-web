@@ -20,11 +20,15 @@ module.exports = function(environment) {
 
         login: '/auth/github',
         postMessageIframe: '/auth/post_message/iframe.html',
+        logout: '/auth/logout',
 
         resources: '/v1/resources/',
         builds: '/v1/builds/',
         approveBuild: '/v1/builds/%@/approve',
       },
+    },
+    'simple-auth': {
+      authenticationRoute: 'index',
     },
   };
 

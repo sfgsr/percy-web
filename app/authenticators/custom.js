@@ -21,12 +21,13 @@ export default Base.extend({
           // Success! Store the token and user in the session.
           var serializer = this.get('store').serializerFor('user');
           var user = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
+          Ember.$('.auth-iframe').remove();
 
           resolve({token: event.data.token, user: user});
         } else if (event.data === 'unauthenticated') {
           // Redirect to GitHub auth.
           if (options.doRedirect) {
-            var params = {redirect_to: window.location.href};
+            var params = {redirect_to: window.location.href + '#auth'};
             window.location = utils.buildApiUrl('login', {params: params});
           }
         } else {
@@ -37,13 +38,19 @@ export default Base.extend({
       window.addEventListener('message', receiveMessage, false);
 
       // Second, inject the iframe into the page, which will trigger the postMessage events.
-      var iframe = Ember.$('<iframe width="0" height="0" frameborder="0">');
+      var iframe = Ember.$(
+        '<iframe class="auth-iframe" style="display: block" width="0" height="0" frameborder="0">');
       iframe = iframe.attr('src', utils.buildApiUrl('postMessageIframe'));
       iframe.appendTo('body');
     }.bind(this));
   },
   invalidate: function() {
-    // TODO: logout
-    return Ember.RSVP.resolve({});
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var iframe = Ember.$(
+        '<iframe class="auth-iframe" style="display: block" width="0" height="0" frameborder="0">');
+      iframe = iframe.attr('src', utils.buildApiUrl('logout'));
+      iframe.appendTo('body');
+      resolve({});
+    }.bind(this));
   }
 });

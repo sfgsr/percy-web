@@ -5,6 +5,7 @@ export default DS.Model.extend({
   name: DS.attr(),
   avatarUrl: DS.attr(),
   githubId: DS.attr(),
+  isWhitelisted: DS.attr('boolean'),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 });

@@ -2,15 +2,24 @@
   {{#if session.isAuthenticated}}
     {{nav-menu user=session.secure.user classes="u-pull-right u-clear-floats"}}
   {{/if}}
-  <div class="Header-logo"><img src="/images/percy.svg"></div>
+  <div class="Header-logo"><img width="400" height="120" src="/images/percy.svg"></div>
   <h1>Perceptual CI</h1>
   <h2>Visual regression testing for web applications</h2>
 
   {{#if session.isAuthenticated}}
-    {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{#if session.secure.user.isWhitelisted}}
+      {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{else}}
+      <div class="Alert Alert--info">
+        <strong>Invite requested!</strong>
+        You can also <a href="#">tell us more</a> about your app and tech stack.
+      </div>
+    {{/if}}
   {{else}}
     {{login-button classes="Header-cta"}}
+    <div style="font-size: 1.2rem">Currently invite-only—sign in to request an invite!</div>
   {{/if}}
+  <div>&nbsp;</div>
 </div>
 <div class="container container--fixedWidth container--forContent">
   <h3>Get notified <em>before</em> launching a broken site</h3>
