@@ -1,2 +1,8 @@
-/dist/*
-/tmp/*
+# Folders.
+.git/
+dist/
+tmp/
+
+# Files.
+.dockerignore
+Dockerfile
