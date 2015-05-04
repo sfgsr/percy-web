@@ -11,13 +11,13 @@
       {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
     {{else}}
       <div class="Alert Alert--info">
-        <strong>Invite requested!</strong>
+        <strong>Thanks for requesting an invite!</strong>
         You can also <a href="#">tell us more</a> about your app and tech stack.
       </div>
     {{/if}}
   {{else}}
     {{login-button classes="Header-cta"}}
-    <div style="font-size: 1.2rem">Currently invite-only—sign in to request an invite!</div>
+    <div style="font-size: 1.3rem">Currently <strong>invite-only</strong>—sign up to request an invite!</div>
   {{/if}}
   <div>&nbsp;</div>
 </div>
