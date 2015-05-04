@@ -1,4 +1,4 @@
-FROM gcr.io/perceptual_ci_prod/baseimage-api:latest
+FROM gcr.io/perceptual_ci_prod/baseimage-ui:latest
 
 # Configure nginx to serve dist directory.
 RUN rm /etc/nginx/sites-enabled/default
