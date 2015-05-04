@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="Header Header--small Header--fixedTop">
+    <div class="Header-logo u-pull-left">
+      {{#link-to "index"}}
+        <img src="/images/percy.svg" class="u-pull-left">
+        <div class="Header-title u-pull-left">
+          Perceptual CI
+        </div>
+      {{/link-to}}
+    </div>
+    {{#if session.isAuthenticated}}
+      {{nav-menu user=session.secure.user classes="u-pull-right"}}
+    {{/if}}
+  </div>
+</div>
