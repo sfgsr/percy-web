@@ -9,7 +9,6 @@ ADD config/server/nginx.sh /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
 
 # Setup the app directory and build the ember app.
-RUN npm install -g ember-cli@0.2.3 bower@1.4.1
 ADD . /home/app/
 WORKDIR /home/app/
 RUN npm rebuild
