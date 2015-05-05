@@ -45,7 +45,7 @@ export default Base.extend({
     }.bind(this));
   },
   invalidate: function() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise(function(resolve) {
       var iframe = Ember.$(
         '<iframe class="auth-iframe" style="display: block" width="0" height="0" frameborder="0">');
       iframe = iframe.attr('src', utils.buildApiUrl('logout'));
