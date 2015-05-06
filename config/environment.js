@@ -18,13 +18,13 @@ module.exports = function(environment) {
       apiUrls: {
         base: null,  // Set by environment.
 
-        login: '/auth/github',
-        postMessageIframe: '/auth/post_message/iframe.html',
-        logout: '/auth/logout',
+        login: '/api/auth/github',
+        postMessageIframe: '/api/auth/post_message/iframe.html',
+        logout: '/api/auth/logout',
 
-        resources: '/v1/resources/',
-        builds: '/v1/builds/',
-        approveBuild: '/v1/builds/%@/approve',
+        resources: '/api/v1/resources/',
+        builds: '/api/v1/builds/',
+        approveBuild: '/api/v1/builds/%@/approve',
       },
     },
     'simple-auth': {
@@ -54,7 +54,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.apiUrls.base = 'https://api.perceptual-ci.com';
+    ENV.APP.apiUrls.base = 'https://percy.io';
   }
 
   return ENV;

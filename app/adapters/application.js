@@ -3,7 +3,7 @@ import utils from '../lib/utils';
 
 export default JsonApiAdapter.extend({
   host: utils.buildApiUrl('base'),
-  namespace: 'v1',
+  namespace: 'api/v1',
   headers: function() {
     var token = this.get('session.secure.token');
     if (token) {
