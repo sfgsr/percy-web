@@ -3,8 +3,8 @@
     {{nav-menu user=session.secure.user classes="u-pull-right u-clear-floats"}}
   {{/if}}
   <div class="Header-logo"><img width="400" height="120" src="/images/percy.svg"></div>
-  <h1>Perceptual CI</h1>
-  <h2>Visual regression testing for web applications</h2>
+  <h1>Percy</h1>
+  <h2>Visual continuous integration for web applications</h2>
 
   {{#if session.isAuthenticated}}
     {{#if session.secure.user.isWhitelisted}}
@@ -12,7 +12,7 @@
     {{else}}
       <div class="Alert Alert--info">
         <strong>Thanks for requesting a beta invite!</strong>
-        We're very excited to make Perceptual CI available to you.<br>
+        We're very excited to make Percy available to you.<br>
         You can <a href="https://goo.gl/ss3aYu">tell us more</a>
         about your app and tech stack to speed things up.
       </div>

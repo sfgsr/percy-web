@@ -14,7 +14,7 @@ export default Base.extend({
       // First, declare a message receiver for the postMessage events.
       var receiveMessage = function(event) {
         // For security reasons, only accept postMessage events from the API origin.
-        if (event.origin !== utils.buildApiUrl('base')) {
+        if (event.origin !== window.location.origin) {
           return;
         }
         if (event.data.token && event.data.user) {

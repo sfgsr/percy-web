@@ -16,10 +16,6 @@ export default {
     var params = options.params;
     var queryParams = params ? '?' + Ember.$.param(params) : '';
 
-    if (key === 'base') {
-      return config.APP.apiUrls.base + queryParams;
-    }
-
     var path = config.APP.apiUrls[key];
     if (!path) {
       Ember.Logger.error('API path not found for key: ' + key);
@@ -35,6 +31,6 @@ export default {
     } else {
       path = path.fmt.apply(path, otherArgs);
     }
-    return config.APP.apiUrls.base + path + queryParams;
+    return window.location.origin + path + queryParams;
   },
 };

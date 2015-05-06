@@ -16,8 +16,6 @@ module.exports = function(environment) {
     APP: {
       // Don't use these directly; use utils.buildApiUrl instead.
       apiUrls: {
-        base: null,  // Set by environment.
-
         login: '/api/auth/github',
         postMessageIframe: '/api/auth/post_message/iframe.html',
         logout: '/api/auth/logout',
@@ -38,7 +36,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.apiUrls.base = 'http://localhost:3000';
   }
 
   if (environment === 'test') {
@@ -54,7 +51,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.apiUrls.base = 'https://percy.io';
   }
 
   return ENV;
