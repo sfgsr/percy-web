@@ -1,7 +1,7 @@
 {
-  "name": "perceptual-ui",
+  "name": "percy-web",
   "version": "0.0.0",
-  "description": "Small description for perceptual-ui goes here",
+  "description": "Percy web application",
   "private": true,
   "directories": {
     "doc": "doc",

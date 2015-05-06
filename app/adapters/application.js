@@ -1,5 +1,4 @@
 import JsonApiAdapter from 'ember-json-api/json-api-adapter';
-import utils from '../lib/utils';
 
 export default JsonApiAdapter.extend({
   namespace: 'api/v1',
