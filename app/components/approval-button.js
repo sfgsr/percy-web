@@ -18,11 +18,9 @@ export default Ember.Component.extend({
   click: function() {
     // TODO(fotinakis): encapsulate headers for custom API ajax requests.
     var self = this;
-    var token = this.get('session.secure.token');
     return Ember.$.ajax({
       type: 'POST',
       url: utils.buildApiUrl('approveBuild', self.get('build.id')),
-      headers: {'Authorization': 'Token token=' + token},
     }).then(function() {
       self.get('build').reloadAll();
     });

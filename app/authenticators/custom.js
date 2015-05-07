@@ -4,7 +4,7 @@ import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
   restore: function(data) {
-    if (data.token && data.user) {
+    if (data.user) {
       return Ember.RSVP.resolve(data);
     }
     return Ember.RSVP.reject();
@@ -17,13 +17,13 @@ export default Base.extend({
         if (event.origin !== window.location.origin) {
           return;
         }
-        if (event.data.token && event.data.user) {
-          // Success! Store the token and user in the session.
+        if (event.data.user) {
+          // Success! Store the user in the session.
           var serializer = this.get('store').serializerFor('user');
           var user = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
           Ember.$('.auth-iframe').remove();
 
-          resolve({token: event.data.token, user: user});
+          resolve({user: user});
         } else if (event.data === 'unauthenticated') {
           // Redirect to GitHub auth.
           if (options.doRedirect) {
