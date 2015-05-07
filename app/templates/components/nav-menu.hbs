@@ -1,9 +1,24 @@
-<div class="NavMenu-item">
-  <a href="#" {{action "invalidateSession"}}>Logout</a>
-</div>
-<div class="NavMenu-item">
-  <a href="https://github.com/{{user.login}}">@{{user.login}}</a>
-</div>
-<div class="NavMenu-avatar">
-  {{user-avatar user=user width=36}}
-</div>
+{{#if user}}
+  <div class="NavMenu-item">
+    <a href="#" {{action "invalidateSession"}}>Logout</a>
+  </div>
+  <div class="NavMenu-item">
+    <a href="https://github.com/{{user.login}}">@{{user.login}}</a>
+  </div>
+  <div class="NavMenu-avatar">
+    {{user-avatar user=user width=36}}
+  </div>
+{{else}}
+  <div class="NavMenu-item">
+    <a href="#">Pricing</a>
+  </div>
+  <div class="NavMenu-item">
+    <a href="#">Blog</a>
+  </div>
+  <div class="NavMenu-item">
+    <a href="#">About</a>
+  </div>
+  <div class="NavMenu-item">
+    <a href="#">Sign In</a>
+  </div>
+{{/if}}
