@@ -5,13 +5,15 @@ export default Ember.Component.extend({
   classes: null,
 
   tagName: 'a',
-  href: utils.buildApiUrl('login'),
+  href: '#',
   classNames: [
     'LoginButton',
     'Button',
+    'Button--primary',
     'Button--onDark',
     'Button--withLeftIcon',
   ],
+  attributeBindings: ['href'],
   classNameBindings: [
     'classes',
   ],

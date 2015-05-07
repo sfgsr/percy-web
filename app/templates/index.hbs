@@ -8,7 +8,7 @@
 
   {{#if session.isAuthenticated}}
     {{#if session.secure.user.isWhitelisted}}
-      {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--onDark"}}My Repositories &raquo;{{/link-to}}
+      {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
     {{else}}
       <div class="Alert Alert--info">
         <strong>Thanks for requesting a beta invite!</strong>
