@@ -1,4 +1,4 @@
-<div class="Header Header--large">
+<div class="container Header Header--large">
   {{#if session.isAuthenticated}}
     {{nav-menu user=session.secure.user classes="u-pull-right u-clear-floats"}}
   {{else}}
@@ -7,41 +7,50 @@
   <img class="Header-logo" src="/images/percy.svg">
   <h1>Percy</h1>
   <h2>Visual continuous integration for web applications</h2>
-
   {{#if session.isAuthenticated}}
     {{#if session.secure.user.isWhitelisted}}
-      {{#link-to 'owner.index' session.secure.user.login classNames="Header-cta Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
-    {{else}}
+      {{#link-to 'owner.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{/if}}
+  {{else}}
+    {{login-button}}
+  {{/if}}
+</div>
+{{#if session.isAuthenticated}}
+  {{#if session.secure.user.isWhitelisted}}
+  {{else}}
+    <div class="container container--marketing container--marketingDarker InviteContainer">
       <div class="Alert Alert--info">
         <strong>Thanks for requesting a beta invite!</strong>
         We're very excited to make Percy available to you.<br>
         You can <a href="https://goo.gl/ss3aYu">tell us more</a>
         about your app and tech stack to speed things up.
       </div>
-    {{/if}}
-  {{else}}
-    {{login-button classes="Header-cta"}}
-    <div style="font-size: 1.3rem">Currently <strong>invite-only</strong>—sign in to request a beta invite!</div>
-  {{/if}}
-  <div>&nbsp;</div>
-</div>
-<div class="container container--fixedWidth container--forContent container--marketing">
-  <h2>No more blind QA</h2>
-  <h3>Know every pixel changed in every launch</h3>
-  <div class="row">
-    <div class="one-third column">
-      <p>
-        Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate <a href="#">installed base portals</a> after maintainable products.
-      </p>
     </div>
-    <div class="two-thirds column">
-      <p>
-        Foo
-      </p>
+  {{/if}}
+{{else}}
+  <div class="container container--marketing container--marketingDarker InviteContainer">
+    <div>We're currently in a <strong>private beta</strong>—sign up to request an invite!</div>
+  </div>
+{{/if}}
+<div class="container container--marketing container--marketingLight">
+  <div class="container container--fixedWidth container--forContent">
+    <h2>No more blind QA</h2>
+    <h3>Know every pixel changed before every launch</h3>
+    <div class="row">
+      <div class="one-third column">
+        <p>
+          Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate <a href="#">installed base portals</a> after maintainable products.
+        </p>
+      </div>
+      <div class="two-thirds column">
+        <p>
+          Foo
+        </p>
+      </div>
     </div>
   </div>
 </div>
-<div class="container container--marketing container--marketingLight">
+<div class="container container--marketing container--marketing">
   <div class="container container--fixedWidth container--forContent">
     <h2>CI friendly</h2>
     <h3>Works in your current environment</h3>

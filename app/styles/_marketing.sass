@@ -1,11 +1,28 @@
-.container--marketing
-  h2
-    font-weight: bold
-    text-align: center
-    margin-bottom: 0
+&.container
+  &.container--marketing
+    h2
+      font-weight: bold
+      text-align: center
+      margin-bottom: 0
 
-  h3
-    text-align: center
+    h3
+      text-align: center
 
-.container--marketingLight
-  background-color: $beige
+    &.container--marketingDark
+      background-color: $darkpurple
+      color: $white
+
+    &.container--marketingDarker
+      background-color: $darkerpurple
+      color: $white
+
+    &.container--marketingLight
+      background-color: $beige
+
+    &.InviteContainer
+      padding: 20px
+      text-align: center
+
+      .Alert--info
+        max-width: 630px
+        margin: 0 auto
