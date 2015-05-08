@@ -4,10 +4,14 @@ import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
   restore: function(data) {
-    if (data.user) {
-      return Ember.RSVP.resolve(data);
-    }
-    return Ember.RSVP.reject();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (data.userData) {
+        var userRecord = this.get('store').push('user', data.userData);
+        resolve({user: userRecord, userData: data.userData});
+      } else {
+        reject();
+      }
+    }.bind(this));
   },
   authenticate: function(options) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -20,10 +24,11 @@ export default Base.extend({
         if (event.data.user) {
           // Success! Store the user in the session.
           var serializer = this.get('store').serializerFor('user');
-          var user = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
+          var userData = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
           Ember.$('.auth-iframe').remove();
 
-          resolve({user: user});
+          var userRecord = this.get('store').push('user', userData);
+          resolve({user: userRecord, userData: userData});
         } else if (event.data === 'unauthenticated') {
           // Redirect to GitHub auth.
           if (options.doRedirect) {

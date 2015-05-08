@@ -1,1 +1,7 @@
-<img src="{{user.avatarUrl}}&s={{width}}">
+{{#if linked}}
+  <a href="{{user.githubUrl}}">
+    <img src="{{user.avatarUrl}}&s={{width}}">
+  </a>
+{{else}}
+  <img src="{{user.avatarUrl}}&s={{width}}">
+{{/if}}

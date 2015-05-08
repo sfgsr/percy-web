@@ -8,4 +8,8 @@ export default DS.Model.extend({
   isWhitelisted: DS.attr('boolean'),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
+
+  githubUrl: function() {
+    return 'https://github.com/' + this.get('login');
+  }.property('login'),
 });
