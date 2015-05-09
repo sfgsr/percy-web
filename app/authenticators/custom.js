@@ -14,6 +14,7 @@ export default Base.extend({
     }.bind(this));
   },
   authenticate: function(options) {
+    var options = options || {};
     return new Ember.RSVP.Promise(function(resolve, reject) {
       // First, declare a message receiver for the postMessage events.
       var receiveMessage = function(event) {
@@ -34,13 +35,14 @@ export default Base.extend({
           if (options.doRedirect) {
             var parser = document.createElement('a');
             parser.href = window.location.href;
-            parser.hash = '#auth';
+            parser.pathname = '/login';
             var params = {redirect_to: parser.href};
             window.location = utils.buildApiUrl('login', {params: params});
           }
         } else {
           Ember.Logger.warn('Unhandled iframe message data:', event.data);
-          reject();
+          // Do not reject here, because authentication did not fail and this is an unrelated
+          // message. Rejecting will cause bugs.
         }
       }.bind(this);
       window.addEventListener('message', receiveMessage, false);

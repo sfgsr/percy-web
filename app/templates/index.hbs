@@ -10,6 +10,12 @@
   {{#if session.isAuthenticated}}
     {{#if session.secure.user.isWhitelisted}}
       {{#link-to 'owner.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{else}}
+      <div class="Alert Alert--info">
+        <strong>Thanks for requesting a beta invite!</strong> We're very excited to make Percy available to you.
+        <br>
+        You can help by <a href="https://goo.gl/ss3aYu">telling us more</a> about your app and tech stack.
+      </div>
     {{/if}}
   {{else}}
     {{login-button}}
@@ -18,11 +24,6 @@
 {{#if session.isAuthenticated}}
   {{#if session.secure.user.isWhitelisted}}
   {{else}}
-    <div class="container container--marketing container--marketingDarker InviteContainer">
-      <strong>Thanks for requesting a beta invite!</strong> We're very excited to make Percy available to you.
-      <br>
-      You can <a href="https://goo.gl/ss3aYu">tell us more</a> about your app and tech stack to speed things up.
-    </div>
   {{/if}}
 {{else}}
   <div class="container container--marketing container--marketingDarker InviteContainer">
@@ -72,8 +73,8 @@
           If any visual diffs are found, you simply review them and click <i>Approve</i> to make the build green.
         </p>
         <p>
-          Percy was also designed from the ground up to be <strong>compatible with all CI environments</strong>
-          and even local development environments. Wherever your code is running,
+          Percy was also designed from the ground up to be <strong>compatible with any CI environment</strong>
+          and even local development. If there is HTML and CSS, Percy will work.
         </p>
       </div>
       <div class="one-half column u-text-center">
@@ -84,16 +85,7 @@
 </div>
 <div class="container container--marketing container--marketingLight">
   <div class="container container--fixedWidth container--forContent">
-    <h2>Demo</h2>
-    <h3></h3>
-    <div class="row u-text-center">
-      <iframe width="900" height="485" src="https://www.youtube.com/embed/k2mjadTm4A8" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-</div>
-<div class="container container--marketing container--marketingDark">
-  <div class="container container--fixedWidth container--forContent">
-    <h2>Simple, transparent pricing</h2>
+    <h2 id="pricing">Simple, transparent pricing</h2>
     <h3></h3>
     <div class="row u-text-center">
       <p>

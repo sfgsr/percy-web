@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import utils from '../lib/utils';
 
 export default Ember.Component.extend({
   classes: null,
 
   tagName: 'a',
-  href: '#',
+  href: utils.buildApiUrl('login'),
   classNames: [
     'LoginButton',
     'Button',
