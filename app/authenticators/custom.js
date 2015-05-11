@@ -14,8 +14,8 @@ export default Base.extend({
     }.bind(this));
   },
   authenticate: function(options) {
-    var options = options || {};
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    options = options || {};
+    return new Ember.RSVP.Promise(function(resolve) {
       // First, declare a message receiver for the postMessage events.
       var receiveMessage = function(event) {
         // For security reasons, only accept postMessage events from the API origin.

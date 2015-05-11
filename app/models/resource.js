@@ -4,7 +4,7 @@ export default DS.Model.extend({
   name: DS.attr(),
   build: DS.belongsTo('build'),
   isRoot: DS.attr('boolean'),
-  screenshots: DS.hasMany('screenshot', {async: true}),
+  screenshots: DS.hasMany('screenshot'),
   pageUrl: DS.attr(),
   resourceUrl: DS.attr(),
   mimetype: DS.attr(),

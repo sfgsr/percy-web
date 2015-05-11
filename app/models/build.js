@@ -5,7 +5,7 @@ export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: true}),
   commit: DS.belongsTo('commit'),
   baseBuild: DS.belongsTo('build'),
-  comparisons: DS.hasMany('comparison'),
+  comparisons: DS.hasMany('comparison', {async: true}),
   resources: DS.hasMany('resource', {async: true}),
 
   isPullRequest: DS.attr('boolean'),
@@ -35,10 +35,6 @@ export default DS.Model.extend({
         'commit',
         'base-build',
         'base-build.commit',
-        'comparisons',
-        'comparisons.pdiff',
-        'comparisons.base-resource',
-        'comparisons.head-resource',
       ].join(',')
     });
   },
