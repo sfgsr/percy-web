@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('login');
   this.resource('owner', {path: '/:owner_id'}, function() {
     this.resource('repo', {path: '/:repo_id'}, function() {
+      this.route('settings');
       this.resource('builds', function() {
         this.route('build', {path: '/:build_id'});
       });

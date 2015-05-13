@@ -13,4 +13,10 @@ export default DS.Model.extend({
   updatedAt: DS.attr('date'),
 
   builds: DS.hasMany('build', {async: true}),
+  tokens: DS.hasMany('token', {async: true}),
+
+  writeOnlyToken: function() {
+    // Write now the tokens API only returns a list of one write-only token.
+    return this.get('tokens.firstObject');
+  }.property('tokens'),
 });

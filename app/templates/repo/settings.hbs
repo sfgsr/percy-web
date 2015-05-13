@@ -1,0 +1,8 @@
+<div class="container container--forContent container--fixedWidth">
+  <h5>
+    {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.ownerLogin model.name}}{{model.name}}{{/link-to}} <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a> Settings
+  </h5>
+  <h3>API keys</h3>
+  <h4>Write-only key</h4>
+  <pre><code>{{model.writeOnlyToken.token}}</code></pre>
+</div>
