@@ -5,4 +5,6 @@ export default DS.Model.extend({
   role: DS.attr(),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
+
+  repo: DS.belongsTo('repo'),
 });
