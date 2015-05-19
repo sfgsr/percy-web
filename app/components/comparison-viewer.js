@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   comparison: null,
 
-  showNoDiffResource: false,
+  showNoDiffSnapshot: false,
   isOverlayEnabled: true,
   classNames: ['ComparisonViewer'],
   actions: {
@@ -11,7 +11,7 @@ export default Ember.Component.extend({
       this.set('isOverlayEnabled', !this.get('isOverlayEnabled'));
     },
     toggleNoDiffResource: function() {
-      this.set('showNoDiffResource', !this.get('showNoDiffResource'));
+      this.set('showNoDiffSnapshot', !this.get('showNoDiffSnapshot'));
     },
   },
 });

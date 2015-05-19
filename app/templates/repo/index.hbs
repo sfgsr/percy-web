@@ -32,13 +32,13 @@
     </tr>
     {{#each build in model.builds}}
       <tr>
-        <td><strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.id}}{{/link-to}}</strong><br></td>
+        <td><strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br></td>
         <td>
           {{build.state}}
           {{#if build.isPending}}
             {{fa-icon 'fa-spinner fa-pulse'}}
           {{/if}}
-          {{#if build.isFinalized}}
+          {{#if build.isProcessing}}
             {{fa-icon 'fa-spinner fa-pulse'}}
           {{/if}}
         </td>

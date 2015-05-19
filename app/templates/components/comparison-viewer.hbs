@@ -1,5 +1,5 @@
 <div class="ComparisonViewer-header row">
-  <strong>{{comparison.headResource.name}}</strong>
+  <strong>{{comparison.headSnapshot.name}}</strong>
   {{comparison-status comparison=comparison classes="u-pull-right"}}
 </div>
 {{#if comparison.isDifferent}}
@@ -21,7 +21,7 @@
       </div>
     </div>
   {{else}}
-    {{#if comparison.headResource}}
+    {{#if comparison.headSnapshot}}
       {{! New resource. }}
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
@@ -31,7 +31,7 @@
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           <div class="ComparisonViewer-pdiffImageBox">
-            <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
+            <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.image.url}}">
           </div>
         </div>
       </div>
@@ -41,14 +41,14 @@
   <div class="row ComparisonViewer-noDiffBox">
     Phew! No visual diffs found.
 
-    {{#if showNoDiffResource}}
+    {{#if showNoDiffSnapshot}}
       <a {{action "toggleNoDiffResource"}} href="#">Hide page</a>
     {{else}}
       <a {{action "toggleNoDiffResource"}} href="#">Show page</a>
     {{/if}}
   </div>
 
-  {{#if showNoDiffResource}}
+  {{#if showNoDiffSnapshot}}
     <div class="row">
       <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
         <div class="ComparisonViewer-resourceMissing">
@@ -57,7 +57,7 @@
       </div>
       <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
         <div class="ComparisonViewer-pdiffImageBox">
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.headResource.screenshots.firstObject.image.url}}">
+          <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.image.url}}">
         </div>
       </div>
     </div>

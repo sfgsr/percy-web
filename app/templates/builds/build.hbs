@@ -1,15 +1,15 @@
 <div class="container container--forContent">
   {{approval-section build=model classes="u-pull-right"}}
   <h5>
-    {{#link-to "owner.index" model.repo.ownerLogin}}{{model.repo.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.repo.ownerLogin model.repo.name}}{{model.repo.name}}{{/link-to}} <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a> Build #{{model.id}}
+    {{#link-to "owner.index" model.repo.ownerLogin}}{{model.repo.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.repo.ownerLogin model.repo.name}}{{model.repo.name}}{{/link-to}} <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a> Build #{{model.buildNumber}}
   </h5>
   <strong>Base:</strong>
-  {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.id}}{{/link-to}}
+  {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.buildNumber}}{{/link-to}}
   <br>
   <strong>Commit:</strong>
   <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
   <p>{{model.commit.message}}</p>
 
-  <h5>{{model.comparisons.length}} comparisons:</h5>
+  <h5>{{model.comparisons.length}} snapshots:</h5>
   {{comparison-list comparisons=model.comparisons}}
 </div>

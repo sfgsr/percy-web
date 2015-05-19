@@ -3,10 +3,12 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: true}),
+  buildNumber: DS.attr('number'),
+
   commit: DS.belongsTo('commit'),
   baseBuild: DS.belongsTo('build'),
   comparisons: DS.hasMany('comparison', {async: true}),
-  resources: DS.hasMany('resource', {async: true}),
+  snapshots: DS.hasMany('snapshot', {async: true}),
 
   isPullRequest: DS.attr('boolean'),
   pullRequestNumber: DS.attr('number'),
@@ -20,7 +22,7 @@ export default DS.Model.extend({
   updatedAt: DS.attr('date'),
 
   isPending: Ember.computed.equal('state', 'pending'),
-  isFinalized: Ember.computed.equal('state', 'finalized'),
+  isProcessing: Ember.computed.equal('state', 'processing'),
   isFinished: Ember.computed.equal('state', 'finished'),
 
   isApproved: function() {
