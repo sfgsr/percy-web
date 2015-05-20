@@ -22,7 +22,7 @@ export default Ember.Component.extend({
   },
   actions: {
     login: function() {
-      this.get('session').authenticate('authenticator:custom', {doRedirect: true});
+      this.get('session').authenticate('authenticator:custom', {redirectTo: window.location.href});
     }
   },
 });

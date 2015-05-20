@@ -32,15 +32,15 @@ export default Base.extend({
           resolve({user: userRecord, userData: userData});
         } else if (event.data === 'unauthenticated') {
           // Redirect to GitHub auth.
-          if (options.doRedirect) {
+          if (options.redirectTo) {
             var parser = document.createElement('a');
             parser.href = window.location.href;
             parser.pathname = '/login';
-            var params = {redirect_to: parser.href};
-            window.location = utils.buildApiUrl('login', {params: params});
+            parser.search = '?redirect_to=' + encodeURIComponent(options.redirectTo);
+            window.location = utils.buildApiUrl('login', {params: {redirect_to: parser.href}});
           }
         } else {
-          Ember.Logger.warn('Unhandled iframe message data:', event.data);
+          Ember.Logger.warn('Ignoring postMessage:', event.data);
           // Do not reject here, because authentication did not fail and this is an unrelated
           // message. Rejecting will cause bugs.
         }
