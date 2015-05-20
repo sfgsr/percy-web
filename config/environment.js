@@ -25,9 +25,6 @@ module.exports = function(environment) {
         approveBuild: '/api/v1/builds/%@/approve',
       },
     },
-    'simple-auth': {
-      authenticationRoute: 'index',
-    },
   };
 
   if (environment === 'development') {

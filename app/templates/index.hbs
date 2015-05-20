@@ -18,7 +18,7 @@
       </div>
     {{/if}}
   {{else}}
-    {{login-button}}
+    {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
   {{/if}}
 </div>
 {{#if session.isAuthenticated}}

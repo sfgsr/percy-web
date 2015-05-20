@@ -5,7 +5,6 @@ export default Ember.Component.extend({
   classes: null,
 
   tagName: 'a',
-  href: utils.buildApiUrl('login'),
   classNames: [
     'LoginButton',
     'Button',
@@ -22,7 +21,7 @@ export default Ember.Component.extend({
   },
   actions: {
     login: function() {
-      this.get('session').authenticate('authenticator:custom', {redirectTo: window.location.href});
+      this.sendAction('sessionRequiresAuthentication');
     }
   },
 });
