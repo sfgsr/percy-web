@@ -26,11 +26,11 @@
   {{else}}
   {{/if}}
 {{else}}
-  <div class="container container--marketing container--marketingDarker InviteContainer">
+  <div class="container container--marketing container--darker InviteContainer">
     <div>We're currently in a <strong>private beta</strong>—sign up to request an invite!</div>
   </div>
 {{/if}}
-<div class="container container--marketing container--marketingLight">
+<div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
     <h2>Stop doing QA in the dark</h2>
     <h3>See every pixel change before launch</h3>
@@ -59,7 +59,7 @@
     </div>
   </div>
 </div>
-<div class="container container--marketing container--marketing">
+<div class="container container--marketing">
   <div class="container container--fixedWidth container--forContent">
     <h2>CI friendly</h2>
     <h3>Plays nice in your environment</h3>
@@ -83,7 +83,7 @@
     </div>
   </div>
 </div>
-<div class="container container--marketing container--marketingLight">
+<div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
     <h2 id="pricing">Simple, transparent pricing</h2>
     <h3></h3>
@@ -94,7 +94,22 @@
     </div>
   </div>
 </div>
-<div class="container container--marketing container--marketingDarker">
+<div class="container container--marketing container--darker">
   <div class="container container--fixedWidth container--forContent">
+    <div class="row">
+      <div class="five columns u-text-right">
+        Pricing<br>
+        Blog<br>
+        About
+      </div>
+      <div class="two columns u-text-center u-no-margin">
+        <img class="Footer-logo" src="/images/percy.svg">
+      </div>
+      <div class="five columns u-text-left u-no-margin">
+        {{#link-to "terms"}}Terms{{/link-to}}<br>
+        {{#link-to "privacy"}}Privacy{{/link-to}}<br>
+        © 2015 Perceptual Inc.
+      </div>
+    </div>
   </div>
 </div>

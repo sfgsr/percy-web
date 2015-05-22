@@ -15,6 +15,8 @@ Router.map(function() {
       });
     });
   });
+  this.resource('terms');
+  this.resource('privacy');
 });
 
 export default Router;
