@@ -3,7 +3,7 @@ import utils from '../lib/utils';
 import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
-  restore: function(data) {
+  restore: function() {
     // Strategy: completely ignore the restore data and ask the backend again for current auth info.
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var receiveMessage = function(event) {

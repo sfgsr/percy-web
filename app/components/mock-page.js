@@ -7,6 +7,13 @@ export default Ember.Component.extend({
   classNames: ['MockPage'],
   classNameBindings: ['classes'],
 
+  showWhenOverlay: function() {
+    return (this.get('hideOverlay') ? 'display: none' : '').htmlSafe();
+  }.property('showOverlay'),
+  hideWhenOverlay: function() {
+    return (this.get('showOverlay') ? 'display: none' : '').htmlSafe();
+  }.property('hideOverlay'),
+
   actions: {
     toggleOverlay: function() {
       this.set('showOverlay', !this.get('showOverlay'));
