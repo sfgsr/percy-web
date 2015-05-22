@@ -1,0 +1,3 @@
+{{! Use inline-if format so that both images are loaded to avoid flicker.}}
+<img alt="Example Percy diff window" src="/images/example-window-overlay.png"  style="{{if showOverlay "display: none"}}" {{action "toggleOverlay"}}>
+<img alt="Example Percy diff window" src="/images/example-window.png" style="{{if hideOverlay "display: none"}}" {{action "toggleOverlay"}}>
