@@ -79,6 +79,31 @@
     &.container--withFixedTopHeader
       padding-top: 60px
 
+    &.container--dark
+      background-color: $darkpurple
+      color: $white
+
+      a
+        color: $on-dark-link
+        text-decoration: none
+      a:hover
+        color: $on-dark-link-hover
+        text-decoration: none
+
+    &.container--darker
+      background-color: $darkerpurple
+      color: $white
+
+      a
+        color: $on-dark-link
+        text-decoration: none
+      a:hover
+        color: $on-dark-link-hover
+        text-decoration: none
+
+    &.container--light
+      background-color: $beige
+
 
 /* For devices larger than 550px */
 @media (min-width: 550px)
@@ -233,7 +258,7 @@ h6
 /* Larger than phablet */
 @media (min-width: 550px)
   h1
-    font-size: 5.0rem
+    font-size: 4.5rem
   h2
     font-size: 4.2rem
   h3
@@ -404,12 +429,20 @@ p
 .u-max-full-width
   max-width: 100%
   box-sizing: border-box
+.u-no-padding
+  padding: 0
+.u-no-margin
+  margin: 0
 .u-pull-right
   float: right
 .u-pull-left
   float: left
 .u-text-center
   text-align: center
+.u-text-right
+  text-align: right
+.u-text-left
+  text-align: left
 .u-pull-center
   margin: 0 auto
 
