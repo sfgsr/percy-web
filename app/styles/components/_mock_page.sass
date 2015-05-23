@@ -2,7 +2,10 @@
   position: relative
   max-width: 1200px
   margin: 0 auto
+
   img
+    display: block
+    margin: 0 auto 50px auto
     width: 100%
     cursor: pointer
 
@@ -14,22 +17,51 @@
     // Allow &#10; newlines in data attr.
     white-space: pre
     background-color: #414141
-    line-height: 1.5rem
+    line-height: 1.7rem
+    font-size: 1.4rem
 
   .MockPage-note1
     position: absolute
     top: 45%
-    right: 27%
+    right: 26%
     z-index: 100
 
   .MockPage-note2
     position: absolute
     top: 57%
-    right: 30.5%
+    right: 30%
     z-index: 100
 
   .MockPage-note3
     position: absolute
     top: 76%
-    right: 22%
+    right: 21.5%
     z-index: 100
+
+  .MockPage-responsiveNote
+    display: none
+
+
+@media (max-width: 750px)
+  .MockPage
+    padding: 0 20px 10px 20px
+
+    img
+      margin: 0 auto
+
+    .MockPage-note1,
+    .MockPage-note2,
+    .MockPage-note3,
+      &.hint--always
+        display: none
+
+    .MockPage-responsiveNote
+      display: block
+      position: relative
+      height: 70px
+
+      &.hint--always:before,
+      &.hint--always:after,
+        top: 15px
+
+

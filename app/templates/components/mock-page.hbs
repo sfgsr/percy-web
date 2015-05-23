@@ -1,11 +1,15 @@
-{{! Use inline-if format so that both images are loaded to avoid flicker.}}
 <img src="/images/example-window-overlay.png"  style={{showWhenOverlay}} {{action "toggleOverlay"}} alt="Example Percy diff window">
 <img src="/images/example-window.png" style={{hideWhenOverlay}} {{action "toggleOverlay"}} alt="Example Percy diff window">
-
 <div class="MockPage-note1 hint--right hint--always" data-hint="Pixel-by-pixel diffs,
 even for complex UI states"></div>
-
 <div class="MockPage-note2 hint--right hint--always" data-hint="Catch nasty visual regressions
 before you launch them"></div>
-
 <div class="MockPage-note3 hint--right hint--always" data-hint="See changes invisible to the human eye"></div>
+
+
+<div class="MockPage-responsiveNote hint--bottom hint--always" data-hint="Pixel-by-pixel diffs,
+even for complex UI states"></div>
+<div class="MockPage-responsiveNote hint--bottom hint--always" data-hint="Catch nasty visual regressions
+before you launch them"></div>
+<div class="MockPage-responsiveNote hint--bottom hint--always" data-hint="See changes invisible
+to the human eye"></div>
