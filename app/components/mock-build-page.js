@@ -3,17 +3,17 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   showHints: false,
   showOverlay: true,
-  hideOverlay: Ember.computed.not('showOverlay'),
 
-  classNames: ['MockPage'],
-  classNameBindings: ['classes', 'showHints:MockPage--showHints'],
+  classNames: ['MockBuildPage'],
+  classNameBindings: ['classes', 'showHints:MockBuildPage--showHints'],
 
+  // We set style directly because we want both images to be in the initial DOM to avoid flicker.
   showWhenOverlay: function() {
-    return (this.get('hideOverlay') ? 'display: none' : '').htmlSafe();
+    return (!this.get('showOverlay') ? 'display: none' : '').htmlSafe();
   }.property('showOverlay'),
   hideWhenOverlay: function() {
     return (this.get('showOverlay') ? 'display: none' : '').htmlSafe();
-  }.property('hideOverlay'),
+  }.property('showOverlay'),
 
   fadeHintsOnScroll: function() {
     var self = this;
@@ -23,7 +23,7 @@ export default Ember.Component.extend({
 
     Ember.$(window).bind('scroll', function(){
       var elementHeightShowing = windowHeight - elementTop + Ember.$(window).scrollTop();
-      if (elementHeightShowing > 550) {
+      if (elementHeightShowing > 650) {
         self.set('showHints', true);
         Ember.$(window).unbind('scroll');
       }

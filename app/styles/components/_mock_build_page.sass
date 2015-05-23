@@ -1,4 +1,4 @@
-.MockPage
+.MockBuildPage
   padding-top: 20px
   position: relative
   max-width: 1200px
@@ -10,7 +10,7 @@
     width: 100%
     cursor: pointer
 
-  &.MockPage--showHints
+  &.MockBuildPage--showHints
     .hint--always
       opacity: 1;
       transition: opacity 1s ease-in-out;
@@ -20,7 +20,10 @@
   .hint--always
     opacity: 0
 
-  .hint--always:before
+  .hint--bottom:before
+    border-bottom-color: rgba(65,65,65,0.8)
+
+  .hint--right:before
     border-right-color: rgba(65,65,65,0.8)
 
   .hint--always:after
@@ -31,42 +34,42 @@
     line-height: 1.7rem
     font-size: 1.4rem
 
-  .MockPage-note1
+  .MockBuildPage-note1
     position: absolute
     top: 47%
     right: 26%
     z-index: 100
 
-  .MockPage-note2
+  .MockBuildPage-note2
     position: absolute
     top: 58.5%
     right: 29%
     z-index: 100
 
-  .MockPage-note3
+  .MockBuildPage-note3
     position: absolute
     top: 77%
     right: 21.5%
     z-index: 100
 
-  .MockPage-responsiveNote
+  .MockBuildPage-responsiveNote
     display: none
 
 
 @media (max-width: 750px)
-  .MockPage
+  .MockBuildPage
     padding: 0 20px 10px 20px
 
     img
       margin: 0 auto
 
-    .MockPage-note1,
-    .MockPage-note2,
-    .MockPage-note3,
+    .MockBuildPage-note1,
+    .MockBuildPage-note2,
+    .MockBuildPage-note3,
       &.hint--always
         display: none
 
-    .MockPage-responsiveNote
+    .MockBuildPage-responsiveNote
       display: block
       position: relative
       height: 70px
