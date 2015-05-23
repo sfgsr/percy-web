@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import utils from '../lib/utils';
 
 export default Ember.Component.extend({
   isApproved: false,
