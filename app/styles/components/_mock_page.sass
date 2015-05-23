@@ -1,40 +1,51 @@
 .MockPage
+  padding-top: 20px
   position: relative
   max-width: 1200px
   margin: 0 auto
 
   img
     display: block
-    margin: 0 auto 50px auto
+    margin: 0 auto
     width: 100%
     cursor: pointer
 
+  &.MockPage--showHints
+    .hint--always
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+      -moz-transition: opacity 1s ease-in-out;
+      -webkit-transition: opacity 1s ease-in-out;
+
+  .hint--always
+    opacity: 0
+
   .hint--always:before
-    border-right-color: #414141
+    border-right-color: rgba(65,65,65,0.8)
 
   .hint--always:after
     text-align: left
     // Allow &#10; newlines in data attr.
     white-space: pre
-    background-color: #414141
+    background-color: rgba(65,65,65,0.8)
     line-height: 1.7rem
     font-size: 1.4rem
 
   .MockPage-note1
     position: absolute
-    top: 45%
+    top: 47%
     right: 26%
     z-index: 100
 
   .MockPage-note2
     position: absolute
-    top: 57%
-    right: 30%
+    top: 58.5%
+    right: 29%
     z-index: 100
 
   .MockPage-note3
     position: absolute
-    top: 76%
+    top: 77%
     right: 21.5%
     z-index: 100
 
