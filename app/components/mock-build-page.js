@@ -26,7 +26,7 @@ export default Ember.Component.extend({
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;
     var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
-    if (elementHeightShowing > elementHeight * (2/3)) {
+    if (elementHeightShowing > elementHeight * (9/10)) {
       this.set('showHints', true);
       Ember.$(window).unbind('.MockBuildPage');
     }

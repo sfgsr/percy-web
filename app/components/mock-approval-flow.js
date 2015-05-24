@@ -30,7 +30,9 @@ export default Ember.Component.extend({
         this.set('isButtonHovered', true);
         Ember.run.later((function() {
           this.set('isButtonHovered', false);
-          this.set('isApproved', true);
+          if (!this.get('isApproved')) {
+            this.set('isApproved', true);
+          }
         }.bind(this)), 500);
       }.bind(this)), 2000);
       Ember.$(window).unbind('.MockApprovalFlow');
