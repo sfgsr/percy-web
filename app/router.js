@@ -15,8 +15,14 @@ Router.map(function() {
       });
     });
   });
-  this.resource('terms');
-  this.resource('privacy');
+  this.resource('docs', function() {
+    this.route('capybara');
+    this.route('static');
+    this.route('custom');
+    this.resource('apidocs', {path: '/api'}, function() {});
+  });
+  this.route('terms');
+  this.route('privacy');
 });
 
 export default Router;

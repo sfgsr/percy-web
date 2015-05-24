@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   }.property('showOverlay'),
 
   setupScrollHandler: function() {
-    $(window).load(function() {
+    Ember.$(window).ready(function() {
       Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
       this._showHintsIfVisible();
     }.bind(this));
@@ -31,7 +31,6 @@ export default Ember.Component.extend({
       Ember.$(window).unbind('.MockBuildPage');
     }
   },
-
   actions: {
     toggleOverlay: function() {
       this.set('anyInteractions', true);

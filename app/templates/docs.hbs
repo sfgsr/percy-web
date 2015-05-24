@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+
+{{fixed-top-header}}
+<div class="container container--fixedWidth container--forContent">
+  <div class="row">
+    <div class="three columns DocsNav">
+      <h3>Get Started</h3>
+      <ul>
+        <li>{{#link-to "docs.capybara"}}Capybara{{/link-to}}</li>
+        <li>{{#link-to "docs.static"}}Static websites{{/link-to}}</li>
+        <li>{{#link-to "docs.custom"}}Custom client{{/link-to}}</li>
+      </ul>
+      <h3>API</h3>
+      <ul>
+        <li>{{#link-to "apidocs.index"}}Reference{{/link-to}}</li>
+      </ul>
+    </div>
+    <div class="nine columns">
+      {{outlet}}
+    </div>
+  </div>
+</div>
+{{main-footer}}

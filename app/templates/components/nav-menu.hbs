@@ -1,4 +1,9 @@
 {{#if user}}
+  {{#if session.secure.user.isWhitelisted}}
+    <div class="NavMenu-item">
+      {{#link-to "docs.index"}}Docs{{/link-to}}
+    </div>
+  {{/if}}
   <div class="NavMenu-item">
     <a href="#" {{action "invalidateSession"}}>Logout</a>
   </div>
