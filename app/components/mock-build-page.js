@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   showHints: false,
   showOverlay: true,
+  anyInteractions: false,
 
   classNames: ['MockBuildPage'],
   classNameBindings: ['classes', 'showHints:MockBuildPage--showHints'],
@@ -15,22 +16,25 @@ export default Ember.Component.extend({
     return (this.get('showOverlay') ? 'display: none' : '').htmlSafe();
   }.property('showOverlay'),
 
-  fadeHintsOnScroll: function() {
-    var self = this;
-    var windowHeight = Ember.$(window).height(); // Assume no resize, for performance sake.
-    var element = this.$();
-
-    Ember.$(window).bind('scroll.MockBuildPage', function(){
-      var elementHeightShowing = windowHeight - element.offset().top + Ember.$(window).scrollTop();
-      if (elementHeightShowing > 650) {
-        self.set('showHints', true);
-        Ember.$(window).unbind('.MockBuildPage');
-      }
-    });
+  setupScrollHandler: function() {
+    $(window).load(function() {
+      Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
+      this._showHintsIfVisible();
+    }.bind(this));
   }.on('didInsertElement'),
+  _showHintsIfVisible: function() {
+    var elementHeight = this.$().height();
+    var elementTop = this.$().offset().top;
+    var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
+    if (elementHeightShowing > elementHeight * (2/3)) {
+      this.set('showHints', true);
+      Ember.$(window).unbind('.MockBuildPage');
+    }
+  },
 
   actions: {
     toggleOverlay: function() {
+      this.set('anyInteractions', true);
       this.set('showOverlay', !this.get('showOverlay'));
     }
   },

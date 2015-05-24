@@ -15,27 +15,25 @@ export default Ember.Component.extend({
   hideWhenApproved: function() {
     return (this.get('isApproved') ? 'display: none' : '').htmlSafe();
   }.property('isApproved'),
-
-  animateOnScrollVisible: function() {
-    var self = this;
-    var windowHeight = Ember.$(window).height(); // Assume no resize, for performance sake.
-    var element = this.$();
-
-    Ember.$(window).bind('scroll.MockApprovalFlow', function(){
-      var elementHeightShowing = windowHeight - element.offset().top + Ember.$(window).scrollTop();
-      /////////// whyyyyyyy does it reflow?
-      console.log('---');
-      console.log(elementHeightShowing);
-      if (elementHeightShowing > 250) {
-        Ember.run.later((function() {
-          self.set('isButtonHovered', true);
-          Ember.run.later((function() {
-            self.set('isButtonHovered', false);
-            self.set('isApproved', true);
-          }), 1000);
-        }), 2000);
-        // Ember.$(window).unbind('.MockApprovalFlow');
-      }
-    });
+  setupScrollHandler: function() {
+    $(window).load(function() {
+      Ember.$(window).bind('scroll.MockBuildPage', this._animateApprovalIfVisible.bind(this));
+      this._animateApprovalIfVisible();
+    }.bind(this));
   }.on('didInsertElement'),
+  _animateApprovalIfVisible: function() {
+    var elementHeight = this.$().height();
+    var elementTop = this.$().offset().top;
+    var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
+    if (elementHeightShowing > elementHeight * (2/3)) {
+      Ember.run.later((function() {
+        this.set('isButtonHovered', true);
+        Ember.run.later((function() {
+          this.set('isButtonHovered', false);
+          this.set('isApproved', true);
+        }.bind(this)), 500);
+      }.bind(this)), 2000);
+      Ember.$(window).unbind('.MockApprovalFlow');
+    }
+  },
 });

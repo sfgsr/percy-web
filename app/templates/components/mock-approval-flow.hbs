@@ -1,7 +1,6 @@
 <div class="row">
   <div class="one-half column">
     <div class="MockApprovalFlow-window">
-      <div class="PulseCircle"></div>
       {{! This relies on 2-way binding sharing the isApproved var, and will break in later Ember versions. }}
       {{mock-approval-button isApproved=isApproved isButtonHovered=isButtonHovered isButtonActive=isButtonActive}}
       <img src="/images/example-approval.png" alt="Example approval window">
