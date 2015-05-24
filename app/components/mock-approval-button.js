@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   isApproved: false,
+  isButtonHovered: false,
+  isButtonActive: false,
 
   tagName: 'button',
   classNames: [
@@ -13,9 +15,11 @@ export default Ember.Component.extend({
   classNameBindings: [
     'classes',
     'isApproved:ApprovalButton--approved',
+    // Custom hover/active classes for animation.
+    'isButtonHovered:ApprovalButton--hover',
+    'isButtonActive:ApprovalButton--active',
   ],
   click: function() {
     this.set('isApproved', !this.get('isApproved'));
-    this.sendAction('fakeApprovalToggled', this.get('isApproved'));
   },
 });

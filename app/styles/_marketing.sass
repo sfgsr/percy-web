@@ -17,6 +17,32 @@
     &.MockPageContainer
       box-shadow: 0 6px 17px -8px #d0d0d0
 
+      .PulseCircle
+        top: 65%
+        right: 25%
+
 .Footer-logo
   width: 100px
   margin: 0 10px 0 10px
+
+
+.PulseCircle
+  border: 3px solid #999
+  border-radius: 30px
+  height: 28px
+  width: 28px
+  position: absolute
+  animation-delay
+  -webkit-animation: pulsate 2s ease-out
+  -webkit-animation-iteration-count: infinite
+  opacity: 0.0
+
+@-webkit-keyframes pulsate
+  0%
+    -webkit-transform: scale(0.1, 0.1)
+    opacity: 0.0
+  25%
+    opacity: 1.0
+  50%
+    -webkit-transform: scale(1.2, 1.2)
+    opacity: 0.0

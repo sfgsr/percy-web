@@ -6,7 +6,8 @@
   border-color: $darkyellow
   width: 170px
 
-  &:hover
+  &:hover,
+  &.ApprovalButton--hover,
     color: white
     background-color: $lightyellow
     text-shadow: 1px 1px 3px #6f6f6f
@@ -15,7 +16,8 @@
   &:focus
     color: white
 
-  &:active
+  &:active,
+  &.ApprovalButton--active,
     box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.2);
 
   &.ApprovalButton--approved

@@ -19,13 +19,12 @@ export default Ember.Component.extend({
     var self = this;
     var windowHeight = Ember.$(window).height(); // Assume no resize, for performance sake.
     var element = this.$();
-    var elementTop = element.offset().top;
 
-    Ember.$(window).bind('scroll', function(){
-      var elementHeightShowing = windowHeight - elementTop + Ember.$(window).scrollTop();
+    Ember.$(window).bind('scroll.MockBuildPage', function(){
+      var elementHeightShowing = windowHeight - element.offset().top + Ember.$(window).scrollTop();
       if (elementHeightShowing > 650) {
         self.set('showHints', true);
-        Ember.$(window).unbind('scroll');
+        Ember.$(window).unbind('.MockBuildPage');
       }
     });
   }.on('didInsertElement'),
