@@ -1,9 +1,21 @@
-<h2>Percy::Capybara</h2>
+<h2>
+  Percy::Capybara
+  <a href="https://github.com/percy/percy-capybara">{{unbound fa-icon "github"}}</a>
+</h2>
 
 <p>
-  Percy includes a Ruby library that can be used within your existing
+  <a href="https://travis-ci.org/percy/percy-capybara"><img src="https://travis-ci.org/percy/percy-capybara.svg?branch=master"></a>
+  <a href="https://rubygems.org/gems/percy-capybara"><img src="https://badge.fury.io/rb/percy-capybara.svg"></a>
+</p>
+
+<p>
+  Percy can be used inside your existing
   <a href="https://github.com/jnicklas/capybara">Capybara</a> feature tests in any
   Ruby web framework, including Rails, Sinatra, etc.
+</p>
+<p>
+  The examples below assume that you are using RSpec, but they could be easily adapted for
+  another testing framework.
 </p>
 
 <h3>Installation</h3>
@@ -21,13 +33,13 @@ $ bundle install
 
 <p>Or install it yourself with <code>gem install percy-capybara</code>.</p>
 
-<h3>Integration</h3>
+<h3>Setup</h3>
 
 First, you'll need to:
 
 <ol>
   <li>Enable the repository in your account.</li>
-  <li>Go to Repo &gt; Settings and copy the "write-only key".</li>
+  <li>Go to <em>Settings</em> for the repository and copy the write-only API key.</li>
 </ol>
 
 For Rails apps, you can add this to your Rails
@@ -35,7 +47,7 @@ For Rails apps, you can add this to your Rails
 
 {{#code-block}}
 test:
-  secret_key_base: 234abc234...
+  secret_key_base: 1234abcd...
   percy_access_token: &lt;REPOSITORY WRITE-ONLY TOKEN HERE&gt;
 {{/code-block}}
 
@@ -50,10 +62,64 @@ RSpec.configure do |config|
 end
 {{/code-block}}
 
+<h3>Usage</h3>
+
+<p>Now the fun part!</p>
+<p>Usually, you'll have an existing feature spec that looks something like this:</p>
+
+{{#code-block}}
+describe 'a feature', type: :feature, js: true do
+  it 'shows the dropdown menu when clicked' do
+    visit '/'
+    first('.dropdown-toggle').click
+    expect(page).to have_selector('#main-dropdown', visible: true)
+  end
+end
+{{/code-block}}
+
+You can integrate with Percy by adding one line:
+
+{{#code-block}}
+<span class="dim">describe 'a feature', type: :feature, js: true do
+  it 'shows the dropdown menu when clicked' do
+    visit '/'
+    first('.dropdown-toggle').click
+    expect(page).to have_selector('#main-dropdown', visible: true)</span>
+    Percy::Capybara.snapshot(page)
+  <span class="dim">end
+end</span>
+{{/code-block}}
+
+<p>
+  Done! The actual screenshot rendering, which can often be very slow, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method simply grabs the current DOM, CSS, and certain page assets and uploads them to Percy for processing.
+</p>
+<p>
+  We handle all the complexities of screenshot rendering in Percy itself so that the impact on your tests is minimal. Also, assets are fingerprinted and only ever uploaded once, so no uploads will happen at all if the assets in a build haven't changed.
+</p>
+
+<h4>Identifying snapshots</h4>
+<p>
+  Percy needs to be able to uniquely identify the same snapshot across builds to provide visual diffs.
+</p>
+<p>
+  To accomplish this, <code>Percy::Capybara</code> uses the current page's URL as the name of the snapshot. We assume that your app has been built with stateful navigation and that the URL fully identifies the page state.
+</p>
+<p>
+  However, there are many cases where this will not be enough, for example when you populate test data in the page, or when you perform a UI interaction that doesn't change the URL (like clicking the dropdown in the example above).
+</p>
+<p>
+  To manually identify a snapshot, you can provide the <code>name</code> parameter:
+</p>
+
+{{#code-block}}
+Percy::Capybara.snapshot(page, name: 'homepage (with dropdown clicked)')
+{{/code-block}}
+
+<p>
+  The <code>name</code> param can be any string that makes sense to you to identify the page state, it just should remain the same across builds.
+</p>
 
 <h3>Troubleshooting</h3>
-
-<h4>Errors</h4>
 
 You may encounter this error:
 
@@ -61,19 +127,21 @@ You may encounter this error:
 Capybara::NotSupportedByDriverError:Capybara::Driver::Base#evaluate_script
 {{/code-block}}
 
-This usually means that you are using the default RackTest driver which does not support JavaScript
-execution. To fix this, feature tests that use Percy must be tagged with <code>js: true</code>:
+<p>
+  This usually means that you are using the default RackTest driver which does not support JavaScript execution. To fix this, feature tests that use Percy must be tagged with <code>js: true</code>:
+</p>
 
 {{#code-block}}
-describe 'some feature test', type: :feature, <strong>js: true</strong> do
+describe 'some feature test', type: :feature, js: true do
   ...
 end
 {{/code-block}}
 
 <h4>WebMock/VCR users</h4>
 
-If you use <a href="https://github.com/vcr/vcr">VCR</a> to mock and record HTTP interactions, you'll
-need to allow connections to the Percy API:
+<p>
+  If you use <a href="https://github.com/vcr/vcr">VCR</a> to mock and record HTTP interactions, you'll need to allow connections to the Percy API:
+</p>
 
 {{#code-block}}
 VCR.configure do |config|
@@ -81,8 +149,9 @@ VCR.configure do |config|
 end
 {{/code-block}}
 
-If you use <a href="https://github.com/bblimke/webmock">WebMock</a> to stub out HTTP connections,
-you'll need to allow connections to the Percy API:
+<p>
+  If you use <a href="https://github.com/bblimke/webmock">WebMock</a> to stub out HTTP connections, you'll need to allow connections to the Percy API:
+</p>
 
 {{#code-block}}
 WebMock.disable_net_connect!(allow: 'percy.io')
