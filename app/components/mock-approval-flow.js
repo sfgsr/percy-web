@@ -21,6 +21,9 @@ export default Ember.Component.extend({
       this._animateApprovalIfVisible();
     }.bind(this));
   }.on('didInsertElement'),
+  destroyScrollHandler: function() {
+    Ember.$(window).unbind('.MockApprovalFlow');
+  }.on('willDestroyElement'),
   _animateApprovalIfVisible: function() {
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;

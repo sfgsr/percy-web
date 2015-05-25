@@ -22,6 +22,9 @@ export default Ember.Component.extend({
       this._showHintsIfVisible();
     }.bind(this));
   }.on('didInsertElement'),
+  destroyScrollHandler: function() {
+    Ember.$(window).unbind('.MockBuildPage');
+  }.on('willDestroyElement'),
   _showHintsIfVisible: function() {
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;
