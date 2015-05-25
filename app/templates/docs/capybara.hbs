@@ -1,8 +1,12 @@
-<h3>Capybara client</h3>
+<h2>Percy::Capybara</h2>
 
-<p>For Ruby web frameworks that have</p>
+<p>
+  Percy includes a Ruby library that can be used within your existing
+  <a href="https://github.com/jnicklas/capybara">Capybara</a> feature tests in any
+  Ruby web framework, including Rails, Sinatra, etc.
+</p>
 
-<h4>Installation</h4>
+<h3>Installation</h3>
 
 <p>Add this line to your application's Gemfile:</p>
 {{#code-block}}
@@ -11,14 +15,75 @@ gem 'percy-capybara'
 
 <p>And then execute:</p>
 
-{{#code-block}}
+{{#code-block lang="bash"}}
 $ bundle install
 {{/code-block}}
 
-<p>Or install it yourself as:</p>
+<p>Or install it yourself with <code>gem install percy-capybara</code>.</p>
+
+<h3>Integration</h3>
+
+First, you'll need to:
+
+<ol>
+  <li>Enable the repository in your account.</li>
+  <li>Go to Repo &gt; Settings and copy the "write-only key".</li>
+</ol>
+
+For Rails apps, you can add this to your Rails
+<code><a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">config/secrets.yml</a></code>:
 
 {{#code-block}}
-$ gem install percy-capybara
+test:
+  secret_key_base: 234abc234...
+  percy_access_token: &lt;REPOSITORY WRITE-ONLY TOKEN HERE&gt;
 {{/code-block}}
 
-<h4>Ruby Client</h4>
+And then enable Percy in your <code>spec_helper.rb</code>:
+
+{{#code-block}}
+RSpec.configure do |config|
+  config.before(:suite) do
+    Percy.config.access_token = Rails.application.secrets.percy_access_token
+  end
+  config.after(:suite) { Percy::Capybara.finalize_build }
+end
+{{/code-block}}
+
+
+<h3>Troubleshooting</h3>
+
+<h4>Errors</h4>
+
+You may encounter this error:
+
+{{#code-block}}
+Capybara::NotSupportedByDriverError:Capybara::Driver::Base#evaluate_script
+{{/code-block}}
+
+This usually means that you are using the default RackTest driver which does not support JavaScript
+execution. To fix this, feature tests that use Percy must be tagged with <code>js: true</code>:
+
+{{#code-block}}
+describe 'some feature test', type: :feature, <strong>js: true</strong> do
+  ...
+end
+{{/code-block}}
+
+<h4>WebMock/VCR users</h4>
+
+If you use <a href="https://github.com/vcr/vcr">VCR</a> to mock and record HTTP interactions, you'll
+need to allow connections to the Percy API:
+
+{{#code-block}}
+VCR.configure do |config|
+  config.ignore_hosts 'percy.io'
+end
+{{/code-block}}
+
+If you use <a href="https://github.com/bblimke/webmock">WebMock</a> to stub out HTTP connections,
+you'll need to allow connections to the Percy API:
+
+{{#code-block}}
+WebMock.disable_net_connect!(allow: 'percy.io')
+{{/code-block}}

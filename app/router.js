@@ -19,7 +19,10 @@ Router.map(function() {
     this.route('capybara');
     this.route('static');
     this.route('custom');
-    this.resource('apidocs', {path: '/api'}, function() {});
+    this.resource('apidocs', {path: '/api'}, function() {
+      this.route('reference');
+      this.route('client');
+    });
   });
   this.route('terms');
   this.route('privacy');
