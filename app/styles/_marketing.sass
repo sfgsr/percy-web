@@ -2,12 +2,10 @@
   &.container--marketing
     h2
       padding-top: 20px
-      font-weight: bold
       text-align: center
       margin-bottom: 0
 
     h3
-      font-weight: 300
       text-align: center
       margin-bottom: 3rem
 
@@ -18,10 +16,43 @@
     &.MockPageContainer
       box-shadow: 0 6px 17px -8px #d0d0d0
 
+    &.AboutContainer
+      h2
+        padding-top: 40px
+      h5
+        padding-top: 0
+        margin-bottom: 0
+
+      .AboutContainer-header
+        text-align: center
+        background: $darkpurple
+        border-radius: 10px
+        color: white
+
+        h1
+          padding-top: 70px
+          margin-bottom: 0
+        h2
+          padding-top: 0
+          padding-bottom: 20px
+          font-size: 3rem
+        iframe
+          margin-bottom: 20px
+
+      .AboutContainer-logo
+        width: 300px
+        margin: 30px 0 20px 100px
+
+      .AboutContainer-avatar
+        display: block
+        margin: 30px auto 30px auto
+        width: 100%
+        max-width: 200px
+        border-radius: 7px
+
 .Footer-logo
   width: 100px
   margin: 0 10px 0 10px
-
 
 .PulseCircle
   @include animation('pulsate 2s ease-out')
@@ -43,3 +74,13 @@
   50%
     transform: scale(1.2, 1.2)
     opacity: 0.0
+
+@media (max-width: 550px)
+  &.container
+    &.container--marketing
+      &.AboutContainer
+        .AboutContainer-header
+          h1
+            padding-top: 10px
+        .AboutContainer-logo
+          margin: 10px 0 5px 10px

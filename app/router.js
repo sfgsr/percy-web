@@ -25,6 +25,7 @@ Router.map(function() {
       this.route('client');
     });
   });
+  this.route('about');
   this.route('faq');
   this.route('terms');
   this.route('privacy');
