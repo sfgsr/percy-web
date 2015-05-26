@@ -36,7 +36,7 @@ $ bundle install
 First, you'll need to:
 
 <ol>
-  <li>Login and enable the repository in your account.</li>
+  <li>Sign in and enable a repository in your account.</li>
   <li>Go to <em>Settings</em> for the repository and copy the write-only API key.</li>
 </ol>
 
@@ -120,7 +120,7 @@ Percy::Capybara.snapshot(page, name: 'homepage (with dropdown clicked)')
 {{/code-block}}
 
 <p>
-  The <code>name</code> param can be any string that makes sense to you to identify the page state, it just should remain the same across builds.
+  The <code>name</code> param can be any string that makes sense to you to identify the page state, it should just remain the same across builds.
 </p>
 
 <h3>Troubleshooting</h3>
@@ -160,7 +160,6 @@ end
 {{#code-block}}
 WebMock.disable_net_connect!(allow: 'percy.io')
 {{/code-block}}
-
 
 <h3>Contributing</h3>
 
