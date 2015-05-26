@@ -1,0 +1,22 @@
+<h2>CI integration</h2>
+
+Percy <em>automatically</em> supports the following CI services:
+
+<ul>
+  <li><a href="https://travis-ci.org/">Travis CI</a></li>
+  <li><a href="https://jenkins-ci.org/">Jenkins CI</a></li>
+  <li><a href="https://circleci.com/">Circle CI</a></li>
+</ul>
+
+<p>
+  The {{#link-to "docs.capybara"}}Percy::Capybara{{/link-to}} library and low-level {{#link-to "apidocs.client"}}Percy::Client{{/link-to}} automatically discover if running in one of these environments and read the current branch name, Git commit SHA, repository name, and GitHub Pull Request (if any).
+</p>
+<p>
+  You can see the code for this in the <code><a href="https://github.com/percy/percy-client/blob/master/lib/percy/client/environment.rb">percy/client/environment.rb</a></code> file. If you don't see your favorite CI service in the above list, please <a href="mailto:team@percy.io">contact us</a> or send us a PR to add it to the environment file.
+</p>
+
+<h3>Local dev environment</h3>
+
+<p>
+  Percy also works within local development environments by reading information from the local git repository. This means you can see visual diffs as you iterate on designs but before you push the final changes for review.
+</p>

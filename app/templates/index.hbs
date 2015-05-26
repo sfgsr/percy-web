@@ -1,8 +1,8 @@
 <div class="container Header Header--large">
   {{#if session.isAuthenticated}}
-    {{nav-menu user=session.secure.user classes="u-pull-right u-clear-floats"}}
+    {{nav-menu user=session.secure.user}}
   {{else}}
-    {{nav-menu classes="u-pull-right u-clear-floats"}}
+    {{nav-menu}}
   {{/if}}
   <img class="Header-logo" src="/images/percy.svg">
   <h1>Percy</h1>

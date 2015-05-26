@@ -9,7 +9,9 @@
       {{/link-to}}
     </div>
     {{#if session.isAuthenticated}}
-      {{nav-menu user=session.secure.user classes="u-pull-right"}}
+      {{nav-menu user=session.secure.user}}
+    {{else}}
+      {{nav-menu}}
     {{/if}}
   </div>
   <div class="HeaderSpacer"></div>

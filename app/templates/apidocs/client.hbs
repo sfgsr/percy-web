@@ -1,0 +1,118 @@
+<h2>
+  Percy::Client
+  <a href="https://github.com/percy/percy-client">{{unbound fa-icon "github"}}</a>
+</h2>
+
+<p>
+  <a href="https://travis-ci.org/percy/percy-client"><img src="https://travis-ci.org/percy/percy-client.svg?branch=master"></a>
+  <a href="https://rubygems.org/gems/percy-client"><img src="https://badge.fury.io/rb/percy-client.svg"></a>
+</p>
+
+<div class="Alert Alert--warning">
+  <strong>NOTE:</strong> This is the low-level Percy API client—you might be more interested in the {{#link-to "docs.capybara"}}Capybara client{{/link-to}}.
+</div>
+
+<p>
+  Percy::Client is a simple Ruby client wrapper library for the Percy API, which can be used to build custom scripts or integrations with other services.
+<p>
+</p>
+  The Percy API was built to rely on generic HTML/CSS and assets—we want to encourage an ecosystem of tools that can integrate Percy's screenshot rendering and visual diffing into web apps built in any language or framework.
+</p>
+
+<h3>Installation</h3>
+
+<p>Add this line to your application's Gemfile:</p>
+{{#code-block}}
+gem 'percy-client'
+{{/code-block}}
+
+<p>And then execute:</p>
+
+{{#code-block lang="bash"}}
+$ bundle install
+{{/code-block}}
+
+<p>Or install it yourself with <code>gem install percy-client</code>.</p>
+
+<h3>Authentication</h3>
+
+{{#code-block lang="ruby"}}
+require 'percy'
+
+Percy.config.access_token = '&lt;PERCY WRITE-ONLY REPO TOKEN&gt;'
+{{/code-block}}
+
+<p>
+  Alternatively, you can set the <code>PERCY_TOKEN</code> environment variable. Each repo has it's own write-only token, which can be found in <em>Settings</em> for the Percy repository.
+</p>
+
+<h3>Usage</h3>
+
+<p>There are four steps to uploading assets to Percy:</p>
+
+<ol>
+  <li>Create a build.</li>
+  <li>Create a snapshot for each HTML page, and indicate the resources that this page loads.</li>
+  <li>Upload any missing resources.</li>
+  <li>Finalize the build.</li>
+</ol>
+
+<h4>Create a build</h4>
+
+{{#code-block lang="ruby"}}
+build = Percy.create_build(Percy.client.config.repo)
+{{/code-block}}
+
+<h4>Create a snapshot</h4>
+
+{{#code-block lang="ruby"}}
+html = File.read('./site/index.html')
+css = File.read('./site/css/main.css')
+resources = [
+  Percy::Client::Resource.new('/index.html', is_root: true, content: html),
+  Percy::Client::Resource.new('/css/main.css', content: css),
+]
+snapshot = Percy.create_snapshot(build['data']['id'], resources)
+{{/code-block}}
+
+<p>
+  The <code>is_root: true</code> param indicates the resource that is the main HTML resource of this snapshot, ie. the page that should be rendered. There must be exactly one root resource in a snapshot.
+</p>
+<p>
+  The API will automatically guess the resource mimetype based on the extension. If the URL doesn't have an extension, you can pass the <code>mimetype: 'text/html'</code> param to the <code>Percy::Client::Resource</code> object to explicitly set it.
+</p>
+
+<h4>Upload any missing resources</h4>
+
+<p>
+  For performance reasons, resources are uploaded after the snapshot is created. The snapshot API returns a list of the resource SHAs that have never been uploaded before—this way, resources are only ever uploaded once and never re-uploaded unless they change.
+</p>
+<p>
+  The client must followup and upload all the "missing" resources:
+</p>
+
+{{#code-block lang="ruby"}}
+missing_resources = snapshot['data']['links']['missing-resources']['linkage']
+missing_resources.each do |missing_resource|
+  missing_resource_sha = missing_resource['id']
+  resource = resources.find { |r| r.sha == missing_resource_sha }
+  Percy.upload_resource(build['data']['id'], resource.content)
+end
+{{/code-block}}
+
+<p>
+  Once all missing resources from all snapshots are uploaded, the client can finalize the build.
+</p>
+
+<h4>Finalize the build</h4>
+
+{{#code-block lang="ruby"}}
+Percy.finalize_build(build['data']['id'])
+{{/code-block}}
+
+<p>
+  Done! After this, the build will finishing processing, creating screenshots and visual diffs, and the build can be viewed in Percy.
+</p>
+
+<h3>Environment variables</h3>
+

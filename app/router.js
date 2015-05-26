@@ -17,6 +17,7 @@ Router.map(function() {
   });
   this.resource('docs', function() {
     this.route('capybara');
+    this.route('ci');
     this.route('static');
     this.route('custom');
     this.resource('apidocs', {path: '/api'}, function() {
@@ -24,6 +25,7 @@ Router.map(function() {
       this.route('client');
     });
   });
+  this.route('faq');
   this.route('terms');
   this.route('privacy');
 });

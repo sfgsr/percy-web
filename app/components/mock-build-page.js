@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   }.property('showOverlay'),
 
   setupScrollHandler: function() {
-    Ember.$(window).ready(function() {
+    this.$('img').load(function() {
       Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
       this._showHintsIfVisible();
     }.bind(this));

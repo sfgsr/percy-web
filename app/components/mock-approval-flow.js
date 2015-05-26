@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     return (this.get('isApproved') ? 'display: none' : '').htmlSafe();
   }.property('isApproved'),
   setupScrollHandler: function() {
-    Ember.$(window).ready(function() {
+    this.$('img').load(function() {
       Ember.$(window).bind('scroll.MockApprovalFlow', this._animateApprovalIfVisible.bind(this));
       this._animateApprovalIfVisible();
     }.bind(this));
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
             this.set('isApproved', true);
           }
         }.bind(this)), 500);
-      }.bind(this)), 2000);
+      }.bind(this)), 1000);
       Ember.$(window).unbind('.MockApprovalFlow');
     }
   },
