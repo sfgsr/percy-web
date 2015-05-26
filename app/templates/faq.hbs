@@ -4,7 +4,7 @@
 
   <h5>How does this all work?</h5>
   <p>
-    First, Percy renders a screenshot of the page you give and then visual compares it, pixel by pixel, to a previous screenshot. The output of this comparison creates a third image—this is the "visual diff" or "perceptual diff" that shows exactly what pixels changed between the images:
+    First, Percy renders a screenshot of the page you give and then visually compares it, pixel by pixel, to a previous screenshot. The output of this comparison creates a third image—this is the "visual diff" or "perceptual diff" that shows exactly what pixels changed between the images:
   </p>
   <p>
     <img style="width: 100%; max-width: 854px" src="/images/example-pdiff.png">
@@ -13,7 +13,7 @@
   <p>
     <strong>Actually, no!</strong> You might be surprised to learn that under the hood, Percy was built to rely on "snapshots" of HTML pages and assets, not screenshots themselves. This is very intentional—we want to support visual continuous integration for all web content, regardless of the language or framework it was created in, and make it as fast as possible.
   </p>
-  <h5>My tests are already slow—isn't this going to slow them down more?</h5>
+  <h5>My tests are already slow—isn't this going to make them slower?</h5>
   <p>
     <strong>Actually, no!</strong> A intended side effect of our asset-centric design is that we keep all the computationally expensive screenshot rendering and visual diffing completely out of your systems. By relying on HTML and assets alone, we can highly optimize Percy to have very lightweight clients in numerous languages with little performance impact.
   </p>
