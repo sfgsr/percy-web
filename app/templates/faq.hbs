@@ -2,7 +2,7 @@
 <div class="container container--fixedWidth container--forContent">
   <h2>FAQ</h2>
 
-  <h5>How does this all work?</h5>
+  <h5>How does all this work?</h5>
   <p>
     First, Percy renders a screenshot of the page you give and then visually compares it, pixel by pixel, to a previous screenshot. The output of this comparison creates a third image—this is the "visual diff" or "perceptual diff" that shows exactly what pixels changed between the images:
   </p>
@@ -23,7 +23,7 @@
   </p>
   <h5>Do you support cross-browser or responsive testing?</h5>
   <p>
-    <strong>Not yet!</strong> But a side effect of our asset-centric design is that we can easily do this in the future. Right now, all screenshots are rendered in a modern browser (Firefox 38.0.1 ESR) at a width of 1280px.
+    <strong>Not yet.</strong> But a side effect of our asset-centric design is that we can easily do this in the future. Right now, all screenshots are rendered in a modern browser (Firefox 38.0.1 ESR) at a width of 1280px.
   </p>
   <h5>Do you support mobile apps?</h5>
   <p>
@@ -42,7 +42,7 @@
     <img style="width: 100%; max-width: 430px" src="/images/noisy-pdiff.png">
   </p>
   <p>
-    This is one of the hard parts of perceptual diffs—if the content shifts by any amount, the diff itself is still pixel-by-pixel so it could end up looking like noise. You still get the benefits of knowing when and where your site has changed, but it may require more manual analysis. In Percy you can simply click the diff to hide it and view the underlying screenshot to compare visually.
+    This is one of the hard parts of perceptual diffs—the diff itself is pixel-by-pixel, so if the content shifts by any amount the diff may end up looking like noise. You still get the benefits of knowing when and where your site has changed, but it may require more manual analysis. In Percy you can simply click the diff to hide it and view the underlying screenshot to compare visually. We are also working on ways to address this.
   </p>
 </div>
 {{main-footer}}

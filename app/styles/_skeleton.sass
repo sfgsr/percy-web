@@ -60,6 +60,34 @@
   margin: 0 auto
   box-sizing: border-box
 
+  &.container--fixedWidth
+    max-width: 1040px
+
+  &.container--dark
+    background-color: $darkpurple
+    color: $white
+
+    a
+      color: $on-dark-link
+      text-decoration: none
+    a:hover
+      color: $on-dark-link-hover
+      text-decoration: none
+
+  &.container--darker
+    background-color: $darkerpurple
+    color: $white
+
+    a
+      color: $on-dark-link
+      text-decoration: none
+    a:hover
+      color: $on-dark-link-hover
+      text-decoration: none
+
+  &.container--light
+    background-color: $beige
+
 .column,
 .columns
   width: 100%
@@ -67,46 +95,21 @@
   box-sizing: border-box
 
 
+/* For devices larger than 320px */
+@media (min-width: 320px)
+  .container
+    &.container--forContent
+      padding: 10px
+
 /* For devices larger than 400px */
 @media (min-width: 400px)
   .container
     &.container--forContent
       padding: 30px
 
-    &.container--fixedWidth
-      max-width: 1040px
-
-    &.container--dark
-      background-color: $darkpurple
-      color: $white
-
-      a
-        color: $on-dark-link
-        text-decoration: none
-      a:hover
-        color: $on-dark-link-hover
-        text-decoration: none
-
-    &.container--darker
-      background-color: $darkerpurple
-      color: $white
-
-      a
-        color: $on-dark-link
-        text-decoration: none
-      a:hover
-        color: $on-dark-link-hover
-        text-decoration: none
-
-    &.container--light
-      background-color: $beige
-
-
 /* For devices larger than 550px */
 @media (min-width: 550px)
   .container
-    width: inherit
-
     &.container--withPanel
       margin-left: 300px
 
