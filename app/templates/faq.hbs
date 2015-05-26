@@ -2,6 +2,10 @@
 <div class="container container--fixedWidth container--forContent">
   <h2>FAQ</h2>
 
+  <h5>What is "visual continuous integration"?</h5>
+  <p>
+    Simply the term we use to describe the practice of getting continuous feedback for every visual change that any developer makes. Percy is built to be integrated with your existing CI practices and services.
+  </p>
   <h5>How does all this work?</h5>
   <p>
     First, Percy renders a screenshot of the page you give and then visually compares it, pixel by pixel, to a previous screenshot. The output of this comparison creates a third image—this is the "visual diff" or "perceptual diff" that shows exactly what pixels changed between the images:
@@ -15,7 +19,10 @@
   </p>
   <h5>My tests are already slow—isn't this going to make them slower?</h5>
   <p>
-    <strong>Actually, no!</strong> A intended side effect of our asset-centric design is that we keep all the computationally expensive screenshot rendering and visual diffing completely out of your systems. By relying on HTML and assets alone, we can highly optimize Percy to have very lightweight clients in numerous languages with little performance impact.
+    <strong>Actually, no!</strong> An intended side effect of our asset-centric design is that we keep all the computationally expensive screenshot rendering and visual diffing completely out of your systems. By relying on HTML and assets alone, we can highly optimize Percy to have very lightweight clients in numerous languages with little performance impact.
+  </p>
+  <p>
+    The first build may be slower than usual while assets are first uploaded, but after that, assets are only uploaded if they change, so there is often very limited network overhead.
   </p>
   <h5>Do you support X language or X framework?</h5>
   <p>
@@ -23,7 +30,17 @@
   </p>
   <h5>Do you support cross-browser or responsive testing?</h5>
   <p>
-    <strong>Not yet.</strong> But a side effect of our asset-centric design is that we can easily do this in the future. Right now, all screenshots are rendered in a modern browser (Firefox 38.0.1 ESR) at a width of 1280px.
+    <strong>Not yet.</strong> But, an exciting side effect of our asset-centric design is that we can easily add this in the future without any performance impact or client changes on your side.
+  </p>
+  <p>
+    Right now, all screenshots are rendered in a modern browser (Firefox 38.0.1 ESR) at a width of 1280px.
+  </p>
+  <h5>How do you handle dynamic page content?</h5>
+  <p>
+    <strong>Short answer: we don't.</strong> If you have page content that changes (auto-generated test data, timestamps, dynamic test users, etc.) you may see visual diffs in every build. You can simply ignore them if you know that they are correct, or take steps to reduce the dynamic data present in your feature tests. For example, you could use static fixture data or inject static data just for the relevant tests.
+  </p>
+  <p>
+    We are exploring features to help with this problem. Please <a href="mailto:team@percy.io">email us</a> if you're interested.
   </p>
   <h5>Do you support mobile apps?</h5>
   <p>
