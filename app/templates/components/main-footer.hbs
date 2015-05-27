@@ -1,20 +1,6 @@
-<div class="container container--darker">
-  <div class="container container--fixedWidth container--forContent FooterContainer">
-    <div class="row">
-      <div class="five columns u-text-right">
-        <div>{{#link-to "faq"}}FAQ{{/link-to}}</div>
-        <div>{{#link-to "docs.index"}}Docs{{/link-to}}</div>
-        <div>{{#link-to "about"}}About{{/link-to}}</div>
-        <div>Blog</div>
-      </div>
-      <div class="two columns u-text-center u-no-margin">
-        <img class="Footer-logo" src="/images/percy.svg">
-      </div>
-      <div class="five columns u-text-left u-no-margin">
-        {{#link-to "terms"}}Terms{{/link-to}}<br>
-        {{#link-to "privacy"}}Privacy{{/link-to}}<br>
-        © 2015 Perceptual Inc.
-      </div>
-    </div>
-  </div>
+<div class="container container--darker Footer">
+  <div class="Footer-item Footer-copyright">© 2015 Perceptual Inc.</div>
+  {{#link-to "terms"}}Terms{{/link-to}}
+  {{#link-to "privacy"}}Privacy{{/link-to}}
+  <img class="Footer-logo" src="/images/percy.svg">
 </div>

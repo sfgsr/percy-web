@@ -1,8 +1,25 @@
 .container
-  &.FooterContainer
-    a
+  &.Footer
+    text-align: right
+    line-height: 6rem
+
+    .Footer-copyright
+      opacity: 0.5
+
+    a, .Footer-item
       color: $white
+      display: inline-block
+      padding: 10px
+
 
     .Footer-logo
-      width: 100px
-      margin: 0 10px 0 10px
+      width: 80px
+      margin: 12px
+      display: inline-block
+      float: right
+
+@media (max-width: 750px)
+  .container
+    &.Footer
+      a, .Footer-item
+        padding: 10px 2px 0 2px
