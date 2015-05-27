@@ -1,20 +1,10 @@
-<div class="container container--forContent">
-  <style>
-    .TruncatedCommitMessage {
-      max-width: 500px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    @media (max-width: 1200px) {
-      .TruncatedCommitMessage {
-        max-width: 200px;
-      }
-    }
-  </style>
+<div class="container container--forContent RepoContainer">
   <h5>
     {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{model.name}}
     <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a>
+    {{#if model.isDisabled}}
+      <span class="RepoState">(disabled)</span>
+    {{/if}}
 
     {{#link-to "repo.settings" model.name classNames="Button Button--withLeftIcon u-pull-right"}}
       {{unbound fa-icon "cog" classNames="fa--left"}}
@@ -32,7 +22,9 @@
     </tr>
     {{#each build in model.builds}}
       <tr>
-        <td><strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br></td>
+        <td>
+          <strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
+        </td>
         <td>
           {{build.state}}
           {{#if build.isPending}}
@@ -48,5 +40,20 @@
         <td>{{build.commit.committedAt}}</td>
       </tr>
     {{/each}}
+    {{#unless model.builds}}
+      <tr>
+        <td colspan="6">No builds yet.</td>
+      </tr>
+    {{/unless}}
   </table>
+  {{#unless model.builds}}
+    {{#if model.isEnabled}}
+    <div class="Alert Alert--warning" style="max-width: 700px; margin: 0 auto">
+      <h5>Welcome! Waiting for first build...</h5>
+      <p>
+        Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you push your first build, it will show up here.
+      </p>
+    </div>
+    {{/if}}
+  {{/unless}}
 </div>

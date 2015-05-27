@@ -9,6 +9,7 @@ export default DS.Model.extend({
   slug: DS.attr(),
   isPrivate: DS.attr('boolean'),
   isEnabled: DS.attr('boolean'),
+  isDisabled: Ember.computed.not('isEnabled'),
   htmlUrl: DS.attr(),
   description: DS.attr(),
   createdAt: DS.attr('date'),

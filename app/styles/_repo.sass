@@ -1,0 +1,15 @@
+.RepoContainer
+  .TruncatedCommitMessage
+    max-width: 500px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+  .RepoState
+    font-style: italic
+    font-weight: 300
+    color: $gray
+
+@media (max-width: 1200px)
+  .RepoContainer
+    .TruncatedCommitMessage
+      max-width: 200px
