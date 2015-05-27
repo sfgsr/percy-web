@@ -4,7 +4,7 @@
       <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.slug}}{{/link-to}}</td>
       <td class="RepoList-actions">
         {{#link-to "repo.settings" repo.name classNames="RepoList-repoSettings"}}{{unbound fa-icon "cog" classNames="fa--left"}}{{/link-to}}
-        {{toggle-button enabled=repo.isEnabled enabledText="Disable" disabledText="Enable"}}
+        {{toggle-button action="toggleRepo" object=repo enabled=repo.isEnabled enabledText="Disable" disabledText="Enable"}}
       </td>
     </tr>
   {{/each}}

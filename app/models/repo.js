@@ -1,4 +1,6 @@
+import Ember from 'ember';
 import DS from 'ember-data';
+import utils from '../lib/utils';
 
 export default DS.Model.extend({
   githubId: DS.attr('number'),
@@ -19,4 +21,17 @@ export default DS.Model.extend({
     // Write now the tokens API only returns a list of one write-only token.
     return this.get('tokens.firstObject');
   }.property('tokens'),
+
+  enable: function() {
+    return Ember.$.ajax({
+      type: 'POST',
+      url: utils.buildApiUrl('enableRepo', this.get('id')),
+    });
+  },
+  disable: function() {
+    return Ember.$.ajax({
+      type: 'POST',
+      url: utils.buildApiUrl('disableRepo', this.get('id')),
+    });
+  },
 });

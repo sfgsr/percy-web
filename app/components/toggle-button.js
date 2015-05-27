@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  object: null,
   enabled: false,
   classes: null,
   enabledText: 'Disable',
@@ -20,7 +21,6 @@ export default Ember.Component.extend({
   }.property('enabled', 'enabledText', 'disabledText'),
 
   click: function() {
-    this.set('enabled', !this.get('enabled'));
-    this.sendAction();
+    this.sendAction('action', this.get('enabled'), this.get('object'));
   },
 });

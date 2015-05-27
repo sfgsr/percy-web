@@ -16,4 +16,13 @@ export default Ember.Component.extend({
 
   classNames: ['RepoList'],
   classNameBindings: ['classes'],
+  actions: {
+    toggleRepo: function(currentlyEnabled, repo) {
+      if (currentlyEnabled) {
+        this.sendAction('togglingRepo', repo.disable(), repo);
+      } else {
+        this.sendAction('togglingRepo', repo.enable(), repo);
+      }
+    },
+  },
 });

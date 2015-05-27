@@ -23,6 +23,8 @@ module.exports = function(environment) {
         resources: '/api/v1/resources/',
         builds: '/api/v1/builds/',
         approveBuild: '/api/v1/builds/%@/approve',
+        enableRepo: '/api/v1/repos/%@/enable',
+        disableRepo: '/api/v1/repos/%@/disable',
       },
     },
   };
