@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
   highlight: function() {
     this.$('pre code').each(function(i, block) {
-      hljs.highlightBlock(block);
+      window.hljs.highlightBlock(block);
     });
   }.on('didInsertElement'),
 });

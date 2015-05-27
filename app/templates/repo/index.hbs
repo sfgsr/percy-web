@@ -1,9 +1,9 @@
-<div class="container container--forContent RepoContainer">
+<div class="container container--fixedWidth container--forContent RepoContainer">
   <h5>
     {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{model.name}}
     <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a>
     {{#if model.isDisabled}}
-      <span class="RepoState">(disabled)</span>
+      <span class="RepoContainer-repoState">(disabled)</span>
     {{/if}}
 
     {{#link-to "repo.settings" model.name classNames="Button Button--withLeftIcon u-pull-right"}}
@@ -18,7 +18,7 @@
       <th>Commit</th>
       <th>Committed By</th>
       <th>Message</th>
-      <th>Committed At</th>
+      <th>Last Updated</th>
     </tr>
     {{#each build in model.builds}}
       <tr>
@@ -34,10 +34,14 @@
             {{fa-icon 'fa-spinner fa-pulse'}}
           {{/if}}
         </td>
-        <td><a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a></td>
-        <td>{{build.commit.authorName}}</td>
-        <td class="TruncatedCommitMessage">{{build.commit.message}}</td>
-        <td>{{build.commit.committedAt}}</td>
+        <td>
+          <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+        </td>
+        <td>
+          {{build.commit.authorName}}
+        </td>
+        <td class="RepoContainer-commitMessage">{{build.commit.message}}</td>
+        <td>{{ago build.updatedAt}}</td>
       </tr>
     {{/each}}
     {{#unless model.builds}}
