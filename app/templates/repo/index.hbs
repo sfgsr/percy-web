@@ -16,7 +16,7 @@
     {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{model.name}}
     <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a>
 
-    {{#link-to "repo.settings" model classNames="Button Button--withLeftIcon u-pull-right"}}
+    {{#link-to "repo.settings" model.name classNames="Button Button--withLeftIcon u-pull-right"}}
       {{unbound fa-icon "cog" classNames="fa--left"}}
       Settings
     {{/link-to}}

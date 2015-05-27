@@ -98,6 +98,8 @@
 /* For devices larger than 320px */
 @media (min-width: 320px)
   .container
+    width: inherit
+
     &.container--forContent
       padding: 10px
 
@@ -219,7 +221,7 @@ body
   line-height: 1.5
   font-weight: 400
   font-family: $standard-font
-  color: #394d54
+  color: $default-text-color
 
 
 /**
@@ -281,6 +283,23 @@ a
 a:hover
   color: $default-link-hover
 
+
+/**
+ * Hints.
+ */
+.hint--top,
+.hint--right,
+.hint--bottom,
+.hint--left,
+  &:after
+    // Allow newlines in data attr.
+    white-space: pre
+    text-align: left
+    text-transform: none
+    font-family: $standard-font
+    font-weight: normal
+    letter-spacing: 0
+    line-height: 1.4rem
 
 /**
  * Forms.

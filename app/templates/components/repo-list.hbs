@@ -2,7 +2,10 @@
   {{#each repo in filteredRepos}}
     <tr>
       <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.slug}}{{/link-to}}</td>
-      <td>{{toggle-button classes="u-pull-right" enabled=repo.isEnabled enabledText="Disable" disabledText="Enable"}}</td>
+      <td class="RepoList-actions">
+        {{#link-to "repo.settings" repo.name classNames="RepoList-repoSettings"}}{{unbound fa-icon "cog" classNames="fa--left"}}{{/link-to}}
+        {{toggle-button enabled=repo.isEnabled enabledText="Disable" disabledText="Enable"}}
+      </td>
     </tr>
   {{/each}}
 </table>
