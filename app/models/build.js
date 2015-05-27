@@ -30,14 +30,6 @@ export default DS.Model.extend({
   }.property('approvedAt'),
 
   reloadAll: function() {
-    // TODO(fotinakis): crazy jsonapi, this is duped from the build route. Fix this insanity.
-    this.store.findOne('build', this.get('id'), {
-      include: [
-        'approved-by',
-        'commit',
-        'base-build',
-        'base-build.commit',
-      ].join(',')
-    });
+    this.store.findOne('build', this.get('id'));
   },
 });

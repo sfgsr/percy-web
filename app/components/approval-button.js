@@ -21,8 +21,13 @@ export default Ember.Component.extend({
     return Ember.$.ajax({
       type: 'POST',
       url: utils.buildApiUrl('approveBuild', self.get('build.id')),
-    }).then(function() {
-      self.get('build').reloadAll();
-    });
+    }).then(
+      function() {
+        self.get('build').reloadAll();
+      },
+      function() {
+        self.get('build').reloadAll();
+      }
+    );
   },
 });
