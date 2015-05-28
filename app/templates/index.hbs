@@ -6,7 +6,7 @@
   {{/if}}
   <img class="Header-logo" src="/images/percy.svg">
   <h1 class="alt">Percy</h1>
-  <h2>Continuous visual integration for web applications</h2>
+  <h2>Continuous visual integration for web apps</h2>
   {{#if session.isAuthenticated}}
     {{#if session.secure.user.isWhitelisted}}
       {{#link-to 'owner.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
