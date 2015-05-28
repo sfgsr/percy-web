@@ -12,8 +12,10 @@
   Percy::Capybara is a library for integrating Percy into your existing <a href="https://github.com/jnicklas/capybara">Capybara</a> feature tests in any Ruby web framework—including Rails, Sinatra, etc.
 </p>
 <p>
-  The examples below assume you are using RSpec, but they could be easily adapted for
-  another testing framework.
+  If you've written feature tests (or "UI / acceptance / browser tests"), you know how hard it can be to get them right and to get your app in the correct UI state. This lets you take all the time you've spent building your feature tests and automatically extend them with screenshots and visual testing at every step of the way, to truly see what the browser sees.
+</p>
+<p>
+  The examples below assume you are using RSpec, but they could be easily adapted for other testing frameworks.
 </p>
 
 <h3>Installation</h3>
@@ -40,7 +42,7 @@ First, you need to:
   <li>Go to <em>Settings</em> for the repository and copy the write-only API key.</li>
 </ol>
 
-For Rails apps, you can add this API key to your <code><a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">config/secrets.yml</a></code>:
+For Rails apps, add this API key to your <code><a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">config/secrets.yml</a></code>:
 
 {{#code-block}}
 test:
@@ -60,7 +62,7 @@ end
 {{/code-block}}
 
 <p>
-  Alternatively, you could set the <code>PERCY_TOKEN</code> environment variable to avoid saving the API token in your repository.
+  Alternatively, you could set the <code>PERCY_TOKEN</code> environment variable to avoid storing the API token in your repository.
 </p>
 
 <h3>Usage</h3>
@@ -92,13 +94,13 @@ end</span>
 {{/code-block}}
 
 <p>
-  Done! The next time you run your tests, snapshots will be uploaded to Percy. If your tests run in a {{#link-to "docs.ci"}}supported CI service{{/link-to}}, the rest will be automatically configured.
+  Done! Snapshots will be uploaded to Percy the next time you run your tests in a {{#link-to "docs.ci"}}supported CI service{{/link-to}} (or they can be triggered locally, see below).
 <p>
 </p>
-   The actual screenshot rendering, which can often be very slow, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method simply grabs the current DOM, CSS, and certain page assets and uploads them to Percy for processing.
+   The actual screenshot rendering, which often can be very slow, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method simply grabs the current DOM, CSS, and certain page assets and uploads them to Percy for processing.
 </p>
 <p>
-  We handle all the complexities of screenshot rendering in Percy itself so that the impact on your tests is minimal. Also, assets are fingerprinted and only ever uploaded once, so assets won't be uploaded again if they haven't changed.
+  We handle all the complexities of screenshot rendering in Percy itself so that the impact on your tests is minimal. Assets are fingerprinted when uploaded, so they are only uploaded once or when they change.
 </p>
 
 <h4>Identifying snapshots</h4>
@@ -109,7 +111,7 @@ end</span>
   To accomplish this, <code>Percy::Capybara</code> uses the current page's URL as the name of the snapshot. We assume that your app has been built with stateful navigation and that the URL fully identifies the page state.
 </p>
 <p>
-  However, there are many cases where this will not be enough—for example, when you populate test data in the page, or when you perform a UI interaction that doesn't change the URL (like clicking the dropdown in the example above).
+  However, there are many cases where this is not enough—for example, populating test data in the page, or performing a UI interaction that doesn't change the URL (like clicking the dropdown in the example above).
 </p>
 <p>
   To manually identify a snapshot, you can provide the <code>name</code> parameter:
@@ -120,7 +122,24 @@ Percy::Capybara.snapshot(page, name: 'homepage (with dropdown clicked)')
 {{/code-block}}
 
 <p>
-  The <code>name</code> param can be any string that makes sense to you to identify the page state, it should just remain the same across builds.
+  The <code>name</code> param can be any string that makes sense to you to identify the page state, it should just be unique and remain the same across builds.
+</p>
+
+<h3>Local dev environment</h3>
+
+<p>
+  Though disabled by default, Percy can work in local development environments by reading information from the local git repository and/or environment variables. You can use this feature to see visual diffs as you iterate on a design but before you push the final changes for review.
+</p>
+<p>
+  Enable Percy for your local environment by setting the <code>PERCY_ENABLE</code> environment variable:
+</p>
+
+{{#code-block lang="bash"}}
+$ PERCY_ENABLE=1 bundle exec rspec
+{{/code-block}}
+
+<p>
+  Be aware that the Percy build will use the current local branch name, so if you run it in <code>master</code> the latest Percy master build will be from your local environment. You can avoid this by simply checking out a different branch or setting the <code>PERCY_BRANCH</code> environment variable.
 </p>
 
 <h3>Troubleshooting</h3>
@@ -140,6 +159,10 @@ describe 'some feature test', type: :feature, js: true do
   ...
 end
 {{/code-block}}
+
+<p>
+  You will need to make sure that your <a href="https://github.com/jnicklas/capybara#drivers">Capybara/Selenium driver</a> is properly configured.
+</p>
 
 <h4>WebMock/VCR users</h4>
 

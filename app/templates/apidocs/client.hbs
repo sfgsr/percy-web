@@ -13,10 +13,7 @@
 </div>
 
 <p>
-  Percy::Client is a simple Ruby client wrapper library for the Percy API, which can be used to build custom scripts or integrations with other services.
-<p>
-</p>
-  The Percy API was built to rely on generic HTML/CSS and assets—we want to encourage an ecosystem of tools that can integrate Percy's screenshot rendering and visual diffing into web apps built in any language or framework.
+  Percy::Client is a simple Ruby client and wrapper library for the {{#link-to "apidocs.reference"}}Percy API{{/link-to}}, which can be used to integrate Percy's screenshot rendering and visual testing into custom environments and services.
 </p>
 
 <h3>Installation</h3>
@@ -43,12 +40,12 @@ Percy.config.access_token = '&lt;PERCY WRITE-ONLY REPO TOKEN&gt;'
 {{/code-block}}
 
 <p>
-  Alternatively, you can set the <code>PERCY_TOKEN</code> environment variable. Each repo has it's own write-only token, which can be found in <em>Settings</em> for the Percy repository.
+  Alternatively, you can set the <code>PERCY_TOKEN</code> environment variable. Each repository has it's own write-only token, which can be found in Percy <em>Settings</em> page for the repo.
 </p>
 
 <h3>Usage</h3>
 
-<p>There are four steps to uploading assets to Percy:</p>
+<p>There are four steps to working with Percy:</p>
 
 <ol>
   <li>Create a build.</li>
@@ -59,6 +56,11 @@ Percy.config.access_token = '&lt;PERCY WRITE-ONLY REPO TOKEN&gt;'
 
 <h4>Create a build</h4>
 
+{{#code-block lang="ruby"}}
+build = Percy.create_build('repo/slug')
+{{/code-block}}
+
+Or, to use the current Git repository name:
 {{#code-block lang="ruby"}}
 build = Percy.create_build(Percy.client.config.repo)
 {{/code-block}}
@@ -85,10 +87,10 @@ snapshot = Percy.create_snapshot(build['data']['id'], resources)
 <h4>Upload any missing resources</h4>
 
 <p>
-  For performance reasons, resources are uploaded after the snapshot is created. The snapshot API returns a list of the resource SHAs that have never been uploaded before—this way, resources are only ever uploaded once and never re-uploaded unless they change.
+  For performance reasons, resources are uploaded after the snapshot is created. Each snapshot API call returns a list of resource SHAs that have never been uploaded before and the client must followup and upload all the "missing" resources. This way, resources are only ever uploaded once and never re-uploaded unless they change.
 </p>
 <p>
-  The client must followup and upload all the "missing" resources:
+  The client uploads the "missing" resources:
 </p>
 
 {{#code-block lang="ruby"}}
@@ -100,15 +102,15 @@ missing_resources.each do |missing_resource|
 end
 {{/code-block}}
 
-<p>
-  Once all missing resources from all snapshots are uploaded, the client can finalize the build.
-</p>
-
 <div class="Alert Alert--warning">
   <strong>NOTE:</strong> Percy's API is based on the emerging <a href="http://jsonapi.org/">JSON API standard</a> which has only recently been finalized. This client interface will change slightly when we finalize our v1 API.
 </div>
 
 <h4>Finalize the build</h4>
+
+<p>
+  Once all missing resources from all snapshots are uploaded, the client can finalize the build.
+</p>
 
 {{#code-block lang="ruby"}}
 Percy.finalize_build(build['data']['id'])
