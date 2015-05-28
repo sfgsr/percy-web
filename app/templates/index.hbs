@@ -21,19 +21,15 @@
     {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
   {{/if}}
 </div>
-{{#if session.isAuthenticated}}
-  {{#if session.secure.user.isWhitelisted}}
-  {{else}}
-  {{/if}}
-{{else}}
+{{#unless session.isAuthenticated}}
   <div class="container container--marketing container--darker InviteContainer">
-    <div>We're currently in a <strong>private beta</strong>—<a href="/login" {{action "sessionRequiresAuthentication"}}>sign up</a> to request an invite!</div>
+    <div>We just launched our <strong>private beta</strong>! <a href="/login" {{action "sessionRequiresAuthentication"}}>Sign up for an invite</a> or <a href="#updates">join the mailing list</a>.</div>
   </div>
-{{/if}}
+{{/unless}}
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
     <h2>Stop doing QA in the dark</h2>
-    <h3 class="alt u-no-margin">See every pixel before launch</h3>
+    <h3 class="alt u-no-margin">See every changed pixel before launch</h3>
   </div>
 </div>
 <div class="container container--marketing container--light MockPageContainer">
@@ -42,21 +38,19 @@
 <div class="container container--marketing">
   <div class="container container--fixedWidth container--forContent">
     <h2>CI friendly</h2>
-    <h3 class="alt">Plays nice in your environment</h3>
     <div class="row">
       <div class="one-half column">
         <p>
-          Percy <strong>automatically integrates with CI services</strong> and GitHub Pull Requests, with one line of code.
+          <strong>Runs with your test suite</strong> and automatically supports common CI services with zero configuration.
         </p>
         <p>
-          Percy <strong>fits in nicely with code review</strong>—if any visual diffs are found, you can review and approve them in one click.
+          <strong>Integrates with GitHub Pull Requests</strong>—approve or reject visual diffs in one click as part of your code review process.
         </p>
       </div>
       <div class="one-half column u-text-center">
         <img src="/images/cis.png">
       </div>
     </div>
-    <hr style="margin-bottom: 0">
   </div>
 </div>
 <div class="container container--marketing">
@@ -76,30 +70,45 @@
       </div>
       <div class="seven columns">
         <p>
-          Percy is designed to be <strong>integrated in minutes</strong> and have almost <strong>no performance impact</strong> on the speed of your tests.
+          Designed to be <strong>integrated in minutes</strong> and have <strong>no negative performance impact</strong> on your tests.
         </p>
         <p>
-          We do all the complex and heavy lifting of screenshot rendering and visual diffing in our systems to keep yours fast.
+          We handle all the heavy lifting of screenshot rendering and visual diffing so you don't have to.
         </p>
         <p>
           Percy comes with drop-in open source clients for Rails/Capybara tests and static websites, and we are just getting started.
         </p>
         <p>
-          See the {{#link-to "faq"}}FAQ{{/link-to}} and {{#link-to "docs.index"}}Docs{{/link-to}} for more information.
+          See the {{#link-to "faq"}}FAQ{{/link-to}} and {{#link-to "docs.index"}}Docs{{/link-to}} for more info.
         </p>
       </div>
     </div>
   </div>
 </div>
-<div class="container container--marketing container--light">
-  <div class="container container--fixedWidth container--forContent">
-    <h2 id="pricing">Pricing</h2>
-    <div class="row u-text-center">
-      <p>
-        We're still working out the details—pricing will be announced after the beta.<br>
-        We plan for it to be simple and transparent.
-      </p>
+{{#unless session.isAuthenticated}}
+  <div class="container container--marketing container--light SignUpContainer">
+    <div class="container container--fixedWidth container--forContent">
+      <h2 id="pricing">Sign up for updates</h2>
+      <div class="row u-text-center">
+        <p>
+          We just launched our <strong>private beta</strong>—sign up for an invite!
+        </p>
+        <p>
+          {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+        </p>
+        <p id="updates">
+          Or join the announcement mailing list:
+          <form action="//percy.us11.list-manage.com/subscribe/post?u=91ed66ed144af73368ef29b57&amp;id=3b8f071960" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="required email" placeholder="you@example.com">
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="Button">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+            <div style="position: absolute; left: -5000px;"><input type="text" name="b_91ed66ed144af73368ef29b57_3b8f071960" tabindex="-1" value=""></div>
+          </form>
+          <span>We will only use your email to let you know when Percy is available.</span>
+        </p>
+      </div>
     </div>
   </div>
-</div>
+{{/unless}}
 {{main-footer}}
