@@ -9,6 +9,10 @@
     </tr>
   {{/each}}
 </table>
-{{#if onCurrentUserOwner}}
-  {{login-extended-button classes="u-pull-right"}}
-{{/if}}
+<div class="u-text-right">
+  <div>{{login-extended-button}}</div>
+  <div class="u-text-small">
+    Last synced private repos: {{ago session.secure.user.lastPrivateSyncedAt}}
+    {{#unless session.secure.user.lastPrivateSyncedAt}}never{{/unless}}
+  </div>
+</div>
