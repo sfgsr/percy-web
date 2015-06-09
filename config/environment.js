@@ -20,7 +20,6 @@ module.exports = function(environment) {
         postMessageIframe: '/api/auth/post_message/iframe.html',
         logout: '/api/auth/logout',
 
-        resources: '/api/v1/resources/',
         builds: '/api/v1/builds/',
         approveBuild: '/api/v1/builds/%@/approve',
         enableRepo: '/api/v1/repos/%@/enable',
