@@ -75,6 +75,7 @@ resources = [
   Percy::Client::Resource.new('/css/main.css', content: css),
 ]
 snapshot = Percy.create_snapshot(build['data']['id'], resources)
+Percy.finalize_snapshot(snapshot['data']['id'])
 {{/code-block}}
 
 <p>
@@ -82,6 +83,9 @@ snapshot = Percy.create_snapshot(build['data']['id'], resources)
 </p>
 <p>
   The API will automatically guess the resource mimetype based on the extension. If the URL doesn't have an extension, you can pass the <code>mimetype: 'text/html'</code> param to the <code>Percy::Client::Resource</code> object to explicitly set it.
+</p>
+<p>
+  Unlike calling <code>finalize_build</code> later, the call to <code>finalize_snapshot</code> is not strictly required. It is recommended, however, so that Percy can start processing the snapshot earlier and the build can be processed faster. If not called, Percy will wait to process snapshots until the build is finalized.
 </p>
 
 <h4>Upload any missing resources</h4>
@@ -94,17 +98,13 @@ snapshot = Percy.create_snapshot(build['data']['id'], resources)
 </p>
 
 {{#code-block lang="ruby"}}
-missing_resources = snapshot['data']['links']['missing-resources']['linkage']
+missing_resources = snapshot['data']['relationships']['missing-resources']['data']
 missing_resources.each do |missing_resource|
   missing_resource_sha = missing_resource['id']
   resource = resources.find { |r| r.sha == missing_resource_sha }
   Percy.upload_resource(build['data']['id'], resource.content)
 end
 {{/code-block}}
-
-<div class="Alert Alert--warning">
-  <strong>NOTE:</strong> Percy's API is based on the emerging <a href="http://jsonapi.org/">JSON API standard</a> which has only recently been finalized. This client interface will change slightly when we finalize our v1 API.
-</div>
 
 <h4>Finalize the build</h4>
 
