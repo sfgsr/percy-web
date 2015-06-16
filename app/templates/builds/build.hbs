@@ -14,6 +14,10 @@
   <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
   <p>{{model.commit.message}}</p>
 
-  <h5>{{model.comparisons.length}} snapshots:</h5>
-  {{comparison-list comparisons=model.comparisons}}
+  {{#if model.comparisons.isPending}}
+    {{loading-page}}
+  {{else}}
+    <h5>{{model.comparisons.length}} snapshots:</h5>
+    {{comparison-list comparisons=model.comparisons}}
+  {{/if}}
 </div>
