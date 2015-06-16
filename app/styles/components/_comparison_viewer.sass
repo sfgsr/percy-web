@@ -1,8 +1,36 @@
 .ComparisonViewer
   position: relative
   margin-top: 20px
-  border: 1px solid #ddd
+  margin-bottom: 20px
+  border: $darkgrayborder
   border-radius: 3px
+
+  &:first-child
+    margin-top: 0
+
+  &:last-child
+    margin-bottom: 0
+
+  &.ComparisonViewer--collapsed
+    margin-top: 0
+    margin-bottom: 0
+    // Hacky way to make inner borders overlap, plus the z-index in hover.
+    margin-top: -1px
+
+    .ComparisonViewer-header
+      border-bottom: 1px solid $lightgray
+      border-bottom-left-radius: 2px
+      border-bottom-right-radius: 2px
+
+  &.ComparisonViewer--actionable
+    cursor: pointer
+
+    &:hover
+      border: $grayborderhover
+      z-index: 100
+
+      .ComparisonViewer-header
+        background-color: $lightestgray
 
   .ComparisonViewer-header
     padding: 5px 10px;
@@ -49,7 +77,7 @@
     background-color: rgb(255, 255, 255)
     opacity: 0.9
 
-  .ComparisonViewer-resourceMissing
+  .ComparisonViewer-snapshotMissing
     box-sizing: border-box
     height: 200px
     text-align: center

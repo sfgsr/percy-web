@@ -2,31 +2,58 @@
   <strong>{{comparison.headSnapshot.name}}</strong>
   {{comparison-status comparison=comparison classes="u-pull-right"}}
 </div>
-{{#if comparison.isDifferent}}
-  {{#if comparison.pdiff}}
-    <div class="row">
-      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
-        <div class="ComparisonViewer-pdiffImageBox">
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
-        </div>
-      </div>
-      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
-        {{! TODO(fotinakis): better way to determine primary resource screenshot? }}
-        <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
-          <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.image.url}}">
-          {{#if isOverlayEnabled}}
-            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
-          {{/if}}
-        </div>
-      </div>
-    </div>
-  {{else}}
-    {{#if comparison.headSnapshot}}
-      {{! New resource. }}
+{{#if isExpanded}}
+  {{#if comparison.isDifferent}}
+    {{#if comparison.pdiff}}
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
-          <div class="ComparisonViewer-resourceMissing">
-            {{fa-icon "remove"}}
+          <div class="ComparisonViewer-pdiffImageBox">
+            <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
+          </div>
+        </div>
+        <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
+          {{! TODO(fotinakis): better way to determine primary snapshot screenshot? }}
+          <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
+            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.image.url}}">
+            {{#if isOverlayEnabled}}
+              <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+      {{#if comparison.headSnapshot}}
+        {{! New snapshot. }}
+        <div class="row">
+          <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
+            <div class="ComparisonViewer-snapshotMissing">
+              {{fa-icon "remove"}}
+            </div>
+          </div>
+          <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
+            <div class="ComparisonViewer-pdiffImageBox">
+              <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.image.url}}">
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    <div class="row ComparisonViewer-noDiffBox">
+      No visual diffs detected.
+
+      {{#if showNoDiffSnapshot}}
+        <a {{action "toggleNoDiffResource"}} href="#">Hide snapshot</a>
+      {{else}}
+        <a {{action "toggleNoDiffResource"}} href="#">Show snapshot</a>
+      {{/if}}
+    </div>
+
+    {{#if showNoDiffSnapshot}}
+      <div class="row">
+        <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
+          <div class="ComparisonViewer-snapshotMissing">
+            {{fa-icon "arrows-h"}}
           </div>
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
@@ -36,30 +63,5 @@
         </div>
       </div>
     {{/if}}
-  {{/if}}
-{{else}}
-  <div class="row ComparisonViewer-noDiffBox">
-    Phew! No visual diffs found.
-
-    {{#if showNoDiffSnapshot}}
-      <a {{action "toggleNoDiffResource"}} href="#">Hide page</a>
-    {{else}}
-      <a {{action "toggleNoDiffResource"}} href="#">Show page</a>
-    {{/if}}
-  </div>
-
-  {{#if showNoDiffSnapshot}}
-    <div class="row">
-      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
-        <div class="ComparisonViewer-resourceMissing">
-          {{fa-icon "arrows-h"}}
-        </div>
-      </div>
-      <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
-        <div class="ComparisonViewer-pdiffImageBox">
-          <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.image.url}}">
-        </div>
-      </div>
-    </div>
   {{/if}}
 {{/if}}
