@@ -30,6 +30,10 @@ export default Ember.Component.extend({
     var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
     if (elementHeightShowing > elementHeight * (2/3)) {
       Ember.run.later((function() {
+        if (this.isDestroyed) {
+          // If the user has navigated away before this timer fired, skip.
+          return;
+        }
         this.set('isButtonHovered', true);
         Ember.run.later((function() {
           this.set('isButtonHovered', false);
