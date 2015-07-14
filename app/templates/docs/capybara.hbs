@@ -95,8 +95,16 @@ end</span>
 
 <p>
   Done! Snapshots will be uploaded to Percy the next time you run your tests in a {{#link-to "docs.ci"}}supported CI service{{/link-to}} (or they can be triggered locally, see below).
-<p>
 </p>
+
+<div class="Alert Alert--warning">
+  <strong>NOTE:</strong> For the first build, you will need to set a baseline by running a build on the <code>master</code> branch before any visual diffs will be found. You can do this by either merging in Percy integration and running your tests on master, or fake it by setting the <code>PERCY_BRANCH</code> environment var:
+
+{{#code-block lang="bash"}}
+$ PERCY_BRANCH=master rspec
+{{/code-block}}</div>
+
+<p>
    The actual screenshot rendering, which often can be very slow, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method simply grabs the current DOM, CSS, and certain page assets and uploads them to Percy for processing.
 </p>
 <p>
@@ -151,7 +159,7 @@ Capybara::NotSupportedByDriverError:Capybara::Driver::Base#evaluate_script
 {{/code-block}}
 
 <p>
-  This usually means that you are using the default RackTest driver which does not support JavaScript execution. To fix this, feature tests that use Percy must be tagged with <code>js: true</code>:
+  To fix this, feature tests that use Percy must be tagged with <code>js: true</code>:
 </p>
 
 {{#code-block}}
@@ -161,7 +169,10 @@ end
 {{/code-block}}
 
 <p>
-  You will need to make sure that your <a href="https://github.com/jnicklas/capybara#drivers">Capybara/Selenium driver</a> is properly configured.
+  <strong>Why is <code>js: true</code> required?</strong> The default Capybara driver is Rack::Test, which does not run a real browser underneath and does not support the JavaScript execution required by Percy::Capybara.
+</p>
+<p>
+  Under the hood, Percy relies on page resources (HTML, CSS, images, etc.) being uploaded by clients so that Percy can render, screenshot, and visually diff the snapshot. This is powerful because we keep all the slow rendering of screenshots and visual diffs <em>out</em> of your systems, can optimize and parallelize them inside Percy, and can work for any tech stack. The Percy::Capybara client figures out which resources to upload by running JavaScript in the browser during your test, which requires a Capybara driver that can execute JavaScript (including <a href="https://github.com/jnicklas/capybara#selenium">Selenium</a>, <a href="https://github.com/thoughtbot/capybara-webkit">capybara-webkit</a>, <a href="https://github.com/teampoltergeist/poltergeist">Poltergeist</a>, etc.) This may be slower than the default Rack::Test driver, but we think it's a worthwhile trade-off to get visual regression testing. We may be able to support Rack::Test in the future.
 </p>
 
 <h4>WebMock/VCR users</h4>
