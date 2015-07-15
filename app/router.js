@@ -32,6 +32,9 @@ Router.map(function() {
       this.route('client');
     });
   });
+  this.resource('settings', function() {
+    this.route('billing');
+  });
   this.route('about');
   this.route('faq');
   this.route('terms');
