@@ -9,6 +9,7 @@ export default DS.Model.extend({
   isWhitelisted: DS.attr('boolean'),
   lastSyncedAt: DS.attr('date'),
   lastPrivateSyncedAt: DS.attr('date'),
+  plan: DS.attr(),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 

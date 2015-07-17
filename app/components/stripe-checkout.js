@@ -3,43 +3,55 @@ import config from '../config/environment';
 import utils from '../lib/utils';
 
 export default Ember.Component.extend({
+  plan: null,
+  price: null,
+
+  handler: null,
   classes: null,
   classNames: ['StripeCheckout'],
   classNameBindings: ['classes'],
 
+  loadStripeCheckout: function() {
+    if (!window.StripeCheckout) {
+      var scriptEl = document.createElement('script');
+      scriptEl.setAttribute('src','https://checkout.stripe.com/checkout.js');
+      document.head.appendChild(scriptEl);
+    }
+  }.on('willInsertElement'),
   destroyStripeHandler: function() {
-    if (this.handler) {
-      this.handler.close();
+    if (this.get('handler')) {
+      this.get('handler').close();
     }
   }.on('willDestroyElement'),
   actions: {
     checkout: function() {
-      this.handler = window.StripeCheckout.configure({
+      var self = this;
+      this.set('handler', window.StripeCheckout.configure({
         key: config.APP.stripePublishableKey,
         image: '/images/percy.svg',
         token: function(token) {
-          // Use the token to create the charge with a server-side script.
-          // You can access the token ID with `token.id`
-          console.log(token.id)
-
           return Ember.$.ajax({
             type: 'POST',
             url: utils.buildApiUrl('subscriptions'),
+            data: {
+              plan: self.get('plan'),
+              token: token.id,
+            },
           }).then(
             function() {
-              console.log('true')
+              alert('Success!')
             },
             function() {
-              console.log('false')
+              alert('An error with Stripe processing occurred!')
             }
           );
         }
-      });
-      this.handler.open({
+      }));
+      this.get('handler').open({
         name: 'Percy.io',
-        description: 'Basic Plan (2 workers)',
+        description: this.get('planName'),
         email: this.get('session.secure.user.email'),
-        amount: 1900,
+        amount: this.get('price') * 100,
       });
     },
   },

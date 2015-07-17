@@ -317,10 +317,14 @@ select
   /* The 6px vertically centers text on FF, ignored by Webkit */
   padding: 6px 10px
   background-color: #fff
-  border: 1px solid #D1D1D1
+  border: 1px solid #793989
   border-radius: 4px
   box-shadow: none
   box-sizing: border-box
+
+  &:disabled
+    border: 1px solid $lightpurple
+    color: $gray
 
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
@@ -347,7 +351,7 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus
-  border: 1px solid #793989
+  border: 1px solid $darkpurple
   outline: 0
 label,
 legend

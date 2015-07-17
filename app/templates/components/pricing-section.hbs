@@ -1,0 +1,43 @@
+<div {{bind-attr class=":PricingSection-bucket isFreeActive:PricingSection-bucket--active"}}>
+  <h3>Free</h3>
+  <div class="PricingSection-price"><strong>{{format-number 0 style="currency" currency="USD"}}</strong> per month</div>
+  <div class="PricingSection-concurrency">{{concurrency-picker isDisabled=true plan='free'}}</div>
+  <div class="PricingSection-diffs"><strong>250</strong> visual diffs</div>
+  <div class=""><strong>Unlimited</strong> users</div>
+  <div class=""><strong>Unlimited</strong> private repos</div>
+  <div class=""><strong>1 week</strong> image retention</div>
+  <div class=""><em>no credit card required</em></div>
+  {{#unless session.isAuthenticated}}
+    {{login-button text="Sign In" sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+  {{/unless}}
+</div>
+<div class="PricingSection-bucket">
+  <h3>Basic</h3>
+  <div class="PricingSection-price"><strong>{{format-number basicPrice style="currency" currency="USD"}}</strong> per month</div>
+  <div class="PricingSection-concurrency">{{concurrency-picker plan='basic' changed="concurrencyChanged"}}</div>
+  <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
+  <div class=""><strong>Unlimited</strong> users</div>
+  <div class=""><strong>Unlimited</strong> private repos</div>
+  <div class=""><strong>6 months</strong> image retention</div>
+  <div class="">{{stripe-checkout plan=basicPlan price=basicPrice planName=basicPlanName}}</div>
+</div>
+<div class="PricingSection-bucket">
+  <h3>Pro</h3>
+  <div class="PricingSection-price"><strong>{{format-number proPrice style="currency" currency="USD"}}</strong> per month</div>
+  <div class="PricingSection-concurrency">{{concurrency-picker plan='pro' changed="concurrencyChanged"}}</div>
+  <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
+  <div class=""><strong>Unlimited</strong> users</div>
+  <div class=""><strong>Unlimited</strong> private repos</div>
+  <div class=""><strong>6 months</strong> image retention</div>
+  <div class="">{{stripe-checkout plan=proPlan price=proPrice planName=proPlanName}}</div>
+</div>
+<div class="PricingSection-bucket">
+  <h3>Enterprise</h3>
+  <div class="PricingSection-price"><strong>{{format-number enterprisePrice style="currency" currency="USD"}}</strong> per month</div>
+  <div class="PricingSection-concurrency">{{concurrency-picker plan='enterprise' changed="concurrencyChanged"}}</div>
+  <div class="PricingSection-diffs"><strong>Unlimited</strong> visual diffs</div>
+  <div class=""><strong>Unlimited</strong> users</div>
+  <div class=""><strong>Unlimited</strong> private repos</div>
+  <div class=""><strong>1 year</strong> image retention</div>
+  <div class="">{{stripe-checkout plan=enterprisePlan price=enterprisePrice planName=enterprisePlanName}}</div>
+</div>
