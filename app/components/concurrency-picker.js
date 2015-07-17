@@ -19,12 +19,12 @@ export default Ember.Component.extend({
     this.set('optionsZeroIndexedLength', options.length - 1);
   }.on('init'),
   input: function(e) {
-    this._handleChange(e)
+    this._handleChange(e);
   },
   change: function(e) {
     // This is for IE, because it completely does not handle the events correctly.
     // http://www.impressivewebs.com/onchange-vs-oninput-for-range-sliders/
-    this._handleChange(e)
+    this._handleChange(e);
   },
   _handleChange: function(e) {
     this.sendAction('changed', this.get('plan'), parseInt(e.target.value));

@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 
   isFreeActive: true,
 
-  // Current plan name.
+  // Plan ID.
   freePlan: 'free-2',
   basicPlan: function() {
     return 'basic-%@'.fmt(this.get('basicConcurrencySelected'));
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     return 'enterprise-%@'.fmt(this.get('enterpriseConcurrencySelected'));
   }.property('enterpriseConcurrencySelected'),
 
-  // Current price for selected plan.
+  // Price for selected plan.
   basicPrice: function() {
     return Math.floor(this.get('basicConcurrencySelected') * 999 / 100);
   }.property('basicConcurrencySelected'),
@@ -33,7 +33,7 @@ export default Ember.Component.extend({
     return Math.floor(this.get('enterpriseConcurrencySelected') * 9999 / 100);
   }.property('enterpriseConcurrencySelected'),
 
-  // Current number of diffs for selected plan.
+  // Number of diffs for selected plan.
   numVisualDiffsBasic: function() {
     return this.get('basicConcurrencySelected') * 1250;
   }.property('basicConcurrencySelected'),
@@ -41,7 +41,7 @@ export default Ember.Component.extend({
     return this.get('proConcurrencySelected') * 5000;
   }.property('proConcurrencySelected'),
 
-  // Current plan name.
+  // Plan name.
   basicPlanName: function() {
     return 'Basic (%@ workers)'.fmt(this.get('basicConcurrencySelected'));
   }.property('basicConcurrencySelected'),

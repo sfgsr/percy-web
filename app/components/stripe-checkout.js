@@ -6,6 +6,10 @@ export default Ember.Component.extend({
   plan: null,
   price: null,
 
+  // If false, a confirmation dialog for upgrading the plan will be presented instead.
+  // This is used when Stripe already has the customer's card info and we can instantly upgrade.
+  requestCard: true,
+
   handler: null,
   classes: null,
   classNames: ['StripeCheckout'],
@@ -23,36 +27,47 @@ export default Ember.Component.extend({
       this.get('handler').close();
     }
   }.on('willDestroyElement'),
+  _upgradePlan: function(plan, token) {
+    return Ember.$.ajax({
+      type: 'POST',
+      url: utils.buildApiUrl('subscriptions'),
+      data: {
+        plan: plan,
+        token: token && token.id,
+      },
+    }).then(
+      function() {
+        window.reload();
+      },
+      function() {
+        alert('An error with Stripe processing occurred!');
+      }
+    );
+  },
   actions: {
     checkout: function() {
       var self = this;
-      this.set('handler', window.StripeCheckout.configure({
-        key: config.APP.stripePublishableKey,
-        image: '/images/percy.svg',
-        token: function(token) {
-          return Ember.$.ajax({
-            type: 'POST',
-            url: utils.buildApiUrl('subscriptions'),
-            data: {
-              plan: self.get('plan'),
-              token: token.id,
-            },
-          }).then(
-            function() {
-              alert('Success!')
-            },
-            function() {
-              alert('An error with Stripe processing occurred!')
-            }
-          );
+      if (this.get('requestCard')) {
+        this.set('handler', window.StripeCheckout.configure({
+          key: config.APP.stripePublishableKey,
+          image: '/images/percy.svg',
+          token: function(token) {
+            self._upgradePlan(self.get('plan'), token);
+          }
+        }));
+        this.get('handler').open({
+          name: 'Percy.io',
+          description: this.get('planName'),
+          email: this.get('session.secure.user.email'),
+          amount: this.get('price') * 100,
+          panelLabel: 'Upgrade! ({{amount}})',
+          allowRememberMe: false,
+        });
+      } else {
+        if (confirm('Ready to upgrade?')) {
+          self._upgradePlan(self.get('plan'));
         }
-      }));
-      this.get('handler').open({
-        name: 'Percy.io',
-        description: this.get('planName'),
-        email: this.get('session.secure.user.email'),
-        amount: this.get('price') * 100,
-      });
+      }
     },
   },
 });
