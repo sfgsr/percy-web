@@ -8,8 +8,6 @@ export default Ember.Component.extend({
   proConcurrencySelected: 5,
   enterpriseConcurrencySelected: 5,
 
-  isFreeActive: true,
-
   // Plan ID.
   freePlan: 'free-2',
   basicPlan: function() {
@@ -24,13 +22,13 @@ export default Ember.Component.extend({
 
   // Price for selected plan.
   basicPrice: function() {
-    return Math.floor(this.get('basicConcurrencySelected') * 999 / 100);
+    return Math.floor(this.get('basicConcurrencySelected') * 980 / 100);
   }.property('basicConcurrencySelected'),
   proPrice: function() {
-    return Math.floor(this.get('proConcurrencySelected') * 1999 / 100);
+    return Math.floor(this.get('proConcurrencySelected') * 1980 / 100);
   }.property('proConcurrencySelected'),
   enterprisePrice: function() {
-    return Math.floor(this.get('enterpriseConcurrencySelected') * 9999 / 100);
+    return Math.floor(this.get('enterpriseConcurrencySelected') * 9980 / 100);
   }.property('enterpriseConcurrencySelected'),
 
   // Number of diffs for selected plan.

@@ -1,0 +1,32 @@
+{{fixed-top-header}}
+<div class="container container--fixedWidth container--forContent">
+  <a href="#" class="u-pull-right Button" {{action "invalidateSession"}}>Logout</a>
+  <h2>Account</h2>
+  <p>
+    <strong>GitHub:</strong> <strong><a href="{{session.secure.user.githubUrl}}">@{{session.secure.user.login}}</a></strong> ({{session.secure.user.name}})
+  </p>
+
+  <h3>Current Plan</h3>
+  {{#if session.secure.user.hasFreeSubscription}}
+    {{pricing-free-section}}
+  {{else}}
+    <div class="Alert Alert--info">
+      <strong>{{session.secure.user.planName}}</strong>
+    </div>
+    <p>
+      {{stripe-checkout
+        text='Update Credit Card'
+        checkoutLabelText='Update Credit Card'
+        forceCheckout=true
+        plan=session.secure.user.plan
+        price=0
+        planName='Update Credit Card'
+      }}
+      {{cancel-subscription}}
+    </p>
+  {{/if}}
+
+  <h3>Upgrade plan</h3>
+  {{pricing-section}}
+</div>
+{{main-footer}}

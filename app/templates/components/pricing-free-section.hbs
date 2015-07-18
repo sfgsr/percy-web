@@ -1,0 +1,15 @@
+<div class="row u-text-center">
+  <div class="PricingSection-bucket PricingSection-bucket--free">
+    <div class="PricingSection-title">Free plan</div>
+    <div class="PricingSection-bucketBody">
+      <div class="PricingSection-infoItem"><strong>250</strong> visual diffs per month</div>
+      <div class="PricingSection-infoItem"><strong>Max 2 concurrent visual diffs</strong></div>
+      <div class="PricingSection-infoItem"><strong>1 week</strong> image retention</div>
+      {{#unless session.isAuthenticated}}
+        <br>
+        {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+      {{/unless}}
+      <div><em>no credit card required</em></div>
+    </div>
+  </div>
+</div>

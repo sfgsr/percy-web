@@ -2,6 +2,16 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 export default {
+  redirectToLogin: function(options) {
+    options = options || {};
+    var params = {
+      redirect_to: options.redirectTo || window.location.href,
+    };
+    if (options.extendedPermissions) {
+      params['extended_permissions'] = options.extendedPermissions;
+    }
+    window.location = this.buildApiUrl('login', {params: params});
+  },
   buildApiUrl: function() {
     var key = arguments[0];
     var otherArgs = Array.prototype.slice.call(arguments, 1);

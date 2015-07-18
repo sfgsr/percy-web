@@ -1,18 +1,25 @@
 import Ember from 'ember';
 import config from '../config/environment';
 import utils from '../lib/utils';
+import SubscriptionHelpers from '../lib/subscription-helpers';
 
 export default Ember.Component.extend({
   plan: null,
   price: null,
+  text: 'Select Plan',
 
-  // If false, a confirmation dialog for upgrading the plan will be presented instead.
-  // This is used when Stripe already has the customer's card info and we can instantly upgrade.
-  requestCard: true,
+  // This is set to true when updating credit card info.
+  forceCheckout: false,
+  checkoutLabelText: 'Select Plan ({{amount}})',
 
   handler: null,
   classes: null,
-  classNames: ['StripeCheckout'],
+  tagName: 'button',
+  classNames: [
+    'StripeCheckout',
+    'Button',
+    'Button--primary',
+  ],
   classNameBindings: ['classes'],
 
   loadStripeCheckout: function() {
@@ -27,32 +34,39 @@ export default Ember.Component.extend({
       this.get('handler').close();
     }
   }.on('willDestroyElement'),
-  _upgradePlan: function(plan, token) {
-    return Ember.$.ajax({
-      type: 'POST',
-      url: utils.buildApiUrl('subscriptions'),
-      data: {
-        plan: plan,
-        token: token && token.id,
-      },
-    }).then(
+  _changeSubscription: function(plan, token) {
+    return SubscriptionHelpers.changeSubscription(plan, token).then(
       function() {
-        window.reload();
+        location.reload();
       },
       function() {
-        alert('An error with Stripe processing occurred!');
+        alert(
+          'A Stripe error occurred! Sorry about that, please ' +
+          'contact us at team@percy.io and we will make sure you are set up correctly.'
+        );
       }
     );
+  },
+  click: function() {
+    this.send('checkout');
   },
   actions: {
     checkout: function() {
       var self = this;
-      if (this.get('requestCard')) {
+
+      // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
+      // login then to /account.
+      if (!this.get('session.isAuthenticated')) {
+        utils.redirectToLogin({redirectTo: '/account'});
+        return;
+      }
+
+      if (this.get('forceCheckout') || this.get('session.secure.user.hasFreeSubscription')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.stripePublishableKey,
           image: '/images/percy.svg',
           token: function(token) {
-            self._upgradePlan(self.get('plan'), token);
+            self._changeSubscription(self.get('plan'), token);
           }
         }));
         this.get('handler').open({
@@ -60,12 +74,12 @@ export default Ember.Component.extend({
           description: this.get('planName'),
           email: this.get('session.secure.user.email'),
           amount: this.get('price') * 100,
-          panelLabel: 'Upgrade! ({{amount}})',
+          panelLabel: this.get('checkoutLabelText'),
           allowRememberMe: false,
         });
       } else {
-        if (confirm('Ready to upgrade?')) {
-          self._upgradePlan(self.get('plan'));
+        if (confirm("Ready to change plans? We'll use your existing payment info.")) {
+          self._changeSubscription(self.get('plan'));
         }
       }
     },
