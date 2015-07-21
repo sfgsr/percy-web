@@ -36,6 +36,7 @@ Router.map(function() {
   this.route('faq');
   this.route('terms');
   this.route('privacy');
+  this.route('account');
 });
 
 export default Router;

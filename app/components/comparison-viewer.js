@@ -21,7 +21,9 @@ export default Ember.Component.extend({
 
   _register: function() {
     var parent = this.get('parentComparisonList');
-    parent && parent.send('registerChild', this);
+    if (parent) {
+      parent.send('registerChild', this);
+    }
   }.on('didInsertElement'),
   click: function() {
     this.set('isExpanded', true);

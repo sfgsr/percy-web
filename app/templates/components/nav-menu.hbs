@@ -11,11 +11,14 @@
   {{#link-to "about"}}About{{/link-to}}
 </div>
 {{#if user}}
+  <div class="NavMenu-item">&nbsp;</div>
   <div class="NavMenu-item">
-    <a href="#" {{action "invalidateSession"}}>Logout</a>
+    {{#link-to 'owner.index' session.secure.user.login}}My Repos{{/link-to}}
   </div>
   <div class="NavMenu-avatar">
-    {{user-avatar user=user width=36 linked=true}}
+    {{#link-to 'owner.index' session.secure.user.login}}{{user-avatar user=user width=36 linked=false}}{{/link-to}}
+    {{! #beta }}
+    {{!-- {{user-avatar user=user width=36 linked=true href='/account'}} --}}
   </div>
 {{else}}
   <div class="NavMenu-item">

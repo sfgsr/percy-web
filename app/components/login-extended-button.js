@@ -32,11 +32,7 @@ export default Ember.Component.extend({
   },
   actions: {
     login: function() {
-      var params = {
-        redirect_to: window.location.href,
-        extended_permissions: 1,
-      };
-      window.location = utils.buildApiUrl('login', {params: params});
+      utils.redirectToLogin({extendedPermissions: 1});
     },
   },
 });

@@ -24,6 +24,7 @@ module.exports = function(environment) {
         approveBuild: '/api/v1/builds/%@/approve',
         enableRepo: '/api/v1/repos/%@/enable',
         disableRepo: '/api/v1/repos/%@/disable',
+        subscriptions: '/api/v1/subscriptions/',
       },
     },
   };
@@ -34,6 +35,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.stripePublishableKey = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
   }
 
   if (environment === 'test') {
@@ -46,9 +48,11 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.stripePublishableKey = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
   }
 
   if (environment === 'production') {
+    ENV.APP.stripePublishableKey = 'pk_live_cmaeNcmPuMihdT3Q7QDBDMDr';
   }
 
   return ENV;

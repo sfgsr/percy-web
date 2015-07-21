@@ -1,0 +1,88 @@
+.PricingSection,
+.PricingFreeSection,
+  // Reset font-size for homepage.
+  font-size: $standard-font-size
+  margin-bottom: 20px
+
+  .PricingSection-bucket
+    position: relative
+    box-sizing: border-box
+    display: inline-block
+    vertical-align: top
+    width: 260px
+    margin-top: 20px
+    border-bottom: $grayborder
+    border-left: $grayborder
+    border-top: $grayborder
+    background-color: white
+
+    &.PricingSection-bucket--active
+      background-color: #fffbdf
+
+    &.PricingSection-bucket--promoted
+      box-shadow: 5px 5px 10px #eaeaea
+      margin-top: 0
+      z-index: 100
+      border: 1px solid $percy-beige
+
+  .PricingSection-bucket:last-child
+    border-right: $grayborder
+
+  .PricingSection-bucket--promoted + .PricingSection-bucket
+    border-left: none
+
+  .PricingSection-title
+    text-align: center
+    font-family: $fancy-font
+    font-size: 3rem
+    font-weight: bold
+    background: $beige
+    padding: 5px
+
+    &.PricingSection-title--promoted
+      font-size: 3.2rem
+      background: $percy-beige
+      padding: 10px
+      margin-bottom: 5px
+
+    &.PricingSection-title--small
+      background: $percy-beige
+      font-size: 1.5rem
+      padding: 5px
+
+  .PricingSection-bucketBody
+    padding: 20px
+
+  .PricingSection-price
+    text-align: center
+    font-size: 20px
+    color: $darkgray
+    strong
+      font-size: 30px
+      color: $default-text-color
+
+  .PricingSection-concurrency
+    padding: 20px 0 20px 0
+
+    input
+      margin-bottom: 0
+
+  .PricingSection-diffs
+    font-size: 20px
+    padding-bottom: 20px
+
+  .PricingSection-infoItem
+    color: $darkgray
+    strong
+      color: $default-text-color
+
+  .PricingSection-cta
+    padding-top: 20px
+    .Button
+      width: 100%
+
+
+.PricingFreeSection
+  .PricingSection-bucket--free
+    width: 480px
+    border-right: $grayborder
