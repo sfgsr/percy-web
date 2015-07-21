@@ -16,7 +16,9 @@
     {{#link-to 'owner.index' session.secure.user.login}}My Repos{{/link-to}}
   </div>
   <div class="NavMenu-avatar">
-    {{user-avatar user=user width=36 linked=true href='/account'}}
+    {{#link-to 'owner.index' session.secure.user.login}}{{user-avatar user=user width=36 linked=false}}{{/link-to}}
+    {{! #beta }}
+    {{!-- {{user-avatar user=user width=36 linked=true href='/account'}} --}}
   </div>
 {{else}}
   <div class="NavMenu-item">
