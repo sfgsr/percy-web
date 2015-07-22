@@ -12,6 +12,7 @@
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>6 months</strong> image retention</div>
+      <br>
       <div class="PricingSection-cta">
         {{stripe-checkout plan=basicPlan price=basicPrice planName=basicPlanName}}
       </div>
@@ -29,6 +30,7 @@
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>6 months</strong> image retention</div>
+      <br>
       <div class="PricingSection-cta">
         {{stripe-checkout plan=proPlan price=proPrice planName=proPlanName}}
       </div>
@@ -47,8 +49,11 @@
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>1 year</strong> image retention</div>
+    <div class="PricingSection-infoItem"><strong class="u-text-dashed-underline hint--top hint--centered hint--rounded" data-hint="Enterprise plans come with dedicated
+infrastructure set up for your organization
+to get the fastest builds possible.">Priority builds</strong></div>
       <div class="PricingSection-cta">
-        {{stripe-checkout plan=enterprisePlan price=enterprisePrice planName=enterprisePlanName}}
+        <a href="mailto:team@percy.io?subject=Request for Percy Enterprise" class="Button">Contact Us</a>
       </div>
     </div>
   </div>

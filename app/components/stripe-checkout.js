@@ -64,7 +64,7 @@ export default Ember.Component.extend({
       if (this.get('forceCheckout') || this.get('session.secure.user.hasFreeSubscription')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.stripePublishableKey,
-          image: '/images/percy.svg',
+          image: '/images/percy-bg.png',
           token: function(token) {
             self._changeSubscription(self.get('plan'), token);
           }

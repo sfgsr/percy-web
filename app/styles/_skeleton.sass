@@ -472,6 +472,8 @@ p:last-child
   text-align: left
 .u-text-small
   font-size: 80%
+.u-text-dashed-underline
+  border-bottom: 1px dashed #999
 .u-pull-center
   margin: 0 auto
 
@@ -479,6 +481,7 @@ p:last-child
 /**
  * Misc.
  */
+
 hr
   margin-top: 3rem
   margin-bottom: 3.5rem
@@ -497,3 +500,12 @@ hr
   content: ""
   display: table
   clear: both
+
+/**
+ * Hint.css overrides.
+ */
+.hint--centered
+  &, &:hover, &:focus
+    &:after, &:before
+      transform: translate(-50%, 0)
+      margin-left: 0
