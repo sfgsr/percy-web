@@ -8,6 +8,7 @@ export default Ember.Component.extend({
     return this.get('user.githubUrl');
   }.property('user.githubUrl'),
   width: 40,
+  height: Ember.computed.alias('width'),
 
   classNames: ['UserAvatar'],
   classNameBindings: ['classes'],

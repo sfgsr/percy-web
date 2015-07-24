@@ -5,12 +5,15 @@ import utils from '../lib/utils';
 export default DS.Model.extend({
   githubId: DS.attr('number'),
   name: DS.attr(),
+  // The GitHub organization/user namespace.
   ownerLogin: DS.attr(),
   slug: DS.attr(),
+  htmlUrl: DS.attr(),
   isPrivate: DS.attr('boolean'),
   isEnabled: DS.attr('boolean'),
   isDisabled: Ember.computed.not('isEnabled'),
-  htmlUrl: DS.attr(),
+  // The Percy owner who enabled the repo. Unrelated to the ownerLogin attribute.
+  owner: DS.belongsTo('user'),
   description: DS.attr(),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
@@ -18,8 +21,17 @@ export default DS.Model.extend({
   builds: DS.hasMany('build', {async: true}),
   tokens: DS.hasMany('token', {async: true}),
 
+  isCurrentUserOwner: function() {
+    if (this.get('isEnabled')) {
+      // If there is a repo owner, check if it's the same as the current session's user.
+      return this.get('session.secure.user.login') == this.get('owner.login');
+    }
+    return false;
+  }.property('isEnabled', 'owner'),
+  isNotCurrentUserOwner: Ember.computed.not('isCurrentUserOwner'),
+
   writeOnlyToken: function() {
-    // Write now the tokens API only returns a list of one write-only token.
+    // Right now the tokens API only returns a list of one write-only token.
     return this.get('tokens.firstObject');
   }.property('tokens'),
 

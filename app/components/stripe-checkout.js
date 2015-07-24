@@ -54,6 +54,11 @@ export default Ember.Component.extend({
     checkout: function() {
       var self = this;
 
+      // This is intentionally evaluated here, outside of the handlers below, because password
+      // managers like 1Password strangely change the select boxes underneath Stripe Checkout
+      // when filling out credit card info.
+      var chosenPlan = this.get('plan');
+
       // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
       // login then to /account.
       if (!this.get('session.isAuthenticated')) {
@@ -66,7 +71,7 @@ export default Ember.Component.extend({
           key: config.APP.stripePublishableKey,
           image: '/images/percy-bg.png',
           token: function(token) {
-            self._changeSubscription(self.get('plan'), token);
+            self._changeSubscription(chosenPlan, token);
           }
         }));
         this.get('handler').open({
@@ -79,7 +84,7 @@ export default Ember.Component.extend({
         });
       } else {
         if (confirm("Ready to change plans? We'll use your existing payment info.")) {
-          self._changeSubscription(self.get('plan'));
+          self._changeSubscription(chosenPlan);
         }
       }
     },

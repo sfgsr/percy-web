@@ -6,10 +6,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return Ember.Object.create({login: params.owner_id});
   },
   actions: {
-    togglingRepo: function(promise, repo) {
-      promise.then(function() {
-        repo.reload();
-      });
-    },
   },
 });

@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       owner: this.modelFor('owner'),
-      repos: this.store.find('repo'),
+      repos: this.store.find('repo', {'filter[owner-login]': this.modelFor('owner').get('login')}),
     });
   },
   actions: {

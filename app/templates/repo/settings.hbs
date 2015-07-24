@@ -1,6 +1,11 @@
 <div class="container container--forContent container--fixedWidth">
   <h5>
-    {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.ownerLogin model.name}}{{model.name}}{{/link-to}} <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a> Settings
+    {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.ownerLogin model.name}}{{model.name}}{{/link-to}}
+    {{#if model.isDisabled}}
+      <span class="RepoContainer-repoState">(disabled)</span>
+    {{/if}}
+
+    <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a> Settings
   </h5>
   <h3>API keys</h3>
   <h4>Write-only key</h4>
@@ -8,4 +13,15 @@
   <p>
     This key only has access to create builds, snapshots, and upload resources. See the {{#link-to "docs"}}docs{{/link-to}} for how to set up client authentication for your app.
   </p>
+  <h3>Repo actions</h3>
+  {{#if model.isEnabled}}
+    {{repo-disable repo=model disableRepo="disableRepo" disabled=model.isNotCurrentUserOwner}}
+    {{#if model.isNotCurrentUserOwner}}
+      <p class="u-text-small">
+        Repo can only disabled by its owner: <strong>@{{model.owner.login}}</strong>
+      </p>
+    {{/if}}
+  {{else}}
+    {{repo-enable repo=model isPrimary=true enableRepo="enableRepo"}}
+  {{/if}}
 </div>

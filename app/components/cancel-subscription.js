@@ -13,7 +13,19 @@ export default Ember.Component.extend({
   ],
   click: function() {
     if (confirm('Are you sure you want to cancel?\n\nWe want to help if we can, just email us at team@percy.io.')) {
-      SubscriptionHelpers.changeSubscription('free-2');
+      SubscriptionHelpers.changeSubscription('free-2').then(
+        function() {
+          // Refresh after canceling plan.
+          location.reload();
+        },
+        function() {
+          alert(
+            'A Stripe error occurred! Sorry about that, please ' +
+            'contact us at team@percy.io and we will make sure you are set up correctly.'
+          );
+          location.reload();
+        }
+      );
     }
   },
 });
