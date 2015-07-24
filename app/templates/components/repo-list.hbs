@@ -1,11 +1,11 @@
 <table class="u-full-width">
-  {{#each repo in filteredRepos}}
+  {{#each repo in repos}}
     <tr {{bind-attr class=":RepoList-repo repo.isEnabled:RepoList-repo--enabled"}}>
-      <td>{{#link-to "repo.index" repo.ownerLogin repo.name}}{{repo.slug}}{{/link-to}}</td>
+      <td>{{#link-to "repo.index" repo.namespace.id repo.name}}{{repo.slug}}{{/link-to}}</td>
       <td class="RepoList-actions">
         {{#link-to "repo.settings" repo.name classNames="RepoList-repoSettings"}}{{unbound fa-icon "cog" classNames="fa--left"}}{{/link-to}}
         {{#if repo.isEnabled}}
-          {{#link-to "repo.index" repo.ownerLogin repo.name classNames="Button Button--primary"}}Go &raquo;{{/link-to}}
+          {{#link-to "repo.index" repo.namespace.id repo.name classNames="Button Button--primary"}}Go &raquo;{{/link-to}}
         {{else}}
           {{repo-enable repo=repo text="Enable" enableRepo="enableRepo"}}
         {{/if}}

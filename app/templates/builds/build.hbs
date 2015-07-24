@@ -1,11 +1,11 @@
 <div class="container container--forContent">
   {{approval-section build=model classes="u-pull-right"}}
   <h5>
-    {{#link-to "owner.index" model.repo.ownerLogin}}{{model.repo.ownerLogin}}{{/link-to}}/{{#link-to "repo.index" model.repo.ownerLogin model.repo.name}}{{model.repo.name}}{{/link-to}} <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a> Build #{{model.buildNumber}}
+    {{#link-to "namespace.index" model.repo.namespace.id}}{{model.repo.namespace.id}}{{/link-to}}/{{#link-to "repo.index" model.repo.namespace.id model.repo.name}}{{model.repo.name}}{{/link-to}} <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a> Build #{{model.buildNumber}}
   </h5>
   {{#if model.baseBuild}}
     <strong>Compared to:</strong>
-    {{#link-to "builds.build" model.repo.ownerLogin model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.buildNumber}}{{/link-to}}
+    {{#link-to "builds.build" model.repo.namespace.id model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.buildNumber}}{{/link-to}}
   {{else}}
     First build!
   {{/if}}

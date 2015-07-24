@@ -1,0 +1,9 @@
+<div class="container container--fixedWidth">
+  <div class="Panel">
+    {{namespace-list namespaces=model.namespaces currentNamespace=model.currentNamespace selectNamespace="selectNamespace"}}
+  </div>
+  <div class="container container--forContent container--withPanel">
+    <h5>Repositories</h5>
+    {{repo-list repos=model.repos disableRepo="disableRepo" enableRepo="enableRepo"}}
+  </div>
+</div>

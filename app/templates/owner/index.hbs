@@ -1,9 +1,0 @@
-<div class="container container--fixedWidth">
-  <div class="Panel">
-    {{owner-list repos=model.repos currentOwner=model.owner selectOwner="selectOwner"}}
-  </div>
-  <div class="container container--forContent container--withPanel">
-    <h5>Repositories</h5>
-    {{repo-list repos=model.repos filterByOwner=model.owner disableRepo="disableRepo" enableRepo="enableRepo"}}
-  </div>
-</div>

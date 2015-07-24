@@ -9,7 +9,7 @@
   <h2>Continuous visual integration for web apps</h2>
   {{#if session.isAuthenticated}}
     {{#if session.secure.user.isWhitelisted}}
-      {{#link-to 'owner.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+      {{#link-to 'namespace.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
     {{else}}
       <div class="Alert Alert--info">
         <strong>Thanks for requesting an invite!</strong> We're very excited to make Percy available to you.

@@ -4,15 +4,13 @@ import utils from '../lib/utils';
 
 export default DS.Model.extend({
   githubId: DS.attr('number'),
+  namespace: DS.belongsTo('namespace'),
   name: DS.attr(),
-  // The GitHub organization/user namespace.
-  ownerLogin: DS.attr(),
   slug: DS.attr(),
   htmlUrl: DS.attr(),
   isPrivate: DS.attr('boolean'),
   isEnabled: DS.attr('boolean'),
   isDisabled: Ember.computed.not('isEnabled'),
-  // The Percy owner who enabled the repo. Unrelated to the ownerLogin attribute.
   owner: DS.belongsTo('user'),
   description: DS.attr(),
   createdAt: DS.attr('date'),

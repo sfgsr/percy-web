@@ -1,6 +1,6 @@
 <div class="container container--fixedWidth container--forContent RepoContainer">
   <h5>
-    {{#link-to "owner.index" model.ownerLogin}}{{model.ownerLogin}}{{/link-to}}/{{model.name}}
+    {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}/{{model.name}}
     <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a>
     {{#if model.isDisabled}}
       <span class="RepoContainer-repoState">(disabled)</span>
@@ -23,7 +23,7 @@
     {{#each build in model.builds}}
       <tr>
         <td>
-          <strong>{{#link-to "builds.build" model.ownerLogin model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
+          <strong>{{#link-to "builds.build" model.namespace.id model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
         </td>
         <td>
           {{build.state}}
