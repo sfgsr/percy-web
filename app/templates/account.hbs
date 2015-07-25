@@ -6,12 +6,12 @@
     <strong>GitHub:</strong> <strong><a href="{{session.secure.user.githubUrl}}">@{{session.secure.user.login}}</a></strong> ({{session.secure.user.name}})
   </p>
 
-  <h3>Current Plan</h3>
-  {{#if session.secure.user.hasFreeSubscription}}
+  <h3>Current plan and usage</h3>
+  {{#if session.secure.user.subscription.isFree}}
     {{pricing-free-section}}
   {{else}}
     <div class="Alert Alert--info">
-      <strong>{{session.secure.user.planName}}</strong>
+      <strong>{{session.secure.user.subscription.planName}}</strong>
     </div>
     <p>
       {{stripe-checkout
@@ -25,6 +25,8 @@
       {{cancel-subscription}}
     </p>
   {{/if}}
+  {{session.secure.user.subscription.planUsageLimit}}
+  {{session.secure.user.subscription.currentUsage}}
 
   <h3>Upgrade plan</h3>
   {{pricing-section}}

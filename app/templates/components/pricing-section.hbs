@@ -11,10 +11,10 @@
       <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
-      <div class="PricingSection-infoItem"><strong>6 months</strong> image retention</div>
+      <div class="PricingSection-infoItem"><strong>1 month</strong> image storage</div>
       <br>
       <div class="PricingSection-cta">
-        {{stripe-checkout plan=basicPlan price=basicPrice planName=basicPlanName}}
+        {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=basicPlan price=basicPrice planName=basicPlanName}}
       </div>
     </div>
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket PricingSection-bucket--promoted">
@@ -29,10 +29,10 @@
       <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
-      <div class="PricingSection-infoItem"><strong>6 months</strong> image retention</div>
+      <div class="PricingSection-infoItem"><strong>3 months</strong> image storage</div>
       <br>
       <div class="PricingSection-cta">
-        {{stripe-checkout plan=proPlan price=proPrice planName=proPlanName}}
+        {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=proPlan price=proPrice planName=proPlanName}}
       </div>
     </div>
     <div class="PricingSection-title PricingSection-title--small">Best starter for teams</div>
@@ -48,7 +48,7 @@
       <div class="PricingSection-diffs"><strong>Unlimited</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
-      <div class="PricingSection-infoItem"><strong>1 year</strong> image retention</div>
+      <div class="PricingSection-infoItem"><strong>6 months</strong> image storage</div>
     <div class="PricingSection-infoItem"><strong class="u-text-dashed-underline hint--top hint--centered hint--rounded" data-hint="Enterprise plans come with dedicated
 infrastructure set up for your organization
 to get the fastest builds possible.">Priority builds</strong></div>

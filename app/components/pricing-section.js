@@ -4,6 +4,11 @@ export default Ember.Component.extend({
   classNames: ['PricingSection'],
   classNameBindings: ['classes'],
 
+  forceAccountPage: false,
+  checkoutText: function() {
+    return this.get('forceAccountPage') ? 'Change Plan...' : 'Select Plan';
+  }.property('forceAccountPage'),
+
   basicConcurrencySelected: 2,
   proConcurrencySelected: 5,
   enterpriseConcurrencySelected: 5,

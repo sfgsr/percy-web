@@ -8,10 +8,11 @@ export default Ember.Component.extend({
   href: utils.buildApiUrl('login', {params: {extended_permissions: 1}}),
   dataHint: function() {
     return [
-    'Due to how GitHub permissions work, we',
-    'temporarily request more permissions to',
-    'read your personal private repositories.',
-    'The token is used once and never stored.',
+      'Due to how GitHub authorization works,',
+      'we request higher permissions to access',
+      'your private repositories. We only use',
+      'the token to read repository metadata',
+      'and to set commit statuses.',
     ].join('\n');
   }.property(),
   attributeBindings: [
@@ -23,6 +24,7 @@ export default Ember.Component.extend({
     'Button--withLeftIcon',
     'hint--top',
     'hint--rounded',
+    'hint--centered',
   ],
   classNameBindings: [
     'classes',

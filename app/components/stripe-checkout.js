@@ -12,6 +12,9 @@ export default Ember.Component.extend({
   forceCheckout: false,
   checkoutLabelText: 'Select Plan ({{amount}})',
 
+  // Set on the homepage to force users to pick plan from account page.
+  forceAccountPage: false,
+
   handler: null,
   classes: null,
   tagName: 'button',
@@ -61,12 +64,12 @@ export default Ember.Component.extend({
 
       // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
       // login then to /account.
-      if (!this.get('session.isAuthenticated')) {
+      if (this.get('forceAccountPage') || !this.get('session.isAuthenticated')) {
         utils.redirectToLogin({redirectTo: '/account'});
         return;
       }
 
-      if (this.get('forceCheckout') || this.get('session.secure.user.hasFreeSubscription')) {
+      if (this.get('forceCheckout') || this.get('session.secure.user.subscription.isFree')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.stripePublishableKey,
           image: '/images/percy-bg.png',

@@ -23,11 +23,11 @@ module.exports = function(environment) {
         postMessageIframe: '/api/auth/post_message/iframe.html',
         logout: '/api/auth/logout',
 
-        builds: '/api/v1/builds/',
+        builds: '/api/v1/builds',
         approveBuild: '/api/v1/builds/%@/approve',
         enableRepo: '/api/v1/repos/%@/enable',
         disableRepo: '/api/v1/repos/%@/disable',
-        subscriptions: '/api/v1/subscriptions/',
+        subscription: '/api/v1/subscription',
       },
     },
   };

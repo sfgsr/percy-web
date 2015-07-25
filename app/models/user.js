@@ -10,13 +10,13 @@ export default DS.Model.extend({
   isWhitelisted: DS.attr('boolean'),
   lastSyncedAt: DS.attr('date'),
   lastPrivateSyncedAt: DS.attr('date'),
-  plan: DS.attr(),
-  planName: DS.attr(),
+
+  // This should only ever be accessed on the current user, because the API endpoint only returns
+  // the subscription for the current user.
+  subscription: DS.belongsTo('subscription'),
+
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
-
-  hasFreeSubscription: Ember.computed.equal('plan', 'free-2'),
-  hasPaidSubscription: Ember.computed.not('hasFreeSubscription'),
 
   githubUrl: function() {
     return 'https://github.com/' + this.get('login');
