@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   forceAccountPage: false,
   checkoutText: function() {
-    return this.get('forceAccountPage') ? 'Change Plan...' : 'Select Plan';
+    return this.get('forceAccountPage') ? 'Go To Account...' : 'Select Plan';
   }.property('forceAccountPage'),
 
   basicConcurrencySelected: 2,
