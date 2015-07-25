@@ -63,7 +63,7 @@ export default Ember.Component.extend({
       var chosenPlan = this.get('plan');
 
       // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
-      // login then to /account.
+      // login then to /account. Or, if they are logged in and forceAccountPage is set. :|
       if (this.get('forceAccountPage') || !this.get('session.isAuthenticated')) {
         utils.redirectToLogin({redirectTo: '/account'});
         return;
