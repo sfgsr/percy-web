@@ -5,12 +5,12 @@
       The number of visual diffs we will process at the same time.
     </p>
     <p>
-      Each visual diff takes time to render the page, screenshot it, and then compute a pixel-by-pixel
-      {{#link-to 'faq'}}visual diff{{/link-to}} of the screenshot to the last build.
+      We count a "visual diff" as the full process, including rendering the page, taking a screenshot, and generating a pixel-by-pixel
+      {{#link-to 'faq'}}visual diff{{/link-to}} compared to the last build.
     </p>
     <h5>How easy is it to upgrade?</h5>
     <p>
-      In a single click! The updated plan limits are immediately applied to your current and future builds.
+      In a single click! Upgrading to a new plan is immediately applied in realtime to your current builds.
     </p>
     <h5>Is upgrading prorated?</h5>
     <p>
@@ -25,6 +25,11 @@
     <h5>When can I cancel my subscription?</h5>
     <p>
       Anytime! It is a simple one click. Note, we do not offer refunds of the remaining billing period.
+    </p>
+    <h5>What happens if I exceed the limits?</h5>
+    <p>
+      First, we will let you know if it looks like you might exceed the plan limits. If you do go over,
+      the API will start rejecting new snapshots.
     </p>
   </div>
 </div>
