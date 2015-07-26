@@ -11,13 +11,19 @@
   {{#link-to "about"}}About{{/link-to}}
 </div>
 {{#if user}}
-  <div class="NavMenu-item">&nbsp;</div>
-  <div class="NavMenu-item">
-    {{#link-to 'namespace.index' session.secure.user.login}}My Repos{{/link-to}}
-  </div>
-  <div class="NavMenu-avatar">
-    {{user-avatar user=user width=36 linked=true href='/account'}}
-  </div>
+  {{#if session.secure.user.isWhitelisted}}
+    <div class="NavMenu-item">&nbsp;</div>
+    <div class="NavMenu-item">
+      {{#link-to 'namespace.index' session.secure.user.login}}My Repos{{/link-to}}
+    </div>
+    <div class="NavMenu-avatar">
+      {{user-avatar user=user width=36 linked=true href='/account'}}
+    </div>
+  {{else}}
+    <div class="NavMenu-avatar">
+      {{user-avatar user=user width=36}}
+    </div>
+  {{/if}}
 {{else}}
   <div class="NavMenu-item">
     <a href="#" {{action "sessionRequiresAuthentication"}}>Sign In</a>
