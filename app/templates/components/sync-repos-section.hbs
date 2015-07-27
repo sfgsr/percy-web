@@ -1,0 +1,18 @@
+<div>
+  <div>{{sync-repos-button private=true classes="Button--small"}}</div>
+  <div class="SyncReposSection-info">
+    Last synced public repos:
+    {{#if session.secure.user.lastSyncedAt}}
+      {{ago session.secure.user.lastSyncedAt}}
+    {{else}}
+      never
+    {{/if}}
+    <br>
+    Last synced private repos:
+    {{#if session.secure.user.lastPrivateSyncedAt}}
+      {{ago session.secure.user.lastPrivateSyncedAt}}
+    {{else}}
+      never
+    {{/if}}
+  </div>
+</div>

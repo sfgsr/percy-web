@@ -9,10 +9,10 @@ export default Ember.Component.extend({
   dataHint: function() {
     return [
       'Due to how GitHub authorization works,',
-      'we request higher permissions to access',
-      'your private repositories. We only use',
-      'the token to read repository metadata',
-      'and to set commit statuses.',
+      'we have to request higher permissions to',
+      'sync your private repositories. We only',
+      'use the token to read repository',
+      'metadata and to set commit statuses.',
     ].join('\n');
   }.property(),
   attributeBindings: [

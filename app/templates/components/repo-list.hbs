@@ -13,14 +13,3 @@
     </tr>
   {{/each}}
 </table>
-<div class="u-text-right">
-  <div>{{login-extended-button}}</div>
-  <div class="u-text-small">
-    Last synced private repos:
-    {{#if session.secure.user.lastPrivateSyncedAt}}
-      {{ago session.secure.user.lastPrivateSyncedAt}}
-    {{else}}
-      never
-    {{/if}}
-  </div>
-</div>
