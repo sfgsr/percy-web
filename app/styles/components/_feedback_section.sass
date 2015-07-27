@@ -1,0 +1,60 @@
+.FeedbackSection
+
+  .FeedbackSection-box
+    @include transition('0.25s ease-in-out')
+    border-radius: 6px 0 0 6px
+    color: $white
+    box-sizing: border-box
+    background-color: $darkpurple
+    border: 1px solid $lightpurple
+    border-right: 0
+    position: fixed
+    width: 275px
+    height: 270px
+    padding: 10px
+    z-index: 900
+    right: -275px
+    top: 90px
+    font-size: 90%
+
+    textarea
+      color: #000
+      margin: 5px 0 5px 0
+      height: 191px
+      width: 100%
+
+    .Button
+      width: 100%
+
+  .FeedbackSection-tab
+    @include transition('0.25s ease-in-out')
+    @include rotate('270')
+    border-radius: 6px 6px 0 0
+    display: block
+    font-family: $fancy-font
+    font-size: 80%
+    font-weight: 600
+    text-decoration: none
+    text-transform: uppercase
+    letter-spacing: .1rem
+    box-sizing: border-box
+    color: $white
+    background: $darkpurple
+    border: 1px solid $lightpurple
+    border-bottom: 0
+    position: fixed
+    right: -35px
+    top: 150px
+    width: 100px
+    text-align: center
+    height: 35px
+    z-index: 999
+    padding-top: 8px
+
+  &.FeedbackSection--active
+    .FeedbackSection-box
+      right: 0px
+    .FeedbackSection-tab
+      right: 241px
+
+

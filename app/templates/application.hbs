@@ -1,1 +1,6 @@
+{{#if session.isAuthenticated}}
+  {{#if session.secure.user.isWhitelisted}}
+    {{feedback-section}}
+  {{/if}}
+{{/if}}
 {{outlet}}
