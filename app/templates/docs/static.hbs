@@ -57,20 +57,3 @@ https://percy.io/fotinakis/percy-examples/builds/140
 {{#code-block lang="bash"}}
 $ percy snapshot _site/ --snapshot_limit 10
 {{/code-block}}
-
-<h4>Including remote resources</h4>
-
-<p>
-  To keep things fast, Percy renders only the files that you give it. By default, your site is rendered in isolation and does not load any remote resources (such as CSS or image files not in your <code>_site</code> directory). You might visit Percy and notice that your site is rendered incorrectly, possibly missing remote styles or images.
-</p>
-<p>
-  You can tell the client to try to find and upload your site's remote resources:
-</p>
-
-{{#code-block lang="bash"}}
-$ percy snapshot _site/ --autoload_remote_resources
-{{/code-block}}
-
-<p>
-  This will attempt to find all relevant URLs in your site's source code and upload them to Percy. This is not perfect, but can cover many use cases. If you need more fine-grained control, you could write your own upload script using the low-level {{#link-to "apidocs.client"}}Percy Client{{/link-to}}.
-</p>
