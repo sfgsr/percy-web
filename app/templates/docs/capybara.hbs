@@ -50,13 +50,23 @@ test:
   percy_access_token: &lt;PERCY WRITE-ONLY REPO TOKEN&gt;
 {{/code-block}}
 
-And then enable Percy in your <code>spec_helper.rb</code>:
+<div class="Alert Alert--warning">
+  <p>
+    <strong>NOTE: If your repository is public, do not save the Percy API token</strong> in your repository or else anyone will be able to write to Percy and consume your quota (they will not be able to read any data because the token is write-only).
+  </p>
+  <p>
+    You can set the <code>PERCY_TOKEN</code> environment variable to avoid storing the API token in your repository.
+  </p>
+</div>
+
+<p>
+  And then enable Percy in your <code>spec_helper.rb</code>:
+</p>
 
 {{#code-block lang="ruby"}}
 require 'percy/capybara/rspec'
 
 RSpec.configure do |config|
-  config.include Percy::Capybara::RSpec
   config.before(:suite) do
     Percy.config.access_token = Rails.application.secrets.percy_access_token
   end
@@ -64,7 +74,7 @@ end
 {{/code-block}}
 
 <p>
-  Alternatively, you could set the <code>PERCY_TOKEN</code> environment variable to avoid storing the API token in your repository.
+  Make sure you include the <code>require 'percy/capybara/rspec'</code> line so that the Percy hooks are registered correctly.
 </p>
 
 <h3>Usage</h3>
