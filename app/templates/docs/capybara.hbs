@@ -12,7 +12,7 @@
   Percy::Capybara is a library for integrating Percy into your existing <a href="https://github.com/jnicklas/capybara">Capybara</a> feature tests in any Ruby web framework—including Rails, Sinatra, etc.
 </p>
 <p>
-  If you've written feature tests (or "UI / acceptance / browser tests"), you know how hard it can be to get them right and to get your app in the correct UI state. This lets you take all the time you've spent building your feature tests and automatically extend them with screenshots and visual testing at every step of the way, to truly see what the browser sees.
+  If you've written feature tests (or "UI / acceptance / browser tests"), you know how hard it can be to get them right and to get your app in the correct UI state. Percy::Capybara lets you take all the time you've spent building your feature tests and expand them with screenshots and visual testing at every step of the way, to truly see what the browser sees.
 </p>
 <p>
   The examples below assume you are using RSpec, but they could be easily adapted for other testing frameworks.
@@ -52,12 +52,14 @@ test:
 
 And then enable Percy in your <code>spec_helper.rb</code>:
 
-{{#code-block}}
+{{#code-block lang="ruby"}}
+require 'percy/capybara/rspec'
+
 RSpec.configure do |config|
+  config.include Percy::Capybara::RSpec
   config.before(:suite) do
     Percy.config.access_token = Rails.application.secrets.percy_access_token
   end
-  config.after(:suite) { Percy::Capybara.finalize_build }
 end
 {{/code-block}}
 
@@ -97,18 +99,11 @@ end</span>
   Done! Snapshots will be uploaded to Percy the next time you run your tests in a {{#link-to "docs.ci"}}supported CI service{{/link-to}} (or they can be triggered locally, see below).
 </p>
 
-<div class="Alert Alert--warning">
-  <strong>NOTE:</strong> For the first build, you will need to set a baseline by running a build on the <code>master</code> branch before any visual diffs will be found. You can do this by either merging in Percy integration and running your tests on master, or fake it by setting the <code>PERCY_BRANCH</code> environment var:
-
-{{#code-block lang="bash"}}
-$ PERCY_BRANCH=master rspec
-{{/code-block}}</div>
-
 <p>
    The actual screenshot rendering, which often can be very slow, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method simply grabs the current DOM, CSS, and certain page assets and uploads them to Percy for processing.
 </p>
 <p>
-  We handle all the complexities of screenshot rendering in Percy itself so that the impact on your tests is minimal. Assets are fingerprinted when uploaded, so they are only uploaded once or when they change.
+  We handle all the complexities of screenshot rendering in Percy itself so that the impact on your tests is minimal. Assets are fingerprinted when uploaded, so they are only uploaded once.
 </p>
 
 <h4>Identifying snapshots</h4>
@@ -151,29 +146,6 @@ $ PERCY_ENABLE=1 bundle exec rspec
 </p>
 
 <h3>Troubleshooting</h3>
-
-You may encounter this error:
-
-{{#code-block}}
-Capybara::NotSupportedByDriverError:Capybara::Driver::Base#evaluate_script
-{{/code-block}}
-
-<p>
-  To fix this, feature tests that use Percy must be tagged with <code>js: true</code>:
-</p>
-
-{{#code-block}}
-describe 'some feature test', type: :feature, js: true do
-  ...
-end
-{{/code-block}}
-
-<p>
-  <strong>Why is <code>js: true</code> required?</strong> The default Capybara driver is Rack::Test, which does not run a real browser underneath and does not support the JavaScript execution required by Percy::Capybara.
-</p>
-<p>
-  Under the hood, Percy relies on page resources (HTML, CSS, images, etc.) being uploaded by clients so that Percy can render, screenshot, and visually diff the snapshot. This is powerful because we keep all the slow rendering of screenshots and visual diffs <em>out</em> of your systems, can optimize and parallelize them inside Percy, and can work for any tech stack. The Percy::Capybara client figures out which resources to upload by running JavaScript in the browser during your test, which requires a Capybara driver that can execute JavaScript (including <a href="https://github.com/jnicklas/capybara#selenium">Selenium</a>, <a href="https://github.com/thoughtbot/capybara-webkit">capybara-webkit</a>, <a href="https://github.com/teampoltergeist/poltergeist">Poltergeist</a>, etc.) This may be slower than the default Rack::Test driver, but we think it's a worthwhile trade-off to get visual regression testing. We may be able to support Rack::Test in the future.
-</p>
 
 <h4>WebMock/VCR users</h4>
 
