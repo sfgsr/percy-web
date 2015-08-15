@@ -45,7 +45,7 @@ https://percy.io/fotinakis/percy-examples/builds/140
 {{/code-block}}
 
 <p>
-  Under the hood, Percy only uploads files that have changed. So, after the first time this command is run, future runs will likely be very fast and only take a few seconds.
+  Under the hood, Percy only uploads files that have changed. So, after the first time this command is run, future runs will likely be very fast and only new files.
 </p>
 
 <h4>Limit pages for testing</h4>
@@ -57,3 +57,19 @@ https://percy.io/fotinakis/percy-examples/builds/140
 {{#code-block lang="bash"}}
 $ percy snapshot _site/ --snapshot_limit 10
 {{/code-block}}
+
+<h3>Troubleshooting</h3>
+
+<h4>Base URL path</h4>
+
+<p>
+  If your static files are hosted in a sub-directory instead of the webserver root, you will need to provide the <code>--baseurl</code> flag:
+</p>
+
+{{#code-block lang="bash"}}
+$ percy snapshot _site/ --baseurl "/my-subdir"
+{{/code-block}}
+
+<p>
+  For Jekyll users, this should be set to the same as your <code>baseurl</code> config setting.
+</p>
