@@ -21,9 +21,8 @@ export default Ember.Component.extend({
   classNames: [
     'StripeCheckout',
     'Button',
-    'Button--primary',
   ],
-  classNameBindings: ['classes'],
+  classNameBindings: ['classes', 'forceCheckout::Button--primary'],
 
   loadStripeCheckout: function() {
     if (!window.StripeCheckout) {
