@@ -4,8 +4,9 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: true}),
   buildNumber: DS.attr('number'),
+  branch: DS.attr(),
 
-  commit: DS.belongsTo('commit'),
+  commit: DS.belongsTo('commit'),  // Might be null.
   baseBuild: DS.belongsTo('build'),
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),

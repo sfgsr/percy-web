@@ -7,7 +7,6 @@ export default DS.Model.extend({
     return sha && sha.slice(0, 7);
   }.property('sha'),
 
-  branch: DS.attr(),
   message: DS.attr(),
   authorName: DS.attr(),
   // author_email: DS.attr(),

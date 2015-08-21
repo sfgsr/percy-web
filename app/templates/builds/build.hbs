@@ -10,9 +10,12 @@
     First build!
   {{/if}}
   <br>
-  <strong>Commit:</strong>
-  <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
-  <p>{{model.commit.message}}</p>
+
+  {{#if model.commit}}
+    <strong>Commit:</strong>
+    <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
+    <p>{{model.commit.message}}</p>
+  {{/if}}
 
   {{#if model.comparisons.isPending}}
     {{loading-page}}
