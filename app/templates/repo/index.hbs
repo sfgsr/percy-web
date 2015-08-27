@@ -13,26 +13,20 @@
   </h5>
   <table class="u-full-width">
     <tr>
+      <th></th>
       <th>Build</th>
-      <th>State</th>
       <th>Commit</th>
       <th>Committed By</th>
       <th>Message</th>
-      <th>Last Updated</th>
+      <th>Created</th>
     </tr>
     {{#each build in model.builds}}
       <tr>
         <td>
-          <strong>{{#link-to "builds.build" model.namespace.id model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
+          {{build-state build=build}}
         </td>
         <td>
-          {{build.state}}
-          {{#if build.isPending}}
-            {{fa-icon 'fa-spinner fa-pulse'}}
-          {{/if}}
-          {{#if build.isProcessing}}
-            {{fa-icon 'fa-spinner fa-pulse'}}
-          {{/if}}
+          <strong>{{#link-to "builds.build" model.namespace.id model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
         </td>
         <td>
           <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>

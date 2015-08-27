@@ -1,0 +1,42 @@
+.BuildState
+  font-size: 1.2rem
+  line-height: 2.5rem
+  // font-weight: 300
+  width: 130px
+
+  .BuildState-icon
+    border-radius: 4px
+    box-sizing: border-box
+    color: $white
+    float: left
+    font-size: 1.7rem
+    height: 25px
+    line-height: 0rem
+    margin-right: 10px
+    padding-top: 4px
+    text-align: center
+    width: 25px
+
+  &.BuildState--pending
+    .BuildState-icon
+      background-color: $gray
+
+  &.BuildState--processing
+    .BuildState-icon
+      background-color: $green
+
+  &.BuildState--finished
+    .BuildState-icon
+      background-color: $green
+
+    &.BuildState--hasDiffs
+      .BuildState-icon
+        background-color: $darkyellow
+
+    &.BuildState--approved
+      .BuildState-icon
+        background-color: $green
+
+  &.BuildState--failed
+    .BuildState-icon
+      background-color: $red

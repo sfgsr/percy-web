@@ -1,0 +1,23 @@
+{{#if build.isPending}}
+  <div class="BuildState-icon">{{fa-icon 'upload'}}</div>
+  <div class="BuildState-text">Receiving</div>
+{{else if build.isProcessing}}
+  <div class="BuildState-icon">{{fa-icon 'fa-spinner fa-pulse'}}</div>
+  <div class="BuildState-text">Processing</div>
+{{else if build.isFinished}}
+  {{#if build.isApproved}}
+    <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
+    <div class="BuildState-text">Approved</div>
+  {{else}}
+    {{#if build.hasDiffs}}
+      <div class="BuildState-icon">{{fa-icon 'fa-dot-circle-o'}}</div>
+      <div class="BuildState-text">Visual diffs found</div>
+    {{else}}
+      <div class="BuildState-icon">{{fa-icon 'fa-check-circle-o'}}</div>
+      <div class="BuildState-text">No visual diffs</div>
+    {{/if}}
+  {{/if}}
+{{else if build.isFailed}}
+  <div class="BuildState-icon">{{fa-icon 'exclamation'}}</div>
+  <div class="BuildState-text">Errored</div>
+{{/if}}

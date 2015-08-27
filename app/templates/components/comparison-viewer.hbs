@@ -1,6 +1,7 @@
 <div class="ComparisonViewer-header row">
   <strong>{{comparison.headSnapshot.name}}</strong>
   {{comparison-status comparison=comparison classes="u-pull-right"}}
+  {{comparison-duration comparison=comparison classes="u-pull-right"}}
 </div>
 {{#if isExpanded}}
   {{#if comparison.isDifferent}}
