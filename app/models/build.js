@@ -18,10 +18,15 @@ export default DS.Model.extend({
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 
-  numVisualDiffs: DS.attr('number'),
+  totalComparisonsFinished: DS.attr('number'),
+  totalComparisonsDiff: DS.attr('number'),
   hasDiffs: function() {
-    return (this.get('numVisualDiffs') || 0 > 0);
-  }.property('numVisualDiffs'),
+    // Only have the chance to return true if the build is finished.
+    if (!this.get('isFinished')) {
+      return false;
+    }
+    return (this.get('totalComparisonsDiff') > 0);
+  }.property('totalComparisonsDiff'),
 
   isPullRequest: DS.attr('boolean'),
   pullRequestNumber: DS.attr('number'),

@@ -13,18 +13,15 @@
   </h5>
   <table class="u-full-width">
     <tr>
-      <th></th>
       <th>Build</th>
       <th>Commit</th>
       <th>Committed By</th>
       <th>Message</th>
       <th>Created</th>
+      <th></th>
     </tr>
     {{#each build in model.builds}}
       <tr>
-        <td>
-          {{build-state build=build}}
-        </td>
         <td>
           <strong>{{#link-to "builds.build" model.namespace.id model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
         </td>
@@ -35,7 +32,8 @@
           {{build.commit.authorName}}
         </td>
         <td class="RepoContainer-commitMessage">{{build.commit.message}}</td>
-        <td>{{ago build.updatedAt}}</td>
+        <td>{{ago build.createdAt}}</td>
+        <td>{{build-state build=build}}</td>
       </tr>
     {{/each}}
     {{#unless model.builds}}
