@@ -1,9 +1,9 @@
 {{#if build.isPending}}
   <div class="BuildState-icon">{{fa-icon 'upload'}}</div>
-  <div class="BuildState-text">Receiving</div>
+  <div class="BuildState-text">Receiving...</div>
 {{else if build.isProcessing}}
   <div class="BuildState-icon">{{fa-icon 'fa-spinner fa-pulse'}}</div>
-  <div class="BuildState-text">Processing</div>
+  <div class="BuildState-text">Processing...</div>
 {{else if build.isFinished}}
   {{#if build.isApproved}}
     <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
