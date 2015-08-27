@@ -41,7 +41,7 @@ export default DS.Model.extend({
   durationSeconds: function() {
     var finished = this.get('finishedAt');
     if (!finished) {
-      finished = moment();
+      finished = window.moment();
     }
     var started = this.get('createdAt');
     var milliseconds = window.moment(finished).diff(started);
