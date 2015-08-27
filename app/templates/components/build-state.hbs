@@ -7,11 +7,11 @@
 {{else if build.isFinished}}
   {{#if build.isApproved}}
     <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
-    <div class="BuildState-text">{{build.totalComparisonsDiff}} visual diffs</div>
+    <div class="BuildState-text"><strong>{{build.totalComparisonsDiff}}</strong> visual diffs</div>
   {{else}}
     {{#if build.hasDiffs}}
       <div class="BuildState-icon">{{fa-icon 'fa-dot-circle-o'}}</div>
-      <div class="BuildState-text">{{build.totalComparisonsDiff}} visual diffs</div>
+      <div class="BuildState-text"><strong>{{build.totalComparisonsDiff}}</strong> visual diffs</div>
     {{else}}
       <div class="BuildState-icon">{{fa-icon 'fa-check-circle-o'}}</div>
       <div class="BuildState-text">No visual diffs</div>

@@ -10,6 +10,9 @@
   border-radius: 4px
   font-weight: lighter
 
+  .BuildState-text strong
+    font-weight: normal
+
   .BuildState-icon
     border-radius: 4px
     box-sizing: border-box
@@ -46,5 +49,6 @@
         background-color: $green
 
   &.BuildState--failed
+    background-color: $lightestred
     .BuildState-icon
       background-color: $red
