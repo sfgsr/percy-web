@@ -33,6 +33,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       });
       this.send('enablingRepo', promise, repo);
     },
+    navigateToBuild: function(build) {
+      this.transitionTo('builds.build', build);
+    },
   },
 });
 
