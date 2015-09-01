@@ -3,7 +3,7 @@
     <div class="PricingSection-title">Basic</div>
     <div class="PricingSection-bucketBody">
       <div class="PricingSection-price">
-        <strong>{{format-number basicPrice style="currency" currency="USD"}}</strong> per month
+        <strong>{{format-currency basicPrice precision=0}}</strong> per month
       </div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='basic' changed="concurrencyChanged"}}
@@ -21,7 +21,7 @@
     <div class="PricingSection-title PricingSection-title--promoted">Pro</div>
     <div class="PricingSection-bucketBody">
       <div class="PricingSection-price">
-        <strong>{{format-number proPrice style="currency" currency="USD"}}</strong> per month
+        <strong>{{format-currency proPrice precision=0}}</strong> per month
       </div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='pro' changed="concurrencyChanged"}}
@@ -40,7 +40,7 @@
     <div class="PricingSection-title">Enterprise</div>
     <div class="PricingSection-bucketBody">
       <div class="PricingSection-price">
-        <strong>{{format-number enterprisePrice style="currency" currency="USD"}}</strong> per month
+        <strong>{{format-currency enterprisePrice precision=0}}</strong> per month
       </div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='enterprise' changed="concurrencyChanged"}}

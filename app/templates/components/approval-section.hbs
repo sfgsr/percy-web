@@ -6,7 +6,6 @@
     {{#if build.isPullRequest}}
       <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">Pull Request #{{build.pullRequestNumber}}</a>
     {{/if}}
-    {{build.branch}} --> {{build.baseBuild.branch}}
   </div>
   {{#if build.isApproved}}
     <div class="row">

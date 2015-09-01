@@ -1,21 +1,24 @@
-<div class="container container--forContent">
+<div class="container container--forContent BuildContainer">
   {{approval-section build=model classes="u-pull-right"}}
   <h5>
     {{#link-to "namespace.index" model.repo.namespace.id}}{{model.repo.namespace.id}}{{/link-to}}/{{#link-to "repo.index" model.repo.namespace.id model.repo.name}}{{model.repo.name}}{{/link-to}} <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a> Build #{{model.buildNumber}}
+    {{build-state build=model}}
   </h5>
-  {{#if model.baseBuild}}
-    <strong>Compared to:</strong>
-    {{#link-to "builds.build" model.repo.namespace.id model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.buildNumber}}{{/link-to}}
-  {{else}}
-    First build!
-  {{/if}}
-  <br>
 
+  {{build-duration build=model}} {{build-started build=model}}
+  <br>
   {{#if model.commit}}
-    <strong>Commit:</strong>
-    <a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a>
-    <p>{{model.commit.message}}</p>
+    <div class="u-text-small"><a href="{{model.repo.htmlUrl}}/commit/{{model.commit.sha}}">{{model.commit.shaShort}}</a> {{model.commit.message}}</div>
   {{/if}}
+  {{#if model.baseBuild}}
+    Compared {{model.branch}} → {{model.baseBuild.branch}} from {{#link-to "builds.build" model.repo.namespace.id model.repo.name model.baseBuild.id}}Build #{{model.baseBuild.buildNumber}}{{/link-to}}
+  {{else}}
+    {{#if build.isFinished}}
+      First build! Nothing to compare to yet.
+    {{/if}}
+  {{/if}}
+
+  <hr>
 
   {{#if model.comparisons.isPending}}
     {{loading-page}}

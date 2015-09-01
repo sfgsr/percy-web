@@ -1,0 +1,63 @@
+.BuildState
+  display: inline-block
+  font-family: $standard-font
+  letter-spacing: 0
+  font-size: 1.2rem
+  line-height: 2.5rem
+  width: 135px
+  height: 25px
+  text-align: center
+  background-color: $lightgray
+  border-radius: 4px
+  font-weight: lighter
+
+  .BuildState-text strong
+    font-weight: normal
+
+  .BuildState-icon
+    border-radius: 4px
+    box-sizing: border-box
+    color: $white
+    float: left
+    font-size: 1.7rem
+    height: 25px
+    line-height: 0rem
+    padding-top: 4px
+    text-align: center
+    width: 25px
+
+  &.BuildState--pending
+    .BuildState-icon
+      background-color: $gray
+
+  &.BuildState--processing
+    .BuildState-icon
+      background-color: $lightergreen
+
+  &.BuildState--finished
+    background-color: $lightestgreen
+    .BuildState-icon
+      background-color: $green
+
+    &.BuildState--hasDiffs
+      background-color: $percy-beige
+      .BuildState-icon
+        background-color: $darkyellow
+
+    &.BuildState--approved
+      background-color: $lightestgreen
+      .BuildState-icon
+        background-color: $green
+
+  &.BuildState--failed
+    background-color: $lightestred
+    .BuildState-icon
+      background-color: $red
+
+.BuildCard
+  .BuildState
+    margin: 6px 0 15px 0
+
+.BuildContainer
+  .BuildState
+    margin-left: 10px

@@ -11,45 +11,14 @@
       Settings
     {{/link-to}}
   </h5>
-  <table class="u-full-width">
-    <tr>
-      <th>Build</th>
-      <th>State</th>
-      <th>Commit</th>
-      <th>Committed By</th>
-      <th>Message</th>
-      <th>Last Updated</th>
-    </tr>
+  <div>
     {{#each build in model.builds}}
-      <tr>
-        <td>
-          <strong>{{#link-to "builds.build" model.namespace.id model.name build.id}}Build #{{build.buildNumber}}{{/link-to}}</strong><br>
-        </td>
-        <td>
-          {{build.state}}
-          {{#if build.isPending}}
-            {{fa-icon 'fa-spinner fa-pulse'}}
-          {{/if}}
-          {{#if build.isProcessing}}
-            {{fa-icon 'fa-spinner fa-pulse'}}
-          {{/if}}
-        </td>
-        <td>
-          <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
-        </td>
-        <td>
-          {{build.commit.authorName}}
-        </td>
-        <td class="RepoContainer-commitMessage">{{build.commit.message}}</td>
-        <td>{{ago build.updatedAt}}</td>
-      </tr>
+      {{build-card build=build navigateToBuild="navigateToBuild"}}
     {{/each}}
-    {{#unless model.builds}}
-      <tr>
-        <td colspan="6">No builds yet.</td>
-      </tr>
-    {{/unless}}
-  </table>
+  </div>
+  {{#unless model.builds}}
+    <p>No builds yet.</p>
+  {{/unless}}
   {{#unless model.builds}}
     {{#if model.isEnabled}}
     <div class="Alert Alert--warning" style="max-width: 700px; margin: 0 auto">
