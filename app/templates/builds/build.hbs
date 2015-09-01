@@ -20,6 +20,24 @@
 
   <hr>
 
+  {{#if model.isPending}}
+    <div class="Alert Alert--warning">
+      <strong>Waiting for snapshot uploads...</strong> This build has not finished receiving data from your CI service or client, <a href="javascript:location.reload()">refresh</a>?
+      <br>
+      If this has been pending for a long time, your client may have failed to upload all the data. This build can be safely ignored, it will not be used for visual diffs.
+    </div>
+  {{/if}}
+  {{#if model.isProcessing}}
+    <div class="Alert Alert--warning">
+      <strong>Still working!</strong> This build has not finished processing, <a href="javascript:location.reload()">refresh</a>?
+    </div>
+  {{/if}}
+  {{#if model.isFailed}}
+    <div class="Alert Alert--error">
+      <strong>Errored.</strong> Your CI service or client failed to correctly upload data. This build can be safely ignored, it will not be used for visual diffs. If these failures continue to happen, check your CI or client logs for failures.
+    </div>
+  {{/if}}
+
   {{#if model.comparisons.isPending}}
     {{loading-page}}
   {{else}}
