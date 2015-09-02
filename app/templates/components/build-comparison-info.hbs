@@ -1,0 +1,8 @@
+{{fa-icon "compress"}}
+{{#if build.baseBuild}}
+  compared <strong>{{build.branch}}</strong> → <strong>{{build.baseBuild.branch}}</strong> ({{#link-to "builds.build" build.repo.namespace.id build.repo.name build.baseBuild.id}}Build #{{build.baseBuild.buildNumber}}{{/link-to}})
+{{else}}
+  {{#if build.isFinished}}
+    first build, nothing to compare yet
+  {{/if}}
+{{/if}}
