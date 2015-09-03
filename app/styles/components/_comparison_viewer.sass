@@ -56,6 +56,8 @@
     position: relative
     border: 1px solid #d0d0d0
     box-shadow: 5px 5px 10px #eaeaea
+    // translatez hack to force this box to its own hardware-accelerated layer.
+    transform: translateZ(0)
 
     img
       @include unselectable
