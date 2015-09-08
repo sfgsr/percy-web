@@ -24,9 +24,13 @@ Router.map(function() {
   });
   this.resource('docs', function() {
     this.route('capybara');
-    this.route('ci');
     this.route('static');
-    this.route('custom');
+
+    this.route('ci');
+    this.route('fonts');
+    this.route('github');
+    this.route('github-pages');
+
     this.resource('apidocs', {path: '/api'}, function() {
       this.route('reference');
       this.route('client');
