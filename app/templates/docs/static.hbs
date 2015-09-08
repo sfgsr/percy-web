@@ -1,5 +1,11 @@
 <h2>Static websites</h2>
 
+<h3>Percy CLI <a href="https://github.com/percy/percy-cli">{{unbound fa-icon "github"}}</a></h3>
+<p>
+  <a href="https://travis-ci.org/percy/percy-cli"><img src="https://travis-ci.org/percy/percy-cli.svg?branch=master"></a>
+  <a href="https://rubygems.org/gems/percy-cli"><img src="https://badge.fury.io/rb/percy-cli.svg"></a>
+</p>
+
 <p>
   Percy makes it very simple to integrate visual diff testing with static websites, no matter where the site is hosted or what tools were used to generate it.
 </p>
@@ -19,6 +25,38 @@ $ gem install percy-cli
 {{#code-block lang="bash"}}
 $ gem update percy-cli
 {{/code-block}}
+
+<h3>Authentication</h3>
+
+<p>
+  Percy CLI relies on the <code>PERCY_TOKEN</code> environment variable for authenticating and authorizing access to each repository.
+</p>
+
+<p>
+  You can temporarily set this in your local shell session by exporting the variable:
+</p>
+
+{{#code-block lang="bash"}}
+$ export PERCY_TOKEN=1234abcd1234abcd
+$ percy snapshot _site/
+{{/code-block}}
+
+<p>
+  Or you can set it just for the current command:
+</p>
+
+{{#code-block lang="bash"}}
+$ PERCY_TOKEN=1234abcd1234abcd percy snapshot _site/
+{{/code-block}}
+
+<div class="Alert Alert--warning">
+  <p>
+    <strong>IMPORTANT: Do not store the Percy API token in your repository</strong> if your code is public. Anyone could use your token and consume your account quota (they will not be able to read data because the token is write-only).
+  </p>
+  <p>
+    Most CI services allow you to set secure environment variables in your build settings (for example, see <a href="http://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings">Travis CI Environment Variables</a>). You should set the <code>PERCY_TOKEN</code> environment variable in your CI settings instead of storing it in your repository.
+  </p>
+</div>
 
 <h3>Usage</h3>
 <p>
@@ -45,7 +83,11 @@ https://percy.io/fotinakis/percy-examples/builds/140
 {{/code-block}}
 
 <p>
-  Under the hood, Percy only uploads files that have changed. So, after the first time this command is run, future runs will likely be very fast and only new files.
+  Percy now starts rendering pages and generating visual diffs for your site.
+</p>
+
+<p>
+  Under the hood, Percy only uploads files that have changed. So, after the first time this command is run, future runs will likely be very fast.
 </p>
 
 <h4>Limit pages for testing</h4>
@@ -57,8 +99,6 @@ https://percy.io/fotinakis/percy-examples/builds/140
 {{#code-block lang="bash"}}
 $ percy snapshot _site/ --snapshot_limit 10
 {{/code-block}}
-
-<h3>Troubleshooting</h3>
 
 <h4>Base URL path</h4>
 

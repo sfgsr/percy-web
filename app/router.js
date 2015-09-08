@@ -24,9 +24,15 @@ Router.map(function() {
   });
   this.resource('docs', function() {
     this.route('capybara');
-    this.route('ci');
     this.route('static');
-    this.route('custom');
+
+    this.resource('integrations', {path: '/integrations'}, function() {
+      this.route('ci');
+      this.route('github');
+      this.route('github-pages');
+      this.route('fonts');
+    });
+
     this.resource('apidocs', {path: '/api'}, function() {
       this.route('reference');
       this.route('client');

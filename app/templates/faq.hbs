@@ -4,7 +4,7 @@
 
   <h5>What is continuous visual integration?</h5>
   <p>
-    Simply what we use to describe the practice of continuous feedback for every visual change that any developer makes. Percy is built to be easily integrated with your existing CI workflow and services.
+    The term we use to describe the practice of continuous feedback for every visual change that any developer makes. Percy is built to be easily integrated with your existing CI workflow and services.
   </p>
   <h5>How does all this work?</h5>
   <p>
@@ -15,11 +15,11 @@
   </p>
   <h5>So, I upload screenshots?</h5>
   <p>
-    <strong>Actually, no!</strong> You might be surprised to learn that under the hood, Percy is built to accept "snapshots" of HTML pages and assets, not screenshots themselves. This is very intentional—we want to support visual testing for any web content, regardless of the language or framework it was created in, and make it as fast as possible.
+    <strong>Nope!</strong> You might be surprised to learn that under the hood, Percy is built to accept "snapshots" of HTML pages and assets, not screenshots themselves. This is very intentional—we want to support visual testing for any web content, regardless of the language or framework it was created in, and make it as fast as possible.
   </p>
   <h5>My tests are already slow—isn't this going to make them slower?</h5>
   <p>
-    <strong>Actually, no!</strong> An intended side effect of our asset-centric design is that we keep all the computationally expensive screenshot rendering and visual diffing completely out of your systems. By accepting HTML and assets alone, we can highly optimize Percy to have lightweight clients in numerous languages and environments with little performance impact.
+    <strong>Nope!</strong> An intended side effect of our asset-centric design is that we keep all the computationally expensive screenshot rendering and visual diffing completely out of your systems. By accepting HTML and assets alone, we can highly optimize Percy to have lightweight clients in numerous languages and environments with little performance impact.
   </p>
   <p>
     The first build may be slower than usual while assets are first uploaded, but after that assets are only uploaded if they change, so there is often very limited network overhead.
@@ -52,7 +52,7 @@
   </p>
   <h5>Do you require my code to be in Git?</h5>
   <p>
-    <strong>Yes, for now.</strong> But you're already using Git, right? Right?
+    <strong>Nope!</strong> Though running inside a git environment will show more data for each build, the low-level {{#link-to "apidocs.client"}}Percy::Client{{/link-to}} supports non-Git environments.
   </p>
   <h5>My diffs are very noisy, is this broken?</h5>
   <p class="u-text-center">
@@ -61,6 +61,7 @@
   <p>
     This is one of the hard parts of perceptual diffs—the diff itself is pixel-by-pixel, so the diff may end up looking like noise if the content shifts by any amount. You still get the benefits of knowing when and where your app has changed, but it may require more manual analysis. In Percy you can simply click the diff to hide it and view the underlying screenshot to compare visually. We are also working on better ways to address this.
   </p>
+  {{! #launch }}
   <h5>This is awesome—when will it be available to everyone?</h5>
   <p>
     As soon as possible! We are working with our early customers to identify pain points and make sure we can handle the load of more users. Please <a href="/login" {{action "sessionRequiresAuthentication"}}>sign up</a> to request an invite and then <a href="https://goo.gl/ss3aYu">tell us more</a> about your app and tech stack.

@@ -33,7 +33,7 @@ $ bundle install
 
 <p>Or install it yourself with <code>gem install percy-capybara</code>.</p>
 
-<h3>Setup</h3>
+<h3>Authentication</h3>
 
 First, you need to:
 
@@ -42,25 +42,23 @@ First, you need to:
   <li>Go to <em>Settings</em> for the repository and copy the write-only API key.</li>
 </ol>
 
-For Rails apps, add this API key to your <code><a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">config/secrets.yml</a></code>:
+<h4>Private repositories {{fa-icon "lock"}}</h4>
+
+<p>
+  For Rails apps in private repositories, you can use <a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">Rails Secrets</a> to store the Percy repo token. We will use this below when configuring RSpec.
+</p>
+
+<p>
+  Add this to your <code>config/secrets.yml</code>:
+</p>
 
 {{#code-block}}
 test:
-  secret_key_base: 1234abcd...
-  percy_access_token: &lt;PERCY WRITE-ONLY REPO TOKEN&gt;
+  percy_access_token: 1234abcd1234abcd
 {{/code-block}}
 
-<div class="Alert Alert--warning">
-  <p>
-    <strong>NOTE: If your repository is public, do not save the Percy API token</strong> in your repository or else anyone will be able to write to Percy and consume your quota (they will not be able to read any data because the token is write-only).
-  </p>
-  <p>
-    You can set the <code>PERCY_TOKEN</code> environment variable to avoid storing the API token in your repository.
-  </p>
-</div>
-
 <p>
-  And then enable Percy in your <code>spec_helper.rb</code>:
+  Then configure <code>spec_helper.rb</code> to set the access token from your Rails secrets:
 </p>
 
 {{#code-block lang="ruby"}}
@@ -74,7 +72,50 @@ end
 {{/code-block}}
 
 <p>
-  Make sure you include the <code>require 'percy/capybara/rspec'</code> line so that the Percy hooks are registered correctly.
+  Alternatively, you can configure the <code>PERCY_TOKEN</code> environment variable to avoid storing the token in your repository.
+</p>
+
+<h4>Public repositories {{fa-icon "unlock"}}</h4>
+
+<div class="Alert Alert--warning">
+  <p>
+    <strong>IMPORTANT: Do not store the Percy API token in your repository</strong> if your code is public. Anyone could use your token and consume your account quota (they will not be able to read data because the token is write-only).
+  </p>
+  <p>
+    Most CI services allow you to set secure environment variables in your build settings (for example, see <a href="http://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings">Travis CI Environment Variables</a>). You should set the <code>PERCY_TOKEN</code> environment variable in your CI settings instead of storing it in your repository.
+  </p>
+</div>
+
+<p>
+  You can temporarily set the <code>PERCY_TOKEN</code> environment variable in your local shell session by exporting the variable:
+</p>
+
+{{#code-block lang="bash"}}
+$ export PERCY_ENABLE=1  # Required only in local dev environments.
+$ export PERCY_TOKEN=1234abcd1234abcd
+$ bundle exec rspec
+{{/code-block}}
+
+<p>
+  Or you can set it just for the current command:
+</p>
+
+{{#code-block lang="bash"}}
+$ PERCY_ENABLE=1 PERCY_TOKEN=1234abcd1234abcd bundle exec rspec
+{{/code-block}}
+
+<h3>RSpec setup</h3>
+
+<p>
+  Enable Percy in your <code>spec_helper.rb</code>:
+</p>
+
+{{#code-block lang="ruby"}}
+require 'percy/capybara/rspec'
+{{/code-block}}
+
+<p>
+  This <code>require</code> line is important—it registers Percy's rspec hooks and must be included, even in Rails apps.
 </p>
 
 <h3>Usage</h3>
@@ -100,28 +141,45 @@ You can integrate with Percy by adding one line:
     visit '/'
     first('.dropdown-toggle').click
     expect(page).to have_selector('#main-dropdown', visible: true)</span>
-    Percy::Capybara.snapshot(page)
+    Percy::Capybara.snapshot(page, name: 'homepage with dropdown')
   <span class="dim">end
 end</span>
 {{/code-block}}
 
 <p>
-  Done! Snapshots will be uploaded to Percy the next time you run your tests in a {{#link-to "docs.ci"}}supported CI service{{/link-to}} (or they can be triggered locally, see below).
+  The <code>name: 'homepage with dropdown'</code> argument is not required, but it is helpful to identify the page by more than just its URL. If you are snapshotting a page multiple times with the same URL, <code>name</code> must be set. See <em>Identifying snapshots</em> below.
 </p>
 
 <p>
-   The actual screenshot rendering, which often can be very slow, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method simply grabs the current DOM, CSS, and certain page assets and uploads them to Percy for processing.
-</p>
-<p>
-  We handle all the complexities of screenshot rendering in Percy itself so that the impact on your tests is minimal. Assets are fingerprinted when uploaded, so they are only uploaded once.
+  Done! A new Percy build will be created the next time you run your tests in a {{#link-to "integrations.ci"}}supported CI service{{/link-to}}, or it can be triggered locally.
 </p>
 
-<h4>Identifying snapshots</h4>
+<h3>Local dev environments</h3>
+
+<p>
+  By default, Percy is disabled in local dev environments to avoid teams accidentally overriding each others' changes while developing feature specs.
+</p>
+<p>
+  However, you may want to enable Percy locally while getting set up for the first time. Or, you may want to see visual diffs as you iterate on a design but before pushing the final changes for review.
+</p>
+<p>
+  You can enable Percy for your local environment by setting the <code>PERCY_ENABLE</code> environment variable:
+</p>
+
+{{#code-block lang="bash"}}
+$ PERCY_ENABLE=1 bundle exec rspec
+{{/code-block}}
+
+<p>
+  Careful though—if you run this in your local <code>master</code> branch, Percy cannot tell the difference between your local environment and your CI environment, so this will set the repo's <code>master</code> state in Percy. You can avoid this by simply checking out a different branch, or setting the <code>PERCY_BRANCH</code> environment variable.
+</p>
+
+<h3>Identifying snapshots</h3>
 <p>
   Percy needs to be able to uniquely identify the same snapshot across builds to provide visual diffs.
 </p>
 <p>
-  To accomplish this, <code>Percy::Capybara</code> uses the current page's URL as the name of the snapshot. We assume that your app has been built with stateful navigation and that the URL fully identifies the page state.
+  To accomplish this, <code>Percy::Capybara</code> uses the current page URL as the name of the snapshot. We assume that your app has been built with stateful navigation and that the URL fully identifies the page state.
 </p>
 <p>
   However, there are many cases where this is not enough—for example, populating test data in the page, or performing a UI interaction that doesn't change the URL (like clicking the dropdown in the example above).
@@ -137,22 +195,20 @@ Percy::Capybara.snapshot(page, name: 'homepage (with dropdown clicked)')
 <p>
   The <code>name</code> param can be any string that makes sense to you to identify the page state, it should just be unique and remain the same across builds.
 </p>
-
-<h3>Local dev environment</h3>
-
 <p>
-  Though disabled by default, Percy can work in local development environments by reading information from the local git repository and/or environment variables. You can use this feature to see visual diffs as you iterate on a design but before you push the final changes for review.
-</p>
-<p>
-  Enable Percy for your local environment by setting the <code>PERCY_ENABLE</code> environment variable:
+  It is <strong>required</strong> if you are snapshotting a page multiple times with the same URL.
 </p>
 
-{{#code-block lang="bash"}}
-$ PERCY_ENABLE=1 bundle exec rspec
-{{/code-block}}
+<h3>How it works</h3>
 
 <p>
-  Be aware that the Percy build will use the current local branch name, so if you run it in <code>master</code> the latest Percy master build will be from your local environment. You can avoid this by simply checking out a different branch or setting the <code>PERCY_BRANCH</code> environment variable.
+   The actual page rendering and diffing, which often can be very slow and computationally expensive, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method grabs a the current DOM structure, CSS, and the page's assets and uploads them to Percy.
+</p>
+<p>
+  Percy then handles all the complexities of rendering the page in a modern browser (Firefox 38 ESR), taking a screenshot, generating a pixel-by-pixel visual diff compared to the last successful master build, setting the status of the GitHub Pull Request, etc. This is performed in our custom, parallelized rendering infrastructure—built specifically to support processing and storing hundreds or thousands of snapshots at the same time, as fast as your team and app size may need.
+</p>
+<p>
+  This asset-centric architecture keeps the impact on your tests minimal—in most cases, the overhead for each snapshot in your tests is only a few milliseconds. Assets are also fingerprinted when uploaded, so they are only uploaded once.
 </p>
 
 <h3>Troubleshooting</h3>
