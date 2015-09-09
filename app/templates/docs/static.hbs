@@ -113,3 +113,25 @@ $ percy snapshot _site/ --baseurl "/my-subdir"
 <p>
   For Jekyll users, this should be set to the same as your <code>baseurl</code> config setting.
 </p>
+
+<h3>Troubleshooting</h3>
+<h4>OS X and SSL errors</h4>
+
+<p>
+  When running on OS X, you may enounter this error because the system Ruby version is compiled with a very old version of OpenSSL:
+</p>
+
+{{#code-block lang="bash"}}
+httpclient/session.rb:307:in `connect': SSL_connect returned=1 errno=0 state=SSLv2/v3
+  read server hello A: sslv3 alert handshake failure (Faraday::SSLError)
+{{/code-block}}
+
+<p>
+  To fix this, first install <a href="http://brew.sh/">Homebrew</a>, then run:
+</p>
+
+{{#code-block lang="bash"}}
+$ brew install ruby
+{{/code-block}}
+
+After that, <code>percy</code> commands should work.
