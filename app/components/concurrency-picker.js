@@ -12,8 +12,10 @@ export default Ember.Component.extend({
   setupOptions: function() {
     var plan = this.get('plan');
     var options = [5, 10, 15, 25, 50, 75, 100];
-    if (plan === 'free' || plan === 'basic') {
-      options.unshift(2);
+    if (plan === 'free') {
+      options = [2];
+    } else if (plan === 'basic') {
+      options = [2, 5, 10];
     }
     this.set('options', options);
     this.set('optionsZeroIndexedLength', options.length - 1);
