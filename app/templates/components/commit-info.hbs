@@ -1,6 +1,9 @@
 <div>
   <strong>{{build.branch}}</strong>
   <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+  {{#if build.isPullRequest}}
+    <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">PR #{{build.pullRequestNumber}}</a>
+  {{/if}}
   {{build.commit.authorName}}
 </div>
 <div class="CommitInfo-message">{{build.commit.message}}</div>

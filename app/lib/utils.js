@@ -10,7 +10,8 @@ export default {
     if (options.extendedPermissions) {
       params['extended_permissions'] = options.extendedPermissions;
     }
-    window.location = this.buildApiUrl('login', {params: params});
+    var urlName = (options.extendedPermissions ? 'loginExtended' : 'login');
+    window.location = this.buildApiUrl(urlName, {params: params});
   },
   buildApiUrl: function() {
     var key = arguments[0];
