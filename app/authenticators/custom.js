@@ -18,6 +18,7 @@ export default Base.extend({
           Ember.$('.auth-iframe').remove();
 
           var userRecord = this.get('store').push('user', userData);
+          userRecord.reload();  // Reload to load compound document data correctly.
           resolve({user: userRecord, userData: userData});
         } else if (event.data === 'unauthenticated') {
           reject();
@@ -48,6 +49,7 @@ export default Base.extend({
           Ember.$('.auth-iframe').remove();
 
           var userRecord = this.get('store').push('user', userData);
+          userRecord.reload();  // Reload to load compound document data correctly.
           resolve({user: userRecord, userData: userData});
         } else if (event.data === 'unauthenticated') {
           // Build params if given a custom final redirect location.

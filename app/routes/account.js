@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   afterModel: function() {
-    // Reload the subscription details, and return a promise so the page render will wait.
+    // Reload to get the latest subscription details, and return a promise so the load will wait.
     return this.get('session.secure.user').reload();
   },
 });
