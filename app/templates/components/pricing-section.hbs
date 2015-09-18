@@ -11,7 +11,7 @@
       <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
-      <div class="PricingSection-infoItem"><strong>1 week</strong> image storage</div>
+      <div class="PricingSection-infoItem"><strong>1 week</strong> image retention</div>
       <br>
       <div class="PricingSection-cta">
         {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=basicPlan price=basicPrice planName=basicPlanName}}
@@ -29,7 +29,7 @@
       <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
-      <div class="PricingSection-infoItem"><strong>2 months</strong> image storage</div>
+      <div class="PricingSection-infoItem"><strong>2 months</strong> image retention</div>
       <br>
       <div class="PricingSection-cta">
         {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=proPlan price=proPrice planName=proPlanName}}
@@ -39,21 +39,18 @@
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket">
     <div class="PricingSection-title">Enterprise</div>
     <div class="PricingSection-bucketBody">
-      <div class="PricingSection-price">
-        <strong>{{format-currency enterprisePrice precision=0}}</strong> per month
-      </div>
-      <div class="PricingSection-concurrency">
-        {{concurrency-picker plan='enterprise' changed="concurrencyChanged"}}
+      <div class="PricingSection-concurrency u-text-small">
+        <strong>Customized plan</strong> for your team's specific needs. Just <a href="mailto:team@percy.io?subject=Percy Enterprise">contact us</a> to chat! We can also provide consulting for integration with Percy and best practices for visual regression testing.
       </div>
       <div class="PricingSection-diffs"><strong>Unlimited</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
-      <div class="PricingSection-infoItem"><strong>6 months</strong> image storage</div>
+      <div class="PricingSection-infoItem"><strong>Custom</strong> image retention</div>
     <div class="PricingSection-infoItem"><strong class="u-text-dashed-underline hint--top hint--centered hint--rounded" data-hint="Enterprise plans come with dedicated
 infrastructure set up for your organization
 to get the fastest builds possible.">Priority builds {{unbound fa-icon "fa-question-circle"}}</strong></div>
       <div class="PricingSection-cta">
-        <a href="mailto:team@percy.io?subject=Request for Percy Enterprise" class="Button">Contact Us</a>
+        <a href="mailto:team@percy.io?subject=Percy Enterprise" class="Button">Contact Us</a>
       </div>
     </div>
   </div>
