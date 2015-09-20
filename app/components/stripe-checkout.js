@@ -28,6 +28,8 @@ export default Ember.Component.extend({
     if (!window.StripeCheckout) {
       var scriptEl = document.createElement('script');
       scriptEl.setAttribute('src','https://checkout.stripe.com/checkout.js');
+      // https://stripe.com/blog/checkout-in-more-languages
+      scriptEl.setAttribute('data-locale', 'auto');
       document.head.appendChild(scriptEl);
     }
   }.on('willInsertElement'),
