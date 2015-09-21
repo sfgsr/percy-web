@@ -112,25 +112,24 @@
     </div>
   </div>
 {{/unless}}
-    {{! #launch }}
-    <div class="container container--marketing">
-      <div class="container container--fixedWidth container--forContent">
-        <h2>Pricing</h2>
-        <h3></h3>
-        <div class="u-text-center">
-          {{pricing-free-section sessionRequiresAuthentication="sessionRequiresAuthentication"}}
-        </div>
-        {{pricing-section forceAccountPage=true}}
-        <div class="u-text-center u-text-small">
-          <em>Average cost of 1 day of visual QA bug fixing by one engineer: $500+</em>
-        </div>
-      </div>
+<div class="container container--marketing">
+  <div class="container container--fixedWidth container--forContent">
+    <h2>Pricing</h2>
+    <h3></h3>
+    <div class="u-text-center">
+      {{pricing-free-section sessionRequiresAuthentication="sessionRequiresAuthentication"}}
     </div>
-    <div class="container container--marketing container--light">
-      <div class="container container--fixedWidth container--forContent">
-        <h2>Pricing FAQ</h2>
-        <h3></h3>
-        {{pricing-questions}}
-      </div>
+    {{pricing-section forceAccountPage=true}}
+    <div class="u-text-center u-text-small">
+      <em>Average cost of 1 day of visual QA bug fixing by one engineer: $500+</em>
     </div>
+  </div>
+</div>
+<div class="container container--marketing container--light">
+  <div class="container container--fixedWidth container--forContent">
+    <h2>Pricing FAQ</h2>
+    <h3></h3>
+    {{pricing-questions}}
+  </div>
+</div>
 {{main-footer}}

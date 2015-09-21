@@ -59,7 +59,7 @@ export default Ember.Component.extend({
       var self = this;
 
       // This is intentionally evaluated here, outside of the handlers below, because password
-      // managers like 1Password strangely change the select boxes underneath Stripe Checkout
+      // managers like 1Password might strangely change the inputs underneath Stripe Checkout
       // when filling out credit card info.
       var chosenPlan = this.get('plan');
       var planName = this.get('planName');

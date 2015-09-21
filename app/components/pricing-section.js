@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Formatting from '../lib/formatting';
 
 export default Ember.Component.extend({
   classNames: ['PricingSection'],
@@ -45,10 +46,12 @@ export default Ember.Component.extend({
 
   // Plan name.
   basicPlanName: function() {
-    return 'Basic (%@ workers)'.fmt(this.get('basicConcurrencySelected'));
+    var formattedValue = Formatting.formatNumber(this.get('numVisualDiffsBasic'));
+    return 'Basic (%@ visual diffs)'.fmt(formattedValue);
   }.property('basicConcurrencySelected'),
   proPlanName: function() {
-    return 'Pro (%@ workers)'.fmt(this.get('proConcurrencySelected'));
+    var formattedValue = Formatting.formatNumber(this.get('numVisualDiffsPro'));
+    return 'Pro (%@ visual diffs)'.fmt(formattedValue);
   }.property('proConcurrencySelected'),
 
   actions: {
