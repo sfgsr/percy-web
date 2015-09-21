@@ -5,10 +5,11 @@
       <div class="PricingSection-price">
         <strong>{{format-currency basicPrice precision=0}}</strong> per month
       </div>
+      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='basic' changed="concurrencyChanged"}}
       </div>
-      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
+      <div class="PricingSection-infoItem"><strong>{{basicConcurrencySelected}}</strong> concurrent workers</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>1 week</strong> image retention</div>
@@ -23,10 +24,11 @@
       <div class="PricingSection-price">
         <strong>{{format-currency proPrice precision=0}}</strong> per month
       </div>
+      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='pro' changed="concurrencyChanged"}}
       </div>
-      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
+      <div class="PricingSection-infoItem"><strong>{{proConcurrencySelected}}</strong> concurrent workers</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>2 months</strong> image retention</div>

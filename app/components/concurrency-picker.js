@@ -2,16 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   plan: null,
-  isDisabled: false,
 
-  tagName: 'select',
   options: null,
   optionsZeroIndexedLength: null,
-  attributeBindings: ['isDisabled:disabled'],
   classNames: ['ConcurrencyPicker'],
   setupOptions: function() {
     var plan = this.get('plan');
-    var options = [5, 10, 15, 25, 50, 75, 100];
+    var options = [5, 10, 15, 25, 50];
     if (plan === 'free') {
       options = [2];
     } else if (plan === 'basic') {
@@ -20,15 +17,22 @@ export default Ember.Component.extend({
     this.set('options', options);
     this.set('optionsZeroIndexedLength', options.length - 1);
   }.on('init'),
-  input: function(e) {
-    this._handleChange(e);
-  },
-  change: function(e) {
-    // This is for IE, because it completely does not handle the events correctly.
-    // http://www.impressivewebs.com/onchange-vs-oninput-for-range-sliders/
-    this._handleChange(e);
-  },
-  _handleChange: function(e) {
-    this.sendAction('changed', this.get('plan'), parseInt(e.target.value));
+  setupSlider: function() {
+    var self = this;
+    var pipsOptions = {
+      first: 'pip',
+      last: 'pip',
+      rest: 'pip',
+      labels: false,
+    };
+    this.$().slider({
+      max: this.get('options').length - 1,
+      value: 0,
+      change: function(event, ui) { self._handleChange(self.get('options')[ui.value]); },
+      slide: function(event, ui) { self._handleChange(self.get('options')[ui.value]); },
+    }).slider('pips', pipsOptions);
+  }.on('didInsertElement'),
+  _handleChange: function(value) {
+    this.sendAction('changed', this.get('plan'), parseInt(value));
   },
 });

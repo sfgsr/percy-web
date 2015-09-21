@@ -112,8 +112,6 @@
     </div>
   </div>
 {{/unless}}
-{{#if session.isAuthenticated}}
-  {{#if session.secure.user.isWhitelisted}}
     {{! #launch }}
     <div class="container container--marketing">
       <div class="container container--fixedWidth container--forContent">
@@ -135,6 +133,4 @@
         {{pricing-questions}}
       </div>
     </div>
-  {{/if}}
-{{/if}}
 {{main-footer}}

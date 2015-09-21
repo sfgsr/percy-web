@@ -21,20 +21,19 @@ export default Ember.Component.extend({
   proPlan: function() {
     return 'pro-%@'.fmt(this.get('proConcurrencySelected'));
   }.property('proConcurrencySelected'),
-  enterprisePlan: function() {
-    return 'enterprise-%@'.fmt(this.get('enterpriseConcurrencySelected'));
-  }.property('enterpriseConcurrencySelected'),
 
   // Price for selected plan.
   basicPrice: function() {
-    return Math.floor(this.get('basicConcurrencySelected') * 980 / 100);
+    var basicPrices = {
+      2: 19,
+      5: 49,
+      10: 89,
+    };
+    return basicPrices[this.get('basicConcurrencySelected')];
   }.property('basicConcurrencySelected'),
   proPrice: function() {
     return Math.floor(this.get('proConcurrencySelected') * 1980 / 100);
   }.property('proConcurrencySelected'),
-  enterprisePrice: function() {
-    return Math.floor(this.get('enterpriseConcurrencySelected') * 9980 / 100);
-  }.property('enterpriseConcurrencySelected'),
 
   // Number of diffs for selected plan.
   numVisualDiffsBasic: function() {
@@ -51,9 +50,6 @@ export default Ember.Component.extend({
   proPlanName: function() {
     return 'Pro (%@ workers)'.fmt(this.get('proConcurrencySelected'));
   }.property('proConcurrencySelected'),
-  enterprisePlanName: function() {
-    return 'Enterprise (%@ workers)'.fmt(this.get('enterpriseConcurrencySelected'));
-  }.property('enterpriseConcurrencySelected'),
 
   actions: {
     concurrencyChanged: function(plan, concurrencySelected) {

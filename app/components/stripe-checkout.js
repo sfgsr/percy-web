@@ -62,6 +62,7 @@ export default Ember.Component.extend({
       // managers like 1Password strangely change the select boxes underneath Stripe Checkout
       // when filling out credit card info.
       var chosenPlan = this.get('plan');
+      var planName = this.get('planName');
 
       // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
       // login then to /account. Or, if they are logged in and forceAccountPage is set. :|
@@ -80,14 +81,15 @@ export default Ember.Component.extend({
         }));
         this.get('handler').open({
           name: 'Percy.io',
-          description: this.get('planName'),
+          description: planName,
           email: this.get('session.secure.user.email'),
           amount: this.get('price') * 100,
           panelLabel: this.get('checkoutLabelText'),
           allowRememberMe: false,
         });
       } else {
-        if (confirm("Ready to change plans? We'll use your existing payment info.")) {
+        var msg = "Ready to change plans to " + planName + "? We'll use your existing payment info."
+        if (confirm(msg)) {
           self._changeSubscription(chosenPlan);
         }
       }
