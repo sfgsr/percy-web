@@ -23,7 +23,7 @@
 </div>
 {{#unless session.isAuthenticated}}
   <div class="container container--marketing container--darker InviteContainer">
-    <div>We just launched our <strong>private beta</strong>! <a href="/login" {{action "sessionRequiresAuthentication"}}>Sign up for an invite</a> or <a href="#updates">join the mailing list</a>.</div>
+    <a href="/login" {{action "sessionRequiresAuthentication"}}>Sign up for an invite</a> or <a href="#updates">join the mailing list</a>.
   </div>
 {{/unless}}
 <div class="container container--marketing container--light">
@@ -112,7 +112,7 @@
       <h2>Sign up for updates</h2>
       <div class="row u-text-center">
         <p>
-          We just launched our <strong>private beta</strong>—sign up for an invite!
+          Percy is in a <strong>private beta</strong>—sign up for an invite!
         </p>
         <p>
           {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
