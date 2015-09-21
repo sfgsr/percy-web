@@ -14,10 +14,12 @@
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>1 week</strong> image retention</div>
       {{#if session.isAuthenticated}}
-        <br>
-        <div class="PricingSection-cta">
-          {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=basicPlan price=basicPrice planName=basicPlanName}}
-        </div>
+        {{#if session.secure.user.isWhitelisted}}
+          <br>
+          <div class="PricingSection-cta">
+            {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=basicPlan price=basicPrice planName=basicPlanName}}
+          </div>
+        {{/if}}
       {{else}}
         {{! #launch -- add "sign in" button. }}
       {{/if}}
@@ -37,10 +39,12 @@
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>2 months</strong> image retention</div>
       {{#if session.isAuthenticated}}
-        <br>
-        <div class="PricingSection-cta">
-          {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=proPlan price=proPrice planName=proPlanName}}
-        </div>
+        {{#if session.secure.user.isWhitelisted}}
+          <br>
+          <div class="PricingSection-cta">
+            {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=proPlan price=proPrice planName=proPlanName}}
+          </div>
+        {{/if}}
       {{else}}
         {{! #launch -- add "sign in" button. }}
       {{/if}}
