@@ -5,17 +5,24 @@
       <div class="PricingSection-price">
         <strong>{{format-currency basicPrice precision=0}}</strong> per month
       </div>
+      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='basic' changed="concurrencyChanged"}}
       </div>
-      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsBasic}}</strong> visual diffs</div>
+      <div class="PricingSection-infoItem"><strong>{{basicConcurrencySelected}}</strong> concurrent workers</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>1 week</strong> image retention</div>
-      <br>
-      <div class="PricingSection-cta">
-        {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=basicPlan price=basicPrice planName=basicPlanName}}
-      </div>
+      {{#if session.isAuthenticated}}
+        {{#if session.secure.user.isWhitelisted}}
+          <br>
+          <div class="PricingSection-cta">
+            {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=basicPlan price=basicPrice planName=basicPlanName}}
+          </div>
+        {{/if}}
+      {{else}}
+        {{! #launch -- add "sign in" button. }}
+      {{/if}}
     </div>
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket PricingSection-bucket--promoted">
     <div class="PricingSection-title PricingSection-title--promoted">Pro</div>
@@ -23,26 +30,33 @@
       <div class="PricingSection-price">
         <strong>{{format-currency proPrice precision=0}}</strong> per month
       </div>
+      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
       <div class="PricingSection-concurrency">
         {{concurrency-picker plan='pro' changed="concurrencyChanged"}}
       </div>
-      <div class="PricingSection-diffs"><strong>{{format-number numVisualDiffsPro}}</strong> visual diffs</div>
+      <div class="PricingSection-infoItem"><strong>{{proConcurrencySelected}}</strong> concurrent workers</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>2 months</strong> image retention</div>
-      <br>
-      <div class="PricingSection-cta">
-        {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=proPlan price=proPrice planName=proPlanName}}
-      </div>
+      {{#if session.isAuthenticated}}
+        {{#if session.secure.user.isWhitelisted}}
+          <br>
+          <div class="PricingSection-cta">
+            {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=proPlan price=proPrice planName=proPlanName}}
+          </div>
+        {{/if}}
+      {{else}}
+        {{! #launch -- add "sign in" button. }}
+      {{/if}}
     </div>
     <div class="PricingSection-title PricingSection-title--small">Best starter for teams</div>
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket">
     <div class="PricingSection-title">Enterprise</div>
     <div class="PricingSection-bucketBody">
-      <div class="PricingSection-concurrency u-text-small">
-        <strong>Customized plan</strong> for your team's specific needs. Just <a href="mailto:team@percy.io?subject=Percy Enterprise">contact us</a> to chat!
+      <div class="PricingSection-customized"><strong>Custom plan</strong></div>
+      <div class="PricingSection-customizedInfo u-text-small">
+        Built for your team's specific needs. <a href="mailto:team@percy.io?subject=Percy Enterprise">Contact us</a> to chat!
       </div>
-      <div class="PricingSection-diffs"><strong>Unlimited</strong> visual diffs</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> users</div>
       <div class="PricingSection-infoItem"><strong>Unlimited</strong> private repos</div>
       <div class="PricingSection-infoItem"><strong>Custom</strong> image retention</div>
@@ -54,4 +68,7 @@ to get the fastest builds possible.">Priority builds {{unbound fa-icon "fa-quest
       </div>
     </div>
   </div>
+</div>
+<div class="PricingSection-comparison u-text-center u-text-small">
+  <em>Average cost of 2 days of visual QA bug fixing by one engineer: $1,000+</em>
 </div>

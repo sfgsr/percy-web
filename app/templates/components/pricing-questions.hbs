@@ -1,26 +1,35 @@
 <div class="row">
   <div class="one-half column">
-    <h5>What are concurrent visual diffs?</h5>
+    <h5>What counts as a visual diff?</h5>
     <p>
-      The number of visual diffs we will process at the same time.
+      Each page snapshot counts as one visual diff.
     </p>
     <p>
-      We count a "visual diff" as the full process, including rendering the page, taking a screenshot, and generating a pixel-by-pixel
-      {{#link-to 'faq'}}visual diff{{/link-to}} compared to the last build.
+      We include the full process—rendering the page, taking a screenshot, and generating a pixel-by-pixel {{#link-to 'faq'}}visual diff{{/link-to}} compared to the last build.
     </p>
-    <h5>How easy is it to upgrade?</h5>
+    <h5>What are concurrent workers?</h5>
     <p>
-      In a single click! Upgrading to a new plan is immediately applied in realtime to your current builds.
+      The number of concurrent workers determines how many snapshots we will process at the same time for your builds.
     </p>
-    <h5>Is upgrading prorated?</h5>
     <p>
-      Yes, upgrading your plan is automatically prorated up to the next billing cycle.
+      This gives you control over the speed of Percy builds.
+    </p>
+    <p>
+      For example, more workers can be helpful for large static sites that infrequently upload hundreds or thousands of pages to Percy and want them to be processed quickly. It can also be helpful for large teams that have very frequent small builds.
     </p>
   </div>
   <div class="one-half column">
     <h5>Are there any discounted plans available?</h5>
     <p>
       Yes, we offer yearly plans that give 2 months for free (an almost 20% discount). Please <a href="mailto:team@percy.io">contact us</a> for yearly plans.
+    </p>
+    <h5>How easy is upgrading?</h5>
+    <p>
+      It's a single click, the new plan is immediately applied in realtime to your current builds.
+    </p>
+    <h5>Is upgrading prorated?</h5>
+    <p>
+      Yes, upgrading your plan is automatically prorated up to the next billing cycle.
     </p>
     <h5>When can I cancel my subscription?</h5>
     <p>
@@ -29,7 +38,7 @@
     <h5>What happens if I exceed the limits?</h5>
     <p>
       First, we will let you know if it looks like you might exceed the plan limits. If you do go over,
-      the API will start rejecting new snapshots.
+      the API will start rejecting new builds and snapshots.
     </p>
   </div>
 </div>

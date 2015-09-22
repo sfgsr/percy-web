@@ -23,7 +23,7 @@
 </div>
 {{#unless session.isAuthenticated}}
   <div class="container container--marketing container--darker InviteContainer">
-    <div>We just launched our <strong>private beta</strong>! <a href="/login" {{action "sessionRequiresAuthentication"}}>Sign up for an invite</a> or <a href="#updates">join the mailing list</a>.</div>
+    <a href="/login" {{action "sessionRequiresAuthentication"}}>Sign up for an invite</a> or <a href="#updates">join the mailing list</a>.
   </div>
 {{/unless}}
 <div class="container container--marketing container--light">
@@ -86,22 +86,39 @@
     </div>
   </div>
 </div>
+<div class="container container--marketing">
+  <div class="container container--fixedWidth container--forContent">
+    <h2>Pricing</h2>
+    <h3></h3>
+    {{pricing-section forceAccountPage=true}}
+    <div class="u-text-center">
+      {{pricing-free-section sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+    </div>
+  </div>
+</div>
+<div class="container container--marketing container--light">
+  <div class="container container--fixedWidth container--forContent">
+    <h2>Pricing FAQ</h2>
+    <h3></h3>
+    {{pricing-questions}}
+  </div>
+</div>
 {{#unless session.isAuthenticated}}
-  <div class="container container--marketing container--light SignUpContainer">
+  <div class="container container--marketing container--dark SignUpContainer">
     <div class="container container--fixedWidth container--forContent">
       <h2>Sign up for updates</h2>
       <div class="row u-text-center">
         <p>
-          We just launched our <strong>private beta</strong>—sign up for an invite!
+          Percy is in a <strong>private beta</strong>—sign up for an invite!
         </p>
         <p>
           {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
         </p>
         <p id="updates">
           Or join the announcement mailing list:
-          <form action="//percy.us11.list-manage.com/subscribe/post?u=91ed66ed144af73368ef29b57&amp;id=3b8f071960" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <form action="//percy.us11.list-manage.com/subscribe/post?u=91ed66ed144af73368ef29b57&amp;id=312a531647" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
             <input type="email" value="" name="EMAIL" class="required email" placeholder="you@example.com">
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="Button">
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="Button Button--onDark">
             <div class="response" id="mce-error-response" style="display:none"></div>
             <div class="response" id="mce-success-response" style="display:none"></div>
             <div style="position: absolute; left: -5000px;"><input type="text" name="b_91ed66ed144af73368ef29b57_3b8f071960" tabindex="-1" value=""></div>
@@ -112,29 +129,4 @@
     </div>
   </div>
 {{/unless}}
-{{#if session.isAuthenticated}}
-  {{#if session.secure.user.isWhitelisted}}
-    {{! #launch }}
-    <div class="container container--marketing">
-      <div class="container container--fixedWidth container--forContent">
-        <h2>Pricing</h2>
-        <h3></h3>
-        <div class="u-text-center">
-          {{pricing-free-section sessionRequiresAuthentication="sessionRequiresAuthentication"}}
-        </div>
-        {{pricing-section forceAccountPage=true}}
-        <div class="u-text-center u-text-small">
-          <em>Average cost of 1 day of visual QA bug fixing by one engineer: $500+</em>
-        </div>
-      </div>
-    </div>
-    <div class="container container--marketing container--light">
-      <div class="container container--fixedWidth container--forContent">
-        <h2>Pricing FAQ</h2>
-        <h3></h3>
-        {{pricing-questions}}
-      </div>
-    </div>
-  {{/if}}
-{{/if}}
 {{main-footer}}

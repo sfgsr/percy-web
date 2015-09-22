@@ -28,6 +28,8 @@ export default Ember.Component.extend({
     if (!window.StripeCheckout) {
       var scriptEl = document.createElement('script');
       scriptEl.setAttribute('src','https://checkout.stripe.com/checkout.js');
+      // https://stripe.com/blog/checkout-in-more-languages
+      scriptEl.setAttribute('data-locale', 'auto');
       document.head.appendChild(scriptEl);
     }
   }.on('willInsertElement'),
@@ -57,9 +59,10 @@ export default Ember.Component.extend({
       var self = this;
 
       // This is intentionally evaluated here, outside of the handlers below, because password
-      // managers like 1Password strangely change the select boxes underneath Stripe Checkout
+      // managers like 1Password might strangely change the inputs underneath Stripe Checkout
       // when filling out credit card info.
       var chosenPlan = this.get('plan');
+      var planName = this.get('planName');
 
       // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
       // login then to /account. Or, if they are logged in and forceAccountPage is set. :|
@@ -78,14 +81,15 @@ export default Ember.Component.extend({
         }));
         this.get('handler').open({
           name: 'Percy.io',
-          description: this.get('planName'),
+          description: planName,
           email: this.get('session.secure.user.email'),
           amount: this.get('price') * 100,
           panelLabel: this.get('checkoutLabelText'),
           allowRememberMe: false,
         });
       } else {
-        if (confirm("Ready to change plans? We'll use your existing payment info.")) {
+        var msg = "Ready to change plans to " + planName + "? We'll use your existing payment info."
+        if (confirm(msg)) {
           self._changeSubscription(chosenPlan);
         }
       }
