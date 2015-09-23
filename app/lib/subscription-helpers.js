@@ -12,4 +12,18 @@ export default {
       },
     });
   },
+  updateMetadata: function(billingEmail) {
+    // TODO: get the JSON-API endpoint for subscriptions working.
+    return Ember.$.ajax({
+      type: 'PATCH',
+      url: utils.buildApiUrl('subscription'),
+      data: {
+        data: {
+          attributes: {
+            'billing-email': billingEmail,
+          },
+        },
+      },
+    });
+  },
 };

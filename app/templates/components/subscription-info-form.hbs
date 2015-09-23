@@ -1,3 +1,11 @@
 <label for="subscription_billing_email">Billing Email</label>
 {{input id="subscription_billing_email" type="email" value=newBillingEmail required="true"}}
-<input type="submit" {{action 'save'}} value="Save">
+<input type="submit" value="Save">
+{{#if showSpinner}}
+  {{fa-icon 'fa-spinner fa-pulse'}}
+{{/if}}
+{{#if showSuccess}}
+  {{fa-icon 'check-circle'}}
+{{/if}}
+<br>
+<em class="u-text-small">For payment receipts and billing issues</em>
