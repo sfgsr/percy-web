@@ -5,33 +5,41 @@
   <p>
     {{unbound fa-icon "github"}} <strong><a href="{{session.secure.user.githubUrl}}">@{{session.secure.user.login}}</a></strong> ({{session.secure.user.name}})
   </p>
-
-  <h4>Current plan: {{session.secure.user.subscription.planName}}</h4>
+  <hr>
+  <h5>Current plan: {{session.secure.user.subscription.planName}}</h5>
   <div class="row">
     <div class="five columns">
       {{meter-bar count=session.secure.user.subscription.currentUsage total=session.secure.user.subscription.planUsageLimit}}
     </div>
     <div class="seven columns">
-      <h5>
-        {{format-number session.secure.user.subscription.currentUsage}}
+      <p>
+        <strong>{{format-number session.secure.user.subscription.currentUsage}}</strong>
         / {{format-number session.secure.user.subscription.planUsageLimit}} visual diffs
-      </h5>
+      </p>
     </div>
   </div>
-
+  <hr>
   {{#unless session.secure.user.subscription.isFree}}
-    <p>
-      {{stripe-checkout
-        text='Update Credit Card'
-        checkoutLabelText='Update Credit Card'
-        forceCheckout=true
-        plan=session.secure.user.subscription.plan
-        price=0
-        planName='Update Credit Card'
-      }}
-      {{cancel-subscription}}
-    </p>
+    <div class="row">
+      <div class="five columns">
+        {{subscription-info-form subscription=session.secure.user.subscription}}
+      </div>
+      <div class="seven columns u-text-right">
+        <br>
+        {{stripe-checkout
+          text='Update Credit Card'
+          checkoutLabelText='Update Credit Card'
+          forceCheckout=true
+          plan=session.secure.user.subscription.plan
+          price=0
+          planName='Update Credit Card'
+        }}
+        {{cancel-subscription}}
+      </div>
+    </div>
+    <hr>
   {{/unless}}
+
   <h4>Upgrade plan</h4>
   {{pricing-section}}
 </div>

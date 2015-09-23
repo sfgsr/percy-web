@@ -6,6 +6,7 @@ export default DS.Model.extend({
   planName: DS.attr(),
   planUsageLimit: DS.attr('number'),
   currentUsage: DS.attr('number'),
+  billingEmail: DS.attr(),
 
   isFree: Ember.computed.equal('plan', 'free-2'),
   isPaid: Ember.computed.not('isFree'),
