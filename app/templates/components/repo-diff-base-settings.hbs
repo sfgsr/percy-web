@@ -1,18 +1,20 @@
-<fieldset>
-  <label>
-    <input type="radio" name="repo_diff_base" value="automatic" {{bind-attr checked=repo.isAutomaticDiffBase}} {{action 'setAutomatic'}}>
-    <span class="label-body">
-      Automatic diff base (default)
-    </span>
-    <p>
-      Automatically use the the last build from the <code>master</code> branch as the baseline for diffs.
-    </p>
-  </label>
-  <label>
-    <input type="radio" name="repo_diff_base" value="manual" {{bind-attr checked=repo.isManualDiffBase}} {{action 'setManual'}}>
-    <span class="label-body">Manual diff base</span>
-    <p>
-      Use the last <strong><em style="color: green">{{fa-icon 'fa-thumbs-up'}} Approved</em></strong> build from the <code>master</code> branch as the baseline for diffs.
-    </p>
-  </label>
-</fieldset>
+<div {{action 'setAutomatic'}} class="RepoDiffBaseSettings-setting {{if repo.isAutomaticDiffBase "RepoDiffBaseSettings-setting--selected"}}">
+  {{#if repo.isAutomaticDiffBase}}
+    {{fa-icon "arrow-right"}}
+  {{/if}}
+  <span class="RepoDiffBaseSettings-title">
+    Automatic diff base (default)
+  </span>
+  <p>
+    Automatically use the the last build from the <code>master</code> branch as the baseline for diffs.
+  </p>
+</div>
+<div {{action 'setManual'}} class="RepoDiffBaseSettings-setting {{if repo.isManualDiffBase "RepoDiffBaseSettings-setting--selected"}}">
+  {{#if repo.isManualDiffBase}}
+    {{fa-icon "arrow-right"}}
+  {{/if}}
+  <span class="RepoDiffBaseSettings-title">Manual diff base</span>
+  <p>
+    Use the last <strong><em style="color: green">{{fa-icon "fa-thumbs-up"}} Approved</em></strong> build from the <code>master</code> branch as the baseline for diffs.
+  </p>
+</div>

@@ -99,6 +99,13 @@
 
   .PricingSection-bucket--free
     text-align: center
-    width: 480px
+    max-width: 480px
+    width: 100%
     margin: 0
     border-right: $grayborder
+
+@media (max-width: 550px)
+  .PricingSection
+    .PricingSection-bucket
+      margin-top: 20px !important
+      border: $grayborder !important

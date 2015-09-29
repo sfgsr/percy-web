@@ -10,16 +10,10 @@ export default Ember.Component.extend({
   ],
   actions: {
     setAutomatic: function() {
-      var self = this;
-      this.get('repo').set('diffBase', 'automatic').save().then(function(repo) {
-        repo.reload();
-      });
+      this.get('repo').set('diffBase', 'automatic').save();
     },
     setManual: function() {
-      var self = this;
-      this.get('repo').set('diffBase', 'manual').save().then(function(repo) {
-        repo.reload();
-      });
+      this.get('repo').set('diffBase', 'manual').save();
     },
   },
 });

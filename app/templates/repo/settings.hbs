@@ -7,25 +7,25 @@
 
     <a href="{{model.htmlUrl}}">{{unbound fa-icon "github"}}</a> Settings
   </h5>
-  <h3>API keys</h3>
-  <h4>Write-only key</h4>
+  <h4>Write-only API key</h4>
   <pre><code>{{model.writeOnlyToken.token}}</code></pre>
   <p>
     This key only has access to create builds, snapshots, and upload resources to this repository. See the {{#link-to "docs"}}docs{{/link-to}} for how to set up client authentication for your app.
   </p>
+  <hr>
 
-  <h3>Diff base config</h3>
+  <h4>Diff base config</h4>
   {{repo-diff-base-settings repo=model}}
+  <hr>
 
-  <h3>Actions</h3>
+  <h4>Actions</h4>
   {{#if model.isEnabled}}
     {{repo-disable repo=model disableRepo="disableRepo" disabled=model.isNotCurrentUserOwner}}
-    {{#if model.isNotCurrentUserOwner}}
-      <p class="u-text-small">
-        Repo can only disabled by its owner: <strong>@{{model.owner.login}}</strong>
-      </p>
-    {{/if}}
+    <p class="u-text-small">
+      Repository billing owner: <strong>@{{model.owner.login}}</strong>
+    </p>
   {{else}}
     {{repo-enable repo=model isPrimary=true enableRepo="enableRepo"}}
   {{/if}}
+  <hr>
 </div>
