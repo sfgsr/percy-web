@@ -1,0 +1,35 @@
+<h2>Parallel tests</h2>
+
+<p>
+  Percy has built-in support for CI services and local tests that run in parallel (such as <a href="https://circleci.com/docs/parallel-manual-setup">Circle CI parallelism</a>, the <a href="https://github.com/grosser/parallel_tests"><code>parallel_tests</code></a> gem, etc.).
+</p>
+
+<p>
+  Parallelism is a common way to speed up test suites by running multiple tests concurrently and then combining results at the end.
+</p>
+
+<p>
+  However, supporting parallel tests in a visual diffing CI can be more complicated than a traditional CI because builds influence each other—snapshots rendered in one build might become the new base for visual diffs in later builds.
+</p>
+
+<p>
+  Percy provides a simple mechanism to group snapshots into the same Percy build, eliminating the problem. Percy's clients and API provide a simple interface to support all parallel testing environments.
+</p>
+
+<p>Percy automatically supports the following CI services:</p>
+
+<h3>How it works</h3>
+
+<p>
+  The low-level {{#link-to "apidocs.client"}}Percy::Client{{/link-to}} automatically discovers if it's running in one of these environments and reads.
+</p>
+<p>
+  You can see the code for this in the <code><a href="https://github.com/percy/percy-client/blob/master/lib/percy/client/environment.rb">percy/client/environment.rb</a></code> file. If you don't see support in your favorite CI service in the above list, please <a href="mailto:team@percy.io">contact us</a> or send us a PR to add support to the environment file.
+</p>
+
+<h3>Environment variables</h3>
+
+<p>
+  You can override the environment discovery behaviors by setting any of these environment variables:
+</p>
+{{render "apidocs/env-vars"}}

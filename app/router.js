@@ -31,6 +31,7 @@ Router.map(function() {
       this.route('github');
       this.route('github-pages');
       this.route('fonts');
+      this.route('parallel-tests');
     });
 
     this.resource('apidocs', {path: '/api'}, function() {
