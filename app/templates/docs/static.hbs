@@ -5,7 +5,6 @@
   <a href="https://travis-ci.org/percy/percy-cli"><img src="https://travis-ci.org/percy/percy-cli.svg?branch=master"></a>
   <a href="https://rubygems.org/gems/percy-cli"><img src="https://badge.fury.io/rb/percy-cli.svg"></a>
 </p>
-
 <p>
   Percy makes it very simple to integrate visual diff testing with static websites, no matter where the site is hosted or what tools were used to generate it.
 </p>
@@ -15,7 +14,6 @@
 
 <h3>Installation</h3>
 <p>First, install the Percy command-line client:</p>
-
 {{#code-block lang="bash"}}
 $ gem install percy-cli
 {{/code-block}}
@@ -27,28 +25,22 @@ $ gem update percy-cli
 {{/code-block}}
 
 <h3>Authentication</h3>
-
 <p>
   Percy CLI relies on the <code>PERCY_TOKEN</code> environment variable for authenticating and authorizing access to each repository.
 </p>
-
 <p>
   You can temporarily set this in your local shell session by exporting the variable:
 </p>
-
 {{#code-block lang="bash"}}
 $ export PERCY_TOKEN=1234abcd1234abcd
 $ percy snapshot _site/
 {{/code-block}}
-
 <p>
   Or you can set it just for the current command:
 </p>
-
 {{#code-block lang="bash"}}
 $ PERCY_TOKEN=1234abcd1234abcd percy snapshot _site/
 {{/code-block}}
-
 <div class="Alert Alert--warning">
   <p>
     <strong>IMPORTANT: Do not store the Percy API token in your repository</strong> if your code is public. Anyone could use your token and consume your account quota (they will not be able to read data because the token is write-only).
@@ -62,13 +54,10 @@ $ PERCY_TOKEN=1234abcd1234abcd percy snapshot _site/
 <p>
   If your static site exists in a directory called <code>_site</code>, it's as simple as this:
 </p>
-
 {{#code-block lang="bash"}}
 $ percy snapshot _site/
 {{/code-block}}
-
 <p>That's it!</p>
-
 <p>For example:</p>
 {{#code-block lang="bash"}}
 $ percy snapshot _site/
@@ -81,35 +70,28 @@ Finalizing build...
 Done! Percy is now processing, you can view the visual diffs here:
 https://percy.io/fotinakis/percy-examples/builds/140
 {{/code-block}}
-
 <p>
   Percy now starts rendering pages and generating visual diffs for your site.
 </p>
-
 <p>
   Under the hood, Percy only uploads files that have changed. So, after the first time this command is run, future runs will likely be very fast.
 </p>
 
 <h4>Limit pages for testing</h4>
-
 <p>
   If you have a very large site, you might want to limit the number of pages that are actually uploaded to Percy while testing. You can pass the <code>snapshot_limit</code> flag to do this:
 </p>
-
 {{#code-block lang="bash"}}
 $ percy snapshot _site/ --snapshot_limit 10
 {{/code-block}}
 
 <h4>Base URL path</h4>
-
 <p>
   If your static files are hosted in a sub-directory instead of the webserver root, you will need to provide the <code>--baseurl</code> flag:
 </p>
-
 {{#code-block lang="bash"}}
 $ percy snapshot _site/ --baseurl "/my-subdir"
 {{/code-block}}
-
 <p>
   For Jekyll users, this should be set to the same as your <code>baseurl</code> config setting.
 </p>
