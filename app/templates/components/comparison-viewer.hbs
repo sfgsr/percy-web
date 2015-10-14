@@ -9,13 +9,13 @@
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
           <div class="ComparisonViewer-pdiffImageBox">
-            <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.image.url}}">
+            <img class="ComparisonViewer-pdiffImage" src="{{comparison.pdiff.baseScreenshot.lossyImage.url}}">
           </div>
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           {{! TODO(fotinakis): better way to determine primary snapshot screenshot? }}
           <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
-            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.image.url}}">
+            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.lossyImage.url}}">
             {{#if isOverlayEnabled}}
               <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
             {{/if}}
@@ -34,7 +34,7 @@
           </div>
           <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
             <div class="ComparisonViewer-pdiffImageBox">
-              <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.image.url}}">
+              <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.lossyImage.url}}">
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           <div class="ComparisonViewer-pdiffImageBox">
-            <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.image.url}}">
+            <img class="ComparisonViewer-pdiffImage" src="{{comparison.headSnapshot.screenshots.firstObject.lossyImage.url}}">
           </div>
         </div>
       </div>
