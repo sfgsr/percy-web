@@ -13,10 +13,11 @@ export default Ember.Component.extend({
   ],
   click: function() {
     if (confirm('Are you sure you want to cancel?\n\nWe want to help if we can, just email us at team@percy.io.')) {
-      SubscriptionHelpers.changeSubscription('free-2').then(
+      SubscriptionHelpers.changeSubscription('free').then(
         function() {
           // Refresh after canceling plan.
-          location.reload();
+          location.href = '/account#success';
+          location.reload();  // If we are already on the account page.
         },
         function() {
           alert(

@@ -6,7 +6,6 @@ export default DS.Model.extend({
   email: DS.attr(),
   avatarUrl: DS.attr(),
   githubId: DS.attr(),
-  isWhitelisted: DS.attr('boolean'),
   lastSyncedAt: DS.attr('date'),
   lastPrivateSyncedAt: DS.attr('date'),
 

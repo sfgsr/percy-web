@@ -1,5 +1,5 @@
 <div class="NavMenu-item">
-  {{#link-to "faq"}}FAQ{{/link-to}}
+  {{#link-to "pricing"}}Pricing{{/link-to}}
 </div>
 <div class="NavMenu-item">
   {{#link-to "docs.index"}}Docs{{/link-to}}
@@ -8,26 +8,20 @@
   <a href="https://blog.percy.io">Blog</a>
 </div>
 {{#if user}}
-  {{#if session.secure.user.isWhitelisted}}
-    <div class="NavMenu-item">
-      {{#link-to 'namespace.index' session.secure.user.login}}My Repos{{/link-to}}
-    </div>
-    <div class="NavMenu-avatar">
-      {{user-avatar user=user width=36 linked=true href='/account'}}
-    </div>
-    <div class="NavMenu-item NavMenu-usage">
-      <a href="/account">
-        {{meter-bar count=session.secure.user.subscription.currentUsage total=session.secure.user.subscription.planUsageLimit}}
-        <br>
-        {{format-number session.secure.user.subscription.currentUsage}}
-        / {{format-number session.secure.user.subscription.planUsageLimit}}
-      </a>
-    </div>
-  {{else}}
-    <div class="NavMenu-avatar">
-      {{user-avatar user=user width=36}}
-    </div>
-  {{/if}}
+  <div class="NavMenu-item">
+    {{#link-to 'namespace.index' session.secure.user.login}}My Repos{{/link-to}}
+  </div>
+  <div class="NavMenu-avatar">
+    {{user-avatar user=user width=36 linked=true href='/account'}}
+  </div>
+  <div class="NavMenu-item NavMenu-usage">
+    <a href="/account">
+      {{meter-bar count=session.secure.user.subscription.currentUsage total=session.secure.user.subscription.planUsageLimit}}
+      <br>
+      {{format-number session.secure.user.subscription.currentUsage}}
+      / {{format-number session.secure.user.subscription.planUsageLimit}}
+    </a>
+  </div>
 {{else}}
   <div class="NavMenu-item">
     <a href="#" {{action "sessionRequiresAuthentication"}}>Sign In</a>

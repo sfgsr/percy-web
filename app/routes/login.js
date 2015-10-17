@@ -9,6 +9,8 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       if (finalRedirect) {
         window.location.href = decodeURIComponent(finalRedirect);
       }
+    }, function() {
+      debugger
     });
   },
 });

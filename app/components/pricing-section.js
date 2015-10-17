@@ -5,9 +5,10 @@ export default Ember.Component.extend({
   classNames: ['PricingSection'],
   classNameBindings: ['classes'],
 
+  currentPlan: null,
   forceAccountPage: false,
   checkoutText: function() {
-    return this.get('forceAccountPage') ? 'Go To Account...' : 'Select Plan';
+    return this.get('forceAccountPage') ? 'Select Plan »' : 'Select Plan »';
   }.property('forceAccountPage'),
 
   basicConcurrencySelected: 2,
@@ -15,49 +16,43 @@ export default Ember.Component.extend({
   enterpriseConcurrencySelected: 5,
 
   // Plan ID.
-  freePlan: 'free-2',
-  basicPlan: function() {
-    return 'basic-%@'.fmt(this.get('basicConcurrencySelected'));
-  }.property('basicConcurrencySelected'),
-  proPlan: function() {
-    return 'pro-%@'.fmt(this.get('proConcurrencySelected'));
-  }.property('proConcurrencySelected'),
+  freePlan: 'free',
+  microPlan: 'micro',
+  smallPlan: 'small',
+  mediumPlan: 'medium',
+  largePlan: 'large',
+  enterprisePlan: 'enterprise',
 
   // Price for selected plan.
-  basicPrice: function() {
-    var basicPrices = {
-      2: 19,
-      5: 49,
-      10: 89,
-    };
-    return basicPrices[this.get('basicConcurrencySelected')];
-  }.property('basicConcurrencySelected'),
-  proPrice: function() {
-    return Math.floor(this.get('proConcurrencySelected') * 1980 / 100);
-  }.property('proConcurrencySelected'),
+  microPlanPrice: 9,
+  smallPlanPrice: 29,
+  mediumPlanPrice: 99,
+  largePlanPrice: 249,
+  enterprisePlanPrice: 990,
 
   // Number of diffs for selected plan.
-  numVisualDiffsBasic: function() {
-    return this.get('basicConcurrencySelected') * 1250;
-  }.property('basicConcurrencySelected'),
-  numVisualDiffsPro: function() {
-    return this.get('proConcurrencySelected') * 5000;
-  }.property('proConcurrencySelected'),
+  microPlanDiffs: 750,
+  smallPlanDiffs: 2500,
+  mediumPlanDiffs: 25000,
+  largePlanDiffs: 100000,
+  enterprisePlanDiffs: 500000,
 
   // Plan name.
-  basicPlanName: function() {
-    var formattedValue = Formatting.formatNumber(this.get('numVisualDiffsBasic'));
-    return 'Basic (%@ visual diffs)'.fmt(formattedValue);
-  }.property('basicConcurrencySelected'),
-  proPlanName: function() {
-    var formattedValue = Formatting.formatNumber(this.get('numVisualDiffsPro'));
-    return 'Pro (%@ visual diffs)'.fmt(formattedValue);
-  }.property('proConcurrencySelected'),
+  microPlanName: 'Micro',
+  smallPlanName: 'Small',
+  mediumPlanName: 'Medium',
+  largePlanName: 'Large',
+  enterprisePlanName: 'Enterprise',
+
+  // Current plan flag.
+  isFreePlanSelected: Ember.computed.equal('currentPlan', 'free'),
+  isMicroPlanSelected: Ember.computed.equal('currentPlan', 'micro'),
+  isSmallPlanSelected: Ember.computed.equal('currentPlan', 'small'),
+  isMediumPlanSelected: Ember.computed.equal('currentPlan', 'medium'),
+  isLargePlanSelected: Ember.computed.equal('currentPlan', 'large'),
+  isEnterprisePlanSelected: Ember.computed.equal('currentPlan', 'enterprise'),
 
   actions: {
-    concurrencyChanged: function(plan, concurrencySelected) {
-      this.set(plan + 'ConcurrencySelected', concurrencySelected);
-    },
     sessionRequiresAuthentication: function() {
       this.sendAction('sessionRequiresAuthentication');
     },
