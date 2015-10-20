@@ -3,9 +3,17 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(params) {
-    return this.store.find('repo', this.modelFor('namespace').get('id') + '/' + params.repo_id);
+    var repoSlug = this.modelFor('namespace').get('id') + '/' + params.repo_id;
+    return this.store.find('repo', repoSlug);
   },
   afterModel: function(repo) {
     return repo.get('builds');
-  }
+  },
+  actions: {
+    error: function(error, transition) {
+      if (error.status === 403) {
+        return this.transitionTo('repo-forbidden');
+      }
+    },
+  },
 });

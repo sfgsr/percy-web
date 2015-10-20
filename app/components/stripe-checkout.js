@@ -9,20 +9,17 @@ export default Ember.Component.extend({
   text: 'Select Plan',
 
   // This is set to true when updating credit card info.
-  forceCheckout: false,
+  updateCard: false,
   checkoutLabelText: 'Select Plan ({{amount}})',
-
-  // Set on the homepage to force users to pick plan from account page.
-  forceAccountPage: false,
 
   handler: null,
   classes: null,
+  attributeBindings: ['href'],
   tagName: 'button',
   classNames: [
     'StripeCheckout',
-    'Button',
   ],
-  classNameBindings: ['classes', 'forceCheckout::Button--primary'],
+  classNameBindings: ['classes', 'updateCard::Button--primary'],
 
   loadStripeCheckout: function() {
     if (!window.StripeCheckout) {
@@ -41,18 +38,20 @@ export default Ember.Component.extend({
   _changeSubscription: function(plan, token) {
     return SubscriptionHelpers.changeSubscription(plan, token).then(
       function() {
-        location.reload();
+        location.href = '/account#success';
+        location.reload();  // If we are already on the account page.
       },
       function() {
         alert(
-          'A Stripe error occurred! Sorry about that, please ' +
-          'contact us at team@percy.io and we will make sure you are set up correctly.'
+          'A Stripe error occurred! Your card may have been declined. Please try again or ' +
+          'contact us at team@percy.io and we will help you get set up.'
         );
       }
     );
   },
   click: function() {
     this.send('checkout');
+    return false;
   },
   actions: {
     checkout: function() {
@@ -65,13 +64,13 @@ export default Ember.Component.extend({
       var planName = this.get('planName');
 
       // Specific UX flow: if the user is not logged in but clicks 'Select Plan', redirect to
-      // login then to /account. Or, if they are logged in and forceAccountPage is set. :|
-      if (this.get('forceAccountPage') || !this.get('session.isAuthenticated')) {
+      // login then to /account.
+      if (!this.get('session.isAuthenticated')) {
         utils.redirectToLogin({redirectTo: '/account'});
         return;
       }
 
-      if (this.get('forceCheckout') || this.get('session.secure.user.subscription.isFree')) {
+      if (this.get('updateCard') || this.get('session.secure.user.subscription.isFree')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.stripePublishableKey,
           image: '/images/percy-bg.png',
@@ -81,14 +80,14 @@ export default Ember.Component.extend({
         }));
         this.get('handler').open({
           name: 'Percy.io',
-          description: planName,
+          description: 'Subscription to ' + planName + ' plan',
           email: this.get('session.secure.user.email'),
           amount: this.get('price') * 100,
           panelLabel: this.get('checkoutLabelText'),
           allowRememberMe: false,
         });
       } else {
-        var msg = "Ready to change plans to " + planName + "? We'll use your existing payment info.";
+        var msg = "Ready to change to the " + planName + " plan? We'll use your existing payment info.";
         if (confirm(msg)) {
           self._changeSubscription(chosenPlan);
         }

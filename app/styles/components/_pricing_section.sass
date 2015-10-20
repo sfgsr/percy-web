@@ -1,5 +1,4 @@
 .PricingSection,
-.PricingFreeSection,
   // Reset font-size for homepage.
   font-size: $standard-font-size
 
@@ -8,57 +7,57 @@
     box-sizing: border-box
     display: inline-block
     vertical-align: top
-    width: 260px
-    margin-top: 20px
-    border-bottom: $grayborder
-    border-left: $grayborder
-    border-top: $grayborder
+    width: 240px
+    border: $grayborder
     background-color: white
+    margin-right: 20px
+    min-height: 381px
+
+    &:last-of-type
+      margin-right: 0
 
     &.PricingSection-bucket--active
       background-color: #fffbdf
 
-    &.PricingSection-bucket--promoted
-      box-shadow: 5px 5px 10px #eaeaea
-      margin-top: 0
-      z-index: 100
-      border: 1px solid $percy-beige
+    &.PricingSection-bucket--secondaryPlan
+      min-height: auto
+      width: 100%
 
-  .PricingSection-bucket:last-child
-    border-right: $grayborder
-
-  .PricingSection-bucket--promoted + .PricingSection-bucket
-    border-left: none
+      .PricingSection-title
+        &.PricingSection-title--small
+          margin-top: 0
 
   .PricingSection-title
     text-align: center
     font-family: $fancy-font
-    font-size: 3rem
-    font-weight: bold
+    font-size: 2rem
     background: $beige
     padding: 5px
 
-    &.PricingSection-title--promoted
-      font-size: 3.2rem
-      background: $percy-beige
-      padding: 10px
-      margin-bottom: 5px
-
     &.PricingSection-title--small
       background: $percy-beige
-      font-size: 1.5rem
-      padding: 5px
+      font-size: 1.3rem
+      font-weight: bold
+      margin-top: 3px
+      padding: 9px
+      box-shadow: 0 5px 10px #eaeaea
+      text-transform: uppercase
 
   .PricingSection-bucketBody
     padding: 20px
 
   .PricingSection-price
     text-align: center
-    font-size: 20px
+    font-size: 2rem
     color: $darkgray
     strong
-      font-size: 30px
+      font-size: 4rem
+      font-weight: normal
       color: $default-text-color
+    span
+      vertical-align: 12px
+      font-size: 2rem
+      padding-right: 2px
 
   .PricingSection-concurrency
     padding: 20px 0 20px 0
@@ -68,7 +67,7 @@
 
   .PricingSection-diffs
     font-size: 20px
-    padding-top: 20px
+    padding-top: 10px
 
   .PricingSection-customized
     font-size: 20px
@@ -81,28 +80,10 @@
     padding-bottom: 20px
 
   .PricingSection-infoItem
-    color: $darkgray
-    strong
-      color: $default-text-color
+    color: $gray
 
     .fa-question-circle
       color: $darkpurple
-
-  .PricingSection-cta
-    padding-top: 20px
-    .Button
-      width: 100%
-
-.PricingFreeSection
-  .PricingSection-title
-    font-size: 2rem
-
-  .PricingSection-bucket--free
-    text-align: center
-    max-width: 480px
-    width: 100%
-    margin: 0
-    border-right: $grayborder
 
 @media (max-width: 550px)
   .PricingSection

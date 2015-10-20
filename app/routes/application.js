@@ -23,8 +23,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       promise.then(null, function(response) {
         if (response.status === 402) {
           var msg = [
-            "Whoops! You've hit the limit of 2 private repos on the free plan.",
-            "\n\nUpgrading is easy, would you like to see the available plans?",
+            "You've hit the limit of 2 active repos on this plan.",
+            "\nView plan upgrades?",
           ].join('');
           if (confirm(msg)) {
             self.transitionTo('account');

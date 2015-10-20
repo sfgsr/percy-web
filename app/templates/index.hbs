@@ -8,22 +8,14 @@
   <h1 class="alt">Percy</h1>
   <h2>Continuous visual integration for web apps</h2>
   {{#if session.isAuthenticated}}
-    {{#if session.secure.user.isWhitelisted}}
-      {{#link-to 'namespace.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
-    {{else}}
-      <div class="Alert Alert--info">
-        <strong>Thanks for requesting an invite!</strong> We're very excited to make Percy available to you.
-        <br>
-        You can help by <a href="https://goo.gl/ss3aYu">telling us more</a> about your app and tech stack.
-      </div>
-    {{/if}}
+    {{#link-to 'namespace.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
   {{else}}
     {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
   {{/if}}
 </div>
 {{#unless session.isAuthenticated}}
   <div class="container container--marketing container--darker InviteContainer">
-    <a href="/login" {{action "sessionRequiresAuthentication"}}>Sign up for an invite</a> or <a href="#updates">join the mailing list</a>.
+    New: <a href="https://blog.percy.io/2015/10/13/support-for-parallel-test-suites/">Support for parallel test suites</a>
   </div>
 {{/unless}}
 <div class="container container--marketing container--light">
@@ -54,14 +46,18 @@
   </div>
 </div>
 <div class="container container--marketing">
-  <div class="row">
-    <h3 class="alt">Automatic GitHub Pull Request integration</h3>
-  </div>
-  <div class="row">
-    {{mock-approval-flow}}
+  <div class="container container--fixedWidth container--forContent">
+    <div class="row u-text-center">
+      <h3 class="alt">Automatic GitHub Pull Request integration</h3>
+      <p><strong>You already do code review.</strong> Percy gives you instant visual reviews, right alonside your tests in GitHub.</p>
+      <p></p>
+    </div>
+    <div class="row">
+      {{mock-approval-flow}}
+    </div>
   </div>
 </div>
-<div class="container container--marketing container--dark SpeedContainer">
+<div class="container container--marketing container--dark">
   <div class="container container--fixedWidth container--forContent">
     <h2>Simple and <em>fast</em></h2>
     <h3 class="alt">Visual diff testing at scale</h3>
@@ -80,50 +76,56 @@
           Percy comes with drop-in open source clients for Rails/Capybara tests and static websites, and we are just getting started.
         </p>
         <p>
-          See the {{#link-to "faq"}}FAQ{{/link-to}} and {{#link-to "docs.index"}}Docs{{/link-to}} for more info.
+          See the {{#link-to "docs.faq"}}FAQ{{/link-to}} and {{#link-to "docs.index"}}Docs{{/link-to}} for more info.
         </p>
       </div>
     </div>
-  </div>
-</div>
-<div class="container container--marketing">
-  <div class="container container--fixedWidth container--forContent">
-    <h2>Pricing</h2>
-    <h3></h3>
-    {{pricing-section forceAccountPage=true}}
   </div>
 </div>
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
-    <h2>Pricing FAQ</h2>
-    <h3></h3>
-    {{pricing-questions}}
-  </div>
-</div>
-{{#unless session.isAuthenticated}}
-  <div class="container container--marketing container--dark SignUpContainer">
-    <div class="container container--fixedWidth container--forContent">
-      <h2>Sign up for updates</h2>
-      <div class="row u-text-center">
-        <p>
-          Percy is in a <strong>private beta</strong>—sign up for an invite!
-        </p>
-        <p>
-          {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
-        </p>
-        <p id="updates">
-          Or join the announcement mailing list:
-          <form action="//percy.us11.list-manage.com/subscribe/post?u=91ed66ed144af73368ef29b57&amp;id=312a531647" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-            <input type="email" value="" name="EMAIL" class="required email" placeholder="you@example.com">
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="Button Button--onDark">
-            <div class="response" id="mce-error-response" style="display:none"></div>
-            <div class="response" id="mce-success-response" style="display:none"></div>
-            <div style="position: absolute; left: -5000px;"><input type="text" name="b_91ed66ed144af73368ef29b57_3b8f071960" tabindex="-1" value=""></div>
-          </form>
-          <span>We will only use your email to let you know when Percy is available.</span>
-        </p>
+    <h2>Automate your visual testing today</h2>
+    <div class="row">
+      <div class="six columns">
+      <h4>Rails + RSpec</h4>
+{{#code-block lang="ruby"}}
+gem 'percy-capybara'
+{{/code-block}}
+
+{{#code-block lang="ruby"}}
+# spec_helper.rb:
+require 'percy/capybara/rspec'
+{{/code-block}}
+
+{{#code-block}}
+<span class="dim">describe 'app features', type: :feature do
+  it 'shows the dropdown menu when clicked' do
+    visit '/'
+    first('.dropdown-toggle').click</span>
+    Percy::Capybara.snapshot(page)
+  <span class="dim">end
+end</span>
+{{/code-block}}
+      </div>
+      <div class="six columns">
+      <h4>Static websites</h4>
+{{#code-block lang="bash"}}
+$ gem install percy-cli
+{{/code-block}}
+{{#code-block lang="bash"}}
+$ percy snapshot build/
+{{/code-block}}
       </div>
     </div>
+    <hr>
+    <div class="row u-text-center">
+      <p>It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, {{#link-to "pricing"}}Pricing{{/link-to}}, or {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.</p>
+      {{#if session.isAuthenticated}}
+        {{#link-to 'namespace.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+      {{else}}
+        {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+      {{/if}}
+    </div>
   </div>
-{{/unless}}
+</div>
 {{main-footer}}

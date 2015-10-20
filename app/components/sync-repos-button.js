@@ -3,6 +3,7 @@ import utils from '../lib/utils';
 
 export default Ember.Component.extend({
   classes: null,
+  redirectTo: null,
 
   tagName: 'a',
   href: utils.buildApiUrl('login', {params: {extended_permissions: 1}}),
@@ -34,7 +35,11 @@ export default Ember.Component.extend({
   },
   actions: {
     login: function() {
-      utils.redirectToLogin({extendedPermissions: 1});
+      var options = {extendedPermissions: 1};
+      if (this.get('redirectTo')) {
+        options['redirectTo'] = this.get('redirectTo');
+      }
+      utils.redirectToLogin(options);
     },
   },
 });

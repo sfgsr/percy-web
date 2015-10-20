@@ -14,6 +14,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('login');
+  this.route('repo-forbidden');
   this.resource('namespace', {path: '/:namespace_id'}, function() {
     this.resource('repo', {path: '/:repo_id'}, function() {
       this.route('settings', {path: '/settings'});
@@ -25,6 +26,7 @@ Router.map(function() {
   this.resource('docs', function() {
     this.route('capybara');
     this.route('static');
+    this.route('faq');
 
     this.resource('integrations', {path: '/integrations'}, function() {
       this.route('ci');
@@ -39,8 +41,8 @@ Router.map(function() {
       this.route('client');
     });
   });
+  this.route('pricing');
   this.route('about');
-  this.route('faq');
   this.route('terms');
   this.route('privacy');
   this.route('account');

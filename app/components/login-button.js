@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classes: null,
-  text: 'Sign up for invite',
+  text: 'Sign in with GitHub',
 
   tagName: 'a',
   classNames: [
