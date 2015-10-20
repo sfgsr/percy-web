@@ -97,14 +97,14 @@
     <div class="one-half column">
       <div class="PricingSection-bucket PricingSection-bucket--secondaryPlan">
         <div class="PricingSection-bucketBody">
-          <strong>Free plan:</strong> To try Percy you'll get 2 projects, 250 visual diffs/month, and 7 days history. No credit card required.
+          <strong>Free plan:</strong> To try Percy you'll get 2 projects, 250 visual diffs/month, and 7 day history. No credit card required.
         </div>
       </div>
     </div>
     <div class="one-half column">
       <div class="PricingSection-bucket PricingSection-bucket--secondaryPlan">
         <div class="PricingSection-bucketBody">
-          <strong>Micro plan:</strong> We offer a micro plan for $9/month with 2 projects, 750 visual diffs/month, and 7 days history.
+          <strong>Micro plan:</strong> We offer a micro plan for $9/month with 2 projects, 750 visual diffs/month, and 7 day history.
           {{#unless session.secure.user.subscription.isMicro}}
             {{stripe-checkout tagName='a' href='#' text='Sign Up' plan=microPlan price=microPlanPrice planName=microPlanName}}.
           {{/unless}}
