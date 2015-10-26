@@ -13,11 +13,9 @@
     {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
   {{/if}}
 </div>
-{{#unless session.isAuthenticated}}
-  <div class="container container--marketing container--darker InviteContainer">
-    New post: <a href="https://blog.percy.io/2015/10/26/open-for-business/">Open for business!</a>
-  </div>
-{{/unless}}
+<div class="container container--marketing container--darker InviteContainer">
+  Blog: <em><a href="https://blog.percy.io/2015/10/26/open-for-business/">Open for business!</a></em>
+</div>
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
     <h2>Stop doing QA in the dark</h2>
