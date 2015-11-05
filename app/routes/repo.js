@@ -10,7 +10,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return repo.get('builds');
   },
   actions: {
-    error: function(error, transition) {
+    error: function(error) {
       if (error.status === 403) {
         return this.transitionTo('repo-forbidden');
       }

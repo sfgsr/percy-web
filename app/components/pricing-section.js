@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Formatting from '../lib/formatting';
 
 export default Ember.Component.extend({
   classNames: ['PricingSection'],
