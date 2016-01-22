@@ -2,8 +2,8 @@
   {{approval-section build=model classes="u-pull-right"}}
   <h5>
     {{#link-to "namespace.index" model.repo.namespace.id}}{{model.repo.namespace.id}}{{/link-to}}/{{#link-to "repo.index" model.repo.namespace.id model.repo.name}}{{model.repo.name}}{{/link-to}}
-    <a href="{{model.repo.htmlUrl}}">{{unbound fa-icon "github"}}</a>
-    {{#link-to "repo.settings" model.repo.name}}{{unbound fa-icon "cog" classNames="fa--left"}}{{/link-to}}
+    <a href="{{model.repo.htmlUrl}}">{{fa-icon icon="github"}}</a>
+    {{#link-to "repo.settings" model.repo.name}}{{fa-icon icon="cog" classNames="fa--left"}}{{/link-to}}
     Build #{{model.buildNumber}}
   </h5>
 

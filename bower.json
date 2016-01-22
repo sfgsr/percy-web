@@ -17,6 +17,7 @@
     "jquery-ui": "1.11.4",
     "jquery-ui-slider-pips": "1.10.5",
     "loader.js": "ember-cli/loader.js#3.2.0",
-    "qunit": "~1.17.1"
+    "qunit": "~1.17.1",
+    "font-awesome": "~4.4.0"
   }
 }
