@@ -7,6 +7,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     sessionRequiresAuthentication: function() {
       this.get('session').authenticate('authenticator:custom');
     },
+    invalidateSession: function() {
+      this.get('session').invalidate();
+    },
     enablingRepo: function(promise, repo) {
       promise.then(function() {
         repo.reload();
