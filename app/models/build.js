@@ -39,14 +39,14 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  durationSeconds: function() {
+  duration: function() {
     var finished = this.get('finishedAt');
     if (!finished) {
       finished = moment();
     }
     var started = this.get('createdAt');
     var milliseconds = moment(finished).diff(started);
-    return milliseconds / 1000;
+    return milliseconds;
   }.property('finishedAt', 'createdAt'),
 
   isApproved: function() {
@@ -54,6 +54,6 @@ export default DS.Model.extend({
   }.property('approvedAt'),
 
   reloadAll: function() {
-    this.store.findOne('build', this.get('id'));
+    this.store.findRecord('build', this.get('id'), {reload: true});
   },
 });
