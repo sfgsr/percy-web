@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   currentNamespace: null,
   classes: null,
 
+  session: Ember.inject.service(),
   classNames: ['NamespaceList'],
   classNameBindings: ['classes'],
 

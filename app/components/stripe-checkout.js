@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   updateCard: false,
   checkoutLabelText: 'Select Plan ({{amount}})',
 
+  session: Ember.inject.service(),
   handler: null,
   classes: null,
   attributeBindings: ['href'],

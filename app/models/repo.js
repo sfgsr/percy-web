@@ -22,6 +22,7 @@ export default DS.Model.extend({
   builds: DS.hasMany('build', {async: true}),
   tokens: DS.hasMany('token', {async: true}),
 
+  session: Ember.inject.service(),
   isCurrentUserOwner: function() {
     if (this.get('isEnabled')) {
       // If there is a repo owner, check if it's the same as the current session's user.

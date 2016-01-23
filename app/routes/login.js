@@ -3,6 +3,7 @@ import utils from '../lib/utils';
 import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-mixin';
 
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
+  session: Ember.inject.service(),
   afterModel: function() {
     this.get('session').authenticate('authenticator:custom').then(function() {
       var finalRedirect = utils.getQueryParam('redirect_to');
