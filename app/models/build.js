@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import moment from 'moment';
 
 export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: true}),
@@ -41,10 +42,10 @@ export default DS.Model.extend({
   durationSeconds: function() {
     var finished = this.get('finishedAt');
     if (!finished) {
-      finished = window.moment();
+      finished = moment();
     }
     var started = this.get('createdAt');
-    var milliseconds = window.moment(finished).diff(started);
+    var milliseconds = moment(finished).diff(started);
     return milliseconds / 1000;
   }.property('finishedAt', 'createdAt'),
 
