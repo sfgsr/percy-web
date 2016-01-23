@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   sortedNamespaces: function() {
     var result = this.get('namespaces').toArray().sort(function(first, second) {
       // Always sort current user's org to the top.
-      if (first.get('id') === this.get('session.secure.user.login')) {
+      if (first.get('id') === this.get('session.data.authenticated.user.login')) {
         return -1;
       }
       // Sort everything else alphabetically.

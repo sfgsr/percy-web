@@ -1,6 +1,6 @@
 <div class="container Header Header--large">
   {{#if session.isAuthenticated}}
-    {{nav-menu user=session.secure.user}}
+    {{nav-menu user=session.data.authenticated.user}}
   {{else}}
     {{nav-menu}}
   {{/if}}
@@ -8,7 +8,7 @@
   <h1 class="alt">Percy</h1>
   <h2>Continuous visual integration for web apps</h2>
   {{#if session.isAuthenticated}}
-    {{#link-to 'namespace.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
   {{else}}
     {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
   {{/if}}
@@ -128,7 +128,7 @@ $ percy snapshot _site/
     <div class="row u-text-center">
       <p>It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, {{#link-to "pricing"}}Pricing{{/link-to}}, or {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.</p>
       {{#if session.isAuthenticated}}
-        {{#link-to 'namespace.index' session.secure.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+        {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
       {{else}}
         {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
       {{/if}}

@@ -1,6 +1,6 @@
 <div style="position: relative">
-  <img width="1200" height="696" src="/images/example-window-overlay.png"  style={{showWhenOverlay}} {{action "toggleOverlay"}} alt="Example Percy diff window">
-  <img width="1200" height="696" src="/images/example-window.png" style={{hideWhenOverlay}} {{action "toggleOverlay"}} alt="Example Percy diff window">
+  <img width="1200" height="696" src="/images/example-window-overlay.png"  style="{{showWhenOverlay}}" {{action "toggleOverlay"}} alt="Example Percy diff window">
+  <img width="1200" height="696" src="/images/example-window.png" style="{{hideWhenOverlay}}" {{action "toggleOverlay"}} alt="Example Percy diff window">
   {{#unless anyInteractions}}
     <div {{action "toggleOverlay"}} class="PulseCircle"></div>
   {{/unless}}

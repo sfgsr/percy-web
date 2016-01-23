@@ -10,10 +10,10 @@ export default Ember.Component.extend({
   classNameBindings: ['classes'],
 
   showWhenApproved: function() {
-    return (!this.get('isApproved') ? 'display: none' : '').htmlSafe();
+    return Ember.String.htmlSafe(!this.get('isApproved') ? 'display: none' : '');
   }.property('isApproved'),
   hideWhenApproved: function() {
-    return (this.get('isApproved') ? 'display: none' : '').htmlSafe();
+    return Ember.String.htmlSafe(this.get('isApproved') ? 'display: none' : '');
   }.property('isApproved'),
   setupScrollHandler: function() {
     this.$('img').load(function() {
