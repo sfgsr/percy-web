@@ -11,7 +11,7 @@ export default DS.Model.extend({
   isPrivate: DS.attr('boolean'),
   isEnabled: DS.attr('boolean'),
   isDisabled: Ember.computed.not('isEnabled'),
-  owner: DS.belongsTo('user'),
+  owner: DS.belongsTo('user', {async: false}),
   diffBase: DS.attr(),  // Either "automatic" or "manual".
   isAutomaticDiffBase: Ember.computed.equal('diffBase', 'automatic'),
   isManualDiffBase: Ember.computed.equal('diffBase', 'manual'),

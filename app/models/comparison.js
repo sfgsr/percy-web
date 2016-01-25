@@ -3,9 +3,9 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   build: DS.belongsTo('build'),
-  headSnapshot: DS.belongsTo('snapshot'),
-  baseSnapshot: DS.belongsTo('snapshot'),
-  pdiff: DS.belongsTo('pdiff'),
+  headSnapshot: DS.belongsTo('snapshot', {async: false}),
+  baseSnapshot: DS.belongsTo('snapshot', {async: false}),
+  pdiff: DS.belongsTo('pdiff', {async: false}),
   state: DS.attr(),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),

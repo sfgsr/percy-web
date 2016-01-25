@@ -4,7 +4,7 @@ import moment from 'moment';
 export default DS.Model.extend({
   name: DS.attr(),
   build: DS.belongsTo('build'),
-  screenshots: DS.hasMany('screenshot'),
+  screenshots: DS.hasMany('screenshot', {async: false}),
   startedProcessingAt: DS.attr('date'),
   finishedProcessingAt: DS.attr('date'),
   processingDurationSeconds: function() {
