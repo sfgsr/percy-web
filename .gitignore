@@ -6,6 +6,7 @@
 
 # Intentionally versioned, see: http://addyosmani.com/blog/checking-in-front-end-dependencies/
 # /bower_components
+node_modules/
 
 # misc
 /.sass-cache
