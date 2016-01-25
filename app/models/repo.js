@@ -4,7 +4,7 @@ import utils from '../lib/utils';
 
 export default DS.Model.extend({
   githubId: DS.attr('number'),
-  namespace: DS.belongsTo('namespace'),
+  namespace: DS.belongsTo('namespace', {async: false}),
   name: DS.attr(),
   slug: DS.attr(),
   htmlUrl: DS.attr(),
