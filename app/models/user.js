@@ -11,7 +11,7 @@ export default DS.Model.extend({
 
   // This should only ever be accessed on the current user, because the API endpoint only returns
   // the subscription for the current user.
-  subscription: DS.belongsTo('subscription'),
+  subscription: DS.belongsTo('subscription', {async: false}),
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),

@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   classNames: ['PricingSection'],
   classNameBindings: ['classes'],
 
+  session: Ember.inject.service(),
   currentPlan: null,
   forceAccountPage: false,
   checkoutText: function() {

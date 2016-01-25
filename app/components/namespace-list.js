@@ -5,13 +5,14 @@ export default Ember.Component.extend({
   currentNamespace: null,
   classes: null,
 
+  session: Ember.inject.service(),
   classNames: ['NamespaceList'],
   classNameBindings: ['classes'],
 
   sortedNamespaces: function() {
     var result = this.get('namespaces').toArray().sort(function(first, second) {
       // Always sort current user's org to the top.
-      if (first.get('id') === this.get('session.secure.user.login')) {
+      if (first.get('id') === this.get('session.data.authenticated.user.login')) {
         return -1;
       }
       // Sort everything else alphabetically.

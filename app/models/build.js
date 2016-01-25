@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import moment from 'moment';
 
 export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: true}),
@@ -13,8 +14,8 @@ export default DS.Model.extend({
   isFinished: Ember.computed.equal('state', 'finished'),
   isFailed: Ember.computed.equal('state', 'failed'),
 
-  commit: DS.belongsTo('commit'),  // Might be null.
-  baseBuild: DS.belongsTo('build'),
+  commit: DS.belongsTo('commit', {async: false}),  // Might be null.
+  baseBuild: DS.belongsTo('build', {async: false}),
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 
@@ -34,18 +35,18 @@ export default DS.Model.extend({
 
   finishedAt: DS.attr('date'),
   approvedAt: DS.attr('date'),
-  approvedBy: DS.belongsTo('user'),
+  approvedBy: DS.belongsTo('user', {async: false}),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  durationSeconds: function() {
+  duration: function() {
     var finished = this.get('finishedAt');
     if (!finished) {
-      finished = window.moment();
+      finished = moment();
     }
     var started = this.get('createdAt');
-    var milliseconds = window.moment(finished).diff(started);
-    return milliseconds / 1000;
+    var milliseconds = moment(finished).diff(started);
+    return milliseconds;
   }.property('finishedAt', 'createdAt'),
 
   isApproved: function() {
@@ -53,6 +54,6 @@ export default DS.Model.extend({
   }.property('approvedAt'),
 
   reloadAll: function() {
-    this.store.findOne('build', this.get('id'));
+    this.store.findRecord('build', this.get('id'), {reload: true});
   },
 });

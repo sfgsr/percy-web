@@ -4,8 +4,8 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       currentNamespace: this.modelFor('namespace'),
-      namespaces: this.store.find('namespace'),
-      repos: this.store.find('repo', {'filter[namespace]': this.modelFor('namespace').get('id')}),
+      namespaces: this.store.findAll('namespace'),
+      repos: this.store.query('repo', {'filter[namespace]': this.modelFor('namespace').get('id')}),
     });
   },
   actions: {

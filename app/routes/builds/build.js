@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    return this.store.findOne('build', params.build_id);
+    return this.store.findRecord('build', params.build_id);
   },
   afterModel: function(build) {
     // The model hook may not be called if transition happened by a link-to helper which provides

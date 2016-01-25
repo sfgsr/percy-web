@@ -6,7 +6,8 @@ export default Ember.Component.extend({
 
   classes: null,
   widthPercentage: function() {
-    return Math.min(100, Math.max(1, (this.get('count') / this.get('total') * 100)));
+    let value = Math.min(100, Math.max(1, (this.get('count') / this.get('total') * 100)));
+    return Ember.String.htmlSafe(value.toString());
   }.property('count', 'total'),
 
   classNames: [

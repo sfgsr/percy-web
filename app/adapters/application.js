@@ -1,5 +1,6 @@
-import JsonApiAdapter from 'ember-json-api/json-api-adapter';
+import DS from 'ember-data';
 
-export default JsonApiAdapter.extend({
+export default DS.JSONAPIAdapter.extend({
   namespace: 'api/v1',
 });
+

@@ -11,14 +11,14 @@
       <div class="PricingSection-infoItem">Unlimited private repos</div>
       <div class="PricingSection-infoItem">2 parallel workers</div>
       <div class="PricingSection-infoItem">7 day history</div>
-      {{#unless session.secure.user.subscription.isSmall}}
+      {{#unless session.data.authenticated.user.subscription.isSmall}}
         <br>
         <div class="PricingSection-cta">
           {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=smallPlan price=smallPlanPrice planName=smallPlanName}}
         </div>
       {{/unless}}
     </div>
-    {{#if session.secure.user.subscription.isSmall}}
+    {{#if session.data.authenticated.user.subscription.isSmall}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket PricingSection-bucket--promoted">
@@ -33,14 +33,14 @@
       <div class="PricingSection-infoItem">Unlimited private repos</div>
       <div class="PricingSection-infoItem">5 parallel workers</div>
       <div class="PricingSection-infoItem">30 day history</div>
-      {{#unless session.secure.user.subscription.isMedium}}
+      {{#unless session.data.authenticated.user.subscription.isMedium}}
         <br>
         <div class="PricingSection-cta">
           {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=mediumPlan price=mediumPlanPrice planName=mediumPlanName}}
         </div>
       {{/unless}}
     </div>
-    {{#if session.secure.user.subscription.isMedium}}
+    {{#if session.data.authenticated.user.subscription.isMedium}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket">
@@ -55,14 +55,14 @@
       <div class="PricingSection-infoItem">Unlimited private repos</div>
       <div class="PricingSection-infoItem">15 parallel workers</div>
       <div class="PricingSection-infoItem">90 day history</div>
-      {{#unless session.secure.user.subscription.isLarge}}
+      {{#unless session.data.authenticated.user.subscription.isLarge}}
         <br>
         <div class="PricingSection-cta">
           {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=largePlan price=largePlanPrice planName=largePlanName}}
         </div>
       {{/unless}}
     </div>
-    {{#if session.secure.user.subscription.isLarge}}
+    {{#if session.data.authenticated.user.subscription.isLarge}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
   </div>{{! no spaces because inline-block }}<div class="PricingSection-bucket">
@@ -77,14 +77,14 @@
       <div class="PricingSection-infoItem">Unlimited private repos</div>
       <div class="PricingSection-infoItem">25 parallel workers</div>
       <div class="PricingSection-infoItem">90 day history</div>
-      {{#unless session.secure.user.subscription.isEnterprise}}
+      {{#unless session.data.authenticated.user.subscription.isEnterprise}}
         <br>
         <div class="PricingSection-cta">
           {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=enterprisePlan price=enterprisePlanPrice planName=enterprisePlanName}}
         </div>
       {{/unless}}
     </div>
-    {{#if session.secure.user.subscription.isEnterprise}}
+    {{#if session.data.authenticated.user.subscription.isEnterprise}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
   </div>
@@ -105,11 +105,11 @@
       <div class="PricingSection-bucket PricingSection-bucket--secondaryPlan">
         <div class="PricingSection-bucketBody">
           <strong>Micro plan:</strong> We offer a micro plan for $9/month with 2 projects, 750 visual diffs/month, and 7 day history.
-          {{#unless session.secure.user.subscription.isMicro}}
+          {{#unless session.data.authenticated.user.subscription.isMicro}}
             {{stripe-checkout tagName='a' href='#' text='Sign Up' plan=microPlan price=microPlanPrice planName=microPlanName}}.
           {{/unless}}
         </div>
-        {{#if session.secure.user.subscription.isMicro}}
+        {{#if session.data.authenticated.user.subscription.isMicro}}
           <div class="PricingSection-title PricingSection-title--small">Current plan</div>
         {{/if}}
       </div>

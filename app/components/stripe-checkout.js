@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   updateCard: false,
   checkoutLabelText: 'Select Plan ({{amount}})',
 
+  session: Ember.inject.service(),
   handler: null,
   classes: null,
   attributeBindings: ['href'],
@@ -70,7 +71,7 @@ export default Ember.Component.extend({
         return;
       }
 
-      if (this.get('updateCard') || this.get('session.secure.user.subscription.isFree')) {
+      if (this.get('updateCard') || this.get('session.data.authenticated.user.subscription.isFree')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.stripePublishableKey,
           image: '/images/percy-bg.png',
@@ -81,7 +82,7 @@ export default Ember.Component.extend({
         this.get('handler').open({
           name: 'Percy.io',
           description: 'Subscription to ' + planName + ' plan',
-          email: this.get('session.secure.user.email'),
+          email: this.get('session.data.authenticated.user.email'),
           amount: this.get('price') * 100,
           panelLabel: this.get('checkoutLabelText'),
           allowRememberMe: false,

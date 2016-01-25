@@ -1,25 +1,27 @@
 import Ember from 'ember';
 import utils from '../lib/utils';
-import Base from 'simple-auth/authenticators/base';
+import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 
-export default Base.extend({
+export default BaseAuthenticator.extend({
+  store: Ember.inject.service(),
   restore: function() {
     // Strategy: completely ignore the restore data and ask the backend again for current auth info.
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var receiveMessage = function(event) {
+        var store = this.get('store');
         // For security reasons, only accept postMessage events from the API origin.
         if (event.origin !== window.location.origin) {
           return;
         }
         if (event.data.user) {
+          var payload = event.data.user;
           // Success! Store the user in the session.
-          var serializer = this.get('store').serializerFor('user');
-          var userData = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
           Ember.$('.auth-iframe').remove();
 
-          var userRecord = this.get('store').push('user', userData);
-          userRecord.reload();  // Reload to load compound document data correctly.
-          resolve({user: userRecord, userData: userData});
+          var userId = payload.data.id;
+          store.pushPayload(payload);
+          var userRecord = store.peekRecord('user', userId);
+          resolve({user: userRecord});
         } else if (event.data === 'unauthenticated') {
           reject();
         }
@@ -38,19 +40,20 @@ export default Base.extend({
     return new Ember.RSVP.Promise(function(resolve) {
       // First, declare a message receiver for the postMessage events.
       var receiveMessage = function(event) {
+        var store = this.get('store');
         // For security reasons, only accept postMessage events from the API origin.
         if (event.origin !== window.location.origin) {
           return;
         }
         if (event.data.user) {
           // Success! Store the user in the session.
-          var serializer = this.get('store').serializerFor('user');
-          var userData = serializer.normalize(this.store.modelFor('user'), event.data.user.data);
+          var payload = event.data.user;
           Ember.$('.auth-iframe').remove();
 
-          var userRecord = this.get('store').push('user', userData);
-          userRecord.reload();  // Reload to load compound document data correctly.
-          resolve({user: userRecord, userData: userData});
+          var userId = payload.data.id;
+          store.pushPayload(payload);
+          var userRecord = store.peekRecord('user', userId);
+          resolve({user: userRecord});
         } else if (event.data === 'unauthenticated') {
           // Build params if given a custom final redirect location.
           var finalRedirect;

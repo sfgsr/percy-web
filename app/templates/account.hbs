@@ -3,33 +3,33 @@
   <a href="#" class="u-pull-right Button" {{action "invalidateSession"}}>Logout</a>
   <h2>Account</h2>
   <p>
-    {{unbound fa-icon "github"}} <strong><a href="{{session.secure.user.githubUrl}}">@{{session.secure.user.login}}</a></strong> ({{session.secure.user.name}})
+    {{fa-icon icon="github"}} <strong><a href="{{session.data.authenticated.user.githubUrl}}">@{{session.data.authenticated.user.login}}</a></strong> ({{session.data.authenticated.user.name}})
   </p>
   <div class="row">
     {{#show-if-hash hash="success"}}
       <div class="Alert Alert--success">
-        {{fa-icon 'fa-check-circle'}} Your plan was updated successfully.
+        {{fa-icon icon='fa-check-circle'}} Your plan was updated successfully.
       </div>
     {{/show-if-hash}}
   </div>
   <hr>
-  <h5>Current subscription: {{session.secure.user.subscription.planName}}</h5>
+  <h5>Current subscription: {{session.data.authenticated.user.subscription.planName}}</h5>
   <div class="row">
     <div class="seven columns">
-      {{meter-bar count=session.secure.user.subscription.currentUsage total=session.secure.user.subscription.planUsageLimit}}
+      {{meter-bar count=session.data.authenticated.user.subscription.currentUsage total=session.data.authenticated.user.subscription.planUsageLimit}}
     </div>
     <div class="five columns">
       <p>
-        <strong>{{format-number session.secure.user.subscription.currentUsage}}</strong>
-        / {{format-number session.secure.user.subscription.planUsageLimit}} visual diffs
+        <strong>{{format-number session.data.authenticated.user.subscription.currentUsage}}</strong>
+        / {{format-number session.data.authenticated.user.subscription.planUsageLimit}} visual diffs
       </p>
     </div>
   </div>
   <hr>
-  {{#unless session.secure.user.subscription.isFree}}
+  {{#unless session.data.authenticated.user.subscription.isFree}}
     <div class="row">
       <div class="five columns">
-        {{subscription-info-form subscription=session.secure.user.subscription}}
+        {{subscription-info-form subscription=session.data.authenticated.user.subscription}}
       </div>
       <div class="seven columns u-text-right">
         <br>
@@ -37,7 +37,7 @@
           text='Update Credit Card'
           checkoutLabelText='Update Credit Card'
           updateCard=true
-          plan=session.secure.user.subscription.plan
+          plan=session.data.authenticated.user.subscription.plan
           price=0
           planName='Update Credit Card'
         }}
@@ -48,7 +48,7 @@
   {{/unless}}
 </div>
 <div class="container">
-  {{pricing-section currentPlan=session.secure.user.subscription.plan}}
+  {{pricing-section currentPlan=session.data.authenticated.user.subscription.plan}}
 </div>
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">

@@ -10,10 +10,10 @@ export default Ember.Component.extend({
 
   // We set style directly because we want both images to be in the initial DOM to avoid flicker.
   showWhenOverlay: function() {
-    return (!this.get('showOverlay') ? 'display: none' : '').htmlSafe();
+    return new Ember.Handlebars.SafeString(!this.get('showOverlay') ? 'display: none' : '');
   }.property('showOverlay'),
   hideWhenOverlay: function() {
-    return (this.get('showOverlay') ? 'display: none' : '').htmlSafe();
+    return new Ember.Handlebars.SafeString(this.get('showOverlay') ? 'display: none' : '');
   }.property('showOverlay'),
 
   setupScrollHandler: function() {

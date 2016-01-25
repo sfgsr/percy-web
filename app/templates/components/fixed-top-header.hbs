@@ -9,7 +9,7 @@
       {{/link-to}}
     </div>
     {{#if session.isAuthenticated}}
-      {{nav-menu user=session.secure.user}}
+      {{nav-menu user=session.data.authenticated.user}}
     {{else}}
       {{nav-menu}}
     {{/if}}
