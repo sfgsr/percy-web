@@ -10,6 +10,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
+    "build-production": "ember build --environment=production",
     "test": "ember test",
     "shrinkwrap": "npm shrinkwrap --dev"
   },
