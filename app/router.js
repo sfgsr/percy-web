@@ -13,22 +13,23 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  // TODO: remove resetNamespace and refactor all route references to full paths.
   this.route('login');
   this.route('repo-forbidden');
-  this.resource('namespace', {path: '/:namespace_id'}, function() {
-    this.resource('repo', {path: '/:repo_id'}, function() {
+  this.route('namespace', {path: '/:namespace_id'}, function() {
+    this.route('repo', {resetNamespace: true, path: '/:repo_id'}, function() {
       this.route('settings', {path: '/settings'});
-      this.resource('builds', function() {
+      this.route('builds', {resetNamespace: true}, function() {
         this.route('build', {path: '/:build_id'});
       });
     });
   });
-  this.resource('docs', function() {
+  this.route('docs', function() {
     this.route('capybara');
     this.route('static');
     this.route('faq');
 
-    this.resource('integrations', {path: '/integrations'}, function() {
+    this.route('integrations', {resetNamespace: true, path: '/integrations'}, function() {
       this.route('ci');
       this.route('github');
       this.route('github-pages');
@@ -36,7 +37,7 @@ Router.map(function() {
       this.route('parallel-tests');
     });
 
-    this.resource('apidocs', {path: '/api'}, function() {
+    this.route('apidocs', {resetNamespace: true, path: '/api'}, function() {
       this.route('reference');
       this.route('client');
     });

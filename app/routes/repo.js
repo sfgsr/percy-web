@@ -10,8 +10,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return repo.get('builds');
   },
   actions: {
-    error: function(error) {
-      if (error.status === 403) {
+    error: function(errors) {
+      if (errors.errors[0].status === 'forbidden') {
         return this.transitionTo('repo-forbidden');
       }
     },

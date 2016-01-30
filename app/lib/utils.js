@@ -40,7 +40,9 @@ export default {
         'Mismatched number of formatting args for: ' + path + '\nGot: ' + otherArgs);
       return;
     } else {
-      path = path.fmt.apply(path, otherArgs);
+      otherArgs.forEach(function(arg) {
+        path = path.replace('%@', arg);
+      })
     }
     return window.location.origin + path + queryParams;
   },
