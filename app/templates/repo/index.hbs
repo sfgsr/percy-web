@@ -1,13 +1,13 @@
 <div class="container container--fixedWidth container--forContent RepoContainer">
   <h5>
     {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}/{{model.name}}
-    <a href="{{model.htmlUrl}}">{{fa-icon icon="github"}}</a>
+    <a href="{{model.htmlUrl}}">{{fa-icon "github"}}</a>
     {{#if model.isDisabled}}
       <span class="RepoContainer-repoState">(disabled)</span>
     {{/if}}
 
     {{#link-to "repo.settings" model.name classNames="Button Button--withLeftIcon u-pull-right"}}
-      {{fa-icon icon="cog" classNames="fa--left"}}
+      {{fa-icon "cog" classNames="fa--left"}}
       Settings
     {{/link-to}}
   </h5>

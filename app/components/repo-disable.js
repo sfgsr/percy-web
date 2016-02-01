@@ -16,9 +16,10 @@ export default Ember.Component.extend({
   actions: {
     action: function() {
       var message = (
-        'Are you sure you want to disable %@?\n\nPercy builds for this repo will be disabled and ' +
+        `Are you sure you want to disable ${this.get('repo.slug')}?` +
+        '\n\nPercy builds for this repo will be disabled and ' +
         'we may remove stored images at any time.'
-      ).fmt(this.get('repo.slug'));
+      );
       if (confirm(message)) {
         this.sendAction('disableRepo', this.get('repo'));
       }

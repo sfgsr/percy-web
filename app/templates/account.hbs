@@ -3,12 +3,12 @@
   <a href="#" class="u-pull-right Button" {{action "invalidateSession"}}>Logout</a>
   <h2>Account</h2>
   <p>
-    {{fa-icon icon="github"}} <strong><a href="{{session.data.authenticated.user.githubUrl}}">@{{session.data.authenticated.user.login}}</a></strong> ({{session.data.authenticated.user.name}})
+    {{fa-icon "github"}} <strong><a href="{{session.data.authenticated.user.githubUrl}}">@{{session.data.authenticated.user.login}}</a></strong> ({{session.data.authenticated.user.name}})
   </p>
   <div class="row">
     {{#show-if-hash hash="success"}}
       <div class="Alert Alert--success">
-        {{fa-icon icon='fa-check-circle'}} Your plan was updated successfully.
+        {{fa-icon 'fa-check-circle'}} Your plan was updated successfully.
       </div>
     {{/show-if-hash}}
   </div>

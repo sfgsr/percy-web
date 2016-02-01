@@ -3,7 +3,7 @@
     <tr class="RepoList-repo {{if repo.isEnabled 'RepoList-repo--enabled'}}">
       <td>{{#link-to "repo.index" repo.namespace.id repo.name}}{{repo.slug}}{{/link-to}}</td>
       <td class="RepoList-actions">
-        {{#link-to "repo.settings" repo.name classNames="RepoList-repoSettings"}}{{fa-icon icon="cog" classNames="fa--left"}}{{/link-to}}
+        {{#link-to "repo.settings" repo.name classNames="RepoList-repoSettings"}}{{fa-icon "cog" classNames="fa--left"}}{{/link-to}}
         {{#if repo.isEnabled}}
           {{#link-to "repo.index" repo.namespace.id repo.name classNames="Button Button--primary"}}Go &raquo;{{/link-to}}
         {{else}}

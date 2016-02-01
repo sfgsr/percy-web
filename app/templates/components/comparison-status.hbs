@@ -3,18 +3,18 @@
     {{! Both base and head exist. }}
     {{#if comparison.isDifferent}}
       {{comparison.pdiff.diffPercentage}}% different
-      {{fa-icon icon="square"}}
+      {{fa-icon "square"}}
     {{else}}
-      {{fa-icon icon="square"}}
+      {{fa-icon "square"}}
     {{/if}}
   {{else}}
     {{! Resource existed in the last build but has been removed. }}
-    {{fa-icon icon="minus-square"}}
+    {{fa-icon "minus-square"}}
   {{/if}}
 {{else}}
   {{#if comparison.headSnapshot}}
     {{! Resources exists in current build but did not exist in the base. }}
     New snapshot
-    {{fa-icon icon="plus-square"}}
+    {{fa-icon "plus-square"}}
   {{/if}}
 {{/if}}

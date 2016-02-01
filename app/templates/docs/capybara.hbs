@@ -1,6 +1,6 @@
 <h2>
   Percy::Capybara
-  <a href="https://github.com/percy/percy-capybara">{{fa-icon icon="github"}}</a>
+  <a href="https://github.com/percy/percy-capybara">{{fa-icon "github"}}</a>
 </h2>
 <p>
   <a href="https://travis-ci.org/percy/percy-capybara"><img src="https://travis-ci.org/percy/percy-capybara.svg?branch=master"></a>
@@ -36,7 +36,7 @@ $ bundle install
   <li>Go to <em>Settings</em> for the repository and copy the write-only API key.</li>
 </ol>
 
-<h4>Private repositories {{fa-icon icon="lock"}}</h4>
+<h4>Private repositories {{fa-icon "lock"}}</h4>
 <p>
   For Rails apps in private repositories, you can use <a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">Rails Secrets</a> to store the Percy repo token. We will use this below when configuring RSpec.
 </p>
@@ -63,7 +63,7 @@ end
   Alternatively, you can configure the <code>PERCY_TOKEN</code> environment variable to avoid storing the token in your repository.
 </p>
 
-<h4>Public repositories {{fa-icon icon="unlock"}}</h4>
+<h4>Public repositories {{fa-icon "unlock"}}</h4>
 <div class="Alert Alert--warning">
   <p>
     <strong>IMPORTANT: Do not store the Percy API token in your repository</strong> if your code is public. Anyone could use your token and consume your account quota (they will not be able to read data because the token is write-only).
