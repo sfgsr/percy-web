@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   actions: {
     setAutomatic: function() {
       let repo = this.get('repo');
-      repo.set('diffBase', 'automatic')
+      repo.set('diffBase', 'automatic');
       repo.save();
     },
     setManual: function() {

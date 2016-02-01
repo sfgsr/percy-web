@@ -42,7 +42,7 @@ export default {
     } else {
       otherArgs.forEach(function(arg) {
         path = path.replace('%@', arg);
-      })
+      });
     }
     return window.location.origin + path + queryParams;
   },

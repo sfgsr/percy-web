@@ -5,7 +5,7 @@ var Router = Ember.Router.extend({
   location: config.locationType,
 
   notifyGoogleAnalytics: function() {
-    return window.ga('send', 'pageview', {
+    return window.ga && window.ga('send', 'pageview', {
       'page': this.get('url'),
       'title': this.get('url')
     });
