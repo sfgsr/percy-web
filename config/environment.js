@@ -37,7 +37,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.stripePublishableKey = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
+    ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
   }
 
   if (environment === 'test') {
@@ -50,11 +50,12 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-    ENV.APP.stripePublishableKey = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
+    ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
+    ENV.APP.PERCY_TOKEN = process.env.PERCY_TOKEN;
   }
 
   if (environment === 'production') {
-    ENV.APP.stripePublishableKey = 'pk_live_cmaeNcmPuMihdT3Q7QDBDMDr';
+    ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_live_cmaeNcmPuMihdT3Q7QDBDMDr';
   }
 
   return ENV;
