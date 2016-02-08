@@ -53,8 +53,8 @@ export default Ember.Component.extend({
   isEnterprisePlanSelected: Ember.computed.equal('currentPlan', 'enterprise'),
 
   actions: {
-    sessionRequiresAuthentication: function() {
-      this.sendAction('sessionRequiresAuthentication');
+    redirectToLogin: function() {
+      this.sendAction('redirectToLogin');
     },
   },
 });

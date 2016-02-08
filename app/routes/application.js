@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
+import utils from '../lib/utils';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
   session: Ember.inject.service(),
   actions: {
-    sessionRequiresAuthentication: function() {
-      this.get('session').authenticate('authenticator:custom');
+    redirectToLogin: function() {
+      utils.redirectToLogin();
     },
     invalidateSession: function() {
       this.get('session').invalidate();

@@ -10,7 +10,7 @@
   {{#if session.isAuthenticated}}
     {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
   {{else}}
-    {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+    {{login-button redirectToLogin="redirectToLogin"}}
   {{/if}}
 </div>
 <div class="container container--marketing container--darker InviteContainer">
@@ -130,7 +130,7 @@ $ percy snapshot _site/
       {{#if session.isAuthenticated}}
         {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
       {{else}}
-        {{login-button sessionRequiresAuthentication="sessionRequiresAuthentication"}}
+        {{login-button redirectToLogin="redirectToLogin"}}
       {{/if}}
     </div>
   </div>

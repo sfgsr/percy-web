@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   },
   actions: {
     login: function() {
-      this.sendAction('sessionRequiresAuthentication');
+      this.sendAction('redirectToLogin');
     }
   },
 });
