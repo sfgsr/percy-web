@@ -14,7 +14,13 @@
       {{#unless session.data.authenticated.user.subscription.isSmall}}
         <br>
         <div class="PricingSection-cta">
-          {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=smallPlan price=smallPlanPrice planName=smallPlanName}}
+          {{stripe-checkout
+            forceAccountPage=forceAccountPage
+            text=checkoutText
+            plan=smallPlan
+            price=smallPlanPrice
+            planName=smallPlanName
+          }}
         </div>
       {{/unless}}
     </div>
@@ -36,7 +42,13 @@
       {{#unless session.data.authenticated.user.subscription.isMedium}}
         <br>
         <div class="PricingSection-cta">
-          {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=mediumPlan price=mediumPlanPrice planName=mediumPlanName}}
+          {{stripe-checkout
+            forceAccountPage=forceAccountPage
+            text=checkoutText
+            plan=mediumPlan
+            price=mediumPlanPrice
+            planName=mediumPlanName
+          }}
         </div>
       {{/unless}}
     </div>
@@ -58,7 +70,13 @@
       {{#unless session.data.authenticated.user.subscription.isLarge}}
         <br>
         <div class="PricingSection-cta">
-          {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=largePlan price=largePlanPrice planName=largePlanName}}
+          {{stripe-checkout
+            forceAccountPage=forceAccountPage
+            text=checkoutText
+            plan=largePlan
+            price=largePlanPrice
+            planName=largePlanName
+          }}
         </div>
       {{/unless}}
     </div>
@@ -80,7 +98,13 @@
       {{#unless session.data.authenticated.user.subscription.isEnterprise}}
         <br>
         <div class="PricingSection-cta">
-          {{stripe-checkout forceAccountPage=forceAccountPage text=checkoutText plan=enterprisePlan price=enterprisePlanPrice planName=enterprisePlanName}}
+          {{stripe-checkout
+            forceAccountPage=forceAccountPage
+            text=checkoutText
+            plan=enterprisePlan
+            price=enterprisePlanPrice
+            planName=enterprisePlanName
+          }}
         </div>
       {{/unless}}
     </div>
@@ -106,7 +130,14 @@
         <div class="PricingSection-bucketBody">
           <strong>Micro plan:</strong> We offer a micro plan for $9/month with 2 projects, 750 visual diffs/month, and 7 day history.
           {{#unless session.data.authenticated.user.subscription.isMicro}}
-            {{stripe-checkout tagName='a' href='#' text='Sign Up' plan=microPlan price=microPlanPrice planName=microPlanName}}.
+            {{stripe-checkout
+              tagName='a'
+              href='#'
+              text='Sign Up'
+              plan=microPlan
+              price=microPlanPrice
+              planName=microPlanName
+            }}.
           {{/unless}}
         </div>
         {{#if session.data.authenticated.user.subscription.isMicro}}

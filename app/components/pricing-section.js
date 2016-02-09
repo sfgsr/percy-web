@@ -51,10 +51,4 @@ export default Ember.Component.extend({
   isMediumPlanSelected: Ember.computed.equal('currentPlan', 'medium'),
   isLargePlanSelected: Ember.computed.equal('currentPlan', 'large'),
   isEnterprisePlanSelected: Ember.computed.equal('currentPlan', 'enterprise'),
-
-  actions: {
-    redirectToLogin: function() {
-      this.sendAction('redirectToLogin');
-    },
-  },
 });

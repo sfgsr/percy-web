@@ -6,7 +6,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   session: Ember.inject.service(),
   actions: {
     redirectToLogin: function() {
-      utils.redirectToLogin();
+      this.transitionTo('login');
     },
     invalidateSession: function() {
       this.get('session').invalidate();
