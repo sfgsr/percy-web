@@ -7,6 +7,14 @@ export default DS.Model.extend({
   baseSnapshot: DS.belongsTo('snapshot', {async: false}),
   pdiff: DS.belongsTo('pdiff', {async: false}),
   state: DS.attr(),
+  startedProcessingAt: DS.attr('date'),
+  finishedProcessingAt: DS.attr('date'),
+  processingDurationSeconds: function() {
+    var finished = this.get('finishedProcessingAt');
+    var started = this.get('startedProcessingAt');
+    var milliseconds = moment(finished).diff(started);
+    return milliseconds / 1000;
+  }.property('startedProcessingAt', 'finishedProcessingAt'),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
