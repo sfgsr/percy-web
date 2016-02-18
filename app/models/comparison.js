@@ -5,6 +5,8 @@ export default DS.Model.extend({
   build: DS.belongsTo('build'),
   headSnapshot: DS.belongsTo('snapshot', {async: false}),
   baseSnapshot: DS.belongsTo('snapshot', {async: false}),
+  headScreenshot: DS.belongsTo('snapshot', {async: false}),
+  baseScreenshot: DS.belongsTo('snapshot', {async: false}),
   pdiff: DS.belongsTo('pdiff', {async: false}),
   state: DS.attr(),
   startedProcessingAt: DS.attr('date'),
