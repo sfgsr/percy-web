@@ -13,9 +13,8 @@
           </div>
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
-          {{! TODO(fotinakis): better way to determine primary snapshot screenshot? }}
           <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
-            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.pdiff.headScreenshot.lossyImage.url}}">
+            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.headScreenshot.lossyImage.url}}">
             {{#if isOverlayEnabled}}
               <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
             {{/if}}
