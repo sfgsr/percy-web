@@ -3,12 +3,13 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   build: DS.belongsTo('build'),
+  state: DS.attr(),
+  width: DS.attr('number'),
   headSnapshot: DS.belongsTo('snapshot', {async: false}),
   baseSnapshot: DS.belongsTo('snapshot', {async: false}),
   headScreenshot: DS.belongsTo('snapshot', {async: false}),
   baseScreenshot: DS.belongsTo('snapshot', {async: false}),
   pdiff: DS.belongsTo('pdiff', {async: false}),
-  state: DS.attr(),
   startedProcessingAt: DS.attr('date'),
   finishedProcessingAt: DS.attr('date'),
   processingDurationSeconds: function() {
