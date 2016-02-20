@@ -87,7 +87,15 @@ $ bundle exec rspec
 $ PERCY_ENABLE=1 PERCY_TOKEN=1234abcd1234abcd bundle exec rspec
 {{/code-block}}
 
-<h3>RSpec setup</h3>
+<h3>Test suite setup</h3>
+
+<div class="Alert Alert--warning">
+  <p>
+    <strong>NOTE:</strong> This setup is required for Percy to group tests correctly. If your builds get stuck <em>"Receiving..."</em>, check this configuration first.
+  </p>
+</div>
+
+<h4>RSpec</h4>
 <p>
   Enable Percy in your <code>spec_helper.rb</code>:
 </p>
@@ -97,6 +105,20 @@ require 'percy/capybara/rspec'
 <p>
   This <code>require</code> line is important—it registers Percy's rspec hooks and must be included, even in Rails apps.
 </p>
+
+<h4>Other test frameworks (MiniTest, etc.)</h4>
+
+<p>
+  If you are not using RSpec, you must manually call <code>Percy::Capybara.initialize_build</code> before your test suite runs and <code>Percy::Capybara.finalize_build</code> after it finishes (even if tests error).
+</p>
+<p>For example, with MiniTest you can add this to your <code>test_helper.rb</code>:</p>
+
+{{#code-block lang="ruby"}}
+Percy::Capybara.initialize_build
+MiniTest.after_run {
+  Percy::Capybara.finalize_build
+}
+{{/code-block}}
 
 <h3>Usage</h3>
 <p>Now the fun part!</p>
