@@ -35,7 +35,7 @@ export default Ember.Component.extend({
         function() {
           alert(
             'Sorry! Something went wrong submitting your feedback, ' +
-            'please email team@percy.io instead.'
+            'please email hello@percy.io instead.'
           );
         }
       );

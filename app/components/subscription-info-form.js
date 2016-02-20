@@ -36,7 +36,7 @@ export default Ember.Component.extend({
         function() {
           alert(
             'An API error occurred! Sorry about that, please ' +
-            'contact us at team@percy.io and we will make sure you are set up correctly.'
+            'contact us at hello@percy.io and we will make sure you are set up correctly.'
           );
           location.reload();
         }

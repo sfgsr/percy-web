@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     'classes',
   ],
   click: function() {
-    if (confirm('Are you sure you want to cancel?\n\nWe want to help if we can, just email us at team@percy.io.')) {
+    if (confirm('Are you sure you want to cancel?\n\nWe want to help if we can, just email us at hello@percy.io.')) {
       SubscriptionHelpers.changeSubscription('free').then(
         function() {
           // Refresh after canceling plan.
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
         function() {
           alert(
             'A Stripe error occurred! Sorry about that, please ' +
-            'contact us at team@percy.io and we will make sure you are set up correctly.'
+            'contact us at hello@percy.io and we will make sure you are set up correctly.'
           );
           location.reload();
         }

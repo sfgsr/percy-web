@@ -45,7 +45,7 @@ export default Ember.Component.extend({
       function() {
         alert(
           'A Stripe error occurred! Your card may have been declined. Please try again or ' +
-          'contact us at team@percy.io and we will help you get set up.'
+          'contact us at hello@percy.io and we will help you get set up.'
         );
       }
     );
