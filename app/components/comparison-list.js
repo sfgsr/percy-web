@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  selectedWidths: null,
   comparisons: null,
   comparisonComponents: null,
 
@@ -8,7 +9,7 @@ export default Ember.Component.extend({
   lastComparisonIndex: null,
 
   isDefaultExpanded: function() {
-    return this.get('comparisons.length') < 100;
+    return this.get('comparisons.length') < 500;
   }.property('comparisons'),
 
   sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),

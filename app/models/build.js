@@ -19,6 +19,14 @@ export default DS.Model.extend({
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 
+  comparisonWidths: function() {
+    var widths = new Set();
+    this.get('comparisons').forEach(function(comparison) {
+      widths.add(comparison.get('width'));
+    });
+    return widths;
+  }.property('comparisons'),
+
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),
   hasDiffs: function() {
