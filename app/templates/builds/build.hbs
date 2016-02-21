@@ -1,22 +1,5 @@
+{{build-header build=model}}
 <div class="container container--forContent BuildContainer">
-  {{approval-section build=model classes="u-pull-right"}}
-  <h5>
-    {{#link-to "namespace.index" model.repo.namespace.id}}{{model.repo.namespace.id}}{{/link-to}}/{{#link-to "repo.index" model.repo.namespace.id model.repo.name}}{{model.repo.name}}{{/link-to}}
-    <a href="{{model.repo.htmlUrl}}">{{fa-icon "github"}}</a>
-    {{#link-to "repo.settings" model.repo.name}}{{fa-icon "cog" classNames="fa--left"}}{{/link-to}}
-    Build #{{model.buildNumber}}
-  </h5>
-
-  {{#if model.commit}}
-    {{commit-info build=model}}
-  {{/if}}
-  <br>
-  {{build-state build=model}}
-  <div>{{build-duration build=model}}</div>
-  <div>{{build-started build=model}}</div>
-  <div>{{build-comparison-info build=model}}</div>
-  <hr>
-
   {{#if model.isPending}}
     <div class="Alert Alert--warning">
       <strong>Waiting for snapshot uploads...</strong> This build has not finished receiving data from your CI service or client, <a href="javascript:location.reload()">refresh</a>?

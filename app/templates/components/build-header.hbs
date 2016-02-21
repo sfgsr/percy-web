@@ -1,0 +1,16 @@
+{{approval-section build=build classes="u-pull-right"}}
+<h5>
+  {{#link-to "namespace.index" build.repo.namespace.id}}{{build.repo.namespace.id}}{{/link-to}}/{{#link-to "repo.index" build.repo.namespace.id build.repo.name}}{{build.repo.name}}{{/link-to}}
+  <a href="{{build.repo.htmlUrl}}">{{fa-icon "github"}}</a>
+  {{#link-to "repo.settings" build.repo.name}}{{fa-icon "cog" classNames="fa--left"}}{{/link-to}}
+  Build #{{build.buildNumber}}
+</h5>
+
+{{#if build.commit}}
+  {{commit-info build=build}}
+{{/if}}
+<br>
+{{build-state build=build}}
+<div>{{build-duration build=build}}</div>
+<div>{{build-started build=build}}</div>
+<div>{{build-comparison-info build=build}}</div>
