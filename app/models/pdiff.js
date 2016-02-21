@@ -2,9 +2,6 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  comparison: DS.belongsTo('comparison'),
-  baseScreenshot: DS.belongsTo('screenshot', {async: false}),
-  headScreenshot: DS.belongsTo('screenshot', {async: false}),
   diffImage: DS.belongsTo('image', {async: false}),
   diffRatio: DS.attr('number'),
   createdAt: DS.attr('date'),

@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   comparison: null,
-  parentComparisonList: null,
 
   showNoDiffSnapshot: false,
   isOverlayEnabled: true,
@@ -11,7 +10,7 @@ export default Ember.Component.extend({
     // TODO: this is just to break the binding with isDefaultExpanded,
     // fix this when migrating to later ember versions with default one-way bindings.
     return this.get('isDefaultExpanded');
-  }.property(),
+  }.property('isDefaultExpanded'),
 
   classNames: ['ComparisonViewer'],
   classNameBindings: [
@@ -19,16 +18,16 @@ export default Ember.Component.extend({
     'isExpanded::ComparisonViewer--actionable',
   ],
 
-  _register: function() {
-    var parent = this.get('parentComparisonList');
-    if (parent) {
-      parent.send('registerChild', this);
-    }
+  registerChild: function() {
+    this.send('registerChild', this);
   }.on('didInsertElement'),
   click: function() {
     this.set('isExpanded', true);
   },
   actions: {
+    registerChild: function() {
+      this.sendAction('registerChildComparisonViewer', this);
+    },
     toggleOverlay: function() {
       this.set('isOverlayEnabled', !this.get('isOverlayEnabled'));
     },

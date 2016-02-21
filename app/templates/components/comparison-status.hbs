@@ -1,20 +1,17 @@
-{{#if comparison.baseSnapshot}}
-  {{#if comparison.headSnapshot}}
-    {{! Both base and head exist. }}
-    {{#if comparison.isDifferent}}
-      {{comparison.pdiff.diffPercentage}}% different
-      {{fa-icon "square"}}
-    {{else}}
-      {{fa-icon "square"}}
-    {{/if}}
+{{#if comparison.wasCompared}}
+  {{#if comparison.isDifferent}}
+    {{comparison.pdiff.diffPercentage}}% different
+    {{fa-icon "square"}}
   {{else}}
-    {{! Resource existed in the last build but has been removed. }}
-    {{fa-icon "minus-square"}}
+    {{fa-icon "square"}}
   {{/if}}
 {{else}}
-  {{#if comparison.headSnapshot}}
-    {{! Resources exists in current build but did not exist in the base. }}
+  {{#if comparison.wasAdded}}
     New snapshot
     {{fa-icon "plus-square"}}
+  {{/if}}
+  {{#if comparison.wasRemoved}}
+    Removed snapshot
+    {{fa-icon "minus-square"}}
   {{/if}}
 {{/if}}

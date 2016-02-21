@@ -5,5 +5,5 @@
   </div>
 {{/unless}}
 {{#each sortedComparisons as |comparison index|}}
-  {{comparison-viewer comparison=comparison isDefaultExpanded=isDefaultExpanded parentComparisonList=this}}
+  {{comparison-viewer comparison=comparison isDefaultExpanded=isDefaultExpanded registerChildComparisonViewer="registerChild"}}
 {{/each}}

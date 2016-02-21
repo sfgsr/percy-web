@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       if (!this.get('comparisonComponents')) {
         this.set('comparisonComponents', []);
       }
-      this.get('comparisonComponents').unshift(component);
+      this.get('comparisonComponents').push(component);
     },
     nextComparison: function() {
       var index = this.get('selectedComparisonIndex');
@@ -68,6 +68,7 @@ export default Ember.Component.extend({
 
       // Expand the selected component.
       selectedComponent.set('isExpanded', true);
+      selectedComponent.set('showNoDiffSnapshot', true);
 
       // Grab the last component, if it exists.
       if (lastIndex !== -1) {

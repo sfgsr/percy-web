@@ -5,8 +5,8 @@
   <span class="u-pull-right">{{comparison.width}}px</span>
 </div>
 {{#if isExpanded}}
-  {{#if comparison.isDifferent}}
-    {{#if comparison.pdiff}}
+  {{#if comparison.wasCompared}}
+    {{#if comparison.isDifferent}}
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
           <div class="ComparisonViewer-pdiffImageBox">
@@ -23,13 +23,23 @@
         </div>
       </div>
     {{else}}
-      {{#if comparison.headSnapshot}}
-        {{! New snapshot. }}
+      {{!-- Compared, but not different. --}}
+      <div class="row ComparisonViewer-noDiffBox">
+        No visual diffs detected.
+
+        {{#if showNoDiffSnapshot}}
+          <a {{action "toggleNoDiffResource"}} href="#">Hide snapshot</a>
+        {{else}}
+          <a {{action "toggleNoDiffResource"}} href="#">Show snapshot</a>
+        {{/if}}
+      </div>
+
+      {{#if showNoDiffSnapshot}}
         <div class="row">
           <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
             <div class="ComparisonViewer-snapshotMissing">
-              {{fa-icon "remove"}}
-              <p class="u-text-small">New snapshot, nothing to compare yet.</p>
+              {{fa-icon "arrows-h"}}
+              <p class="u-text-small">No visual diffs detected.</p>
             </div>
           </div>
           <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
@@ -41,22 +51,13 @@
       {{/if}}
     {{/if}}
   {{else}}
-    <div class="row ComparisonViewer-noDiffBox">
-      No visual diffs detected.
-
-      {{#if showNoDiffSnapshot}}
-        <a {{action "toggleNoDiffResource"}} href="#">Hide snapshot</a>
-      {{else}}
-        <a {{action "toggleNoDiffResource"}} href="#">Show snapshot</a>
-      {{/if}}
-    </div>
-
-    {{#if showNoDiffSnapshot}}
+    {{#if comparison.wasAdded}}
+      {{! New snapshot. }}
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
           <div class="ComparisonViewer-snapshotMissing">
-            {{fa-icon "arrows-h"}}
-            <p class="u-text-small">No visual diffs detected.</p>
+            {{fa-icon "remove"}}
+            <p class="u-text-small">New snapshot, nothing to compare yet.</p>
           </div>
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
@@ -65,6 +66,9 @@
           </div>
         </div>
       </div>
+    {{/if}}
+    {{#if comparison.wasRemoved}}
+      {{!-- TODO: was removed. --}}
     {{/if}}
   {{/if}}
 {{/if}}
