@@ -4,6 +4,11 @@
   margin-bottom: 20px
   border: $darkgrayborder
   border-radius: 3px
+  // Will be dynamically tied to width slider.
+  width: 32%
+  max-height: 1500px
+  overflow-y: auto
+
 
   &:last-child
     margin-bottom: 0
@@ -49,7 +54,6 @@
 
   .ComparisonViewer-pdiffImageBox
     @include unselectable
-    float: left
     position: relative
     border: 1px solid #d0d0d0
     box-shadow: 5px 5px 10px #eaeaea
