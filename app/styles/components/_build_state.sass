@@ -3,16 +3,20 @@
   font-family: $standard-font
   letter-spacing: 0
   font-size: 1.2rem
-  line-height: 2.5rem
   width: 135px
-  height: 25px
-  text-align: center
+  height: 50px
   background-color: $lightergray
   border-radius: 4px
   font-weight: lighter
 
-  .BuildState-text strong
-    font-weight: normal
+  .BuildState-text
+    height: 50px
+    display: flex
+    align-items: center
+    justify-content: center
+
+    span
+      display: inline-block
 
   .BuildState-icon
     border-radius: 4px
@@ -20,9 +24,9 @@
     color: $white
     float: left
     font-size: 1.7rem
-    height: 25px
+    height: 50px
     line-height: 0rem
-    padding-top: 4px
+    padding-top: 16px
     text-align: center
     width: 25px
 

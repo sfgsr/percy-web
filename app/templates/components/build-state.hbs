@@ -1,24 +1,35 @@
 {{#if build.isPending}}
   <div class="BuildState-icon">{{fa-icon 'upload'}}</div>
-  <div class="BuildState-text">Receiving...</div>
+  <div class="BuildState-text"><span>Receiving...</span></div>
 {{else if build.isProcessing}}
   <div class="BuildState-icon">{{fa-icon 'fa-spinner fa-pulse'}}</div>
-  <div class="BuildState-text">Processing...</div>
+  <div class="BuildState-text"><span>Processing...</span></div>
 {{else if build.isFinished}}
   {{#if build.isApproved}}
     <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
-    <div class="BuildState-text hint--top hint--centered hint--rounded" data-hint="{{build.totalComparisonsFinished}} snapshots rendered"><strong>{{build.totalComparisonsDiff}}</strong> visual diffs</div>
+    <div class="BuildState-text">
+      {{pluralize build.totalComparisonsDiff 'visual diff'}}
+      <br>
+      {{pluralize build.totalComparisonsFinished 'snapshot'}}
+    </div>
   {{else}}
     {{#if build.hasDiffs}}
       <div class="BuildState-icon">{{fa-icon 'fa-dot-circle-o'}}</div>
-      <div class="BuildState-text hint--top hint--centered hint--rounded" data-hint="{{build.totalComparisonsFinished}} snapshots rendered"><strong>{{build.totalComparisonsDiff}}</strong> visual diffs</div>
+      <div class="BuildState-text">
+          {{pluralize build.totalComparisonsDiff 'visual diff'}}
+          <br>
+          {{pluralize build.totalComparisonsFinished 'snapshot'}}
+      </div>
     {{else}}
       <div class="BuildState-icon">{{fa-icon 'fa-check-circle-o'}}</div>
-      <div class="BuildState-text hint--top hint--centered hint--rounded" data-hint="{{build.totalComparisonsFinished}} snapshots rendered">No visual diffs</div>
+      <div class="BuildState-text">
+        No visual diffs
+        <br>
+        {{pluralize build.totalComparisonsFinished 'snapshot'}}
+      </div>
     {{/if}}
   {{/if}}
 {{else if build.isFailed}}
   <div class="BuildState-icon">{{fa-icon 'exclamation'}}</div>
-  <div class="BuildState-text hint--top hint--centered hint--rounded" data-hint="CI failed or client errored,
-incorrect data received.">Errored</div>
+  <div class="BuildState-text"><span>Errored</span></div>
 {{/if}}

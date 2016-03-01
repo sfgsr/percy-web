@@ -1,14 +1,25 @@
 .BuildHeader
   position: fixed
-  padding: 40px
+  padding: 15px
   width: 100%
-  height: 100px
   box-sizing: border-box
   z-index: 800
   background: white
   border-bottom: $grayborder
   box-shadow: 0 6px 17px -8px $lightgray
-  // overflow: hidden
+  overflow: auto
 
   .BuildState
-    margin-bottom: 1rem
+    margin: 10px 5px 0 0
+
+  .BuildHeader-title
+    margin: 0 0 4px 0
+
+  .CommitInfo
+    max-width: 70%
+
+
+@media (min-width: 750px)
+  .BuildHeader
+    // On desktop, make sure the build header is not larger than this.
+    max-height: 130px

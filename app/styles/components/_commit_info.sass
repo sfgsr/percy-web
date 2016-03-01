@@ -1,6 +1,13 @@
 .CommitInfo
   font-size: 80%
-  max-width: 900px
+  max-width: 100%
+  box-sizing: border-box
+  display: inline-flex
+  flex-direction: column
+
+  .CommitInfo-branch
+    text-overflow: ellipsis
+    max-width: 20%
 
   .CommitInfo-message
     color: $gray
