@@ -8,7 +8,7 @@ export default Ember.Component.extend({
       this.get('selectedWidths').push(parseInt(value));
 
       let selectedWidths = this.get('selectedWidths');
-      this.get('updateSelectedWidths')(selectedWidths.slice());
+      this.get('updateSelectedWidths')(selectedWidths.slice()); // Slice to copy array.
     }
   },
 });

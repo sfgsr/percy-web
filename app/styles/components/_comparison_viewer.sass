@@ -1,14 +1,12 @@
 .ComparisonViewer
   position: relative
-  margin-top: 20px
-  margin-bottom: 20px
-  border: $darkgrayborder
+  background: $lightestgray
   border-radius: 3px
   // Will be dynamically tied to width slider.
-  width: 32%
-  max-height: 1500px
-  overflow-y: auto
+  width: 33%
 
+  // max-height: 1500px
+  // overflow-y: auto
 
   &:last-child
     margin-bottom: 0
@@ -19,11 +17,6 @@
     // Hacky way to make inner borders overlap, plus the z-index in hover.
     margin-top: -1px
 
-    .ComparisonViewer-header
-      border-bottom: 1px solid $lightgray
-      border-bottom-left-radius: 2px
-      border-bottom-right-radius: 2px
-
   &.ComparisonViewer--actionable
     cursor: pointer
 
@@ -31,13 +24,10 @@
       border: $grayborderhover
       z-index: 100
 
-      .ComparisonViewer-header
-        background-color: $lightestgray
-
   .ComparisonViewer-header
     padding: 5px 10px;
     background-color: $lightgray
-    border-bottom: $grayborder
+    border: 1px solid $lightgray
     border-top-left-radius: 2px
     border-top-right-radius: 2px
 
@@ -47,16 +37,16 @@
     width: 50%
 
   .ComparisonViewer-halfColumn--left
-    padding: 30px 15px 30px 30px
+    padding: 20px 10px 20px 20px
 
   .ComparisonViewer-halfColumn--right
-    padding: 30px 30px 30px 15px
+    padding: 20px 20px 20px 10px
 
   .ComparisonViewer-pdiffImageBox
     @include unselectable
     position: relative
     border: 1px solid #d0d0d0
-    box-shadow: 5px 5px 10px #eaeaea
+    box-shadow: 2px 2px 5px #eaeaea
     // translatez hack to force this box to its own hardware-accelerated layer.
     transform: translateZ(0)
 
@@ -89,7 +79,7 @@
 
     .fa
       font-size: 10rem
-      color: $lightgray
+      color: $lightergray
       text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray;
 
   .ComparisonViewer-noDiffBox
