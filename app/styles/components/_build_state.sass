@@ -2,21 +2,25 @@
   display: inline-block
   font-family: $standard-font
   letter-spacing: 0
-  font-size: 1.2rem
-  width: 135px
+  width: 155px
   height: 50px
   background-color: $lightergray
   border-radius: 4px
   font-weight: lighter
 
-  .BuildState-text
+  .BuildState-textAligner
     height: 50px
     display: flex
     align-items: center
     justify-content: center
+    text-align: center
 
-    span
-      display: inline-block
+  .BuildState-text
+    font-size: 85%
+
+    strong
+      font-weight: normal
+      font-size: $standard-font-size
 
   .BuildState-icon
     border-radius: 4px

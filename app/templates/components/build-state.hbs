@@ -1,35 +1,51 @@
 {{#if build.isPending}}
   <div class="BuildState-icon">{{fa-icon 'upload'}}</div>
-  <div class="BuildState-text"><span>Receiving...</span></div>
+  <div class="BuildState-textAligner">
+    <div class="BuildState-text">
+      <strong>Receiving...</strong>
+    </div>
+  </div>
 {{else if build.isProcessing}}
   <div class="BuildState-icon">{{fa-icon 'fa-spinner fa-pulse'}}</div>
-  <div class="BuildState-text"><span>Processing...</span></div>
+  <div class="BuildState-textAligner">
+    <div class="BuildState-text">
+      <strong>Processing...</strong>
+    </div>
+  </div>
 {{else if build.isFinished}}
   {{#if build.isApproved}}
     <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
-    <div class="BuildState-text">
-      {{pluralize build.totalComparisonsDiff 'visual diff'}}
-      <br>
-      {{pluralize build.totalComparisonsFinished 'snapshot'}}
+    <div class="BuildState-textAligner">
+      <div class="BuildState-text">
+        <strong>{{pluralize build.totalComparisonsFinished "visual diff"}}</strong>
+        <br>
+        {{pluralize build.totalComparisonsDiff "total snapshot"}}
+      </div>
     </div>
   {{else}}
     {{#if build.hasDiffs}}
       <div class="BuildState-icon">{{fa-icon 'fa-dot-circle-o'}}</div>
-      <div class="BuildState-text">
-          {{pluralize build.totalComparisonsDiff 'visual diff'}}
+      <div class="BuildState-textAligner">
+        <div class="BuildState-text">
+          <strong>{{pluralize build.totalComparisonsFinished "visual diff"}}</strong>
           <br>
-          {{pluralize build.totalComparisonsFinished 'snapshot'}}
+          {{pluralize build.totalComparisonsDiff "total snapshot"}}
+        </div>
       </div>
     {{else}}
       <div class="BuildState-icon">{{fa-icon 'fa-check-circle-o'}}</div>
-      <div class="BuildState-text">
-        No visual diffs
-        <br>
-        {{pluralize build.totalComparisonsFinished 'snapshot'}}
+      <div class="BuildState-textAligner">
+        <div class="BuildState-text">
+          <strong>No visual diffs</strong>
+        </div>
       </div>
     {{/if}}
   {{/if}}
 {{else if build.isFailed}}
   <div class="BuildState-icon">{{fa-icon 'exclamation'}}</div>
-  <div class="BuildState-text"><span>Errored</span></div>
+  <div class="BuildState-textAligner">
+    <div class="BuildState-text">
+      <strong>Failed</strong>
+    </div>
+  </div>
 {{/if}}
