@@ -6,6 +6,7 @@
   z-index: 800
   background: $darkpurple
   box-shadow: 0 0px 10px 0px $darkpurple
+  transform: translateZ(0)  // Composite layer hack to avoid an odd 1-pixel shift on scroll.
 
   .BuildHeader-inner
     background: $white

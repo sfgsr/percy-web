@@ -3,7 +3,8 @@
     {{fa-icon "github"}}
     {{build.branch}}
   </span>
-  <br>
+</div>
+<div>
   <span class="CommitInfo-commit">
     <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
     {{#if build.isPullRequest}}
@@ -13,6 +14,8 @@
   <span class="CommitInfo-author">
     {{build.commit.authorName}}
   </span>
+</div>
+<div>
   <span class="CommitInfo-message">
     {{build.commit.message}}
   </span>
