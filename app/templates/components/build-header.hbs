@@ -10,7 +10,7 @@
         {{build-info-expando build=build toggleBuildInfo=(action 'toggleBuildInfo')}}
       </div>
       {{build-info build=build isVisible=isBuildInfoVisible}}
-      <div>
+      <div class="BuildHeader-stateAndCommit">
         {{build-state build=build}}
         {{#if build.commit}}
           {{commit-info build=build}}
