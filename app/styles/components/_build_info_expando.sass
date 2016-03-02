@@ -1,0 +1,15 @@
+.BuildInfoExpando
+  display: inline-block
+
+  .BuildInfoExpando-handle
+    cursor: pointer
+    .fa
+      font-size: 2rem
+      color: $gray
+
+  .BuildInfoExpando-inner
+    display: none
+
+  &.BuildInfoExpando--expanded
+    .BuildInfoExpando-inner
+      display: block

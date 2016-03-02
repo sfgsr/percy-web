@@ -1,26 +1,33 @@
-<div class="row">
-  <div class="four columns">
-    <h5 class="BuildHeader-title">
-      {{#link-to "namespace.index" build.repo.namespace.id}}{{build.repo.namespace.id}}{{/link-to}}/{{#link-to "repo.index" build.repo.namespace.id build.repo.name}}{{build.repo.name}}{{/link-to}}
-      <a href="{{build.repo.htmlUrl}}">{{fa-icon "github"}}</a>
-      #{{build.buildNumber}}
-    </h5>
-    {{build-state build=build}}
-    {{#if build.commit}}
-      {{commit-info build=build}}
-    {{/if}}
-  </div>
-  <div class="three columns">
-    <div class="BuildHeader-timings">
-      <div>{{build-duration build=build}}</div>
-      <div>{{build-started build=build}}</div>
-      <div>{{build-comparison-info build=build}}</div>
+<div class="BuildHeader-inner">
+  <div class="row">
+    <div class="six columns">
+      <span class="BuildHeader-title">
+        {{#link-to "namespace.index" build.repo.namespace.id}}{{build.repo.namespace.id}}{{/link-to}}
+        / {{#link-to "repo.index" build.repo.namespace.id build.repo.name}}{{build.repo.name}}{{/link-to}}
+        <a href="{{build.repo.htmlUrl}}">{{fa-icon "github"}}</a>
+        Build #{{build.buildNumber}}
+      </span>
+      {{build-info-expando build=build}}
+    </div>
+    <div class="four columns">
+      {{width-selector updateSelectedWidths=updateSelectedWidths build=build}}
+    </div>
+    <div class="two columns">
+      {{approval-section build=build}}
     </div>
   </div>
-  <div class="three columns">
-    {{width-selector updateSelectedWidths=updateSelectedWidths build=build}}
-  </div>
-  <div class="two columns">
-    {{approval-section build=build}}
+  <div class="row">
+    <div class="two columns">
+      {{build-state build=build}}
+    </div>
+    <div class="four columns">
+      {{#if build.commit}}
+        {{commit-info build=build}}
+      {{/if}}
+    </div>
+    <div class="four columns">
+    </div>
+    <div class="two columns">
+    </div>
   </div>
 </div>

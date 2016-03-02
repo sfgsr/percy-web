@@ -1,6 +1,8 @@
 <div class="container container--fixedWidth container--forContent RepoContainer">
   <h5>
-    {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}/{{model.name}}
+    {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}
+    / {{#link-to "repo.index" model.namespace.id model.name}}{{model.name}}{{/link-to}}
+
     <a href="{{model.htmlUrl}}">{{fa-icon "github"}}</a>
     {{#if model.isDisabled}}
       <span class="RepoContainer-repoState">(disabled)</span>

@@ -1,11 +1,19 @@
 <div>
-  <strong class="CommitInfo-branch">{{build.branch}}</strong>
-  <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
-  {{#if build.isPullRequest}}
-    <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">PR #{{build.pullRequestNumber}}</a>
-  {{/if}}
-  {{build.commit.authorName}}
-</div>
-<div class="CommitInfo-message">
-  {{build.commit.message}}
+  <span class="CommitInfo-branch">
+    {{fa-icon "github"}}
+    {{build.branch}}
+  </span>
+  <br>
+  <span class="CommitInfo-commit">
+    <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+    {{#if build.isPullRequest}}
+      <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">PR #{{build.pullRequestNumber}}</a>
+    {{/if}}
+  </span>
+  <span class="CommitInfo-author">
+    {{build.commit.authorName}}
+  </span>
+  <span class="CommitInfo-message">
+    {{build.commit.message}}
+  </span>
 </div>
