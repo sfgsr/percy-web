@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNameBindings: ['classes', 'isExpanded:BuildInfoExpando--expanded'],
   actions: {
     toggle: function() {
-      this.set('isExpanded', !this.get('isExpanded'));
+      this.get('toggleBuildInfo')();
     },
   },
 });

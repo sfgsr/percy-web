@@ -5,10 +5,9 @@
   <div class="four columns">
     {{commit-info build=build}}
   </div>
-  <div class="three columns BuildCard-timingSection">
-    {{build-duration build=build}}<br>
-    {{build-started build=build}}
-    {{!-- {{build-comparison-info build=build}}<br> --}}
+  <div class="three columns">
+    {{! TODO(fotinakis): figure out why comparison data is not loaded correctly here. }}
+    {{build-info build=build showComparisonInfo=false}}
   </div>
   <div class="three columns">{{build-state build=build classes="u-pull-right"}}</div>
 </div>
