@@ -16,16 +16,19 @@
         {{/if}}
       </div>
     </div>
-    <div class="four columns">
-      &nbsp;
-      {{!-- {{width-selector updateSelectedWidths=updateSelectedWidths build=build}} --}}
-    </div>
-    <div class="two columns">
+    <div class="six columns">
       {{approval-section build=build}}
       {{comparison-mode-picker
           selectedNumColumns=selectedNumColumns
           selectNumColumns=(action selectNumColumns)
       }}
+      {{#if (gt build.numComparisonWidths 1)}}
+        {{width-selector
+            build=build
+            selectedWidths=selectedWidths
+            updateSelectedWidths=(action updateSelectedWidths)
+        }}
+      {{/if}}
     </div>
   </div>
 </div>

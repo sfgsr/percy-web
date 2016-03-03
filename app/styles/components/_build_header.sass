@@ -12,13 +12,18 @@
     .ApprovalSection
       margin-top: 10px
 
-    .Button
+    .Button,
+    .WidthSelector,
       float: right
 
+    .Button
+      clear: both
+
+    .WidthSelector
+      margin-right: 10px
+
   .BuildInfo
-    content: ""
-    display: table
-    clear: both
+    @include clearfix
 
     .BuildInfo-started,
     .BuildInfo-duration,

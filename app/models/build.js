@@ -20,12 +20,19 @@ export default DS.Model.extend({
   snapshots: DS.hasMany('snapshot', {async: true}),
 
   comparisonWidths: function() {
-    var widths = new Set();
+    // TODO(fotinakis): use a JavaScript Set when the world has advanced.
+    var widths = [];
     this.get('comparisons').forEach(function(comparison) {
-      widths.add(comparison.get('width'));
+      let width = comparison.get('width');
+      if (widths.indexOf(width) === -1) {
+        widths.push(width);
+      }
     });
-    return widths;
+    return widths.sort(function(a, b) { return a - b; });
   }.property('comparisons'),
+  numComparisonWidths: function() {
+    return this.get('comparisonWidths').length;
+  }.property('comparisonWidths'),
 
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),

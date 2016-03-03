@@ -7,10 +7,18 @@
   .ComparisonViewer
     @include transition('1s ease-in-out')
 
+    .ComparisonViewer-snapshotMissing
+      .fa
+        @include transition('1s ease-in-out')
+
   &.ComparisonList--1col
     .ComparisonViewer
       width: 100%
   &.ComparisonList--4col
     .ComparisonViewer
       width: 24.5%
+
+      .ComparisonViewer-snapshotMissing
+        .fa
+          font-size: 5rem
 

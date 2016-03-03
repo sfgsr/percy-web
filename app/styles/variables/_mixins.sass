@@ -17,6 +17,11 @@
    -ms-user-select: none
    user-select: none
 
+@mixin clearfix
+  content: ""
+  display: table
+  clear: both
+
 @mixin keyframes($animation-name)
   @-webkit-keyframes #{$animation-name}
     @content

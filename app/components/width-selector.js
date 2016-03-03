@@ -2,6 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   selectedWidths: [],
+  classNames: ['WidthSelector'],
+
+  // Convenience property since the width selector is currently a single-select dropdown.
+  primarySelectedWidth: function() {
+    return this.get('selectedWidths').slice(-1)[0];
+  }.property('selectedWidths'),
+
   actions: {
     updateSelectedWidths: function(value) {
       this.set('selectedWidths', []);
