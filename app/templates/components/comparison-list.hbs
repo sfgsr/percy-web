@@ -1,9 +1,14 @@
 {{#unless isDefaultExpanded}}
-  <div class="Alert Alert--warning">
+  <div class="container container--fixedWidth Alert Alert--warning">
     <strong>Whew!</strong> There are too many snapshots to show all at once, so they
-    are collapsed below. <strong>Tip:</strong> use <code>j</code> and <code>k</code> to move around.
+    are collapsed below. <strong>Tip:</strong> use <code>j</code> and <code>k</code> or the arrow keys to move around.
   </div>
 {{/unless}}
 {{#each sortedComparisons as |comparison index|}}
-  {{comparison-viewer comparison=comparison isDefaultExpanded=isDefaultExpanded registerChildComparisonViewer="registerChild"}}
+  {{comparison-viewer
+      comparison=comparison
+      isDefaultExpanded=isDefaultExpanded
+      registerChildComparisonViewer="registerChild"
+      selectedWidths=selectedWidths
+  }}
 {{/each}}

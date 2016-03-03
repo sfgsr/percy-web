@@ -1,9 +1,9 @@
 {{fa-icon "compress"}}
 {{#if build.baseBuild}}
-  compared <strong>{{build.branch}}</strong> → <strong>{{build.baseBuild.branch}}</strong> ({{#link-to "builds.build" build.repo.namespace.id build.repo.name build.baseBuild.id}}Build #{{build.baseBuild.buildNumber}}{{/link-to}})
+  compared to {{#link-to "builds.build" build.repo.namespace.id build.repo.name build.baseBuild.id}}Build #{{build.baseBuild.buildNumber}}{{/link-to}} (<strong>{{build.baseBuild.branch}}</strong>)
 {{else}}
   {{#if build.isFinished}}
-    no target build to compare
+    no base build to compare
   {{else}}
     --
   {{/if}}

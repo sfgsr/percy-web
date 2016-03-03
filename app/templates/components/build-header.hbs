@@ -1,0 +1,34 @@
+<div class="BuildHeader-inner">
+  <div class="row">
+    <div class="six columns">
+      <div>
+        <span class="BuildHeader-title">
+          {{#link-to "namespace.index" build.repo.namespace.id}}{{build.repo.namespace.id}}{{/link-to}}
+          / {{#link-to "repo.index" build.repo.namespace.id build.repo.name}}{{build.repo.name}}{{/link-to}}
+          Build #{{build.buildNumber}}
+        </span>
+      </div>
+      {{build-info build=build}}
+      <div class="BuildHeader-stateAndCommit">
+        {{build-state build=build}}
+        {{#if build.commit}}
+          {{commit-info build=build}}
+        {{/if}}
+      </div>
+    </div>
+    <div class="six columns">
+      {{approval-section build=build}}
+      {{comparison-mode-picker
+          selectedNumColumns=selectedNumColumns
+          selectNumColumns=(action selectNumColumns)
+      }}
+      {{#if (gt build.numComparisonWidths 1)}}
+        {{width-selector
+            build=build
+            selectedWidths=selectedWidths
+            updateSelectedWidths=(action updateSelectedWidths)
+        }}
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,12 +1,9 @@
 .ComparisonViewer
   position: relative
-  margin-top: 20px
-  margin-bottom: 20px
-  border: $darkgrayborder
+  background: $lightestgray
   border-radius: 3px
-
-  &:first-child
-    margin-top: 0
+  width: 100%
+  margin-bottom: 10px
 
   &:last-child
     margin-bottom: 0
@@ -17,11 +14,6 @@
     // Hacky way to make inner borders overlap, plus the z-index in hover.
     margin-top: -1px
 
-    .ComparisonViewer-header
-      border-bottom: 1px solid $lightgray
-      border-bottom-left-radius: 2px
-      border-bottom-right-radius: 2px
-
   &.ComparisonViewer--actionable
     cursor: pointer
 
@@ -29,39 +21,52 @@
       border: $grayborderhover
       z-index: 100
 
-      .ComparisonViewer-header
-        background-color: $lightestgray
-
   .ComparisonViewer-header
-    padding: 5px 10px;
+    padding: 5px;
     background-color: $lightgray
-    border-bottom: $grayborder
+    border: 1px solid $lightgray
     border-top-left-radius: 2px
     border-top-right-radius: 2px
+
+    strong
+      display: inline-block
+      margin: 4px 0 0 10px
+
+    .ComparisonStatus
+      float: right
+      margin-right: 5px
+
+    .ComparisonDuration
+      float: right
+      margin-top: 4px
+      margin-right: 10px
 
   .ComparisonViewer-halfColumn
     float: left
     box-sizing: border-box
     width: 50%
+    display: flex
+    justify-content: center
 
   .ComparisonViewer-halfColumn--left
-    padding: 30px 15px 30px 30px
+    padding: 20px 10px 20px 20px
 
   .ComparisonViewer-halfColumn--right
-    padding: 30px 30px 30px 15px
+    padding: 20px 20px 20px 10px
 
   .ComparisonViewer-pdiffImageBox
     @include unselectable
-    float: left
     position: relative
-    border: 1px solid #d0d0d0
-    box-shadow: 5px 5px 10px #eaeaea
+    border: 1px solid #eaeaea
+    box-shadow: 0px 0px 5px #dadada
     // translatez hack to force this box to its own hardware-accelerated layer.
     transform: translateZ(0)
 
     img
       @include unselectable
+      display: block
       width: 100%
+      height: auto
 
   .ComparisonViewer-pdiffImageBox--actionable
     @include unselectable
@@ -84,11 +89,13 @@
     height: 200px
     text-align: center
     padding-top: 50px
+    background: $white
     border: $grayborder
+    width: 100%
 
     .fa
-      font-size: 10rem
-      color: $lightgray
+      font-size: 8rem
+      color: $lightergray
       text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray;
 
   .ComparisonViewer-noDiffBox

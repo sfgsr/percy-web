@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  selectedWidths: null,
+  selectedNumColumns: null,
   comparisons: null,
   comparisonComponents: null,
 
@@ -8,19 +10,23 @@ export default Ember.Component.extend({
   lastComparisonIndex: null,
 
   isDefaultExpanded: function() {
-    return this.get('comparisons.length') < 100;
+    return this.get('comparisons.length') < 500;
   }.property('comparisons'),
 
   sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),
   comparisonSortProperties: ['isDifferent:desc', 'pdiff.diffPercentageFull:desc'],
 
   classNames: ['ComparisonList'],
+  classNameBindings: ['comparisonListMode'],
+  comparisonListMode: function() {
+    return 'ComparisonList--' + this.get('selectedNumColumns') + 'col';
+  }.property('selectedNumColumns'),
 
   setupKeyHandlers: function() {
     Ember.$(document).bind('keydown.comparisons', function(e) {
-      if (e.keyCode === 74) {  // "j"
+      if (e.keyCode === 74 || e.keyCode === 39) {  // "j" or right arrow
         this.send('nextComparison');
-      } else if (e.keyCode === 75) {  // "k"
+      } else if (e.keyCode === 75 || e.keyCode === 37) {  // "k" or left arrow
         this.send('previousComparison');
       }
     }.bind(this));
@@ -78,7 +84,7 @@ export default Ember.Component.extend({
 
       // Wait for the views changes above to render, then calculate the right scroll position.
       Ember.run.scheduleOnce('afterRender', function() {
-        window.scrollTo(0, selectedComponent.$().offset().top - 75);
+        window.scrollTo(0, selectedComponent.$().offset().top - 210);
       });
     },
   }

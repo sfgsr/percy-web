@@ -2,6 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   comparison: null,
+  selectedWidths: [],
+
+  isVisible: function() {
+    let width = this.get('comparison.width');
+    let selectedWidths = this.get('selectedWidths');
+    return selectedWidths.contains(width);
+  }.property('selectedWidths'),
 
   showNoDiffSnapshot: false,
   isOverlayEnabled: true,

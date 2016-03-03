@@ -1,10 +1,9 @@
 {{#if build.isFinished}}
-  <div class="row">
-    {{approval-button build=build}}
-  </div>
+  {{approval-button build=build}}
   {{#if build.isApproved}}
-    <div class="row">
-      Last approved by @{{build.approvedBy.login}}
-    </div>
+    <p class="u-pull-right">
+      Approved by
+      {{user-name user=build.approvedBy}}
+    </p>
   {{/if}}
 {{/if}}

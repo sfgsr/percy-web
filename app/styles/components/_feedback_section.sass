@@ -14,8 +14,7 @@
     padding: 10px
     z-index: 900
     right: -275px
-    top: 90px
-    font-size: 90%
+    top: 200px
 
     textarea
       color: #000
@@ -32,7 +31,7 @@
     border-radius: 6px 6px 0 0
     display: block
     font-family: $fancy-font
-    font-size: 80%
+    font-size: 90%
     font-weight: 600
     text-decoration: none
     text-transform: uppercase
@@ -44,17 +43,20 @@
     border-bottom: 0
     position: fixed
     right: -35px
-    top: 150px
+    top: 250px
     width: 100px
     text-align: center
     height: 35px
     z-index: 999
     padding-top: 8px
+    opacity: 0.35
+
+    &:hover
+      opacity: 1
 
   &.FeedbackSection--active
     .FeedbackSection-box
       right: 0px
     .FeedbackSection-tab
       right: 241px
-
-
+      opacity: 1

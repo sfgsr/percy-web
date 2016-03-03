@@ -43,6 +43,7 @@
     "ember-inflector": "^1.9.4",
     "ember-moment": "5.1.0",
     "ember-simple-auth": "1.0.1",
+    "ember-truth-helpers": "1.2.0",
     "glob": "^4.5.3",
     "http-proxy": "^1.11.1",
     "morgan": "^1.5.2"

@@ -280,8 +280,10 @@ h6
  */
 a
   color: $default-link
+  text-decoration: none
 a:hover
   color: $default-link-hover
+  text-decoration: underline
 
 
 /**
@@ -300,6 +302,7 @@ a:hover
     font-weight: normal
     letter-spacing: 0
     line-height: 1.4rem
+
 
 /**
  * Forms.
@@ -502,9 +505,7 @@ hr
 .container:after,
 .row:after,
 .u-clear-floats
-  content: ""
-  display: table
-  clear: both
+  @include clearfix
 
 /**
  * Hint.css overrides.

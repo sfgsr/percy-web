@@ -1,6 +1,7 @@
 <div class="container container--forContent container--fixedWidth">
-  <h5>
-    {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}/{{#link-to "repo.index" model.namespace.id model.name}}{{model.name}}{{/link-to}}
+  <h5 class="alt">
+    {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}
+    / {{#link-to "repo.index" model.namespace.id model.name}}{{model.name}}{{/link-to}}
     {{#if model.isDisabled}}
       <span class="RepoContainer-repoState">(disabled)</span>
     {{/if}}

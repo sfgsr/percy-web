@@ -2,12 +2,12 @@
   <div class="two columns">
     <h6>{{#link-to "builds.build" build}}Build #{{build.buildNumber}}{{/link-to}}</h6>
   </div>
-  <div class="five columns">
+  <div class="six columns">
     {{commit-info build=build}}
   </div>
-  <div class="three columns BuildCard-timingSection">
-    {{build-duration build=build}}<br>
-    {{build-started build=build}}
+  <div class="two columns">
+    {{! TODO(fotinakis): figure out why comparison data is not loaded correctly here. }}
+    {{build-info build=build showComparisonInfo=false}}
   </div>
-  <div class="two columns u-text-center">{{build-state build=build}}</div>
+  <div class="two columns">{{build-state build=build classes="u-pull-right"}}</div>
 </div>

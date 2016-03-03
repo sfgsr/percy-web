@@ -1,25 +1,30 @@
 <div class="ComparisonViewer-header row">
   <strong>{{comparison.headSnapshot.name}}</strong>
-  {{comparison-status comparison=comparison classes="u-pull-right"}}
-  {{comparison-duration comparison=comparison classes="u-pull-right"}}
-  <span class="u-pull-right">{{comparison.width}}px</span>
+  {{comparison-status comparison=comparison}}
+  {{comparison-duration comparison=comparison}}
 </div>
 {{#if isExpanded}}
   {{#if comparison.wasCompared}}
     {{#if comparison.isDifferent}}
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
-          <div class="ComparisonViewer-pdiffImageBox">
-            <img class="ComparisonViewer-pdiffImage" src="{{comparison.baseScreenshot.lossyImage.url}}">
-          </div>
+          {{#with comparison.baseScreenshot.lossyImage as |image|}}
+            <div class="ComparisonViewer-pdiffImageBox" style="max-width: {{image.width}}px">
+              <img class="ComparisonViewer-pdiffImage" src="{{image.url}}">
+            </div>
+          {{/with}}
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
-          <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable">
-            <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{comparison.headScreenshot.lossyImage.url}}">
-            {{#if isOverlayEnabled}}
-              <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{comparison.pdiff.diffImage.url}}">
-            {{/if}}
-          </div>
+          {{#with comparison.headScreenshot.lossyImage as |lossyImage|}}
+            <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable" style="max-width: {{lossyImage.width}}px">
+              <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{lossyImage.url}}">
+              {{#if isOverlayEnabled}}
+                {{#with comparison.pdiff.diffImage as |diffImage|}}
+                  <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{diffImage.url}}">
+                {{/with}}
+              {{/if}}
+            </div>
+          {{/with}}
         </div>
       </div>
     {{else}}
@@ -39,13 +44,15 @@
           <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
             <div class="ComparisonViewer-snapshotMissing">
               {{fa-icon "arrows-h"}}
-              <p class="u-text-small">No visual diffs detected.</p>
+              <p>No visual diffs detected.</p>
             </div>
           </div>
           <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
-            <div class="ComparisonViewer-pdiffImageBox">
-              <img class="ComparisonViewer-pdiffImage" src="{{comparison.headScreenshot.lossyImage.url}}">
-            </div>
+            {{#with comparison.headScreenshot.lossyImage as |image|}}
+              <div class="ComparisonViewer-pdiffImageBox" style="max-width: {{image.width}}px">
+                <img class="ComparisonViewer-pdiffImage" src="{{image.url}}">
+              </div>
+            {{/with}}
           </div>
         </div>
       {{/if}}
@@ -57,13 +64,15 @@
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
           <div class="ComparisonViewer-snapshotMissing">
             {{fa-icon "remove"}}
-            <p class="u-text-small">New snapshot, nothing to compare yet.</p>
+            <p>New snapshot,<br>nothing to compare yet.</p>
           </div>
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
-          <div class="ComparisonViewer-pdiffImageBox">
-            <img class="ComparisonViewer-pdiffImage" src="{{comparison.headScreenshot.lossyImage.url}}">
-          </div>
+          {{#with comparison.headScreenshot.lossyImage as |image|}}
+            <div class="ComparisonViewer-pdiffImageBox" style="max-width: {{image.width}}px">
+              <img class="ComparisonViewer-pdiffImage" src="{{image.url}}">
+            </div>
+          {{/with}}
         </div>
       </div>
     {{/if}}

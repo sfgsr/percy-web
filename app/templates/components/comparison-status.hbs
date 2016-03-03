@@ -1,14 +1,12 @@
 {{#if comparison.wasCompared}}
   {{#if comparison.isDifferent}}
-    {{comparison.pdiff.diffPercentage}}% different
-    {{fa-icon "square"}}
+    {{comparison.pdiff.diffPercentage}}%
   {{else}}
     {{fa-icon "square"}}
   {{/if}}
 {{else}}
   {{#if comparison.wasAdded}}
-    New snapshot
-    {{fa-icon "plus-square"}}
+    New
   {{/if}}
   {{#if comparison.wasRemoved}}
     Removed snapshot

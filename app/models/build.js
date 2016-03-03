@@ -19,6 +19,21 @@ export default DS.Model.extend({
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 
+  comparisonWidths: function() {
+    // TODO(fotinakis): use a JavaScript Set when the world has advanced.
+    var widths = [];
+    this.get('comparisons').forEach(function(comparison) {
+      let width = comparison.get('width');
+      if (widths.indexOf(width) === -1) {
+        widths.push(width);
+      }
+    });
+    return widths.sort(function(a, b) { return a - b; });
+  }.property('comparisons'),
+  numComparisonWidths: function() {
+    return this.get('comparisonWidths').length;
+  }.property('comparisonWidths'),
+
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),
   hasDiffs: function() {
@@ -46,8 +61,19 @@ export default DS.Model.extend({
     }
     var started = this.get('createdAt');
     var milliseconds = moment(finished).diff(started);
-    return milliseconds;
+    return moment.duration(milliseconds);
   }.property('finishedAt', 'createdAt'),
+
+  // Convenience methods for accessing common methods in templates.
+  durationHours: function() {
+    return this.get('duration').hours();
+  }.property('duration'),
+  durationMinutes: function() {
+    return this.get('duration').minutes();
+  }.property('duration'),
+  durationSeconds: function() {
+    return this.get('duration').seconds();
+  }.property('duration'),
 
   isApproved: function() {
     return !!this.get('approvedAt');

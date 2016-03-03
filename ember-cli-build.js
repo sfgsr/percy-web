@@ -1,7 +1,12 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {});
+  var app = new EmberApp(defaults, {
+    babel: {
+      comments: false,
+      includePolyfill: true,
+    }
+  });
 
   app.import('bower_components/accounting.js/accounting.js');
   app.import('bower_components/hint.css/hint.css');
