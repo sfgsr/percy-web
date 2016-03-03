@@ -11,7 +11,7 @@
   <div class="container container--fixedWidth Alert Alert--warning">
     <strong>Waiting for snapshot uploads...</strong> This build has not finished receiving data from your CI service or client, <a href="javascript:location.reload()">refresh</a>?
     <br>
-    If this has been pending for a long time, your client may have failed to upload all the data. This build can be safely ignored, it will not be used for visual diffs.
+    If this has been pending for a while, your client may have failed to upload or finalize all snapshots. This build can be safely ignored, it will not be used for visual diffs.
   </div>
 {{/if}}
 {{#if build.isProcessing}}
