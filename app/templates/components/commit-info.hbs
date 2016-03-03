@@ -3,12 +3,12 @@
     <a href="{{build.repo.htmlUrl}}">{{fa-icon "github"}}</a>
     {{build.branch}}
   </span>
-</div>
-<div>
   <span class="CommitInfo-commit">
     <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+  </span>
+  <span class="CommitInfo-pr">
     {{#if build.isPullRequest}}
-      <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">PR #{{build.pullRequestNumber}}</a>
+      (<a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">#{{build.pullRequestNumber}}</a>)
     {{/if}}
   </span>
   <span class="CommitInfo-author">

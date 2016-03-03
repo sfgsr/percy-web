@@ -4,34 +4,38 @@
   display: inline-flex
   flex-direction: column
 
-  .fa
-    font-size: 1.7rem
-    line-height: 2rem
-    color: $default-text-color
-
-  .CommitInfo-author
-    padding-left: 3px
-
   .CommitInfo-branch
-    text-overflow: ellipsis
     float: left
+    text-overflow: ellipsis
     display: inline-block
-    line-height: 1rem
     overflow: hidden
     white-space: nowrap
     font-weight: bold
-    max-width: 100%
-    line-height: 2rem
+    max-width: 50%
     box-sizing: border-box
+
+    .fa
+      color: $default-text-color
+
+  .CommitInfo-author
+    float: left
+    display: inline-block
+    padding-left: 4px
+
+  .CommitInfo-pr
+    float: left
+    display: inline-block
+    padding-left: 4px
 
   .CommitInfo-commit
     float: left
+    display: inline-block
     font-family: $monospace-font
     font-size: 90%
+    padding-left: 4px
 
   .CommitInfo-message
     color: $gray
-    float: left
     display: inline-block
     white-space: nowrap
     overflow: hidden

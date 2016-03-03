@@ -54,8 +54,19 @@ export default DS.Model.extend({
     }
     var started = this.get('createdAt');
     var milliseconds = moment(finished).diff(started);
-    return milliseconds;
+    return moment.duration(milliseconds);
   }.property('finishedAt', 'createdAt'),
+
+  // Convenience methods for accessing common methods in templates.
+  durationHours: function() {
+    return this.get('duration').hours();
+  }.property('duration'),
+  durationMinutes: function() {
+    return this.get('duration').minutes();
+  }.property('duration'),
+  durationSeconds: function() {
+    return this.get('duration').seconds();
+  }.property('duration'),
 
   isApproved: function() {
     return !!this.get('approvedAt');

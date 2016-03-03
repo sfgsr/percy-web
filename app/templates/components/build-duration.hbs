@@ -5,6 +5,8 @@
   {{#if build.isPending}}
     --
   {{else}}
-    ran for {{moment-duration build.duration}}
+    {{#if build.durationHours}}{{build.durationHours}} h{{/if}}
+    {{#if build.durationMinutes}}{{build.durationMinutes}} min{{/if}}
+    {{#if build.durationSeconds}}{{build.durationSeconds}} sec{{/if}}
   {{/if}}
 {{/if}}

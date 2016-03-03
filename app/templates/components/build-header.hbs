@@ -7,9 +7,8 @@
           / {{#link-to "repo.index" build.repo.namespace.id build.repo.name}}{{build.repo.name}}{{/link-to}}
           Build #{{build.buildNumber}}
         </span>
-        {{build-info-expando build=build toggleBuildInfo=(action 'toggleBuildInfo')}}
       </div>
-      {{build-info build=build isVisible=isBuildInfoVisible}}
+      {{build-info build=build}}
       <div class="BuildHeader-stateAndCommit">
         {{build-state build=build}}
         {{#if build.commit}}

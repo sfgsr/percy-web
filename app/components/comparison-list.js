@@ -79,7 +79,7 @@ export default Ember.Component.extend({
 
       // Wait for the views changes above to render, then calculate the right scroll position.
       Ember.run.scheduleOnce('afterRender', function() {
-        window.scrollTo(0, selectedComponent.$().offset().top - 200);
+        window.scrollTo(0, selectedComponent.$().offset().top - 210);
       });
     },
   }
