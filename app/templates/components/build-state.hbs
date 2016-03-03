@@ -17,9 +17,9 @@
     <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
     <div class="BuildState-textAligner">
       <div class="BuildState-text">
-        <strong>{{pluralize build.totalComparisonsFinished "visual diff"}}</strong>
+        <strong>{{pluralize build.totalComparisonsDiff "visual diff"}}</strong>
         <br>
-        {{pluralize build.totalComparisonsDiff "total snapshot"}}
+        {{pluralize build.totalComparisonsFinished "total snapshot"}}
       </div>
     </div>
   {{else}}
@@ -27,9 +27,9 @@
       <div class="BuildState-icon">{{fa-icon 'fa-dot-circle-o'}}</div>
       <div class="BuildState-textAligner">
         <div class="BuildState-text">
-          <strong>{{pluralize build.totalComparisonsFinished "visual diff"}}</strong>
+          <strong>{{pluralize build.totalComparisonsDiff "visual diff"}}</strong>
           <br>
-          {{pluralize build.totalComparisonsDiff "total snapshot"}}
+          {{pluralize build.totalComparisonsFinished "total snapshot"}}
         </div>
       </div>
     {{else}}
