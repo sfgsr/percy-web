@@ -1,4 +1,9 @@
-{{build-header build=build updateSelectedWidths=(action 'updateSelectedWidths')}}
+{{build-header
+    build=build
+    updateSelectedWidths=(action "updateSelectedWidths")
+    selectNumColumns=(action "selectNumColumns")
+    selectedNumColumns=selectedNumColumns
+}}
 {{build-header-spacer}}
 
 {{#if build.isPending}}
@@ -22,5 +27,9 @@
 {{#if build.comparisons.isPending}}
   {{loading-page}}
 {{else}}
-  {{comparison-list comparisons=build.comparisons selectedWidths=selectedWidths}}
+  {{comparison-list
+      comparisons=build.comparisons
+      selectedWidths=selectedWidths
+      selectedNumColumns=selectedNumColumns
+  }}
 {{/if}}

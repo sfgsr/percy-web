@@ -22,6 +22,10 @@
     </div>
     <div class="two columns">
       {{approval-section build=build}}
+      {{comparison-mode-picker
+          selectedNumColumns=selectedNumColumns
+          selectNumColumns=(action selectNumColumns)
+      }}
     </div>
   </div>
 </div>

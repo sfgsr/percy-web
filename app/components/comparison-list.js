@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   selectedWidths: null,
+  selectedNumColumns: null,
   comparisons: null,
   comparisonComponents: null,
 
@@ -16,6 +17,10 @@ export default Ember.Component.extend({
   comparisonSortProperties: ['isDifferent:desc', 'pdiff.diffPercentageFull:desc'],
 
   classNames: ['ComparisonList'],
+  classNameBindings: ['comparisonListMode'],
+  comparisonListMode: function() {
+    return 'ComparisonList--' + this.get('selectedNumColumns') + 'col';
+  }.property('selectedNumColumns'),
 
   setupKeyHandlers: function() {
     Ember.$(document).bind('keydown.comparisons', function(e) {
