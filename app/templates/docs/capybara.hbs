@@ -121,12 +121,8 @@ MiniTest.after_run { Percy::Capybara.finalize_build }
 
 <h3>Non-Rails frameworks (Sinatra, etc.)</h3>
 <p>
-  You'll need to manually require the Percy library when using it:
+  Without Rails autoloading, you will need to manually <code>require 'percy/capybara'</code> when using Percy.
 </p>
-
-{{#code-block lang="ruby"}}
-require 'percy/capybara'
-{{/code-block}}
 
 <h2>Usage</h2>
 <p>Now the fun part!</p>
