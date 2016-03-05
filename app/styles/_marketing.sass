@@ -1,19 +1,31 @@
 &.container
   &.container--marketing
+    // Default marketing font-size.
     font-size: 1.7rem
+
+    // Default marketing headers are bigger.
+    h1
+      font-size: 4.5rem
+    h2
+      font-size: 4.0rem
+      padding-top: 20px
+      margin-bottom: 0
+    h3
+      font-size: 3.3rem
+      margin-bottom: 3rem
+    h4
+      font-size: 2.8rem
+      margin-bottom: 2rem
+    h5
+      font-size: 2.4rem
+    h6
+      font-size: 1.5rem
 
     h2, h3, h4
       text-align: center
 
-    h2
-      padding-top: 20px
-      margin-bottom: 0
-
     h2 + div.row
       margin-top: 3rem
-
-    h3, h4
-      margin-bottom: 3rem
 
     &.InviteContainer
       padding: 20px
@@ -22,8 +34,10 @@
     &.MockPageContainer
       box-shadow: 0 6px 17px -8px #d0d0d0
 
-    code span.dim
-      opacity: 0.4
+    code
+      font-size: 1.2rem
+      span.dim
+        opacity: 0.4
 
   &.AboutContainer
     h2

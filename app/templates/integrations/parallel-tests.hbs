@@ -1,4 +1,4 @@
-<h2>Parallel test suites</h2>
+<h1>Parallel test suites</h1>
 <p>
   Percy has built-in support for complex test suites that run in parallelized CI services or parallel test runners.
 </p>
@@ -9,7 +9,7 @@
   If you currently see multiple Percy builds created incorrectly each time your tests run (with different snapshots in each build), this article is for you.
 </p>
 
-<h3>Usage</h3>
+<h2>Usage</h2>
 <p>
   Depending on your CI service, you may need to do some simple configuration to support parallel tests.
 </p>
@@ -26,7 +26,8 @@
     <li>Jenkins, Drone, others</li>
   </ul>
 </ul>
-<h4>Manual configuration with environment variables</h4>
+
+<h3>Manual configuration with environment variables</h3>
 <p>
   Two environment variables must be configured to support parallel test suites: a <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce">nonce</a>, and the total number of parallel nodes.
 </p>
@@ -37,7 +38,8 @@
 <p>
   These are the only variables needed for Percy to correctly support your parallelized test suite.
 </p>
-<h4>Example: parallel_tests gem</h4>
+
+<h3>Example: parallel_tests gem</h3>
 <p>
   For example, if you are using the <a href="https://github.com/grosser/parallel_tests">parallel_tests gem</a> with RSpec, you may run your tests like this:
 </p>
@@ -65,7 +67,7 @@ $ PERCY_PARALLEL_NONCE=`date +%s` PERCY_PARALLEL_TOTAL=4 rake parallel:spec[4]
 <p>
   In this example, we use <code>date +%s</code> to generate a Unix timestamp to use as the parallel nonce. As long as different test runs never start at the exact same second, this will work nicely as an identifier for this build across all four parallel processes.
 </p>
-<h3>How it works</h3>
+<h2>How it works</h2>
 <p>
   Parallelism is a common way to speed up test suites by running multiple tests concurrently and then combining results at the end.
 </p>

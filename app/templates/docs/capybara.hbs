@@ -1,7 +1,7 @@
-<h2>
+<h1>
   Percy::Capybara
   <a href="https://github.com/percy/percy-capybara">{{fa-icon "github"}}</a>
-</h2>
+</h1>
 <p>
   <a href="https://travis-ci.org/percy/percy-capybara"><img src="https://travis-ci.org/percy/percy-capybara.svg?branch=master"></a>
   <a href="https://rubygems.org/gems/percy-capybara"><img src="https://badge.fury.io/rb/percy-capybara.svg"></a>
@@ -16,7 +16,7 @@
   The examples below assume you are using RSpec, but they could be easily adapted for other testing frameworks.
 </p>
 
-<h3>Installation</h3>
+<h2>Installation</h2>
 <p>Add this line to your application's Gemfile:</p>
 {{#code-block}}
 gem 'percy-capybara'
@@ -27,7 +27,7 @@ $ bundle install
 {{/code-block}}
 <p>Or install it yourself with <code>gem install percy-capybara</code>.</p>
 
-<h3>Authentication</h3>
+<h2>Authentication</h2>
 <p>
   First, you need to:
 </p>
@@ -36,7 +36,7 @@ $ bundle install
   <li>Go to <em>Settings</em> for the repository and copy the write-only API key.</li>
 </ol>
 
-<h4>Private repositories {{fa-icon "lock"}}</h4>
+<h3>Private repositories {{fa-icon "lock"}}</h3>
 <p>
   For Rails apps in private repositories, you can use <a href="http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml">Rails Secrets</a> to store the Percy repo token. We will use this below when configuring RSpec.
 </p>
@@ -51,8 +51,6 @@ test:
   Then configure <code>spec_helper.rb</code> to set the access token from your Rails secrets:
 </p>
 {{#code-block lang="ruby"}}
-require 'percy/capybara/rspec'
-
 RSpec.configure do |config|
   config.before(:suite) do
     Percy.config.access_token = Rails.application.secrets.percy_access_token
@@ -63,7 +61,7 @@ end
   Alternatively, you can configure the <code>PERCY_TOKEN</code> environment variable to avoid storing the token in your repository.
 </p>
 
-<h4>Public repositories {{fa-icon "unlock"}}</h4>
+<h3>Public repositories {{fa-icon "unlock"}}</h3>
 <div class="Alert Alert--warning">
   <p>
     <strong>IMPORTANT: Do not store the Percy API token in your repository</strong> if your code is public. Anyone could use your token and consume your account quota (they will not be able to read data because the token is write-only).
@@ -73,7 +71,7 @@ end
   </p>
 </div>
 <p>
-  You can temporarily set the <code>PERCY_TOKEN</code> environment variable in your local shell session by exporting the variable:
+  For local testing, you can temporarily set the <code>PERCY_TOKEN</code> environment variable by exporting the variable:
 </p>
 {{#code-block lang="bash"}}
 $ export PERCY_ENABLE=1  # Required only in local dev environments.
@@ -87,53 +85,53 @@ $ bundle exec rspec
 $ PERCY_ENABLE=1 PERCY_TOKEN=1234abcd1234abcd bundle exec rspec
 {{/code-block}}
 
-<h3>Test suite setup</h3>
-
+<h2>Setup</h2>
+<p>
+  Test suites need to call <code>Percy::Capybara.initialize_build</code> before running and <code>Percy::Capybara.finalize_build</code> when finished (even if tests error).
+</p>
 <div class="Alert Alert--warning">
   <p>
-    <strong>NOTE:</strong> This setup is required for Percy to group tests correctly. If your builds get stuck <em>"Receiving..."</em>, check this configuration first.
+    <strong>NOTE:</strong> If your builds get stuck <em>"Receiving..."</em>, check this configuration first.
   </p>
 </div>
 
-<h4>RSpec</h4>
+<h3>RSpec</h3>
 <p>
-  Enable Percy in your <code>spec_helper.rb</code>:
+  Add these setup lines to <code>spec_helper.rb</code>:
 </p>
 {{#code-block lang="ruby"}}
-require 'percy/capybara/rspec'
+<span class="dim">RSpec.configure do |config|</span>
+  # ...
+  config.before(:suite) { Percy::Capybara.initialize_build }
+  config.after(:suite) { Percy::Capybara.finalize_build }
+<span class="dim">end</span>
 {{/code-block}}
-<p>
-  This <code>require</code> line is important—it registers Percy's rspec hooks and must be included, even in Rails apps.
-</p>
-
-<h4>Other test frameworks (MiniTest, etc.)</h4>
 
 <p>
-  If you are not using RSpec, you must manually call <code>Percy::Capybara.initialize_build</code> before your test suite runs and <code>Percy::Capybara.finalize_build</code> after it finishes (even if tests error).
+  Note that RSpec runs before hooks in order, so these lines must come after any Percy authentication setup done in private repositories in <code>before(:suite)</code> hooks.
 </p>
+
+<h3>Other test frameworks (MiniTest, etc.)</h3>
 <p>For example, with MiniTest you can add this to your <code>test_helper.rb</code>:</p>
 
 {{#code-block lang="ruby"}}
 Percy::Capybara.initialize_build
-MiniTest.after_run {
-  Percy::Capybara.finalize_build
-}
+MiniTest.after_run { Percy::Capybara.finalize_build }
 {{/code-block}}
 
-<h3>Usage</h3>
-<p>Now the fun part!</p>
-<p>Usually, you'll have an existing feature spec that looks something like this:</p>
-{{#code-block}}
-describe 'a feature', type: :feature, js: true do
-  it 'shows the dropdown menu when clicked' do
-    visit '/'
-    first('.dropdown-toggle').click
-    expect(page).to have_selector('#main-dropdown', visible: true)
-  end
-end
-{{/code-block}}
+<h3>Non-Rails frameworks (Sinatra, etc.)</h3>
 <p>
-  You can integrate with Percy by adding one line:
+  You'll need to manually require the Percy library when using it:
+</p>
+
+{{#code-block lang="ruby"}}
+require 'percy/capybara'
+{{/code-block}}
+
+<h2>Usage</h2>
+<p>Now the fun part!</p>
+<p>
+  You can integrate with Percy by adding one line to your existing feature specs:
 </p>
 {{#code-block}}
 <span class="dim">describe 'a feature', type: :feature, js: true do
@@ -152,7 +150,7 @@ end</span>
   Done! A new Percy build will be created the next time you run your tests in a {{#link-to "integrations.ci"}}supported CI service{{/link-to}}, or it can be triggered locally.
 </p>
 
-<h3>Local dev environments</h3>
+<h2>Local dev environments</h2>
 <p>
   By default, Percy is disabled in local dev environments to avoid teams accidentally overriding each others' changes while developing feature specs.
 </p>
@@ -169,7 +167,7 @@ $ PERCY_ENABLE=1 bundle exec rspec
   Careful though—if you run this in your local <code>master</code> branch, Percy cannot tell the difference between your local environment and your CI environment, so this will set the repo's <code>master</code> state in Percy. You can avoid this by simply checking out a different branch, or setting the <code>PERCY_BRANCH</code> environment variable.
 </p>
 
-<h3>Identifying snapshots</h3>
+<h2>Identifying snapshots</h2>
 <p>
   Percy needs to be able to uniquely identify the same snapshot across builds to provide visual diffs.
 </p>
@@ -192,7 +190,7 @@ Percy::Capybara.snapshot(page, name: 'homepage (with dropdown clicked)')
   It is <strong>required</strong> if you are snapshotting a page multiple times with the same URL.
 </p>
 
-<h3>How it works</h3>
+<h2>How it works</h2>
 <p>
    The actual page rendering and diffing, which often can be very slow and computationally expensive, does <em>not</em> happen in your tests. Instead, the <code>snapshot</code> method grabs a the current DOM structure, CSS, and the page's assets and uploads them to Percy.
 </p>
@@ -203,9 +201,9 @@ Percy::Capybara.snapshot(page, name: 'homepage (with dropdown clicked)')
   This asset-centric architecture keeps the impact on your tests minimal—in most cases, the overhead for each snapshot in your tests is only a few milliseconds. Assets are also fingerprinted when uploaded, so they are only uploaded once.
 </p>
 
-<h3>Troubleshooting</h3>
+<h2>Troubleshooting</h2>
 
-<h4>WebMock/VCR users</h4>
+<h3>WebMock/VCR users</h3>
 <p>
   If you use <a href="https://github.com/vcr/vcr">VCR</a> to mock and record HTTP interactions, you need to allow connections to the Percy API:
 </p>
@@ -222,7 +220,7 @@ end
 WebMock.disable_net_connect!(allow: 'percy.io')
 {{/code-block}}
 
-<h4>Turn off debug assets</h4>
+<h3>Turn off debug assets</h3>
 <p>
   After upgrading to Sprockets 3, you may notice broken CSS in Percy builds. You likely have this option set in <code>test.rb</code>:
 </p>
@@ -239,12 +237,21 @@ config.assets.debug = false
   There is no compelling reason to have debug assets permanently enabled in tests—debug assets disables concatination of asset files and will negatively affect your test performance and consistency. You must turn off debug assets in tests for Percy to work correctly.
 </p>
 
-<h3>Other resources</h3>
-<ul>
-  <li><a href="http://www.rubydoc.info/gems/percy-capybara/Percy/Capybara">Percy::Capybara Reference</a> on RubyDoc</li>
-</ul>
+<h2>Other resources</h2>
+<p>
+  <ul>
+    <li><a href="http://www.rubydoc.info/gems/percy-capybara/Percy/Capybara">Percy::Capybara Reference</a> on RubyDoc</li>
+  </ul>
+</p>
 
-<h3>Contributing</h3>
+<h2>Changelog</h2>
+<p>
+  <ul>
+    <li><a href="https://github.com/percy/percy-capybara/releases">percy-capybara releases on GitHub</a></li>
+  </ul>
+</p>
+
+<h2>Contributing</h2>
 <ol>
   <li>Fork it (<a href="https://github.com/percy/percy-capybara/fork">https://github.com/percy/percy-capybara/fork</a>)</li>
   <li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>

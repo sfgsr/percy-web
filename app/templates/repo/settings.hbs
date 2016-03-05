@@ -1,5 +1,5 @@
 <div class="container container--forContent container--fixedWidth">
-  <h5 class="alt">
+  <h3>
     {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}
     / {{#link-to "repo.index" model.namespace.id model.name}}{{model.name}}{{/link-to}}
     {{#if model.isDisabled}}
@@ -7,7 +7,7 @@
     {{/if}}
 
     <a href="{{model.htmlUrl}}">{{fa-icon "github"}}</a> Settings
-  </h5>
+  </h3>
   <h4>Write-only API key</h4>
   <pre><code>{{model.writeOnlyToken.token}}</code></pre>
   <p>
@@ -22,7 +22,7 @@
   <h4>Actions</h4>
   {{#if model.isEnabled}}
     {{repo-disable repo=model disableRepo="disableRepo" disabled=model.isNotCurrentUserOwner}}
-    <p class="u-text-small">
+    <p>
       Repository billing owner: <strong>@{{model.owner.login}}</strong>
     </p>
   {{else}}
@@ -30,3 +30,4 @@
   {{/if}}
   <hr>
 </div>
+{{main-footer}}

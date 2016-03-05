@@ -1,10 +1,14 @@
 .DocsContainer
   max-width: 1200px !important
 
+  // Default fontsize for docs is set to 15px, since the whole point is to read things.
+  font-size: 1.5rem
+  line-height: 1.7
+
   code span.dim
     opacity: 0.4
 
-  h3
+  h2
     border-bottom: 1px solid #E1E1E1
 
   .DocsNav
@@ -13,14 +17,15 @@
     box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px, rgba(0,0,0,0.09804) 0px 1px 2px 0px
     border-radius: 3px
 
-    h3
+    header
       margin-bottom: 0
       margin-top: 2rem
       font-size: 1.5rem
       font-weight: bold
+      font-family: $fancy-font
       border-bottom: 0
 
-    h3:first-child
+    header:first-child
       margin-top: 0
 
     ul

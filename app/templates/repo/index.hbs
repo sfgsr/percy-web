@@ -1,5 +1,5 @@
 <div class="container container--fixedWidth container--forContent RepoContainer">
-  <h5 class="alt">
+  <h3>
     {{#link-to "namespace.index" model.namespace.id}}{{model.namespace.id}}{{/link-to}}
     / <a href="#" {{action "refresh"}}>{{model.name}}</a>
 
@@ -12,7 +12,7 @@
       {{fa-icon "cog" classNames="fa--left"}}
       Settings
     {{/link-to}}
-  </h5>
+  </h3>
   {{#if model.builds.isPending}}
     {{loading-page}}
   {{else}}
@@ -40,3 +40,4 @@
     {{/if}}
   {{/if}}
 </div>
+{{main-footer}}

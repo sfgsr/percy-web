@@ -96,14 +96,17 @@
     <h2>Automate your visual testing today</h2>
     <div class="row">
       <div class="six columns">
-      <h4>Rails + RSpec</h4>
+      <h3>Rails + RSpec</h3>
 {{#code-block lang="ruby"}}
 gem 'percy-capybara'
 {{/code-block}}
 
 {{#code-block lang="ruby"}}
 # spec_helper.rb:
-require 'percy/capybara/rspec'
+RSpec.configure do |config|
+  config.before(:suite) { Percy::Capybara.initialize_build }
+  config.after(:suite) { Percy::Capybara.finalize_build }
+end
 {{/code-block}}
 
 {{#code-block}}
@@ -111,17 +114,19 @@ require 'percy/capybara/rspec'
   it 'shows the dropdown menu when clicked' do
     visit '/'
     first('.dropdown-toggle').click</span>
-    Percy::Capybara.snapshot(page)
+    Percy::Capybara.snapshot(page, name: 'homepage')
   <span class="dim">end
 end</span>
 {{/code-block}}
+        {{#link-to "docs.capybara"}}See more »{{/link-to}}
       </div>
       <div class="six columns">
-      <h4>Static websites</h4>
+      <h3>Static websites</h3>
 {{#code-block lang="bash"}}
 $ gem install percy-cli
 $ percy snapshot _site/
 {{/code-block}}
+        {{#link-to "docs.static"}}See more »{{/link-to}}
       </div>
     </div>
     <hr>

@@ -13,7 +13,7 @@
     {{/show-if-hash}}
   </div>
   <hr>
-  <h5>Current subscription: {{session.data.authenticated.user.subscription.planName}}</h5>
+  <h3>Current subscription: {{session.data.authenticated.user.subscription.planName}}</h3>
   <div class="row">
     <div class="seven columns">
       {{meter-bar count=session.data.authenticated.user.subscription.currentUsage total=session.data.authenticated.user.subscription.planUsageLimit}}
@@ -52,8 +52,6 @@
 </div>
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
-    <h2>Pricing FAQ</h2>
-    <h3></h3>
     {{pricing-questions}}
   </div>
 </div>
