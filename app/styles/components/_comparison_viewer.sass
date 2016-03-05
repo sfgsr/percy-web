@@ -4,6 +4,9 @@
   border-radius: 3px
   width: 100%
   margin-bottom: 10px
+  // translatez hack to force this box to its own layer.
+  // TODO(fotinakis): I think we can remove this when Chrome 51 has majority stake.
+  transform: translateZ(0)
 
   &:last-child
     margin-bottom: 0
