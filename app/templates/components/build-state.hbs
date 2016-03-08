@@ -45,7 +45,8 @@
   <div class="BuildState-icon">{{fa-icon 'exclamation'}}</div>
   <div class="BuildState-textAligner">
     <div class="BuildState-text">
-      <strong>Failed</strong>
+      <strong>Failed</strong><br>
+      {{build.failureReasonHumanized}}
     </div>
   </div>
 {{/if}}

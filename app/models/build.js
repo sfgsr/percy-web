@@ -13,6 +13,15 @@ export default DS.Model.extend({
   isProcessing: Ember.computed.equal('state', 'processing'),
   isFinished: Ember.computed.equal('state', 'finished'),
   isFailed: Ember.computed.equal('state', 'failed'),
+  failureReason: DS.attr(),
+  failureReasonHumanized: function() {
+    let failureReason = this.get('failureReason');
+    if (failureReason === 'missing_resources') {
+      return 'Missing resources'
+    } else if (failureReason === 'no_snapshots') {
+      return 'No snapshots'
+    }
+  }.property('failureReason'),
 
   commit: DS.belongsTo('commit', {async: false}),  // Might be null.
   baseBuild: DS.belongsTo('build', {async: false}),
