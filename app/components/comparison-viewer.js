@@ -79,7 +79,7 @@ export default Ember.Component.extend({
       }
       this.set('isTogglingFullWidth', true);
       this.toggleProperty('isToggledFullWidth');
-      this.toggleProperty('showNoDiffSnapshot');
+      this.set('showNoDiffSnapshot', true);
 
       Ember.run.next(() => {
         this.set('isTogglingFullWidth', false);
