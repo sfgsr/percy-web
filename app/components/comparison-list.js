@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   lastComparisonIndex: null,
 
   isDefaultExpanded: function() {
-    return this.get('comparisons.length') < 500;
+    return this.get('comparisons.length') < 150;
   }.property('comparisons'),
 
   sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),
