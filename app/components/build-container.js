@@ -5,6 +5,13 @@ export default Ember.Component.extend({
   classNames: ['BuildContainer'],
   selectedWidths: [1280],
   selectedNumColumns: 4,
+
+  visibleComparisons: function() {
+    return this.get('build.comparisons').filter((comparison) => {
+      return this.get('selectedWidths').indexOf(comparison.get('width')) !== -1;
+    });
+  }.property('build.comparisons', 'selectedWidths'),
+
   restoreSelectedModeColumns: function() {
     let numColumns = localStorage.getItem('numColumns');
 

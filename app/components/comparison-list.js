@@ -38,9 +38,14 @@ export default Ember.Component.extend({
   actions: {
     registerChild: function(component) {
       if (!this.get('comparisonComponents')) {
-        this.set('comparisonComponents', []);
+        this.set('comparisonComponents', Ember.ArrayProxy.create({content: Ember.A()}));
       }
-      this.get('comparisonComponents').push(component);
+      this.get('comparisonComponents').pushObject(component);
+    },
+    unregisterChild: function(component) {
+      // Assume all components are being destroyed and we should reset the selection. TODO: improve.
+      this.set('selectedComparisonIndex', 0);
+      this.get('comparisonComponents').removeObject(component);
     },
     nextComparison: function() {
       var index = this.get('selectedComparisonIndex');
@@ -69,21 +74,23 @@ export default Ember.Component.extend({
     updateSelectedComparison: function() {
       var comparisonComponents = this.get('comparisonComponents');
       var selectedIndex = this.get('selectedComparisonIndex');
-      var selectedComponent = comparisonComponents[selectedIndex];
+      var selectedComponent = comparisonComponents.objectAt(selectedIndex);
       var lastIndex = this.get('lastComparisonIndex');
 
       // Expand the selected component.
       selectedComponent.set('isExpanded', true);
       selectedComponent.set('showNoDiffSnapshot', true);
+      selectedComponent.set('isFocus', true);
 
       // Grab the last component, if it exists.
       if (lastIndex !== -1) {
-        var lastComponent = comparisonComponents[lastIndex];
+        var lastComponent = comparisonComponents.objectAt(lastIndex);
         lastComponent.set('isExpanded', this.get('isDefaultExpanded'));
+        lastComponent.set('isFocus', false);
       }
 
       // Wait for the views changes above to render, then calculate the right scroll position.
-      Ember.run.scheduleOnce('afterRender', function() {
+      Ember.run.next(function() {
         window.scrollTo(0, selectedComponent.$().offset().top - 210);
       });
     },

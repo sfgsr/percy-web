@@ -7,6 +7,7 @@
   // translatez hack to force this box to its own layer.
   // TODO(fotinakis): I think we can remove this when Chrome 51 has majority stake.
   transform: translateZ(0)
+  border: 1px solid $lightestgray
 
   &:last-child
     margin-bottom: 0
@@ -17,12 +18,18 @@
     // Hacky way to make inner borders overlap, plus the z-index in hover.
     margin-top: -1px
 
+  &.ComparisonViewer--focus
+    border: $grayborderhover
+
   &.ComparisonViewer--actionable
     cursor: pointer
 
     &:hover
       border: $grayborderhover
-      z-index: 100
+      cursor: pointer
+
+  &.ComparisonViewer--fullWidth
+    width: 100% !important
 
   .ComparisonViewer-header
     padding: 5px;
@@ -30,10 +37,28 @@
     border: 1px solid $lightgray
     border-top-left-radius: 2px
     border-top-right-radius: 2px
+    display: flex
 
-    strong
-      display: inline-block
-      margin: 4px 0 0 10px
+    &.ComparisonViewer-header--actionable
+      &:hover
+        border: $grayborderhover
+        cursor: pointer
+
+    .ComparisonViewer-title
+      flex: 0 1 auto
+      margin: 4px 10px 0 10px
+      width: calc(100% - 125px)  // 100% - width of details.
+
+      span
+        display: inline-block
+        font-weight: bold
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap
+        max-width: 100%
+
+    .ComparisonViewer-details
+      flex: 0 0 auto
 
     .ComparisonStatus
       float: right
@@ -43,6 +68,21 @@
       float: right
       margin-top: 4px
       margin-right: 10px
+
+    .ComparisonViewer-info
+      color: $gray
+
+    .Button
+      float: right
+      height: 27px
+      margin: 0 10px 0 0
+      padding: 0 20px
+
+      .fa
+        left: 10px
+        top: 3px
+        font-size: 2rem
+
 
   .ComparisonViewer-halfColumn
     float: left

@@ -2,44 +2,89 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   comparison: null,
-  selectedWidths: [],
 
-  isVisible: function() {
-    let width = this.get('comparison.width');
-    let selectedWidths = this.get('selectedWidths');
-    return selectedWidths.contains(width);
-  }.property('selectedWidths'),
+  // The selected column mode of the comparison list.
+  // So that comparison viewers can know if they are inside a n-column layout.
+  selectedNumColumns: 1,
+  isFullWidthOnlyMode: Ember.computed.equal('selectedNumColumns', 1),
+  isMultiColumnMode: Ember.computed.gt('selectedNumColumns', 1),
 
   showNoDiffSnapshot: false,
   isOverlayEnabled: true,
   isDefaultExpanded: true,
+  isTogglingFullWidth: false,
+  isToggledFullWidth: false,
+  isFocus: false,
   isExpanded: function() {
     // TODO: this is just to break the binding with isDefaultExpanded,
     // fix this when migrating to later ember versions with default one-way bindings.
     return this.get('isDefaultExpanded');
   }.property('isDefaultExpanded'),
+  isNotExpanded: Ember.computed.not('isExpanded'),
+  isActionable: Ember.computed.or('isNotExpanded', 'isMultiColumnMode'),
 
   classNames: ['ComparisonViewer'],
   classNameBindings: [
+    'isFocus:ComparisonViewer--focus',
     'isExpanded::ComparisonViewer--collapsed',
-    'isExpanded::ComparisonViewer--actionable',
+    'isActionable:ComparisonViewer--actionable',
+    'isToggledFullWidth:ComparisonViewer--fullWidth',
   ],
+  attributeBindings: ['style'],
+  style: function() {
+    // Prevent the width animation from happening on toggle-full-screen actions.
+    if (this.get('isTogglingFullWidth')) {
+      return 'transition-property: none;'
+    }
+  }.property('isTogglingFullWidth'),
 
-  registerChild: function() {
+  // When switching to full-width mode, reset the full-width toggled state. This doesn't do anything
+  // now, but prevents viewers from staying full-width if the user switches back to overview mode.
+  resetToggledFullWidth: Ember.observer('isFullWidthOnlyMode', function() {
+    if (this.get('isFullWidthOnlyMode')) {
+      this.set('isToggledFullWidth', false);
+    }
+  }),
+
+  setup: function() {
     this.send('registerChild', this);
   }.on('didInsertElement'),
+  teardown: function() {
+    this.send('unregisterChild', this);
+  }.on('willDestroyElement'),
+
   click: function() {
-    this.set('isExpanded', true);
+    if (this.get('isNotExpanded')) {
+      this.set('isExpanded', true);
+    } else {
+      this.send('toggleFullWidth');
+    }
   },
   actions: {
     registerChild: function() {
-      this.sendAction('registerChildComparisonViewer', this);
+      this.get('registerChild')(this);
+    },
+    unregisterChild: function() {
+      this.get('unregisterChild')(this);
     },
     toggleOverlay: function() {
-      this.set('isOverlayEnabled', !this.get('isOverlayEnabled'));
+      this.toggleProperty('isOverlayEnabled');
     },
     toggleNoDiffResource: function() {
-      this.set('showNoDiffSnapshot', !this.get('showNoDiffSnapshot'));
+      this.toggleProperty('showNoDiffSnapshot');
+    },
+    toggleFullWidth: function() {
+      if (this.get('isFullWidthOnlyMode')) {
+        return;
+      }
+      this.set('isTogglingFullWidth', true);
+      this.toggleProperty('isToggledFullWidth');
+      this.toggleProperty('showNoDiffSnapshot');
+
+      Ember.run.next(() => {
+        this.set('isTogglingFullWidth', false);
+        window.scrollTo(0, this.$().offset().top - 210)
+      });
     },
   },
 });

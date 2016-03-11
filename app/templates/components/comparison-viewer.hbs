@@ -1,7 +1,11 @@
 <div class="ComparisonViewer-header row">
-  <strong>{{comparison.headSnapshot.name}}</strong>
-  {{comparison-status comparison=comparison}}
-  {{comparison-duration comparison=comparison}}
+  <div class="ComparisonViewer-title" title="{{comparison.headSnapshot.name}}">
+    <span>{{comparison.headSnapshot.name}}</span>
+  </div>
+  <div class="ComparisonViewer-details">
+    {{comparison-status comparison=comparison}}
+    {{comparison-duration comparison=comparison}}
+  </div>
 </div>
 {{#if isExpanded}}
   {{#if comparison.wasCompared}}
@@ -17,10 +21,10 @@
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           {{#with comparison.headScreenshot.lossyImage as |lossyImage|}}
             <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable" style="max-width: {{lossyImage.width}}px">
-              <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{lossyImage.url}}">
+              <img {{action "toggleOverlay" bubbles=false}} class="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable" src="{{lossyImage.url}}">
               {{#if isOverlayEnabled}}
                 {{#with comparison.pdiff.diffImage as |diffImage|}}
-                  <img {{action "toggleOverlay"}} class="ComparisonViewer-pdiffImageOverlay" src="{{diffImage.url}}">
+                  <img {{action "toggleOverlay" bubbles=false}} class="ComparisonViewer-pdiffImageOverlay" src="{{diffImage.url}}">
                 {{/with}}
               {{/if}}
             </div>
@@ -33,9 +37,9 @@
         No visual diffs detected.
 
         {{#if showNoDiffSnapshot}}
-          <a {{action "toggleNoDiffResource"}} href="#">Hide snapshot</a>
+          <a {{action "toggleNoDiffResource" bubbles=false}} href="#">Hide snapshot</a>
         {{else}}
-          <a {{action "toggleNoDiffResource"}} href="#">Show snapshot</a>
+          <a {{action "toggleNoDiffResource" bubbles=false}} href="#">Show snapshot</a>
         {{/if}}
       </div>
 

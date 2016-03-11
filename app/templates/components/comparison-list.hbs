@@ -7,8 +7,10 @@
 {{#each sortedComparisons as |comparison index|}}
   {{comparison-viewer
       comparison=comparison
+      listIndex=index
       isDefaultExpanded=isDefaultExpanded
-      registerChildComparisonViewer="registerChild"
-      selectedWidths=selectedWidths
+      registerChild=(action "registerChild")
+      unregisterChild=(action "unregisterChild")
+      selectedNumColumns=selectedNumColumns
   }}
 {{/each}}
