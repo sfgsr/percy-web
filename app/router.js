@@ -33,6 +33,7 @@ Router.map(function() {
       this.route('ci');
       this.route('github');
       this.route('github-pages');
+      this.route('responsive');
       this.route('fonts');
       this.route('parallel-tests');
     });

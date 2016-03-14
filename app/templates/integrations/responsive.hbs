@@ -1,0 +1,70 @@
+<h1>Responsive visual diffs<sup style="color: red;">new!</sup></h1>
+
+<p>
+  A powerful feature of Percy is visual regression testing for responsive sites and web apps. You provide a list of your responsive breakpoints, we take care of the rest.
+</p>
+
+<p>
+  For example, here is a responsive visual diff of a button change on the exact same page rendered at different widths:
+</p>
+
+<p>
+  <strong>/index.html @ 375px:</strong>
+  <img class="u-capped-width" src="/images/example-responsive-375.jpg">
+</p>
+<p>
+  <strong>/index.html @ 1280px:</strong>
+  <img class="u-capped-width" src="/images/example-responsive-1280.jpg">
+</p>
+
+<h2>Usage</h2>
+
+<h3>Capybara client</h3>
+
+<p>In your <code>spec_helper.rb</code>, simply set the default widths for all snapshots:</p>
+{{#code-block lang="ruby"}}
+Percy.config.<strong>default_widths = [375, 1280]</strong>
+{{/code-block}}
+
+<p>Or, you can override widths for a single snapshot:</p>
+
+{{#code-block}}
+Percy::Capybara.snapshot(page, name: 'homepage', <strong>widths: [375, 1280]</strong>)
+{{/code-block}}
+
+<h3>Command-line client</h3>
+
+<p>
+  Pass the <code>--widths</code> flag with a comma-separated list of widths.
+</p>
+
+{{#code-block lang="bash"}}
+$ percy snapshot <strong>--widths "375,1280"</strong> _site/
+...
+{{/code-block}}
+
+<p>
+  That's it!
+</p>
+
+<h2>Limits</h2>
+
+<ul>
+  <li>Maximum of 10 different widths per snapshot.</li>
+  <li>Each width must be between 120px and 1400px inclusive.</li>
+</ul>
+
+<h2>Pricing</h2>
+
+<p>
+  Each responsive width counts as as a separate visual diff in your subscription. For example, a snapshot of your homepage at 375px and 1280px simply counts as 2 visual diffs.
+</p>
+
+<h2>How it works</h2>
+
+<p>
+  Because Percy stores the original DOM snapshot and page assets, we simply render the same page at different widths by resizing the browser when generating page screenshots. This is handled entirely server-side and has <strong>no effect on the speed of your tests</strong> since all rendering and diffing takes place in Percy, just like normal.
+</p>
+<p>
+  One downside to this approach is that we do not execute JavaScript while rendering pages, so any responsive changes that rely on JavaScript may not show. We have some ideas of how to handle this in the future, please <a href="mailto:hello@percy.io">contact us</a> if you are interested in this feature.
+</p>
