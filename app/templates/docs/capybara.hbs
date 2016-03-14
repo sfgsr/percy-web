@@ -146,7 +146,7 @@ end</span>
   Done! A new Percy build will be created the next time you run your tests in a {{#link-to "integrations.ci"}}supported CI service{{/link-to}}, or it can be triggered locally.
 </p>
 
-<h2>Local dev environments</h2>
+<h3>Local dev environments</h3>
 <p>
   By default, Percy is disabled in local dev environments to avoid teams accidentally overriding each others' changes while developing feature specs.
 </p>
@@ -163,7 +163,12 @@ $ PERCY_ENABLE=1 bundle exec rspec
   Careful though—if you run this in your local <code>master</code> branch, Percy cannot tell the difference between your local environment and your CI environment, so this will set the repo's <code>master</code> state in Percy. You can avoid this by simply checking out a different branch, or setting the <code>PERCY_BRANCH</code> environment variable.
 </p>
 
-<h2>Identifying snapshots</h2>
+<h3>Responsive visual diffs</h3>
+<p>
+  You can also {{#link-to "integrations.responsive"}}test responsive designs{{/link-to}} in Percy.
+</p>
+
+<h3>Identifying snapshots</h3>
 <p>
   Percy needs to be able to uniquely identify the same snapshot across builds to provide visual diffs.
 </p>
