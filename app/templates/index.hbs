@@ -19,46 +19,70 @@
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
     <h2>Stop doing QA in the dark</h2>
-    <h3 class="alt u-no-margin">See every changed pixel before launch</h3>
+    <h3 class="alt u-no-margin">See every pixel changed on every commit</h3>
   </div>
 </div>
 <div class="container container--marketing container--light MockPageContainer">
   {{mock-build-page}}
 </div>
-<div class="container container--marketing CiContainer">
-  <div class="container container--fixedWidth container--forContent">
-    <h2>CI friendly</h2>
-    <div class="row">
-      <div class="one-half column">
-        <p>
-          <strong>Runs with your test suite</strong> and automatically supports common CI services with zero configuration.
-        </p>
-        <p>
-          <strong>Integrates with GitHub Pull Requests</strong>—approve or reject visual diffs in one click as part of your code review process.
-        </p>
-      </div>
-      <div class="one-half column u-text-center">
-        {{supported-cis-image}}
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container container--marketing">
-  <div class="container container--fixedWidth container--forContent">
+  <div class="container container--fixedWidth container--forContent u-text-center">
     <div class="row u-text-center">
-      <h3 class="alt">Automatic GitHub Pull Request integration</h3>
-      <p><strong>You already do code review.</strong> Percy gives you instant visual reviews, right alongside your tests in GitHub.</p>
-      <p></p>
+      <h2>GitHub PR integration</h2>
+      <h3></h3>
+      <p>
+        <strong>Shows up with your tests in GitHub.</strong>
+        <br>
+        Approve visual changes in one click as part of your code review process.
+      </p>
     </div>
     <div class="row">
       {{mock-approval-flow}}
     </div>
   </div>
 </div>
+<div class="container container--marketing container--light">
+  <div class="container container--fixedWidth container--forContent">
+    <h2>Visual regression testing</h2>
+    <h3 class="alt">on every commit</h3>
+    <div class="row">
+      <div class="one-half column">
+        <p>
+          We believe visual testing is only truly useful to developers if it is continously integrated with every commit.
+        </p>
+        <p>
+          <strong>Percy is very different</strong>—unlike other services that are limited to testing only staging servers and live sites, Percy integrates directly into your test suite and development workflow so that we can provide iterative and fast feedback about visual changes. This is what we mean by <strong>continuous visual integration</strong>.
+        </p>
+        <p>
+          Percy runs with your test suite, takes DOM snapshots, and uploads them to our service where they are rendered in parallel in a modern browser, then visually compared and stored. We have <strong>support for most CI services.</strong>
+        </p>
+      </div>
+      <div class="one-half column u-text-center">
+        {{supported-cis-image}}
+        {{marketing-num-diffs}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container--marketing">
+  <div class="container container--fixedWidth container--forContent u-text-center">
+    <h2>Responsive visual diffs</h2>
+    <div class="row">
+      <p>
+        Test your responsive designs—simply provide a list of breakpoint widths and we take care of the rest. Instantly see how CSS changes will affect your entire site, including on mobile devices. Catch mobile visual bugs before launch.
+        <br>
+        {{#link-to "integrations.responsive"}}See docs »{{/link-to}}
+      </p>
+      <p>
+        <img class="u-capped-width" style="border: 1px solid #ddd" src="/images/example-responsive-375.jpg">
+      </p>
+    </div>
+  </div>
+</div>
 <div class="container container--marketing container--dark">
   <div class="container container--fixedWidth container--forContent">
-    <h2>Simple and <em>fast</em></h2>
-    <h3 class="alt">Visual diff testing at scale</h3>
+    <h2>Simple and fast</h2>
+    <h3 class="alt">visual diff testing at scale</h3>
     <div class="row">
       <div class="five columns">
         <img style="max-width: 100%" src="/images/race.png">
@@ -68,10 +92,10 @@
           Designed to be <strong>integrated in minutes</strong> and have <strong>no performance impact</strong> on your tests.
         </p>
         <p>
-          We handle all the heavy lifting of screenshot rendering and visual diffing in our systems, so you don't have to.
+          We handle all the heavy lifting of consistent screenshot rendering and visual diffing in our systems, so you don't have to.
         </p>
         <p>
-          Percy comes with drop-in open source clients for Rails/Capybara tests and static websites, and we are just getting started.
+          Percy comes with drop-in open source clients for Rails/Capybara tests and static websites.
         </p>
         <p>
           See the {{#link-to "docs.faq"}}FAQ{{/link-to}} and {{#link-to "docs.index"}}Docs{{/link-to}} for more info.
@@ -93,7 +117,7 @@
 </div>
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
-    <h2>Automate your visual testing today</h2>
+    <h2>Get started</h2>
     <div class="row">
       <div class="six columns">
       <h3>Rails + RSpec</h3>
