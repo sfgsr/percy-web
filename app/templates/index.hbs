@@ -69,7 +69,7 @@
     <h2>Responsive visual diffs</h2>
     <div class="row">
       <p>
-        Test your responsive designs—simply provide a list of breakpoint widths and we take care of the rest. Instantly see how CSS changes will affect your entire site, including on mobile devices. Catch mobile visual bugs before launch.
+        Test your responsive designs—simply provide a list of breakpoint widths and we take care of the rest. See how CSS changes will affect your entire site, including on mobile devices. Catch mobile visual bugs before launch.
         <br>
         {{#link-to "integrations.responsive"}}See docs »{{/link-to}}
       </p>
@@ -98,7 +98,7 @@
           Percy comes with drop-in open source clients for Rails/Capybara tests and static websites.
         </p>
         <p>
-          See the {{#link-to "docs.faq"}}FAQ{{/link-to}} and {{#link-to "docs.index"}}Docs{{/link-to}} for more info.
+          See the {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.
         </p>
       </div>
     </div>
@@ -155,12 +155,17 @@ $ percy snapshot _site/
     </div>
     <hr>
     <div class="row u-text-center">
-      <p>It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, {{#link-to "pricing"}}Pricing{{/link-to}}, or {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.</p>
+      <p>
+        It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, or {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.
+      </p>
       {{#if session.isAuthenticated}}
         {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
       {{else}}
         {{login-button redirectToLogin="redirectToLogin"}}
       {{/if}}
+      <p>
+        Our {{#link-to "pricing"}}free plan{{/link-to}} comes with 250 visual diffs/month to get started.
+      </p>
     </div>
   </div>
 </div>
