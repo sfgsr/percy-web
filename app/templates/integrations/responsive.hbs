@@ -63,7 +63,7 @@ $ percy snapshot <strong>--widths "375,1280"</strong> _site/
 <h2>How it works</h2>
 
 <p>
-  Because Percy stores the original DOM snapshot and page assets, we simply render the same page at different widths by resizing the browser when generating page screenshots. This is handled entirely server-side and has <strong>no effect on the speed of your tests</strong> since all rendering and diffing takes place in Percy, just like normal.
+  Because Percy stores the original DOM snapshot and page assets, we simply render the same page at different widths by resizing the browser when generating page screenshots. This is handled entirely server-side and has <strong>no effect on the speed of your tests</strong> since all rendering and diffing takes place in Percy, like normal.
 </p>
 <p>
   One downside to this approach is that we do not execute JavaScript while rendering pages, so any responsive changes that rely on JavaScript may not show. We have some ideas of how to handle this in the future, please <a href="mailto:hello@percy.io">contact us</a> if you are interested in this feature.
