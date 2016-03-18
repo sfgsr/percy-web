@@ -5,9 +5,10 @@ export default Ember.Route.extend({
     return this.store.findRecord('build', params.build_id);
   },
   afterModel: function(build) {
-    // The model hook may not be called if transition happened by a link-to helper which provides
-    // the model already. However, that model may not have all the correct relationships loaded for
-    // this page, so we refresh the model manually.
+    // Reload the build and relationships in the background each time we transition to this route.
+    // We do this because the user might be clicking around and the store cache might be out of
+    // date, like when comparisons have finished processing.
     build.reload();
+    build.get('comparisons').reload();
   },
 });

@@ -5,12 +5,11 @@ export default Ember.Route.extend({
     return this.modelFor('repo');
   },
   afterModel: function(repo) {
-    repo.get('builds'); // Load builds async, not returned and blocking.
+    repo.get('builds').reload(); // Load (or reload) builds async, not returned to avoid blocking.
   },
   actions: {
     refresh: function() {
-      let repo = this.modelFor('repo.index')
-      repo.reload().then(function(repo) {
+      this.modelFor('repo.index').reload().then(function(repo) {
         repo.get('builds').reload();
       });
     },
