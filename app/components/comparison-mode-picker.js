@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   actions: {
     selectNumColumns: function(numColumns) {
       this.set('numColumns', numColumns);
-      this.get('selectNumColumns')(numColumns)
+      this.get('selectNumColumns')(numColumns);
     },
   }
 });

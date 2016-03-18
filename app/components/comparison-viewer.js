@@ -34,7 +34,7 @@ export default Ember.Component.extend({
   style: function() {
     // Prevent the width animation from happening on toggle-full-screen actions.
     if (this.get('isTogglingFullWidth')) {
-      return 'transition-property: none;'
+      return 'transition-property: none;';
     }
   }.property('isTogglingFullWidth'),
 
@@ -83,7 +83,7 @@ export default Ember.Component.extend({
 
       Ember.run.next(() => {
         this.set('isTogglingFullWidth', false);
-        window.scrollTo(0, this.$().offset().top - 210)
+        window.scrollTo(0, this.$().offset().top - 210);
       });
     },
   },

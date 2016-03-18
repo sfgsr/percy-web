@@ -17,9 +17,9 @@ export default DS.Model.extend({
   failureReasonHumanized: function() {
     let failureReason = this.get('failureReason');
     if (failureReason === 'missing_resources') {
-      return 'Missing resources'
+      return 'Missing resources';
     } else if (failureReason === 'no_snapshots') {
-      return 'No snapshots'
+      return 'No snapshots';
     }
   }.property('failureReason'),
 

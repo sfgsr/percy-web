@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       return;
     }
     if (numColumns) {
-      this.send('selectNumColumns', parseInt(numColumns))
+      this.send('selectNumColumns', parseInt(numColumns));
     }
   }.on('init'),
   actions: {
