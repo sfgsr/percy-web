@@ -1,4 +1,4 @@
-import { module } from 'qunit';
+import { module } from 'ember-mocha';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
 
