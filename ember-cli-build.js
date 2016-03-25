@@ -5,7 +5,10 @@ module.exports = function(defaults) {
     babel: {
       comments: false,
       includePolyfill: true,
-    }
+    },
+    'ember-cli-mocha': {
+      useLintTree: false
+    },
   });
 
   app.import('bower_components/accounting.js/accounting.js');
