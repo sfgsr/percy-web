@@ -35,12 +35,16 @@ describe('Acceptance: Homepage', function() {
     });
 
     percySnapshot('homepage');
+
     visit('/pricing');
     percySnapshot('pricing');
+
     visit('/docs');
     percySnapshot('docs');
+
     visit('/privacy');
     percySnapshot('privacy');
+
     visit('/terms');
     percySnapshot('terms');
   });
