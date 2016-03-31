@@ -6,46 +6,31 @@ import {
   afterEach
 } from 'mocha';
 import { expect } from 'chai';
-import startApp from '../helpers/start-app';
-import percyFinalizeBuild from '../helpers/percy/finalize';
+import setupAcceptance from '../helpers/setup-acceptance';
 import Ember from 'ember';
 
-describe('Acceptance: Homepage', function() {
-  let application;
 
-  this.timeout(0);
-
-  beforeEach(function() {
-    application = startApp();
-  });
-
-  afterEach(function() {
-    Ember.run(application, 'destroy');
-  });
-
-  after(function() {
-    percyFinalizeBuild();
-  });
+describe('Marketing acceptance tests', function() {
+  setupAcceptance();
 
   it('can visit /', function() {
     visit('/');
-
-    andThen(function() {
-      expect(currentPath()).to.equal('index');
-    });
-
-    percySnapshot('homepage');
-
+    andThen(() => { expect(currentPath()).to.equal('index'); });
+  });
+  it('can visit /pricing', function() {
     visit('/pricing');
-    percySnapshot('pricing');
-
+    andThen(() => { expect(currentPath()).to.equal('pricing'); });
+  });
+  it('can visit /docs', function() {
     visit('/docs');
-    percySnapshot('docs');
-
+    andThen(() => { expect(currentPath()).to.equal('docs.index'); });
+  });
+  it('can visit /privacy', function() {
     visit('/privacy');
-    percySnapshot('privacy');
-
+    andThen(() => { expect(currentPath()).to.equal('privacy'); });
+  });
+  it('can visit /terms', function() {
     visit('/terms');
-    percySnapshot('terms');
+    andThen(() => { expect(currentPath()).to.equal('terms'); });
   });
 });
