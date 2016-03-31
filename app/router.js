@@ -28,6 +28,7 @@ Router.map(function() {
     this.route('capybara');
     this.route('static');
     this.route('faq');
+    this.route('animations');
 
     this.route('integrations', {resetNamespace: true, path: '/integrations'}, function() {
       this.route('ci');
