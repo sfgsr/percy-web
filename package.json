@@ -46,7 +46,6 @@
     "ember-inflector": "^1.9.4",
     "ember-load-initializers": "^0.5.0",
     "ember-moment": "5.1.0",
-    "ember-percy": "file:../ember-percy/",
     "ember-resolver": "^2.0.3",
     "ember-simple-auth": "1.0.1",
     "ember-truth-helpers": "1.2.0",
