@@ -7,16 +7,18 @@
 <p>For example, take this awesome pure-CSS animation:</p>
 
 <p>
-<iframe height="428" scrolling="no" src="https://codepen.io/ajerez/embed/EaEEOW/?height=428&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="http://codepen.io/ajerez/pen/EaEEOW/">Submarine with CSS</a></iframe>
+<iframe height="425" scrolling="no" src="//codepen.io/fotinakis/embed/xVXXpo/?height=425&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"></iframe>
 </p>
 
-<p>If you rendered and visually diffed this animation multiple times, you would end up with a noisy and false-positive visual diff:</p>
+<p>If you captured a page with this animation multiple times, you would end up with noisy and false-positive visual diffs:</p>
 
 <p><img src="/images/examples/animation-diffs.jpg"></p>
 
+<p>Though fun to look at, this doesn’t really help at all!</p>
+
 <h2>Automatic animation freezing in Percy</h2>
 
-<p>Percy does a lot of work behind the scenes to make sure that pages are rendered consistently and determistically. One of the things we do is freeze different kinds of animations that can cause false-positive visual diffs.</p>
+<p>Percy does a lot of work behind the scenes to make sure that pages are rendered consistently and deterministically. One of the things we do is freeze different kinds of animations that can cause false-positive visual diffs.</p>
 
 <p><strong>Percy will automatically:</strong></p>
 
@@ -27,13 +29,15 @@
 
 <p><img src="/images/examples/animation-no-diffs.jpg"></p>
 
-<p>Outside of animations, we also do a lot of tricks to create a consistent server-side rendering environment that avoids other kinds of false-positives, such as font rendering differences, sub-pixel antialiasing, width and height changes, etc.</p>
+<p>Much better!</p>
+
+<p>Other than animations, Percy does other server-side tricks to create a consistent rendering environment and avoid other kinds of false-positives (such as font rendering differences, sub-pixel antialiasing, width and height changes, etc.)</p>
 
 <h2>Manual jQuery animation handling</h2>
 
-<p>Percy does not execute JavaScript in our rendering pipeline, but JavaScript is likely enabled in your environment's headless acceptance tests. You might unknowingly be running jQuery animations in tests simply by using them in your app.</p>
+<p>Percy does not currently execute JavaScript in our rendering pipeline, but JavaScript is likely enabled in the browser that runs your acceptance tests locally or on CI. You might be unknowingly running jQuery animations in tests simply by using them in your app.</p>
 
-<p>In addition to causing false-positives if the DOM is captured in the middle of animation, jQuery animations can also have the adverse effect of slowing down your acceptance tests—assertions might wait for animations to complete before an element exists on the page. <strong>Temporarily disabling jQuery animations might help speed up your tests, as well as help Percy avoid capturing a DOM snapshot while elements are still animating.</strong></p>
+<p>In addition to causing false-positives if the DOM is captured in the middle of animation, jQuery animations can also have the adverse effect of slowing down your acceptance tests—assertions might wait for animations to complete before an element exists on the page. <strong>Temporarily disabling jQuery animations might help speed up your acceptance tests, as well as will help Percy avoid capturing the DOM state while elements are still animating.</strong></p>
 
 <p>You can set a jQuery config to disable animations:</p>
 
