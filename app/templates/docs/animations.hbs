@@ -2,7 +2,7 @@
 
 <p>A big challenge of visual regression testing is avoiding false-positive visual diffs.</p>
 
-<p>False-positive visual diffs can be caused by many variables, including system and hardware differences where a browser is running, but the most obvious cause is page animations.</p>
+<p>False-positives can be caused by many variables (including system and hardware differences where a browser is running), but are commonly caused by page animations.</p>
 
 <p>For example, take this awesome pure-CSS animation:</p>
 
@@ -23,10 +23,11 @@
 <ul>
   <li>Freeze animated GIFs on the first frame.</li>
   <li>Freeze most CSS <code>animation</code> and <code>transition</code> styles.</li>
-  <li>Create a consistent server-side rendering environment to avoid other kinds of false-positives (such as font rendering differences, sub-pixel antialiasing, width and height changes, etc.).</li>
 </ul>
 
 <p><img src="/images/examples/animation-no-diffs.jpg"></p>
+
+<p>Outside of animations, we also do a lot of tricks to create a consistent server-side rendering environment that avoids other kinds of false-positives, such as font rendering differences, sub-pixel antialiasing, width and height changes, etc.</p>
 
 <h2>Manual jQuery animation handling</h2>
 
