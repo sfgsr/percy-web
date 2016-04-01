@@ -1,6 +1,49 @@
-<h1>Animation handling</h1>
+<h1>Animation handling<sup style="color: red;">new!</sup></h1>
 
-<p>Percy does a lot of work behind the scenes to work around animations that can cause false-positive visual diffs.</p>
+<p>A big challenge of visual regression testing is avoiding false-positive visual diffs.</p>
 
-<p>For example, in our rendering pipeline we freeze animated GIFs on their first frame. We also prevent most CSS <code>transition</code> and <code>transition</code> styles from animating.
+<p>False-positive visual diffs can be caused by many variables, including system and hardware differences where a browser is running, but the most obvious cause is page animations.</p>
+
+<p>For example, take this awesome pure-CSS animation:</p>
+
+<p>
+<iframe height="428" scrolling="no" src="https://codepen.io/ajerez/embed/EaEEOW/?height=428&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="http://codepen.io/ajerez/pen/EaEEOW/">Submarine with CSS</a></iframe>
 </p>
+
+<p>If you rendered and visually diffed this animation multiple times, you would end up with a noisy and false-positive visual diff:</p>
+
+<p><img src="/images/examples/animation-diffs.jpg"></p>
+
+<h2>Automatic animation freezing in Percy</h2>
+
+<p>Percy does a lot of work behind the scenes to make sure that pages are rendered consistently and determistically. One of the things we do is freeze different kinds of animations that can cause false-positive visual diffs.</p>
+
+<p><strong>Percy will automatically:</strong></p>
+
+<ul>
+  <li>Freeze animated GIFs on the first frame.</li>
+  <li>Freeze most CSS <code>animation</code> and <code>transition</code> styles.</li>
+  <li>Create a consistent server-side rendering environment to avoid other kinds of false-positives (such as font rendering differences, sub-pixel antialiasing, width and height changes, etc.).</li>
+</ul>
+
+<p><img src="/images/examples/animation-no-diffs.jpg"></p>
+
+<h2>Manual jQuery animation handling</h2>
+
+<p>Percy does not execute JavaScript in our rendering pipeline, but JavaScript is likely enabled in your environment's headless acceptance tests. You might unknowingly be running jQuery animations in tests simply by using them in your app.</p>
+
+<p>In addition to causing false-positives if the DOM is captured in the middle of animation, jQuery animations can also have the adverse effect of slowing down your acceptance tests—assertions might wait for animations to complete before an element exists on the page. <strong>Temporarily disabling jQuery animations might help speed up your tests, as well as help Percy avoid capturing a DOM snapshot while elements are still animating.</strong></p>
+
+<p>You can set a jQuery config to disable animations:</p>
+
+{{#code-block lang="javascript"}}
+$.fx.off = true;
+{{/code-block}}
+
+<div class="Alert Alert--warning">
+  <p>
+    <strong>NOTE:</strong> You should only include this snippet in your testing environment!
+  </p>
+</div>
+
+<p>As the <a href="https://api.jquery.com/jquery.fx.off/">jQuery docs</a> say: "When this property is set to <code>true</code> all animation methods will immediately set elements to their final state when called, rather than displaying an effect."</p>
