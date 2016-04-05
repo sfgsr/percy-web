@@ -1,5 +1,8 @@
 <div class="container container--darker Footer">
   <div class="Footer-item Footer-copyright">© Perceptual Inc.</div>
+  {{#if session.isAuthenticated}}
+    {{#link-to "pricing"}}Pricing{{/link-to}}
+  {{/if}}
   {{#link-to "terms"}}Terms{{/link-to}}
   {{#link-to "privacy"}}Privacy{{/link-to}}
   {{#link-to "about"}}About{{/link-to}}

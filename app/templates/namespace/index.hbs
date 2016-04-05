@@ -4,6 +4,7 @@
     {{sync-repos-section}}
   </div>
   <div class="container container--forContent container--withPanel">
+    {{#link-to "account" class="Button u-pull-right"}}My Account &raquo;{{/link-to}}
     <h3>Repositories</h3>
     {{repo-list repos=model.repos disableRepo="disableRepo" enableRepo="enableRepo"}}
   </div>

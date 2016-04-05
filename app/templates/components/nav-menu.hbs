@@ -1,6 +1,12 @@
-<div class="NavMenu-item">
-  {{#link-to "pricing"}}Pricing{{/link-to}}
-</div>
+{{#if user}}
+  <div class="NavMenu-item">
+    {{#link-to 'namespace.index' session.data.authenticated.user.login}}My Repos{{/link-to}}
+  </div>
+{{else}}
+  <div class="NavMenu-item">
+    {{#link-to "pricing"}}Pricing{{/link-to}}
+  </div>
+{{/if}}
 <div class="NavMenu-item">
   {{#link-to "docs.index"}}Docs{{/link-to}}
 </div>
@@ -8,9 +14,6 @@
   <a href="https://blog.percy.io">Blog</a>
 </div>
 {{#if user}}
-  <div class="NavMenu-item">
-    {{#link-to 'namespace.index' session.data.authenticated.user.login}}My Repos{{/link-to}}
-  </div>
   <div class="NavMenu-avatar">
     {{user-avatar user=user width=36 linked=true href='/account'}}
   </div>
