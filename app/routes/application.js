@@ -30,7 +30,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       promise.then(null, function(response) {
         if (response.status === 402) {
           var msg = [
-            "You've hit the limit of 2 active repos on this plan.",
+            "You've hit the limit of active repos on your current plan.",
             "\nView plan upgrades?",
           ].join('');
           if (confirm(msg)) {
