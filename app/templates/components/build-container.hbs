@@ -30,20 +30,26 @@
   </div>
 {{else if build.isExpired}}
   <div class="container container--fixedWidth Alert Alert--warning">
-    {{!-- TODO: need to allow subscription info for users who can read the repo. #projectification --}}
-    {{#if build.repo.isCurrentUserOwner}}
-      <p>
-        Build history on the <strong>{{currentSubscription.planName}}</strong> is limited to <strong>{{currentSubscription.planHistoryLimitDays}} days</strong>.
-      </p>
-      <p>
-        You can easily {{#link-to "account"}}upgrade your plan{{/link-to}} for more build history.
-      </p>
+    {{#if build.isEnabled}}
+      {{!-- TODO: need to allow subscription info for users who can read the repo. #projectification --}}
+      {{#if build.repo.isCurrentUserOwner}}
+        <p>
+          Build history on the <strong>{{currentSubscription.planName}}</strong> is limited to <strong>{{currentSubscription.planHistoryLimitDays}} days</strong>.
+        </p>
+        <p>
+          You can easily {{#link-to "account"}}upgrade your plan{{/link-to}} for more build history.
+        </p>
+      {{else}}
+        <p>
+          Build history is limited by your current subscription.
+        </p>
+        <p>
+          This repository's billing owner (<strong>@{{build.repo.owner.login}}</strong>) can upgrade this repository's plan for more build history.
+        </p>
+      {{/if}}
     {{else}}
       <p>
-        Build history is limited by your current subscription.
-      </p>
-      <p>
-        This repository's billing owner (<strong>@{{build.repo.owner.login}}</strong>) can upgrade this repository's plan for more build history.
+        The <strong>{{build.repo.name}}</strong> repository is not enabled.
       </p>
     {{/if}}
   </div>
