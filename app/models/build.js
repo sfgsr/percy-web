@@ -13,6 +13,8 @@ export default DS.Model.extend({
   isProcessing: Ember.computed.equal('state', 'processing'),
   isFinished: Ember.computed.equal('state', 'finished'),
   isFailed: Ember.computed.equal('state', 'failed'),
+  isExpired: Ember.computed.equal('state', 'expired'),
+
   failureReason: DS.attr(),
   failureReasonHumanized: function() {
     let failureReason = this.get('failureReason');

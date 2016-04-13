@@ -13,13 +13,11 @@
     <br>
     If this has been pending for a while, your client may have failed to upload or finalize all snapshots. This build can be safely ignored, it will not be used as a baseline for visual diffs.
   </div>
-{{/if}}
-{{#if build.isProcessing}}
+{{else if build.isProcessing}}
   <div class="container container--fixedWidth Alert Alert--warning">
     <strong>Still working!</strong> This build has not finished processing, <a href="javascript:location.reload()">refresh</a>?
   </div>
-{{/if}}
-{{#if build.isFailed}}
+{{else if build.isFailed}}
   <div class="container container--fixedWidth Alert Alert--error">
     {{#if (eq build.failureReason 'missing_resources')}}
       <p><strong>Failed.</strong> Your CI service or client failed to correctly upload build and snapshot resources.</p>
@@ -30,14 +28,35 @@
       <p>This could happen if your tests failed in your CI environment and nothing was uploaded to Percy. This build can be safely ignored, it will not be used as a baseline for visual diffs. If these failures happen frequently, check your CI or client logs for failures.</p>
     {{/if}}
   </div>
+{{else if build.isExpired}}
+  <div class="container container--fixedWidth Alert Alert--warning">
+    {{!-- TODO: need to allow subscription info for users who can read the repo. #projectification --}}
+    {{#if build.repo.isCurrentUserOwner}}
+      <p>
+        Build history on the <strong>{{currentSubscription.planName}}</strong> is limited to <strong>{{currentSubscription.planHistoryLimitDays}} days</strong>.
+      </p>
+      <p>
+        You can easily {{#link-to "account"}}upgrade your plan{{/link-to}} for more build history.
+      </p>
+    {{else}}
+      <p>
+        Build history is limited by your current subscription.
+      </p>
+      <p>
+        This repository's billing owner (<strong>@{{build.repo.owner.login}}</strong>) can upgrade this repository's plan for more build history.
+      </p>
+    {{/if}}
+  </div>
 {{/if}}
 
-{{#if build.comparisons.isPending}}
-  {{loading-page}}
-{{else}}
-  {{comparison-list
-      comparisons=visibleComparisons
-      selectedWidths=selectedWidths
-      selectedNumColumns=selectedNumColumns
-  }}
+{{#if showComparisons}}
+  {{#if build.comparisons.isPending}}
+    {{loading-page}}
+  {{else}}
+    {{comparison-list
+        comparisons=visibleComparisons
+        selectedWidths=selectedWidths
+        selectedNumColumns=selectedNumColumns
+    }}
+  {{/if}}
 {{/if}}

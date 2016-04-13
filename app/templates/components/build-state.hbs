@@ -51,4 +51,11 @@
       {{build.failureReasonHumanized}}
     </div>
   </div>
+{{else if build.isExpired}}
+  <div class="BuildState-icon">{{fa-icon 'lock'}}</div>
+  <div class="BuildState-textAligner">
+    <div class="BuildState-text">
+      <strong>Expired</strong><br>
+    </div>
+  </div>
 {{/if}}

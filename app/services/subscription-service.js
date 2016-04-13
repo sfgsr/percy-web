@@ -20,7 +20,7 @@ export default Ember.Service.extend({
       numWorkersTitle: '5 parallel workers',
       numProjectsTitle: '5 private repositories',
       numUsersTitle: 'Unlimited users',
-      historyLimitTitle: '30 day history',
+      historyLimitTitle: '14 day history',
     },
     medium: {
       id: 'v1-medium',
@@ -30,7 +30,7 @@ export default Ember.Service.extend({
       numWorkersTitle: '10 parallel workers',
       numProjectsTitle: '20 private repositories',
       numUsersTitle: 'Unlimited users',
-      historyLimitTitle: '60 day history',
+      historyLimitTitle: '30 day history',
     },
     large: {
       id: 'v1-large',
@@ -40,7 +40,7 @@ export default Ember.Service.extend({
       numWorkersTitle: '15 parallel workers',
       numProjectsTitle: '50 private repositories',
       numUsersTitle: 'Unlimited users',
-      historyLimitTitle: '90 day history',
+      historyLimitTitle: '60 day history',
     },
     pro: {
       id: 'v1-pro',

@@ -26,7 +26,7 @@ export default DS.Model.extend({
   isCurrentUserOwner: function() {
     if (this.get('isEnabled')) {
       // If there is a repo owner, check if it's the same as the current session's user.
-      return this.get('session.data.authenticated.user.login') === this.get('owner.login');
+      return this.get('session.data.authenticated.user.id') === this.get('owner.id');
     }
     return false;
   }.property('isEnabled', 'owner'),
