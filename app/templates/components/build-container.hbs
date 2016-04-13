@@ -30,7 +30,7 @@
   </div>
 {{else if build.isExpired}}
   <div class="container container--fixedWidth Alert Alert--warning">
-    {{#if build.isEnabled}}
+    {{#if build.repo.isEnabled}}
       {{!-- TODO: need to allow subscription info for users who can read the repo. #projectification --}}
       {{#if build.repo.isCurrentUserOwner}}
         <p>
