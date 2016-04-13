@@ -12,6 +12,7 @@ export default Ember.Component.extend({
     'build.isProcessing:BuildState--processing',
     'build.isFinished:BuildState--finished',
     'build.isFailed:BuildState--failed',
+    'build.isExpired:BuildState--expired',
 
     'build.isApproved:BuildState--approved',
     'build.hasDiffs:BuildState--hasDiffs',

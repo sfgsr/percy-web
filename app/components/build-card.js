@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   ],
   classNameBindings: [
     'classes',
+    'build.isExpired:BuildCard--expired',
   ],
   actions: {
     navigateToBuild: function() {

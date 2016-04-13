@@ -6,6 +6,12 @@ export default Ember.Component.extend({
   selectedWidths: [1280],
   selectedNumColumns: 4,
 
+  // TODO(fotinakis): remove these on #projectification.
+  session: Ember.inject.service(),
+  currentSubscription: Ember.computed.alias('session.data.authenticated.user.subscription'),
+
+  showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
+
   visibleComparisons: function() {
     return this.get('build.comparisons').filter((comparison) => {
       return this.get('selectedWidths').indexOf(comparison.get('width')) !== -1;
