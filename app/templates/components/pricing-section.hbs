@@ -1,5 +1,5 @@
 <div class="row u-text-center">
-  {{#with subscriptionService.PLANS.free as |plan|}}
+  {{#with subscriptionData.PLANS.free as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -37,7 +37,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionService.PLANS.small as |plan|}}
+  {{#with subscriptionData.PLANS.small as |plan|}}
     <div class="PricingSection-bucket PricingSection-bucket--promoted">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -67,7 +67,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionService.PLANS.medium as |plan|}}
+  {{#with subscriptionData.PLANS.medium as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -97,7 +97,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionService.PLANS.large as |plan|}}
+  {{#with subscriptionData.PLANS.large as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -129,7 +129,7 @@ might be slow to start, especially at peak hours.">
   {{/with}}
 </div>
 <div class="row u-text-center">
-  {{#with subscriptionService.PLANS.pro as |plan|}}
+  {{#with subscriptionData.PLANS.pro as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -159,7 +159,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionService.PLANS.premium as |plan|}}
+  {{#with subscriptionData.PLANS.premium as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -189,7 +189,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionService.PLANS.premiumXl as |plan|}}
+  {{#with subscriptionData.PLANS.premiumXl as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">

@@ -11,7 +11,7 @@ import Ember from 'ember';
 
 
 describe('Marketing acceptance tests', function() {
-  setupAcceptance();
+  setupAcceptance({'autoPercySnapshot': false});
 
   it('can visit /', function() {
     visit('/');

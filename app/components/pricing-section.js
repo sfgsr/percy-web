@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNameBindings: ['classes'],
 
   session: Ember.inject.service(),
-  subscriptionService: Ember.inject.service(),
+  subscriptionData: Ember.inject.service(),
   currentSubscription: Ember.computed.alias('session.data.authenticated.user.subscription'),
   checkoutText: 'Select Plan »',
 });

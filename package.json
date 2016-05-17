@@ -46,6 +46,7 @@
     "ember-inflector": "^1.9.4",
     "ember-load-initializers": "^0.5.0",
     "ember-moment": "5.1.0",
+    "ember-percy": "git+https://github.com/percy/ember-percy.git#b544b64d2d78c89da714e850aee080f90246b420",
     "ember-resolver": "^2.0.3",
     "ember-simple-auth": "1.0.1",
     "ember-truth-helpers": "1.2.0",

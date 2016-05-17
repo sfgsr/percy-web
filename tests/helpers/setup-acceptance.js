@@ -1,13 +1,12 @@
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
-import percyFinalizeBuild from '../helpers/percy/finalize';
+import percyFinalizeBuild from './percy/finalize';
 import './percy/register-helpers';
 
 let application;
 
 export default function setupAcceptance(options) {
-  options = options || {};
-  options.autoPercySnapshot = options.autoPercySnapshot || true;
+  options = options || {autoPercySnapshot: true};
 
   beforeEach(function() {
     application = startApp();
