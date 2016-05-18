@@ -1,17 +1,8 @@
-/* jshint expr:true */
-import {
-  describe,
-  it,
-  beforeEach,
-  afterEach
-} from 'mocha';
-import { expect } from 'chai';
-import setupAcceptance from '../helpers/setup-acceptance';
+import setupAcceptance, { setupSession } from '../helpers/setup-acceptance';
 import Ember from 'ember';
 
-
-describe('Marketing acceptance tests', function() {
-  setupAcceptance({'autoPercySnapshot': false});
+describe('Acceptance: Marketing pages', function() {
+  application = setupAcceptance({'autoPercySnapshot': false});
 
   it('can visit /', function() {
     visit('/');
@@ -32,5 +23,17 @@ describe('Marketing acceptance tests', function() {
   it('can visit /terms', function() {
     visit('/terms');
     andThen(() => { expect(currentPath()).to.equal('terms'); });
+  });
+
+  context('for authenticated user', function() {
+    setupSession();
+
+    it('can navigate to repository listing', function() {
+      visit('/');
+      click('.ReposLink a');
+      andThen(() => {
+        expect(currentPath()).to.equal('namespace.index');
+      });
+    });
   });
 });

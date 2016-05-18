@@ -26,6 +26,9 @@ export default Ember.Component.extend({
     Ember.$(window).unbind('.MockBuildPage');
   }.on('willDestroyElement'),
   _showHintsIfVisible: function() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;
     var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();

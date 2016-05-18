@@ -8,7 +8,7 @@
   <h1 class="alt">Percy</h1>
   <h2>Continuous visual integration for web apps</h2>
   {{#if session.isAuthenticated}}
-    {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+    {{repos-link}}
   {{else}}
     {{login-button redirectToLogin="redirectToLogin"}}
   {{/if}}
