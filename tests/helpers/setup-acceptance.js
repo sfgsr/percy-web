@@ -22,18 +22,16 @@ export default function setupAcceptance(options) {
     application = startApp();
   });
 
-  afterEach(function() {
-    if (options.autoPercySnapshot) {
-      percySnapshot(encodeURIComponent(this.currentTest.fullTitle().dasherize()));
-    }
-  });
+  // afterEach(function() {
+  //   if (options.autoPercySnapshot) {
+  //     percySnapshot();
+  //   }
+  // });
 
-  afterEach(function() {
-    // percySnapshot();
-    // this.timeout(0);
-    // percyFinalizeBuild();
-    Ember.run(application, 'destroy');
-  });
+
+  // afterEach(function() {
+  //   percySnapshot();
+  // });
 }
 
 export function setupSession() {

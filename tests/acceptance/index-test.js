@@ -1,12 +1,14 @@
 import setupAcceptance, { setupSession } from '../helpers/setup-acceptance';
 import Ember from 'ember';
+import config from '../../config/environment';
 
 describe('Acceptance: Marketing pages', function() {
-  application = setupAcceptance({'autoPercySnapshot': false});
+  setupAcceptance({'autoPercySnapshot': false});
 
   it('can visit /', function() {
     visit('/');
     andThen(() => { expect(currentPath()).to.equal('index'); });
+    percySnapshot(this.test.fullTitle());
   });
   it('can visit /pricing', function() {
     visit('/pricing');
