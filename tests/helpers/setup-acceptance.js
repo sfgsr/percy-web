@@ -15,23 +15,14 @@ import 'percy-web/tests/helpers/percy/register-helpers';
 
 let application;
 
-export default function setupAcceptance(options) {
-  options = options || {autoPercySnapshot: true};
-
+export default function setupAcceptance() {
   beforeEach(function() {
     application = startApp();
   });
 
-  // afterEach(function() {
-  //   if (options.autoPercySnapshot) {
-  //     percySnapshot();
-  //   }
-  // });
-
-
-  // afterEach(function() {
-  //   percySnapshot();
-  // });
+  afterEach(function() {
+    Ember.run(application, 'destroy');
+  });
 }
 
 export function setupSession() {
