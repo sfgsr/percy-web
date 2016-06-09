@@ -11,7 +11,7 @@ import { expect } from 'chai';
 import { authenticateSession } from 'percy-web/tests/helpers/ember-simple-auth';
 
 // This import registers the percy test helpers globally.
-import 'percy-web/tests/helpers/percy/register-helpers';
+import '../helpers/percy/register-helpers';
 
 let application;
 
