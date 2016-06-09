@@ -11,27 +11,16 @@ import { expect } from 'chai';
 import { authenticateSession } from 'percy-web/tests/helpers/ember-simple-auth';
 
 // This import registers the percy test helpers globally.
-import 'percy-web/tests/helpers/percy/register-helpers';
+import '../helpers/percy/register-helpers';
 
 let application;
 
-export default function setupAcceptance(options) {
-  options = options || {autoPercySnapshot: true};
-
+export default function setupAcceptance() {
   beforeEach(function() {
     application = startApp();
   });
 
   afterEach(function() {
-    if (options.autoPercySnapshot) {
-      percySnapshot(encodeURIComponent(this.currentTest.fullTitle().dasherize()));
-    }
-  });
-
-  afterEach(function() {
-    // percySnapshot();
-    // this.timeout(0);
-    // percyFinalizeBuild();
     Ember.run(application, 'destroy');
   });
 }

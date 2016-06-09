@@ -8,6 +8,9 @@ export default function() {
     }
   });
 
+  // Don't block percy requests.
+  this.passthrough('/_percy/**');
+
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
