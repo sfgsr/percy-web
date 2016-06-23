@@ -51,7 +51,10 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
-    ENV.APP.PERCY_TOKEN = process.env.PERCY_TOKEN;
+
+    ENV.percy = {
+      defaultWidths: [375, 1280]
+    }
   }
 
   if (environment === 'production') {
