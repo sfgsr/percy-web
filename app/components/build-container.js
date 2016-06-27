@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   build: null,
   classNames: ['BuildContainer'],
-  selectedWidths: [1280],
+  selectedWidths: function() {
+    // Use the largest width by default.
+    return this.get('build.comparisonWidths').slice(-1);
+  }.property('build.comparisonWidths'),
   selectedNumColumns: 4,
 
   // TODO(fotinakis): remove these on #projectification.

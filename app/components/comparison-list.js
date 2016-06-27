@@ -24,9 +24,9 @@ export default Ember.Component.extend({
 
   setupKeyHandlers: function() {
     Ember.$(document).bind('keydown.comparisons', function(e) {
-      if (e.keyCode === 74 || e.keyCode === 39) {  // "j" or right arrow
+      if (e.keyCode === 39) {  // right arrow
         this.send('nextComparison');
-      } else if (e.keyCode === 75 || e.keyCode === 37) {  // "k" or left arrow
+      } else if (e.keyCode === 37) {  // left arrow
         this.send('previousComparison');
       }
     }.bind(this));
