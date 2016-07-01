@@ -22,7 +22,7 @@ export default Ember.Component.extend({
   ],
   classNameBindings: ['classes', 'updateCard::Button--primary'],
 
-  loadStripeCheckout: function() {
+  loadStripeCheckout: Ember.on('willInsertElement', function() {
     if (!window.StripeCheckout) {
       var scriptEl = document.createElement('script');
       scriptEl.setAttribute('src','https://checkout.stripe.com/checkout.js');
@@ -30,12 +30,12 @@ export default Ember.Component.extend({
       scriptEl.setAttribute('data-locale', 'auto');
       document.head.appendChild(scriptEl);
     }
-  }.on('willInsertElement'),
-  destroyStripeHandler: function() {
+  }),
+  destroyStripeHandler: Ember.on('willDestroyElement', function() {
     if (this.get('handler')) {
       this.get('handler').close();
     }
-  }.on('willDestroyElement'),
+  }),
   _changeSubscription: function(plan, token) {
     return SubscriptionHelpers.changeSubscription(plan, token).then(
       function() {

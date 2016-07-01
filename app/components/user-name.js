@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   classNames: ['UserName'],
   classNameBindings: ['classes'],
 
-  href: function() {
+  href: Ember.computed('user.githubUrl', function() {
     return this.get('user.githubUrl');
-  }.property('user.githubUrl'),
+  }),
 });

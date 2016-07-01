@@ -12,13 +12,13 @@ export default Ember.Component.extend({
   classNames: ['ToggleButton', 'Button'],
   classNameBindings: ['enabled:Button--primary', 'classes'],
 
-  text: function() {
+  text: Ember.computed('enabled', 'enabledText', 'disabledText', function() {
     if (this.get('enabled')) {
       return this.get('enabledText');
     } else {
       return this.get('disabledText');
     }
-  }.property('enabled', 'enabledText', 'disabledText'),
+  }),
 
   click: function() {
     this.sendAction('action', this.get('enabled'), this.get('object'));

@@ -1,11 +1,12 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
   sha: DS.attr(),
-  shaShort: function() {
+  shaShort: Ember.computed('sha', function() {
     var sha = this.get('sha');
     return sha && sha.slice(0, 7);
-  }.property('sha'),
+  }),
 
   message: DS.attr(),
   authorName: DS.attr(),

@@ -5,10 +5,10 @@ export default Ember.Component.extend({
   total: null,
 
   classes: null,
-  widthPercentage: function() {
+  widthPercentage: Ember.computed('count', 'total', function() {
     let value = Math.min(100, Math.max(1, (this.get('count') / this.get('total') * 100)));
     return Ember.String.htmlSafe(value.toString());
-  }.property('count', 'total'),
+  }),
 
   classNames: [
     'MeterBar',

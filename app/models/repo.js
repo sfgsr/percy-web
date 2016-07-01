@@ -23,19 +23,19 @@ export default DS.Model.extend({
   tokens: DS.hasMany('token', {async: true}),
 
   session: Ember.inject.service(),
-  isCurrentUserOwner: function() {
+  isCurrentUserOwner: Ember.computed('isEnabled', 'owner', function() {
     if (this.get('isEnabled')) {
       // If there is a repo owner, check if it's the same as the current session's user.
       return this.get('session.data.authenticated.user.id') === this.get('owner.id');
     }
     return false;
-  }.property('isEnabled', 'owner'),
+  }),
   isNotCurrentUserOwner: Ember.computed.not('isCurrentUserOwner'),
 
-  writeOnlyToken: function() {
+  writeOnlyToken: Ember.computed('tokens', function() {
     // Right now the tokens API only returns a list of one write-only token.
     return this.get('tokens.firstObject');
-  }.property('tokens'),
+  }),
 
   enable: function() {
     return Ember.$.ajax({

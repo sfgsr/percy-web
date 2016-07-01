@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 
   tagName: 'a',
   href: utils.buildApiUrl('login', {params: {extended_permissions: 1}}),
-  dataHint: function() {
+  dataHint: Ember.computed(function() {
     return [
       'Due to how GitHub authorization works,',
       'we have to request higher permissions to',
@@ -15,7 +15,7 @@ export default Ember.Component.extend({
       'use the token to read repository',
       'metadata and to set commit statuses.',
     ].join('\n');
-  }.property(),
+  }),
   attributeBindings: [
     'dataHint:data-hint',
   ],

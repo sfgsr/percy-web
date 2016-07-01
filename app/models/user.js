@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -16,7 +17,7 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  githubUrl: function() {
+  githubUrl: Ember.computed('login', function() {
     return 'https://github.com/' + this.get('login');
-  }.property('login'),
+  }),
 });

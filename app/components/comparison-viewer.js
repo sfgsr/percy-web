@@ -15,11 +15,11 @@ export default Ember.Component.extend({
   isTogglingFullWidth: false,
   isToggledFullWidth: false,
   isFocus: false,
-  isExpanded: function() {
+  isExpanded: Ember.computed('isDefaultExpanded', function() {
     // TODO: this is just to break the binding with isDefaultExpanded,
     // fix this when migrating to later ember versions with default one-way bindings.
     return this.get('isDefaultExpanded');
-  }.property('isDefaultExpanded'),
+  }),
   isNotExpanded: Ember.computed.not('isExpanded'),
   isActionable: Ember.computed.or('isNotExpanded', 'isMultiColumnMode'),
 
@@ -31,12 +31,12 @@ export default Ember.Component.extend({
     'isToggledFullWidth:ComparisonViewer--fullWidth',
   ],
   attributeBindings: ['style'],
-  style: function() {
+  style: Ember.computed('isTogglingFullWidth', function() {
     // Prevent the width animation from happening on toggle-full-screen actions.
     if (this.get('isTogglingFullWidth')) {
       return 'transition-property: none;';
     }
-  }.property('isTogglingFullWidth'),
+  }),
 
   // When switching to full-width mode, reset the full-width toggled state. This doesn't do anything
   // now, but prevents viewers from staying full-width if the user switches back to overview mode.
@@ -46,12 +46,12 @@ export default Ember.Component.extend({
     }
   }),
 
-  setup: function() {
+  setup: Ember.on('didInsertElement', function() {
     this.send('registerChild', this);
-  }.on('didInsertElement'),
-  teardown: function() {
+  }),
+  teardown: Ember.on('willDestroyElement', function() {
     this.send('unregisterChild', this);
-  }.on('willDestroyElement'),
+  }),
 
   click: function() {
     if (this.get('isNotExpanded')) {

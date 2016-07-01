@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   classNames: ['NamespaceList'],
   classNameBindings: ['classes'],
 
-  sortedNamespaces: function() {
+  sortedNamespaces: Ember.computed('namespaces', 'currentNamespace', function() {
     var result = this.get('namespaces').toArray().sort(function(first, second) {
       // Always sort current user's org to the top.
       if (first.get('id') === this.get('session.data.authenticated.user.login')) {
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
       return (first.get('id') > second.get('id')) ? 1 : -1;
     }.bind(this));
     return result;
-  }.property('namespaces', 'currentNamespace'),
+  }),
 
   actions: {
     selectNamespace: function(namespace) {

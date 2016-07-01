@@ -9,21 +9,21 @@ export default Ember.Component.extend({
   classNames: ['MockApprovalFlow'],
   classNameBindings: ['classes'],
 
-  showWhenApproved: function() {
+  showWhenApproved: Ember.computed('isApproved', function() {
     return Ember.String.htmlSafe(!this.get('isApproved') ? 'display: none' : '');
-  }.property('isApproved'),
-  hideWhenApproved: function() {
+  }),
+  hideWhenApproved: Ember.computed('isApproved', function() {
     return Ember.String.htmlSafe(this.get('isApproved') ? 'display: none' : '');
-  }.property('isApproved'),
-  setupScrollHandler: function() {
+  }),
+  setupScrollHandler: Ember.on('didInsertElement', function() {
     this.$('img').load(function() {
       Ember.$(window).bind('scroll.MockApprovalFlow', this._animateApprovalIfVisible.bind(this));
       this._animateApprovalIfVisible();
     }.bind(this));
-  }.on('didInsertElement'),
-  destroyScrollHandler: function() {
+  }),
+  destroyScrollHandler: Ember.on('willDestroyElement', function() {
     Ember.$(window).unbind('.MockApprovalFlow');
-  }.on('willDestroyElement'),
+  }),
   _animateApprovalIfVisible: function() {
     if (this.get('isDestroyed')) {
       return;

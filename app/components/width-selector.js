@@ -5,9 +5,9 @@ export default Ember.Component.extend({
   classNames: ['WidthSelector'],
 
   // Convenience property since the width selector is currently a single-select dropdown.
-  primarySelectedWidth: function() {
+  primarySelectedWidth: Ember.computed('selectedWidths', function() {
     return this.get('selectedWidths').slice(-1)[0];
-  }.property('selectedWidths'),
+  }),
 
   actions: {
     updateSelectedWidths: function(value) {

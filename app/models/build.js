@@ -16,21 +16,21 @@ export default DS.Model.extend({
   isExpired: Ember.computed.equal('state', 'expired'),
 
   failureReason: DS.attr(),
-  failureReasonHumanized: function() {
+  failureReasonHumanized: Ember.computed('failureReason', function() {
     let failureReason = this.get('failureReason');
     if (failureReason === 'missing_resources') {
       return 'Missing resources';
     } else if (failureReason === 'no_snapshots') {
       return 'No snapshots';
     }
-  }.property('failureReason'),
+  }),
 
   commit: DS.belongsTo('commit', {async: false}),  // Might be null.
   baseBuild: DS.belongsTo('build', {async: false}),
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 
-  comparisonWidths: function() {
+  comparisonWidths: Ember.computed('comparisons', function() {
     // TODO(fotinakis): use a JavaScript Set when the world has advanced.
     var widths = [];
     this.get('comparisons').forEach(function(comparison) {
@@ -40,20 +40,20 @@ export default DS.Model.extend({
       }
     });
     return widths.sort(function(a, b) { return a - b; });
-  }.property('comparisons'),
-  numComparisonWidths: function() {
+  }),
+  numComparisonWidths: Ember.computed('comparisonWidths', function() {
     return this.get('comparisonWidths').length;
-  }.property('comparisonWidths'),
+  }),
 
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),
-  hasDiffs: function() {
+  hasDiffs: Ember.computed('totalComparisonsDiff', function() {
     // Only have the chance to return true if the build is finished.
     if (!this.get('isFinished')) {
       return false;
     }
     return (this.get('totalComparisonsDiff') > 0);
-  }.property('totalComparisonsDiff'),
+  }),
 
   isPullRequest: DS.attr('boolean'),
   pullRequestNumber: DS.attr('number'),
@@ -65,7 +65,7 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  duration: function() {
+  duration: Ember.computed('finishedAt', 'createdAt', function() {
     var finished = this.get('finishedAt');
     if (!finished) {
       finished = moment();
@@ -73,22 +73,22 @@ export default DS.Model.extend({
     var started = this.get('createdAt');
     var milliseconds = moment(finished).diff(started);
     return moment.duration(milliseconds);
-  }.property('finishedAt', 'createdAt'),
+  }),
 
   // Convenience methods for accessing common methods in templates.
-  durationHours: function() {
+  durationHours: Ember.computed('duration', function() {
     return this.get('duration').hours();
-  }.property('duration'),
-  durationMinutes: function() {
+  }),
+  durationMinutes: Ember.computed('duration', function() {
     return this.get('duration').minutes();
-  }.property('duration'),
-  durationSeconds: function() {
+  }),
+  durationSeconds: Ember.computed('duration', function() {
     return this.get('duration').seconds();
-  }.property('duration'),
+  }),
 
-  isApproved: function() {
+  isApproved: Ember.computed('approvedAt', function() {
     return !!this.get('approvedAt');
-  }.property('approvedAt'),
+  }),
 
   reloadAll: function() {
     this.store.findRecord('build', this.get('id'), {reload: true});

@@ -7,9 +7,9 @@ export default Ember.Component.extend({
 
   classNames: ['NamespaceCard', 'NamespaceCard--linked'],
   classNameBindings: ['classes', 'isActive:NamespaceCard--active'],
-  isActive: function() {
+  isActive: Ember.computed('namespace.id', 'currentNamespace.id', function() {
     return this.get('namespace.id') === this.get('currentNamespace.id');
-  }.property('namespace.id', 'currentNamespace.id'),
+  }),
 
   click: function() {
     this.send('selectNamespace', this.get('namespace'));

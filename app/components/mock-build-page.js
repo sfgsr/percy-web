@@ -9,22 +9,22 @@ export default Ember.Component.extend({
   classNameBindings: ['classes', 'showHints:MockBuildPage--showHints'],
 
   // We set style directly because we want both images to be in the initial DOM to avoid flicker.
-  showWhenOverlay: function() {
+  showWhenOverlay: Ember.computed('showOverlay', function() {
     return new Ember.Handlebars.SafeString(!this.get('showOverlay') ? 'display: none' : '');
-  }.property('showOverlay'),
-  hideWhenOverlay: function() {
+  }),
+  hideWhenOverlay: Ember.computed('showOverlay', function() {
     return new Ember.Handlebars.SafeString(this.get('showOverlay') ? 'display: none' : '');
-  }.property('showOverlay'),
+  }),
 
-  setupScrollHandler: function() {
+  setupScrollHandler: Ember.on('didInsertElement', function() {
     this.$('img').load(function() {
       Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
       this._showHintsIfVisible();
     }.bind(this));
-  }.on('didInsertElement'),
-  destroyScrollHandler: function() {
+  }),
+  destroyScrollHandler: Ember.on('willDestroyElement', function() {
     Ember.$(window).unbind('.MockBuildPage');
-  }.on('willDestroyElement'),
+  }),
   _showHintsIfVisible: function() {
     if (this.get('isDestroyed')) {
       return;

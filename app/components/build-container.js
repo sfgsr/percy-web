@@ -3,10 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   build: null,
   classNames: ['BuildContainer'],
-  selectedWidths: function() {
+  selectedWidths: Ember.computed('build.comparisonWidths', function() {
     // Use the largest width by default.
     return this.get('build.comparisonWidths').slice(-1);
-  }.property('build.comparisonWidths'),
+  }),
   selectedNumColumns: 4,
 
   // TODO(fotinakis): remove these on #projectification.
@@ -15,13 +15,13 @@ export default Ember.Component.extend({
 
   showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
 
-  visibleComparisons: function() {
+  visibleComparisons: Ember.computed('build.comparisons', 'selectedWidths', function() {
     return this.get('build.comparisons').filter((comparison) => {
       return this.get('selectedWidths').indexOf(comparison.get('width')) !== -1;
     });
-  }.property('build.comparisons', 'selectedWidths'),
+  }),
 
-  restoreSelectedModeColumns: function() {
+  restoreSelectedModeColumns: Ember.on('init', function() {
     let numColumns = localStorage.getItem('numColumns');
 
     // Cleanup bad data (not a number) in localStorage.
@@ -32,7 +32,7 @@ export default Ember.Component.extend({
     if (numColumns) {
       this.send('selectNumColumns', parseInt(numColumns));
     }
-  }.on('init'),
+  }),
   actions: {
     updateSelectedWidths: function(widths) {
       this.set('selectedWidths', widths);

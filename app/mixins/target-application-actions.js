@@ -13,11 +13,11 @@ import Ember from 'ember';
   This mixin should be used for simple components where this high-coupling is desirable.
 */
 var TargetApplicationActionsMixin = Ember.Mixin.create({
-  target: function() {
+  target: Ember.computed(function() {
     // Note: high-coupling to the container. We always return the main application controller, which
     // will trigger standard bubbling through the route hierarchy if not handled.
     return Ember.getOwner(this).lookup('controller:application');
-  }.property(),
+  }),
 
   /**
     Override sendAction to set myAction="myAction" on the object before triggering the action

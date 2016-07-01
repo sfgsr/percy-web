@@ -4,12 +4,12 @@ import config from './config/environment';
 const Router = Ember.Router.extend({
   location: config.locationType,
 
-  notifyGoogleAnalytics: function() {
+  notifyGoogleAnalytics: Ember.on('didTransition', function() {
     return window.ga && window.ga('send', 'pageview', {
       'page': this.get('url'),
       'title': this.get('url')
     });
-  }.on('didTransition'),
+  }),
 });
 
 Router.map(function() {

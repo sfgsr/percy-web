@@ -9,20 +9,20 @@ export default Ember.Component.extend({
   selectedComparisonIndex: -1,
   lastComparisonIndex: null,
 
-  isDefaultExpanded: function() {
+  isDefaultExpanded: Ember.computed('comparisons', function() {
     return this.get('comparisons.length') < 150;
-  }.property('comparisons'),
+  }),
 
   sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),
   comparisonSortProperties: ['isDifferent:desc', 'pdiff.diffPercentageFull:desc'],
 
   classNames: ['ComparisonList'],
   classNameBindings: ['comparisonListMode'],
-  comparisonListMode: function() {
+  comparisonListMode: Ember.computed('selectedNumColumns', function() {
     return 'ComparisonList--' + this.get('selectedNumColumns') + 'col';
-  }.property('selectedNumColumns'),
+  }),
 
-  setupKeyHandlers: function() {
+  setupKeyHandlers: Ember.on('didInsertElement', function() {
     Ember.$(document).bind('keydown.comparisons', function(e) {
       if (e.keyCode === 39) {  // right arrow
         this.send('nextComparison');
@@ -30,10 +30,10 @@ export default Ember.Component.extend({
         this.send('previousComparison');
       }
     }.bind(this));
-  }.on('didInsertElement'),
-  destroyKeyHandlers: function() {
+  }),
+  destroyKeyHandlers: Ember.on('willDestroyElement', function() {
     Ember.$(document).unbind('keydown.comparisons');
-  }.on('willDestroyElement'),
+  }),
 
   actions: {
     registerChild: function(component) {

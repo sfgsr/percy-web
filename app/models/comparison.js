@@ -19,21 +19,21 @@ export default DS.Model.extend({
 
   startedProcessingAt: DS.attr('date'),
   finishedProcessingAt: DS.attr('date'),
-  processingDurationSeconds: function() {
+  processingDurationSeconds: Ember.computed('startedProcessingAt', 'finishedProcessingAt', function() {
     var finished = this.get('finishedProcessingAt');
     var started = this.get('startedProcessingAt');
     var milliseconds = moment(finished).diff(started);
     return milliseconds / 1000;
-  }.property('startedProcessingAt', 'finishedProcessingAt'),
+  }),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  wasAdded: function() {
+  wasAdded: Ember.computed('headScreenshot', 'baseScreenshot', function() {
     return !!this.get('headScreenshot') && !this.get('baseScreenshot');
-  }.property('headScreenshot', 'baseScreenshot'),
-  wasRemoved: function() {
+  }),
+  wasRemoved: Ember.computed('headScreenshot', 'baseScreenshot', function() {
     return !!this.get('baseScreenshot') && !this.get('headScreenshot');
-  }.property('headScreenshot', 'baseScreenshot'),
+  }),
   wasCompared: Ember.computed.and('pdiff'),
 
   // Comparison is guaranteed 100% different if head was added or head was removed.
