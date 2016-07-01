@@ -6,7 +6,6 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import { percySnapshot } from 'ember-percy';
 
-
 describeComponent(
   'meter-bar',
   'Integration: MeterBarComponent',
