@@ -30,21 +30,21 @@ export function setupSession() {
     // TODO: move this auth payload to a real fixture and make it able to be more dynamic.
     authenticateSession(application, {
       "data": {
-        "id": "123",
+        "id": "12345",
         "type": "users",
         "attributes": {
           "login": "test-user",
           "name": "Test User",
           "email": "fake@example.com",
-          "avatar-url": "https://avatars.githubusercontent.com/u/75300?v=3",
-          "github-id": 75300,
+          "avatar-url": "https://avatars.githubusercontent.com/u/12261879?v=3",
+          "github-id": 12261879,
           "last-synced-at": "2015-10-20T22:25:04.000Z",
           "last-private-synced-at": "2015-10-20T22:25:04.000Z",
           "created-at": "2015-10-20T18:17:13.000Z",
           "updated-at": "2016-04-13T22:16:38.000Z"
         },
         "links": {
-          "self": "/api/v1/users/123"
+          "self": "/api/v1/users/12345"
         },
         "relationships": {
           "subscription": {

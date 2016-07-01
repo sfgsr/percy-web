@@ -72,8 +72,8 @@ export default {
       "attributes": {
         "login": "test-user",
         "name": "Test User",
-        "avatar-url": "https://avatars.githubusercontent.com/u/75300?v=3",
-        "github-id": 75300
+        "avatar-url": "https://avatars.githubusercontent.com/u/12261879?v=3",
+        "github-id": 12261879
       },
       "links": {
         "self": "/api/v1/users/test-user"
