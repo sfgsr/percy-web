@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import startApp from 'percy-web/tests/helpers/start-app';
 // Import mocha helpers so that they will be included for all tests.
+/* jshint unused:false */
 import {
   describe,
   it,

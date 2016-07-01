@@ -1,6 +1,4 @@
 import setupAcceptance, { setupSession } from '../helpers/setup-acceptance';
-import Ember from 'ember';
-import config from '../../config/environment';
 
 describe('Acceptance: Marketing pages', function() {
   setupAcceptance();

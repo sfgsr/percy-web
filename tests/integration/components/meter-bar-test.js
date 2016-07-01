@@ -1,5 +1,4 @@
 /* jshint expr:true */
-import { expect } from 'chai';
 import {
   describeComponent,
   it

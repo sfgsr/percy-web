@@ -1,5 +1,5 @@
 export default function() {
-  this.get('/api/v1/namespaces', function(schema, request) {
+  this.get('/api/v1/namespaces', function(schema) {
     return schema.db.namespaces[0];
   });
   this.get('/api/v1/repos', function(schema, request) {
