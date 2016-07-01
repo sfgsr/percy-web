@@ -10,11 +10,11 @@ export default Ember.Component.extend({
   classNames: ['RepoEnable', 'Button'],
   classNameBindings: ['classes', 'isPrimary:Button--primary'],
 
-  click: function() {
+  click() {
     this.send('action');
   },
   actions: {
-    action: function() {
+    action() {
       this.sendAction('enableRepo', this.get('repo'));
     },
   },

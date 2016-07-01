@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     'classes',
     'isApproved:ApprovalButton--approved',
   ],
-  click: function() {
+  click() {
     // TODO(fotinakis): encapsulate headers for custom API ajax requests.
     var self = this;
     return Ember.$.ajax({

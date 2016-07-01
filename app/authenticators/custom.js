@@ -5,7 +5,7 @@ import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 // TODO: needs a complete refactor since we don't need the iframe postMessage architecture anymore.
 export default BaseAuthenticator.extend({
   store: Ember.inject.service(),
-  restore: function() {
+  restore() {
     // Strategy: completely ignore the restore data and ask the backend again for current auth info.
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var receiveMessage = function(event) {
@@ -36,7 +36,7 @@ export default BaseAuthenticator.extend({
       iframe.appendTo('body');
     }.bind(this));
   },
-  authenticate: function(options) {
+  authenticate(options) {
     options = options || {};
     return new Ember.RSVP.Promise(function(resolve) {
       // First, declare a message receiver for the postMessage events.
@@ -84,7 +84,7 @@ export default BaseAuthenticator.extend({
       iframe.appendTo('body');
     }.bind(this));
   },
-  invalidate: function() {
+  invalidate() {
     return new Ember.RSVP.Promise(function(resolve) {
       var iframe = Ember.$(
         '<iframe class="auth-iframe" style="display: block" width="0" height="0" frameborder="0">');

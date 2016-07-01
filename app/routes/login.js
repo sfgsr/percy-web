@@ -7,7 +7,7 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
   session: Ember.inject.service(),
 
-  afterModel: function() {
+  afterModel() {
     // Right now location.href is the URL before the transition to the login route has completed.
     // Make sure to pass redirectTo into the authenticator so that we come back to that URL.
     let options = {};

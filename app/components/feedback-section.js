@@ -12,10 +12,10 @@ export default Ember.Component.extend({
     'active:FeedbackSection--active',
   ],
   actions: {
-    toggle: function() {
+    toggle() {
       this.set('active', !this.get('active'));
     },
-    send: function() {
+    send() {
       var self = this;
       var content = this.get('content') || '';
       if (content.trim() === '') {

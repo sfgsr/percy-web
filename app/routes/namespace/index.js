@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
+  model() {
     return Ember.RSVP.hash({
       currentNamespace: this.modelFor('namespace'),
       namespaces: this.store.findAll('namespace'),
@@ -9,7 +9,7 @@ export default Ember.Route.extend({
     });
   },
   actions: {
-    selectNamespace: function(namespace) {
+    selectNamespace(namespace) {
       this.transitionTo('namespace.index', namespace.get('id'));
     },
   },

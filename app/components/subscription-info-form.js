@@ -16,12 +16,12 @@ export default Ember.Component.extend({
   classNameBindings: [
     'classes',
   ],
-  submit: function(e) {
+  submit(e) {
     e.preventDefault();
     this.send('save');
   },
   actions: {
-    save: function() {
+    save() {
       var self = this;
       var subscription = this.get('subscription');
       subscription.set('billingEmail', this.get('newBillingEmail'));

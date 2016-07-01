@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    updateSelectedWidths: function(value) {
+    updateSelectedWidths(value) {
       this.set('selectedWidths', []);
       this.get('selectedWidths').push(parseInt(value));
 

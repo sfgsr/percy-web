@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   build: null,
   classes: null,
 
-  click: function() {
+  click() {
     this.send('navigateToBuild');
   },
   classNames: [
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     'build.isExpired:BuildCard--expired',
   ],
   actions: {
-    navigateToBuild: function() {
+    navigateToBuild() {
       this.sendAction('navigateToBuild', this.get('build'));
     },
   },

@@ -16,11 +16,11 @@ export default Ember.Component.extend({
   classNameBindings: [
     'classes',
   ],
-  click: function() {
+  click() {
     this.send('login');
   },
   actions: {
-    login: function() {
+    login() {
       this.sendAction('redirectToLogin');
     }
   },

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import utils from '../lib/utils';
 
 export default {
-  changeSubscription: function(plan, token) {
+  changeSubscription(plan, token) {
     return Ember.$.ajax({
       type: 'POST',
       url: utils.buildApiUrl('subscription'),
@@ -12,7 +12,7 @@ export default {
       },
     });
   },
-  updateMetadata: function(billingEmail) {
+  updateMetadata(billingEmail) {
     // TODO: get the JSON-API endpoint for subscriptions working.
     return Ember.$.ajax({
       type: 'PATCH',

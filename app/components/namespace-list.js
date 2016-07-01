@@ -22,7 +22,7 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    selectNamespace: function(namespace) {
+    selectNamespace(namespace) {
       this.sendAction('selectNamespace', namespace);
     },
   }

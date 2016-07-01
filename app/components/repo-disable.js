@@ -10,11 +10,11 @@ export default Ember.Component.extend({
   classNameBindings: ['classes'],
   attributeBindings: ['disabled'],
 
-  click: function() {
+  click() {
     this.send('action');
   },
   actions: {
-    action: function() {
+    action() {
       var message = (
         `Are you sure you want to disable ${this.get('repo.slug')}?` +
         '\n\nPercy builds for this repo will be disabled and ' +

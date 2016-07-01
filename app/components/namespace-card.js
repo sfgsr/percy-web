@@ -11,11 +11,11 @@ export default Ember.Component.extend({
     return this.get('namespace.id') === this.get('currentNamespace.id');
   }),
 
-  click: function() {
+  click() {
     this.send('selectNamespace', this.get('namespace'));
   },
   actions: {
-    selectNamespace: function(namespace) {
+    selectNamespace(namespace) {
       this.sendAction('selectNamespace', namespace);
     },
   }

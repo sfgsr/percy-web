@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 var ResetScrollMixin = Ember.Mixin.create({
-  activate: function() {
+  activate() {
     this._super();
     window.scrollTo(0, 0);
   },

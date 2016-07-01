@@ -25,7 +25,7 @@ var TargetApplicationActionsMixin = Ember.Mixin.create({
     to the application controller always, rather than being swallowed by the component (since
     components don't bubble actions by default if the action is not bound to an external action).
   */
-  send: function(action) {
+  send(action) {
     var actionName = this.get(action);
     if (Ember.isNone(actionName)) {
       this.set(action, action);

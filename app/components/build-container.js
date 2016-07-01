@@ -34,10 +34,10 @@ export default Ember.Component.extend({
     }
   }),
   actions: {
-    updateSelectedWidths: function(widths) {
+    updateSelectedWidths(widths) {
       this.set('selectedWidths', widths);
     },
-    selectNumColumns: function(numColumns) {
+    selectNumColumns(numColumns) {
       this.set('selectedNumColumns', numColumns);
       localStorage.setItem('numColumns', numColumns);
     },

@@ -37,13 +37,13 @@ export default DS.Model.extend({
     return this.get('tokens.firstObject');
   }),
 
-  enable: function() {
+  enable() {
     return Ember.$.ajax({
       type: 'POST',
       url: utils.buildApiUrl('enableRepo', this.get('id')),
     });
   },
-  disable: function() {
+  disable() {
     return Ember.$.ajax({
       type: 'POST',
       url: utils.buildApiUrl('disableRepo', this.get('id')),

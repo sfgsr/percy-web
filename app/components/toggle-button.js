@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  click: function() {
+  click() {
     this.sendAction('action', this.get('enabled'), this.get('object'));
   },
 });

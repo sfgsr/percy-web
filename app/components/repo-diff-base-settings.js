@@ -9,12 +9,12 @@ export default Ember.Component.extend({
     'classes',
   ],
   actions: {
-    setAutomatic: function() {
+    setAutomatic() {
       let repo = this.get('repo');
       repo.set('diffBase', 'automatic');
       repo.save();
     },
-    setManual: function() {
+    setManual() {
       let repo = this.get('repo');
       repo.set('diffBase', 'manual');
       repo.save();

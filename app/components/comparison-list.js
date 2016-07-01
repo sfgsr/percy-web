@@ -36,18 +36,18 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    registerChild: function(component) {
+    registerChild(component) {
       if (!this.get('comparisonComponents')) {
         this.set('comparisonComponents', Ember.ArrayProxy.create({content: Ember.A()}));
       }
       this.get('comparisonComponents').pushObject(component);
     },
-    unregisterChild: function(component) {
+    unregisterChild(component) {
       // Assume all components are being destroyed and we should reset the selection. TODO: improve.
       this.set('selectedComparisonIndex', 0);
       this.get('comparisonComponents').removeObject(component);
     },
-    nextComparison: function() {
+    nextComparison() {
       var index = this.get('selectedComparisonIndex');
       this.set('lastComparisonIndex', index);
 
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
       }
       this.send('updateSelectedComparison');
     },
-    previousComparison: function() {
+    previousComparison() {
       var index = this.get('selectedComparisonIndex');
       this.set('lastComparisonIndex', index);
 
@@ -71,7 +71,7 @@ export default Ember.Component.extend({
       }
       this.send('updateSelectedComparison');
     },
-    updateSelectedComparison: function() {
+    updateSelectedComparison() {
       var comparisonComponents = this.get('comparisonComponents');
       var selectedIndex = this.get('selectedComparisonIndex');
       var selectedComponent = comparisonComponents.objectAt(selectedIndex);

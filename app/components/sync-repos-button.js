@@ -30,11 +30,11 @@ export default Ember.Component.extend({
   classNameBindings: [
     'classes',
   ],
-  click: function() {
+  click() {
     this.send('login');
   },
   actions: {
-    login: function() {
+    login() {
       var options = {extendedPermissions: 1};
       if (this.get('redirectTo')) {
         options['redirectTo'] = this.get('redirectTo');

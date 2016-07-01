@@ -36,7 +36,7 @@ export default Ember.Component.extend({
       this.get('handler').close();
     }
   }),
-  _changeSubscription: function(plan, token) {
+  _changeSubscription(plan, token) {
     return SubscriptionHelpers.changeSubscription(plan, token).then(
       function() {
         location.href = '/account#success';
@@ -50,12 +50,12 @@ export default Ember.Component.extend({
       }
     );
   },
-  click: function() {
+  click() {
     this.send('checkout');
     return false;
   },
   actions: {
-    checkout: function() {
+    checkout() {
       var self = this;
 
       // This is intentionally evaluated here, outside of the handlers below, because password
@@ -75,7 +75,7 @@ export default Ember.Component.extend({
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.STRIPE_PUBLISHABLE_KEY,
           image: '/images/percy-bg.png',
-          token: function(token) {
+          token(token) {
             self._changeSubscription(chosenPlan, token);
           }
         }));

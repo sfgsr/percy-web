@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNameBindings: ['classes'],
   actions: {
     // Delegate up to application route.
-    enableRepo: function(repo) {
+    enableRepo(repo) {
       this.sendAction('enableRepo', repo);
     },
   },

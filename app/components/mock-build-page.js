@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   destroyScrollHandler: Ember.on('willDestroyElement', function() {
     Ember.$(window).unbind('.MockBuildPage');
   }),
-  _showHintsIfVisible: function() {
+  _showHintsIfVisible() {
     if (this.get('isDestroyed')) {
       return;
     }
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    toggleOverlay: function() {
+    toggleOverlay() {
       this.set('anyInteractions', true);
       this.set('showOverlay', !this.get('showOverlay'));
     }

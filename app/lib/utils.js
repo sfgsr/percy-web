@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 export default {
-  redirectToLogin: function(options) {
+  redirectToLogin(options) {
     options = options || {};
     var params = {
       redirect_to: options.redirectTo || window.location.href,
@@ -13,7 +13,7 @@ export default {
     var urlName = (options.extendedPermissions ? 'loginExtended' : 'login');
     window.location = this.buildApiUrl(urlName, {params: params});
   },
-  buildApiUrl: function() {
+  buildApiUrl() {
     var key = arguments[0];
     var otherArgs = Array.prototype.slice.call(arguments, 1);
 
@@ -46,7 +46,7 @@ export default {
     }
     return window.location.origin + path + queryParams;
   },
-  getQueryParam: function(param) {
+  getQueryParam(param) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');
     for (var i = 0; i < vars.length; i++) {

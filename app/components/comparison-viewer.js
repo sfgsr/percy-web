@@ -53,7 +53,7 @@ export default Ember.Component.extend({
     this.send('unregisterChild', this);
   }),
 
-  click: function() {
+  click() {
     if (this.get('isNotExpanded')) {
       this.set('isExpanded', true);
     } else {
@@ -61,19 +61,19 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    registerChild: function() {
+    registerChild() {
       this.get('registerChild')(this);
     },
-    unregisterChild: function() {
+    unregisterChild() {
       this.get('unregisterChild')(this);
     },
-    toggleOverlay: function() {
+    toggleOverlay() {
       this.toggleProperty('isOverlayEnabled');
     },
-    toggleNoDiffResource: function() {
+    toggleNoDiffResource() {
       this.toggleProperty('showNoDiffSnapshot');
     },
-    toggleFullWidth: function() {
+    toggleFullWidth() {
       if (this.get('isFullWidthOnlyMode')) {
         return;
       }

@@ -90,7 +90,7 @@ export default DS.Model.extend({
     return !!this.get('approvedAt');
   }),
 
-  reloadAll: function() {
+  reloadAll() {
     this.store.findRecord('build', this.get('id'), {reload: true});
   },
 });

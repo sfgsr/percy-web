@@ -24,7 +24,7 @@ export default Ember.Component.extend({
   destroyScrollHandler: Ember.on('willDestroyElement', function() {
     Ember.$(window).unbind('.MockApprovalFlow');
   }),
-  _animateApprovalIfVisible: function() {
+  _animateApprovalIfVisible() {
     if (this.get('isDestroyed')) {
       return;
     }

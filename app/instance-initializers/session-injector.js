@@ -1,6 +1,6 @@
 export default {
   name: 'session-injector',
-  initialize: function(appInstance) {
+  initialize(appInstance) {
     appInstance.inject('controller', 'session', 'service:session');
   },
 };

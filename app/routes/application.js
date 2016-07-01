@@ -4,27 +4,27 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 export default Ember.Route.extend(ApplicationRouteMixin, {
   session: Ember.inject.service(),
   actions: {
-    redirectToLogin: function() {
+    redirectToLogin() {
       this.transitionTo('login');
     },
-    invalidateSession: function() {
+    invalidateSession() {
       this.get('session').invalidate();
     },
-    enablingRepo: function(promise, repo) {
+    enablingRepo(promise, repo) {
       promise.then(function() {
         repo.reload();
       });
     },
-    disablingRepo: function(promise, repo) {
+    disablingRepo(promise, repo) {
       promise.then(function() {
         repo.reload();
       });
     },
 
-    disableRepo: function(repo) {
+    disableRepo(repo) {
       this.send('disablingRepo', repo.disable(), repo);
     },
-    enableRepo: function(repo) {
+    enableRepo(repo) {
       var self = this;
       var promise = repo.enable();
       promise.then(null, function(response) {
@@ -40,7 +40,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       });
       this.send('enablingRepo', promise, repo);
     },
-    navigateToBuild: function(build) {
+    navigateToBuild(build) {
       this.transitionTo('builds.build', build);
     },
   },

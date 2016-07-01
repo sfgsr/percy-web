@@ -19,7 +19,7 @@ export default Ember.Component.extend({
     'isButtonHovered:ApprovalButton--hover',
     'isButtonActive:ApprovalButton--active',
   ],
-  click: function() {
+  click() {
     this.set('isApproved', !this.get('isApproved'));
   },
 });

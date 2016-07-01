@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   classNameBindings: [
     'classes',
   ],
-  click: function() {
+  click() {
     if (confirm('Are you sure you want to cancel?\n\nWe want to help if we can, just email us at hello@percy.io.')) {
       SubscriptionHelpers.changeSubscription('free').then(
         function() {
