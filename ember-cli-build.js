@@ -16,8 +16,8 @@ module.exports = function(defaults) {
 
   app.import('bower_components/accounting.js/accounting.js');
   app.import('bower_components/hint.css/hint.css');
-  app.import('vendor/highlight/styles/github.css');
-  app.import('vendor/highlight/highlight.pack.js');
+  app.import('bower_components/highlightjs/styles/github.css');
+  app.import('bower_components/highlightjs/highlight.pack.js');
 
   return app.toTree();
 };
