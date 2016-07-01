@@ -1,26 +1,13 @@
 export default function() {
+  this.get('/api/v1/namespaces', function(schema, request) {
+    return schema.db.namespaces[0];
+  });
+  this.get('/api/v1/repos', function(schema, request) {
+    if (request.queryParams['filter[namespace]'] === 'test-user') {
+      return schema.db.filteredRepos[0];
+    }
+  });
 
-  // These comments are here to help you get started. Feel free to delete them.
-
-  /*
-    Config (with defaults).
-
-    Note: these only affect routes defined *after* them!
-  */
-
-  // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  // this.namespace = '';    // make this `api`, for example, if your API is namespaced
-  // this.timing = 400;      // delay for each request, automatically set to 0 during testing
-
-  /*
-    Shorthand cheatsheet:
-
-    this.get('/posts');
-    this.post('/posts');
-    this.get('/posts/:id');
-    this.put('/posts/:id'); // or this.patch
-    this.del('/posts/:id');
-
-    http://www.ember-cli-mirage.com/docs/v0.2.x/shorthands/
-  */
+  // Don't block internal ember-percy requests.
+  this.passthrough('/_percy/**');
 }
