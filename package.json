@@ -10,7 +10,6 @@
     "build": "ember build",
     "start": "ember server",
     "start-production-for-testing": "ember server --environment=production",
-    "build": "ember build",
     "build-production": "ember build --environment=production",
     "test": "ember test",
     "test:server": "ember test --server",

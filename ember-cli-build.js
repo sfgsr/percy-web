@@ -9,6 +9,9 @@ module.exports = function(defaults) {
     'ember-cli-mocha': {
       useLintTree: false
     },
+    sassOptions: {
+      extension: 'sass',
+    }
   });
 
   app.import('bower_components/accounting.js/accounting.js');
