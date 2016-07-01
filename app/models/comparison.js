@@ -3,7 +3,7 @@ import DS from 'ember-data';
 import moment from 'moment';
 
 export default DS.Model.extend({
-  build: DS.belongsTo('build'),
+  build: DS.belongsTo('build', {async: true}),
   state: DS.attr(),
   width: DS.attr('number'),
 
