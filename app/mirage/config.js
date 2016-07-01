@@ -1,10 +1,10 @@
 export default function() {
-  this.get('/api/v1/namespaces', function(db, request) {
-    return db.namespaces[0];
+  this.get('/api/v1/namespaces', function(schema, request) {
+    return schema.db.namespaces[0];
   });
-  this.get('/api/v1/repos', function(db, request) {
+  this.get('/api/v1/repos', function(schema, request) {
     if (request.queryParams['filter[namespace]'] === 'test-user') {
-      return db.filtered_repos[0];
+      return schema.db.filteredRepos[0];
     }
   });
 

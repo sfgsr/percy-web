@@ -31,16 +31,16 @@ describe('Acceptance: Marketing pages', function() {
     percySnapshot(this.test.fullTitle());
   });
 
-  // context('for authenticated user', function() {
-  //   setupSession();
+  context('for authenticated user', function() {
+    setupSession();
 
-  //   it('can navigate to repository listing', function() {
-  //     visit('/');
-  //     click('.ReposLink a');
-  //     andThen(() => {
-  //       expect(currentPath()).to.equal('namespace.index');
-  //     });
-  //     percySnapshot(this.test.fullTitle());
-  //   });
-  // });
+    it('can navigate to repository listing', function() {
+      visit('/');
+      click('.ReposLink a');
+      andThen(() => {
+        expect(currentPath()).to.equal('namespace.index');
+      });
+      percySnapshot(this.test.fullTitle());
+    });
+  });
 });
