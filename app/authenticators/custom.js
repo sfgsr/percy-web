@@ -2,6 +2,7 @@ import Ember from 'ember';
 import utils from '../lib/utils';
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 
+// TODO: needs a complete refactor since we don't need the iframe postMessage architecture anymore.
 export default BaseAuthenticator.extend({
   store: Ember.inject.service(),
   restore: function() {
