@@ -16,8 +16,8 @@ var TargetApplicationActionsMixin = Ember.Mixin.create({
   target: function() {
     // Note: high-coupling to the container. We always return the main application controller, which
     // will trigger standard bubbling through the route hierarchy if not handled.
-    return this.container.lookup('controller:application');
-  }.property('_parentView'),
+    return Ember.getOwner(this).lookup('controller:application');
+  }.property(),
 
   /**
     Override sendAction to set myAction="myAction" on the object before triggering the action
