@@ -8,7 +8,8 @@ export default Ember.Route.extend(ResetScrollMixin, {
   },
   actions: {
     docsNavigate(docsPath) {
-      // docs-renderer hijacks links in the doc pages so we can do in-app transitions here:
+      // Avoid doing full-page refreshes when navigating around doc pages. The docs-renderer
+      // component hijacks links to internal pages so we can do smooth in-app transitions here:
       if (docsPath) {
         this.transitionTo('docs.page', docsPath);
       } else {
