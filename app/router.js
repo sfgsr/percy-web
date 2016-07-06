@@ -16,6 +16,14 @@ Router.map(function() {
   // TODO: remove resetNamespace and refactor all route references to full paths.
   this.route('login');
   this.route('repo-forbidden');
+  this.route('docs', {path: '/docs'}, function() {
+    this.route('page', {path: '*path'});
+  });
+  this.route('pricing');
+  this.route('about');
+  this.route('terms');
+  this.route('privacy');
+  this.route('account');
   this.route('namespace', {path: '/:namespace_id'}, function() {
     this.route('repo', {resetNamespace: true, path: '/:repo_id'}, function() {
       this.route('settings', {path: '/settings'});
@@ -24,30 +32,6 @@ Router.map(function() {
       });
     });
   });
-  this.route('docs', function() {
-    this.route('capybara');
-    this.route('static');
-    this.route('faq');
-    this.route('animations');
-
-    this.route('integrations', {resetNamespace: true, path: '/integrations'}, function() {
-      this.route('ci');
-      this.route('github');
-      this.route('responsive');
-      this.route('fonts');
-      this.route('parallel-tests');
-    });
-
-    this.route('apidocs', {resetNamespace: true, path: '/api'}, function() {
-      this.route('reference');
-      this.route('client');
-    });
-  });
-  this.route('pricing');
-  this.route('about');
-  this.route('terms');
-  this.route('privacy');
-  this.route('account');
 });
 
 export default Router;

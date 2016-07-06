@@ -1,6 +1,4 @@
 .DocsContainer
-  max-width: 1200px !important
-
   // Default fontsize for docs is set to 15px, since the whole point is to read things.
   font-size: 1.5rem
   line-height: 1.7
@@ -11,16 +9,16 @@
   h2
     border-bottom: 1px solid #E1E1E1
 
-  // Make images on docs page responsive.
   img
+    // Make images on docs page downsize responsive.
     max-width: 100%
 
   .DocsNav
     padding: 20px
-    margin-bottom: 30px
     background: $lightergray
     box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px, rgba(0,0,0,0.09804) 0px 1px 2px 0px
     border-radius: 3px
+    box-sizing: border-box
 
     header
       margin-bottom: 0
@@ -42,3 +40,27 @@
 
       a
         text-decoration: none
+  .DocsBody
+    box-sizing: border-box
+
+@media (max-width: 750px)
+  .DocsNav
+    max-height: 100px
+    overflow: scroll
+    width: 100%
+
+  .DocsBody
+    padding: 20px
+
+@media (min-width: 751px)
+  .DocsContainer
+    display: flex
+
+  .DocsNav
+    float: left
+    width: 20%
+
+  .DocsBody
+    padding: 40px
+    float: left
+    width: 80%

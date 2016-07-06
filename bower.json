@@ -16,7 +16,8 @@
     "lodash": "4.13.1",
     "pretender": "1.1.0",
     "Faker": "3.1.0",
-    "highlightjs": "9.4.0",
-    "jquery-mockjax": "2.2.0"
+    "highlightjs": "^9.4.0",
+    "jquery-mockjax": "2.2.0",
+    "remarkable": "^1.6.2"
   }
 }
