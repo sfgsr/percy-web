@@ -1,43 +1,7 @@
 {{fixed-top-header}}
 <div class="container DocsContainer">
    <div class="DocsNav">
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    <header>Clients</header>
-    {{!--
-    <ul>
-      <li>{{#link-to "docs.capybara"}}Capybara{{/link-to}}</li>
-      <li>{{#link-to "docs.static"}}Static websites{{/link-to}}</li>
-    </ul>
-    <header>Integrations</header>
-    <ul>
-      <li>{{#link-to "integrations.ci"}}CI services{{/link-to}}</li>
-      <li>{{#link-to "integrations.github"}}GitHub integration{{/link-to}}</li>
-      <li>{{#link-to "integrations.fonts"}}Font services{{/link-to}}</li>
-      <li>{{#link-to "integrations.parallel-tests"}}Parallel test suites{{/link-to}}</li>
-      <li>{{#link-to "integrations.responsive"}}Responsive visual diffs{{/link-to}}</li>
-    </ul>
-    <header>API</header>
-    <ul>
-      <li>{{#link-to "apidocs.client"}}Client{{/link-to}}</li>
-      <li>{{#link-to "apidocs.reference"}}Reference{{/link-to}}</li>
-    </ul>
-    <header>Other</header>
-    <ul>
-      <li>{{#link-to "docs.animations"}}Animation handling{{/link-to}}</li>
-      <li>{{#link-to "docs.faq"}}FAQ{{/link-to}}</li>
-    </ul>
-    --}}
+    {{docs-renderer markdown=model.navMarkdown docsNavigate="docsNavigate"}}
   </div>
   <div class="DocsBody">
     {{outlet}}

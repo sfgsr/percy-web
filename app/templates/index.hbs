@@ -71,7 +71,7 @@
       <p>
         Test your responsive designs—simply provide a list of breakpoint widths and we take care of the rest. See how CSS changes will affect your entire site, including on mobile devices. Catch mobile visual bugs before launch.
         <br>
-        {{#link-to "integrations.responsive"}}See docs »{{/link-to}}
+        {{#link-to "docs.page" "learn/responsive"}}See docs »{{/link-to}}
       </p>
       <p>
         <img class="u-capped-width" style="border: 1px solid #ddd" src="/images/example-responsive-375.jpg">
@@ -98,7 +98,7 @@
           Percy comes with drop-in open source clients for Rails/Capybara tests and static websites.
         </p>
         <p>
-          See the {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.
+          See the {{#link-to "docs.page" "learn/faq"}}FAQ{{/link-to}} for more info.
         </p>
       </div>
     </div>
@@ -142,7 +142,7 @@ end
   <span class="dim">end
 end</span>
 {{/code-block}}
-        {{#link-to "docs.capybara"}}See more »{{/link-to}}
+        {{#link-to "docs.page" "clients/ruby/capybara"}}See more »{{/link-to}}
       </div>
       <div class="six columns">
       <h3>Static websites</h3>
@@ -150,13 +150,13 @@ end</span>
 $ gem install percy-cli
 $ percy snapshot _site/
 {{/code-block}}
-        {{#link-to "docs.static"}}See more »{{/link-to}}
+        {{#link-to "docs.page" "clients/static"}}See more »{{/link-to}}
       </div>
     </div>
     <hr>
     <div class="row u-text-center">
       <p>
-        It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, or {{#link-to "docs.faq"}}FAQ{{/link-to}} for more info.
+        It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, or {{#link-to "docs.page" "learn/faq"}}FAQ{{/link-to}} for more info.
       </p>
       {{#if session.isAuthenticated}}
         {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}

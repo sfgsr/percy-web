@@ -1,2 +1,4 @@
-{{docs-edit-button classes="u-pull-right"}}
-{{docs-renderer markdown=model docsNavigate="docsNavigate"}}
+{{#if model.pageMarkdown}}
+  {{docs-edit-button classes="u-pull-right"}}
+{{/if}}
+{{docs-renderer markdown=model.pageMarkdown docsNavigate="docsNavigate"}}

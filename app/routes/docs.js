@@ -4,7 +4,10 @@ import markdownFiles from 'percy-docs/markdownFiles';
 
 export default Ember.Route.extend(ResetScrollMixin, {
   model() {
-    return Ember.get(markdownFiles, 'index') || null;
+    return Ember.RSVP.hash({
+      navMarkdown: Ember.get(markdownFiles, 'nav'),
+      pageMarkdown: Ember.get(markdownFiles, 'index'),
+    });
   },
   actions: {
     docsNavigate(docsPath) {

@@ -20,10 +20,10 @@
     border-radius: 3px
     box-sizing: border-box
 
-    header
+    h1
       margin-bottom: 0
       margin-top: 2rem
-      font-size: 1.5rem
+      font-size: 1.8rem
       font-weight: bold
       font-family: $fancy-font
       border-bottom: 0
@@ -44,23 +44,24 @@
     box-sizing: border-box
 
 @media (max-width: 750px)
-  .DocsNav
-    max-height: 100px
-    overflow: scroll
-    width: 100%
+  .DocsContainer
+    .DocsNav
+      max-height: 100px
+      overflow: scroll
+      width: 100%
 
-  .DocsBody
-    padding: 20px
+    .DocsBody
+      padding: 20px
 
 @media (min-width: 751px)
   .DocsContainer
     display: flex
 
-  .DocsNav
-    float: left
-    width: 20%
+    .DocsNav
+      float: left
+      width: 20%
 
-  .DocsBody
-    padding: 40px
-    float: left
-    width: 80%
+    .DocsBody
+      padding: 40px
+      float: left
+      width: 80%
