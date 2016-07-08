@@ -21860,12 +21860,12 @@
     },
     "percy-docs": {
       "version": "0.0.0",
-      "from": "git+https://github.com/percy/percy-docs.git",
+      "from": "git+https://github.com/percy/percy-docs.git#c3b373cb33f68a40d95587b20fd828401a24a54f",
       "resolved": "git+https://github.com/percy/percy-docs.git#c3b373cb33f68a40d95587b20fd828401a24a54f",
       "dependencies": {
         "broccoli-flatiron": {
           "version": "0.0.0",
-          "from": "git+https://github.com/percy/broccoli-flatiron.git",
+          "from": "git+https://github.com/percy/broccoli-flatiron.git#1752a13d24f263127724c80c6637a2f8c1901352",
           "resolved": "git+https://github.com/percy/broccoli-flatiron.git#1752a13d24f263127724c80c6637a2f8c1901352",
           "dependencies": {
             "broccoli-writer": {
@@ -22263,7 +22263,7 @@
             },
             "fast-ordered-set": {
               "version": "1.0.2",
-              "from": "fast-ordered-set@>=1.0.2 <2.0.0",
+              "from": "fast-ordered-set@>=1.0.0 <2.0.0",
               "resolved": "https://registry.npmjs.org/fast-ordered-set/-/fast-ordered-set-1.0.2.tgz",
               "dependencies": {
                 "blank-object": {
