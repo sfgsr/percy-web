@@ -95,10 +95,7 @@
           We handle all the heavy lifting of consistent screenshot rendering and visual diffing in our systems, so you don't have to.
         </p>
         <p>
-          Percy comes with drop-in open source clients for Rails/Capybara tests and static websites.
-        </p>
-        <p>
-          See the {{#link-to "docs.page" "learn/faq"}}FAQ{{/link-to}} for more info.
+          Percy comes with drop-in open source clients for many Ruby, Python, and JavaScript frameworks, plus a command-line client for static websites.
         </p>
       </div>
     </div>
@@ -120,17 +117,9 @@
     <h2>Get started</h2>
     <div class="row">
       <div class="six columns">
-      <h3>Rails + RSpec</h3>
+      <h3>{{#link-to "docs.page" "clients/ruby/capybara"}}Rails »{{/link-to}}</h3>
 {{#code-block lang="ruby"}}
 gem 'percy-capybara'
-{{/code-block}}
-
-{{#code-block lang="ruby"}}
-# spec_helper.rb:
-RSpec.configure do |config|
-  config.before(:suite) { Percy::Capybara.initialize_build }
-  config.after(:suite) { Percy::Capybara.finalize_build }
-end
 {{/code-block}}
 
 {{#code-block}}
@@ -138,35 +127,50 @@ end
   it 'shows the dropdown menu when clicked' do
     visit '/'
     first('.dropdown-toggle').click</span>
-    Percy::Capybara.snapshot(page, name: 'homepage')
+    <strong>Percy::Capybara.snapshot(page, name: 'homepage')</strong>
   <span class="dim">end
 end</span>
 {{/code-block}}
-        {{#link-to "docs.page" "clients/ruby/capybara"}}See more »{{/link-to}}
-      </div>
-      <div class="six columns">
-      <h3>Static websites</h3>
+
+        <h3>{{#link-to "docs.page" "clients/ruby/cli"}}Static websites »{{/link-to}}</h3>
 {{#code-block lang="bash"}}
 $ gem install percy-cli
-$ percy snapshot _site/
+$ <strong>percy snapshot _site/</strong>
 {{/code-block}}
-        {{#link-to "docs.page" "clients/ruby/cli"}}See more »{{/link-to}}
+      </div>
+      <div class="six columns">
+        <h3>{{#link-to "docs.page" "clients/javascript/ember"}}Ember »{{/link-to}}</h3>
+{{#code-block lang="bash"}}
+$ ember install ember-percy
+{{/code-block}}
+{{#code-block lang="javascript"}}
+<span class="dim">describe('Acceptance: Marketing pages', function() {
+  it('can visit /about', function() {
+    visit('/about');
+    click('#person1');</span>
+    <strong>percySnapshot('about page (person details)');</strong>
+  <span class="dim">});
+});</span>
+{{/code-block}}
+        <hr>
+        <div class="u-text-center">
+          <p>
+            <strong>{{#link-to "docs.index"}}And more!{{/link-to}}</strong> It's easy to get started:
+          </p>
+          <p>
+            {{#if session.isAuthenticated}}
+              {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
+            {{else}}
+              {{login-button redirectToLogin="redirectToLogin"}}
+            {{/if}}
+          </p>
+          <p>
+            Sign up and get 500 visual diffs/month for free to try us out!
+          </p>
+        </div>
       </div>
     </div>
     <hr>
-    <div class="row u-text-center">
-      <p>
-        It's easy to get started, see the {{#link-to "docs.index"}}Docs{{/link-to}}, or {{#link-to "docs.page" "learn/faq"}}FAQ{{/link-to}} for more info.
-      </p>
-      {{#if session.isAuthenticated}}
-        {{#link-to 'namespace.index' session.data.authenticated.user.login classNames="Button Button--primary Button--onDark"}}My Repositories &raquo;{{/link-to}}
-      {{else}}
-        {{login-button redirectToLogin="redirectToLogin"}}
-      {{/if}}
-      <p>
-        Our {{#link-to "pricing"}}free plan{{/link-to}} comes with 500 visual diffs/month to get started.
-      </p>
-    </div>
   </div>
 </div>
 {{main-footer}}
