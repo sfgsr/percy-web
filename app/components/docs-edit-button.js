@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  docPath: null,
   classes: null,
 
   text: 'Edit on GitHub',
-  href: Ember.computed(function() {
-    return 'https://github.com/percy/percy-docs/tree/master' + window.location.pathname + '.md';
+  href: Ember.computed('docPath', function() {
+    return 'https://github.com/percy/percy-docs/tree/master' + this.get('docPath') + '.md';
   }),
   tagName: 'a',
   classNames: [
