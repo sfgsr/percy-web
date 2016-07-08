@@ -40,6 +40,10 @@
 
       a
         text-decoration: none
+
+    .DocsNav-toggle
+      display: none
+
   .DocsBody
     box-sizing: border-box
 
@@ -49,6 +53,15 @@
       max-height: 100px
       overflow: scroll
       width: 100%
+
+      .DocsNav-toggle
+        display: block
+        float: right
+        cursor: pointer
+
+      &.DocsNav--expanded
+        max-height: inherit
+
 
     .DocsBody
       padding: 20px
