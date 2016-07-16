@@ -22,6 +22,15 @@ export default BaseAuthenticator.extend({
           var userId = payload.data.id;
           store.pushPayload(payload);
           var userRecord = store.peekRecord('user', userId);
+
+          if (window.Intercom) {
+            window.Intercom('update', {
+              name: userRecord.get('name'),
+              email: userRecord.get('email'),
+              created_at: userRecord.get('createdAt').getTime() / 1000,
+            });
+          }
+
           resolve({user: userRecord});
         } else if (event.data === 'unauthenticated') {
           reject();
@@ -54,6 +63,15 @@ export default BaseAuthenticator.extend({
           var userId = payload.data.id;
           store.pushPayload(payload);
           var userRecord = store.peekRecord('user', userId);
+
+          if (window.Intercom) {
+            window.Intercom('update', {
+              name: userRecord.get('name'),
+              email: userRecord.get('email'),
+              created_at: userRecord.get('createdAt').getTime() / 1000,
+            });
+          }
+
           resolve({user: userRecord});
         } else if (event.data === 'unauthenticated') {
           // Build params if given a custom final redirect location.
@@ -90,6 +108,9 @@ export default BaseAuthenticator.extend({
         '<iframe class="auth-iframe" style="display: block" width="0" height="0" frameborder="0">');
       iframe = iframe.attr('src', utils.buildApiUrl('logout'));
       iframe.appendTo('body');
+      if (window.Intercom) {
+        window.Intercom('shutdown');
+      }
       resolve({});
     }.bind(this));
   }

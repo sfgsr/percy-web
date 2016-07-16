@@ -31,6 +31,9 @@ module.exports = function(environment) {
     },
   };
 
+  // Intercom development/test app ID.
+  ENV.APP.INTERCOM_APP_ID = 'itdwmqct';
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -59,6 +62,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_live_cmaeNcmPuMihdT3Q7QDBDMDr';
+    ENV.APP.INTERCOM_APP_ID = 'm37fs4zj';
   }
 
   return ENV;

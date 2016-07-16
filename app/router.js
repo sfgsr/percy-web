@@ -5,10 +5,16 @@ const Router = Ember.Router.extend({
   location: config.locationType,
 
   notifyGoogleAnalytics: Ember.on('didTransition', function() {
-    return window.ga && window.ga('send', 'pageview', {
-      'page': this.get('url'),
-      'title': this.get('url')
-    });
+    if (window.ga) {
+      window.ga('send', 'pageview', {
+        'page': this.get('url'),
+        'title': this.get('url')
+      });
+    }
+    if (window.Intercom) {
+      window.Intercom('update');
+    }
+    return true;
   }),
 });
 
