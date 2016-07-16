@@ -21860,8 +21860,8 @@
     },
     "percy-docs": {
       "version": "0.0.0",
-      "from": "git+https://github.com/percy/percy-docs.git#c3b373cb33f68a40d95587b20fd828401a24a54f",
-      "resolved": "git+https://github.com/percy/percy-docs.git#c3b373cb33f68a40d95587b20fd828401a24a54f",
+      "from": "git+https://github.com/percy/percy-docs.git#0c9a97170bc9cbdd0d8ac769a32784b3fd4e5b2a",
+      "resolved": "git+https://github.com/percy/percy-docs.git#0c9a97170bc9cbdd0d8ac769a32784b3fd4e5b2a",
       "dependencies": {
         "broccoli-flatiron": {
           "version": "0.0.0",
@@ -21994,9 +21994,9 @@
           }
         },
         "broccoli-funnel": {
-          "version": "1.0.2",
+          "version": "1.0.3",
           "from": "broccoli-funnel@>=1.0.2 <2.0.0",
-          "resolved": "https://registry.npmjs.org/broccoli-funnel/-/broccoli-funnel-1.0.2.tgz",
+          "resolved": "https://registry.npmjs.org/broccoli-funnel/-/broccoli-funnel-1.0.3.tgz",
           "dependencies": {
             "array-equal": {
               "version": "1.0.0",
@@ -22067,9 +22067,9 @@
               "resolved": "https://registry.npmjs.org/fast-ordered-set/-/fast-ordered-set-1.0.2.tgz"
             },
             "fs-tree-diff": {
-              "version": "0.3.1",
-              "from": "fs-tree-diff@>=0.3.0 <0.4.0",
-              "resolved": "https://registry.npmjs.org/fs-tree-diff/-/fs-tree-diff-0.3.1.tgz"
+              "version": "0.5.0",
+              "from": "fs-tree-diff@>=0.5.0 <0.6.0",
+              "resolved": "https://registry.npmjs.org/fs-tree-diff/-/fs-tree-diff-0.5.0.tgz"
             },
             "minimatch": {
               "version": "3.0.2",
@@ -22190,9 +22190,9 @@
           }
         },
         "broccoli-merge-trees": {
-          "version": "1.1.1",
+          "version": "1.1.2",
           "from": "broccoli-merge-trees@>=1.1.1 <2.0.0",
-          "resolved": "https://registry.npmjs.org/broccoli-merge-trees/-/broccoli-merge-trees-1.1.1.tgz",
+          "resolved": "https://registry.npmjs.org/broccoli-merge-trees/-/broccoli-merge-trees-1.1.2.tgz",
           "dependencies": {
             "broccoli-plugin": {
               "version": "1.2.1",
@@ -22268,7 +22268,7 @@
             },
             "fast-ordered-set": {
               "version": "1.0.2",
-              "from": "fast-ordered-set@>=1.0.2 <2.0.0",
+              "from": "fast-ordered-set@>=1.0.0 <2.0.0",
               "resolved": "https://registry.npmjs.org/fast-ordered-set/-/fast-ordered-set-1.0.2.tgz",
               "dependencies": {
                 "blank-object": {
@@ -22279,9 +22279,9 @@
               }
             },
             "fs-tree-diff": {
-              "version": "0.4.4",
-              "from": "fs-tree-diff@>=0.4.3 <0.5.0",
-              "resolved": "https://registry.npmjs.org/fs-tree-diff/-/fs-tree-diff-0.4.4.tgz"
+              "version": "0.5.0",
+              "from": "fs-tree-diff@>=0.5.0 <0.6.0",
+              "resolved": "https://registry.npmjs.org/fs-tree-diff/-/fs-tree-diff-0.5.0.tgz"
             },
             "rimraf": {
               "version": "2.5.3",
