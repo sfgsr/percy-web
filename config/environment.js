@@ -26,7 +26,6 @@ module.exports = function(environment) {
         enableRepo: '/api/v1/repos/%@/enable',
         disableRepo: '/api/v1/repos/%@/disable',
         subscription: '/api/v1/subscription',
-        feedback: '/api/feedback',
       },
     },
   };
