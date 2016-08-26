@@ -7,7 +7,7 @@ export default Ember.Component.extend({
     // Use the largest width by default.
     return this.get('build.comparisonWidths').slice(-1);
   }),
-  selectedNumColumns: 4,
+  selectedNumColumns: 1,
 
   // TODO(fotinakis): remove these on #projectification.
   session: Ember.inject.service(),

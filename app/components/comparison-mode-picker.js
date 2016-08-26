@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classes: null,
   selectNumColumns: null,  // Action to pass in.
-  selectedNumColumns: 4,
+  selectedNumColumns: 1,
 
   classNames: ['ComparisonModePicker'],
   classNameBindings: [
