@@ -1,5 +1,5 @@
 build:
-	gcloud docker pull $(grep '^FROM' Dockerfile | grep -o ' .*' | tr -d ' ')
+	gcloud docker pull $$(grep '^FROM' Dockerfile | grep -o ' .*' | tr -d ' ')
 	docker-compose build
 
 test:
