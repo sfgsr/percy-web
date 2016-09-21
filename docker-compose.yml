@@ -8,4 +8,4 @@ services:
     environment:
      - PERCY_TOKEN=${PERCY_TOKEN}
      - PERCY_PROJECT=${PERCY_PROJECT}
-     - BUILDKITE_COMMIT=${BUILDKITE_COMMIT}
+     - PERCY_COMMIT=${PERCY_COMMIT}

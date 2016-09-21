@@ -3,4 +3,5 @@ build:
 	docker-compose build
 
 test:
+	export PERCY_COMMIT=$$(git rev-parse HEAD)
 	docker-compose run web npm test
