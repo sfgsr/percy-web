@@ -25,6 +25,7 @@ RUN npm install
 RUN bower install
 # Setup the full app directory (do this after package install to speed up docker builds).
 ADD . /app/src/
+RUN chown -R app:app /app/src/
 RUN npm run build-production
 USER root
 ENV HOME /root
