@@ -1,0 +1,13 @@
+# Files.
+.dockerignore
+.travis.yml
+docker-compose.yml
+Makefile
+Dockerfile
+
+# Folders.
+.git/
+tmp/
+dist/
+node_modules/
+bower_components/

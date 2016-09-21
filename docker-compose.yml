@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web:
+    build: .
+    image: gcr.io/percy_dev/web:local
+    ports:
+      - "8080:8080"
