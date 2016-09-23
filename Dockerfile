@@ -1,4 +1,4 @@
-FROM gcr.io/percy_dev/baseimage-web:2016-09-07-164954
+FROM gcr.io/percy_dev/baseimage-web:2016-09-23-233919
 
 # Configure nginx to serve dist directory.
 RUN rm /etc/nginx/sites-enabled/default
