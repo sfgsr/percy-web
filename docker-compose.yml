@@ -6,6 +6,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-     - PERCY_TOKEN=${PERCY_TOKEN}
-     - PERCY_PROJECT=${PERCY_PROJECT}
-     - PERCY_COMMIT=${PERCY_COMMIT}
+      - BUILDKITE
+      - BUILDKITE_COMMIT
+      - BUILDKITE_BRANCH
+      - BUILDKITE_PULL_REQUEST
+      - BUILDKITE_BUILD_ID
+      - PERCY_TOKEN
+      - PERCY_PROJECT
