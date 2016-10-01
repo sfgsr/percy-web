@@ -1,12 +1,12 @@
 FROM gcr.io/percy_dev/baseimage-web:2016-10-01-195329
 
-# Configure nginx to serve dist directory.
-RUN rm /etc/nginx/sites-enabled/default
-ADD config/nginx_site.conf /etc/nginx/sites-enabled/site.conf
+# Configure nginx.
+ADD config/nginx-main.conf /etc/nginx/nginx.conf
+ADD config/nginx-default-site.conf /etc/nginx/sites-enabled/default
 
 # Configure nginx to run automatically.
-ADD config/run_nginx.sh /etc/service/nginx/run
-ADD config/run_logger.sh /etc/service/nginx/log/run
+ADD config/run-nginx.sh /etc/service/nginx/run
+ADD config/run-logger.sh /etc/service/nginx/log/run
 RUN chmod +x /etc/service/*/run
 RUN chmod +x /etc/service/*/log/run
 
