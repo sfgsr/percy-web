@@ -6,7 +6,9 @@ ADD config/nginx_site.conf /etc/nginx/sites-enabled/site.conf
 
 # Configure nginx to run automatically.
 ADD config/run_nginx.sh /etc/service/nginx/run
-RUN chmod +x /etc/service/nginx/run
+ADD config/run_logger.sh /etc/service/nginx/log/run
+RUN chmod +x /etc/service/*/run
+RUN chmod +x /etc/service/*/log/run
 
 # Global npm packages.
 RUN npm install -g bower
