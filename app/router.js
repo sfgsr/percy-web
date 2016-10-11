@@ -30,6 +30,18 @@ Router.map(function() {
   this.route('terms');
   this.route('privacy');
   this.route('account');
+  this.route('organizations', {path: '/organizations'}, function() {
+    this.route('new', {path: '/new'});
+  });
+  // TODO: #projectification launch.
+  this.route('organization', {path: '/_org/:organization_id'}, function() {
+    this.route('project', {resetNamespace: true, path: '/:project_id'}, function() {
+      this.route('settings', {path: '/settings'});
+      this.route('builds', {resetNamespace: true}, function() {
+        this.route('build', {path: '/:build_id'});
+      });
+    });
+  });
   this.route('namespace', {path: '/:namespace_id'}, function() {
     this.route('repo', {resetNamespace: true, path: '/:repo_id'}, function() {
       this.route('settings', {path: '/settings'});

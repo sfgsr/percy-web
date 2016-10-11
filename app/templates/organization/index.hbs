@@ -1,0 +1,12 @@
+<div class="container container--fixedWidth">
+  <div class="container container--forContent">
+    <h3>Projects</h3>
+
+    {{#if projects}}
+      {{projects/projects-list projects=model.projects}}
+    {{else}}
+      No projects! Create one?
+    {{/if}}
+  </div>
+</div>
+{{main-footer}}
