@@ -13,7 +13,7 @@
     "build-production": "ember build --environment=production",
     "test": "ember test",
     "test:server": "ember test --server",
-    "test:node_debug": "node debug node_modules/ember-cli/bin/ember test --server",
+    "test:node_debug": "node debug node_modules/ember-cli/bin/ember test --server"
   },
   "repository": "percy/percy-web",
   "engines": {
