@@ -5,7 +5,7 @@ import lookupValidator from 'ember-changeset-validations';
 
 
 export default Ember.Component.extend({
-  save: null,
+  organizationCreated: null,
 
   store: Ember.inject.service(),
   model: Ember.computed('store', function() {
@@ -32,10 +32,7 @@ export default Ember.Component.extend({
           .save()
           .then(() => {
             // Bubble the successfully saved model upward, so the route can react to it.
-            let saveAction = this.get('save');
-            if (saveAction) {
-              saveAction(this.get('model'));
-            }
+            this.sendAction('organizationCreated', this.get('model'));
           })
           .catch(() => {
             this.get('model.errors').forEach(({attribute, message}) => {

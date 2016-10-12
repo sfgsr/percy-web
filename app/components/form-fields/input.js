@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   title: null,
   property: null,
   type: 'text',
+  autofocus: false,
 
   classNames: ['FormFieldsInput'],
 

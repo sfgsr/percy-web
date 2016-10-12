@@ -1,15 +1,24 @@
 .Panel
+  width: 100%
+  border: $grayborder
+
+  .Panel-header
+    width: 100%
+    background-color: #eee
+    font-weight: bold
+    padding: 10px
+
+// TODO: remove me! #projectification launch.
+.LegacyPanel
   background: #efefef
 
 @media (min-width: 400px)
-  .Panel
-    box-sizing: border-box
+  .LegacyPanel
     width: 100%
     padding: 20px
 
 @media (min-width: 550px)
-  .Panel
-    box-sizing: border-box
+  .LegacyPanel
     position: fixed
     overflow: scroll
     height: 100%

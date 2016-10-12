@@ -33,12 +33,17 @@ Router.map(function() {
   this.route('account');
   this.route('organizations', {path: '/organizations'}, function() {
     this.route('new', {path: '/new'});
+    this.route('organization', {path: '/:organization_id'}, function() {
+      this.route('settings', {path: '/settings'});
+    });
   });
   // TODO: #projectification launch.
   this.route('organization', {path: '/_org/:organization_id'}, function() {
-    this.route('project', {resetNamespace: true, path: '/:project_id'}, function() {
+    // Don't add anything else in this namespace, we want to allow users to own the whole projects
+    // namespace. Org-level settings and such should go in the above "organizations" route.
+    this.route('project', {path: '/:project_id'}, function() {
       this.route('settings', {path: '/settings'});
-      this.route('builds', {resetNamespace: true}, function() {
+      this.route('builds', {}, function() {
         this.route('build', {path: '/:build_id'});
       });
     });

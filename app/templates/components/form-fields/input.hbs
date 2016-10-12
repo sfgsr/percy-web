@@ -1,14 +1,16 @@
 <label for={{concat type "-" property}}>{{title}}</label>
 <input
   type={{type}}
-  class="FormFieldsInput {{if fieldErrors 'error'}}"
+  class="{{if fieldErrors 'error'}}"
   id={{concat type "-" property}}
   value={{get changeset property}}
   oninput={{action (mut (get changeset property)) value="target.value"}}
   onblur={{action validateProperty}}
+  autofocus={{autofocus}}
+  placeholder={{placeholder}}
 >
 {{#if fieldErrors}}
-  <ul>
+  <ul class="FormFieldsInput-errors">
     {{#each (get fieldErrors "validation") as |message|}}
       <li>{{message}}</li>
     {{/each}}
