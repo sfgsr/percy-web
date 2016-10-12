@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   }),
 
   setupScrollHandler: Ember.on('didInsertElement', function() {
-    this.$('img').load(function() {
+    this.$('img').on('load', function() {
       Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
       this._showHintsIfVisible();
     }.bind(this));

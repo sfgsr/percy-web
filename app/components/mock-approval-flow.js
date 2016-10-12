@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     return Ember.String.htmlSafe(this.get('isApproved') ? 'display: none' : '');
   }),
   setupScrollHandler: Ember.on('didInsertElement', function() {
-    this.$('img').load(function() {
+    this.$('img').on('load', function() {
       Ember.$(window).bind('scroll.MockApprovalFlow', this._animateApprovalIfVisible.bind(this));
       this._animateApprovalIfVisible();
     }.bind(this));
