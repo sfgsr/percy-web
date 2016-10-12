@@ -14,7 +14,6 @@
     "test": "ember test",
     "test:server": "ember test --server",
     "test:node_debug": "node debug node_modules/ember-cli/bin/ember test --server",
-    "shrinkwrap": "npm shrinkwrap --dev"
   },
   "repository": "percy/percy-web",
   "engines": {

@@ -4,3 +4,11 @@
 
 Ember web app for [Percy](https://percy.io).
 
+## Setup
+
+First, install [yarn](https://yarnpkg.com).
+
+```
+yarn
+bower install
+```
