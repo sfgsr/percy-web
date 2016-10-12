@@ -21,7 +21,7 @@ RUN npm install -g phantomjs-prebuilt
 # Setup the app directory and build the ember app.
 ADD package.json yarn.lock bower.json /app/src/
 WORKDIR /app/src/
-RUN yarn
+RUN bash -c "yarn"
 RUN bower install --allow-root
 # Setup the full app directory (do this after package install to speed up docker builds).
 ADD . /app/src/
