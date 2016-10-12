@@ -19,7 +19,7 @@ RUN bash -c "curl -o- -L https://yarnpkg.com/install.sh | bash"
 RUN npm install -g phantomjs-prebuilt
 
 # Setup the app directory and build the ember app.
-ADD package.json npm-shrinkwrap.json bower.json /app/src/
+ADD package.json yarn.lock bower.json /app/src/
 WORKDIR /app/src/
 RUN yarn
 RUN bower install --allow-root
