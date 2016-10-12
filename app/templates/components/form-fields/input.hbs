@@ -1,7 +1,7 @@
 <label for={{concat type "-" property}}>{{title}}</label>
 <input
   type={{type}}
-  class="FormFieldsInput {{if fieldErrors 'FormFieldsInput--error'}}"
+  class="FormFieldsInput {{if fieldErrors 'error'}}"
   id={{concat type "-" property}}
   value={{get changeset property}}
   oninput={{action (mut (get changeset property)) value="target.value"}}
