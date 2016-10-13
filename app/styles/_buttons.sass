@@ -79,6 +79,21 @@ input[type="button"],
     font-size: 10px
     padding: 0 10px
 
+  &.Button--nav
+    border: none
+    width: 100%
+
+    &.Button--active,
+    // Note: this one does not follow BEM style naming because it is applied automatically
+    // by Ember link-to if the current route matches.
+    &.active,
+      color: $darkpurple
+      font-weight: bold
+      background-color: $lightergray
+
+    &.Button--nav:hover
+      background-color: $lightergray
+
   &[disabled]
     color: $gray !important
     border-color: $gray !important

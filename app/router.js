@@ -35,6 +35,8 @@ Router.map(function() {
     this.route('new', {path: '/new'});
     this.route('organization', {path: '/:organization_id'}, function() {
       this.route('settings', {path: '/settings'});
+      this.route('users', {path: '/users'});
+      this.route('billing', {path: '/billing'});
     });
   });
   // TODO: #projectification launch.

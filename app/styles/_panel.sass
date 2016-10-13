@@ -1,12 +1,27 @@
 .Panel
   width: 100%
   border: $grayborder
+  border-radius: 4px
+
+  & > .Panel-section
+    padding: 10px
 
   .Panel-header
     width: 100%
-    background-color: #eee
+    background-color: $lightergray
+    border-bottom: $grayborder
     font-weight: bold
-    padding: 10px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .Panel-nav
+    ul
+      margin: 0
+      padding: 0
+      list-style: none
+      li
+        margin-bottom: 0
 
 // TODO: remove me! #projectification launch.
 .LegacyPanel

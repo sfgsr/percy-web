@@ -1,0 +1,17 @@
+<form action="javascript:;">
+  {{form-fields/input
+      property="name"
+      title="Organization name"
+      changeset=changeset
+      validateProperty=(action "validateProperty" changeset "name")
+      autofocus=true
+  }}
+  {{form-fields/input
+      property="slug"
+      title="Short name"
+      changeset=changeset
+      validateProperty=(action "validateProperty" changeset "slug")
+      autofocus=true
+  }}
+  {{form-fields/submit value="Save" classes="Button--primary" submit=(action "save")}}
+</form>
