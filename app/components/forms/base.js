@@ -23,7 +23,6 @@ export default Ember.Component.extend({
     save() {
       let model = this.get('model');
       let changeset = this.get('changeset');
-      let snapshot = changeset.snapshot();
 
       if (Ember.get(changeset, 'isValid')) {
         changeset
