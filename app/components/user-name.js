@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classes: null,
   linked: true,
 
-  tag: 'span',
+  tagName: 'span',
   classNames: ['UserName'],
   classNameBindings: ['classes'],
 

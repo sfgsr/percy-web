@@ -10,8 +10,8 @@ export default DS.Model.extend({
   lastSyncedAt: DS.attr('date'),
   lastPrivateSyncedAt: DS.attr('date'),
 
-  // This should only ever be accessed on the current user, because the API endpoint only returns
-  // the subscription for the current user.
+  // These endpoints are only available on the current user and should not be accessed otherwise:
+  organizations: DS.hasMany('organizations'),
   subscription: DS.belongsTo('subscription', {async: false}),
 
   createdAt: DS.attr('date'),

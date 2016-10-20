@@ -1,0 +1,28 @@
+<div class="Alert Alert--warning">
+  <strong>
+    GitHub Integrations are awesome but still in a <a target="_blank" href="https://developer.github.com/changes/2016-09-14-Integrations-Early-Access/">GitHub early-access beta</a>.
+  </strong>
+  <br>
+  Please <a href="#" {{action "showSupport"}}>reach out</a> if you are having trouble getting the Integration to work.
+</div>
+
+{{#if currentIntegration}}
+  {{organizations/github-integration organization=organization}}
+{{else}}
+  <p>
+    <a {{action "triggerWaitingForInstallation" preventDefault=false}} href="{{githubIntegrationUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
+      {{fa-icon "github" classNames="fa--left"}}
+      Install GitHub Integration
+    </a>
+  </p>
+  <p>
+    {{#if organization.githubIntegrationRequest}}
+      {{organizations/github-integration
+          organization=organization
+          cancelIntegrationRequest="cancelIntegrationRequest"
+      }}
+    {{else}}
+      Installation will open in a new tab—come back here after it's installed!
+    {{/if}}
+  </p>
+{{/if}}

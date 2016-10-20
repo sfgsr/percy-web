@@ -1,11 +1,23 @@
+{{fixed-top-header useNewProjectsHeader=true currentOrganization=model}}
 <div class="container container--fixedWidth">
   <div class="container container--forContent">
-    <h3>Projects</h3>
-
-    {{#if projects}}
-      {{projects/projects-list projects=model.projects}}
+    {{#if model.projects.isPending}}
+      {{loading-page}}
     {{else}}
-      No projects! Create one?
+      {{#if model.projects}}
+        {{#link-to "organizations.organization.projects.new" model.slug classNames="Button Button--primary u-pull-right"}}
+          New Project
+        {{/link-to}}
+        <h3>Projects</h3>
+        {{projects-list projects=model.projects}}
+      {{else}}
+        <div class="Card Card--extraPadded u-text-center">
+          <h3>Welcome <strong>{{model.name}}</strong>!</h3>
+          {{#link-to "organizations.organization.projects.new" model.slug classNames="Button Button--primary"}}
+            Create your first project
+          {{/link-to}}
+        </div>
+      {{/if}}
     {{/if}}
   </div>
 </div>

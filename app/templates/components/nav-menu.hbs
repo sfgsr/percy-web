@@ -1,32 +1,62 @@
-{{#if user}}
-  <div class="NavMenu-item">
-    {{#link-to 'namespace.index' session.data.authenticated.user.login}}My Repos{{/link-to}}
-  </div>
+{{#if useNewProjectsHeader}}
+  {{#if user}}
+    {{#if currentOrganization}}
+      <div class="NavMenu-item">
+        {{#link-to "organization.index" currentOrganization.slug}}
+          Projects
+        {{/link-to}}
+      </div>
+      <div class="NavMenu-item">
+        {{#link-to "organizations.organization.settings" currentOrganization.slug}}
+          Settings
+        {{/link-to}}
+      </div>
+    {{/if}}
+    <div class="NavMenu-avatar">
+      {{user-avatar user=user width=36 linked=true href='/account'}}
+    </div>
+    <div class="NavMenu-item NavMenu-item--right">
+      {{#link-to "docs.index"}}Documentation{{/link-to}}
+    </div>
+  {{else}}
+    <div class="NavMenu-item">
+      <a href="#" {{action "redirectToLogin"}}>Sign In</a>
+    </div>
+  {{/if}}
 {{else}}
-  <div class="NavMenu-item">
-    {{#link-to "pricing"}}Pricing{{/link-to}}
+  {{#if user}}
+    <div class="NavMenu-avatar">
+      {{user-avatar user=user width=36 linked=true href='/account'}}
+    </div>
+    <div class="NavMenu-item NavMenu-item--right NavMenu-usage">
+      <a href="/account">
+        {{meter-bar count=session.data.authenticated.user.subscription.currentUsage total=session.data.authenticated.user.subscription.planUsageLimit}}
+        <br>
+        {{format-number session.data.authenticated.user.subscription.currentUsage}}
+        / {{format-number session.data.authenticated.user.subscription.planUsageLimit}}
+      </a>
+    </div>
+  {{else}}
+    <div class="NavMenu-item NavMenu-item--right">
+      <a href="#" {{action "redirectToLogin"}}>Sign In</a>
+    </div>
+  {{/if}}
+  {{#unless user}}
+    <div class="NavMenu-item NavMenu-item--right">
+      {{#link-to "pricing"}}Pricing{{/link-to}}
+    </div>
+  {{/unless}}
+  <div class="NavMenu-item NavMenu-item--right">
+    <a href="https://blog.percy.io">Blog</a>
   </div>
-{{/if}}
-<div class="NavMenu-item">
-  {{#link-to "docs.index"}}Docs{{/link-to}}
-</div>
-<div class="NavMenu-item">
-  <a href="https://blog.percy.io">Blog</a>
-</div>
-{{#if user}}
-  <div class="NavMenu-avatar">
-    {{user-avatar user=user width=36 linked=true href='/account'}}
+  <div class="NavMenu-item NavMenu-item--right">
+    {{#link-to "docs.index"}}Documentation{{/link-to}}
   </div>
-  <div class="NavMenu-item NavMenu-usage">
-    <a href="/account">
-      {{meter-bar count=session.data.authenticated.user.subscription.currentUsage total=session.data.authenticated.user.subscription.planUsageLimit}}
-      <br>
-      {{format-number session.data.authenticated.user.subscription.currentUsage}}
-      / {{format-number session.data.authenticated.user.subscription.planUsageLimit}}
-    </a>
-  </div>
-{{else}}
-  <div class="NavMenu-item">
-    <a href="#" {{action "redirectToLogin"}}>Sign In</a>
-  </div>
+  {{#if user}}
+    <div class="NavMenu-item NavMenu-item--right">
+      {{#link-to 'namespace.index' session.data.authenticated.user.login}}
+        My Repos
+      {{/link-to}}
+    </div>
+  {{/if}}
 {{/if}}

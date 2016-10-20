@@ -1,0 +1,20 @@
+{{#if currentIntegration}}
+  <div class="OrganizationsGithubIntegration-actions">
+    <a href="{{currentIntegration.githubHtmlUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
+      {{fa-icon "github" classNames="fa--left"}}
+      Manage
+    </a>
+  </div>
+  <img class="OrganizationsGithubIntegration-leftAvatar" src="{{currentIntegration.githubAccountAvatarUrl}}&s=64">
+  <header>Installed!</header>
+  <p>
+    GitHub integration installed {{moment-from-now currentIntegration.createdAt}}.
+  </p>
+{{else if organization.githubIntegrationRequest}}
+  <div class="OrganizationsGithubIntegration-actions">
+    <a href="#" class="Button" {{action "cancelIntegrationRequest"}}>Cancel</a>
+  </div>
+  {{fa-icon 'fa-spinner fa-pulse' classNames="OrganizationsGithubIntegration-leftAvatar"}}
+  <header>Waiting for installation...</header>
+  Waiting for <strong>{{organization.githubIntegrationRequest.createdBy.login}}</strong> to install Percy in GitHub.
+{{/if}}

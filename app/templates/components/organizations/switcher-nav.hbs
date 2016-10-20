@@ -1,0 +1,34 @@
+<div class="OrganizationsSwitcherNav-item" {{action "toggleSwitcher"}}>
+  {{#if currentOrganization}}
+    {{currentOrganization.name}}
+  {{else}}
+    Switch organization
+  {{/if}}
+  {{fa-icon "chevron-down"}}
+</div>
+{{#if isExpanded}}
+  <div class="OrganizationsSwitcherNav-pageClickOverlay" {{action "hideSwitcher"}}></div>
+  <div class="OrganizationsSwitcherNav-arrow">{{fa-icon "caret-up"}}</div>
+  <div class="OrganizationsSwitcherNav-switcher" {{action "hideSwitcher"}}>
+    {{#if currentUser.organizations.isPending}}
+      {{loading-page}}
+    {{else}}
+      <ul>
+        <li>
+          {{#link-to "organizations.new" classNames="OrganizationsSwitcherNav-item"}}
+            {{fa-icon "plus-circle"}} Create new organization
+          {{/link-to}}
+        </li>
+        {{#each currentUser.organizations as |org|}}
+          {{#if (not-eq org currentOrganization)}}
+            <li>
+              {{#link-to "organization.index" org.slug classNames="OrganizationsSwitcherNav-item"}}
+                {{org.name}}
+              {{/link-to}}
+            </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+{{/if}}

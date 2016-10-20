@@ -11,8 +11,12 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   changeset: Ember.computed('model', function() {
     let model = this.get('model');
-    let validator = this.get('validator');
+    let validator = this.get('validator') || {};
     return new Changeset(model, lookupValidator(validator), validator);
+  }),
+  focusOnInsert: Ember.on('didInsertElement', function() {
+    // We can't only use autofocus=true because it apparently only works on first load.
+    this.$('[autofocus]').focus();
   }),
 
   actions: {
@@ -32,10 +36,17 @@ export default Ember.Component.extend({
             this.sendAction('saveSuccess', model);
           })
           .catch(() => {
+            // TODO: clean this up when this issue is addressed:
+            // https://github.com/DockYard/ember-changeset/issues/100
+            let errorData = {};
             this.get('model.errors').forEach(({attribute, message}) => {
-              // TODO: we currently only show the last error message because we have to set this
-              // as an array. https://github.com/DockYard/ember-changeset/issues/100
-              changeset.addError(attribute, [message]);
+              if (!errorData[attribute]) {
+                errorData[attribute] = [];
+              }
+              errorData[attribute].push(message);
+            });
+            Object.keys(errorData).forEach((key) => {
+              changeset.addError(key, errorData[key]);
             });
             // Make sure the model ditry attrs are rolled back.
             // TODO: this causes flashing when page state is bound to a model attribute that is

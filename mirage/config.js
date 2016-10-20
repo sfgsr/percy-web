@@ -1,4 +1,7 @@
 export default function() {
+  // Don't block internal ember-percy requests.
+  this.passthrough('/_percy/**');
+
   this.get('/api/v1/namespaces', function(schema) {
     return schema.db.namespaces[0];
   });
@@ -7,7 +10,4 @@ export default function() {
       return schema.db.filteredRepos[0];
     }
   });
-
-  // Don't block internal ember-percy requests.
-  this.passthrough('/_percy/**');
 }

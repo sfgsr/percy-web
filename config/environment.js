@@ -26,7 +26,12 @@ module.exports = function(environment) {
         enableRepo: '/api/v1/repos/%@/enable',
         disableRepo: '/api/v1/repos/%@/disable',
         subscription: '/api/v1/subscription',
+        githubIntegrationRequest: '/api/v1/organizations/%@/github-integration-request',
+        projectsCollection: '/api/v1/organizations/%@/projects',
       },
+      githubUrls: {
+        integration: 'https://github.com/integrations/percy/installations/new',
+      }
     },
   };
 
@@ -40,6 +45,10 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
+
+    ENV.APP.githubUrls = {
+      integration: 'https://github.com/integrations/percy-dev/installations/new',
+    }
   }
 
   if (environment === 'test') {

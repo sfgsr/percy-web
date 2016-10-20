@@ -7,7 +7,4 @@ export default BaseFormComponent.extend({
 
   model: Ember.computed.alias('organization'),
   validator: OrganizationEditValidations,
-
-  actions: {
-  },
 });

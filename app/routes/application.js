@@ -4,8 +4,26 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 export default Ember.Route.extend(ApplicationRouteMixin, {
   session: Ember.inject.service(),
   actions: {
+    showSupport() {
+      window.Intercom('show');
+    },
     redirectToLogin() {
       this.transitionTo('login');
+    },
+    redirectToDefaultOrganization() {
+      let lastOrganizationSlug = localStorage.getItem('lastOrganizationSlug');
+      if (lastOrganizationSlug) {
+        this.transitionTo('organization.index', lastOrganizationSlug);
+      } else {
+        this.get('session.currentUser.organizations.firstObject').then((org) => {
+          if (org) {
+            this.transitionTo('organization.index', org.slug);
+          } else {
+            // User has no organizations.
+            this.transitionTo('organizations.new');
+          }
+        });
+      }
     },
     invalidateSession() {
       this.get('session').invalidate();
@@ -20,7 +38,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         repo.reload();
       });
     },
-
     disableRepo(repo) {
       this.send('disablingRepo', repo.disable(), repo);
     },

@@ -4,14 +4,15 @@
       title="Organization name"
       changeset=changeset
       validateProperty=(action "validateProperty" changeset "name")
-      autofocus=true
   }}
   {{form-fields/input
       property="slug"
-      title="Short name"
+      title="Slug"
       changeset=changeset
       validateProperty=(action "validateProperty" changeset "slug")
-      autofocus=true
   }}
+  <p>
+    The slug is used in URLs and the Percy API. Note that old build links will not work if the slug is changed, and a new organization can claim the old slug.
+  </p>
   {{form-fields/submit value="Save" classes="Button--primary" submit=(action "save")}}
 </form>
