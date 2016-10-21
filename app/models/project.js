@@ -11,5 +11,6 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
+  repo: DS.belongsTo('repo', {async: false}),
   builds: DS.hasMany('build', {async: true}),
 });

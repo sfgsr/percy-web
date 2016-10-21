@@ -11,7 +11,10 @@ export default Ember.Component.extend({
     'classes',
   ],
   actions: {
-    chooseRepo() {
+    chooseRepo(repo) {
+      let project = this.get('project');
+      project.set('repo', repo);
+      project.save();
     }
   }
 });
