@@ -43,8 +43,8 @@ Router.map(function() {
   });
   // TODO: #projectification launch.
   this.route('organization', {path: '/-/:organization_id'}, function() {
-    // Don't add anything else in this namespace, we want to allow users to own the whole projects
-    // namespace. Org-level settings and such should go in the above "organizations" route.
+    // Don't add anything else in this top-level namespace, we want to allow users to own the whole
+    // projects namespace. Org-level settings and such should go in the above "organizations" route.
     this.route('project', {path: '/:project_id'}, function() {
       this.route('settings');
       this.route('builds', {}, function() {

@@ -7,4 +7,10 @@ export default DS.Model.extend({
   githubIntegrationRequest: DS.belongsTo('github-integration-request', {async: false}),
 
   projects: DS.hasMany('project'),
+
+  // These are GitHub repositories that the integration has access to. To be useful, a repo
+  // has to be linked to a project.
+  repos: DS.hasMany('repo'),
+
+  isGithubIntegrated: Ember.computed.bool('githubIntegration'),
 });

@@ -1,6 +1,10 @@
 {{fixed-top-header useNewProjectsHeader=true currentOrganization=model.organization}}
 <div class="container container--fixedWidth">
   <div class="container container--forContent">
+    {{#link-to "organization.project.settings" model.organization.slug model.slug classNames="Button Button--withLeftIcon u-pull-right"}}
+      {{fa-icon "cog" classNames="fa--left"}}
+      Settings
+    {{/link-to}}
     <h3>{{model.name}}</h3>
   </div>
 </div>

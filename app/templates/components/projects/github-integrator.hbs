@@ -1,0 +1,14 @@
+<p>
+  You can link this project to a GitHub repository. This enables Percy commit statuses on GitHub Pull Requests.
+</p>
+{{#if organization.isGithubIntegrated}}
+  {{#power-select
+    selected=project.repo
+    searchField="slug"
+    options=organization.repos
+    onchange=(action "chooseRepo")
+    as |repos|
+  }}
+    {{repos.slug}}
+  {{/power-select}}
+{{/if}}
