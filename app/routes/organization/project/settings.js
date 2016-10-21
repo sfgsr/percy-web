@@ -7,7 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       // If project slug changed, redirect to new URL slug:
       let projectSlug = project.get('slug');
       let organizationSlug = project.get('organization.slug');
-      this.transitionTo('organization.project.settings', organizationSlug, projectSlug);
+      this.transitionTo('organization.project.index', organizationSlug, projectSlug);
     },
   }
 });
