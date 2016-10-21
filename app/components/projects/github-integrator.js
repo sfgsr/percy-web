@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from 'percy-web/config/environment';
 
 export default Ember.Component.extend({
   project: null,
@@ -13,7 +12,6 @@ export default Ember.Component.extend({
   ],
   actions: {
     chooseRepo() {
-      debugger;
     }
   }
 });

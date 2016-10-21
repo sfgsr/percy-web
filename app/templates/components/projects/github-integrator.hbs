@@ -1,6 +1,8 @@
 <p>
   You can link this project to a GitHub repository. This enables Percy commit statuses on GitHub Pull Requests.
 </p>
+<div class="ProjectGithubIntegrator">
+</div>
 {{#if organization.isGithubIntegrated}}
   {{#power-select
     selected=project.repo
@@ -9,6 +11,6 @@
     onchange=(action "chooseRepo")
     as |repos|
   }}
-    {{repos.slug}}
+    {{repos.name}}
   {{/power-select}}
 {{/if}}
