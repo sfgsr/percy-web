@@ -8,7 +8,7 @@
     <h3>{{model.name}}</h3>
 
     <h4>Settings</h4>
-
+    {{forms/project-edit project=model saveSuccess="projectUpdated"}}
     <hr>
     <h4>Link to GitHub repository</h4>
     {{projects/github-integrator project=model}}

@@ -1,16 +1,21 @@
 <p>
   You can link this project to a GitHub repository. This enables Percy commit statuses on GitHub Pull Requests.
 </p>
-<div class="ProjectGithubIntegrator">
-</div>
 {{#if organization.isGithubIntegrated}}
-  {{#power-select
-    selected=project.repo
-    searchField="slug"
-    options=organization.repos
-    onchange=(action "chooseRepo")
-    as |repos|
-  }}
-    {{repos.name}}
-  {{/power-select}}
+  <p>
+    {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+    {{#power-select
+      selected=project.repo
+      searchField="slug"
+      placeholder="Select GitHub repository..."
+      renderInPlace=true
+      matchTriggerWidth=false
+      allowClear=true
+      options=organization.repos
+      onchange=(action "chooseRepo")
+      as |repos|
+    }}
+      {{repos.slug}}
+    {{/power-select}}
+  </p>
 {{/if}}

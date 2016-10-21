@@ -1,0 +1,24 @@
+<form action="javascript:;">
+  {{form-fields/input
+      property="name"
+      title="Project name"
+      changeset=changeset
+      validateProperty=(action "validateProperty" changeset "name")
+  }}
+  {{form-fields/input
+      property="slug"
+      title="Slug"
+      changeset=changeset
+      validateProperty=(action "validateProperty" changeset "slug")
+  }}
+  <p>
+    The slug is used in URLs and the Percy API. Note that old build links will not work if the slug is changed.
+  </p>
+  {{form-fields/submit
+    isSaving=isSaving
+    isSaveSuccessful=isSaveSuccessful
+    value="Save"
+    classes="Button--primary"
+    submit=(action "save")
+  }}
+</form>

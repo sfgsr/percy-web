@@ -4,3 +4,6 @@
   value="{{value}}"
   onclick={{action submit}}
 >
+{{#if showSavingIndicator}}
+  {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+{{/if}}

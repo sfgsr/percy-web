@@ -8,6 +8,9 @@ export default Ember.Component.extend({
   model: null,
   validator: null,
 
+  isSaving: false,
+  isSaveSuccessful: null,
+
   store: Ember.inject.service(),
   changeset: Ember.computed('model', function() {
     let model = this.get('model');
@@ -20,6 +23,17 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    saving(promise) {
+      this.set('isSaving', true);
+      promise.then(() => {
+        this.set('isSaving', false);
+        this.set('isSaveSuccessful', true);
+      }, () => {
+        this.set('isSaving', false);
+        this.set('isSaveSuccessful', false);
+      });
+    },
+
     validateProperty(changeset, property) {
       return changeset.validate(property);
     },
@@ -29,31 +43,32 @@ export default Ember.Component.extend({
       let changeset = this.get('changeset');
 
       if (Ember.get(changeset, 'isValid')) {
-        changeset
-          .save()
-          .then(() => {
-            // Bubble the successfully saved model upward, so the route can react to it.
-            this.sendAction('saveSuccess', model);
-          })
-          .catch(() => {
-            // TODO: clean this up when this issue is addressed:
-            // https://github.com/DockYard/ember-changeset/issues/100
-            let errorData = {};
-            this.get('model.errors').forEach(({attribute, message}) => {
-              if (!errorData[attribute]) {
-                errorData[attribute] = [];
-              }
-              errorData[attribute].push(message);
-            });
-            Object.keys(errorData).forEach((key) => {
-              changeset.addError(key, errorData[key]);
-            });
-            // Make sure the model ditry attrs are rolled back.
-            // TODO: this causes flashing when page state is bound to a model attribute that is
-            // dirtied by the changeset save(), but it's better than leaving the model dirty
-            // and having page state be out of date. Better way to handle this?
-            model.rollbackAttributes();
+        let savingPromise = changeset.save();
+        this.send('saving', savingPromise);
+
+        savingPromise.then(() => {
+          // Bubble the successfully saved model upward, so the route can react to it.
+          this.sendAction('saveSuccess', model);
+          changeset.rollback();
+        }).catch(() => {
+          // TODO: clean this up when this issue is addressed:
+          // https://github.com/DockYard/ember-changeset/issues/100
+          let errorData = {};
+          this.get('model.errors').forEach(({attribute, message}) => {
+            if (!errorData[attribute]) {
+              errorData[attribute] = [];
+            }
+            errorData[attribute].push(message);
           });
+          Object.keys(errorData).forEach((key) => {
+            changeset.addError(key, errorData[key]);
+          });
+          // Make sure the model ditry attrs are rolled back.
+          // TODO: this causes flashing when page state is bound to a model attribute that is
+          // dirtied by the changeset save(), but it's better than leaving the model dirty
+          // and having page state be out of date. Better way to handle this?
+          model.rollbackAttributes();
+        });
       }
     },
 

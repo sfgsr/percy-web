@@ -6,8 +6,10 @@ export default Ember.Component.extend({
   property: null,
   type: 'text',
   autofocus: false,
+  classes: null,
 
   classNames: ['FormFieldsInput'],
+  classNameBindings: ['classes'],
 
   fieldErrors: Ember.computed('changeset.error', function() {
     return Ember.get(this.get('changeset.error'), this.get('property'));
