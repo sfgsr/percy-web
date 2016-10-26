@@ -1862,9 +1862,9 @@ ember-moment@5.1.0:
   dependencies:
     ember-cli-babel "^5.1.6"
 
-ember-percy@^1.2.2:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.3.tgz#42bad9f5307c54ac05a247c9ee1e6c9a4b221728"
+ember-percy@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.4.tgz#1bdcecfe25ab444a380150416b836527e0ebd6ad"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.5"
@@ -4039,7 +4039,7 @@ percy-client@^1.3.0:
 
 "percy-docs@git+https://github.com/percy/percy-docs.git":
   version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#87895d0a898cb75ec4979cb91e24c589ef625193"
+  resolved "git+https://github.com/percy/percy-docs.git#1e0425476aa303acf8a3a192530af649d157763a"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
     broccoli-funnel "^1.0.2"

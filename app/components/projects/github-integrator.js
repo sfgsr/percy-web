@@ -17,7 +17,7 @@ export default Ember.Component.extend({
       this.set('isSaveSuccessful', true);
     }, () => {
       this.set('isSaveSuccessful', false);
-    })
+    });
   },
 
   classNames: ['ProjectsGithubIntegrator'],
