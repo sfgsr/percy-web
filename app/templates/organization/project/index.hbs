@@ -5,7 +5,46 @@
       {{fa-icon "cog" classNames="fa--left"}}
       Settings
     {{/link-to}}
-    <h3>{{model.name}}</h3>
+    <h3>
+      {{model.name}}
+      {{#if model.isDisabled}}
+        <span class="RepoContainer-repoState">(disabled)</span>
+      {{/if}}
+    </h3>
+    {{#if model.repo}}
+      <p>
+        Linked to <a href="{{model.repo.htmlUrl}}">{{fa-icon "github"}} {{model.repo.slug}}</a>
+      </p>
+    {{/if}}
+    {{#if model.builds.isPending}}
+      {{loading-page}}
+    {{else}}
+      {{#if model.builds}}
+        <div>
+          {{#each model.builds as |build|}}
+            {{build-card build=build navigateToBuild="navigateToBuild"}}
+          {{/each}}
+        </div>
+      {{else}}
+        {{#if model.isEnabled}}
+          <div class="Alert Alert--warning" style="max-width: 700px; margin: 0 auto">
+            <h4>Waiting for first build...</h4>
+            <p>
+              Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you push your first build, it will show up here.
+            </p>
+            <p>
+              Here is the <strong>write-only API key</strong> for <strong>{{model.name}}</strong>, you'll need this to authenticate to Percy:
+            </p>
+            {{#with model.writeOnlyToken.token as |token|}}
+              {{#code-block}}PERCY_TOKEN={{token}}
+PERCY_PROJECT={{model.fullSlug}}{{/code-block}}
+            {{/with}}
+          </div>
+        {{else}}
+          <p>No builds yet, and this project is disabled.</p>
+        {{/if}}
+      {{/if}}
+    {{/if}}
   </div>
 </div>
 {{main-footer}}
