@@ -1,7 +1,7 @@
-<p>
-  You can link this project to a GitHub repository. This enables Percy commit statuses on GitHub Pull Requests.
-</p>
 {{#if organization.isGithubIntegrated}}
+  <p>
+    You can link this project to a GitHub repository. This enables Percy commit statuses on GitHub Pull Requests.
+  </p>
   <p>
     {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
     {{#power-select
@@ -18,4 +18,8 @@
       {{repos.slug}}
     {{/power-select}}
   </p>
+{{else}}
+  <div class="Alert Alert--info">
+    <strong>Missing organization GitHub integration.</strong> Before you can link to a repository you must first {{#link-to "organizations.organization.settings" project.organization.slug}}install the Percy GitHub integration{{/link-to}} in your organanization.
+  </div>
 {{/if}}

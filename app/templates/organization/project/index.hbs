@@ -33,7 +33,7 @@
               Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you push your first build, it will show up here.
             </p>
             <p>
-              Here is the <strong>write-only API key</strong> for <strong>{{model.name}}</strong>, you'll need this to authenticate to Percy:
+              Here are the <strong>environment variables</strong> you'll need to {{#link-to "docs.index"}}setup in your CI service{{/link-to}}:
             </p>
             {{#with model.writeOnlyToken.token as |token|}}
               {{#code-block}}PERCY_TOKEN={{token}}

@@ -5,6 +5,7 @@ export default DS.Model.extend({
   organization: DS.belongsTo('organization', {async: false}),
   name: DS.attr(),
   slug: DS.attr(),
+  fullSlug: DS.attr(),
   isEnabled: DS.attr('boolean'),
   isDisabled: Ember.computed.not('isEnabled'),
   diffBase: DS.attr(),  // Either "automatic" or "manual".
@@ -15,8 +16,10 @@ export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: false}),
 
   builds: DS.hasMany('build', {async: true}),
+  tokens: DS.hasMany('token', {async: true}),
 
-  fullSlug: Ember.computed('organization', function() {
-    return `${this.get('organization.slug')}/${this.get('slug')}`;
+  writeOnlyToken: Ember.computed('tokens', function() {
+    // Right now the tokens API only returns a list of one write-only token.
+    return this.get('tokens.firstObject');
   }),
 });
