@@ -2,8 +2,8 @@
 <div class="container container--fixedWidth container--forContent">
   {{#if (eq model.errors.firstObject.status 'forbidden') }}
     <h2>Forbidden</h2>
-    <p>You do not have access to this resource or the resource does not exist in Percy.</p>
-    <p>Feel free to <a href="mailto:hello@percy.io" {{action "showSupport"}}>contact us</a> if you believe you have reached this in error.</p>
+    <p>You do not have access to this resource or the resource does not exist in Percy. Feel free to <a href="mailto:hello@percy.io" {{action "showSupport"}}>contact us</a> if you believe you have reached this in error.</p>
+    <p><strong>An administrator can send you an invite to join this organization.</strong></p>
   {{else if (eq model.errors.firstObject.status 'not_found')}}
     <h2>Not Found</h2>
     <p>This resource was not found in Percy.</p>
