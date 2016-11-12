@@ -5,6 +5,4 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   afterModel(model) {
     localStorage.setItem('lastOrganizationSlug', model.get('slug'));
   },
-  actions: {
-  },
 });

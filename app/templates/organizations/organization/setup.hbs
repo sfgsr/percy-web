@@ -1,0 +1,26 @@
+<div class="container container--forContent container--fixedWidth">
+  <div class="u-pull-right"><strong>Step 2 of 2</strong></div>
+  <h3>Great!</h3>
+  <p>
+    Now let's get GitHub set up:
+  </p>
+  <div class="Card Card--extraPadded Card--white">
+    <h4>GitHub Integration {{fa-icon "github"}}</h4>
+    {{organizations/github-settings organization=model showSupport="showSupport"}}
+  </div>
+  <br>
+  <div>
+    <p>
+      {{#link-to "organization" model.slug classNames="Button Button--primary"}}
+        {{#if model.isGithubIntegrated}}
+          Done &raquo;
+        {{else}}
+          Skip GitHub setup &raquo;
+        {{/if}}
+      {{/link-to}}
+    </p>
+    <p>
+      You can always change this setting later.
+    </p>
+  </div>
+</div>

@@ -1,9 +1,12 @@
 {{fa-icon "compress"}}
 {{#if build.baseBuild}}
-  compared to {{#link-to "builds.build" build.repo.namespace.id build.repo.name build.baseBuild.id}}Build #{{build.baseBuild.buildNumber}}{{/link-to}} (<strong>{{build.baseBuild.branch}}</strong>)
+  Compared to
+  {{!-- NOTE: we use the baseBuild.id instead of the object to force the next build to reload so all relationships are available. TODO: better way? --}}
+  {{#link-to "organization.project.builds.build" build.project.organization.slug build.project.slug build.baseBuild.id}}Build {{build.baseBuild.buildNumber}}{{/link-to}}
+  (<strong>{{build.baseBuild.branch}}</strong>)
 {{else}}
   {{#if build.isFinished}}
-    no base build to compare
+    No baseline to compare against
   {{else}}
     --
   {{/if}}

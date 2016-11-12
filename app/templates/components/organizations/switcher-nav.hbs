@@ -2,7 +2,7 @@
   {{#if currentOrganization}}
     {{currentOrganization.name}}
   {{else}}
-    Switch organization
+    Jump to organization
   {{/if}}
   {{fa-icon "chevron-down"}}
 </div>
@@ -10,23 +10,26 @@
   <div class="OrganizationsSwitcherNav-pageClickOverlay" {{action "hideSwitcher"}}></div>
   <div class="OrganizationsSwitcherNav-arrow">{{fa-icon "caret-up"}}</div>
   <div class="OrganizationsSwitcherNav-switcher" {{action "hideSwitcher"}}>
+    {{!--
+    {{#if currentOrganization}}
+      {{#link-to "organizations.organization.settings" currentOrganization.slug classNames="Button Button--onDark Button--withLeftIcon"}}
+        {{fa-icon "cog fa--left"}} Settings
+      {{/link-to}}
+    {{/if}}
+    --}}
+    {{#link-to "organizations.new" classNames="Button Button--onDark Button--withLeftIcon"}}
+      {{fa-icon "plus-circle fa--left"}} Create new organization
+    {{/link-to}}
     {{#if currentUser.organizations.isPending}}
       {{loading-page}}
     {{else}}
       <ul>
-        <li>
-          {{#link-to "organizations.new" classNames="OrganizationsSwitcherNav-item"}}
-            {{fa-icon "plus-circle"}} Create new organization
-          {{/link-to}}
-        </li>
         {{#each currentUser.organizations as |org|}}
-          {{#if (not-eq org currentOrganization)}}
-            <li>
-              {{#link-to "organization.index" org.slug classNames="OrganizationsSwitcherNav-item"}}
-                {{org.name}}
-              {{/link-to}}
-            </li>
-          {{/if}}
+          <li>
+            {{#link-to "organization.index" org.slug classNames="OrganizationsSwitcherNav-item"}}
+              {{org.name}}
+            {{/link-to}}
+          </li>
         {{/each}}
       </ul>
     {{/if}}

@@ -1,5 +1,6 @@
 .Panel
   width: 100%
+  margin-bottom: 1rem
   border: $grayborder
   border-radius: 4px
 
@@ -15,7 +16,23 @@
     overflow: hidden
     text-overflow: ellipsis
 
+  .Panel-header--withSelect
+    background-color: $lightergray
+    border-bottom: $grayborder
+    overflow: initial
+    .ember-power-select-trigger
+      border: 0
+      background: none
+      outline: none
+    .ember-basic-dropdown-content
+      margin-top: 12px
+    .ember-power-select-selected-item,
+    .ember-power-select-placeholder
+      margin-left: 0
+
   .Panel-nav
+    .Button
+      margin: 0
     ul
       margin: 0
       padding: 0

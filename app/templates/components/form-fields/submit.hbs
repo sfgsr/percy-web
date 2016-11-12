@@ -2,7 +2,8 @@
   type="submit"
   class="{{classes}}"
   value="{{value}}"
-  onclick={{action submit}}
+  disabled={{disabled}}
+  onclick={{action "perform"}}
 >
 {{#if showSavingIndicator}}
   {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}

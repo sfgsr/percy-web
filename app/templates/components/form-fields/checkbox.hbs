@@ -1,0 +1,17 @@
+<label>
+  <span class="label-body">{{title}}</span>
+  <input
+    type="checkbox"
+    class="{{if fieldErrors 'error'}}"
+    onchange={{action "updateValue"}}
+    onblur={{action validateProperty}}
+    checked={{shouldBeChecked}}
+  >
+</label>
+{{#if fieldErrors}}
+  <ul class="Form-errors">
+    {{#each (get fieldErrors "validation") as |message|}}
+      <li>{{message}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

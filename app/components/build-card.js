@@ -17,7 +17,10 @@ export default Ember.Component.extend({
   ],
   actions: {
     navigateToBuild() {
-      this.sendAction('navigateToBuild', this.get('build'));
+      // Send action directly up to application controller, so we don't have to delegate every
+      // time in the template.
+      let applicationController = Ember.getOwner(this).lookup('controller:application');
+      applicationController.send('navigateToBuild', this.get('build'));
     },
   },
 });

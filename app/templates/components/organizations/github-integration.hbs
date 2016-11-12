@@ -1,6 +1,6 @@
 {{#if currentIntegration}}
   <div class="OrganizationsGithubIntegration-actions">
-    <a href="{{currentIntegration.githubHtmlUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
+    <a href="{{currentIntegration.githubHtmlUrl}}" class="Button Button--withLeftIcon" target="_blank">
       {{fa-icon "github" classNames="fa--left"}}
       Manage
     </a>
@@ -8,7 +8,7 @@
   <img class="OrganizationsGithubIntegration-leftAvatar" src="{{currentIntegration.githubAccountAvatarUrl}}&s=64">
   <header>Installed!</header>
   <p>
-    GitHub integration installed {{moment-from-now currentIntegration.createdAt}}.
+    {{moment-from-now currentIntegration.createdAt}}
   </p>
 {{else if organization.githubIntegrationRequest}}
   <div class="OrganizationsGithubIntegration-actions">

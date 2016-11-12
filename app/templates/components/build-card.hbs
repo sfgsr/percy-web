@@ -1,6 +1,7 @@
 <div class="row">
   <div class="two columns">
-    <h6>{{#link-to "builds.build" build}}Build #{{build.buildNumber}}{{/link-to}}</h6>
+    {{!-- NOTE: we use the baseBuild.id instead of the object to force the next build to reload so all relationships are available. TODO: better way? --}}
+    <h6>{{#link-to "organization.project.builds.build" build.project.organization.slug build.project.slug build.id}}Build {{build.buildNumber}}{{/link-to}}</h6>
   </div>
   <div class="six columns">
     {{commit-info build=build}}

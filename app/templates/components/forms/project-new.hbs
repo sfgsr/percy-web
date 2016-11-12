@@ -2,6 +2,7 @@
   Projects are how we group related builds in Percy. Usually, you'll want to use the name of your repository or the name of your site.
 </p>
 <form action="javascript:;">
+  <hr>
   {{form-fields/input
       property="name"
       title="Project name"
@@ -10,5 +11,13 @@
       autofocus=true
       placeholder="widgets-web-app"
   }}
-  {{form-fields/submit value="Create Project" classes="Button--primary" submit=(action "save")}}
+  <hr>
+  {{#if organization.isGithubIntegrated}}
+    <strong>Link GitHub repository</strong>
+    {{projects/github-integrator project=changeset}}
+    <hr>
+  {{/if}}
+
+  <br>
+  {{form-fields/submit value="Create Project" classes="Button Button--primary" submit=(action "save")}}
 </form>

@@ -1,0 +1,34 @@
+<form action="javascript:;">
+  {{form-fields/textarea
+      property="emails"
+      title="Email addresses"
+      changeset=changeset
+      autofocus=true
+      validateProperty=(action "validateProperty" changeset "emails")
+  }}
+  <p>
+    Separate each email with a space or a new line. Invitations expire after one week.
+  </p>
+  {{form-fields/checkbox
+      property="role"
+      checkedValue="admin"
+      title="Administrator"
+      changeset=changeset
+      validateProperty=(action "validateProperty" changeset "role")
+  }}
+  <p>
+    Allow these people to edit organization details, billing information, and invite new members. All normal members can create and manage projects.
+  </p>
+  {{#if errorMessage}}
+    <div class="Form-errors">
+      {{errorMessage}}
+    </div>
+  {{/if}}
+  {{form-fields/submit
+    value="Send Invites"
+    classes="Button Button--primary"
+    isSaving=isSaving
+    isSaveSuccessful=isSaveSuccessful
+    submit=(action "save")
+  }}
+</form>

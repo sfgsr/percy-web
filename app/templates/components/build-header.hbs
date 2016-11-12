@@ -3,9 +3,10 @@
     <div class="six columns">
       <div>
         <span class="BuildHeader-title">
-          {{#link-to "namespace.index" build.repo.namespace.id}}{{build.repo.namespace.id}}{{/link-to}}
-          / {{#link-to "repo.index" build.repo.namespace.id build.repo.name}}{{build.repo.name}}{{/link-to}}
-          Build #{{build.buildNumber}}
+          <strong>
+            {{#link-to "organization.project.index" build.project.organization.slug build.project.slug}}{{build.project.name}}{{/link-to}}
+          </strong>
+          Build {{build.buildNumber}}
         </span>
       </div>
       {{build-info build=build}}

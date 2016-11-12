@@ -1,0 +1,6 @@
+{{#if organization.organizationUsers.isPending}}
+  {{loading-page}}
+{{/if}}
+{{#each organization.organizationUsers as |organizationUser|}}
+  {{organizations/user-card organizationUser=organizationUser}}
+{{/each}}

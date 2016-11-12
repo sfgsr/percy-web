@@ -28,7 +28,12 @@ export default Ember.Component.extend({
     chooseRepo(repo) {
       let project = this.get('project');
       project.set('repo', repo);
-      this.triggerSavingIndicator(project.save());
+
+      // If the project is not saved (ie. we're on the new project screen), don't trigger saving,
+      // just set the property above and it will be saved when the user creates the project.
+      if (!project.get('isNew')) {
+        this.triggerSavingIndicator(project.save());
+      }
     },
   }
 });

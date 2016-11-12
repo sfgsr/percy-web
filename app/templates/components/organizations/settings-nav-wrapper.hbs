@@ -28,6 +28,35 @@
           </ul>
         </div>
       </div>
+      <div class="Panel">
+        <div class="Panel-section Panel-header Panel-header--withSelect">
+          {{! TODO: stop relying on private .content API on the proxied object. }}
+          {{#power-select
+            selected=project
+            searchField="slug"
+            placeholder="Select project..."
+            renderInPlace=true
+            matchTriggerWidth=false
+            options=organization.projects.content
+            onchange=(action "chooseProject")
+            as |project|
+          }}
+            {{project.name}}
+          {{/power-select}}
+        </div>
+        {{#if project}}
+          <div class="Panel-section Panel-nav">
+            <ul>
+              <li>
+                {{#link-to "organization.project.settings" organization.slug project.slug classNames="Button Button--nav Button--withLeftIcon"}}
+                  {{fa-icon "cog" classNames="fa--left"}}
+                  Settings
+                {{/link-to}}
+              </li>
+            </ul>
+          </div>
+        {{/if}}
+      </div>
     </div>
     <div class="nine columns">
       {{yield}}

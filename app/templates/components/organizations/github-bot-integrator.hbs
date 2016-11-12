@@ -1,0 +1,18 @@
+<div class="Card">
+  {{#if changeset.githubBotUser}}
+    {{user-avatar user=changeset.githubBotUser width=36 linked=true}}
+    {{user-name user=changeset.githubBotUser}}
+    {{#if changeset.isDirty}}
+      <i class="unsaved">(unsaved)</i>
+    {{/if}}
+  {{else}}
+    {{user-avatar showPlaceholder=true width=36}}
+    <strong>No user selected</strong>
+  {{/if}}
+  <a href="#" class="Button {{if changeset.githubBotUser "" "Button--primary"}}" {{action "assignMe"}}>
+    Assign Me
+  </a>
+</div>
+<p>
+  This user's GitHub OAuth access token will be used for all Percy requests to the GitHub API, such as setting Pull Request commit statuses and reading repository metadata. To assign a different user, login to Percy with a different GitHub account.
+</p>

@@ -1,0 +1,5 @@
+<h3>Users - Invite</h3>
+
+{{#organizations/require-role role="admin" organization=model}}
+  {{forms/organization-invite organization=model}}
+{{/organizations/require-role}}

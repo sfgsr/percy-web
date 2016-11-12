@@ -1,0 +1,7 @@
+{{#if project.tokens.isPending}}
+  {{#code-block}}<em>Loading...</em>{{/code-block}}
+{{/if}}
+{{#with project.writeOnlyToken.token as |token|}}
+{{#code-block}}<strong>PERCY_TOKEN</strong>={{token}}
+<strong>PERCY_PROJECT</strong>={{project.fullSlug}}{{/code-block}}
+{{/with}}

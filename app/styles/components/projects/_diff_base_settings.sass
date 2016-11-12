@@ -1,0 +1,28 @@
+.ProjectsDiffBaseSettings
+  .SavingIndicator
+    margin-top: 10px
+    float: right
+
+  .ProjectsDiffBaseSettings-setting
+    @include Card
+    @include Card--linkable
+    padding: 10px
+    margin-bottom: 10px
+
+    .fa-arrow-right
+      color: $darkpurple
+      position: absolute
+      top: 13px
+
+    p
+      margin-left: 1.9rem
+
+    .ProjectsDiffBaseSettings-title
+      font-weight: bold
+      font-size: 110%
+      margin-left: 1.9rem
+
+    &.ProjectsDiffBaseSettings-setting--selected
+      @include Card--selected
+
+

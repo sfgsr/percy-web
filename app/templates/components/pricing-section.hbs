@@ -1,5 +1,8 @@
 <div class="row u-text-center">
-  {{#with subscriptionData.PLANS.free as |plan|}}
+  {{#if showJumpToBilling}}
+    {{organizations/jump-to-billing hide=(action "hideModal")}}
+  {{/if}}
+  {{#with subscriptionData.PLANS.[0] as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -19,7 +22,6 @@ might be slow to start, especially at peak hours.">
             </span>
           </strong>
         </div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
       </div>
@@ -37,7 +39,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionData.PLANS.small as |plan|}}
+  {{#with subscriptionData.PLANS.[1] as |plan|}}
     <div class="PricingSection-bucket PricingSection-bucket--promoted">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -47,13 +49,16 @@ might be slow to start, especially at peak hours.">
         <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
         <hr>
         <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
         {{#if (not-eq currentSubscription.plan plan.id)}}
           <br>
           <div class="PricingSection-cta">
-            {{stripe-checkout text=checkoutText plan=plan.id price=plan.price planName=plan.name}}
+            {{#if session.isAuthenticated}}
+              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
+            {{else}}
+              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -62,7 +67,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionData.PLANS.medium as |plan|}}
+  {{#with subscriptionData.PLANS.[2] as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -72,13 +77,16 @@ might be slow to start, especially at peak hours.">
         <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
         <hr>
         <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
         {{#if (not-eq currentSubscription.plan plan.id)}}
           <br>
           <div class="PricingSection-cta">
-            {{stripe-checkout text=checkoutText plan=plan.id price=plan.price planName=plan.name}}
+            {{#if session.isAuthenticated}}
+              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
+            {{else}}
+              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -87,7 +95,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionData.PLANS.large as |plan|}}
+  {{#with subscriptionData.PLANS.[3] as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -97,13 +105,16 @@ might be slow to start, especially at peak hours.">
         <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
         <hr>
         <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
         {{#if (not-eq currentSubscription.plan plan.id)}}
           <br>
           <div class="PricingSection-cta">
-            {{stripe-checkout text=checkoutText plan=plan.id price=plan.price planName=plan.name}}
+            {{#if session.isAuthenticated}}
+              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
+            {{else}}
+              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -114,7 +125,7 @@ might be slow to start, especially at peak hours.">
   {{/with}}
 </div>
 <div class="row u-text-center">
-  {{#with subscriptionData.PLANS.pro as |plan|}}
+  {{#with subscriptionData.PLANS.[4] as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -124,13 +135,16 @@ might be slow to start, especially at peak hours.">
         <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
         <hr>
         <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
         {{#if (not-eq currentSubscription.plan plan.id)}}
           <br>
           <div class="PricingSection-cta">
-            {{stripe-checkout text=checkoutText plan=plan.id price=plan.price planName=plan.name}}
+            {{#if session.isAuthenticated}}
+              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
+            {{else}}
+              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -139,7 +153,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionData.PLANS.premium as |plan|}}
+  {{#with subscriptionData.PLANS.[5] as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -149,13 +163,16 @@ might be slow to start, especially at peak hours.">
         <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
         <hr>
         <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
         {{#if (not-eq currentSubscription.plan plan.id)}}
           <br>
           <div class="PricingSection-cta">
-            {{stripe-checkout text=checkoutText plan=plan.id price=plan.price planName=plan.name}}
+            {{#if session.isAuthenticated}}
+              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
+            {{else}}
+              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -164,7 +181,7 @@ might be slow to start, especially at peak hours.">
       {{/if}}
     </div>
   {{/with}}
-  {{#with subscriptionData.PLANS.premiumXl as |plan|}}
+  {{#with subscriptionData.PLANS.[6] as |plan|}}
     <div class="PricingSection-bucket">
       <div class="PricingSection-title">{{plan.name}}</div>
       <div class="PricingSection-bucketBody">
@@ -174,13 +191,16 @@ might be slow to start, especially at peak hours.">
         <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
         <hr>
         <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        <div class="PricingSection-infoItem">{{plan.numProjectsTitle}}</div>
         {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
         <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
         {{#if (not-eq currentSubscription.plan plan.id)}}
           <br>
           <div class="PricingSection-cta">
-            {{stripe-checkout text=checkoutText plan=plan.id price=plan.price planName=plan.name}}
+            {{#if session.isAuthenticated}}
+              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
+            {{else}}
+              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
+            {{/if}}
           </div>
         {{/if}}
       </div>

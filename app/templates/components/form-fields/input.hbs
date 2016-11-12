@@ -1,16 +1,17 @@
-<label for={{concat type "-" property}}>{{title}}</label>
-<input
-  type={{type}}
-  class="{{if fieldErrors 'error'}}"
-  id={{concat type "-" property}}
-  value={{get changeset property}}
-  oninput={{action (mut (get changeset property)) value="target.value"}}
-  onblur={{action validateProperty}}
-  autofocus={{autofocus}}
-  placeholder={{placeholder}}
->
+<label>
+  <span class="label-body">{{title}}</span>
+  <input
+    type={{type}}
+    class="{{if fieldErrors 'error'}}"
+    value={{get changeset property}}
+    onchange={{action (mut (get changeset property)) value="target.value"}}
+    oninput={{action (mut (get changeset property)) value="target.value"}}
+    autofocus={{autofocus}}
+    placeholder={{placeholder}}
+  >
+</label>
 {{#if fieldErrors}}
-  <ul class="FormFieldsInput-errors">
+  <ul class="Form-errors">
     {{#each (get fieldErrors "validation") as |message|}}
       <li>{{message}}</li>
     {{/each}}

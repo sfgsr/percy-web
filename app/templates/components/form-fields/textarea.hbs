@@ -1,0 +1,18 @@
+<label>
+  <span class="label-body">{{title}}</span>
+  <textarea
+    class="{{if fieldErrors 'error'}}"
+    value={{get changeset property}}
+    oninput={{action (mut (get changeset property)) value="target.value"}}
+    onblur={{action validateProperty}}
+    autofocus={{autofocus}}
+    placeholder={{placeholder}}
+  ></textarea>
+</label>
+{{#if fieldErrors}}
+  <ul class="Form-errors">
+    {{#each (get fieldErrors "validation") as |message|}}
+      <li>{{message}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

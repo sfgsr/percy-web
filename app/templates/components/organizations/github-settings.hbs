@@ -1,0 +1,64 @@
+<form action="javascript:;" class="Form">
+  <label>
+    <input type="radio" name="github-integration-setting" value="no-access"
+      checked={{if (eq changeset.githubAuthMechanism "no-access") "checked"}}
+      {{action "changeSelection" preventDefault=false}}
+    >
+    <span class="label-body">No access</span>
+    <p>Some Percy features will not be available.</p>
+  </label>
+  <label>
+    <input type="radio" name="github-integration-setting" value="github-integration"
+      checked={{if (eq changeset.githubAuthMechanism "github-integration") "checked"}}
+      {{action "changeSelection" preventDefault=false}}
+    >
+    <span class="label-body">Official GitHub Integration (recommended)</span>
+    <p>Install Percy's first-party GitHub Integration with customizable access control.</p>
+  </label>
+  {{#if (eq changeset.githubAuthMechanism "github-integration")}}
+    {{organizations/github-integrator organization=organization showSupport="showSupport"}}
+  {{/if}}
+  <label>
+    <input type="radio" name="github-integration-setting" value="github-bot-user"
+      checked={{if (eq changeset.githubAuthMechanism "github-bot-user") "checked"}}
+      {{action "changeSelection" preventDefault=false}}
+    >
+    <span class="label-body">Bot user</span>
+    <p>
+      Pick a GitHub user with access to your organization's repositories.
+    </p>
+  </label>
+  {{#if (eq changeset.githubAuthMechanism "github-bot-user")}}
+    {{organizations/github-bot-integrator organization=organization changeset=changeset assignMe=(action "assignBotUser")}}
+  {{/if}}
+
+  {{!-- Show special "sync private repos" section if on bot user and the current user is the bot user. --}}
+  {{#if (eq changeset.githubAuthMechanism "github-bot-user")}}
+    {{#if (eq organization.githubBotUser session.data.authenticated.user)}}
+      {{sync-repos-section organization=organization}}
+    {{/if}}
+  {{/if}}
+
+  {{#if changeset.errors}}
+    <ul class="Form-errors">
+      {{#each changeset.errors as |error|}}
+        {{#each error.validation as |validation|}}
+          <li>{{validation}}</li>
+        {{/each}}
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  {{form-fields/submit
+    isSaving=isSaving
+    isSaveSuccessful=isSaveSuccessful
+    value="Save"
+    disabled=disableSave
+    classes="Button Button--primary"
+    submit=(action "saveSelection")
+  }}
+</form>
+<p>
+  Note that projects must still be linked to a specific GitHub repo for Percy's full {{#link-to "docs.page" "learn/github-integration"}}Pull Request integration{{/link-to}} to work. You can verify the repo link in each project's settings.
+</p>
+

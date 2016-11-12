@@ -1,0 +1,24 @@
+<div class="Card Card--linkable" {{action "toggleExpanded"}}>
+  {{user-avatar user=organizationUser.user width=36 linked=true}}
+  <div>
+    {{user-name user=organizationUser.user}}
+    <br>
+    <span class="OrganizationsUserCard-role">{{organizationUser.roleTitle}}</span>
+  </div>
+</div>
+{{#if isExpanded}}
+  <div class="Card Card--expando">
+    {{!-- TODO: #billingadmins --}}
+    {{#if (eq "admin" organizationUser.organization.currentUserMembership.role)}}
+      {{!-- Allow admin to do everything. --}}
+      {{forms/organization-user-edit organizationUser=organizationUser}}
+    {{else if (eq organizationUser.user.id currentUser.id)}}
+      {{!-- Allow member to view their own record. --}}
+      {{forms/organization-user-edit organizationUser=organizationUser}}
+    {{else}}
+      <div class="Alert Alert--error">
+        <strong>Editing users requires organization admin permissions.</strong>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

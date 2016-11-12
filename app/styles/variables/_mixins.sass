@@ -65,10 +65,16 @@
   border: $grayborder
   padding: 10px
 
+@mixin Card--white
+  background: $white
+
 @mixin Card--linkable
   &:hover
     border: $grayborderhover
     cursor: pointer
+
+@mixin Card--expando
+  background: $lightgray
 
 @mixin Card--selected
   background: $lightestpurple

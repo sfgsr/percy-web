@@ -1,3 +1,3 @@
 import DS from 'ember-data';
 
-export default DS.JSONAPISerializer;
+export default DS.JSONAPISerializer.extend({});

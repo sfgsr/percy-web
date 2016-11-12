@@ -3,6 +3,16 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
   session: Ember.inject.service(),
+  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+
+  // ESA relies on `config.baseURL` which is gone in our version of Ember. Fix logout manually.
+  // https://github.com/simplabs/ember-simple-auth/issues/1048
+  sessionInvalidated() {
+    if (!Ember.testing) {
+      window.location.replace('/');
+    }
+  },
+
   actions: {
     showSupport() {
       window.Intercom('show');
@@ -15,9 +25,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       if (lastOrganizationSlug) {
         this.transitionTo('organization.index', lastOrganizationSlug);
       } else {
-        this.get('session.currentUser.organizations.firstObject').then((org) => {
+        this.get('currentUser.organizations').then((orgs) => {
+          let org = orgs.get('firstObject');
           if (org) {
-            this.transitionTo('organization.index', org.slug);
+            this.transitionTo('organization.index', org.get('slug'));
           } else {
             // User has no organizations.
             this.transitionTo('organizations.new');
@@ -28,37 +39,24 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     invalidateSession() {
       this.get('session').invalidate();
     },
-    enablingRepo(promise, repo) {
-      promise.then(function() {
-        repo.reload();
-      });
-    },
-    disablingRepo(promise, repo) {
-      promise.then(function() {
-        repo.reload();
-      });
-    },
-    disableRepo(repo) {
-      this.send('disablingRepo', repo.disable(), repo);
-    },
-    enableRepo(repo) {
-      var self = this;
-      var promise = repo.enable();
-      promise.then(null, function(response) {
-        if (response.status === 402) {
-          var msg = [
-            "You've hit the limit of active repos on your current plan.",
-            "\nView plan upgrades?",
-          ].join('');
-          if (confirm(msg)) {
-            self.transitionTo('account');
-          }
-        }
-      });
-      this.send('enablingRepo', promise, repo);
+    navigateToProject(project) {
+      let organizationSlug = project.get('organization.slug');
+      let projectSlug = project.get('slug');
+      this.transitionTo('organization.project.index', organizationSlug, projectSlug);
     },
     navigateToBuild(build) {
-      this.transitionTo('builds.build', build);
+      let organizationSlug = build.get('project.organization.slug');
+      let projectSlug = build.get('project.slug');
+      this.transitionTo('organization.project.builds.build', organizationSlug, projectSlug, build);
+    },
+    navigateToOrganizationBilling(organization) {
+      let organizationSlug = organization.get('slug');
+      this.transitionTo('organizations.organization.billing', organizationSlug);
+    },
+    navigateToProjectSettings(project) {
+      let organizationSlug = project.get('organization.slug');
+      let projectSlug = project.get('slug');
+      this.transitionTo('organization.project.settings', organizationSlug, projectSlug);
     },
   },
 });

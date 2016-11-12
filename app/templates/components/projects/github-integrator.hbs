@@ -1,9 +1,17 @@
 {{#if organization.isGithubIntegrated}}
   <p>
-    You can link this project to a GitHub repository. This enables Percy commit statuses on GitHub Pull Requests.
+    You can optionally link this project to a GitHub repository. This enables {{#link-to "docs.page" "learn/github-integration"}}Pull Request integration{{/link-to}} for this project.
   </p>
+  {{#if organization.repos.isFulfilled}}
+    {{#unless organization.repos}}
+      <div class="Alert Alert--warning">
+        <strong>No repos found.</strong> It can take up to 1 minute to sync your repos from GitHub if there are a lot of them. <a href="javascript:location.reload()">Refresh</a>?
+      </div>
+    {{/unless}}
+  {{/if}}
   <p>
     {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+    {{! TODO: stop relying on private .content API on the proxied object. }}
     {{#power-select
       selected=project.repo
       searchField="slug"
@@ -11,15 +19,18 @@
       renderInPlace=true
       matchTriggerWidth=false
       allowClear=true
-      options=organization.repos
+      options=organization.repos.content
       onchange=(action "chooseRepo")
-      as |repos|
+      as |repo|
     }}
-      {{repos.slug}}
+      {{repo.slug}}
     {{/power-select}}
+  </p>
+  <p>
+    Missing a repository? Check your organization's {{#link-to "organizations.organization.settings" project.organization.slug}}GitHub integration settings{{/link-to}}.
   </p>
 {{else}}
   <div class="Alert Alert--info">
-    <strong>Missing organization GitHub integration.</strong> Before you can link to a repository you must first {{#link-to "organizations.organization.settings" project.organization.slug}}install the Percy GitHub integration{{/link-to}} in your organanization.
+    <strong>Missing organization GitHub integration.</strong> Before you can link a repository you must first {{#link-to "organizations.organization.settings" project.organization.slug}}install the Percy GitHub integration{{/link-to}} in your organanization.
   </div>
 {{/if}}

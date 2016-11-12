@@ -1,10 +1,12 @@
 {{#organizations/settings-nav-wrapper organization=model}}
   <h3>Settings</h3>
 
-  {{forms/organization-edit organization=model saveSuccess="organizationUpdated"}}
+  {{#organizations/require-role role="admin" organization=model}}
+    {{forms/organization-edit organization=model saveSuccess="organizationUpdated"}}
 
-  <hr>
-  <h3>GitHub Integration</h3>
+    <hr>
+    <h4>GitHub Integration {{fa-icon "github"}}</h4>
 
-  {{organizations/github-integrator organization=model showSupport="showSupport"}}
+    {{organizations/github-settings organization=model showSupport="showSupport"}}
+  {{/organizations/require-role}}
 {{/organizations/settings-nav-wrapper}}

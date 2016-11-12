@@ -1,5 +1,20 @@
-<div>
-  <div>{{sync-repos-button private=true classes="Button--small"}}</div>
+<header {{action "togglePrivateRepos"}}>
+  {{#if isPrivateReposExpanded}}
+    {{fa-icon "chevron-up"}}
+  {{else}}
+    {{fa-icon "chevron-down"}}
+  {{/if}}
+  <p>
+    <div class="u-pull-right u-text-small">(only visible to you)</div>
+    <strong>Private repository access</strong>
+  </p>
+</header>
+{{#if isPrivateReposExpanded}}
+  <p>
+    Due to how GitHub authorization works, we have to request higher GitHub permissions for your account if you need this bot user to access to private repositories.
+  </p>
+
+  {{sync-repos-button private=true classes="Button--small"}}
   <div class="SyncReposSection-info">
     Last synced public repos:
     {{#if session.data.authenticated.user.lastSyncedAt}}
@@ -15,6 +30,8 @@
       never
     {{/if}}
   </div>
-  <br>
-  <br>
-</div>
+  <p>
+    <br>
+    You can avoid this by using the Official GitHub Integration instead, which lets you grant specific access to repositories.
+  </p>
+{{/if}}

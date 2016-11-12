@@ -12,13 +12,13 @@
       validateProperty=(action "validateProperty" changeset "slug")
   }}
   <p>
-    The slug is used in URLs and the Percy API. Note that old build links will not work if the slug is changed.
+    The slug is used to identify this project in URLs and the Percy API. If changed, you must update the <code>PERCY_PROJECT</code> environment variable in your CI service. Note, old build URLs will break if the slug is changed.
   </p>
   {{form-fields/submit
     isSaving=isSaving
     isSaveSuccessful=isSaveSuccessful
     value="Save"
-    classes="Button--primary"
+    classes="Button Button--primary"
     submit=(action "save")
   }}
 </form>

@@ -3,7 +3,12 @@ import DS from 'ember-data';
 import moment from 'moment';
 
 export default DS.Model.extend({
-  repo: DS.belongsTo('repo', {async: true}),
+  project: DS.belongsTo('project', {async: false}),
+  repo: DS.belongsTo('repo', {async: false}),
+
+  // Check isGithubLinked before accessing repo.
+  isGithubLinked: Ember.computed.bool('repo'),
+
   buildNumber: DS.attr('number'),
   branch: DS.attr(),
 
@@ -26,7 +31,7 @@ export default DS.Model.extend({
   }),
 
   commit: DS.belongsTo('commit', {async: false}),  // Might be null.
-  baseBuild: DS.belongsTo('build', {async: false}),
+  baseBuild: DS.belongsTo('build', {async: false, inverse: null}),
   comparisons: DS.hasMany('comparison', {async: true}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 

@@ -1,21 +1,39 @@
-{{fixed-top-header useNewProjectsHeader=true currentOrganization=model}}
+{{fixed-top-header currentOrganization=model}}
 <div class="container container--fixedWidth">
   <div class="container container--forContent">
+    {{!-- Note: use model.projects here to get the promise proxy, but use savedProjects below for filtering. --}}
     {{#if model.projects.isPending}}
       {{loading-page}}
     {{else}}
-      {{#if model.projects}}
-        {{#link-to "organizations.organization.projects.new" model.slug classNames="Button Button--primary u-pull-right"}}
+      {{#if model.savedProjects}}
+        {{#link-to "organizations.organization.projects.new" model.slug classNames="Button u-pull-right"}}
           New Project
         {{/link-to}}
-        <h3>Projects</h3>
-        {{projects-list projects=model.projects}}
+        {{!-- TODO: #billingadmins --}}
+        {{#if (eq "admin" model.currentUserMembership.role)}}
+          {{#link-to "organizations.organization.settings" model.slug classNames="Button Button--withLeftIcon u-pull-right"}}
+            {{fa-icon "cog" classNames="fa--left"}}
+            Settings
+          {{/link-to}}
+        {{/if}}
+        <h3>{{model.name}}</h3>
+        {{projects-list projects=model.savedProjects}}
       {{else}}
         <div class="Card Card--extraPadded u-text-center">
           <h3>Welcome <strong>{{model.name}}</strong>!</h3>
-          {{#link-to "organizations.organization.projects.new" model.slug classNames="Button Button--primary"}}
-            Create your first project
-          {{/link-to}}
+          <p>
+            {{#link-to "organizations.organization.projects.new" model.slug classNames="Button Button--primary"}}
+              Create your first project
+            {{/link-to}}
+          </p>
+          {{!-- TODO: #billingadmins --}}
+          {{#if (eq "admin" model.currentUserMembership.role)}}
+            <p>
+              You can also
+              {{#link-to "organizations.organization.users.invite" model.slug}}invite team members{{/link-to}}
+              to join.
+            </p>
+          {{/if}}
         </div>
       {{/if}}
     {{/if}}

@@ -12,9 +12,18 @@ export default Ember.Component.extend({
   isSaveSuccessful: null,
 
   store: Ember.inject.service(),
-  changeset: Ember.computed('model', function() {
+  changeset: Ember.computed('model', 'validator', function() {
     let model = this.get('model');
     let validator = this.get('validator') || {};
+
+    // Handle model being a DS.PromiseObject, like if passed a relationship from a template.
+    // For some reason, ember-changeset .save() does not delegate all the way through in this case.
+    // TODO: better way to do this? .content is a private API.
+    if (model.content) {
+      model = model.content;
+      this.set('model', model);
+    }
+
     return new Changeset(model, lookupValidator(validator), validator);
   }),
   focusOnInsert: Ember.on('didInsertElement', function() {
@@ -24,6 +33,7 @@ export default Ember.Component.extend({
 
   actions: {
     saving(promise) {
+      this.set('isSaveSuccessful', null);
       this.set('isSaving', true);
       promise.then(() => {
         this.set('isSaving', false);
@@ -42,11 +52,13 @@ export default Ember.Component.extend({
       let model = this.get('model');
       let changeset = this.get('changeset');
 
+      changeset.validate();
+
       if (Ember.get(changeset, 'isValid')) {
         let savingPromise = changeset.save();
         this.send('saving', savingPromise);
 
-        savingPromise.then(() => {
+        savingPromise.then((model) => {
           // Bubble the successfully saved model upward, so the route can react to it.
           this.sendAction('saveSuccess', model);
           changeset.rollback();
@@ -63,17 +75,18 @@ export default Ember.Component.extend({
           Object.keys(errorData).forEach((key) => {
             changeset.addError(key, errorData[key]);
           });
-          // Make sure the model ditry attrs are rolled back.
+          // Make sure the model dirty attrs are rolled back (not for new, unsaved records).
           // TODO: this causes flashing when page state is bound to a model attribute that is
           // dirtied by the changeset save(), but it's better than leaving the model dirty
           // and having page state be out of date. Better way to handle this?
-          model.rollbackAttributes();
+          if (!model.get('isNew')) {
+            model.rollbackAttributes();
+          }
         });
       }
     },
-
-    reset(changeset) {
-      return changeset.rollback();
+    delete() {
+      this.get('model').destroyRecord();
     },
   },
 });

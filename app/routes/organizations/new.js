@@ -4,7 +4,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
     organizationCreated(organization) {
-      this.transitionTo('organization', organization.get('slug'));
+      this.transitionTo('organizations.organization.setup', organization.get('slug'));
     },
   }
 });

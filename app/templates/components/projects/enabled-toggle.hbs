@@ -1,0 +1,5 @@
+{{#if project.isEnabled}}
+  <button {{action "disable"}}>Disable Project</button>
+{{else}}
+  <button class="Button--primary" {{action "enable"}}>Enable Project</button>
+{{/if}}

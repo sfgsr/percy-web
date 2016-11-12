@@ -13,16 +13,38 @@ export default DS.JSONAPIAdapter.extend({
   },
 
   buildURL(modelName, id, snapshot, requestType, query) {
-    // Use organization nested and singular URL for github-integration-request models.
+    // NOTE: for certain objects we don't expose a top-level API object and only operate on the
+    // nested route. Because of that, some requests have to be transformed here.
+
+    // Use organization nested, singular /organizations/:org_id/github-integration-request route.
     if (modelName === 'github-integration-request') {
+      // TODO: use adapterOptions for this.
       let organizationSlug = snapshot.record.get('_orgForAdapter.slug');
       return utils.buildApiUrl('githubIntegrationRequest', organizationSlug);
     }
-
-    // Use the nested /organizations/:org_id/projects collection route when creating projects.
     if (requestType === 'createRecord' && modelName === 'project') {
-      let organizationSlug = snapshot.record.get('organization.slug');
-      return utils.buildApiUrl('projectsCollection', organizationSlug);
+      return utils.buildApiUrl('projectsCollection', snapshot.record.get('organization.slug'));
+    }
+    // Use the nested /organizations/:org_id/invites collection route when creating invites.
+    if (requestType === 'createRecord' && modelName === 'invite') {
+      return utils.buildApiUrl('invites', snapshot.record.get('organization.slug'));
+    }
+    // Use the nested /organizations/:org_id/organization-users collection route.
+    if (requestType === 'query' && modelName === 'organization-user') {
+      let organization = query.organization;
+      delete query.organization;
+      // Query params are handled elsewhere in Ember, we just need the base URL here.
+      return utils.buildApiUrl('organizationUsers', organization.get('slug'));
+    }
+    // Use the nested /projects/:org_id/:project_id/builds collection route.
+    if (requestType === 'query' && modelName === 'build') {
+      let project = query.project;
+      delete query.project;
+      return utils.buildApiUrl('projectBuilds', project.get('fullSlug'));
+    }
+    // Use the nested, singular /organizations/:org_id/subscription route for the org subscription.
+    if (modelName === 'subscription') {
+      return utils.buildApiUrl('subscription', snapshot.record.get('organization.slug'));
     }
 
     // Customize buildURL for models where we want to use the slug as the ID in the API URL, but

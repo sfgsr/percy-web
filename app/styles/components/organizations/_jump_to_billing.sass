@@ -1,0 +1,39 @@
+.OrganizationsJumpToBilling
+  @include animation('fadein 0.5s ease')
+  @include keyframes(growfromtop)
+    0%
+      opacity: 0
+    100%
+      opacity: 1
+
+  width: 600px
+  height: 332px
+  z-index: 99
+  box-shadow: 8px 8px 19px -4px $darkgray
+  position: absolute
+  top: 105px
+  left: calc(50% - 600px / 2);
+  background: $darkpurple
+  border-radius: 4px
+  border: 1px solid $darkpurple
+
+  header
+    color: $white
+    font-family: $fancy-font
+    font-size: 2rem
+    margin-top: 20px
+
+  .ember-basic-dropdown
+    margin: 30px
+    width: 90%
+
+  .ember-power-select-trigger
+    display: none
+
+  .OrganizationsJumpToBilling-pageClickOverlay
+    position: fixed
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    z-index: 0

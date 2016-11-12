@@ -1,6 +1,32 @@
 .ProjectCard
-  @include Card
+  a.ProjectCard-link
+    color: $default-text-color
+    font-family: $fancy-font
+    font-weight: bold
+    height: 50px
+    display: block
+    overflow: hidden
+    text-overflow: ellipsis
 
-  &.ProjectCard--linkable
     @include Card
     @include Card--linkable
+
+    background: $lightgray
+
+    &:hover
+      text-decoration: none
+
+    .fa-github
+      font-size: 1.8rem
+
+  .fa-chevron-right
+    float: right
+    margin-top: 5px
+    color: $gray
+
+  .ProjectCard-title
+    font-size: 2rem
+
+  &.ProjectCard--disabled
+    a.ProjectCard-link
+      color: $gray

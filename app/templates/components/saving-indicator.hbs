@@ -4,3 +4,6 @@
 {{#if isSaveSuccessful}}
   {{fa-icon 'check-circle'}}
 {{/if}}
+{{#if (eq isSaveSuccessful false)}}
+  {{fa-icon 'times-circle'}} <strong>Failed!</strong>
+{{/if}}

@@ -1,7 +1,7 @@
 .OrganizationsSwitcherNav
   .LoadingPage
     padding: 50px
-    padding-top: 80px
+    padding-top: 60px
 
     .fa-spinner
       font-size: 4rem
@@ -38,10 +38,10 @@
       0%
         height: 0
       100%
-        height: 235px
+        height: 285px
     @include animation('growfromtop 0.2s ease')
     width: 300px
-    height: 235px
+    height: 285px
     z-index: 99
     box-shadow: 8px 8px 19px -4px $darkgray
     position: absolute
@@ -53,11 +53,18 @@
     &::-webkit-scrollbar
        display: none
 
+    .Button
+      width: 289px
+      border: 0px
+      margin-top: 5px
+      margin-left: 5px
+      text-align: left
+      overflow: hidden
+
     ul
       list-style: none
-      margin: 5px 0 5px 0
+      margin: 0 0 5px 0
       li
-        color: $default-text-color
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis

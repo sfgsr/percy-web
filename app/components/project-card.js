@@ -8,5 +8,6 @@ export default Ember.Component.extend({
   ],
   classNameBindings: [
     'classes',
+    'project.isDisabled:ProjectCard--disabled',
   ],
 });

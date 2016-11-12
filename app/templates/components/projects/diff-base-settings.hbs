@@ -1,0 +1,23 @@
+<div {{action 'setAutomatic'}} class="ProjectsDiffBaseSettings-setting {{if (eq project.diffBase "automatic") "ProjectsDiffBaseSettings-setting--selected"}}">
+  {{#if (eq project.diffBase "automatic")}}
+    {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+    {{fa-icon "arrow-right"}}
+  {{/if}}
+  <span class="ProjectsDiffBaseSettings-title">
+    Automatic diff base (default)
+  </span>
+  <p>
+    Automatically use the last <strong>successful</strong> build from the <code>master</code> branch as the baseline for diffs.
+  </p>
+</div>
+<div {{action 'setManual'}} class="ProjectsDiffBaseSettings-setting {{if (eq project.diffBase "manual") "ProjectsDiffBaseSettings-setting--selected"}}">
+  {{#if (eq project.diffBase "manual")}}
+    {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+    {{fa-icon "arrow-right"}}
+  {{/if}}
+  <span class="ProjectsDiffBaseSettings-title">Manual diff base</span>
+  <p>
+    Use the latest <strong><em style="color: green">{{fa-icon "fa-thumbs-up"}} Approved</em></strong> build from the <code>master</code> branch as the baseline for diffs.<br>
+    You must manually approve <code>master</code> builds to change the baseline for future builds.
+  </p>
+</div>

@@ -1,0 +1,18 @@
+<div class="Card Card--extraPadded u-text-center">
+  {{#if invitation.isExpired}}
+    <h3><strong>Whoops!</strong> This invite has expired or already been used</h3>
+
+    <p>
+      Select an organization above, or ask an organization administrator to send you a new invite.
+    </p>
+  {{else}}
+    <h3>Join <strong>{{invitation.organization.name}}</strong> on Percy</h3>
+
+    <p>
+      <button class="Button Button--primary" {{action "accept"}}>Accept invitation</button>
+    </p>
+    <p>
+      Joining as <strong>{{user-name user=currentUser}}</strong>. You can <a href="#" {{action "invalidateSession"}}>logout</a> and login as a different user.
+    </p>
+  {{/if}}
+</div>

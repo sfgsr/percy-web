@@ -18,6 +18,10 @@ export default DS.Model.extend({
   builds: DS.hasMany('build', {async: true}),
   tokens: DS.hasMany('token', {async: true}),
 
+  recentBuilds: Ember.computed('organization', 'slug', 'builds', function() {
+    return this.store.query('build', {project: this, page: {limit: 2}});
+  }),
+
   writeOnlyToken: Ember.computed('tokens', function() {
     // Right now the tokens API only returns a list of one write-only token.
     return this.get('tokens.firstObject');

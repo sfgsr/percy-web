@@ -6,5 +6,5 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  repo: DS.belongsTo('repo', {async: true}),
+  project: DS.belongsTo('project', {inverse: 'tokens'}),
 });

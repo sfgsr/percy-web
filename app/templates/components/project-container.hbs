@@ -1,0 +1,55 @@
+<div class="container container--fixedWidth">
+  <div class="container container--forContent ProjectContainer">
+    <a {{action "refresh"}} href="#" class="Button Button--withLeftIcon u-pull-right">
+      {{#if isRefreshing}}
+        {{fa-icon "refresh" classNames="fa--left fa-spin"}}
+      {{else}}
+        {{fa-icon "refresh" classNames="fa--left"}}
+      {{/if}}
+      Refresh
+    </a>
+    {{#link-to "organization.project.settings" project.organization.slug project.slug classNames="Button Button--withLeftIcon u-pull-right"}}
+      {{fa-icon "cog" classNames="fa--left"}}
+      Settings
+    {{/link-to}}
+    <header>
+      <h3>
+        {{project.name}}
+        {{#if project.isDisabled}}
+          <span class="ProjectContainer-state">(disabled)</span>
+        {{/if}}
+      </h3>
+      {{#if project.organization.isGithubIntegrated}}
+        {{#if project.repo}}
+          Linked to <a href="{{project.repo.htmlUrl}}">{{project.repo.slug}}</a> {{fa-icon "github"}}
+        {{/if}}
+      {{/if}}
+    </header>
+    {{#if project.builds.isPending}}
+      {{loading-page}}
+    {{else}}
+      {{#if project.builds}}
+        <div>
+          {{#each project.builds as |build|}}
+            {{build-card build=build}}
+          {{/each}}
+        </div>
+      {{else}}
+        {{#if project.isEnabled}}
+          <div class="Alert Alert--warning">
+            <h4>Waiting for first build...</h4>
+            <p>
+              Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you push your first build, it will show up here.
+            </p>
+            <p>
+              Here are the <strong>environment variables</strong> you'll need to {{#link-to "docs.index"}}setup in your CI service{{/link-to}}:
+            </p>
+            {{projects/env-vars project=project}}
+          </div>
+        {{else}}
+          <p>No builds yet, and this project is disabled.</p>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

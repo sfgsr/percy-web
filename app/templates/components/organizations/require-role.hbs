@@ -1,0 +1,7 @@
+{{#if (eq role organization.currentUserMembership.role)}}
+  {{yield}}
+{{else}}
+  <div class="Alert Alert--error">
+    <strong>This feature requires organization admin permissions.</strong>
+  </div>
+{{/if}}

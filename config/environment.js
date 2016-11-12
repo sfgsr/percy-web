@@ -23,11 +23,12 @@ module.exports = function(environment) {
 
         builds: '/api/v1/builds',
         approveBuild: '/api/v1/builds/%@/approve',
-        enableRepo: '/api/v1/repos/%@/enable',
-        disableRepo: '/api/v1/repos/%@/disable',
-        subscription: '/api/v1/subscription',
         githubIntegrationRequest: '/api/v1/organizations/%@/github-integration-request',
         projectsCollection: '/api/v1/organizations/%@/projects',
+        projectBuilds: '/api/v1/projects/%@/builds',
+        organizationUsers: '/api/v1/organizations/%@/organization-users',
+        subscription: '/api/v1/organizations/%@/subscription',
+        invites: '/api/v1/organizations/%@/invites',
       },
       githubUrls: {
         integration: 'https://github.com/integrations/percy/installations/new',

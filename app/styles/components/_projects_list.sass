@@ -1,0 +1,31 @@
+.ProjectsList
+  .ProjectCard-link
+    border-top-left-radius: 3px
+    border-top-right-radius: 3px
+
+  .ProjectCard
+    margin-top: 20px
+    &:first-of-type
+      margin-top: 0px
+
+  .ProjectsList-recentBuilds
+    border-bottom-left-radius: 3px
+    border-bottom-right-radius: 3px
+
+    // This is the default height of the recent builds display, to prevent resizing after load.
+    min-height: 117px
+
+    border: $grayborder
+    border-top: none
+
+    .ProjectsList-empty
+      padding: 40px 20px 20px 20px
+      text-align: center
+
+    .BuildCard
+      border: 0
+
+    .LoadingPage
+      padding: 50px 0 0 0
+      .fa
+        font-size: 2rem

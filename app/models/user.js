@@ -10,9 +10,10 @@ export default DS.Model.extend({
   lastSyncedAt: DS.attr('date'),
   lastPrivateSyncedAt: DS.attr('date'),
 
-  // These endpoints are only available on the current user and should not be accessed otherwise:
-  organizations: DS.hasMany('organizations'),
-  subscription: DS.belongsTo('subscription', {async: false}),
+  // These endpoints are only available on the current user and should not be accessed otherwise.
+  // Note: the {inverse: null} is important here to avoid the github-bot-user relation on
+  // organizations from being auto filled-in by ember data.
+  organizations: DS.hasMany('organizations', {inverse: null}),
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),

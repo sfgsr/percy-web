@@ -1,6 +1,28 @@
 .SyncReposSection
-  margin-top: 30px
+  margin-top: 20px
+  margin-bottom: 20px
 
+  header
+    cursor: pointer
+    margin-bottom: 10px
+    .fa
+      float: left
+      font-size: 1.6rem
+      margin: 2px 7px 0 5px
+
+  &.SyncReposSection--collapsed
+    padding: 0
+    cursor: pointer
+
+    header
+      margin-bottom: 0
+      padding: 8px
+
+    &:hover
+      border: 1px solid $darkpurple
+
+  .Button
+    display: inline-block
   .SyncReposSection-info
-    margin-top: 10px
+    display: inline-block
     font-size: 70%

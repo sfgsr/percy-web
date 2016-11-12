@@ -1,11 +1,17 @@
 <div>
   {{!-- #projectification: move these urls to builds, and handle null repo. --}}
   <span class="CommitInfo-branch">
-    <a href="{{build.repo.htmlUrl}}">{{fa-icon "github"}}</a>
+    {{#if build.isGithubLinked}}
+      <a href="{{build.repo.htmlUrl}}">{{fa-icon "github"}}</a>
+    {{/if}}
     {{build.branch}}
   </span>
   <span class="CommitInfo-commit">
-    <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+    {{#if build.isGithubLinked}}
+      <a href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+    {{else}}
+      {{build.commit.shaShort}}
+    {{/if}}
   </span>
   <span class="CommitInfo-pr">
     {{#if build.isPullRequest}}

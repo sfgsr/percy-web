@@ -21,6 +21,7 @@ input[type="button"],
   text-decoration: none
   text-transform: uppercase
   white-space: nowrap
+  margin-right: 5px
 
   &:hover,
   &:focus,
@@ -42,6 +43,10 @@ input[type="button"],
 
     &:active
       box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75)
+
+    &[disabled]
+      background-color: $lightergray
+      border: 1px solid $lightgray !important
 
   &.Button--onDark,
     color: #fff
@@ -89,10 +94,16 @@ input[type="button"],
     &.active,
       color: $darkpurple
       font-weight: bold
-      background-color: $lightergray
+      background-color: $lightgray
 
     &.Button--nav:hover
       background-color: $lightergray
+
+  // Ugh, we try to avoid these things but this one is kind of necessary because of the default
+  // right padding on buttons to allow them to stack horizontally.
+  &.u-pull-right
+    margin-right: 0
+    margin-left: 5px
 
   &[disabled]
     color: $gray !important

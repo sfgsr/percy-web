@@ -1,3 +1,24 @@
 {{#each projects as |project|}}
   {{project-card project=project}}
+  {{#if project.isEnabled}}
+    <div class="ProjectsList-recentBuilds">
+      {{#if project.recentBuilds.isPending}}
+        {{loading-page}}
+      {{else}}
+        {{#if project.recentBuilds}}
+          {{#each project.recentBuilds as |build|}}
+            {{build-card build=build}}
+          {{/each}}
+        {{else}}
+          <div class="ProjectsList-empty">
+            No recent builds.
+            <br>
+            {{#link-to "organization.project.index" project.organization.slug project.slug}}
+              Get started &raquo;
+            {{/link-to}}
+          </div>
+        {{/if}}
+      {{/if}}
+    </div>
+  {{/if}}
 {{/each}}

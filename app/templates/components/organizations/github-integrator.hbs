@@ -9,20 +9,20 @@
 {{#if currentIntegration}}
   {{organizations/github-integration organization=organization}}
 {{else}}
-  <p>
-    <a {{action "triggerWaitingForInstallation" preventDefault=false}} href="{{githubIntegrationUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
-      {{fa-icon "github" classNames="fa--left"}}
-      Install GitHub Integration
-    </a>
-  </p>
-  <p>
-    {{#if organization.githubIntegrationRequest}}
-      {{organizations/github-integration
-        organization=organization
-        cancelIntegrationRequest="cancelIntegrationRequest"
-      }}
-    {{else}}
-      Installation will open in a new tab—come back here after it's installed!
-    {{/if}}
-  </p>
+  {{#if organization.githubIntegrationRequest}}
+    {{organizations/github-integration
+      organization=organization
+      cancelIntegrationRequest="cancelIntegrationRequest"
+    }}
+  {{else}}
+    <p>
+      <a {{action "triggerWaitingForInstallation"}} href="{{githubIntegrationUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
+        {{fa-icon "github" classNames="fa--left"}}
+        Install GitHub Integration
+      </a>
+    </p>
+    <p>
+      Installation will open in a popup—come back here after it's installed!
+    </p>
+  {{/if}}
 {{/if}}

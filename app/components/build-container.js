@@ -9,10 +9,6 @@ export default Ember.Component.extend({
   }),
   selectedNumColumns: 1,
 
-  // TODO(fotinakis): remove these on #projectification.
-  session: Ember.inject.service(),
-  currentSubscription: Ember.computed.alias('session.data.authenticated.user.subscription'),
-
   showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
 
   visibleComparisons: Ember.computed('build.comparisons', 'selectedWidths', function() {
