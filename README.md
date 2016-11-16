@@ -12,3 +12,18 @@ First, install [yarn](https://yarnpkg.com).
 yarn
 bower install
 ```
+
+## Run
+
+```
+npm run start
+```
+
+To hit the production API, two environment variables must be set:
+
+```
+export PERCY_WEB_AUTH_TOKEN=...
+export PERCY_WEB_API_HOST=https://percy.io
+
+npm run start
+```
