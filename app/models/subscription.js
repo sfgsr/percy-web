@@ -5,6 +5,7 @@ export default DS.Model.extend({
   organization: DS.belongsTo('organization'),
   plan: DS.attr(),
   planName: DS.attr(),
+  planNumWorkers: DS.attr('number'),
   planUsageLimit: DS.attr('number'),
   planHistoryLimitDays: DS.attr('number'),
   currentUsage: DS.attr('number'),

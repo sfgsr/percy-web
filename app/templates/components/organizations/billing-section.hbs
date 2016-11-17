@@ -48,9 +48,12 @@
           {{organization.subscription.planName}}
         </div>
         <div class="nine columns">
-          {{format-number organization.subscription.planUsageLimit}} visual diffs
+          <strong>{{organization.subscription.planNumWorkers}} parallel workers</strong>,
+          <strong>{{format-number organization.subscription.planUsageLimit}} visual diffs</strong>,
+          <strong>{{organization.subscription.planHistoryLimitDays}} day history</strong>
           <br>
-          You are on a custom plan. See monthly email receipt for more info.
+          <br>
+          You are on a custom plan. Feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions before changing plans.
         </div>
       </div>
     </div>
