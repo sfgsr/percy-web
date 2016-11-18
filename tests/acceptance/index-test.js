@@ -1,4 +1,4 @@
-import setupAcceptance, { setupSession } from '../helpers/setup-acceptance';
+import setupAcceptance from '../helpers/setup-acceptance';
 
 describe('Acceptance: Marketing pages', function() {
   setupAcceptance();
@@ -27,18 +27,5 @@ describe('Acceptance: Marketing pages', function() {
     visit('/terms');
     andThen(() => { expect(currentPath()).to.equal('terms'); });
     percySnapshot(this.test.fullTitle());
-  });
-
-  context('for authenticated user', function() {
-    setupSession();
-
-    it('can navigate to repository listing', function() {
-      visit('/');
-      click('.ReposLink a');
-      andThen(() => {
-        expect(currentPath()).to.equal('namespace.index');
-      });
-      percySnapshot(this.test.fullTitle());
-    });
   });
 });

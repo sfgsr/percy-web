@@ -9,26 +9,18 @@ import {
   afterEach
 } from 'mocha';
 import { expect } from 'chai';
-import { authenticateSession } from 'percy-web/tests/helpers/ember-simple-auth';
-import testUserFixture from 'percy-web/mirage/fixtures/user';
 
 // This import registers the percy test helpers globally.
 import '../helpers/percy/register-helpers';
 
-let application;
-
 export default function setupAcceptance() {
   beforeEach(function() {
-    application = startApp();
+    this.application = startApp();
+    window.localStorage.clear();
   });
 
   afterEach(function() {
-    Ember.run(application, 'destroy');
-  });
-}
-
-export function setupSession() {
-  beforeEach(function() {
-    authenticateSession(application, testUserFixture);
+    Ember.run(this.application, 'destroy');
+    this.application = null;
   });
 }
