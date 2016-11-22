@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import startApp from 'percy-web/tests/helpers/start-app';
+import destroyApp from 'percy-web/tests/helpers/destroy-app';
 // Import mocha helpers so that they will be included for all tests.
 /* jshint unused:false */
 import {
@@ -20,7 +21,7 @@ export default function setupAcceptance() {
   });
 
   afterEach(function() {
-    Ember.run(this.application, 'destroy');
+    destroyApp(this.application);
     this.application = null;
   });
 }

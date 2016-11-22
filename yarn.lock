@@ -1537,18 +1537,23 @@ ember-cli-lodash-subset@^1.0.1, ember-cli-lodash-subset@^1.0.7:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-1.0.11.tgz#0149eef9c0c3505ba44ed202f8d034ddbbfb2826"
 
-ember-cli-mirage@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-0.2.1.tgz#454917f8372721c173d5a3557c7985a10a344c08"
+ember-cli-mirage@0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/ember-cli-mirage/-/ember-cli-mirage-0.2.4.tgz#d85ac677dad06658e506ddfd12a6bd7f4ff6b1ff"
   dependencies:
-    broccoli-funnel "^1.0.1"
+    broccoli-funnel "^1.0.2"
     broccoli-merge-trees "^1.1.0"
     broccoli-unwatched-tree "^0.1.1"
     chalk "^1.1.1"
     ember-cli-babel "^5.1.5"
+    ember-cli-node-assets "^0.1.4"
     ember-inflector "^1.9.2"
     ember-lodash "0.0.9"
     exists-sync "0.0.3"
+    fake-xml-http-request "^1.4.0"
+    faker "^3.0.0"
+    pretender "^1.4.1"
+    route-recognizer "^0.1.11"
 
 ember-cli-mocha@^0.10.4:
   version "0.10.4"
@@ -1575,6 +1580,17 @@ ember-cli-moment-shim@0.7.3:
     ember-cli-babel "^5.0.0"
     exists-sync "0.0.3"
     lodash.defaults "^3.1.2"
+
+ember-cli-node-assets@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/ember-cli-node-assets/-/ember-cli-node-assets-0.1.4.tgz#11db3d42f8e9cc35c7c52308691da1f04ff854b2"
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    broccoli-merge-trees "^1.1.1"
+    broccoli-unwatched-tree "^0.1.1"
+    debug "^2.2.0"
+    lodash "^4.5.1"
+    resolve "^1.1.7"
 
 ember-cli-normalize-entity-name@^1.0.0:
   version "1.0.0"
@@ -2180,6 +2196,14 @@ external-editor@^1.1.0:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+fake-xml-http-request@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/fake-xml-http-request/-/fake-xml-http-request-1.4.0.tgz#6481c727a0eae9c420bae229dcdfc5369c4b5477"
+
+faker@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-3.1.0.tgz#0f908faf4e6ec02524e54a57e432c5c013e08c9f"
 
 fast-ordered-set@^1.0.0, fast-ordered-set@^1.0.2:
   version "1.0.3"
@@ -3318,6 +3342,10 @@ lodash@^4.0.0, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.3.0, lo
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.4.tgz#01ce306b9bad1319f2a5528674f88297aeb70127"
 
+lodash@^4.5.1:
+  version "4.17.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
+
 lodash@~4.9.0:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.9.0.tgz#4c20d742f03ce85dc700e0dd7ab9bcab85e6fc14"
@@ -4068,6 +4096,13 @@ portfinder@^1.0.4:
     debug "^2.2.0"
     mkdirp "0.5.x"
 
+pretender@^1.4.1:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/pretender/-/pretender-1.4.2.tgz#dde9995dfdf75b28a3dd7a73cde2f9f612e5e8f4"
+  dependencies:
+    fake-xml-http-request "^1.4.0"
+    route-recognizer "^0.2.3"
+
 printf@^0.2.3:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/printf/-/printf-0.2.5.tgz#c438ca2ca33e3927671db4ab69c0e52f936a4f0f"
@@ -4479,6 +4514,14 @@ rimraf@^2.2.8, rimraf@^2.3.2, rimraf@^2.3.4, rimraf@^2.4.3, rimraf@^2.4.4, rimra
 rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
+
+route-recognizer@^0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/route-recognizer/-/route-recognizer-0.1.11.tgz#810d8e5702abb4056d6dcb8e865c5685e7c14eb7"
+
+route-recognizer@^0.2.3:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/route-recognizer/-/route-recognizer-0.2.8.tgz#931e2629b09f351ac8e577aea03ad0151781e625"
 
 rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0, rsvp@^3.2.1:
   version "3.3.3"

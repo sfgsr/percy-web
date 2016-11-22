@@ -13,14 +13,18 @@ export default BaseAuthenticator.extend({
     return Ember.RSVP.resolve({user: this.userRecord});
   },
 
-  authenticate(user) {
+  authenticate(options) {
     let store = this.get('store');
-    return new Ember.RSVP.Promise((resolve) => {
-      store.findRecord('user', user.id).then((userRecord) => {
-        this.userRecord = userRecord;
-        resolve({user: userRecord});
+    if (options.user) {
+      return new Ember.RSVP.Promise((resolve) => {
+        store.findRecord('user', options.user.id).then((userRecord) => {
+          this.userRecord = userRecord;
+          resolve({user: userRecord});
+        });
       });
-    });
+    } else {
+      return Ember.RSVP.reject();
+    }
   },
 
   invalidate() {
