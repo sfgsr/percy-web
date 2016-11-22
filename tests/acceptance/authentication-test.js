@@ -40,8 +40,8 @@ describe('Acceptance: Join', function() {
       let user = server.create('user', {name: 'Test user', id: 'test_user'});
       let organization = server.create('organization', {name: 'Test org'});
       server.create('organizationUser', {user: user, organization: organization});
-      let antoherOrganization = server.create('organization', {name: 'Other org'});
-      server.create('invite', {id: 'valid_code', organization: antoherOrganization});
+      let anotherOrganization = server.create('organization', {name: 'Other org'});
+      server.create('invite', {id: 'valid_code', organization: anotherOrganization});
       return {user: user};
     });
 
