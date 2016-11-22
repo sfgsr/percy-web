@@ -27,6 +27,8 @@ export default DS.Model.extend({
       return 'Missing resources';
     } else if (failureReason === 'no_snapshots') {
       return 'No snapshots';
+    } else if (failureReason === 'render_timeout') {
+      return 'Timed out';
     }
   }),
 

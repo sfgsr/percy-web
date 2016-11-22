@@ -37,5 +37,8 @@ export default Ember.Component.extend({
       this.set('selectedNumColumns', numColumns);
       localStorage.setItem('numColumns', numColumns);
     },
+    showSupport() {
+      this.sendAction('showSupport');
+    },
   },
 });
