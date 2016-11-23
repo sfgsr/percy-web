@@ -57,5 +57,5 @@ export default function() {
     invite.update(attrs);
     return invite;
   });
-
+  this.get('/builds/:id');
 }
