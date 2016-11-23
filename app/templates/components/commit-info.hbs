@@ -14,8 +14,10 @@
     {{/if}}
   </span>
   <span class="CommitInfo-pr">
-    {{#if build.isPullRequest}}
-      (<a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">#{{build.pullRequestNumber}}</a>)
+    {{#if build.isGithubLinked}}
+      {{#if build.isPullRequest}}
+        (<a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">#{{build.pullRequestNumber}}</a>)
+      {{/if}}
     {{/if}}
   </span>
   <span class="CommitInfo-author">
