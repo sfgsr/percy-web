@@ -28,8 +28,8 @@
       <p>This could happen if your tests failed in your CI environment and nothing was uploaded to Percy. This build can be safely ignored, it will not be used as a baseline for visual diffs. If these failures happen frequently, check your CI or client logs for failures.</p>
     {{/if}}
     {{#if (eq build.failureReason 'render_timeout')}}
-      <p><strong>Timed out.</strong> Some snapshots in this build took too long to render and were canceled after being retried.</p>
-      <p>This can happen in rare cases when a page loads an asset that takes took long and hangs the Percy renderer. We have automatically recorded this error and will look into it, but feel free to <a href="#" {{action "showSupport"}}>reach out</a> and we can help get this fixed.</p>
+      <p><strong>Timed out.</strong> Some snapshots in this build took too long to render even after multiple retries.</p>
+      <p>This can happen in rare cases when a page loads an asset that takes too long and hangs the Percy renderer. We have automatically recorded this error and will look into it, but feel free to <a href="#" {{action "showSupport"}}>reach out</a> and we can help get this fixed.</p>
     {{/if}}
   </div>
 {{else if build.isExpired}}
