@@ -11,9 +11,12 @@ export default function() {
     let attrs = this.normalizedRequestAttrs();
     if (! attrs.slug.match(/^[a-zA-Z][a-zA-Z_]*[a-zA-Z]$/)) {
       return new Mirage.Response(400, {}, {errors: [
-            {status: "bad_request"},
-            {source: {pointer: "/data/attributes/slug"},detail: "Slug must only contain letters, numbers, dashes, and cannot begin or end with a dash."}
-          ]});
+        {status: 'bad_request'},
+        {source: {
+          pointer: '/data/attributes/slug'},
+          detail: 'Slug must only contain letters, numbers, dashes,' +
+                  ' and cannot begin or end with a dash.'}
+        ]});
     }
     let organization = schema.organizations.findBy({slug: request.params.slug});
     organization.update(attrs);
@@ -30,7 +33,7 @@ export default function() {
   this.get('/users/:id/organizations', (schema, request) => {
     let user = schema.users.find(request.params.id);
     let organizationUsers = schema.organizationUsers.where({userId:user.id});
-    let organizationIds = organizationUsers.models.map((organizationUser) => { return organizationUser.organizationId; });
+    let organizationIds = organizationUsers.models.map(obj => obj.organizationId);
     return schema.organizations.where({id: organizationIds});
   });
   this.get('/organizations/:slug/organization-users', (schema, request) => {
@@ -47,7 +50,8 @@ export default function() {
     return schema.projects.findBy({fullSlug: fullSlug});
   });
   this.get('/projects/:organization_slug/:project_slug/builds', (schema, request) => {
-    let project = schema.projects.findBy({fullSlug:`${request.params.organization_slug}/${request.params.project_slug}`});
+    let fullSlug = `${request.params.organization_slug}/${request.params.project_slug}`;
+    let project = schema.projects.findBy({fullSlug: fullSlug});
     return schema.builds.where({projectId: project.id});
   });
   this.get('/invites/:id');

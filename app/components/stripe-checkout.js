@@ -79,7 +79,7 @@ export default Ember.Component.extend({
           allowRememberMe: false,
         });
       } else {
-        var msg = "Ready to change to the " + planName + " plan? We'll use your existing payment info.";
+        var msg = `Ready to change to the ${planName} plan? We'll use your existing payment info.`;
         if (confirm(msg)) {
           self._changeSubscription(chosenPlan);
         }

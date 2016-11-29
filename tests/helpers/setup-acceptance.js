@@ -4,7 +4,7 @@ import destroyApp from 'percy-web/tests/helpers/destroy-app';
 import { authenticateSession } from 'percy-web/tests/helpers/ember-simple-auth';
 
 // Import mocha helpers so that they will be included for all tests.
-/* jshint unused:false */
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "it|describe" }]*/
 import {
   describe,
   it,
@@ -56,8 +56,8 @@ export function renderAdapterErrorsAsPage(callbackThatReturnsAPromise) {
     });
 }
 
-// set up the session, the createData should set this.loginUser a mirage model, and it will be used for
-// authentication.
+// set up the session, the createData should set this.loginUser a mirage model, and it will be used
+// for authentication.
 // Example:
 //  setupSession(function() {
 //    let user = server.create('user', {name: 'Test user', id: 'test_user'});
@@ -69,7 +69,7 @@ export function setupSession(createData) {
   beforeEach(function() {
     let application = this.application;
     createData.bind(this)(server);
-    expect(this.loginUser).not.to.be.undefined; // jshint ignore:line
+    expect(this.loginUser).not.to.be.undefined; // eslint-disable-line no-unused-expressions
     if (this.loginUser) {
       authenticateSession(application, {user: this.loginUser});
     }

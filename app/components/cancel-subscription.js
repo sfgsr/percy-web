@@ -1,3 +1,4 @@
+/*eslint max-len: ['error', { 'ignoreStrings': true }]*/
 import Ember from 'ember';
 
 export default Ember.Component.extend({

@@ -36,7 +36,8 @@ describe('Acceptance: Project', function() {
       let organization = server.create('organization', {name: 'Test organization'});
       server.create('organizationUser', {user: user, organization: organization});
       let enabled = server.create('project', {name: 'Enabled', organization: organization});
-      let disabled = server.create('project', {name: 'Disabled', isEnabled: false, organization: organization});
+      let disabled = server.create('project', {name: 'Disabled', isEnabled: false,
+        organization: organization});
 
       this.enabledProject = enabled;
       this.disabledProject = disabled;
@@ -60,7 +61,7 @@ describe('Acceptance: Project', function() {
     });
   });
 
-  context("builds", function() {
+  context('builds', function() {
     freezeMoment('2018-05-22');
 
     setupSession(function (server) {
@@ -68,15 +69,15 @@ describe('Acceptance: Project', function() {
       let organization = server.create('organization', {name: 'Test organization'});
       server.create('organizationUser', {user: user, organization: organization});
       let project = server.create('project', {name: 'with builds', organization: organization});
-      server.create('build', {project: project, createdAt: moment().subtract(60, 'days') });
+      server.create('build', {project: project, createdAt: moment().subtract(60, 'days')});
       server.create('build', {project: project, createdAt: moment().subtract(30, 'hours'),
         state: 'expired'});
       server.create('build', {project: project, createdAt: moment().subtract(3, 'hours'),
         state: 'failed'});
       server.create('build', {project: project, createdAt: moment().subtract(25, 'minutes'),
-            state: 'failed', failureReason: 'render_timeout'});
+        state: 'failed', failureReason: 'render_timeout'});
       server.create('build', {project: project, createdAt: moment().subtract(25, 'minutes'),
-          state: 'failed', failureReason: 'no_snapshots'});
+        state: 'failed', failureReason: 'no_snapshots'});
       server.create('build', {project: project, createdAt: moment().subtract(15, 'minutes'),
         state: 'failed', failureReason: 'missing_resources'});
       server.create('build', {project: project, createdAt: moment().subtract(10, 'minutes'),

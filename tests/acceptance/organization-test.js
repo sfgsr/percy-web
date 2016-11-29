@@ -111,7 +111,10 @@ describe('Acceptance: Organization', function() {
   context('user is github bot user',function() {
     setupSession(function (server) {
       let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {name: 'Test organization', githubBotUser: user});
+      let organization = server.create('organization', {
+        name: 'Test organization',
+        githubBotUser: user,
+      });
       server.create('organizationUser', {user: user, organization: organization, role: 'admin'});
       this.organization = organization;
       this.loginUser = user;

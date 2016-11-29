@@ -1,4 +1,6 @@
-import setupAcceptance, { setupSession, renderAdapterErrorsAsPage } from '../helpers/setup-acceptance';
+import setupAcceptance, {
+  setupSession, renderAdapterErrorsAsPage
+} from '../helpers/setup-acceptance';
 
 describe('Acceptance: Join', function() {
   setupAcceptance();
