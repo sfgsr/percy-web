@@ -11,6 +11,9 @@ describe('Acceptance: Build', function() {
     let project = server.create('project', {name: 'with builds', organization});
     let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes') });
     server.create('comparison', {build});
+    server.create('comparison', 'wasAdded', {build});
+    server.create('comparison', 'wasRemoved', {build});
+    server.create('comparison', 'same', {build});
     this.project = project;
   });
   it('shows the build page', function() {
@@ -24,5 +27,8 @@ describe('Acceptance: Build', function() {
       expect(currentPath()).to.equal('organization.project.builds.build');
     });
     percySnapshot(this.test.fullTitle());
+
+    click('.ComparisonModePicker button')
+    percySnapshot(this.test.fullTitle() + ' | Overview');
   });
 });
