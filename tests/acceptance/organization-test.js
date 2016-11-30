@@ -5,13 +5,10 @@ describe('Acceptance: Organization', function() {
 
   context('user is member', function () {
     setupSession(function (server) {
-      let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {name: 'Test organization'});
-      let project = server.create('project', {name: 'The Project', organization: organization});
-      server.create('organizationUser', {user: user, organization: organization, role: 'member'});
+      let organization = server.create('organization', 'withUser');
+      let project = server.create('project', {organization});
       this.organization = organization;
       this.project = project;
-      this.loginUser = user;
     });
 
     it('denies billing settings', function() {
@@ -71,11 +68,7 @@ describe('Acceptance: Organization', function() {
 
   context('user is admin', function () {
     setupSession(function (server) {
-      let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {name: 'Test organization'});
-      server.create('organizationUser', {user: user, organization: organization, role: 'admin'});
-      this.organization = organization;
-      this.loginUser = user;
+      this.organization = server.create('organization', 'withAdminUser');
     });
 
     it('can edit organization settings', function() {
@@ -110,14 +103,10 @@ describe('Acceptance: Organization', function() {
 
   context('user is github bot user',function() {
     setupSession(function (server) {
-      let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {
-        name: 'Test organization',
-        githubBotUser: user,
-      });
-      server.create('organizationUser', {user: user, organization: organization, role: 'admin'});
+      let user = server.create('user');
+      let organization = server.create('organization', {githubBotUser: user});
+      server.create('organizationUser', {user, organization, role: 'admin'});
       this.organization = organization;
-      this.loginUser = user;
     });
 
     it('shows private repos access', function() {

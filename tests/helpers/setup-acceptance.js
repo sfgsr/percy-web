@@ -56,8 +56,10 @@ export function renderAdapterErrorsAsPage(callbackThatReturnsAPromise) {
     });
 }
 
-// set up the session, the createData should set this.loginUser a mirage model, and it will be used
-// for authentication.
+// sets up the session, the createData should set create mirage models.
+// If there is only 1 user the this.loginUser will be set to first user.
+// It there are more than one user then createData should set this.loginUser to the user who
+// is to be used for authentication.
 // Example:
 //  setupSession(function() {
 //    let user = server.create('user', {name: 'Test user', id: 'test_user'});
@@ -69,6 +71,9 @@ export function setupSession(createData) {
   beforeEach(function() {
     let application = this.application;
     createData.bind(this)(server);
+    if ((this.loginUser === undefined) && (server.schema.users.all().models.length === 1)) {
+      this.loginUser = server.schema.users.first();
+    }
     expect(this.loginUser).not.to.be.undefined; // eslint-disable-line no-unused-expressions
     if (this.loginUser) {
       authenticateSession(application, {user: this.loginUser});

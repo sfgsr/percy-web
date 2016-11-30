@@ -7,10 +7,7 @@ describe('Acceptance: Project', function() {
 
   context('organization has no projects', function() {
     setupSession(function (server) {
-      let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {name: 'Test organization'});
-      server.create('organizationUser', {user: user, organization: organization});
-      this.loginUser = user;
+      server.create('organization', 'withUser');
     });
 
     it('can create', function() {
@@ -32,16 +29,12 @@ describe('Acceptance: Project', function() {
 
   context('settings', function() {
     setupSession(function (server) {
-      let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {name: 'Test organization'});
-      server.create('organizationUser', {user: user, organization: organization});
-      let enabled = server.create('project', {name: 'Enabled', organization: organization});
-      let disabled = server.create('project', {name: 'Disabled', isEnabled: false,
-        organization: organization});
+      let organization = server.create('organization', 'withUser');
+      let enabled = server.create('project', {name: 'Enabled', organization});
+      let disabled = server.create('project', {name: 'Disabled', isEnabled: false, organization});
 
       this.enabledProject = enabled;
       this.disabledProject = disabled;
-      this.loginUser = user;
     });
 
     it('for disabled', function() {
@@ -65,27 +58,24 @@ describe('Acceptance: Project', function() {
     freezeMoment('2018-05-22');
 
     setupSession(function (server) {
-      let user = server.create('user', {name: 'Test user', id: 'test_user'});
-      let organization = server.create('organization', {name: 'Test organization'});
-      server.create('organizationUser', {user: user, organization: organization});
-      let project = server.create('project', {name: 'with builds', organization: organization});
-      server.create('build', {project: project, createdAt: moment().subtract(60, 'days')});
-      server.create('build', {project: project, createdAt: moment().subtract(30, 'hours'),
+      let organization = server.create('organization', 'withUser');
+      let project = server.create('project', {name: 'with builds', organization});
+      server.create('build', {project, createdAt: moment().subtract(60, 'days') });
+      server.create('build', {project, createdAt: moment().subtract(30, 'hours'),
         state: 'expired'});
-      server.create('build', {project: project, createdAt: moment().subtract(3, 'hours'),
+      server.create('build', {project, createdAt: moment().subtract(3, 'hours'),
         state: 'failed'});
-      server.create('build', {project: project, createdAt: moment().subtract(25, 'minutes'),
+      server.create('build', {project, createdAt: moment().subtract(25, 'minutes'),
         state: 'failed', failureReason: 'render_timeout'});
-      server.create('build', {project: project, createdAt: moment().subtract(25, 'minutes'),
+      server.create('build', {project, createdAt: moment().subtract(25, 'minutes'),
         state: 'failed', failureReason: 'no_snapshots'});
-      server.create('build', {project: project, createdAt: moment().subtract(15, 'minutes'),
+      server.create('build', {project, createdAt: moment().subtract(15, 'minutes'),
         state: 'failed', failureReason: 'missing_resources'});
-      server.create('build', {project: project, createdAt: moment().subtract(10, 'minutes'),
+      server.create('build', {project, createdAt: moment().subtract(10, 'minutes'),
         state: 'pending'});
-      server.create('build', {project: project, createdAt: moment().subtract(10, 'seconds'),
+      server.create('build', {project, createdAt: moment().subtract(10, 'seconds'),
         state: 'processing'});
       this.project = project;
-      this.loginUser = user;
     });
     it('shows builds on index', function() {
       visit(`/${this.project.fullSlug}`);

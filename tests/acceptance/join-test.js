@@ -6,13 +6,10 @@ describe('Acceptance: Join', function() {
   setupAcceptance();
 
   setupSession(function (server) {
-    let user = server.create('user', {name: 'Test user', id: 'test_user'});
-    let organization = server.create('organization', {name: 'Test org'});
-    server.create('organizationUser', {user: user, organization: organization});
+    server.create('organization', 'withUser', {name: 'Test org'});
     let anotherOrganization = server.create('organization', {name: 'Other org'});
     server.create('invite', {id: 'valid-code', organization: anotherOrganization});
     server.create('invite', {id: 'expired-code', isExpired: true});
-    this.loginUser = user;
   });
 
   it('expired rejected', function () {

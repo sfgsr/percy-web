@@ -62,4 +62,6 @@ export default function() {
     return invite;
   });
   this.get('/builds/:id');
+  this.get('/builds/:build_id/snapshots');
+  this.get('/builds/:build_id/comparisons');
 }
