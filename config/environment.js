@@ -47,7 +47,12 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
-
+    if (process.env.PERCY_DEV_MIRAGE === 'yes') {
+      ENV.authenticator = "authenticator:test";
+      ENV['ember-cli-mirage'] = {
+        enabled: true
+      }
+    }
     ENV.APP.githubUrls = {
       integration: 'https://github.com/integrations/percy-dev/installations/new',
     }
@@ -64,7 +69,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
 
-    ENV.authenticator = "authenticator:test";
+    ENV.authenticator = 'authenticator:test';
     ENV.percy = {
       defaultWidths: [375, 1280]
     }

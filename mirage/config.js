@@ -3,7 +3,11 @@ import Mirage from 'ember-cli-mirage';
 export default function() {
   this.namespace = '/api/v1';
 
-  this.get('/users/:id');
+  this.get('/users/:id', function(schema, request) {
+    if (request.params.id == 'current') {
+      return schema.users.findBy({_currentLoginInTest: true});
+    }
+  });
   this.get('/organizations/:slug', function (schema, request) {
     return schema.organizations.findBy({slug: request.params.slug});
   });
@@ -24,14 +28,21 @@ export default function() {
   });
   this.post('/organizations', function (schema) {
     let attrs = this.normalizedRequestAttrs();
-    attrs.slug = 'new_org';
-    let currentUser = schema.users.first();
+    let currentUser = schema.users.findBy({_currentLoginInTest: true});
+    attrs.slug = attrs.name.underscore();
     let result = schema.organizations.create(attrs);
     schema.organizationUsers.create({userId: currentUser.id, organizationId: result.id});
     return result;
   });
+  this.post('/organizations/:slug/projects', function (schema, request) {
+    let attrs = this.normalizedRequestAttrs();
+    schema.organizations.findBy({id: request.params.id});
+    let project = schema.projects.create(attrs);
+    return project;
+  });
   this.get('/users/:id/organizations', (schema, request) => {
     let user = schema.users.find(request.params.id);
+    if (!user._currentLoginInTest) { return {errors: [{status: '403', title: 'unauthorized'}]}; }
     let organizationUsers = schema.organizationUsers.where({userId:user.id});
     let organizationIds = organizationUsers.models.map(obj => obj.organizationId);
     return schema.organizations.where({id: organizationIds});

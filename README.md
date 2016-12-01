@@ -32,6 +32,14 @@ npm run start
 
 Then, access [http://dev.percy.local:4200](http://dev.percy.local:4200)
 
+### Using mirage for development
+
+```bash
+export PERCY_DEV_MIRAGE=yes
+
+npm run start
+```
+
 ### Using production API
 
 To use the production API instead of a local API server, two environment variables must be set:

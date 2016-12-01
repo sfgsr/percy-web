@@ -76,7 +76,11 @@ export function setupSession(createData) {
     }
     expect(this.loginUser).not.to.be.undefined; // eslint-disable-line no-unused-expressions
     if (this.loginUser) {
-      authenticateSession(application, {user: this.loginUser});
+      this.loginUser.update({_currentLoginInTest: true});
+      authenticateSession(application);
     }
   });
+  afterEach(function() {
+    this.loginUser = undefined;
+  })
 }
