@@ -29,16 +29,20 @@ export default Factory.extend({
 
   afterCreate(comparison, server) {
     if (comparison.pdiff === null && comparison.includePdiff) {
-      let pdiff = server.create('pdiff', {diffRatio: 0.42});
+      let diffImage = server.create('image', {url: '/images/test/bs-pdiff.png'});
+      let pdiff = server.create('pdiff', {diffRatio: 0.42, diffImage});
       comparison.update({pdiff});
     }
     if (comparison.baseScreenshot === null && comparison.includeBaseScreenshot) {
-      let baseScreenshot = server.create('screenshot');
+      let lossyImage = server.create('image', {url: '/images/test/bs-base-lossy.jpg'});
+      let baseScreenshot = server.create('screenshot', {lossyImage});
       comparison.update({baseScreenshot});
     }
     if (comparison.headScreenshot === null && comparison.includeHeadScreenshot) {
-      let headScreenshot = server.create('screenshot');
-      comparison.update({headScreenshot});
+      let lossyImage = server.create('image', {url: '/images/test/bs-head-lossy.jpg'});
+      let headScreenshot = server.create('screenshot', {lossyImage});
+      let headSnapshot = server.create('snapshot');
+      comparison.update({headScreenshot, headSnapshot});
     }
     comparison.update({
       includeBaseScreenshot: undefined,
