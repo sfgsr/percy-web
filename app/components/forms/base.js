@@ -16,12 +16,11 @@ export default Ember.Component.extend({
     let model = this.get('model');
     let validator = this.get('validator') || {};
 
-    // Handle model being a DS.PromiseObject, like if passed a relationship from a template.
-    // For some reason, ember-changeset .save() does not delegate all the way through in this case.
-    // TODO: better way to do this? .content is a private API.
     if (model.content) {
-      model = model.content;
-      this.set('model', model);
+      // TODO: re-evaluate this when ember-changeset promise support lands.
+      // https://github.com/DockYard/ember-changeset/pull/130
+      // https://github.com/percy/percy-web/pull/48
+      Ember.assert('Promises are not supported in forms!');
     }
 
     return new Changeset(model, lookupValidator(validator), validator);

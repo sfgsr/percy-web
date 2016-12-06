@@ -11,6 +11,7 @@ module.exports = {
   rules: {
     'no-unused-expressions': 'error',
     'quotes': ['error', 'single'],
-    'max-len': ['error', 110]
+    'max-len': ['error', 110],
+    'space-unary-ops': ['error', { 'nonwords': false }]
   }
 };

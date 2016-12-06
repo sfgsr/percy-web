@@ -13,7 +13,7 @@ export default function() {
   });
   this.patch('/organizations/:slug', function (schema, request) {
     let attrs = this.normalizedRequestAttrs();
-    if (! attrs.slug.match(/^[a-zA-Z][a-zA-Z_]*[a-zA-Z]$/)) {
+    if (!attrs.slug.match(/^[a-zA-Z][a-zA-Z_]*[a-zA-Z]$/)) {
       return new Mirage.Response(400, {}, {errors: [
         {status: 'bad_request'},
         {source: {
@@ -34,11 +34,32 @@ export default function() {
     schema.organizationUsers.create({userId: currentUser.id, organizationId: result.id});
     return result;
   });
-  this.post('/organizations/:slug/projects', function (schema, request) {
+  this.post('/organizations/:id/projects', function (schema, request) {
     let attrs = this.normalizedRequestAttrs();
-    schema.organizations.findBy({id: request.params.id});
+    schema.organizations.findBy({slug: request.params.slug});
     let project = schema.projects.create(attrs);
     return project;
+  });
+  this.get('organizations/:slug/subscription', function(schema, request) {
+    let organization = schema.organizations.findBy({slug: request.params.slug});
+    return organization.subscription;
+  });
+  this.patch('organizations/:slug/subscription', function (schema, request) {
+    let attrs = this.normalizedRequestAttrs();
+    let organization = schema.organizations.findBy({slug: request.params.slug});
+    let subscription = organization.subscription;
+    
+    // Mimic backend email validation.
+    if (!attrs.billingEmail.match(/^[a-zA-Z0-9_]+\@[a-zA-Z0-9_\.]+$/)) {
+      return new Mirage.Response(400, {}, {errors: [
+        {status: 'bad_request'},
+        {source: {
+          pointer: '/data/attributes/billing-email'},
+          detail: 'Billing email is invalid'}
+        ]});
+    }
+    subscription.update(attrs);
+    return subscription;
   });
   this.get('/users/:id/organizations', (schema, request) => {
     let user = schema.users.find(request.params.id);
@@ -52,8 +73,8 @@ export default function() {
     let organization = schema.organizations.findBy({slug: request.params.slug});
     return schema.organizationUsers.where({organizationId: organization.id});
   });
-  this.get('/organizations/:id/projects', (schema, request) => {
-    let organization = schema.organizations.findBy({id: request.params.id});
+  this.get('/organizations/:slug/projects', (schema, request) => {
+    let organization = schema.organizations.findBy({slug: request.params.slug});
     return schema.projects.where({organizationId: organization.id});
   });
   this.get('/projects/:full_slug/', (schema, request) => {

@@ -16,5 +16,12 @@ export default Factory.extend({
       let user = server.create('user');
       server.create('organizationUser', {user, organization, role: 'admin'});
     }
+  }),
+
+  withSubscription: trait({
+    afterCreate(organization, server) {
+      let subscription = server.create('subscription');
+      organization.update({subscription});
+    }
   })
 });

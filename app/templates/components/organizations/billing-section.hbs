@@ -10,7 +10,7 @@
   {{#if (eq "admin" organization.currentUserMembership.role)}}
     <div class="row">
       <div class="eight columns">
-        {{forms/billing-edit subscription=organization.subscription}}
+        {{forms/billing-edit subscription=organization.subscription.content}}
       </div>
       {{#unless organization.subscription.isFree}}
         <div class="four columns u-text-right">
