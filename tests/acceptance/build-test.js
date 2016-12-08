@@ -26,7 +26,7 @@ describe('Acceptance: Build', function() {
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build');
     });
-    percySnapshot(this.test.fullTitle());
+    percySnapshot(this.test);
 
     click('.ComparisonModePicker button')
     percySnapshot(this.test.fullTitle() + ' | Overview');

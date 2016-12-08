@@ -17,7 +17,7 @@ describe('Acceptance: Join', function() {
     andThen(() => {
       expect(currentPath()).to.equal('join');
     });
-    return percySnapshot(this.test.fullTitle());
+    return percySnapshot(this.test);
   });
 
   it('invalid rejected', function() {
@@ -26,7 +26,7 @@ describe('Acceptance: Join', function() {
       andThen(() => {
         expect(currentPath()).to.equal('error');
       });
-      return percySnapshot(this.test.fullTitle());
+      return percySnapshot(this.test);
     });
   });
 
@@ -35,7 +35,7 @@ describe('Acceptance: Join', function() {
     andThen(() => {
       expect(currentPath()).to.equal('join');
     });
-    percySnapshot(this.test.fullTitle());
+    percySnapshot(this.test);
 
     click('.InvitationHandler button:contains("Accept invitation")');
     andThen(() => {

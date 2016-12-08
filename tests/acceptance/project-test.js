@@ -42,7 +42,7 @@ describe('Acceptance: Project', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.settings');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
     });
 
     it('for enabled', function() {
@@ -50,7 +50,7 @@ describe('Acceptance: Project', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.settings');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
     });
   });
 
@@ -82,7 +82,7 @@ describe('Acceptance: Project', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.index');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
     });
   });
 });

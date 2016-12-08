@@ -33,7 +33,7 @@ describe('Acceptance: Organization', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.billing');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
     });
 
     it('lists projects', function() {
@@ -43,7 +43,7 @@ describe('Acceptance: Organization', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organization.index');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
     });
 
     it('can create new organization', function() {
@@ -83,7 +83,7 @@ describe('Acceptance: Organization', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.settings');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
 
       renderAdapterErrorsAsPage(() => {
         fillIn('.FormsOrganizationEdit span:contains("Slug") + input', 'invalid/slug');
@@ -109,7 +109,7 @@ describe('Acceptance: Organization', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.billing');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
 
       fillIn('.FormsBillingEdit span:contains("Billing email") + input', 'a_valid_email@gmail.com');
       click('.FormsBillingEdit input[type=submit]');
@@ -159,7 +159,7 @@ describe('Acceptance: Organization', function() {
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.settings');
       });
-      percySnapshot(this.test.fullTitle());
+      percySnapshot(this.test);
 
       click('.SyncReposSection p:contains("Private repository access")');
       percySnapshot(this.test.fullTitle() + ' | private repository access');
