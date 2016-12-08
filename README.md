@@ -15,34 +15,26 @@ yarn
 bower install
 ```
 
-Second, edit `/etc/hosts` to create a local hostname for development:
+## Run server
+
+```bash
+PERCY_DEV_MIRAGE=yes npm run start
+```
+
+Then, access [http://localhost:4200](http://localhost:4200)
+
+### Using local API server
+
+Edit `/etc/hosts` to add a local hostname (required):
 
 ```bash
 # Add this to /etc/hosts:
 127.0.0.1  dev.percy.local
 ```
 
-This hostname setup is required.
+### Using the production API
 
-## Run server
-
-```bash
-npm run start
-```
-
-Then, access [http://dev.percy.local:4200](http://dev.percy.local:4200)
-
-### Using mirage for development
-
-```bash
-export PERCY_DEV_MIRAGE=yes
-
-npm run start
-```
-
-### Using production API
-
-To use the production API instead of a local API server, two environment variables must be set:
+First, add the `dev.percy.local` hostname above. Then, two environment variables must be set:
 
 ```bash
 export PERCY_WEB_AUTH_TOKEN=...
@@ -52,6 +44,8 @@ npm run start
 ```
 
 `PERCY_WEB_AUTH_TOKEN` is a full-access user token, different than the normal project `PERCY_TOKEN`.
+
+Then, access [http://dev.percy.local:4200](http://dev.percy.local:4200)
 
 ## Run tests
 
