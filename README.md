@@ -32,6 +32,12 @@ Edit `/etc/hosts` to add a local hostname (required):
 127.0.0.1  dev.percy.local
 ```
 
+Then, run:
+
+```bash
+npm run start
+```
+
 ### Using the production API
 
 First, add the `dev.percy.local` hostname above. Then, two environment variables must be set:
