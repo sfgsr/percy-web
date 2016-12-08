@@ -1,8 +1,8 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  billingEmail(i) { return `email${i}@domain.com`; },
+  billingEmail(i) { return `billing-email-${i}@example.com`; },
   plan: 'free',
   planUsageLimit: 500,
-  currentUsage: 42
+  currentUsage: 42,
 });

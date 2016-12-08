@@ -6,5 +6,5 @@ export default Factory.extend({
   totalComparisonsDiff: 8,
   totalComparisonsFinished: 12,
   createdAt: new Date().getTime(),
-  buildNumber(i) { return i; }
+  buildNumber(i) { return i + 1; }
 });

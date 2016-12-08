@@ -8,7 +8,7 @@ export default function(server) {
   let organization = server.create('organization', {subscription});
   server.create('organizationUser', {user, organization, role: 'admin'});
 
-  let project = server.create('project', {name: 'with builds', organization});
+  let project = server.create('project', {organization});
   let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes') });
   server.create('comparison', {build});
   server.create('comparison', 'wasAdded', {build});

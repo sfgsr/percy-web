@@ -1,7 +1,7 @@
 import { Factory, trait } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  name(i) { return `Organization ${i}`; },
+  name(i) { return `My Organization ${i}`; },
   slug() { return this.name.underscore(); },
 
   withUser: trait({
