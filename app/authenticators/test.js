@@ -6,21 +6,21 @@ export default BaseAuthenticator.extend({
 
   restore() {
     let store = this.get('store');
-    return new Ember.RSVP.Promise((resolve) => {
+    return new Ember.RSVP.Promise((resolve, reject) => {
       store.findRecord('user', 'current').then((userRecord) => {
         this.userRecord = userRecord;
         resolve({user: userRecord});
-      });
+      }, reject);
     });
   },
 
   authenticate() {
     let store = this.get('store');
-    return new Ember.RSVP.Promise((resolve) => {
+    return new Ember.RSVP.Promise((resolve, reject) => {
       store.findRecord('user', 'current').then((userRecord) => {
         this.userRecord = userRecord;
         resolve({user: userRecord});
-      });
+      }, reject);
     });
   },
 
