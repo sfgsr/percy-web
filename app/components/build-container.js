@@ -38,7 +38,7 @@ export default Ember.Component.extend({
       try {
         localStorage.setItem('numColumns', numColumns);
       } catch (_) {
-        // Do not care about Safari in private mode.
+        // Safari throws errors while accessing localStorage in private mode.
       }
     },
     showSupport() {
