@@ -16,24 +16,6 @@ module.exports = function(app) {
     console.error(err, req.url);
   });
 
-  var transformerMiddleware = function(req, res, next) {
-    var matcher = /.*post_message\/iframe.*/;
-    if (proxyTarget == 'https://percy.io' && matcher.test(req.url)) {
-      // For this particular request, explicitly disable gzip responses so we don't have to deal
-      // with uncompressing them before transforming below.
-      req.headers['accept-encoding'] = 'gzip;q=0,deflate,sdch';
-
-      var _write = res.write;
-      res.write = function (data) {
-        // Hijack the response and transform the postMessage targetOrigin to be the local origin.
-        data = data.toString().replace(/'https:\/\/percy\.io'/g, "'http://dev.percy.local:4200'");
-        _write.call(res, data);
-      }
-    }
-    next();
-  };
-  app.use(transformerMiddleware);
-
   app.use(proxyPath, function(req, res, next) {
     // include root path in proxied request
     req.url = proxyPath + req.url;

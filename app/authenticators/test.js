@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import utils from '../lib/utils';
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 
 export default BaseAuthenticator.extend({
@@ -7,8 +8,7 @@ export default BaseAuthenticator.extend({
   restore() {
     let store = this.get('store');
     return new Ember.RSVP.Promise((resolve, reject) => {
-      store.findRecord('user', 'current').then((userRecord) => {
-        this.userRecord = userRecord;
+      store.queryRecord('user', {}).then((userRecord) => {
         resolve({user: userRecord});
       }, reject);
     });
@@ -17,14 +17,22 @@ export default BaseAuthenticator.extend({
   authenticate() {
     let store = this.get('store');
     return new Ember.RSVP.Promise((resolve, reject) => {
-      store.findRecord('user', 'current').then((userRecord) => {
-        this.userRecord = userRecord;
+      store.queryRecord('user', {}).then((userRecord) => {
         resolve({user: userRecord});
       }, reject);
     });
   },
 
   invalidate() {
-    return Ember.RSVP.resolve();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.ajax({
+        type: 'GET',
+        url: utils.buildApiUrl('logout')
+      }).done(function(data/*, textStatus, xhr*/) {
+        resolve(data);
+      }).fail(function(xhr/*, textStatus, errorThrown*/) {
+        reject(xhr);
+      });
+    });
   }
 });

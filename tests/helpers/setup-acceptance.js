@@ -34,7 +34,7 @@ export default function setupAcceptance() {
 // Example:
 //   renderAdapterErrorsAsPage(() => {
 //     visit('/join/invalid-code');
-//     andThen(() => {
+//     return andThen(() => {
 //       expect(currentPath()).to.equal('error');
 //     });
 //   );

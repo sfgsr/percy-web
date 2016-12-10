@@ -23,7 +23,6 @@ module.exports = function(environment) {
       apiUrls: {
         login: '/api/auth/github',
         loginExtended: '/api/auth/github_extended',
-        postMessageIframe: '/api/auth/post_message/iframe.html',
         logout: '/api/auth/logout',
 
         builds: '/api/v1/builds',
@@ -34,6 +33,7 @@ module.exports = function(environment) {
         organizationUsers: '/api/v1/organizations/%@/organization-users',
         subscription: '/api/v1/organizations/%@/subscription',
         invites: '/api/v1/organizations/%@/invites',
+        user: '/api/v1/user',
       },
       githubUrls: {
         integration: 'https://github.com/integrations/percy/installations/new',

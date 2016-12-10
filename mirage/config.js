@@ -1,11 +1,29 @@
 import Mirage from 'ember-cli-mirage';
 
 export default function() {
+  this.get('/api/auth/logout',function(schema/*, request */) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    if (user) {
+      user.update({_currentLoginInTest: false});
+    }
+    return new Mirage.Response(200, {}, {success: true});
+  });
+
   this.namespace = '/api/v1';
 
-  this.get('/users/:id', function(schema, request) {
-    if (request.params.id == 'current') {
-      return schema.users.findBy({_currentLoginInTest: true});
+  this.get('/user', function(schema/*, request*/) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    if (user) {
+      return user;
+    } else {
+      return new Mirage.Response(401, {}, {
+        errors: [
+          {
+            status: 'unauthorized',
+            detail: 'Authentication required.'
+          }
+        ]
+      });
     }
   });
   this.get('/organizations/:slug', function (schema, request) {
@@ -14,13 +32,20 @@ export default function() {
   this.patch('/organizations/:slug', function (schema, request) {
     let attrs = this.normalizedRequestAttrs();
     if (!attrs.slug.match(/^[a-zA-Z][a-zA-Z_]*[a-zA-Z]$/)) {
-      return new Mirage.Response(400, {}, {errors: [
-        {status: 'bad_request'},
-        {source: {
-          pointer: '/data/attributes/slug'},
-          detail: 'Slug must only contain letters, numbers, dashes,' +
-                  ' and cannot begin or end with a dash.'}
-        ]});
+      return new Mirage.Response(400, {}, {
+        errors: [
+          {
+            status: 'bad_request'
+          },
+          {
+            source: {
+              pointer: '/data/attributes/slug'
+            },
+            detail: 'Slug must only contain letters, numbers, dashes,' +
+                    ' and cannot begin or end with a dash.'
+          }
+        ]
+      });
     }
     let organization = schema.organizations.findBy({slug: request.params.slug});
     organization.update(attrs);
@@ -48,15 +73,22 @@ export default function() {
     let attrs = this.normalizedRequestAttrs();
     let organization = schema.organizations.findBy({slug: request.params.slug});
     let subscription = organization.subscription;
-    
+
     // Mimic backend email validation.
     if (!attrs.billingEmail.match(/^[a-zA-Z0-9_]+\@[a-zA-Z0-9_\.]+$/)) {
-      return new Mirage.Response(400, {}, {errors: [
-        {status: 'bad_request'},
-        {source: {
-          pointer: '/data/attributes/billing-email'},
-          detail: 'Billing email is invalid'}
-        ]});
+      return new Mirage.Response(400, {}, {
+        errors: [
+          {
+            status: 'bad_request'
+          },
+          {
+            source: {
+              pointer: '/data/attributes/billing-email'
+            },
+            detail: 'Billing email is invalid'
+          }
+        ]
+      });
     }
     subscription.update(attrs);
     return subscription;
