@@ -8,11 +8,13 @@ export default BaseAuthenticator.extend({
     let store = this.get('store');
     return new Ember.RSVP.Promise((resolve, reject) => {
       store.queryRecord('user', {}).then((userRecord) => {
-        window.Intercom('update', {
-          name: userRecord.get('name'),
-          email: userRecord.get('email'),
-          created_at: userRecord.get('createdAt').getTime() / 1000,
-        });
+        if (window.Intercom) {
+          window.Intercom('update', {
+            name: userRecord.get('name'),
+            email: userRecord.get('email'),
+            created_at: userRecord.get('createdAt').getTime() / 1000,
+          });
+        }
         resolve({user: userRecord});
       }, reject);
     });
