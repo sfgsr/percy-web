@@ -35,7 +35,11 @@ export default Ember.Component.extend({
     },
     selectNumColumns(numColumns) {
       this.set('selectedNumColumns', numColumns);
-      localStorage.setItem('numColumns', numColumns);
+      try {
+        localStorage.setItem('numColumns', numColumns);
+      } catch (_) {
+        // Do not care about Safari in private mode.
+      }
     },
     showSupport() {
       this.sendAction('showSupport');

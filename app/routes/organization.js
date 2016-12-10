@@ -3,6 +3,10 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   afterModel(model) {
-    localStorage.setItem('lastOrganizationSlug', model.get('slug'));
+    try {
+      localStorage.setItem('lastOrganizationSlug', model.get('slug'));
+    } catch (_) {
+      // Do not care about Safari in private mode.
+    }
   },
 });
