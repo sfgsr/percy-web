@@ -16,7 +16,6 @@ module.exports = function(environment) {
         Date: false
       }
     },
-    authenticator: 'authenticator:custom',
 
     APP: {
       // Don't use these directly; use utils.buildApiUrl instead.
@@ -52,7 +51,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
     if (process.env.PERCY_DEV_MIRAGE === 'yes') {
-      ENV.authenticator = "authenticator:test";
       ENV['ember-cli-mirage'] = {
         enabled: true
       }
@@ -73,7 +71,6 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
 
-    ENV.authenticator = 'authenticator:test';
     ENV.percy = {
       defaultWidths: [375, 1280]
     }

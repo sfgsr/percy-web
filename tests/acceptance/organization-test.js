@@ -37,6 +37,7 @@ describe('Acceptance: Organization', function() {
     });
 
     it('lists projects', function() {
+      visit('/login');
       visit('/');
 
       click('.ReposLink a');
@@ -47,12 +48,8 @@ describe('Acceptance: Organization', function() {
     });
 
     it('can create new organization', function() {
-      visit('/');
+      visit(`/${this.organization.slug}`);
 
-      click('.ReposLink a');
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.index');
-      });
       click('.OrganizationsSwitcherNav-item');
       click('a:contains("Create new organization")');
       andThen(() => {

@@ -7,13 +7,11 @@ describe('Acceptance: Project', function() {
 
   context('organization has no projects', function() {
     setupSession(function (server) {
-      server.create('organization', 'withUser');
+      this.organization = server.create('organization', 'withUser');
     });
 
     it('can create', function() {
-      visit('/');
-
-      click('.ReposLink a');
+      visit(`/${this.organization.slug}`);
       andThen(() => {
         expect(currentPath()).to.equal('organization.index');
       });

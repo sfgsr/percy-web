@@ -50,9 +50,15 @@ export default BaseAuthenticator.extend({
     });
   },
   invalidate() {
-    return Ember.$.ajax({
-      type: 'GET',
-      url: utils.buildApiUrl('logout')
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.ajax({
+        type: 'GET',
+        url: utils.buildApiUrl('logout')
+      }).done(function(data/*, textStatus, xhr*/) {
+        resolve(data);
+      }).fail(function(xhr/*, textStatus, errorThrown*/) {
+        reject(xhr);
+      });
     });
   }
 });

@@ -5,5 +5,6 @@ export default Factory.extend({
   name(i) { return `Fake User ${i}`; },
   login(i) { return `user-${i}`; },
   avatarUrl() { return 'https://avatars2.githubusercontent.com/u/12261879?v=3&s=400'; },
-  id() { return this.name.underscore(); }
+  id() { return this.name.underscore(); },
+  createdAt() { return new Date().getTime(); }
 });

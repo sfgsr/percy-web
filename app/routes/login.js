@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import utils from '../lib/utils';
-import config from '../config/environment';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
 // TODO: fix broken login route when user is already logged in.
@@ -18,7 +17,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       options['redirectTo'] = '/';
     }
 
-    this.get('session').authenticate(config.authenticator, options).then(
+    this.get('session').authenticate('authenticator:custom', options).then(
       function() {
         var finalRedirect = utils.getQueryParam('redirect_to');
         if (finalRedirect) {
