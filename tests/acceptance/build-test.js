@@ -3,8 +3,8 @@ import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 
 describe('Acceptance: Build', function() {
-  setupAcceptance();
   freezeMoment('2018-05-22');
+  setupAcceptance();
 
   setupSession(function (server) {
     let organization = server.create('organization', 'withUser');

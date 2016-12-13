@@ -2,8 +2,8 @@ import { Factory, trait } from 'ember-cli-mirage';
 import moment from 'moment';
 
 export default Factory.extend({
-  startedProcessingAt: moment().subtract(65, 'seconds'),
-  finishedProcessingAt: moment().subtract(23, 'seconds'),
+  startedProcessingAt() { return moment().subtract(65, 'seconds') },
+  finishedProcessingAt() { return moment().subtract(23, 'seconds') },
 
   includeBaseScreenshot: true,
   includePdiff: true,
