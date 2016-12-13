@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server --watcher=polling",
+    "start": "ember server",
     "start-production-for-testing": "ember server --environment=production",
     "build-production": "ember build --environment=production",
     "test": "ember test",
