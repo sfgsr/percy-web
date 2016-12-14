@@ -18,6 +18,11 @@ describe('Acceptance: Marketing pages', function() {
     andThen(() => { expect(currentPath()).to.equal('docs.index'); });
     percySnapshot(this.test);
   });
+  it('can visit /about', function() {
+    visit('/about');
+    andThen(() => { expect(currentPath()).to.equal('terms'); });
+    percySnapshot(this.test);
+  });
   it('can visit /privacy', function() {
     visit('/privacy');
     andThen(() => { expect(currentPath()).to.equal('privacy'); });

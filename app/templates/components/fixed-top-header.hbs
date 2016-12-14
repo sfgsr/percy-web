@@ -9,7 +9,9 @@
       {{/link-to}}
     </div>
     <div class="u-pull-left">
-      {{organizations/switcher-nav currentOrganization=currentOrganization}}
+      {{#if session.isAuthenticated}}
+        {{organizations/switcher-nav currentOrganization=currentOrganization}}
+      {{/if}}
     </div>
     {{#if session.isAuthenticated}}
       {{nav-menu user=session.data.authenticated.user currentOrganization=currentOrganization}}
