@@ -3066,13 +3066,9 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-iconv-lite@0.4.13:
+iconv-lite@0.4.13, iconv-lite@^0.4.5, iconv-lite@~0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
-
-iconv-lite@^0.4.5, iconv-lite@~0.4.13:
-  version "0.4.15"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
 
 iferr@^0.1.5, iferr@~0.1.5:
   version "0.1.5"
@@ -4513,6 +4509,15 @@ percy-client@^1.3.0:
 "percy-docs@git+https://github.com/percy/percy-docs.git":
   version "0.0.0"
   resolved "git+https://github.com/percy/percy-docs.git#4fffadd726109bef725dbfea71df6b3abe187f36"
+  dependencies:
+    broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
+    broccoli-funnel "^1.0.2"
+    broccoli-merge-trees "^1.1.1"
+    ember-cli-babel "^5.1.6"
+
+"percy-docs@git+https://github.com/percy/percy-docs.git#d01bada7ede554d35860c12e4e1aa55db09e8398":
+  version "0.0.0"
+  resolved "git+https://github.com/percy/percy-docs.git#d01bada7ede554d35860c12e4e1aa55db09e8398"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
     broccoli-funnel "^1.0.2"
