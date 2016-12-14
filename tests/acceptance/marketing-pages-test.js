@@ -20,7 +20,7 @@ describe('Acceptance: Marketing pages', function() {
   });
   it('can visit /about', function() {
     visit('/about');
-    andThen(() => { expect(currentPath()).to.equal('terms'); });
+    andThen(() => { expect(currentPath()).to.equal('about'); });
     percySnapshot(this.test);
   });
   it('can visit /privacy', function() {
