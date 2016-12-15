@@ -12,9 +12,6 @@ import {
 } from 'mocha';
 import { expect } from 'chai';
 
-// This import registers the percy test helpers globally.
-import '../helpers/percy/register-helpers';
-
 export default function setupAcceptance() {
   beforeEach(function() {
     this.application = startApp();
