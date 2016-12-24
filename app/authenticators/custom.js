@@ -15,6 +15,9 @@ export default BaseAuthenticator.extend({
             created_at: userRecord.get('createdAt').getTime() / 1000,
           });
         }
+        if (window.heap) {
+          window.heap.identify(userRecord.get('id'));
+        }
         resolve({user: userRecord});
       }, reject);
     });
@@ -29,6 +32,9 @@ export default BaseAuthenticator.extend({
             email: userRecord.get('email'),
             created_at: userRecord.get('createdAt').getTime() / 1000,
           });
+        }
+        if (window.heap) {
+          window.heap.identify(userRecord.get('id'));
         }
         resolve({user: userRecord});
       }, (/*reason*/) => {

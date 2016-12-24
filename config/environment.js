@@ -40,8 +40,9 @@ module.exports = function(environment) {
     },
   };
 
-  // Intercom development/test app ID.
+  ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
   ENV.APP.INTERCOM_APP_ID = 'itdwmqct';
+  ENV.APP.HEAP_APP_ID = '3430193657';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -49,7 +50,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
     if (process.env.PERCY_DEV_MIRAGE === 'yes') {
       ENV['ember-cli-mirage'] = {
         enabled: true
@@ -69,7 +69,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-    ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
 
     ENV.percy = {
       defaultWidths: [375, 1280]
@@ -79,6 +78,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_live_cmaeNcmPuMihdT3Q7QDBDMDr';
     ENV.APP.INTERCOM_APP_ID = 'm37fs4zj';
+    ENV.APP.HEAP_APP_ID = '928971850';
   }
 
   return ENV;
