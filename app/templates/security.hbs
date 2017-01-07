@@ -1,0 +1,101 @@
+{{fixed-top-header}}
+{{#legalese-nav-wrapper}}
+  <h1>Security Policy</h1>
+  <p><i>Updated: January 6, 2017</i></p>
+
+  <p>Security of our tools and data is our highest priority—we consider the trust that our customers place in us with their data as core to the success of our business.</p>
+
+  <p>This security policy answers common questions about how your data is stored and used in Percy. If you have any additional questions please feel free to <a href="mailto:security@percy.io">reach out</a>, and see our {{#link-to "terms"}}Terms of Service{{/link-to}} and {{#link-to "privacy"}}Privacy Policy{{/link-to}} for additional information.</p>
+
+  <h3>System infrastructure</h3>
+
+  <p>Percy is hosted on Google Cloud Platform, which provides comprehensive security practices for our underlying infrastructure. This includes:</p>
+  <ul>
+    <li>Strict physical data center security.</li>
+    <li>Encryption of data at rest and encryption in transit, with automatic rotation of encryption keys.</li>
+    <li>Multi-region geographic redundancy and backups for databases and block storage.</li>
+    <li>Regular compliance audits of GCP infrastructure for certification to the highest information security standards.</li>
+  </ul>
+
+  <p>See <a href="https://cloud.google.com/security/">https://cloud.google.com/security/</a> and <a href="https://cloud.google.com/security/compliance">https://cloud.google.com/security/compliance</a> for more information.</p>
+
+  <p>Percy runs services and stores data in the following physical locations:</p>
+  <ul>
+    <li>Google Compute Engine, us-central1 (Council Bluffs, Iowa, United States)</li>
+    <li>Google Cloud Storage, multi-regional (United States only)</li>
+  </ul>
+
+  <p>Additionally, we use other third-party infrastructure providers such as <a href="https://www.cloudflare.com/">Cloudflare</a> to provide load-balancing services, denial-of-service protection, and up-to-date SSL/TLS encryption. We enable HTTP Strict Transport Security (HSTS) for all our domains and subdomains.</p>
+
+  <p>We reserve the right to change the underlying infrastructure of Percy at any time and without notice, but we will always aim for industry-leading privacy and security practices.</p>
+
+  <h3>Analytics and logging</h3>
+
+  <p>We use metrics and analytics services such as Google Analytics to track visits to our website, as well as third-party monitoring and exception tracking systems. These services help us provide a stable and robust production environment. Our logs can contain data like user IDs and URLs, but we take careful steps to ensure that sensitive data like passwords and tokens never end up in our logging, metrics, or exception tracking systems.</p>
+
+  <h3>Organization infrastructure</h3>
+
+  <p>Good security practices go far beyond managing underlying technical infrastructure. We employ organization-level security practices to ensure employee access control and audit logs to internal systems, and we enforce domain-wide 2-factor authentication on all employee accounts.
+  </p>
+
+  <h3>Credit card data</h3>
+
+  <p>Percy does not store or receive any credit card data other than references tokens that allow us to create payments. We use Stripe, a PCI Level 1 certified payments provider, to process payments. See <a href="https://stripe.com/docs/security">https://stripe.com/docs/security</a> for more information.</p>
+
+  <h3>What data does Percy collect?</h3>
+
+  <p>Percy is built to render screenshots of pages from web applications. To accomplish this, the primary data collected by Percy is simply web page assets such as HTML, CSS, images, and JavaScript. These assets are then used to render and store screenshots and visual diffs of your web application.</p>
+
+  <p>For public web apps, these assets are often already public and served to your customers in the normal course of using your web site. In any case, we always treat uploaded assets and screenshots as sensitive and private customer data since they can contain private web applications or show unreleased features of public apps.</p>
+
+  <p>Additionally, Percy integrations are primarily run inside test-only continuous integration (CI) environments—so the scope of our access is very limited, and usually only contains "mock" test data and the assets described above. Percy does not need or access your production data and does not have access to your customer PII.</p>
+
+  <p><strong>Percy never clones or accesses your repository source code, other than uploading the page assets mentioned above which are necessary to render screenshots.</strong> Percy collects some version control metadata (such as commit SHAs and branch names) and limited CI environment metadata (such as the CI name and build number) to display relevant build metadata in Percy.</p>
+
+  <p><strong>All Percy client libraries that collect data are open source</strong>, so you can see and audit exactly the mechanisms used for collecting and uploading data to Percy. Please see <a href="https://github.com/percy/">https://github.com/percy/</a> for the source code of our client libraries.</p>
+
+  <h3>Who can access my data?</h3>
+
+  <p>We enforce application-level access control for data via our API, so your Percy projects are only accessible to users when you explicitly grant them access. See your organization settings page to see and manage users who have access.</p>
+
+  <p>Additionally, Percy engineers provide support and analysis of uploaded data which may occasionally require debugging access to uploaded data, but this analysis is only used to improve the quality and stability of our service. We will never share or sell your data to unauthorized third-parties.</p>
+
+  <h3>Is my data segregated from other users?</h3>
+
+  <p>In our hosted solution your data is stored in the same underlying databases and storage systems as other customers. If you need strict data separation from other users, please contact us about our Enterprise self-hosted solution.</p>
+
+  <h3>What GitHub data does Percy access?</h3>
+
+  <p>When you sign in to Percy via GitHub, we receive an OAuth token that allows us to request data from the GitHub API on your behalf. We encrypt all OAuth tokens using AES-256 before storing them, and also use "key splitting" techniques to ensure that the decryption key is split into multiple layers of our tech stack, so that a compromise of a single layer would not yield the key necessary to decrypt data. Each GitHub OAuth token has permissions that are limited to specific GitHub API scopes. Please review the requested permissions when integrating with GitHub.</p>
+
+  <p><strong>Under no circumstances does Percy clone or store source code using your GitHub OAuth tokens. Under no circumstances do Percy engineers directly access your source code in GitHub.</strong> See "What data does Percy collect?" above for more info.</p>
+
+  <p>In your Percy organization settings, you have the option to install the Percy "GitHub Integration" which can be configured to allow access only to specific repositories in your GitHub organization. This is the recommended way to integrate Percy organizations with GitHub, as it provides the easiest way to limit access to specific repositories. Please review the access permissions requested when installing the integration.</p>
+
+  <p>We request data from the GitHub API in these situations:</p>
+
+  <ul>
+    <li>When signing in to Percy via GitHub, to read your user info such as your GitHub name and email address.</li>
+    <li>If you configured your Percy organization to integrate with GitHub, we use the GitHub API in these cases:</li>
+    <ul>
+      <li>To write commit statuses, which shows Percy in GitHub Pull Requests.</li>
+      <li>To list the repositories which the token has access to, so that we can show a list of repositories in Percy when linking projects to GitHub. We only read and store repo names and limited metadata, no source code.</li>
+      <li>To read Pull Request and commit metadata, such as commit SHA, author info, and PR number.</li>
+    </ul>
+  </ul>
+
+  <h3>Removing GitHub access</h3>
+
+  <p>To remove Percy's access to your GitHub account, simply revoke the token via your GitHub <a href="https://github.com/settings/applications">user settings page</a>. If you have installed the Percy "GitHub Integration" in your user account or organization account, you can uninstall it via the "Installed integrations" settings page in GitHub.</p>
+
+  <p>Percy can be used without any GitHub repository access, but some features may not be available.</p>
+
+  <h3>Disclosure</h3>
+
+  <p>If you find a vulnerability in Percy, please contact our security team at <a href="mailto:security@percy.io">security@percy.io</a>. We will do everything in our power to respond and fix the problem as quickly as possible. We adhere to industry-standard responsible disclosure practices and ask that you report the vulnerability to us quickly, and work with us to close the vulnerability within a reasonable time period before disclosing it to others.</p>
+
+  <h3>Any questions?</h3>
+
+  <p>If you have any questions about Percy and security, please email us at <a href="mailto:security@percy.io">security@percy.io</a>.</p>
+{{/legalese-nav-wrapper}}
+{{main-footer}}

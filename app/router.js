@@ -29,6 +29,7 @@ Router.map(function() {
   this.route('about');
   this.route('terms');
   this.route('privacy');
+  this.route('security');
   this.route('account');
   this.route('organizations', {path: '/organizations'}, function() {
     this.route('new');

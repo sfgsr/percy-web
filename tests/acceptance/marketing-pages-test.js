@@ -23,14 +23,19 @@ describe('Acceptance: Marketing pages', function() {
     andThen(() => { expect(currentPath()).to.equal('about'); });
     percySnapshot(this.test);
   });
-  it('can visit /privacy', function() {
-    visit('/privacy');
-    andThen(() => { expect(currentPath()).to.equal('privacy'); });
+  it('can visit /security', function() {
+    visit('/security');
+    andThen(() => { expect(currentPath()).to.equal('security'); });
     percySnapshot(this.test);
   });
   it('can visit /terms', function() {
     visit('/terms');
     andThen(() => { expect(currentPath()).to.equal('terms'); });
+    percySnapshot(this.test);
+  });
+  it('can visit /privacy', function() {
+    visit('/privacy');
+    andThen(() => { expect(currentPath()).to.equal('privacy'); });
     percySnapshot(this.test);
   });
 });
