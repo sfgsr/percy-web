@@ -55,7 +55,10 @@
   {{else}}
     {{comparison-list
         comparisons=visibleComparisons
+        activeComparisonId=activeComparisonId
+        updateActiveComparisonId=(action "updateActiveComparisonId")
         selectedWidths=selectedWidths
+        selectNumColumns=(action "selectNumColumns")
         selectedNumColumns=selectedNumColumns
     }}
   {{/if}}

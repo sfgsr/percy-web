@@ -28,16 +28,18 @@
       border: $grayborderhover
       cursor: pointer
 
-  &.ComparisonViewer--fullWidth
-    width: 100% !important
-
   .ComparisonViewer-header
-    padding: 5px;
+    cursor: pointer
+    padding: 5px
     background-color: $lightgray
     border: 1px solid $lightgray
     border-top-left-radius: 2px
     border-top-right-radius: 2px
     display: flex
+
+    a,
+    a:hover
+      color: $default-text-color
 
     &.ComparisonViewer-header--actionable
       &:hover
@@ -49,7 +51,7 @@
       margin: 4px 10px 0 10px
       width: calc(100% - 125px)  // 100% - width of details.
 
-      span
+      a
         display: inline-block
         font-weight: bold
         text-overflow: ellipsis
@@ -101,12 +103,13 @@
     position: relative
     border: 1px solid #eaeaea
     box-shadow: 0px 0px 5px #dadada
+    width: 100%
 
-    img
-      @include unselectable
-      display: block
+    .pdiffImageOverlay
+      position: absolute
+      top: 0
+      left: 0
       width: 100%
-      height: auto
 
   .ComparisonViewer-pdiffImageBox--actionable
     @include unselectable
@@ -135,7 +138,7 @@
     .fa
       font-size: 8rem
       color: $lightergray
-      text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray;
+      text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray
 
   .ComparisonViewer-noDiffBox
     padding: 7px

@@ -7,22 +7,17 @@
   .Alert
     width: 100%
 
-  .ComparisonViewer
-    @include transition('1s ease-in-out')
-    transition-property: width
-
-    .ComparisonViewer-snapshotMissing
-      .fa
-        @include transition('1s ease-in-out')
-
   &.ComparisonList--1col
     .ComparisonViewer
       width: 100%
   &.ComparisonList--4col
     .ComparisonViewer
       width: 24.5%
+      @include transition('1s ease-in-out')
+      transition-property: width
 
       .ComparisonViewer-snapshotMissing
         .fa
+          @include transition('1s ease-in-out')
           font-size: 5rem
 

@@ -2,8 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   build: null,
+  activeComparisonId: null,
+  updateActiveComparisonId: null,
   classNames: ['BuildContainer'],
-  selectedWidths: Ember.computed('build.comparisonWidths', function() {
+  selectedWidths: Ember.computed(
+    'build.comparisonWidths', 'build.comparisons', 'activeComparisonId', function() {
+    let activeComparisonId = this.get('activeComparisonId');
+    if (activeComparisonId) {
+      let activeComparison = this.get('build.comparisons').find(
+              comparison => comparison.id === activeComparisonId);
+      if (activeComparison) {
+        return [activeComparison.get('width')];
+      }
+    }
     // Use the largest width by default.
     return this.get('build.comparisonWidths').slice(-1);
   }),
@@ -30,8 +41,12 @@ export default Ember.Component.extend({
     }
   }),
   actions: {
+    updateActiveComparisonId(comparisonId) {
+      this.get('updateActiveComparisonId')(comparisonId);
+    },
     updateSelectedWidths(widths) {
       this.set('selectedWidths', widths);
+      this.get('updateActiveComparisonId')(undefined);
     },
     selectNumColumns(numColumns) {
       this.set('selectedNumColumns', numColumns);

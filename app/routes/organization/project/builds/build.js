@@ -2,6 +2,9 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  queryParams: {
+    activeComparisonId: {as: 'comparison', replace: true}
+  },
   afterModel(model) {
     model.reload().then((model) => {
       if (!model.get('isExpired')) {
@@ -12,5 +15,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       }
     });
   },
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      // Clear the query parameter when exiting the route.
+      controller.set('activeComparisonId', undefined);
+    }
+  },
+  actions: {
+    updateActiveComparisonId(comparisonId) {
+      this.set('controller.activeComparisonId', comparisonId);
+    }
+  }
 });
-

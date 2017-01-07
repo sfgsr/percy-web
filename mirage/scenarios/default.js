@@ -11,6 +11,8 @@ export default function(server) {
   let project = server.create('project', {organization});
   let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes') });
   server.create('comparison', {build});
+  server.create('comparison', 'gotLonger', {build});
+  server.create('comparison', 'gotShorter', {build});
   server.create('comparison', 'wasAdded', {build});
   server.create('comparison', 'wasRemoved', {build});
   server.create('comparison', 'same', {build});
