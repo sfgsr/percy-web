@@ -8,6 +8,7 @@ export default Factory.extend({
   includeBaseScreenshot: true,
   includePdiff: true,
   includeHeadScreenshot: true,
+  includeMobileScreenshot: false,
 
   wasAdded: trait({
     includeBaseScreenshot: false,
@@ -17,6 +18,10 @@ export default Factory.extend({
   wasRemoved: trait({
     includeHeadScreenshot: false,
     includePdiff: false,
+  }),
+
+  mobile: trait({
+    includeMobileVersion: true
   }),
 
   gotLonger: trait({
@@ -38,65 +43,79 @@ export default Factory.extend({
   }),
 
   afterCreate(comparison, server) {
-    if (comparison.pdiff === null && comparison.includePdiff) {
-      let pdiff;
-      if (comparison.includePdiff === 'longer') {
-        let diffImage = server.create('image', {
-          url: '/images/test/bs-pdiff-base-head-longer.png',
-          width: 1280,
-          height: 953
-        });
-        pdiff = server.create('pdiff', {diffRatio: 0.62, diffImage});
-      } else {
-        let diffImage = server.create('image', {
-          url: '/images/test/bs-pdiff-base-head.png',
-          width: 1280,
-          height: 600
-        });
-        pdiff = server.create('pdiff', {diffRatio: 0.42, diffImage});
+    let settings = {
+      prefix: 'bs',
+      width: 1280,
+      pdiff: {width: 1280, height: 600, ratio: 0.42, postfix: ''},
+      lossy: {width: 900, height: 422, postfix: ''},
+      longer: {
+        pdiff: {width: 1280, height: 953, ratio: 0.62, postfix: '-longer'},
+        lossy: {width: 900, height: 670, postfix: '-longer'}
       }
+    };
+    if (comparison.includeMobileVersion) {
+      settings.prefix = 'bs-mobile';
+      settings.width = 320;
+      settings.pdiff = {width: 320, height: 600, ratio: 0.32, postfix: ''};
+      settings.lossy = settings.pdiff;
+      settings.longer.pdiff = {width: 320, height: 1040, ratio: 0.72, postfix: '-longer'};
+      settings.longer.lossy = settings.longer.pdiff;
+    }
+    if (comparison.pdiff === null && comparison.includePdiff) {
+      let pdiffSettings = settings.pdiff;
+      if (comparison.includePdiff === 'longer') {pdiffSettings = settings.longer.pdiff;}
+      let diffImage = server.create('image', {
+        url: `/images/test/${settings.prefix}-pdiff-base-head${pdiffSettings.postfix}.png`,
+        width: pdiffSettings.width, height: pdiffSettings.height
+      });
+      let pdiff = server.create('pdiff', {diffRatio: pdiffSettings.ratio, diffImage});
       comparison.update({pdiff});
     }
     if (comparison.baseScreenshot === null && comparison.includeBaseScreenshot) {
-      let lossyImage;
+      let lossy = settings.lossy;
+      let variant = 'base';
       if (comparison.includeBaseScreenshot === 'longer') {
-        lossyImage = server.create('image', {
-          url: '/images/test/bs-head-longer-lossy.jpg',
-          width: 900,
-          height: 670
-        });
-      } else {
-        lossyImage = server.create('image', {
-          url: '/images/test/bs-base-lossy.jpg',
-          width: 900,
-          height: 422
-        });
+        lossy = settings.longer.lossy;
+        variant = 'head';
       }
+      let lossyImage = server.create('image', {
+        url: `/images/test/${settings.prefix}-${variant}${lossy.postfix}-lossy.jpg`,
+        width: lossy.width, height: lossy.height
+      });
       let baseScreenshot = server.create('screenshot', {lossyImage});
       comparison.update({baseScreenshot});
     }
     if (comparison.headScreenshot === null && comparison.includeHeadScreenshot) {
-      let lossyImage;
-      if (comparison.includeHeadScreenshot === 'longer') {
-        lossyImage = server.create('image', {
-          url: '/images/test/bs-head-longer-lossy.jpg',
-          width: 900,
-          height: 670
-        });
-      } else {
-        lossyImage = server.create('image', {
-          url: '/images/test/bs-head-lossy.jpg',
-          width: 900,
-          height: 422
-        });
+      let lossy = settings.lossy;
+      let variant = 'head';
+      if (comparison.includeBaseScreenshot === 'longer') {
+        variant = 'base';
       }
+      if (comparison.includeHeadScreenshot === 'longer') {
+        lossy = settings.longer.lossy;
+      }
+      let lossyImage = server.create('image', {
+          url: `/images/test/${settings.prefix}-${variant}${lossy.postfix}-lossy.jpg`,
+          width: lossy.width, height: lossy.height
+        });
       let headScreenshot = server.create('screenshot', {lossyImage});
-      let headSnapshot = server.create('snapshot');
-      comparison.update({headScreenshot, headSnapshot});
+      comparison.update({headScreenshot});
+      if (comparison.headSnapshot === null) {
+        let headSnapshot = server.create('snapshot');
+        comparison.update({headScreenshot, headSnapshot});
+      }
     }
+    if (comparison.width === undefined &&
+          (comparison.includeHeadScreenshot || comparison.includeBaseScreenshot)) {
+      comparison.update({width: settings.width});
+    }
+
+    // Remove transient attributes.
     comparison.update({
       includeBaseScreenshot: undefined,
       includePdiff: undefined,
-      includeHeadScreenshot: undefined}); // remove transient attributes
+      includeHeadScreenshot: undefined,
+      includeMobileVersion: undefined,
+    });
   }
 });

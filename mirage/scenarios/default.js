@@ -10,10 +10,16 @@ export default function(server) {
 
   let project = server.create('project', {organization});
   let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes') });
-  server.create('comparison', {build});
-  server.create('comparison', 'gotLonger', {build});
-  server.create('comparison', 'gotShorter', {build});
-  server.create('comparison', 'wasAdded', {build});
-  server.create('comparison', 'wasRemoved', {build});
-  server.create('comparison', 'same', {build});
+  let headSnapshot = server.create('comparison', {build}).headSnapshot;
+  server.create('comparison', 'mobile', {build, headSnapshot});
+  headSnapshot = server.create('comparison', 'gotLonger', {build}).headSnapshot;
+  server.create('comparison', 'mobile', 'gotLonger', {build, headSnapshot});
+  headSnapshot = server.create('comparison', 'gotShorter', {build}).headSnapshot;
+  server.create('comparison', 'mobile', 'gotShorter', {build, headSnapshot});
+  headSnapshot = server.create('comparison', 'wasAdded', {build}).headSnapshot;
+  server.create('comparison', 'mobile', 'wasAdded', {build, headSnapshot});
+  headSnapshot = server.create('comparison', 'wasRemoved', {build}).headSnapshot;
+  server.create('comparison', 'mobile', 'wasRemoved', {build, headSnapshot});
+  headSnapshot = server.create('comparison', 'same', {build}).headSnapshot;
+  server.create('comparison', 'mobile', 'same', {build, headSnapshot});
 }
