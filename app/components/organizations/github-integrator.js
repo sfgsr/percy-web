@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from 'percy-web/config/environment';
-import { task, timeout } from 'ember-concurrency';
+import {task, timeout} from 'ember-concurrency';
 
 const POLLING_INTERVAL_SECONDS = 3;
 const MAX_UPDATE_POLLING_REQUESTS = 2000;

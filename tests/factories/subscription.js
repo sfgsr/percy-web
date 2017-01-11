@@ -4,7 +4,7 @@ FactoryGuy.define(
   'subscription',
   {
     sequences: {
-      plan: (num) => { return `subscription-${num}`; },
+      plan: (num) => `subscription-${num}`,
     },
     default: {
       style: 'normal',

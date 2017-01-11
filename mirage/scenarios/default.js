@@ -9,7 +9,7 @@ export default function(server) {
   server.create('organizationUser', {user, organization, role: 'admin'});
 
   let project = server.create('project', {organization});
-  let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes') });
+  let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});
   let headSnapshot = server.create('comparison', {build}).headSnapshot;
   server.create('comparison', 'mobile', {build, headSnapshot});
   headSnapshot = server.create('comparison', 'gotLonger', {build}).headSnapshot;

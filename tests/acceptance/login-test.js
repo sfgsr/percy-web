@@ -1,4 +1,4 @@
-import setupAcceptance, { setupSession } from '../helpers/setup-acceptance';
+import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 
 describe('Acceptance: Login', function() {
   setupAcceptance();

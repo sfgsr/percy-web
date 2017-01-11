@@ -95,7 +95,9 @@ export default function() {
   });
   this.get('/users/:id/organizations', (schema, request) => {
     let user = schema.users.find(request.params.id);
-    if (!user._currentLoginInTest) { return {errors: [{status: '403', title: 'unauthorized'}]}; }
+    if (!user._currentLoginInTest) {
+      return {errors: [{status: '403', title: 'unauthorized'}]};
+    }
     let organizationUsers = schema.organizationUsers.where({userId:user.id});
     let organizationIds = organizationUsers.models.map(obj => obj.organizationId);
     return schema.organizations.where({id: organizationIds});

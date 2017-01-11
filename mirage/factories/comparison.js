@@ -1,9 +1,13 @@
-import { Factory, trait } from 'ember-cli-mirage';
+import {Factory, trait} from 'ember-cli-mirage';
 import moment from 'moment';
 
 export default Factory.extend({
-  startedProcessingAt() { return moment().subtract(65, 'seconds') },
-  finishedProcessingAt() { return moment().subtract(23, 'seconds') },
+  startedProcessingAt() {
+    return moment().subtract(65, 'seconds')
+  },
+  finishedProcessingAt() {
+    return moment().subtract(23, 'seconds')
+  },
 
   includeBaseScreenshot: true,
   includePdiff: true,
@@ -63,7 +67,9 @@ export default Factory.extend({
     }
     if (comparison.pdiff === null && comparison.includePdiff) {
       let pdiffSettings = settings.pdiff;
-      if (comparison.includePdiff === 'longer') {pdiffSettings = settings.longer.pdiff;}
+      if (comparison.includePdiff === 'longer') {
+        pdiffSettings = settings.longer.pdiff;
+      }
       let diffImage = server.create('image', {
         url: `/images/test/${settings.prefix}-pdiff-base-head${pdiffSettings.postfix}.png`,
         width: pdiffSettings.width, height: pdiffSettings.height

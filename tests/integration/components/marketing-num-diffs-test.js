@@ -3,7 +3,7 @@ import {
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import { percySnapshot } from 'ember-percy';
+import {percySnapshot} from 'ember-percy';
 
 describeComponent(
   'marketing-num-diffs',

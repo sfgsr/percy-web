@@ -4,9 +4,9 @@ FactoryGuy.define(
   'user',
   {
     sequences: {
-      name: (num) => { return `User ${num}`; },
-      login: (num) => { return `user-${num}`; },
-      email: (num) => { return `user-${num}@example.com`; },
+      name: (num) => `User ${num}`,
+      login: (num) => `user-${num}`,
+      email: (num) => `user-${num}@example.com`,
     },
     default: {
       style: 'normal',

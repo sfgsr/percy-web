@@ -1,4 +1,4 @@
-import setupAcceptance, { setupSession } from '../helpers/setup-acceptance';
+import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 
@@ -9,7 +9,7 @@ describe('Acceptance: Build', function() {
   setupSession(function (server) {
     let organization = server.create('organization', 'withUser');
     let project = server.create('project', {name: 'with builds', organization});
-    let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes') });
+    let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});
     this.comparisons = {
       different: server.create('comparison', {build}),
       gotLonger: server.create('comparison', 'gotLonger', {build}),

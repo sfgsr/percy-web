@@ -46,7 +46,7 @@ export default DS.Model.extend({
         widths.push(width);
       }
     });
-    return widths.sort(function(a, b) { return a - b; });
+    return widths.sort((a, b) => a - b);
   }),
   numComparisonWidths: Ember.computed('comparisonWidths', function() {
     return this.get('comparisonWidths').length;
