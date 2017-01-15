@@ -14,9 +14,6 @@ export default Factory.extend({
   avatarUrl() {
     return 'https://avatars2.githubusercontent.com/u/12261879?v=3&s=400';
   },
-  id() {
-    return this.name.underscore();
-  },
   createdAt() {
     return moment();
   }
