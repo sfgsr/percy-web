@@ -12,7 +12,7 @@ describe('Acceptance: Login', function() {
 
     andThen(() => {
       this.server.create('user', {_currentLoginInTest: true});
-    })
+    });
     click('a.LoginButton');
     andThen(() => {
       expect(currentPath()).to.equal('index');

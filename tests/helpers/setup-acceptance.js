@@ -76,5 +76,5 @@ export function setupSession(createData) {
   });
   afterEach(function() {
     this.loginUser = undefined;
-  })
+  });
 }

@@ -52,7 +52,7 @@ export default BaseAuthenticator.extend({
         }
         // Redirect to GitHub auth.
         window.location = utils.buildApiUrl('login', {params: {redirect_to: finalRedirect}});
-      })
+      });
     });
   },
   invalidate() {

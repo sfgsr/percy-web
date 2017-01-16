@@ -3,10 +3,10 @@ import moment from 'moment';
 
 export default Factory.extend({
   startedProcessingAt() {
-    return moment().subtract(65, 'seconds')
+    return moment().subtract(65, 'seconds');
   },
   finishedProcessingAt() {
-    return moment().subtract(23, 'seconds')
+    return moment().subtract(23, 'seconds');
   },
 
   includeBaseScreenshot: true,

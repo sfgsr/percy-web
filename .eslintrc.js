@@ -9,12 +9,14 @@ module.exports = {
     'browser': true
   },
   rules: {
-    'no-unused-expressions': 'error',
-    'quotes': ['error', 'single'],
+    'brace-style': ['error', '1tbs', {'allowSingleLine': false}],
     'max-len': ['error', 110],
-    'space-unary-ops': ['error', {'nonwords': false }],
+    'no-unused-expressions': 'error',
     'object-curly-spacing': ['error', 'never'],
+    'quotes': ['error', 'single'],
+    'keyword-spacing': ['error', {'before': true}],
     'space-in-parens': ['error', 'never'],
-    'brace-style': ['error', '1tbs', {'allowSingleLine': false }],
+    'semi': ['error', 'always'],
+    'space-unary-ops': ['error', {'nonwords': false}],
   }
 };

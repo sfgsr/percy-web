@@ -17,7 +17,7 @@ describe('Acceptance: Build', function() {
       wasAdded: server.create('comparison', 'wasAdded', {build}),
       wasRemoved: server.create('comparison', 'wasRemoved', {build}),
       same: server.create('comparison', 'same', {build})
-    }
+    };
     this.project = project;
     this.build = build;
   });
@@ -34,7 +34,7 @@ describe('Acceptance: Build', function() {
     });
     percySnapshot(this.test);
 
-    click('.ComparisonModePicker button')
+    click('.ComparisonModePicker button');
     percySnapshot(this.test.fullTitle() + ' | Overview');
   });
 
@@ -45,7 +45,7 @@ describe('Acceptance: Build', function() {
     });
 
     let comparison = this.comparisons.different;
-    let comparisonSelector = `.ComparisonViewer:has(div[title="${comparison.headSnapshot.name}"])`
+    let comparisonSelector = `.ComparisonViewer:has(div[title="${comparison.headSnapshot.name}"])`;
 
     andThen(() => {
       expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(1);
@@ -104,7 +104,7 @@ describe('Acceptance: Build', function() {
       expect(
         find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
       ).to.equal(comparison.headSnapshot.name);
-      expect('')
+      expect('');
     });
 
     percySnapshot(this.test.fullTitle());
