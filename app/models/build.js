@@ -10,6 +10,9 @@ export default DS.Model.extend({
   isGithubLinked: Ember.computed.bool('repo'),
 
   buildNumber: DS.attr('number'),
+  buildTitle: Ember.computed('buildNumber', function() {
+    return `Build ${this.get('buildNumber')}`;
+  }),
   branch: DS.attr(),
 
   // States.

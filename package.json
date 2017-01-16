@@ -50,6 +50,7 @@
     "ember-inflector": "^1.9.4",
     "ember-load-initializers": "^0.5.1",
     "ember-moment": "5.1.0",
+    "ember-page-title": "3.1.5",
     "ember-percy": "1.2.5",
     "ember-power-select": "1.0.0-beta.25",
     "ember-remarkable": "3.1.2",
@@ -62,6 +63,6 @@
     "http-proxy": "^1.11.1",
     "loader.js": "^4.0.10",
     "morgan": "^1.7.0",
-    "percy-docs": "git+https://github.com/percy/percy-docs.git#5d0156a5c588204ab7ecfb739a470d3122ecac05"
+    "percy-docs": "git+https://github.com/percy/percy-docs.git#499ce3e357be99caea3f0b840e33c7893904fa13"
   }
 }

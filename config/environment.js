@@ -16,7 +16,10 @@ module.exports = function(environment) {
         Date: false
       }
     },
-
+    pageTitle: {
+      separator: ' - ',
+      prepend: true,
+    },
     APP: {
       // Don't use these directly; use utils.buildApiUrl instead.
       apiUrls: {

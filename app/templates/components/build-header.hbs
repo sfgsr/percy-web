@@ -6,7 +6,7 @@
           <strong>
             {{#link-to "organization.project.index" build.project.organization.slug build.project.slug}}{{build.project.name}}{{/link-to}}
           </strong>
-          Build {{build.buildNumber}}
+          {{build.buildTitle}}
         </span>
       </div>
       {{build-info build=build}}

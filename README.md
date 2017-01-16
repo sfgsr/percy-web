@@ -72,3 +72,8 @@ npm run test:server
 ```bash
 PERCY_TOKEN=... PERCY_PROJECT=percy/percy-web npm test
 ```
+
+## Update to new percy-docs version
+```bash
+yarn upgrade git+https://github.com/percy/percy-docs.git#<COMMIT SHA>
+```
