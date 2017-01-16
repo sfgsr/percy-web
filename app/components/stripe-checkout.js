@@ -62,6 +62,15 @@ export default Ember.Component.extend({
       var chosenPlan = this.get('plan');
       var planName = this.get('planName');
 
+      if (!this.get('updateCard')) {
+        let organization = this.get('organization');
+        let eventProperties = {
+          plan_id: chosenPlan,
+          current_plan_id: this.get('organization.subscription.plan'),
+        };
+        this.analytics.track('Billing Plan Selected', organization, eventProperties);
+      }
+
       if (this.get('updateCard') || this.get('organization.subscription.isFree')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.STRIPE_PUBLISHABLE_KEY,

@@ -6,4 +6,3 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     this.transitionTo('organization.index', model.get('slug'));
   },
 });
-

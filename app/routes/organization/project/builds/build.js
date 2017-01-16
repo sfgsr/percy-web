@@ -22,6 +22,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     }
   },
   actions: {
+    didTransition() {
+      let build = this.modelFor(this.routeName);
+      let organization = build.get('project.organization');
+      let eventProperties = {
+        project_id: build.get('project.id'),
+        project_slug: build.get('project.slug'),
+        build_id: build.get('id'),
+        state: build.get('state')
+      };
+      this.analytics.track('Build Viewed', organization, eventProperties);
+    },
     updateActiveComparisonId(comparisonId) {
       this.set('controller.activeComparisonId', comparisonId);
     }

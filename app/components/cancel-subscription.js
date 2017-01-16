@@ -15,10 +15,16 @@ export default Ember.Component.extend({
     'classes',
   ],
   click() {
+    let organization = this.get('organization');
+    let eventProperties = {
+      plan_id: this.get('organization.subscription.plan'),
+    };
+    this.analytics.track('Cancel Subscription Clicked', organization, eventProperties);
+
+
     if (!confirm('Are you sure you want to cancel?\n\nWe want to help if we can, just email us at hello@percy.io.')) {
       return;
     }
-    let organization = this.get('organization');
     let savingPromise = this.get('subscriptionService').changeSubscription(organization, 'free');
     if (this.get('changingSubscription')) {
       this.get('changingSubscription')(savingPromise);

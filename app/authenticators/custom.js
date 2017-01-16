@@ -4,6 +4,7 @@ import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 
 export default BaseAuthenticator.extend({
   store: Ember.inject.service(),
+  analytics: Ember.inject.service(),
   restore() {
     let store = this.get('store');
     return new Ember.RSVP.Promise((resolve, reject) => {
@@ -18,13 +19,14 @@ export default BaseAuthenticator.extend({
         if (window.heap) {
           window.heap.identify(userRecord.get('id'));
         }
+        this.get('analytics').identifyUser(userRecord);
         resolve({user: userRecord});
       }, reject);
     });
   },
   authenticate(options) {
     let store = this.get('store');
-    return new Ember.RSVP.Promise((resolve/*, reject*/) => {
+    return new Ember.RSVP.Promise((resolve) => {
       store.queryRecord('user', {}).then((userRecord) => {
         if (window.Intercom) {
           window.Intercom('update', {
@@ -36,8 +38,9 @@ export default BaseAuthenticator.extend({
         if (window.heap) {
           window.heap.identify(userRecord.get('id'));
         }
+        this.get('analytics').identifyUser(userRecord);
         resolve({user: userRecord});
-      }, (/*reason*/) => {
+      }, () => {
         // Build params if given a custom final redirect location.
         var finalRedirect;
         options = options || {};
@@ -56,13 +59,14 @@ export default BaseAuthenticator.extend({
     });
   },
   invalidate() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise((resolve, reject) => {
       Ember.$.ajax({
         type: 'GET',
         url: utils.buildApiUrl('logout')
-      }).done(function(data/*, textStatus, xhr*/) {
+      }).done((data) => {
+        this.get('analytics').invalidate();
         resolve(data);
-      }).fail(function(xhr/*, textStatus, errorThrown*/) {
+      }).fail(function(xhr) {
         reject(xhr);
       });
     });

@@ -8,5 +8,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   afterModel(model) {
     model.get('projects').reload();
   },
+  actions: {
+    didTransition() {
+      let organization = this.modelFor(this.routeName);
+      this.analytics.track('Dashboard Viewed', organization);
+    },
+  },
 });
-

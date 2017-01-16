@@ -3,6 +3,10 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
+    didTransition() {
+      let organization = this.modelFor(this.routeName);
+      this.analytics.track('Settings Viewed', organization);
+    },
     organizationUpdated(organization) {
       // If an organization slug changes, we prefer to reload the entire application
       // to prevent odd bugs, since we rely on the org slug for basically everything.
