@@ -5,6 +5,8 @@ import ResetScrollMixin from 'percy-web/mixins/reset-scroll';
 export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   actions: {
     didTransition() {
+      this._super.apply(this, arguments);
+
       let project = this.modelFor(this.routeName);
       let organization = project.get('organization');
       let eventProperties = {

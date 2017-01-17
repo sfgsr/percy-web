@@ -4,7 +4,9 @@ import ResetScrollMixin from '../mixins/reset-scroll';
 export default Ember.Route.extend(ResetScrollMixin, {
   actions: {
     didTransition() {
-      // Track Pricing Viewed without the organization for now.
+      this._super.apply(this, arguments);
+
+      // TODO: Add organization tracking
       this.analytics.track('Pricing Viewed');
     },
   }

@@ -23,6 +23,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
   actions: {
     didTransition() {
+      this._super.apply(this, arguments);
+
       let build = this.modelFor(this.routeName);
       let organization = build.get('project.organization');
       let eventProperties = {

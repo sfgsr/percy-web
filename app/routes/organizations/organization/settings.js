@@ -4,6 +4,8 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
     didTransition() {
+      this._super.apply(this, arguments);
+
       let organization = this.modelFor(this.routeName);
       this.analytics.track('Settings Viewed', organization);
     },
