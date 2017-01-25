@@ -46,6 +46,11 @@
       <strong>Trial ends {{moment-from-now organization.subscription.trialEnd}}</strong>
     </div>
   {{/if}}
+  {{#if (eq organization.subscription.plan.id "free")}}
+    <div class="Alert Alert--warning">
+      <strong>You're currently on the limited free plan.</strong> Builds are throttled to only {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} snapshots per month, and builds will stop working after the limit is reached.
+    </div>
+  {{/if}}
 
   {{#if organization.subscription.plan.isCustom}}
   <div class="OrganizationsBillingSection-plan active container {{if (eq organization.subscription.plan.id plan.id) "active"}}">
@@ -54,12 +59,20 @@
           {{organization.subscription.plan.name}}
         </div>
         <div class="nine columns">
-          <strong>{{organization.subscription.plan.workerLimit}} parallel workers</strong>,
-          <strong>{{format-number organization.subscription.plan.usageIncluded}} visual diffs</strong>,
-          <strong>{{organization.subscription.plan.historyLimitDays}} day history</strong>
+          {{#with organization.subscription.plan as |plan|}}
+            <strong>
+              {{plan.workerLimit}} parallel workers
+              <br>
+              {{format-number plan.usageIncluded}} visual diffs included
+              <br>
+            </strong>
+            {{#if plan.allowOverages}}${{plan.overageUnitCost}} / extra snapshot{{else}}No overages allowed{{/if}}
+            <br>
+            {{plan.historyLimitDays}} day history
+          {{/with}}
           <br>
           <br>
-          You are on a custom plan. Feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions before changing plans.
+          You are on a custom plan, feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions before changing plans below.
         </div>
       </div>
     </div>
@@ -69,18 +82,18 @@
     {{#unless (eq planData.id "free")}}
       <div class="OrganizationsBillingSection-plan container {{if (eq organization.subscription.plan.id planData.id) "active"}}">
         <div class="row">
-          <div class="three columns">
+          <div class="two columns">
             {{planData.name}}
           </div>
-          <div class="three columns">
+          <div class="four columns">
             <strong>{{planData.numWorkersTitle}}</strong>
             <br>
-            {{planData.historyLimitTitle}}
+            {{format-number planData.numDiffs}} snapshots included
           </div>
           <div class="three columns">
-            <strong><span>$</span>{{format-number planData.price precision=0}}</strong> / month
+            <strong><span>$</span>{{format-number planData.monthlyPrice precision=0}}</strong> / month
             <br>
-            {{format-number planData.numDiffs}} visual diffs
+            ${{planData.extraDiffPrice}} / extra snapshot
           </div>
           <div class="three columns">
             {{#if (eq organization.subscription.plan.id planData.id)}}
@@ -91,7 +104,7 @@
                 {{stripe-checkout
                   organization=organization
                   planId=planData.id
-                  price=planData.price
+                  price=planData.monthlyPrice
                   planName=planData.name
                   classes="Button--primary"
                   changingSubscription=(action "changingSubscription")
@@ -103,6 +116,27 @@
       </div>
     {{/unless}}
   {{/each}}
+  <div class="OrganizationsBillingSection-plan container">
+    <div class="row">
+      <div class="two columns">
+        Enterprise
+      </div>
+      <div class="four columns">
+        <strong>Custom parallel workers</strong>
+        <br>
+        Unlimited snapshots
+      </div>
+      <div class="three columns">
+        &nbsp;
+      </div>
+      <div class="three columns">
+        {{!-- TODO: #billingadmins --}}
+        {{#if (eq "admin" organization.currentUserMembership.role)}}
+          {{#link-to "enterprise" class="Button"}}Contact Us{{/link-to}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
   <p>
     For more information, see {{#link-to "pricing"}}Pricing{{/link-to}}. Feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions.
   </p>

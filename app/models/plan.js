@@ -10,6 +10,8 @@ export default DS.Model.extend({
   workerLimit: DS.attr('number'),
   usageIncluded: DS.attr('number'),
   historyLimitDays: DS.attr('number'),
+  allowOverages: DS.attr('boolean'),
+  overageUnitCost: DS.attr('number'),
 
   isFree: Ember.computed.equal('id', 'free'),
   isPaid: Ember.computed.not('isFree'),

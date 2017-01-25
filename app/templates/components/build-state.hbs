@@ -17,7 +17,11 @@
     <div class="BuildState-icon">{{fa-icon 'fa-thumbs-up'}}</div>
     <div class="BuildState-textAligner">
       <div class="BuildState-text">
-        <strong>{{pluralize build.totalComparisonsDiff "visual diff"}}</strong>
+        {{#if build.hasDiffs}}
+          <strong>{{pluralize build.totalComparisonsDiff "visual diff"}}</strong>
+        {{else}}
+          <strong>No visual diffs</strong>
+        {{/if}}
         <br>
         {{pluralize build.totalComparisonsFinished "total snapshot"}}
       </div>

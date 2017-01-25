@@ -2,227 +2,126 @@
   {{#if showJumpToBilling}}
     {{organizations/jump-to-billing hide=(action "hideModal")}}
   {{/if}}
-  {{#with subscriptionData.PLANS.[0] as |plan|}}
-    <div class="PricingSection-bucket">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem">
-          <strong>
-            Best-effort processing
-            <span class="hint hint--centered hint--top"
-  data-hint="Free builds run at lower priority than paying builds,
-and they can only use 2 parallel workers. Free builds
-might be slow to start, especially at peak hours.">
-              {{fa-icon "info-circle"}}
-            </span>
-          </strong>
-        </div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-      </div>
-      {{#if (not-eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-cta">
-          {{#unless session.isAuthenticated}}
-            <a href="/" class="Button">
-              Try Percy &raquo;
-            </a>
-          {{/unless}}
-        </div>
-      {{/if}}
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
+  {{#pricing-bucket plan=subscriptionData.PLANS.[1] as |bucket|}}
+    <div class="PricingSection-title">{{bucket.plan.name}}</div>
+    <div class="PricingSection-price">
+      <strong>${{bucket.plan.monthlyPrice}}</strong> / month
     </div>
-  {{/with}}
-  {{#with subscriptionData.PLANS.[1] as |plan|}}
-    <div class="PricingSection-bucket PricingSection-bucket--promoted">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-        {{#if (not-eq currentSubscription.plan plan.id)}}
-          <br>
-          <div class="PricingSection-cta">
-            {{#if session.isAuthenticated}}
-              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
-            {{else}}
-              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
-    </div>
-  {{/with}}
-  {{#with subscriptionData.PLANS.[2] as |plan|}}
-    <div class="PricingSection-bucket">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-        {{#if (not-eq currentSubscription.plan plan.id)}}
-          <br>
-          <div class="PricingSection-cta">
-            {{#if session.isAuthenticated}}
-              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
-            {{else}}
-              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
-    </div>
-  {{/with}}
-  {{#with subscriptionData.PLANS.[3] as |plan|}}
-    <div class="PricingSection-bucket">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-        {{#if (not-eq currentSubscription.plan plan.id)}}
-          <br>
-          <div class="PricingSection-cta">
-            {{#if session.isAuthenticated}}
-              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
-            {{else}}
-              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
-    </div>
-  {{/with}}
-</div>
-<div class="row u-text-center">
-  {{#with subscriptionData.PLANS.[4] as |plan|}}
-    <div class="PricingSection-bucket">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-        {{#if (not-eq currentSubscription.plan plan.id)}}
-          <br>
-          <div class="PricingSection-cta">
-            {{#if session.isAuthenticated}}
-              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
-            {{else}}
-              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
-    </div>
-  {{/with}}
-  {{#with subscriptionData.PLANS.[5] as |plan|}}
-    <div class="PricingSection-bucket">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-        {{#if (not-eq currentSubscription.plan plan.id)}}
-          <br>
-          <div class="PricingSection-cta">
-            {{#if session.isAuthenticated}}
-              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
-            {{else}}
-              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
-    </div>
-  {{/with}}
-  {{#with subscriptionData.PLANS.[6] as |plan|}}
-    <div class="PricingSection-bucket">
-      <div class="PricingSection-title">{{plan.name}}</div>
-      <div class="PricingSection-bucketBody">
-        <div class="PricingSection-price">
-          <strong><span>$</span>{{format-number plan.price precision=0}}</strong> / month
-        </div>
-        <div class="PricingSection-diffs">{{format-number plan.numDiffs}} visual diffs</div>
-        <hr>
-        <div class="PricingSection-infoItem"><strong>{{plan.numWorkersTitle}}</strong></div>
-        {{!-- <div class="PricingSection-infoItem">{{plan.numUsersTitle}}</div> --}}
-        <div class="PricingSection-infoItem">{{plan.historyLimitTitle}}</div>
-        {{#if (not-eq currentSubscription.plan plan.id)}}
-          <br>
-          <div class="PricingSection-cta">
-            {{#if session.isAuthenticated}}
-              <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Select Plan &raquo;</a>
-            {{else}}
-              <a class="Button Button--primary" href="#" {{action "login"}}>Sign In &raquo;</a>
-            {{/if}}
-          </div>
-        {{/if}}
-      </div>
-      {{#if (eq currentSubscription.plan plan.id)}}
-        <div class="PricingSection-title PricingSection-title--small">Current plan</div>
-      {{/if}}
-    </div>
-  {{/with}}
-  <div class="PricingSection-bucket">
-    <div class="PricingSection-title">Enterprise</div>
-    <div class="PricingSection-bucketBody">
-      <div class="PricingSection-price">
-        <strong>Custom</strong>
-      </div>
-      <div class="PricingSection-diffs">&nbsp;</div>
-      <hr>
-      <strong>Special request?</strong> We would be happy to help! {{#link-to "enterprise"}}Contact us{{/link-to}} for a demo or a custom plan.
-      <br>
-      <br>
+    {{!-- <div class="PricingSection-annualMonthlyPrice">${{format-number bucket.plan.annualMonthlyPrice}} if paid annually</div> --}}
+    <hr>
+    <div class="PricingSection-numWorkers">{{bucket.plan.numWorkersTitle}}</div>
+    <div class="PricingSection-diffs">{{format-number bucket.plan.numDiffs}} snapshots included</div>
+    <div class="PricingSection-infoItem">${{bucket.plan.extraDiffPrice}} / extra snapshot</div>
+    <div class="PricingSection-infoItem"><br>Awesome support</div>
+    <div class="PricingSection-infoItem">Unlimited projects</div>
+    <div class="PricingSection-infoItem">{{bucket.plan.historyLimitTitle}}</div>
+    {{#if (not-eq currentSubscription.plan bucket.plan.id)}}
       <div class="PricingSection-cta">
-        {{#link-to "enterprise" class="Button"}}Contact Us{{/link-to}}
+        {{#if session.isAuthenticated}}
+          <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
+        {{else}}
+          <a class="Button" href="#" {{action "login"}}>Sign Up &raquo;</a>
+        {{/if}}
       </div>
+    {{/if}}
+    {{#if (eq currentSubscription.plan bucket.plan.id)}}
+      <div class="PricingSection-title PricingSection-title--small">Current plan</div>
+    {{/if}}
+  {{/pricing-bucket}}
+  {{#pricing-bucket promoted=true plan=subscriptionData.PLANS.[2] as |bucket|}}
+    <div class="PricingSection-title PricingSection-title--small">Great for teams</div>
+    <div class="PricingSection-title">{{bucket.plan.name}}</div>
+    <div class="PricingSection-price">
+      <strong>${{bucket.plan.monthlyPrice}}</strong> / month
     </div>
+    {{!-- <div class="PricingSection-annualMonthlyPrice">${{format-number bucket.plan.annualMonthlyPrice}} if paid annually</div> --}}
+    <hr>
+    <div class="PricingSection-numWorkers">
+      {{bucket.plan.numWorkersTitle}}
+      <span class="hint hint--centered hint--top"
+  data-hint="Every plan comes with Percy's lightning-fast,
+custom rendering infrastructure. We dedicate a
+ton of parallel workers to render your pages as
+fast as possible, because we believe speed is
+key to happy visual testing.
+
+Most Percy builds finish in under 2 minutes.">
+        {{fa-icon "info-circle"}}
+      </span>
+    </div>
+    <div class="PricingSection-diffs">{{format-number bucket.plan.numDiffs}} snapshots included</div>
+    <div class="PricingSection-infoItem">${{bucket.plan.extraDiffPrice}} / extra snapshot</div>
+    <div class="PricingSection-infoItem"><br>Awesome support</div>
+    <div class="PricingSection-infoItem">Unlimited projects</div>
+    <div class="PricingSection-infoItem">{{bucket.plan.historyLimitTitle}}</div>
+    {{#if (not-eq currentSubscription.plan bucket.plan.id)}}
+      <div class="PricingSection-cta">
+        {{#if session.isAuthenticated}}
+          <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
+        {{else}}
+          <a class="Button Button--primary" href="#" {{action "login"}}>Start Trial &raquo;</a>
+        {{/if}}
+      </div>
+    {{/if}}
+    {{#if (eq currentSubscription.plan bucket.plan.id)}}
+      <div class="PricingSection-title PricingSection-title--small">Current plan</div>
+    {{/if}}
+  {{/pricing-bucket}}
+  {{#pricing-bucket plan=subscriptionData.PLANS.[3] as |bucket|}}
+    <div class="PricingSection-title">{{bucket.plan.name}}</div>
+    <div class="PricingSection-price">
+      <strong>${{bucket.plan.monthlyPrice}}</strong> / month
+    </div>
+    {{!-- <div class="PricingSection-annualMonthlyPrice">${{format-number bucket.plan.annualMonthlyPrice}} if paid annually</div> --}}
+    <hr>
+    <div class="PricingSection-numWorkers">{{bucket.plan.numWorkersTitle}}</div>
+    <div class="PricingSection-diffs">{{format-number bucket.plan.numDiffs}} snapshots included</div>
+    <div class="PricingSection-infoItem">${{bucket.plan.extraDiffPrice}} / extra snapshot</div>
+    <div class="PricingSection-infoItem"><br>Awesome support</div>
+    <div class="PricingSection-infoItem">Unlimited projects</div>
+    <div class="PricingSection-infoItem">{{bucket.plan.historyLimitTitle}}</div>
+    {{#if (not-eq currentSubscription.plan bucket.plan.id)}}
+      <div class="PricingSection-cta">
+        {{#if session.isAuthenticated}}
+          <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
+        {{else}}
+          <a class="Button" href="#" {{action "login"}}>Sign Up &raquo;</a>
+        {{/if}}
+      </div>
+    {{/if}}
+    {{#if (eq currentSubscription.plan bucket.plan.id)}}
+      <div class="PricingSection-title PricingSection-title--small">Current plan</div>
+    {{/if}}
+  {{/pricing-bucket}}
+  {{#pricing-bucket}}
+    <div class="PricingSection-title">Enterprise</div>
+    <div class="PricingSection-price">
+      <strong>Let's chat!</strong>
+    </div>
+    <hr>
+    <div class="PricingSection-numWorkers">
+      Custom parallel workers
+    </div>
+    <div class="PricingSection-diffs">Unlimited snapshots</div>
+    <div class="PricingSection-infoItem">Customizable</div>
+    <div class="PricingSection-infoItem"><br>Self-hosting available, {{#link-to "enterprise"}}contact us{{/link-to}}.</div>
+    <div class="PricingSection-infoItem">Unlimited projects</div>
+    <div class="PricingSection-infoItem">Custom history limits</div>
+    <div class="PricingSection-cta">
+      {{#link-to "enterprise" class="Button"}}Contact Us{{/link-to}}
+    </div>
+  {{/pricing-bucket}}
+</div>
+<div class="row">
+  <div class="column one-half PricingSection-specialPlan">
+    <p>
+      <strong><span>🏠</span> Startup discount:</strong> If your organization makes less than $100K annual revenue, we want you to be able to use Percy too! <a href="mailto:hello@percy.io" {{action "showSupport"}}>Contact us</a> about our startup discount.
+    </p>
+  </div>
+  <div class="column one-half PricingSection-specialPlan">
+    <p>
+      <strong>We <span>💕</span>️️open source!</strong> If you have a not-for-profit, community-driven open source application, <a href="mailto:hello@percy.io" {{action "showSupport"}}>contact us</a> about our discounted plans.
+    </p>
   </div>
 </div>
+

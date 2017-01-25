@@ -20,6 +20,9 @@ export default Ember.Component.extend({
       // time in the template.
       let applicationController = Ember.getOwner(this).lookup('controller:application');
       applicationController.send('redirectToLogin');
-    }
+    },
+    showSupport() {
+      this.sendAction('showSupport');
+    },
   },
 });
