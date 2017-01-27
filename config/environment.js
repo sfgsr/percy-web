@@ -46,6 +46,7 @@ module.exports = function(environment) {
   ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
   ENV.APP.INTERCOM_APP_ID = 'itdwmqct';
   ENV.APP.HEAP_APP_ID = '3430193657';
+  ENV.APP.GOOGLE_ANALYTICS_ID = 'UA-63384548-3';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -87,6 +88,7 @@ module.exports = function(environment) {
     ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_live_cmaeNcmPuMihdT3Q7QDBDMDr';
     ENV.APP.INTERCOM_APP_ID = 'm37fs4zj';
     ENV.APP.HEAP_APP_ID = '928971850';
+    ENV.APP.GOOGLE_ANALYTICS_ID = 'UA-63384548-1';
 
     ENV.APP.AMPLITUDE_USERS_INSTANCE_NAME = 'Users';
     ENV.APP.AMPLITUDE_USERS_PROJECT_ID = 'bdf4d18bc5e905549e63455b54ab40f2';

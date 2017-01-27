@@ -7,10 +7,7 @@ const Router = Ember.Router.extend({
 
   notifyGoogleAnalytics: Ember.on('didTransition', function() {
     if (window.ga) {
-      window.ga('send', 'pageview', {
-        'page': this.get('url'),
-        'title': this.get('url')
-      });
+      window.ga('send', 'pageview', {'page': this.get('url')});
     }
     if (window.Intercom) {
       window.Intercom('update');
