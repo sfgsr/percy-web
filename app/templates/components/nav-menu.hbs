@@ -7,7 +7,7 @@
     </div>
     {{!-- TODO: #billingadmins --}}
     {{#if (eq "admin" currentOrganization.currentUserMembership.role)}}
-      <div class="NavMenu-item">
+      <div class="NavMenu-item u-hide-on-mobile">
         {{#link-to "organizations.organization.settings" currentOrganization.slug}}
           Settings
         {{/link-to}}
@@ -18,19 +18,22 @@
     {{user-avatar user=user width=36 linked=true href='/account'}}
   </div>
 {{else}}
-  <div class="NavMenu-item NavMenu-item--right">
+  <div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
     <a href="#" {{action "redirectToLogin"}}>Sign In</a>
+  </div>
+  <div class="NavMenu-item NavMenu-item--right">
+    {{#link-to "enterprise"}}Enterprise{{/link-to}}
   </div>
   <div class="NavMenu-item NavMenu-item--right">
     {{#link-to "pricing"}}Pricing{{/link-to}}
   </div>
 {{/if}}
-<div class="NavMenu-item NavMenu-item--right">
+<div class="NavMenu-item NavMenu-item--right {{if user "u-hide-on-mobile"}}">
   <a href="https://blog.percy.io">Blog</a>
 </div>
-<div class="NavMenu-item NavMenu-item--right">
+<div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
   {{#link-to "docs.page" "tutorials/example-apps"}}Tutorials{{/link-to}}
 </div>
-<div class="NavMenu-item NavMenu-item--right">
+<div class="NavMenu-item NavMenu-item--right {{if user "u-hide-on-mobile"}}">
   {{#link-to "docs.index"}}Docs{{/link-to}}
 </div>

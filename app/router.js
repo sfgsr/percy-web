@@ -23,6 +23,7 @@ Router.map(function() {
     this.route('page', {path: '*path'});
   });
   this.route('pricing');
+  this.route('enterprise');
   this.route('about');
   this.route('terms');
   this.route('privacy');
