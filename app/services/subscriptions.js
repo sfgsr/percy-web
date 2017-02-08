@@ -12,6 +12,7 @@ export default Ember.Service.extend({
       token: token && token.id,
     });
     let savingPromise = subscription.save();
+
     savingPromise.then(() => {}, () => {
       alert(
         'A Stripe error occurred! Your card may have been declined. Please try again or ' +

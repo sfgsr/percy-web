@@ -6,7 +6,7 @@ describe('Acceptance: Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();
 
-  setupSession(function (server) {
+  setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
     let project = server.create('project', {name: 'with builds', organization});
     let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});

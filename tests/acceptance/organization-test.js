@@ -7,7 +7,7 @@ describe('Acceptance: Organization', function() {
 
   context('user is member', function () {
     setupSession(function (server) {
-      let organization = server.create('organization', 'withUser', 'withSubscription');
+      let organization = server.create('organization', 'withUser');
       let project = server.create('project', {organization});
       this.organization = organization;
       this.project = project;
@@ -67,7 +67,7 @@ describe('Acceptance: Organization', function() {
 
   context('user is admin', function () {
     setupSession(function (server) {
-      this.organization = server.create('organization', 'withAdminUser', 'withSubscription');
+      this.organization = server.create('organization', 'withAdminUser');
     });
 
     it('can edit organization settings', function() {
