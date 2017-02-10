@@ -41,6 +41,12 @@
     Usage is across all projects in this organization and resets at the beginning of each month.
   </p>
   <h4>Subscription</h4>
+  {{#if organization.subscription.isTrialing}}
+    <div class="Alert Alert--warning">
+      <strong>Trial ends {{moment-from-now organization.subscription.trialEnd}}</strong>
+    </div>
+  {{/if}}
+
   {{#if organization.subscription.plan.isCustom}}
   <div class="OrganizationsBillingSection-plan active container {{if (eq organization.subscription.plan.id plan.id) "active"}}">
       <div class="row">

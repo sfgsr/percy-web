@@ -7,6 +7,14 @@ export default DS.Model.extend({
   billingEmail: DS.attr(),
   currentUsage: DS.attr('number'),
 
+  status: DS.attr(),
+  isTrialing: Ember.computed.equal('status', 'trialing'),
+
+  currentPeriodStart: DS.attr('date'),
+  currentPeriodEnd: DS.attr('date'),
+  trialStart: DS.attr('date'),
+  trialEnd: DS.attr('date'),
+
   // This is only here so that ember-data will send the token on create, it will never be populated
   // in API responses.
   token: DS.attr(),
