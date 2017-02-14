@@ -64,7 +64,11 @@ export default BaseAuthenticator.extend({
         type: 'GET',
         url: utils.buildApiUrl('logout')
       }).done((data) => {
+        // If a user clicks Logout, make sure we clear all the persistent storage locations.
         this.get('analytics').invalidate();
+        if (window.localStorage) {
+          window.localStorage.clear();
+        }
         resolve(data);
       }).fail(function(xhr) {
         reject(xhr);

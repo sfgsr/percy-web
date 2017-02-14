@@ -29,6 +29,7 @@ Router.map(function() {
   this.route('privacy');
   this.route('security');
   this.route('account');
+  this.route('admin');
   this.route('organizations', {path: '/organizations'}, function() {
     this.route('new');
     this.route('organization', {path: '/:organization_id'}, function() {

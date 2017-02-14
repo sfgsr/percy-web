@@ -1,8 +1,18 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 import utils from 'percy-web/lib/utils';
 
 export default DS.JSONAPIAdapter.extend({
   namespace: 'api/v1',
+
+  headers: Ember.computed(function() {
+    let headers = {};
+    let percyMode = window.localStorage && window.localStorage.getItem('percyMode');
+    if (percyMode) {
+      headers['X-Percy-Mode'] = percyMode;
+    }
+    return headers;
+  }),
 
   isInvalid(status) {
     // NOTE: right now, the Percy API uses HTTP 400 when it should use HTTP 422 in many cases.
