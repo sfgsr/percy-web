@@ -48,15 +48,17 @@
           </div>
 
           <div class="Alert Alert--success">
-            <h4>Tips for getting started</h4>
+            <h4><strong>Quickstart example app</strong></h4>
+
             <p>
-              For the quickest start, you can run snapshots in your development environment before setting up your CI service, by following {{#link-to "docs.page" "setup/local"}}these steps{{/link-to}}.
+              Looking to see what Percy can do? Just follow these simple steps:
             </p>
+
+            {{projects/quickstart-code project=project}}
+
+            <hr>
             <p>
-              If you don't have your own project yet, you're welcome to try one of our {{#link-to "docs.page" "tutorials/example-apps"}}example apps and tutorials{{/link-to}}.
-            </p>
-            <p>
-              Have a question?  <a href="#" {{action "showSupport"}}>Ask us</a>, we'd love to help.
+              We also have framework-specific demos, see the {{#link-to "docs.page" "tutorials/example-apps"}}example apps and tutorials{{/link-to}}. Any questions? <a href="#" {{action "showSupport"}}>Just ask</a>, we'd love to help.
             </p>
           </div>
         {{else}}

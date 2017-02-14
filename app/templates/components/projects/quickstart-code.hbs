@@ -1,0 +1,16 @@
+{{#if project.tokens.isPending}}
+  {{#code-block}}<em>Loading...</em>{{/code-block}}
+{{/if}}
+{{#with project.writeOnlyToken.token as |token|}}
+{{#code-block}}$ git clone https://github.com/percy/example-quickstart.git
+$ cd example-quickstart/
+
+$ gem install bundler  # Only if you don't have bundler installed.
+$ bundle install
+
+$ export PERCY_TOKEN={{token}}
+$ export PERCY_PROJECT={{project.fullSlug}}
+$ <strong>bundle exec ruby visual-tests.rb</strong>
+
+# Then refresh this page!{{/code-block}}
+{{/with}}
