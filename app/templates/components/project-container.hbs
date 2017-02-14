@@ -37,14 +37,24 @@
       {{else}}
         {{#if project.isEnabled}}
           <div class="Alert Alert--warning">
-            <h4>Waiting for first build...</h4>
+            <h4>Waiting for first snapshot...</h4>
             <p>
-              Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you push your first build, it will show up here.
+              Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you run your first snapshot, it will show up here.
             </p>
             <p>
               Here are the <strong>environment variables</strong> you'll need to {{#link-to "docs.index"}}setup in your CI service{{/link-to}}:
             </p>
             {{projects/env-vars project=project}}
+          </div>
+
+          <div class="Alert Alert--success">
+            <h4>Tips for getting started</h4>
+            <p>
+              For the quickest start, you can run snapshots in your development environment before setting up your CI service, by following {{#link-to "docs.page" "setup/local"}}these steps{{/link-to}}.
+            </p>
+            <p>
+              If you don't have your own project yet, you're welcome to try one of our {{#link-to "docs.page" "tutorials/example-apps"}}example apps and tutorials{{/link-to}}.
+            </p>
           </div>
         {{else}}
           <p>No builds yet, and this project is disabled.</p>
