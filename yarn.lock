@@ -2021,9 +2021,9 @@ ember-page-title@3.1.5:
     ember-cli-head "0.1.1"
     ember-cli-htmlbars "^1.1.0"
 
-ember-percy@1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.5.tgz#e9e9e80cdcae91c423c2bd0a90cea3e9964a6b4e"
+ember-percy@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.6.tgz#6cf427937f4a285a7ec3f4be81b36e495e14c32d"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.5"
@@ -4540,15 +4540,6 @@ percy-client@^1.3.0:
 "percy-docs@git+https://github.com/percy/percy-docs.git#8efc10256a7f3605ea06354165170f0df57123fb":
   version "0.0.0"
   resolved "git+https://github.com/percy/percy-docs.git#8efc10256a7f3605ea06354165170f0df57123fb"
-  dependencies:
-    broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
-    broccoli-funnel "^1.0.2"
-    broccoli-merge-trees "^1.1.1"
-    ember-cli-babel "^5.1.6"
-
-"percy-docs@git+https://github.com/percy/percy-docs.git#9584b770f19e2690710c5ae00f188d28ab7cbdf4":
-  version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#9584b770f19e2690710c5ae00f188d28ab7cbdf4"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
     broccoli-funnel "^1.0.2"
