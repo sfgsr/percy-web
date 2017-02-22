@@ -36,7 +36,7 @@
   <div class="container container--fixedWidth Alert Alert--warning">
     {{#if build.project.isEnabled}}
       <p>
-        Build history on the <strong>{{build.project.organization.subscription.plan.name}}</strong> plan is limited to <strong>{{build.project.organization.subscription.plan.historyLimitDays}} days</strong>.
+        Build history on the <strong>{{build.project.organization.subscription.plan.name}}</strong> is limited to <strong>{{build.project.organization.subscription.plan.historyLimitDays}} days</strong>.
       </p>
       <p>
         You can easily {{#link-to "organizations.organization.billing" build.project.organization.slug}}upgrade your plan{{/link-to}} for more build history.
