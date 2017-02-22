@@ -4,8 +4,7 @@ export default function(server) {
   server.logging = true;
 
   let user = server.create('user', {_currentLoginInTest: true});
-  let plan = server.create('plan');
-  let subscription = server.create('subscription', {plan, billingEmail: 'foo@bar.com'});
+  let subscription = server.create('subscription', {billingEmail: 'foo@bar.com'});
   let organization = server.create('organization', {subscription});
   server.create('organizationUser', {user, organization, role: 'admin'});
 

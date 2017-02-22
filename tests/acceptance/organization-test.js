@@ -5,8 +5,8 @@ import setupAcceptance, {
 describe('Acceptance: Organization', function() {
   setupAcceptance();
 
-  context('user is member', function () {
-    setupSession(function (server) {
+  context('user is member', function() {
+    setupSession(function(server) {
       let organization = server.create('organization', 'withUser');
       let project = server.create('project', {organization});
       this.organization = organization;
@@ -65,8 +65,8 @@ describe('Acceptance: Organization', function() {
     });
   });
 
-  context('user is admin', function () {
-    setupSession(function (server) {
+  context('user is admin', function() {
+    setupSession(function(server) {
       this.organization = server.create('organization', 'withAdminUser');
     });
 
@@ -101,7 +101,7 @@ describe('Acceptance: Organization', function() {
       percySnapshot(this.test.fullTitle() + ' | Billing settings');
     });
 
-    it('billing settings | billingEmail', function() {
+    it('can update billing email', function() {
       visit(`/organizations/${this.organization.slug}/billing`);
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.billing');
@@ -141,10 +141,22 @@ describe('Acceptance: Organization', function() {
         return percySnapshot(this.test.fullTitle() + ' | invalid modification');
       });
     });
-  });
+    context('organization is on trial account',function() {
+      setupSession(function(server) {
+        this.organization = server.create('organization', 'withAdminUser', 'withTrial');
+      });
 
+      it('can view billing page', function() {
+        visit(`/organizations/${this.organization.slug}/billing`);
+        andThen(() => {
+          expect(currentPath()).to.equal('organizations.organization.billing');
+        });
+        percySnapshot(this.test);
+      });
+    });
+  });
   context('user is github bot user',function() {
-    setupSession(function (server) {
+    setupSession(function(server) {
       let user = server.create('user');
       let organization = server.create('organization', {githubBotUser: user});
       server.create('organizationUser', {user, organization, role: 'admin'});

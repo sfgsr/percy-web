@@ -13,7 +13,7 @@
     display: inline-block
     vertical-align: top
     width: 240px
-    min-height: 455px
+    min-height: 465px
     border-bottom: 2px solid $beige
     padding-top: 39px
     background-color: white
@@ -86,12 +86,11 @@
 
   .PricingSection-cta
     position: absolute
-    bottom: 20px
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-
+    top: 390px
+    margin-left: auto
+    margin-right: auto
+    left: 0
+    right: 0
 
   .PricingSection-diffs
     // font-size: 20px
@@ -123,7 +122,7 @@
   border-top: 1px solid $lightpurple
   border-bottom: 1px solid $lightpurple
   padding: 20px
-  margin-top: 4rem
+  margin-top: 1rem
   span
     font-size: 2.5rem
 
@@ -131,8 +130,17 @@
   .PricingSection
     .PricingBucket
       padding-top: 0
+      padding-bottom: 30px
+      min-height: auto
       margin-top: 20px !important
       border: $grayborder !important
+
+      &.PricingBucket--promoted
+        .PricingSection-cta
+          display: none
+
+      .Button
+        display: none
 
       .hint:before,
       .hint:after,

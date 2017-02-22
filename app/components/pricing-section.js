@@ -1,3 +1,4 @@
+import utils from 'percy-web/lib/utils';
 import Ember from 'ember';
 
 export default Ember.Component.extend({
@@ -16,10 +17,7 @@ export default Ember.Component.extend({
       this.set('showJumpToBilling', false);
     },
     login() {
-      // Send action directly up to application controller, so we don't have to delegate every
-      // time in the template.
-      let applicationController = Ember.getOwner(this).lookup('controller:application');
-      applicationController.send('redirectToLogin');
+      utils.redirectToLogin({redirectTo: '/organizations/new'});
     },
     showSupport() {
       this.sendAction('showSupport');

@@ -78,7 +78,7 @@ export default Ember.Component.extend({
         this.analytics.track('Billing Plan Selected', organization, eventProperties);
       }
 
-      if (this.get('updateCard') || this.get('organization.subscription.plan.isFree')) {
+      if (this.get('updateCard') || this.get('organization.subscription.isTrialOrFree')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.STRIPE_PUBLISHABLE_KEY,
           image: '/images/percy-bg.png',

@@ -19,8 +19,6 @@
       <div class="PricingSection-cta">
         {{#if session.isAuthenticated}}
           <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
-        {{else}}
-          <a class="Button" href="#" {{action "login"}}>Sign Up &raquo;</a>
         {{/if}}
       </div>
     {{/if}}
@@ -60,6 +58,8 @@ Most Percy builds finish in under 2 minutes.">
           <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
         {{else}}
           <a class="Button Button--primary" href="#" {{action "login"}}>Start Trial &raquo;</a>
+          <br>
+          <em class="u-text-small">No credit card required</em>
         {{/if}}
       </div>
     {{/if}}
@@ -84,8 +84,6 @@ Most Percy builds finish in under 2 minutes.">
       <div class="PricingSection-cta">
         {{#if session.isAuthenticated}}
           <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
-        {{else}}
-          <a class="Button" href="#" {{action "login"}}>Sign Up &raquo;</a>
         {{/if}}
       </div>
     {{/if}}
@@ -112,6 +110,8 @@ Most Percy builds finish in under 2 minutes.">
     </div>
   {{/pricing-bucket}}
 </div>
+<br>
+<h3>Comes with a <strong>14-day free trial</strong>, on us!</h3>
 <div class="row">
   <div class="column one-half PricingSection-specialPlan">
     <p>

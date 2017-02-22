@@ -12,9 +12,9 @@ export default DS.Model.extend({
   historyLimitDays: DS.attr('number'),
   allowOverages: DS.attr('boolean'),
   overageUnitCost: DS.attr('number'),
+  isTrial: DS.attr('boolean'),
+  isFree: DS.attr('boolean'),
 
-  isFree: Ember.computed.equal('id', 'free'),
-  isPaid: Ember.computed.not('isFree'),
   isCustom: Ember.computed('id', function() {
     return this.get('subscriptionData.PLAN_IDS').indexOf(this.get('id')) === -1;
   }),

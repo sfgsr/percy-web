@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -7,6 +6,7 @@ export default DS.Model.extend({
   email: DS.attr(),
   avatarUrl: DS.attr(),
   githubId: DS.attr(),
+  githubUrl: DS.attr(),
   lastSyncedAt: DS.attr('date'),
   lastPrivateSyncedAt: DS.attr('date'),
 
@@ -17,8 +17,4 @@ export default DS.Model.extend({
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
-
-  githubUrl: Ember.computed('login', function() {
-    return 'https://github.com/' + this.get('login');
-  }),
 });

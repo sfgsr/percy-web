@@ -7,6 +7,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this._super.apply(this, arguments);
 
       let organization = this.modelFor(this.routeName);
+      // Always reload org and subscription when navigating here.
+      organization.reload();
+
       this.analytics.track('Billing Viewed', organization);
     },
   }

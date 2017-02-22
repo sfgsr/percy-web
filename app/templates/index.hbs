@@ -162,11 +162,11 @@ $ ember install ember-percy
             {{#if session.isAuthenticated}}
               {{goto-app redirectToDefaultOrganization="redirectToDefaultOrganization"}}
             {{else}}
-              {{login-button redirectToLogin="redirectToLogin"}}
+              {{login-button redirectToLogin="redirectToLogin" text="Start trial »" showIcon=false}}
             {{/if}}
           </p>
           <p>
-            Sign up and get 500 snapshots/month for free to try us out!
+            Comes with a <strong>14-day free trial</strong>, on us!
           </p>
         </div>
       </div>

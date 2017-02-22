@@ -1,151 +1,152 @@
-{{#if organization.subscription.isPending}}
-  {{loading-page}}
-{{else}}
-  {{!-- TODO: #billingadmins --}}
-  {{#unless (eq "admin" organization.currentUserMembership.role)}}
-    <div class="Alert Alert--error">
-      <strong>Changing billing settings requires organization admin permissions.</strong>
+{{!-- TODO: #billingadmins --}}
+{{#unless (eq "admin" organization.currentUserMembership.role)}}
+  <div class="Alert Alert--error">
+    <strong>Changing billing settings requires organization admin permissions.</strong>
+  </div>
+{{/unless}}
+{{#if organization.subscription.plan.isTrial}}
+  <div class="Alert Alert--warning">
+    <strong>Trial ends {{moment-from-now organization.subscription.trialEnd}}</strong>.
+    <br>
+    <br>
+    If you're ready to sign up, you can choose a plan below at any time. Feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions during your trial!
+  </div>
+{{/if}}
+{{#if (eq "admin" organization.currentUserMembership.role)}}
+  <div class="row">
+    <div class="eight columns">
+      {{forms/billing-edit subscription=organization.subscription}}
     </div>
-  {{/unless}}
-  {{#if (eq "admin" organization.currentUserMembership.role)}}
-    <div class="row">
-      <div class="eight columns">
-        {{forms/billing-edit subscription=organization.subscription.content}}
+    {{#if organization.subscription.isCustomer}}
+      <div class="four columns u-text-right">
+        <br>
+        {{stripe-checkout
+          organization=organization
+          text='Update Credit Card'
+          checkoutLabelText='Update Credit Card'
+          updateCard=true
+          planId=organization.subscription.plan.id
+          price=0
+          planName='Update Credit Card'
+          changingSubscription=(action "changingSubscription")
+        }}
       </div>
-      {{#unless organization.subscription.plan.isFree}}
-        <div class="four columns u-text-right">
-          <br>
-          {{stripe-checkout
-            organization=organization
-            text='Update Credit Card'
-            checkoutLabelText='Update Credit Card'
-            updateCard=true
-            planId=organization.subscription.plan.id
-            price=0
-            planName='Update Credit Card'
-            changingSubscription=(action "changingSubscription")
-          }}
-        </div>
-      {{/unless}}
-    </div>
-  {{/if}}
-  <h4>Current subscription: {{organization.subscription.plan.name}}</h4>
-  <p>
-    <strong>
-      Usage this month:
-      {{format-number organization.subscription.currentUsage}}
-      / {{format-number organization.subscription.plan.usageIncluded}} visual diffs
-    </strong>
-  </p>
-  <p>
-    Usage is across all projects in this organization and resets at the beginning of each month.
-  </p>
-  <h4>Subscription</h4>
-  {{#if organization.subscription.isTrialing}}
-    <div class="Alert Alert--warning">
-      <strong>Trial ends {{moment-from-now organization.subscription.trialEnd}}</strong>
-    </div>
-  {{/if}}
-  {{#if (eq organization.subscription.plan.id "free")}}
-    <div class="Alert Alert--warning">
-      <strong>You're currently on the limited free plan.</strong> Builds are throttled to only {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} snapshots per month, and builds will stop working after the limit is reached.
-    </div>
-  {{/if}}
+    {{/if}}
+  </div>
+{{/if}}
+<h4>Current subscription: {{organization.subscription.plan.name}}</h4>
+<p>
+  <strong>
+    Usage this month:
+    {{format-number organization.subscription.currentUsage}}
+    / {{format-number organization.subscription.plan.usageIncluded}} visual diffs
+  </strong>
+</p>
+<p>
+  Usage is across all projects in this organization and resets at the beginning of each month.
+</p>
+<h4>Subscription</h4>
+{{#if organization.subscription.plan.isFree}}
+  <div class="Alert Alert--warning">
+    <strong>Your trial has expired.</strong> You're currently on the limited-use free plan, which is throttled to {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} snapshots. You can sign up for a plan below or feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions!
+  </div>
+{{/if}}
 
-  {{#if organization.subscription.plan.isCustom}}
-  <div class="OrganizationsBillingSection-plan active container {{if (eq organization.subscription.plan.id plan.id) "active"}}">
-      <div class="row">
-        <div class="three columns">
-          {{organization.subscription.plan.name}}
-        </div>
-        <div class="nine columns">
-          {{#with organization.subscription.plan as |plan|}}
-            <strong>
-              {{plan.workerLimit}} parallel workers
-              <br>
-              {{format-number plan.usageIncluded}} visual diffs included
-              <br>
-            </strong>
-            {{#if plan.allowOverages}}${{plan.overageUnitCost}} / extra snapshot{{else}}No overages allowed{{/if}}
+{{#if organization.subscription.plan.isCustom}}
+<div class="OrganizationsBillingSection-plan active container {{if (eq organization.subscription.plan.id plan.id) "active"}}">
+    <div class="row">
+      <div class="three columns">
+        {{organization.subscription.plan.name}}
+      </div>
+      <div class="nine columns">
+        {{#with organization.subscription.plan as |plan|}}
+          <strong>
+            {{plan.workerLimit}} parallel workers
             <br>
-            {{plan.historyLimitDays}} day history
-          {{/with}}
+            {{format-number plan.usageIncluded}} visual diffs included
+            <br>
+          </strong>
+          {{#if plan.allowOverages}}${{plan.overageUnitCost}} / extra snapshot{{else}}No overages allowed{{/if}}
+          <br>
+          {{plan.historyLimitDays}} day history
+        {{/with}}
+        {{#unless organization.subscription.plan.isTrial}}
           <br>
           <br>
           You are on a custom plan, feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions before changing plans below.
-        </div>
-      </div>
-    </div>
-    <br>
-  {{/if}}
-  {{#each subscriptionData.PLANS as |planData|}}
-    {{#unless (eq planData.id "free")}}
-      <div class="OrganizationsBillingSection-plan container {{if (eq organization.subscription.plan.id planData.id) "active"}}">
-        <div class="row">
-          <div class="two columns">
-            {{planData.name}}
-          </div>
-          <div class="four columns">
-            <strong>{{planData.numWorkersTitle}}</strong>
-            <br>
-            {{format-number planData.numDiffs}} snapshots included
-          </div>
-          <div class="three columns">
-            <strong><span>$</span>{{format-number planData.monthlyPrice precision=0}}</strong> / month
-            <br>
-            ${{planData.extraDiffPrice}} / extra snapshot
-          </div>
-          <div class="three columns">
-            {{#if (eq organization.subscription.plan.id planData.id)}}
-              {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
-            {{else}}
-              {{!-- TODO: #billingadmins --}}
-              {{#if (eq "admin" organization.currentUserMembership.role)}}
-                {{stripe-checkout
-                  organization=organization
-                  planId=planData.id
-                  price=planData.monthlyPrice
-                  planName=planData.name
-                  classes="Button--primary"
-                  changingSubscription=(action "changingSubscription")
-                }}
-              {{/if}}
-            {{/if}}
-          </div>
-        </div>
-      </div>
-    {{/unless}}
-  {{/each}}
-  <div class="OrganizationsBillingSection-plan container">
-    <div class="row">
-      <div class="two columns">
-        Enterprise
-      </div>
-      <div class="four columns">
-        <strong>Custom parallel workers</strong>
-        <br>
-        Unlimited snapshots
-      </div>
-      <div class="three columns">
-        &nbsp;
-      </div>
-      <div class="three columns">
-        {{!-- TODO: #billingadmins --}}
-        {{#if (eq "admin" organization.currentUserMembership.role)}}
-          {{#link-to "enterprise" class="Button"}}Contact Us{{/link-to}}
-        {{/if}}
+        {{/unless}}
       </div>
     </div>
   </div>
-  <p>
-    For more information, see {{#link-to "pricing"}}Pricing{{/link-to}}. Feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions.
-  </p>
-  {{#unless organization.subscription.plan.isFree}}
-    {{!-- TODO: #billingadmins --}}
-    {{#if (eq "admin" organization.currentUserMembership.role)}}
-      <hr>
-      <h4>Admin actions</h4>
-      {{cancel-subscription organization=organization changingSubscription=(action "changingSubscription")}}
-    {{/if}}
+  <br>
+{{/if}}
+{{#each subscriptionData.PLANS as |planData|}}
+  {{#unless (eq planData.id "free")}}
+    <div class="OrganizationsBillingSection-plan container {{if (eq organization.subscription.plan.id planData.id) "active"}}">
+      <div class="row">
+        <div class="two columns">
+          {{planData.name}}
+        </div>
+        <div class="four columns">
+          <strong>{{planData.numWorkersTitle}}</strong>
+          <br>
+          {{format-number planData.numDiffs}} snapshots included
+        </div>
+        <div class="three columns">
+          <strong><span>$</span>{{format-number planData.monthlyPrice precision=0}}</strong> / month
+          <br>
+          ${{planData.extraDiffPrice}} / extra snapshot
+        </div>
+        <div class="three columns">
+          {{#if (eq organization.subscription.plan.id planData.id)}}
+            {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+          {{else}}
+            {{!-- TODO: #billingadmins --}}
+            {{#if (eq "admin" organization.currentUserMembership.role)}}
+              {{stripe-checkout
+                organization=organization
+                planId=planData.id
+                price=planData.monthlyPrice
+                planName=planData.name
+                classes="Button--primary"
+                changingSubscription=(action "changingSubscription")
+              }}
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
   {{/unless}}
+{{/each}}
+<div class="OrganizationsBillingSection-plan container">
+  <div class="row">
+    <div class="two columns">
+      Enterprise
+    </div>
+    <div class="four columns">
+      <strong>Custom parallel workers</strong>
+      <br>
+      Unlimited snapshots
+    </div>
+    <div class="three columns">
+      &nbsp;
+    </div>
+    <div class="three columns">
+      {{!-- TODO: #billingadmins --}}
+      {{#if (eq "admin" organization.currentUserMembership.role)}}
+        {{#link-to "enterprise" class="Button"}}Contact Us{{/link-to}}
+      {{/if}}
+    </div>
+  </div>
+</div>
+<p>
+  For more information, see {{#link-to "pricing"}}Pricing{{/link-to}}. Feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions.
+</p>
+{{#if organization.subscription.isCustomer}}
+  {{!-- TODO: #billingadmins --}}
+  {{#if (eq "admin" organization.currentUserMembership.role)}}
+    <hr>
+    <h4>Admin actions</h4>
+    {{cancel-subscription organization=organization changingSubscription=(action "changingSubscription")}}
+  {{/if}}
 {{/if}}

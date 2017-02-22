@@ -7,7 +7,9 @@ export default Factory.extend({
   currentUsage: 42,
 
   afterCreate(subscription, server) {
-    let plan = server.create('plan');
-    subscription.update({plan});
+    if (!subscription.plan) {
+      let plan = server.create('plan');
+      subscription.update({plan});
+    }
   },
 });

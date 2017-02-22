@@ -13,6 +13,20 @@
         {{organizations/switcher-nav currentOrganization=currentOrganization}}
       {{/if}}
     </div>
+    {{#if currentOrganization.subscription.isTrialOrFree}}
+      <div class="Header-trialBar">
+        {{#if currentOrganization.subscription.plan.isFree}}
+          <strong>Your trial has expired.</strong>
+        {{else}}
+          {{#if (eq currentOrganization.subscription.trialDaysRemaining 0)}}
+            <strong>Trial ends today!</strong>
+          {{else}}
+            <strong>{{pluralize currentOrganization.subscription.trialDaysRemaining "day"}}</strong> left in trial.
+          {{/if}}
+        {{/if}}
+        {{#link-to "organizations.organization.billing" currentOrganization.slug}}See plans &raquo;{{/link-to}}
+      </div>
+    {{/if}}
     {{#if session.isAuthenticated}}
       {{nav-menu user=session.data.authenticated.user currentOrganization=currentOrganization}}
     {{else}}

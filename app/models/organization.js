@@ -7,8 +7,7 @@ export default DS.Model.extend({
   githubBotUser: DS.belongsTo('user', {async: false, inverse: null}),
   githubIntegration: DS.belongsTo('github-integration', {async: false}),
   githubIntegrationRequest: DS.belongsTo('github-integration-request', {async: false}),
-
-  subscription: DS.belongsTo('subscription'),
+  subscription: DS.belongsTo('subscription', {async: false}),
   projects: DS.hasMany('project'),
 
   // Filtered down to saved projects, does not include unsaved project objects:
