@@ -25,6 +25,23 @@ describe('Acceptance: Project', function() {
     });
   });
 
+  context('waiting for first snapshot', function() {
+    setupSession(function (server) {
+      let organization = server.create('organization', 'withUser');
+      let project = server.create('project', {name: 'My Project', organization});
+      server.create('token', {project});
+      this.project = project;
+    });
+
+    it('shows environment variables and tips', function() {
+      visit(`/${this.project.fullSlug}`);
+      andThen(() => {
+        expect(currentPath()).to.equal('organization.project.index');
+      });
+      percySnapshot(this.test);
+    });
+  });
+
   context('settings', function() {
     setupSession(function (server) {
       let organization = server.create('organization', 'withUser');

@@ -117,6 +117,11 @@ export default function() {
     let fullSlug = decodeURIComponent(request.params.full_slug);
     return schema.projects.findBy({fullSlug: fullSlug});
   });
+  this.get('/projects/:organization_slug/:project_slug/tokens', (schema, request) => {
+    let fullSlug = `${request.params.organization_slug}/${request.params.project_slug}`;
+    let project = schema.projects.findBy({fullSlug: fullSlug});
+    return schema.tokens.where({projectId: project.id});
+  });
   this.get('/projects/:organization_slug/:project_slug/builds', (schema, request) => {
     let fullSlug = `${request.params.organization_slug}/${request.params.project_slug}`;
     let project = schema.projects.findBy({fullSlug: fullSlug});
