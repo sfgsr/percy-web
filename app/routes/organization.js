@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   currentUser: Ember.computed.alias('session.data.authenticated.user'),
+  intercom: Ember.inject.service(),
 
   afterModel(model) {
     try {
@@ -12,13 +13,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     }
 
     let userId = this.get('currentUser.id');
-    if (userId && window.Intercom) {
-      window.Intercom('update', {
-        user_id: userId,
-        company: {
-          id: model.get('id'),
-        },
-      });
-    }
+    this.get('intercom').associateWithCompany(userId, model.get('id'));
   },
 });

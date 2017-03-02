@@ -2,7 +2,13 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+  intercom: Ember.inject.service(),
+
   afterModel(model) {
+    let userId = this.get('currentUser.id');
+    this.get('intercom').associateWithCompany(userId, model.get('id'));
+
     // Proactively load the currentUserMembership object and return to block rendering until it
     // exists, since we use it to determine what parts of the organization settings the current
     // user has permission to access. Loading it now prevents flickering.

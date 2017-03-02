@@ -3,16 +3,14 @@ import config from '../config/environment';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
+  adminMode: Ember.inject.service(),
   currentUser: Ember.computed.alias('session.data.authenticated.user'),
 
-  isEnabled: false,
   userInstance: null,
   organizationInstance: null,
 
   init() {
-    this.isEnabled = !!window.amplitude;
-
-    if (!this.isEnabled) {
+    if (!this.isEnabled()) {
       return;
     }
 
@@ -25,8 +23,12 @@ export default Ember.Service.extend({
     this.organizationInstance.init(config.APP.AMPLITUDE_ORGANIZATIONS_PROJECT_ID);
   },
 
+  isEnabled() {
+    return window.amplitude && !this.get('adminMode').excludeFromAnalytics();
+  },
+
   invalidate() {
-    if (!this.isEnabled) {
+    if (!this.isEnabled()) {
       return;
     }
 
@@ -38,7 +40,7 @@ export default Ember.Service.extend({
   },
 
   identifyUser(user) {
-    if (!this.isEnabled) {
+    if (!this.isEnabled()) {
       return;
     }
 
@@ -54,7 +56,7 @@ export default Ember.Service.extend({
 
   track(eventName, organization, eventProperties = {}) {
     // window.console.log('Analytics track called:', eventName, organization, eventProperties);
-    if (!this.isEnabled) {
+    if (!this.isEnabled()) {
       return;
     }
 

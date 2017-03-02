@@ -4,10 +4,12 @@ import utils from 'percy-web/lib/utils';
 
 export default DS.JSONAPIAdapter.extend({
   namespace: 'api/v1',
+  adminMode: Ember.inject.service(),
 
   headers: Ember.computed(function() {
     let headers = {};
-    let percyMode = window.localStorage && window.localStorage.getItem('percyMode');
+
+    let percyMode = this.get('adminMode').get();
     if (percyMode) {
       headers['X-Percy-Mode'] = percyMode;
     }
@@ -94,4 +96,3 @@ export default DS.JSONAPIAdapter.extend({
     return this._super(modelName, id, snapshot, requestType, query);
   },
 });
-

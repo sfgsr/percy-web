@@ -2,18 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   isAdminEnabled: false,
+  adminMode: Ember.inject.service(),
 
   setup: Ember.on('init', function() {
-    this.set('isAdminEnabled', localStorage.getItem('percyMode') == 'admin');
+    this.set('isAdminEnabled', this.get('adminMode').get() == 'admin');
   }),
 
   actions: {
     toggleAdmin() {
       this.toggleProperty('isAdminEnabled');
+
       if (this.get('isAdminEnabled')) {
-        localStorage.setItem('percyMode', 'admin');
+        this.get('adminMode').set('admin');
       } else {
-        localStorage.removeItem('percyMode');
+        this.get('adminMode').clear();
       }
     }
   },
