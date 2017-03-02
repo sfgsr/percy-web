@@ -10,6 +10,11 @@ export default Ember.Component.extend({
   subscriptionData: Ember.inject.service(),
   classNames: ['OrganizationsBillingSection'],
   classNameBindings: ['classes'],
+  adminMode: Ember.inject.service(),
+  showCancel: Ember.computed('organization.subscription.isCustomer', function() {
+    let isCustomer = this.get('organization.subscription.isCustomer');
+    return isCustomer && this.get('adminMode').get() == 'admin';
+  }),
   actions: {
     changingSubscription(savingPromise) {
       this.set('isSaveSuccessful', null);
