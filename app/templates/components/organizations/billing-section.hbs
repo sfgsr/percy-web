@@ -7,10 +7,13 @@
 <h3>
   Total monthly usage
   {{#if organization.subscription.isCustomer}}
-    <span>
-      {{moment-format organization.subscription.currentPeriodStart 'MMMM D'}} to
-      {{moment-format organization.subscription.currentPeriodEndDisplayed 'MMMM D'}}
-    </span>
+    {{!-- TODO: remove this, show billing period always after legacy capped monthly users are migrated. --}}
+    {{#if organization.subscription.plan.allowOverages}}
+      <span>
+        {{moment-format organization.subscription.currentPeriodStart 'MMMM D'}} to
+        {{moment-format organization.subscription.currentPeriodEndDisplayed 'MMMM D'}}
+      </span>
+    {{/if}}
   {{/if}}
 </h3>
 <p>
