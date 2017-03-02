@@ -10,6 +10,9 @@ export default DS.Model.extend({
   status: DS.attr(),
   currentPeriodStart: DS.attr('date'),
   currentPeriodEnd: DS.attr('date'),
+  currentPeriodEndDisplayed: Ember.computed('currentPeriodEnd', function() {
+    return moment(this.get('currentPeriodEnd')).subtract(1, 'day').toDate();
+  }),
   trialStart: DS.attr('date'),
   trialEnd: DS.attr('date'),
   isTrialOrFree: Ember.computed.or('plan.isTrial', 'plan.isFree'),

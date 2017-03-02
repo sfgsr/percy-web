@@ -9,7 +9,7 @@
   {{#if organization.subscription.isCustomer}}
     <span>
       {{moment-format organization.subscription.currentPeriodStart 'MMMM D'}} to
-      {{moment-format organization.subscription.currentPeriodEnd 'MMMM D'}}
+      {{moment-format organization.subscription.currentPeriodEndDisplayed 'MMMM D'}}
     </span>
   {{/if}}
 </h3>

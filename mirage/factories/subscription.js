@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {Factory} from 'ember-cli-mirage';
 
 export default Factory.extend({
@@ -5,6 +6,12 @@ export default Factory.extend({
     return `billing-email-${i}@example.com`;
   },
   currentUsage: 42,
+  currentPeriodStart() {
+    return moment('2020-01-15');
+  },
+  currentPeriodEnd() {
+    return moment('2020-02-15');
+  },
 
   afterCreate(subscription, server) {
     if (!subscription.plan) {
