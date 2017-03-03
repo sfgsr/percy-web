@@ -6,8 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   intercom: Ember.inject.service(),
 
   afterModel(model) {
-    let userId = this.get('currentUser.id');
-    this.get('intercom').associateWithCompany(userId, model.get('id'));
+    this.get('intercom').associateWithCompany(this.get('currentUser'), model);
 
     // Proactively load the currentUserMembership object and return to block rendering until it
     // exists, since we use it to determine what parts of the organization settings the current

@@ -12,7 +12,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       // Safari throws errors while accessing localStorage in private mode.
     }
 
-    let userId = this.get('currentUser.id');
-    this.get('intercom').associateWithCompany(userId, model.get('id'));
+    this.get('intercom').associateWithCompany(this.get('currentUser'), model);
   },
 });

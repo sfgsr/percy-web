@@ -3,16 +3,17 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   adminMode: Ember.inject.service(),
 
-  associateWithCompany(userId, companyId) {
+  associateWithCompany(user, organization) {
     if (this.get('adminMode').excludeFromAnalytics()) {
       return;
     }
 
-    if (userId && window.Intercom) {
+    if (window.Intercom && user.get('id')) {
       window.Intercom('update', {
-        user_id: userId,
+        user_id: user.get('id'),
         company: {
-          id: companyId,
+          id: organization.get('id'),
+          name: organization.get('name'),
         },
       });
     }
