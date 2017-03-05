@@ -5,7 +5,6 @@ export default Factory.extend({
   billingEmail(i) {
     return `billing-email-${i}@example.com`;
   },
-  currentUsage: 42,
   currentPeriodStart() {
     return moment('2020-01-15');
   },

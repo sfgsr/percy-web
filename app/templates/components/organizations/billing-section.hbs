@@ -19,7 +19,11 @@
 <p>
   <strong>
     Current usage:
-    {{format-number organization.subscription.currentUsage}} snapshots
+    {{#if organization.subscription.currentUsageStats}}
+      {{format-number organization.subscription.currentUsageStats.total}} snapshots
+    {{else}}
+      ...
+    {{/if}}
   </strong>
   <br>
   Snapshot usage is calculated across all projects in this organization.

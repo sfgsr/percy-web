@@ -1919,9 +1919,9 @@ ember-data-factory-guy@2.6.7:
     broccoli-merge-trees "^1.1.1"
     urijs "~1.18.1"
 
-ember-data@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-2.10.0.tgz#9d6e23ba21ab242afc03a2ac77e8071bc51a5c62"
+ember-data@^2.11.0:
+  version "2.11.3"
+  resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-2.11.3.tgz#46ba0e8411dce6dbb52cc02a29194f265b747ef9"
   dependencies:
     amd-name-resolver "0.0.5"
     babel-plugin-feature-flags "^0.2.1"
