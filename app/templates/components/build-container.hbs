@@ -9,13 +9,18 @@
 
 {{#if build.isPending}}
   <div class="container container--fixedWidth Alert Alert--warning">
-    <strong>Waiting for snapshot uploads...</strong> This build has not finished receiving data from your CI service or client, <a href="javascript:location.reload()">refresh</a>?
-    <br>
-    If this has been pending for a while, your client may have failed to upload or finalize all snapshots. This build can be safely ignored, it will not be used as a baseline for visual diffs.
+    <p>
+      {{fa-icon 'fa-spinner fa-pulse'}}
+      <strong>Receiving snapshots...</strong>
+    </p>
+    <p>
+      This build has not finished receiving data from your CI service or client. If this has been pending for a while, your client may have failed to upload or finalize all snapshots. This build can be safely ignored, it will not be used as a baseline for visual diffs.
+    </p>
   </div>
 {{else if build.isProcessing}}
-  <div class="container container--fixedWidth Alert Alert--warning">
-    <strong>Still working!</strong> This build has not finished processing, <a href="javascript:location.reload()">refresh</a>?
+  <div class="container container--fixedWidth Alert Alert--warning u-text-center">
+    {{fa-icon 'fa-spinner fa-pulse'}}
+    <strong>Processing visual diffs...</strong> hang tight!
   </div>
 {{else if build.isFailed}}
   <div class="container container--fixedWidth Alert Alert--error">

@@ -14,6 +14,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
         project_slug: project.get('slug'),
       };
       this.analytics.track('Project Viewed', organization, eventProperties);
+
+      // If transitioning back to this page after first load, background reload the builds.
+      if (project.get('builds').isFulfilled) {
+        project.get('builds').reload();
+      }
     },
   },
 });
