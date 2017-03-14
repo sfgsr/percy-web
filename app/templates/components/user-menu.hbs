@@ -1,0 +1,9 @@
+{{currentRouteName}}
+{{user-avatar user=user width=36}}
+{{#if showMenu}}
+  <div class="PageClickOverlay"></div>
+  <div class="UserMenu-arrow">{{fa-icon "caret-up"}}</div>
+  <ul>
+    <li {{action "invalidateSession"}}>Logout</li>
+  </ul>
+{{/if}}

@@ -4,11 +4,9 @@ export default Ember.Component.extend({
   user: null,
   classes: null,
   linked: false,
-  href: Ember.computed('user.githubUrl', function() {
-    return this.get('user.githubUrl');
-  }),
+  href: Ember.computed.readOnly('user.githubUrl'),
   width: 40,
-  height: Ember.computed.alias('width'),
+  height: Ember.computed.readOnly('width'),
 
   classNames: ['UserAvatar'],
   classNameBindings: ['classes'],

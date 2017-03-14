@@ -13,25 +13,12 @@ describe('Acceptance: Login', function() {
     andThen(() => {
       this.server.create('user', {_currentLoginInTest: true});
     });
+
     click('a.LoginButton');
     andThen(() => {
       expect(currentPath()).to.equal('index');
     });
+
     percySnapshot(this.test.fullTitle() + ' | Logged in');
-
-    // Logout flow.
-    visit('/account');
-    andThen(() => {
-      expect(currentPath()).to.equal('account');
-    });
-    percySnapshot(this.test.fullTitle() + ' | Account');
-
-    click('a:contains("Logout")');
-    andThen(() => {
-      expect(currentPath()).to.equal('account');
-      expect(
-        server.schema.users.first()._currentLoginInTest
-      ).to.equal(false);
-    });
   });
 });
