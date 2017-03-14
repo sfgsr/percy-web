@@ -13,14 +13,14 @@
       <div class="row">
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--left">
           {{#with comparison.baseScreenshot.lossyImage as |image|}}
-            <div class="ComparisonViewer-pdiffImageBox" style="max-width: {{image.width}}px">
+            <div class="ComparisonViewer-pdiffImageBox" style={{html-safe "max-width: " image.width "px"}}>
               {{image-spacer image=image imageClass="ComparisonViewer-pdiffImage"}}
             </div>
           {{/with}}
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           {{#with comparison.headScreenshot.lossyImage as |lossyImage|}}
-            <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable" style="max-width: {{lossyImage.width}}px">
+            <div class="ComparisonViewer-pdiffImageBox ComparisonViewer-pdiffImageBox--actionable" style={{html-safe "max-width: " lossyImage.width "px"}}>
               {{image-spacer action=(action "toggleOverlay") bubbles=false image=lossyImage imageClass="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable"}}
               {{#if isOverlayEnabled}}
                 {{#with comparison.pdiff.diffImage as |diffImage|}}
@@ -53,7 +53,7 @@
           </div>
           <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
             {{#with comparison.headScreenshot.lossyImage as |image|}}
-              <div class="ComparisonViewer-pdiffImageBox" style="max-width: {{image.width}}px">
+              <div class="ComparisonViewer-pdiffImageBox" style={{html-safe "max-width:" image.width "px"}}>
                 {{image-spacer image=image imageClass="ComparisonViewer-pdiffImage"}}
               </div>
             {{/with}}
@@ -73,7 +73,7 @@
         </div>
         <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
           {{#with comparison.headScreenshot.lossyImage as |image|}}
-            <div class="ComparisonViewer-pdiffImageBox" style="max-width: {{image.width}}px">
+            <div class="ComparisonViewer-pdiffImageBox" style={{html-safe "max-width: " image.width "px"}}>
               {{image-spacer image=image imageClass="ComparisonViewer-pdiffImage"}}
             </div>
           {{/with}}

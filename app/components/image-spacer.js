@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   attributeBindings: ['style'],
   style: Ember.computed('image.width', 'image.height', function() {
     let scale = this.get('image.height') * 100.0 / this.get('image.width');
-    return `padding-top: ${scale}%`;
+    return Ember.String.htmlSafe(`padding-top: ${scale}%`);
   }),
 
   click(e) {
