@@ -63,6 +63,23 @@ describe('Acceptance: Organization', function() {
       });
       percySnapshot(this.test.fullTitle() + ' | setup');
     });
+
+    it('can create new organization with github', function() {
+      visit(`/${this.organization.slug}`);
+
+      click('.OrganizationsSwitcherNav-item');
+      click('a:contains("Create new organization")');
+      andThen(() => {
+        expect(currentPath()).to.equal('organizations.new');
+      });
+      fillIn('.FormsOrganizationNew input[type=text]', 'New organization');
+      click('.FormsOrganizationNew input[type=submit]');
+      andThen(() => {
+        expect(currentPath()).to.equal('organizations.organization.setup');
+      });
+      click('input[type=radio][name=github-integration-setting][value=github-integration]');
+      percySnapshot(this.test.fullTitle() + ' | github-integration');
+     });
   });
 
   context('user is admin', function() {
@@ -93,6 +110,12 @@ describe('Acceptance: Organization', function() {
         expect(currentPath()).to.equal('organizations.organization.users.index');
       });
       percySnapshot(this.test.fullTitle() + ' | Users settings');
+
+      click('.OrganizationsUserCard .Card.Card--linkable');
+      andThen(() => {
+        expect(currentPath()).to.equal('organizations.organization.users.index');
+      });
+      percySnapshot(this.test.fullTitle() + ' | Users settings expanded');
 
       click('.Panel .Panel-nav a:contains("Billing")');
       andThen(() => {
@@ -141,6 +164,18 @@ describe('Acceptance: Organization', function() {
         return percySnapshot(this.test.fullTitle() + ' | invalid modification');
       });
     });
+
+    it('can select pricing', function() {
+      visit('/login');
+      visit('/pricing');
+      andThen(() => expect(currentPath()).to.equal('pricing'));
+      percySnapshot(this.test);
+
+      click('.PricingBucket:contains("Starter") a:contains("Jump to org")');
+      andThen(() => expect(currentPath()).to.equal('pricing'));
+      percySnapshot(this.test.fullTitle() + '| select organization');
+    });
+
     context('organization is on trial account',function() {
       setupSession(function(server) {
         this.organization = server.create('organization', 'withAdminUser', 'withTrial');
