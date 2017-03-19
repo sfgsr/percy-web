@@ -16,9 +16,18 @@
   h2
     border-bottom: 1px solid #E1E1E1
 
+  h2, h3
+    &:hover .DocsAnchor
+      visibility: visible
+
   img
     // Make images on docs page downsize responsive.
     max-width: 100%
+
+  .DocsAnchor
+    cursor: pointer
+    visibility: hidden
+    font-size: 20px
 
   .DocsNav
     padding: 20px

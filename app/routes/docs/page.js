@@ -8,11 +8,20 @@ export default Ember.Route.extend(ResetScrollMixin, {
     let pageTitleMatch = /# (.*)/.exec(pageMarkdown);
     let pageTitle = pageTitleMatch ? pageTitleMatch[1] : 'Docs';
 
+    let anchoredMarkdown = pageMarkdown.replace(/\n(#{2,3}) ((.+))\n/g, function(match, hashes, title) {
+      let titleDashed = title.replace(/( \(.*?\))/g, '').dasherize();
+
+      return `\n${hashes} ${title} \
+        <a href="#${titleDashed}" id="_${titleDashed}" class="DocsAnchor"> \
+          <i aria-hidden="true" class="fa fa-link"></i> \
+        </a>\n`;
+    });
+
     return Ember.RSVP.hash({
       docPath: `/docs/${params.path}`,  // TODO(fotinakis): make more dynamic?
       navMarkdown: Ember.get(percyDocs.markdownFiles, 'nav'),
-      pageMarkdown: pageMarkdown,
+      pageMarkdown: anchoredMarkdown,
       pageTitle: pageTitle,
     });
-  }
+  },
 });
