@@ -4,11 +4,12 @@ import percyDocs from 'percy-docs';
 
 export default Ember.Route.extend(ResetScrollMixin, {
   model(params) {
-    let pageMarkdown = Ember.get(percyDocs.markdownFiles, params.path.replace(/\//g, '.'));
+    let pageMarkdown = Ember.get(percyDocs.markdownFiles, params.path.replace(/\//g, '.')) || '';
     let pageTitleMatch = /# (.*)/.exec(pageMarkdown);
     let pageTitle = pageTitleMatch ? pageTitleMatch[1] : 'Docs';
 
-    let anchoredMarkdown = pageMarkdown.replace(/\n(#{2,3}) ((.+))\n/g, function(match, hashes, title) {
+    let headerRegex = /\n(#{2,3}) ((.+))\n/g;
+    let anchoredMarkdown = pageMarkdown.replace(headerRegex, function(match, hashes, title) {
       let titleDashed = title.replace(/( \(.*?\))/g, '').dasherize();
 
       return `\n${hashes} ${title} \
