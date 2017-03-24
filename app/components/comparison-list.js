@@ -11,11 +11,25 @@ export default Ember.Component.extend({
   selectedComparisonIndex: -1,
   lastComparisonIndex: null,
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    let comparisons = this.get('comparisons');
+    let noDiffComparisons = this.get('comparisons').filterBy('isSame');
+    let hasNoDiffs = noDiffComparisons.length >= 0;
+    let filteredComparisons = hasNoDiffs ? comparisons.filterBy('isDifferent') : comparisons;
+
+    this.setProperties({
+      hideNoDiffs: hasNoDiffs,
+      filteredComparisons: filteredComparisons
+    });
+  },
+
   isDefaultExpanded: Ember.computed('comparisons', function() {
     return this.get('comparisons.length') < 150;
   }),
 
-  sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),
+  sortedComparisons: Ember.computed.sort('filteredComparisons', 'comparisonSortProperties'),
   comparisonSortProperties: ['isDifferent:desc', 'pdiff.diffPercentageFull:desc'],
 
   classNames: ['ComparisonList'],
@@ -111,6 +125,10 @@ export default Ember.Component.extend({
       }
 
       this.scrollToChild(selectedComponent);
+    },
+    showAllSnapshots() {
+      this.set('filteredComparisons', this.get('comparisons'));
+      this.set('hideNoDiffs', false);
     },
   }
 });

@@ -7,7 +7,6 @@
 {{#each sortedComparisons as |comparison index|}}
   {{comparison-viewer
       comparison=comparison
-      listIndex=index
       isDefaultExpanded=isDefaultExpanded
       registerChild=(action "registerChild")
       unregisterChild=(action "unregisterChild")
@@ -15,3 +14,9 @@
       selectedNumColumns=selectedNumColumns
   }}
 {{/each}}
+{{#if hideNoDiffs}}
+  <div class="Panel" style="text-align: center">
+    <p>You have <b>23</b> unchanged snapshots.</p>
+    <button {{action 'showAllSnapshots'}}>View all snapshots</button>
+  </div>
+{{/if}}
