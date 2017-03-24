@@ -13,10 +13,9 @@ export default Ember.Component.extend({
 
   hideSameDiffs: Ember.computed('comparisons', 'activeComparisonId', function() {
     let sameDiffs = this.get('comparisons').filterBy('isSame');
-    let sameDiffsGteZero = sameDiffs.length >= 0;
-    let comparisonID = this.get('comparisons').findBy('id', this.get('activeComparisonId')).get('id');
-    let activeComparisonIsSameDiff = sameDiffs.findBy('id', comparisonID);
-    return sameDiffsGteZero && (activeComparisonIsSameDiff == undefined);
+    let hasSameDiffs = sameDiffs.length >= 0;
+    let activeComparisonIsSameDiff = sameDiffs.findBy('id', this.get('activeComparisonId'));
+    return hasSameDiffs && (activeComparisonIsSameDiff == undefined);
   }),
   diffComparisons: Ember.computed.filterBy('comparisons', 'isDifferent'),
   computedComparisons: Ember.computed('sortedComparisons', 'hideSameDiffs', function() {
