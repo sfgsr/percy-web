@@ -1,15 +1,22 @@
 /* eslint-disable no-unused-expressions */
 import {expect} from 'chai';
-import {it, describe} from 'mocha';
-import {setupTest} from 'ember-mocha';
+import {
+  describeModule,
+  it,
+} from 'ember-mocha';
 
-describe('AnalyticsService', function () {
-  setupTest('service:analytics', {
-    needs: ['service:session', 'service:adminMode']
-  });
-
-  it('exists', function() {
-    let service = this.subject();
-    expect(service).to.be.ok;
-  });
-});
+describeModule(
+  'service:analytics',
+  'AnalyticsService',
+  {
+    // Specify the other units that are required for this test.
+    // needs: ['service:foo']
+  },
+  function() {
+    // Replace this with your real tests.
+    it('exists', function() {
+      let service = this.subject();
+      expect(service).to.be.ok;
+    });
+  }
+);
