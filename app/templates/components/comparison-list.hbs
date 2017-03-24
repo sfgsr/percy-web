@@ -4,9 +4,10 @@
     are collapsed below. <strong>Tip:</strong> use the arrow keys <code>←</code> and <code>➞</code> to move around.
   </div>
 {{/unless}}
-{{#each sortedComparisons as |comparison index|}}
+{{#each computedComparisons as |comparison index|}}
   {{comparison-viewer
       comparison=comparison
+      listIndex=index
       isDefaultExpanded=isDefaultExpanded
       registerChild=(action "registerChild")
       unregisterChild=(action "unregisterChild")
@@ -17,6 +18,9 @@
 {{#if hideNoDiffs}}
   <div class="Panel" style="text-align: center">
     <p>You have <b>23</b> unchanged snapshots.</p>
-    <button {{action 'showAllSnapshots'}}>View all snapshots</button>
+    <button {{action 'toggleNoDiffSnapshots'}}>View all snapshots</button>
   </div>
 {{/if}}
+{{#unless hideNoDiffs}}
+  <button {{action 'toggleNoDiffSnapshots'}}>Hide unchanged snapshots</button>
+{{/unless}}
