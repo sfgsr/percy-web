@@ -15,12 +15,12 @@
       selectedNumColumns=selectedNumColumns
   }}
 {{/each}}
-{{#if hideNoDiffs}}
+{{#if hideSameDiffs}}
   <div class="Panel" style="text-align: center">
     <p>You have <b>23</b> unchanged snapshots.</p>
     <button {{action 'toggleNoDiffSnapshots'}}>View all snapshots</button>
   </div>
 {{/if}}
-{{#unless hideNoDiffs}}
+{{#unless hideSameDiffs}}
   <button {{action 'toggleNoDiffSnapshots'}}>Hide unchanged snapshots</button>
 {{/unless}}

@@ -11,21 +11,23 @@ export default Ember.Component.extend({
   selectedComparisonIndex: -1,
   lastComparisonIndex: null,
 
-  hideNoDiffs: Ember.computed('comparison', function() {
-    let noDiffsSize = this.get('comparisons').filterBy('isSame').length;
-    let noDiffsGteZero = noDiffsSize >= 0;
-    return noDiffsGteZero && this.get('activeComparisonId') < noDiffsSize;
+  hideSameDiffs: Ember.computed('comparisons', 'activeComparisonId', function() {
+    let sameDiffs = this.get('comparisons').filterBy('isSame');
+    let sameDiffsGteZero = sameDiffs.length >= 0;
+    let comparisonID = this.get('comparisons').findBy('id', this.get('activeComparisonId')).get('id');
+    let activeComparisonIsSameDiff = sameDiffs.findBy('id', comparisonID);
+    return sameDiffsGteZero && (activeComparisonIsSameDiff == undefined);
   }),
-  visibleComparisons: Ember.computed.filterBy('comparisons', 'isDifferent'),
-  computedComparisons: Ember.computed('comparisons', 'hideNoDiffs', function() {
-    return this.get('hideNoDiffs') ? this.get('visibleComparisons') : this.get('comparisons');
+  diffComparisons: Ember.computed.filterBy('comparisons', 'isDifferent'),
+  computedComparisons: Ember.computed('sortedComparisons', 'hideSameDiffs', function() {
+    return this.get('hideSameDiffs') ? this.get('diffComparisons') : this.get('comparisons');
   }),
 
   isDefaultExpanded: Ember.computed('comparisons', function() {
     return this.get('comparisons.length') < 150;
   }),
 
-  sortedComparisons: Ember.computed.sort('computedComparisons', 'comparisonSortProperties'),
+  sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),
   comparisonSortProperties: ['isDifferent:desc', 'pdiff.diffPercentageFull:desc'],
 
   classNames: ['ComparisonList'],
@@ -124,7 +126,7 @@ export default Ember.Component.extend({
       this.scrollToChild(selectedComponent);
     },
     toggleNoDiffSnapshots() {
-      this.toggleProperty('hideNoDiffs');
+      this.toggleProperty('hideSameDiffs');
     },
   }
 });
