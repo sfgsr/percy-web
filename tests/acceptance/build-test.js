@@ -98,6 +98,8 @@ describe('Acceptance: Build', function() {
 
   it('jumps to comparison for query params', function() {
     let comparison = this.comparisons.wasAdded;
+    let comparison2 = this.comparisons.same;
+
     visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison.id}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build');
@@ -107,20 +109,14 @@ describe('Acceptance: Build', function() {
     });
 
     percySnapshot(this.test.fullTitle());
-  });
 
-  it('jumps to unchanged comparison for query params', function() {
-    let comparison = this.comparisons.same;
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison.id}`);
+    // Jump to unchanged, "no diff," comparison
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison2.id}`);
     andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build');
       expect(
         find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
-      ).to.equal(comparison.headSnapshot.name);
-      expect('');
+      ).to.equal(comparison2.headSnapshot.name);
     });
-
-    percySnapshot(this.test.fullTitle());
   });
 
   it('shows and hides unchanged diffs', function() {
