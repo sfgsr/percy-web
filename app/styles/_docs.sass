@@ -43,12 +43,27 @@
       font-weight: bold
       font-family: $fancy-font
 
-    h2
-      font-size: 1.6rem
-      margin-top: 1.4rem
-      margin-bottom: 0rem
-      color: #7d7d7d
-      font-family: $standard-font
+    .DocsClientList
+      .DocsClientList-heading
+        font-size: 1.6rem
+        margin-top: 1.4rem
+        margin-bottom: 0rem
+        color: #7d7d7d
+        font-family: $fancy-font
+        font-weight: bold
+
+      ul
+        margin-left: 1em
+        list-style: none
+        padding: 0
+        margin: 0
+        li
+          padding-left: 0.8em
+          text-indent: -.7em
+        li::before
+          content: "-"
+          color: #adadad
+          padding-right: 7px
 
     header:first-child
       margin-top: 0

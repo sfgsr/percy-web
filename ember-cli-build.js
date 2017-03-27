@@ -8,15 +8,13 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     babel: {
       comments: false,
+      includePolyfill: true,
     },
     'ember-cli-mocha': {
       useLintTree: false
     },
     sassOptions: {
       extension: 'sass',
-    },
-    'ember-cli-babel': {
-      includePolyfill: true,
     }
   });
 

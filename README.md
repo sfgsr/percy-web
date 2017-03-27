@@ -77,21 +77,3 @@ PERCY_TOKEN=... PERCY_PROJECT=percy/percy-web npm test
 ```bash
 yarn upgrade git+https://github.com/percy/percy-docs.git#<COMMIT SHA>
 ```
-
-
-## Updating ember.js to a new version
-- Determine the version of Ember Percy's is currently using from the `ember-cli` package version in yarn.lock.
-
-- Determine the [latest Ember release](https://github.com/ember-cli/ember-cli/releases/latest).
-
-- Read the [changelog](https://github.com/emberjs/ember.js/blob/master/CHANGELOG.md) to review changes between the source version and target version.  
-
-- View the [release notes](https://github.com/ember-cli/ember-cli/releases) for each version between the source and target.  If there are any unusual notes for an upgrade step, follow them.
-
-- Update using the Setup and Project Update notes for the [current release](https://github.com/ember-cli/ember-cli/releases/latest).
-
-- When running the `ember-init`, use `d` to do a diff on each file.  Most changes can be ignored (`n`).  The package.json will have a few packages that need to have version numbers updated.  Do these manually one by one.  ember-cli-shims and ember-cli-qunit don't need to be added.
-
-- Run `yarn install`.
-
-- Run `npm run test` and make sure all tests pass.  There might be deprecation warnings and breakages to fix.  
