@@ -15,8 +15,8 @@
       selectedNumColumns=selectedNumColumns
   }}
 {{/each}}
-<div class="HideSameDiffsPanel">
-  {{#if hideSameDiffs}}
+<div class="HideNoDiffsPanel">
+  {{#if hideNoDiffs}}
     <span>You have <b>{{sameComparisonsCount}}</b> unchanged snapshots.</span>
     <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">View all snapshots</button>
   {{else}}

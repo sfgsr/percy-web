@@ -128,12 +128,12 @@ describe('Acceptance: Build', function() {
 
     percySnapshot(this.test.fullTitle() + ' | shows batched same diffs');
 
-    click('.HideSameDiffsPanel button');
+    click('.HideNoDiffsPanel button');
     andThen(() => {
       expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(1);
     });
 
-    click('.HideSameDiffsPanel button');
+    click('.HideNoDiffsPanel button');
     andThen(() => {
       expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(0);
     });
