@@ -79,19 +79,19 @@ describe('Acceptance: Build', function() {
 
     keyEvent('.ComparisonList', 'keydown', RightArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=1`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right');
 
     keyEvent('.ComparisonList', 'keydown', RightArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=3`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2');
 
     keyEvent('.ComparisonList', 'keydown', LeftArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=1`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2 + Left');
   });
@@ -104,9 +104,38 @@ describe('Acceptance: Build', function() {
       expect(
         find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
       ).to.equal(comparison.headSnapshot.name);
+    });
+
+    percySnapshot(this.test.fullTitle());
+  });
+
+  it('jumps to unchanged comparison for query params', function() {
+    let comparison = this.comparisons.same;
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison.id}`);
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.builds.build');
+      expect(
+        find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
+      ).to.equal(comparison.headSnapshot.name);
       expect('');
     });
 
     percySnapshot(this.test.fullTitle());
+  });
+
+  it('shows and hides unchanged diffs', function() {
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
+
+    percySnapshot(this.test.fullTitle() + ' | shows batched same diffs');
+
+    click('.HideSameDiffsPanel button');
+    andThen(() => {
+      expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(1);
+    });
+
+    click('.HideSameDiffsPanel button');
+    andThen(() => {
+      expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(0);
+    });
   });
 });
