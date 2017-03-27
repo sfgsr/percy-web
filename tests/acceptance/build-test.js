@@ -79,19 +79,19 @@ describe('Acceptance: Build', function() {
 
     keyEvent('.ComparisonList', 'keydown', RightArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=1`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right');
 
     keyEvent('.ComparisonList', 'keydown', RightArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=3`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2');
 
     keyEvent('.ComparisonList', 'keydown', LeftArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=1`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2 + Left');
   });
