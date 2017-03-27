@@ -9,8 +9,7 @@ describeModule(
   'service:analytics',
   'AnalyticsService',
   {
-    // Specify the other units that are required for this test.
-    // needs: ['service:foo']
+    needs: ['service:session', 'service:adminMode']
   },
   function() {
     // Replace this with your real tests.
