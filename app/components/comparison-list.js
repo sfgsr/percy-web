@@ -17,12 +17,12 @@ export default Ember.Component.extend({
     let activeComparisonIsNoDiff = noDiffs.findBy('id', this.get('activeComparisonId'));
     return hasNoDiffs && (activeComparisonIsNoDiff == undefined);
   }),
-  diffComparisons: Ember.computed.filterBy('comparisons', 'isDifferent'),
+  diffComparisons: Ember.computed.filterBy('sortedComparisons', 'isDifferent'),
   noDiffComparisonsCount: Ember.computed(function() {
     return this.get('comparisons').filterBy('isSame').length;
   }),
   computedComparisons: Ember.computed('sortedComparisons', 'hideNoDiffs', function() {
-    return this.get('hideNoDiffs') ? this.get('diffComparisons') : this.get('comparisons');
+    return this.get('hideNoDiffs') ? this.get('diffComparisons') : this.get('sortedComparisons');
   }),
 
   isDefaultExpanded: Ember.computed('comparisons', function() {
