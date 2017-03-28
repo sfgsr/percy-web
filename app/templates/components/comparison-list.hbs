@@ -18,8 +18,12 @@
 <div class="HideNoDiffsPanel">
   {{#if hideNoDiffs}}
     <span>{{noDiffComparisonsCountTxt}}</span>
-    <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">View all snapshots</button>
+    <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">
+      View all {{selectedWidths}}px snapshots
+    </button>
   {{else}}
-    <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">Hide unchanged snapshots</button>
+    <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">
+      Hide unchanged {{selectedWidths}}px snapshots
+    </button>
   {{/if}}
 </div>

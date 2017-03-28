@@ -17,18 +17,12 @@ export default Ember.Component.extend({
     let activeComparisonIsNoDiff = noDiffs.findBy('id', this.get('activeComparisonId'));
     return hasNoDiffs && (activeComparisonIsNoDiff == undefined);
   }),
-  diffComparisons: Ember.computed.filterBy('sortedComparisons', 'isDifferent'),
-  noDiffComparisonsCountTxt: Ember.computed(function() {
-    let len = this.get('comparisons').filterBy('isSame').length;
-
-    if (len === 1) {
-      return `You have ${len} unchanged snapshot.`;
-    } else if (len > 1) {
-      return `You have ${len} unchanged snapshots.`;
-    }
+  diffComparisons: Ember.computed.filterBy('comparisons', 'isDifferent'),
+  noDiffComparisonsCount: Ember.computed(function() {
+    return this.get('comparisons').filterBy('isSame').length;
   }),
   computedComparisons: Ember.computed('sortedComparisons', 'hideNoDiffs', function() {
-    return this.get('hideNoDiffs') ? this.get('diffComparisons') : this.get('sortedComparisons');
+    return this.get('hideNoDiffs') ? this.get('diffComparisons') : this.get('comparisons');
   }),
 
   isDefaultExpanded: Ember.computed('comparisons', function() {
