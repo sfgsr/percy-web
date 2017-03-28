@@ -2494,9 +2494,9 @@ ember-page-title@3.1.5:
     ember-cli-head "0.1.1"
     ember-cli-htmlbars "^1.1.0"
 
-ember-percy@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.6.tgz#6cf427937f4a285a7ec3f4be81b36e495e14c32d"
+ember-percy@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.8.tgz#13ddbe6c33d1054be60829460a453e4c982af6f1"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.5"
