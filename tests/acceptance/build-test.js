@@ -124,14 +124,14 @@ describe('Acceptance: Build', function() {
 
     percySnapshot(this.test.fullTitle() + ' | shows batched no diffs');
 
-    click('.HideNoDiffsPanel button');
+    click('.HideNoDiffsPanel');
     andThen(() => {
       expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(1);
     });
 
     percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
 
-    click('.HideNoDiffsPanel button');
+    click('.HideNoDiffsPanel');
     andThen(() => {
       expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(0);
     });
