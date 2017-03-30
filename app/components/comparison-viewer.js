@@ -12,8 +12,6 @@ export default Ember.Component.extend({
   showNoDiffSnapshot: false,
   isOverlayEnabled: true,
   isDefaultExpanded: true,
-  isTogglingFullWidth: false,
-  isToggledFullWidth: false,
   isFocus: false,
   isExpanded: Ember.computed('isDefaultExpanded', function() {
     // TODO: this is just to break the binding with isDefaultExpanded,
@@ -34,12 +32,14 @@ export default Ember.Component.extend({
     'isActionable:ComparisonViewer--actionable',
   ],
 
-  setup: Ember.on('didInsertElement', function() {
+  didInsertElement() {
+    this._super(...arguments);
     this.send('registerChild', this);
-  }),
-  teardown: Ember.on('willDestroyElement', function() {
+  },
+  willDestroyElement() {
+    this._super(...arguments);
     this.send('unregisterChild', this);
-  }),
+  },
   click() {
     if (this.get('isActionable')) {
       this.send('selectChild');

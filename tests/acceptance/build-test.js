@@ -98,15 +98,37 @@ describe('Acceptance: Build', function() {
 
   it('jumps to comparison for query params', function() {
     let comparison = this.comparisons.wasAdded;
+    let comparison2 = this.comparisons.same;
+
     visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison.id}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build');
       expect(
         find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
       ).to.equal(comparison.headSnapshot.name);
-      expect('');
     });
 
     percySnapshot(this.test.fullTitle());
+
+    // Jump to unchanged, "no diff," comparison
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison2.id}`);
+    andThen(() => {
+      expect(
+        find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
+      ).to.equal(comparison2.headSnapshot.name);
+    });
+  });
+
+  it('shows and hides unchanged diffs', function() {
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
+
+    percySnapshot(this.test.fullTitle() + ' | shows batched no diffs');
+
+    click('.HideNoDiffsPanel');
+    andThen(() => {
+      expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(1);
+    });
+
+    percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
   });
 });

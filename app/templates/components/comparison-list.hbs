@@ -4,7 +4,7 @@
     are collapsed below. <strong>Tip:</strong> use the arrow keys <code>←</code> and <code>➞</code> to move around.
   </div>
 {{/unless}}
-{{#each sortedComparisons as |comparison index|}}
+{{#each computedComparisons as |comparison index|}}
   {{comparison-viewer
       comparison=comparison
       listIndex=index
@@ -15,3 +15,9 @@
       selectedNumColumns=selectedNumColumns
   }}
 {{/each}}
+{{#if hideNoDiffs}}
+  <div class="HideNoDiffsPanel" {{action "toggleNoDiffSnapshots"}}>
+    {{pluralize noDiffComparisonsCount "unchanged snapshot"}} at {{selectedWidths}}px.
+    <span>View all &raquo;</span>
+  </div>
+{{/if}}
