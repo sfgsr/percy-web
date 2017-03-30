@@ -130,10 +130,5 @@ describe('Acceptance: Build', function() {
     });
 
     percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
-
-    click('.HideNoDiffsPanel');
-    andThen(() => {
-      expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(0);
-    });
   });
 });
