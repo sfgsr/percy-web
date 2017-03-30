@@ -13,7 +13,7 @@ export default Ember.Component.extend({
 
   hideNoDiffs: Ember.computed('comparisons', 'activeComparisonId', function() {
     let noDiffs = this.get('comparisons').filterBy('isSame');
-    let hasNoDiffs = noDiffs.length >= 0;
+    let hasNoDiffs = noDiffs.length > 0;
     let activeComparisonIsNoDiff = noDiffs.findBy('id', this.get('activeComparisonId'));
     return hasNoDiffs && (activeComparisonIsNoDiff == undefined);
   }),
@@ -25,8 +25,8 @@ export default Ember.Component.extend({
     return this.get('hideNoDiffs') ? this.get('diffComparisons') : this.get('sortedComparisons');
   }),
 
-  isDefaultExpanded: Ember.computed('comparisons', function() {
-    return this.get('comparisons.length') < 150;
+  isDefaultExpanded: Ember.computed('diffComparisons', function() {
+    return this.get('diffComparisons.length') < 150;
   }),
 
   sortedComparisons: Ember.computed.sort('comparisons', 'comparisonSortProperties'),
@@ -107,6 +107,10 @@ export default Ember.Component.extend({
     },
     updateSelectedComparison() {
       let comparisonComponents = this.get('comparisonComponents');
+      if (comparisonComponents.length == 0) {
+        return;
+      }
+
       let selectedIndex = this.get('selectedComparisonIndex');
       let selectedComponent = comparisonComponents.objectAt(selectedIndex);
       let lastIndex = this.get('lastComparisonIndex');
