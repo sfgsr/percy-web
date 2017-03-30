@@ -22,10 +22,16 @@
           font-size: 5rem
 
   .HideNoDiffsPanel
-    background: $lightgray
-    border-radius: 3px
-    border: 1px solid $lightestgray
+    @include Card
+    @include Card--linkable
+    @include Card--expando
     margin-bottom: 10px
-    padding: 5px
+    padding: 15px
     text-align: center
     width: 100%
+
+    &:hover span
+      color: $default-link-hover
+
+    span
+      color: $default-link

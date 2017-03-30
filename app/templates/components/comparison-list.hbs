@@ -15,15 +15,9 @@
       selectedNumColumns=selectedNumColumns
   }}
 {{/each}}
-<div class="HideNoDiffsPanel">
-  {{#if hideNoDiffs}}
-    <span>You have {{pluralize noDiffComparisonsCount 'unchanged snapshot'}}.</span>
-    <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">
-      View all {{selectedWidths}}px snapshots
-    </button>
-  {{else}}
-    <button {{action 'toggleNoDiffSnapshots'}} class="Button--link">
-      Hide unchanged {{selectedWidths}}px snapshots
-    </button>
-  {{/if}}
-</div>
+{{#if hideNoDiffs}}
+  <div class="HideNoDiffsPanel" {{action "toggleNoDiffSnapshots"}}>
+    {{pluralize noDiffComparisonsCount "unchanged snapshot"}} at {{selectedWidths}}px.
+    <span>View all &raquo;</span>
+  </div>
+{{/if}}
