@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     return hasNoDiffs && (activeComparisonIsNoDiff == undefined);
   }),
   diffComparisons: Ember.computed.filterBy('sortedComparisons', 'isDifferent'),
-  noDiffComparisonsCount: Ember.computed(function() {
+  noDiffComparisonsCount: Ember.computed('selectedWidths', function() {
     return this.get('comparisons').filterBy('isSame').length;
   }),
   computedComparisons: Ember.computed('sortedComparisons', 'hideNoDiffs', function() {
