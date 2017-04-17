@@ -14,13 +14,27 @@ export default Ember.Service.extend({
       return;
     }
 
+    let amplitudeConfigurationOptions = {
+      includeUtm: true,
+      includeReferrer: true,
+      includeGclid: true
+    };
+
     this.userInstance = window.amplitude
       .getInstance(config.APP.AMPLITUDE_USERS_INSTANCE_NAME);
-    this.userInstance.init(config.APP.AMPLITUDE_USERS_PROJECT_ID);
+    this.userInstance.init(
+      config.APP.AMPLITUDE_USERS_PROJECT_ID,
+      null,
+      amplitudeConfigurationOptions
+    );
 
     this.organizationInstance = window.amplitude
       .getInstance(config.APP.AMPLITUDE_ORGANIZATIONS_INSTANCE_NAME);
-    this.organizationInstance.init(config.APP.AMPLITUDE_ORGANIZATIONS_PROJECT_ID);
+    this.organizationInstance.init(
+      config.APP.AMPLITUDE_ORGANIZATIONS_PROJECT_ID,
+      null,
+      amplitudeConfigurationOptions
+    );
   },
 
   isEnabled() {
