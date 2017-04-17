@@ -11,20 +11,18 @@ export default Factory.extend({
 
   afterCreate(organization, server) {
     if (!organization.subscription) {
-      let subscription = server.create('subscription', {organization: organization});
-      organization.update({subscription});
+      server.create('subscription', {organization: organization});
     }
   },
 
   withTrial: trait({
     afterCreate(organization, server) {
-      let subscription = server.create('subscription', {
+      server.create('subscription', {
         organization: organization,
         trialStart: moment(),
         trialEnd: moment().add(14, 'days').add(1, 'hour'),
         plan: server.create('plan', 'trial'),
       });
-      organization.update({subscription});
     }
   }),
 

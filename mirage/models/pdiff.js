@@ -1,5 +1,7 @@
 import {Model, belongsTo} from 'ember-cli-mirage';
 
 export default Model.extend({
-  diffImage: belongsTo('image')
+  diffImage: belongsTo('image'),
+  headScreenshot: belongsTo('screenshot'),
+  baseScreenshot: belongsTo('screenshot'),
 });
