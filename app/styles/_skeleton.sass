@@ -217,10 +217,11 @@ body
   /* currently ems cause chrome bug misinterpreting rems on body element */
   font-size: $standard-font-size
   line-height: 1.5
-  font-weight: 400
   font-family: $standard-font
   color: $default-text-color
-
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+  text-rendering: optimizelegibility
 
 /**
  * Typography.
@@ -252,7 +253,6 @@ h5
 h6
   font-size: 1.5rem
   line-height: 1.6
-  letter-spacing: 0
 
 /* Larger than phablet */
 @media (min-width: 550px)
@@ -295,7 +295,6 @@ a:hover
     text-transform: none
     font-family: $standard-font
     font-weight: normal
-    letter-spacing: 0
     line-height: 1.4rem
 
 
