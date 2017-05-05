@@ -5,23 +5,20 @@
         <div class="Panel-section Panel-header">
           {{organization.name}}
         </div>
-        <div class="Panel-section Panel-nav">
+        <div class="Panel-nav">
           <ul>
             <li>
-              {{#link-to "organizations.organization.settings" organization.slug classNames="Button Button--nav Button--withLeftIcon"}}
-                {{fa-icon "cog" classNames="fa--left"}}
+              {{#link-to "organizations.organization.settings" organization.slug classNames="Button Button--nav"}}
                 Settings
               {{/link-to}}
             </li>
             <li>
-              {{#link-to "organizations.organization.users" organization.slug classNames="Button Button--nav Button--withLeftIcon"}}
-                {{fa-icon "users" classNames="fa--left"}}
+              {{#link-to "organizations.organization.users" organization.slug classNames="Button Button--nav"}}
                 Users
               {{/link-to}}
             </li>
             <li>
-              {{#link-to "organizations.organization.billing" organization.slug classNames="Button Button--nav Button--withLeftIcon"}}
-                {{fa-icon "credit-card" classNames="fa--left"}}
+              {{#link-to "organizations.organization.billing" organization.slug classNames="Button Button--nav"}}
                 Billing
               {{/link-to}}
             </li>
