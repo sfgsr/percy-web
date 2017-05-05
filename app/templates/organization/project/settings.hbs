@@ -1,7 +1,6 @@
 {{fixed-top-header currentOrganization=model.organization}}
 {{#organizations/settings-nav-wrapper organization=model.organization project=model}}
-  {{#link-to "organization.project.index" model.organization.slug model.slug classNames="Button Button--withLeftIcon u-pull-right"}}
-    {{fa-icon "arrow-left" classNames="fa--left"}}
+  {{#link-to "organization.project.index" model.organization.slug model.slug classNames="Button u-pull-right"}}
     Back to project
   {{/link-to}}
   <h3>Project Settings</h3>

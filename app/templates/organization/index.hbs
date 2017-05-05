@@ -11,8 +11,7 @@
         {{/link-to}}
         {{!-- TODO: #billingadmins --}}
         {{#if (eq "admin" model.currentUserMembership.role)}}
-          {{#link-to "organizations.organization.settings" model.slug classNames="Button Button--withLeftIcon u-pull-right"}}
-            {{fa-icon "cog" classNames="fa--left"}}
+          {{#link-to "organizations.organization.settings" model.slug classNames="Button u-pull-right"}}
             Settings
           {{/link-to}}
         {{/if}}
