@@ -5,11 +5,9 @@ input[type="reset"],
 input[type="button"],
   background-color: $white
   border-radius: 4px
-  border: 1px solid $lightpurple
   color: #555
   cursor: pointer
   display: inline-block
-  font-size: 12px
   font-weight: 600
   height: 38px
   line-height: 38px
@@ -17,9 +15,9 @@ input[type="button"],
   position: relative
   text-align: center
   text-decoration: none
-  text-transform: uppercase
   white-space: nowrap
   margin-right: 5px
+  border: 1px solid $darkergray
 
   &:hover,
   &:focus,
@@ -31,7 +29,6 @@ input[type="button"],
   &.Button--primary,
     color: #fff
     background-color: $darkpurple
-    border-color: #451b51
 
     &:hover,
       background-color: #793989
@@ -63,8 +60,8 @@ input[type="button"],
 
   &.Button--onDark.Button--primary,
     color: #fff
-    background-color: #793989
-    border-color: #c593d2
+    background-color: $percypurple
+    border: 0
 
     &:hover,
       color: #fff
@@ -76,7 +73,7 @@ input[type="button"],
       border-color: #CFA5D9
 
     &:active
-      box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75);
+      box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75)
 
   &.Button--small
     font-size: 10px
@@ -84,7 +81,7 @@ input[type="button"],
 
   &.Button--nav
     border: none
-    border-radius: 0;
+    border-radius: 0
     width: 100%
 
     &.Button--active,
