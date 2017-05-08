@@ -57,9 +57,11 @@ Most Percy builds finish in under 2 minutes.">
         {{#if session.isAuthenticated}}
           <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
         {{else}}
-          <a class="Button Button--primary" href="#" {{action "login"}}>Start Trial &raquo;</a>
-          <br>
-          <em class="u-text-small">No credit card required</em>
+          <a class="Button Button--primary" href="#" {{action "login"}}>Start Free Trial</a>
+          <br/>
+          <p>
+            <span class="PricingSection-infoItem">No credit card required</span>
+          </p>
         {{/if}}
       </div>
     {{/if}}
@@ -106,21 +108,22 @@ Most Percy builds finish in under 2 minutes.">
     <div class="PricingSection-infoItem">Unlimited projects</div>
     <div class="PricingSection-infoItem">Custom history limits</div>
     <div class="PricingSection-cta">
-      {{#link-to "enterprise" class="Button"}}Contact Us{{/link-to}}
+      {{#link-to "enterprise" class="Button Button--noShadow"}}Contact Us{{/link-to}}
     </div>
   {{/pricing-bucket}}
 </div>
-<br>
-<h3>Comes with a <strong>14-day free trial</strong>, on us!</h3>
+<h4>
+  Comes with a <strong>14-day free trial</strong>, on us!
+</h4>
 <div class="row">
   <div class="column one-half PricingSection-specialPlan">
     <p>
-      <strong><span>🏠</span> Startup discount:</strong> If your organization makes less than $100K annual revenue, we want you to be able to use Percy too! <a href="mailto:hello@percy.io" {{action "showSupport"}}>Contact us</a> about our startup discount.
+      <strong>Startup discount:</strong> If your organization makes less than $100K annual revenue, we want you to be able to use Percy too! <a href="mailto:hello@percy.io" {{action "showSupport"}}>Contact us</a> about our startup discount.
     </p>
   </div>
   <div class="column one-half PricingSection-specialPlan">
     <p>
-      <strong>We <span>💕</span>open source!</strong> If you have a not-for-profit, community-driven open source application, <a href="mailto:hello@percy.io" {{action "showSupport"}}>contact us</a> about our discounted plans.
+      <strong>We love open source!</strong> If you have a not-for-profit, community-driven open source application, <a href="mailto:hello@percy.io" {{action "showSupport"}}>contact us</a> about our discounted plans.
     </p>
   </div>
 </div>
