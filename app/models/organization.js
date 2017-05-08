@@ -9,6 +9,9 @@ export default DS.Model.extend({
   githubIntegrationRequest: DS.belongsTo('github-integration-request', {async: false}),
   subscription: DS.belongsTo('subscription', {async: false}),
   projects: DS.hasMany('project'),
+  billingProvider: DS.attr(),
+  billingProviderData: DS.attr(),
+  billingLocked: DS.attr('boolean'),
 
   // Filtered down to saved projects, does not include unsaved project objects:
   savedProjects: Ember.computed.filterBy('projects', 'isNew', false),
