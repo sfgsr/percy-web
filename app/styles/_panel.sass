@@ -9,7 +9,6 @@
 
   .Panel-header
     width: 100%
-    background-color: $lightergray
     border-bottom: $grayborder
     font-weight: bold
     white-space: nowrap
@@ -17,7 +16,7 @@
     text-overflow: ellipsis
 
   .Panel-header--withSelect
-    background-color: $lightergray
+    background-color: $white
     border-bottom: $grayborder
     overflow: initial
     .ember-power-select-trigger
@@ -33,6 +32,8 @@
   .Panel-nav
     .Button
       margin: 0
+    .active
+      font-weight: normal
     ul
       margin: 0
       padding: 0
