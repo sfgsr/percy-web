@@ -310,15 +310,12 @@ input[type="url"],
 input[type="password"],
 textarea,
 select
-  @include transition('0.15s ease-in-out')
-  transition-property: border,box-shadow
   height: 38px
   /* The 6px vertically centers text on FF, ignored by Webkit */
   padding: 6px 10px
   background-color: #fff
   border: $grayborder
   border-radius: 4px
-  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075)
 
   &:disabled
     border: 1px solid $lightpurple
@@ -361,10 +358,7 @@ textarea:focus,
 textarea:active,
 select:focus,
 select:active,
-  @include transition('0.15s ease-in-out')
-  transition-property: border,box-shadow
-  border: 1px solid $darkpurple
-  box-shadow: 1px 1px 7px 0px $lightpurple
+  border: 1px solid $percypurple
   outline: 0
   &.error
     border: 1px solid $red
