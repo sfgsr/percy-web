@@ -7,7 +7,6 @@
     <div class="PricingSection-price">
       <strong>${{bucket.plan.monthlyPrice}}</strong> / month
     </div>
-    {{!-- <div class="PricingSection-annualMonthlyPrice">${{format-number bucket.plan.annualMonthlyPrice}} if paid annually</div> --}}
     <hr>
     <div class="PricingSection-numWorkers">{{bucket.plan.numWorkersTitle}}</div>
     <div class="PricingSection-diffs">{{format-number bucket.plan.numDiffs}} snapshots included</div>
@@ -15,24 +14,15 @@
     <div class="PricingSection-infoItem"><br>Awesome support</div>
     <div class="PricingSection-infoItem">Unlimited projects</div>
     <div class="PricingSection-infoItem">{{bucket.plan.historyLimitTitle}}</div>
-    {{#if (not-eq currentSubscription.plan bucket.plan.id)}}
-      <div class="PricingSection-cta">
-        {{#if session.isAuthenticated}}
-          <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
-        {{/if}}
-      </div>
-    {{/if}}
     {{#if (eq currentSubscription.plan bucket.plan.id)}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
   {{/pricing-bucket}}
-  {{#pricing-bucket promoted=true plan=subscriptionData.PLANS.[2] as |bucket|}}
-    <div class="PricingSection-title PricingSection-title--small">Great for teams</div>
+  {{#pricing-bucket plan=subscriptionData.PLANS.[2] as |bucket|}}
     <div class="PricingSection-title">{{bucket.plan.name}}</div>
     <div class="PricingSection-price">
       <strong>${{bucket.plan.monthlyPrice}}</strong> / month
     </div>
-    {{!-- <div class="PricingSection-annualMonthlyPrice">${{format-number bucket.plan.annualMonthlyPrice}} if paid annually</div> --}}
     <hr>
     <div class="PricingSection-numWorkers">
       {{bucket.plan.numWorkersTitle}}
@@ -52,19 +42,6 @@ Most Percy builds finish in under 2 minutes.">
     <div class="PricingSection-infoItem"><br>Awesome support</div>
     <div class="PricingSection-infoItem">Unlimited projects</div>
     <div class="PricingSection-infoItem">{{bucket.plan.historyLimitTitle}}</div>
-    {{#if (not-eq currentSubscription.plan bucket.plan.id)}}
-      <div class="PricingSection-cta">
-        {{#if session.isAuthenticated}}
-          <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
-        {{else}}
-          <a class="Button Button--primary" href="#" {{action "login"}}>Start Free Trial</a>
-          <br/>
-          <p>
-            <span class="PricingSection-infoItem">No credit card required</span>
-          </p>
-        {{/if}}
-      </div>
-    {{/if}}
     {{#if (eq currentSubscription.plan bucket.plan.id)}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
@@ -82,13 +59,6 @@ Most Percy builds finish in under 2 minutes.">
     <div class="PricingSection-infoItem"><br>Awesome support</div>
     <div class="PricingSection-infoItem">Unlimited projects</div>
     <div class="PricingSection-infoItem">{{bucket.plan.historyLimitTitle}}</div>
-    {{#if (not-eq currentSubscription.plan bucket.plan.id)}}
-      <div class="PricingSection-cta">
-        {{#if session.isAuthenticated}}
-          <a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org &raquo;</a>
-        {{/if}}
-      </div>
-    {{/if}}
     {{#if (eq currentSubscription.plan bucket.plan.id)}}
       <div class="PricingSection-title PricingSection-title--small">Current plan</div>
     {{/if}}
@@ -107,14 +77,18 @@ Most Percy builds finish in under 2 minutes.">
     <div class="PricingSection-infoItem"><br>Self-hosting available, {{#link-to "enterprise"}}contact us{{/link-to}}.</div>
     <div class="PricingSection-infoItem">Unlimited projects</div>
     <div class="PricingSection-infoItem">Custom history limits</div>
-    <div class="PricingSection-cta">
-      {{#link-to "enterprise" class="Button Button--noShadow"}}Contact Us{{/link-to}}
-    </div>
   {{/pricing-bucket}}
+  {{#if session.isAuthenticated}}
+    <p><a class="Button Button--primary" href="#" {{action "jumpToBilling"}}>Jump to org for billing</a></p>
+  {{else}}
+    <p>
+      <a class="Button Button--primary" href="#" {{action "login"}}>Start Free Trial</a><br/><br/>
+      <span class="PricingSection-infoItem">No credit card required. Free <strong>14-day free trial</strong>.</span>
+    </p>
+  {{/if}}
+  <br/>
 </div>
-<h4>
-  Comes with a <strong>14-day free trial</strong>, on us!
-</h4>
+
 <div class="row">
   <div class="column one-half PricingSection-specialPlan">
     <p>
