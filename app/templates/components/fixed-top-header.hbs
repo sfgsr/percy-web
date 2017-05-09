@@ -24,7 +24,7 @@
             <strong>{{pluralize currentOrganization.subscription.trialDaysRemaining "day"}}</strong> left in trial.
           {{/if}}
         {{/if}}
-        {{#link-to "organizations.organization.billing" currentOrganization.slug}}See plans &raquo;{{/link-to}}
+        {{#link-to "organizations.organization.billing" currentOrganization.slug}}See plans{{/link-to}}
       </div>
     {{/if}}
     {{#if session.isAuthenticated}}

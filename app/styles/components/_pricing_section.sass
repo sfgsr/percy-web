@@ -1,6 +1,7 @@
 .PricingSection,
   // Reset font-size for homepage.
   padding-bottom: 20px
+  padding-top: 20px
   font-size: $smaller-font-size
 
   .hint:before,
@@ -13,9 +14,7 @@
     display: inline-block
     vertical-align: top
     width: 240px
-    min-height: 465px
-    border-bottom: 2px solid $beige
-    padding-top: 39px
+    min-height: 350px
     background-color: white
     font-size: 110%
     margin-bottom: 20px
@@ -25,11 +24,12 @@
 
     &.PricingBucket--promoted
       padding-top: 0
-      border: 4px solid $lightpurple
+      border: 4px solid $percypurple
 
       .PricingSection-title
         &.PricingSection-title--small
-          background-color: $lightpurple
+          background-color: $percypurple
+          color: white
           margin-top: 0
 
     &.PricingBucket--active
@@ -51,12 +51,10 @@
     padding: 10px 5px
 
     &.PricingSection-title--small
-      background: $percy-beige
       font-size: 1.3rem
       font-weight: bold
       margin-top: 3px
       padding: 9px
-      box-shadow: 0 5px 10px #eaeaea
       text-transform: uppercase
 
   .PricingSection-price
@@ -86,11 +84,15 @@
 
   .PricingSection-cta
     position: absolute
-    top: 390px
+    top: 380px
     margin-left: auto
     margin-right: auto
     left: 0
     right: 0
+
+    a
+      margin-bottom: 0.75rem
+      font-size: 1.7rem
 
   .PricingSection-diffs
     // font-size: 20px
@@ -109,22 +111,17 @@
     padding-bottom: 20px
 
   .PricingSection-infoItem
-    color: $gray
+    color: $darkgray
 
     .fa-question-circle
       color: $darkpurple
 
+  .Button--primary
+    font-size: 1.5rem
+
 .PricingSection-specialPlan
   display: flex
-  align-items: center
-  min-height: 100px
-  line-height: 2rem
-  border-top: 1px solid $lightpurple
-  border-bottom: 1px solid $lightpurple
-  padding: 20px
-  margin-top: 1rem
-  span
-    font-size: 2.5rem
+  margin-top: 2.5rem
 
 @media (max-width: 550px)
   .PricingSection

@@ -5,16 +5,16 @@
 
     // Default marketing headers are bigger.
     h1
-      font-size: 4.5rem
+      font-size: 4.3rem
     h2
-      font-size: 4.0rem
+      font-size: 3.3rem
       padding-top: 20px
       margin-bottom: 0
     h3
-      font-size: 3.3rem
-      margin-bottom: 3rem
+      font-size: $h3-font-size
+      margin-bottom: 2.7rem
     h4
-      font-size: 2.8rem
+      font-size: 2.0rem
       margin-bottom: 2rem
     h5
       font-size: 2.4rem
@@ -32,16 +32,29 @@
       text-align: center
 
     &.MockPageContainer
-      box-shadow: 0 6px 17px -8px #d0d0d0
+      border-bottom: $grayborder
 
     code
       font-size: 1.2rem
       span.dim
-        opacity: 0.4
+        opacity: $dim-code-opacity
+
+    sup
+      color: $percypurple
 
     .MarketingNumDiffs
       margin-top: 40px
+      font-family: $fancy-font
 
+    button,
+    .Button
+      box-shadow: $base-shadow
+
+    .Button--primary
+      background: #8A3D9D
+
+      &:hover
+        background: $darkpurple
 
   &.TrustedByContainer
     img

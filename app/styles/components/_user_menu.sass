@@ -23,7 +23,7 @@
     width: 100px
     height: 32px
     z-index: 99
-    box-shadow: 8px 8px 19px -4px $darkgray
+    box-shadow: $base-shadow
     position: absolute
     top: 66px
     background: $darkpurple
@@ -37,10 +37,11 @@
   li
     text-align: center
     list-style: none
-    font-weight: bold
     padding: 5px 10px
     cursor: pointer
     margin: 0
+    &:hover
+      background-color: $darkerpurple
 
 // TODO: add page-level classes
 .Header--large
@@ -57,5 +58,5 @@
 
     li
       color: $default-text-color
-
-
+      &:hover
+        background-color: $lightgray

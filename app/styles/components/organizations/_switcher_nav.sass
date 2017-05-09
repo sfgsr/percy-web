@@ -10,10 +10,6 @@
     line-height: 4.3rem
     display: block
     padding: 10px 17px
-    letter-spacing: 0.1rem
-    font-family: $fancy-font
-    font-size: 13px
-    font-weight: 600
     cursor: pointer
 
   .OrganizationsSwitcherNav-arrow
@@ -25,17 +21,10 @@
     z-index: 100
 
   .OrganizationsSwitcherNav-switcher
-    @include animation('fadein 0.2s ease')
-    @include keyframes(growfromtop)
-      0%
-        height: 0
-      100%
-        height: 285px
-    @include animation('growfromtop 0.2s ease')
     width: 300px
     height: 285px
     z-index: 99
-    box-shadow: 8px 8px 19px -4px $darkgray
+    box-shadow: $base-shadow
     position: absolute
     top: 75px
     background: $darkpurple
@@ -52,6 +41,12 @@
       margin-left: 5px
       text-align: left
       overflow: hidden
+
+    .Button--onDark
+      background: #863C8B
+
+      &:hover
+        background: $percypurple
 
     ul
       list-style: none

@@ -14,8 +14,8 @@
     {{login-button redirectToLogin="redirectToLogin"}}
   {{/if}}
 </div>
-<div class="container container--marketing container--darker InviteContainer">
-  Blog: <em><a href="https://blog.percy.io/tutorials-for-your-first-visual-tests-6d733a893a18#.1ksfem4wc">Tutorials for your first visual tests <sup style="color: red">new!</sup></a></em>
+<div class="container container--marketing InviteContainer">
+  Blog: <a href="https://blog.percy.io/tutorials-for-your-first-visual-tests-6d733a893a18#.1ksfem4wc">Tutorials for your first visual tests</a> <sup>new!</sup>
 </div>
 <div class="container container--marketing container--light">
   <div class="container container--fixedWidth container--forContent">
@@ -30,10 +30,8 @@
   <div class="container container--fixedWidth container--forContent u-text-center">
     <div class="row u-text-center">
       <h2>GitHub PR integration</h2>
-      <h3></h3>
+      <h3>Shows up with your tests in GitHub</h3>
       <p>
-        <strong>Shows up with your tests in GitHub.</strong>
-        <br>
         Approve visual changes in one click as part of your code review process.
       </p>
     </div>
@@ -162,7 +160,7 @@ $ ember install ember-percy
             {{#if session.isAuthenticated}}
               {{goto-app redirectToDefaultOrganization="redirectToDefaultOrganization"}}
             {{else}}
-              {{login-button redirectToLogin="redirectToLogin" text="Start trial »" showIcon=false}}
+              {{login-button redirectToLogin="redirectToLogin" text="Start free trial" showIcon=false}}
             {{/if}}
           </p>
           <p>
@@ -171,7 +169,6 @@ $ ember install ember-percy
         </div>
       </div>
     </div>
-    <hr>
   </div>
 </div>
 {{main-footer}}

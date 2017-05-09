@@ -1,28 +1,31 @@
+$approved-text-shadow: 2px 2px 1px #487E02
+$approved-background: $green
+
 .ApprovalButton
-  color: $white
-  font-size: 1.3rem
-  background-color: $yellow
-  text-shadow: 1px 1px 3px #6f6f6f
-  border-color: $darkyellow
-  width: 150px
+  font-size: 1.4rem
+  text-transform: uppercase
+  border: 0
+  color: white
+  background-color: $approved-background
+  text-shadow: $approved-text-shadow
+  animation-duration: 2s;
 
   &:hover,
+  &:focus,
   &.ApprovalButton--hover,
     color: white
-    background-color: $lightyellow
-    text-shadow: 1px 1px 3px #6f6f6f
-    border-color: $darkyellow
-
-  &:focus
-    color: white
-
-  &:active,
-  &.ApprovalButton--active,
-    box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.2);
+    background: #83C32F
+    text-shadow: 2px 2px 1px #629D16
 
   &.ApprovalButton--approved
-    background-color: $green
-    border-color: $green
+    padding: 20px 28px
+    cursor: default
 
-    &:hover
-      background-color: $lightgreen
+    &:hover,
+    &:focus,
+    &.ApprovalButton--hover,
+      background-color: $approved-background
+      text-shadow: $approved-text-shadow
+
+    span
+      display: none
