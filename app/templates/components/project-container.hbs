@@ -36,30 +36,26 @@
       {{else}}
         {{#if project.isEnabled}}
           <div class="Alert Alert--warning">
-            <h4>Waiting for first snapshot...</h4>
-            <p>
-              Please see the {{#link-to "docs.index"}}documentation{{/link-to}} for how to configure your app—it should only take a few minutes. Once you run your first snapshot, it will show up here.
-            </p>
-            <p>
-              Here are the <strong>environment variables</strong> you'll need to {{#link-to "docs.index"}}setup in your CI service{{/link-to}}:
-            </p>
-            {{projects/env-vars project=project}}
+            <strong>Waiting for first snapshot:</strong> complete setup below to generate first snapshot.
           </div>
+          <h5>Getting started</h5>
+          <p>Here's an overview of what you need to do to get started:</p>
 
-          <div class="Alert Alert--success">
-            <h4><strong>Quickstart example app</strong></h4>
+          <ol>
+          <li>Set <code>PERCY_TOKEN</code> and <code>PERCY_PROJECT</code> environment variables in your CI environment.</li>
+          <li>Integrate Percy's client library to take snapshots in your test suite.</li>
+          <li>Run your tests in CI or create a GitHub PR.</li>
+          </ol>
 
-            <p>
-              Looking to see what Percy can do? Just follow these simple steps:
-            </p>
+          <p>
+            {{#link-to "docs.index" class="Button"}}View setup documentation{{/link-to}}
+          </p>
 
-            {{projects/quickstart-code project=project}}
+          <h5>Environment variables</h5>
+          {{projects/env-vars project=project}}
 
-            <hr>
-            <p>
-              We also have framework-specific demos, see the {{#link-to "docs.page" "tutorials/example-apps"}}example apps and tutorials{{/link-to}}. Any questions? <a href="#" {{action "showSupport"}}>Just ask</a>, we'd love to help.
-            </p>
-          </div>
+          <h5>Just want to see a demo?</h5> 
+          {{projects/quickstart-code project=project}}
         {{else}}
           <p>No builds yet, and this project is disabled.</p>
         {{/if}}

@@ -2,15 +2,32 @@
   {{#code-block}}<em>Loading...</em>{{/code-block}}
 {{/if}}
 {{#with project.writeOnlyToken.token as |token|}}
-{{#code-block}}$ git clone https://github.com/percy/example-quickstart.git
-$ cd example-quickstart/
+  <p>
+    Looking to see what Percy can do? Just follow these simple steps:
+  </p>
 
-$ gem install bundler  # Only if you don't have bundler installed.
-$ bundle install
+  {{#code-block lang="nohighlight"}}git clone https://github.com/percy/example-quickstart.git
+cd example-quickstart/
+  {{/code-block}}
 
-$ export PERCY_TOKEN={{token}}
-$ export PERCY_PROJECT={{project.fullSlug}}
-$ <strong>bundle exec ruby visual-tests.rb</strong>
+  <p>Install and setup bundler</p>
+  {{#code-block lang="nohighlight"}}
+gem install bundler
+bundle install
+  {{/code-block}}
+  <p>
+    Finally, let's run the <code>visual-tests.rb</code> script to take our first snapshot.
+    This loads the <code>index.html</code> file of the quickstart project and takes a snapshot using
+    the <a href="https://github.com/percy/percy-capybara">percy-capybara client</a>.
+  </p>
 
-# Then refresh this page!{{/code-block}}
+  {{#code-block lang="nohighlight"}}
+PERCY_TOKEN={{token}} \
+  PERCY_PROJECT={{project.fullSlug}} \
+  bundle exec ruby visual-tests.rb
+  {{/code-block}}
+
+  <p>
+    Once that's done, refresh this page and you should see your first snapshot.
+  </p>
 {{/with}}
