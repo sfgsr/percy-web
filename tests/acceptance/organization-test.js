@@ -171,7 +171,7 @@ describe('Acceptance: Organization', function() {
       andThen(() => expect(currentPath()).to.equal('pricing'));
       percySnapshot(this.test);
 
-      click('.PricingBucket:contains("Starter") a:contains("Jump to org")');
+      click('a:contains("Jump to organization for billing")');
       andThen(() => expect(currentPath()).to.equal('pricing'));
       percySnapshot(this.test.fullTitle() + '| select organization');
     });
