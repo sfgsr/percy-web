@@ -3,14 +3,14 @@
 {{/if}}
 {{#with project.writeOnlyToken.token as |token|}}
   <p>
-    Looking to see what Percy can do? Just follow these simple steps:
+    Follow these steps to get the demo project running. First clone the Git repository:
   </p>
 
   {{#code-block lang="nohighlight"}}git clone https://github.com/percy/example-quickstart.git
 cd example-quickstart/
   {{/code-block}}
 
-  <p>Install and setup bundler</p>
+  <p>Next, install and setup bundler:</p>
   {{#code-block lang="nohighlight"}}
 gem install bundler
 bundle install
