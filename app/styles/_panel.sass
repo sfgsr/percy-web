@@ -9,11 +9,12 @@
 
   .Panel-header
     width: 100%
+    background: $lightergray
     border-bottom: $grayborder
-    font-weight: bold
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
+    font-size: 1.2rem
 
   .Panel-header--withSelect
     background-color: $white
@@ -25,6 +26,9 @@
       outline: none
     .ember-basic-dropdown-content
       margin-top: 12px
+      left: auto !important /* fixes bug where dropdown is misaligned */
+      top: auto !important /* fixes bug where dropdown is misaligned */
+
     .ember-power-select-selected-item,
     .ember-power-select-placeholder
       margin-left: 0
@@ -32,8 +36,6 @@
   .Panel-nav
     .Button
       margin: 0
-    .active
-      font-weight: normal
     ul
       margin: 0
       padding: 0
