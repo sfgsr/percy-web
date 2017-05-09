@@ -11,11 +11,10 @@
           {{/each}}
         {{else}}
           <div class="ProjectsList-empty">
-            No recent builds.
-            <br>
-            {{#link-to "organization.project.index" project.organization.slug project.slug}}
-              Get started &raquo;
-            {{/link-to}}
+            <p>
+              Waiting for first Snapshot.&nbsp;
+              {{#link-to "organization.project.index" project.organization.slug project.slug class="Button"}}Get started{{/link-to}}
+            </p>
           </div>
         {{/if}}
       {{/if}}
