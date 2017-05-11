@@ -33,12 +33,15 @@ describe('Acceptance: Project', function() {
       this.project = project;
     });
 
-    it('shows environment variables and tips', function() {
+    it('shows environment variables and demo project instructions', function() {
       visit(`/${this.project.fullSlug}`);
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.index');
       });
       percySnapshot(this.test);
+
+      click('a:contains("Demo Project Instructions")');
+      percySnapshot(this.test.fullTitle() + ' | demo project instructions are visible');
     });
   });
 
