@@ -54,8 +54,13 @@
           <h5>Environment variables</h5>
           {{projects/env-vars project=project}}
 
-          <h5>Just want to see a demo?</h5> 
-          {{projects/quickstart-code project=project}}
+          <h5>Just want to see a demo?</h5>
+          <p>
+            {{quickstart-button showQuickstart=showQuickstart}}
+          </p>
+          {{#if showQuickstart}}
+            {{projects/quickstart-code project=project}}
+          {{/if}}
         {{else}}
           <p>No builds yet, and this project is disabled.</p>
         {{/if}}
