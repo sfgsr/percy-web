@@ -23,10 +23,11 @@
             selectNumColumns=(action selectNumColumns)
         }}
         {{#if (gt build.numComparisonWidths 1)}}
-          {{width-selector
-              build=build
-              selectedWidths=selectedWidths
-              updateSelectedWidths=(action updateSelectedWidths)
+          {{build-width-selector
+            widths=build.comparisonWidths
+            defaultSelectedWidth=defaultSelectedWidth
+            updateSelectedWidth=(action updateSelectedWidth)
+            noWidthSelected=noWidthSelected
           }}
         {{/if}}
       {{/if}}

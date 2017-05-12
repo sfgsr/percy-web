@@ -39,4 +39,12 @@ export default DS.Model.extend({
   // Otherwise, rely on the pdiff diff ratio to tell us if pixels changed.
   isDifferent: Ember.computed.or('wasAdded', 'wasRemoved', 'pdiff.isDifferent'),
   isSame: Ember.computed.not('isDifferent'),
+  smartDiffRatio: Ember.computed('wasAdded', 'wasRemoved', 'pdiff.diffRatio', function() {
+    if (this.get('wasAdded') || this.get('wasRemoved')) {
+      // 100% changed pixels if added or removed.
+      return 1;
+    } else {
+      return this.get('pdiff.diffRatio');
+    }
+  }),
 });

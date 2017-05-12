@@ -15,3 +15,7 @@
 npm-debug.log*
 testem.log
 .DS_Store
+
+# sublime files
+*.sublime-workspace
+*.sublime-project

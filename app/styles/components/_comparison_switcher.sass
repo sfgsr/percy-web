@@ -1,0 +1,20 @@
+.ComparisonSwitcher
+  width: 700px
+  text-align: right
+
+  .ComparisonSwitcherItem--noComparison
+    color: $gray
+
+  .ComparisonSwitcherItem
+    display: inline-block
+    border-radius: 3px
+    padding: 5px
+    margin-left: 10px
+    font-size: 12px
+    font-weight: bold
+
+    &.ComparisonSwitcherItem--selected
+      background: #DADADA
+
+    &.ComparisonSwitcherItem--hasDiffs
+      color: $diffred

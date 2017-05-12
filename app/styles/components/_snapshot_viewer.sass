@@ -1,0 +1,83 @@
+.SnapshotViewer
+  position: relative
+  background: $lightestgray
+  border-radius: 3px
+  width: 100%
+  margin-bottom: 10px
+  // translatez hack to force this box to its own layer.
+  // TODO(fotinakis): I think we can remove this when Chrome 51 has majority stake.
+  transform: translateZ(0)
+  border: 1px solid $lightestgray
+
+  &:last-child
+    margin-bottom: 0
+
+  .SnapshotViewer-noComparison
+    padding: 10px
+    text-align: center
+    width: 100%
+
+  &.SnapshotViewer--collapsed
+    margin-top: 0
+    margin-bottom: 0
+    // Hacky way to make inner borders overlap, plus the z-index in hover.
+    margin-top: -1px
+
+  &.SnapshotViewer--focus
+    border: $grayborderhover
+
+  &.SnapshotViewer--actionable
+    cursor: pointer
+
+    &:hover
+      border: $grayborderhover
+      cursor: pointer
+
+    .SnapshotViewer-details
+      flex: 1 0 auto
+
+    .SnapshotViewer-info
+      color: $gray
+
+    .Button
+      float: right
+      height: 27px
+      margin: 0 10px 0 0
+      padding: 0 20px
+
+      .fa
+        left: 10px
+        top: 3px
+        font-size: 2rem
+
+.SnapshotViewer-header
+  cursor: pointer
+  background-color: $lightgray
+  border: 1px solid $lightgray
+  border-top-left-radius: 2px
+  border-top-right-radius: 2px
+  display: flex
+  padding: 5px 15px
+  align-items: center
+
+  a,
+  a:hover
+    color: $default-text-color
+
+  &.SnapshotViewer-header--actionable
+    &:hover
+      border: $grayborderhover
+      cursor: pointer
+
+  .SnapshotViewer-title
+    flex: 0 1 auto
+    width: calc(100% - 125px)  // 100% - width of details.
+    line-height: 1em
+
+    a
+      display: inline-block
+      font-weight: bold
+      text-overflow: ellipsis
+      overflow: hidden
+      white-space: nowrap
+      max-width: 100%

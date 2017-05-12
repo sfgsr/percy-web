@@ -1,0 +1,26 @@
+<div class="SnapshotViewer-header row" {{action "selectChild"}}>
+  <div class="SnapshotViewer-title" title="{{snapshot.name}}">
+    <a href="{{snapshotUrl}}">{{snapshot.name}}</a>
+  </div>
+  {{comparison-switcher
+    comparisons=snapshot.comparisons
+    buildWidths=buildWidths
+    snapshotSelectedWidth=snapshotSelectedWidth
+    updateSelectedWidth=(action 'updateSelectedWidth')
+    isMultiColumnMode=isMultiColumnMode
+  }}
+</div>
+{{#if isExpanded}}
+  {{#if selectedComparison}}
+    {{comparison-viewer
+      comparison=selectedComparison
+      snapshotSelectedWidth=snapshotSelectedWidth
+      isDefaultExpanded=isDefaultExpanded
+      showNoDiffSnapshot=showNoDiffSnapshot
+    }}
+  {{else}}
+    <div class="SnapshotViewer-noComparison">
+      No snapshot taken at {{snapshotSelectedWidth}}px.
+    </div>
+  {{/if}}
+{{/if}}

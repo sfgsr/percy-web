@@ -1,0 +1,16 @@
+{{#if isMultiColumnMode}}
+  {{comparison-switcher-item
+    selectedWidth=selectedWidth
+    width=selectedWidth
+    comparisons=comparisons
+  }}
+{{else}}
+  {{#each buildWidths as |width|}}
+    {{comparison-switcher-item
+      selectedWidth=selectedWidth
+      width=width
+      comparisons=comparisons
+      updateSelectedWidth=(action 'updateSelectedWidth')
+    }}
+  {{/each}}
+{{/if}}

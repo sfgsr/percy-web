@@ -1,3 +1,7 @@
 {{title model.buildTitle}}
 {{fixed-top-header currentOrganization=model.project.organization}}
-{{build-container build=model activeComparisonId=activeComparisonId updateActiveComparisonId=(route-action "updateActiveComparisonId") showSupport="showSupport"}}
+{{build-container
+  build=model
+  activeSnapshotId=activeSnapshotId
+  updateActiveSnapshotId=(route-action "updateActiveSnapshotId")
+  showSupport="showSupport"}}

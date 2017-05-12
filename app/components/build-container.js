@@ -6,28 +6,31 @@ const MAX_UPDATE_POLLING_REQUESTS = 2000;
 
 export default Ember.Component.extend({
   build: null,
-  activeComparisonId: null,
-  updateActiveComparisonId: null,
+  activeSnapshotId: null,
+  updateActiveSnapshotId: null,
   classNames: ['BuildContainer'],
-  selectedWidths: Ember.computed(
-    'build.comparisonWidths', 'build.comparisons', 'activeComparisonId', function() {
-    let activeComparisonId = this.get('activeComparisonId');
-    if (activeComparisonId) {
-      let activeComparison = this.get('build.comparisons').find(
-              comparison => comparison.id === activeComparisonId);
-      if (activeComparison) {
-        return [activeComparison.get('width')];
-      }
-    }
-    // Use the largest width by default.
-    return this.get('build.comparisonWidths').slice(-1);
-  }),
+  maxWidth: Ember.computed.max('build.comparisonWidths'),
+  buildContainerSelectedWidth: Ember.computed.oneWay('maxWidth'),
+  noWidthSelected: false,
+
   selectedNumColumns: 1,
   showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
-  visibleComparisons: Ember.computed('build.comparisons', 'selectedWidths', function() {
-    return this.get('build.comparisons').filter((comparison) => {
-      return this.get('selectedWidths').indexOf(comparison.get('width')) !== -1;
-    });
+
+  // TODO(@rosschapman): only necessary because of funky API
+  // Builds collection of snapshots with comparisons for display on build page
+  snapshots: Ember.computed('build.comparisons', function() {
+    let comparisons = this.get('build.comparisons');
+    let collection = [];
+
+    let snapshots = comparisons.map((comparison) => comparison.get('headSnapshot')).filter(x => x);
+    let uniqueSnapshots = [...new Set(snapshots)];
+
+    if (uniqueSnapshots.length > 0) {
+      uniqueSnapshots.forEach((snapshot) => {
+        collection.push(snapshot);
+      });
+    }
+    return collection;
   }),
 
   // Task to poll for updates for pending builds.
@@ -66,15 +69,22 @@ export default Ember.Component.extend({
     }
   }),
   actions: {
-    updateActiveComparisonId(comparisonId) {
-      this.get('updateActiveComparisonId')(comparisonId);
+    updateActiveSnapshotId(comparisonId) {
+      this.get('updateActiveSnapshotId')(comparisonId);
     },
-    updateSelectedWidths(widths) {
-      this.set('selectedWidths', widths);
-      this.get('updateActiveComparisonId')(undefined);
+    updateSelectedWidth(width) {
+      // Clear the query parameter selected snapshot.
+      this.sendAction('updateActiveSnapshotId', undefined);
+
+      this.set('noWidthSelected', false);
+      if (width) {
+        this.set('buildContainerSelectedWidth', width);
+      }
+      window.scrollTo(0, 0);
     },
     selectNumColumns(numColumns) {
       this.set('selectedNumColumns', numColumns);
+
       try {
         localStorage.setItem('numColumns', numColumns);
       } catch (_) {
@@ -83,6 +93,9 @@ export default Ember.Component.extend({
     },
     showSupport() {
       this.sendAction('showSupport');
+    },
+    snapshotWidthChangeTriggered() {
+      this.set('noWidthSelected', true);
     },
   },
 });

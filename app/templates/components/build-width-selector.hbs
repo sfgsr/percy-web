@@ -1,0 +1,6 @@
+<select onChange={{action 'updateSelectedWidth' value='target.value'}}>
+  <option selected={{noWidthSelected}} value="select-width">Select width</option>
+  {{#each widths as |width|}}
+    <option value={{width}} selected={{if (eq selectedWidth width) 'selected'}}>{{width}}px</option>
+  {{/each}}
+</select>

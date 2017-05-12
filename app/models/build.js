@@ -41,16 +41,11 @@ export default DS.Model.extend({
   snapshots: DS.hasMany('snapshot', {async: true}),
 
   comparisonWidths: Ember.computed('comparisons', function() {
-    // TODO(fotinakis): use a JavaScript Set when the world has advanced.
-    var widths = [];
-    this.get('comparisons').forEach(function(comparison) {
-      let width = comparison.get('width');
-      if (widths.indexOf(width) === -1) {
-        widths.push(width);
-      }
-    });
+    let widths = [...new Set(this.get('comparisons').map((c) => c.get('width')))];
     return widths.sort((a, b) => a - b);
   }),
+
+  defaultSelectedWidth: Ember.computed.max('comparisonWidths'),
   numComparisonWidths: Ember.computed('comparisonWidths', function() {
     return this.get('comparisonWidths').length;
   }),

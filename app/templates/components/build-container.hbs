@@ -1,9 +1,10 @@
 {{build-header
     build=build
-    selectedWidths=selectedWidths
-    updateSelectedWidths=(action "updateSelectedWidths")
+    defaultSelectedWidth=buildContainerSelectedWidth
+    updateSelectedWidth=(action "updateSelectedWidth")
     selectNumColumns=(action "selectNumColumns")
     selectedNumColumns=selectedNumColumns
+    noWidthSelected=noWidthSelected
 }}
 {{build-header-spacer}}
 
@@ -58,13 +59,16 @@
   {{#if build.comparisons.isPending}}
     {{loading-page}}
   {{else}}
-    {{comparison-list
-        comparisons=visibleComparisons
-        activeComparisonId=activeComparisonId
-        updateActiveComparisonId=(action "updateActiveComparisonId")
-        selectedWidths=selectedWidths
-        selectNumColumns=(action "selectNumColumns")
-        selectedNumColumns=selectedNumColumns
+    {{snapshot-list
+      snapshots=snapshots
+      buildContainerSelectedWidth=buildContainerSelectedWidth
+      buildWidths=build.comparisonWidths
+      activeSnapshotId=activeSnapshotId
+      updateActiveSnapshotId=(action "updateActiveSnapshotId")
+      selectedWidth=selectedWidth
+      selectNumColumns=(action "selectNumColumns")
+      selectedNumColumns=selectedNumColumns
+      snapshotWidthChangeTriggered=(action "snapshotWidthChangeTriggered")
     }}
   {{/if}}
 {{/if}}

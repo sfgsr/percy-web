@@ -45,7 +45,7 @@ describe('Acceptance: Build', function() {
     });
 
     let comparison = this.comparisons.different;
-    let comparisonSelector = `.ComparisonViewer:has(div[title="${comparison.headSnapshot.name}"])`;
+    let comparisonSelector = `.SnapshotViewer:has(div[title="${comparison.headSnapshot.name}"])`;
 
     andThen(() => {
       expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(1);
@@ -58,7 +58,7 @@ describe('Acceptance: Build', function() {
     percySnapshot(this.test.fullTitle() + ' | hides overlay');
 
     // TODO somehow click is not happening with regular click, had to trigger('click')
-    //click(`${comparisonSelector} .ComparisonViewer-pdiffImageBox img`);
+    //click(`${comparisonSelector} .SnapshotViewer-pdiffImageBox img`);
     andThen(() => {
       find(`${comparisonSelector} .ComparisonViewer-pdiffImageBox img`).trigger('click');
     });
@@ -68,7 +68,7 @@ describe('Acceptance: Build', function() {
     percySnapshot(this.test.fullTitle() + ' | shows overlay');
   });
 
-  it('walk across comparisons with arrow keys', function() {
+  it('walk across snapshots with arrow keys', function() {
     const RightArrowKey = 39;
     const LeftArrowKey = 37;
     visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
@@ -77,45 +77,47 @@ describe('Acceptance: Build', function() {
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1`);
     });
 
-    keyEvent('.ComparisonList', 'keydown', RightArrowKey);
+
+    keyEvent('.SnapshotList', 'keydown', RightArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right');
 
-    keyEvent('.ComparisonList', 'keydown', RightArrowKey);
+    keyEvent('.SnapshotList', 'keydown', RightArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=3`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-1`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2');
 
-    keyEvent('.ComparisonList', 'keydown', LeftArrowKey);
+    keyEvent('.SnapshotList', 'keydown', LeftArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?comparison=2`);
+      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2 + Left');
   });
 
-  it('jumps to comparison for query params', function() {
-    let comparison = this.comparisons.wasAdded;
-    let comparison2 = this.comparisons.same;
+  it('jumps to snapshot for query params', function() {
+    let snapshot = this.comparisons.wasAdded.headSnapshot;
 
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison.id}`);
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build');
       expect(
-        find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
-      ).to.equal(comparison.headSnapshot.name);
+        find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()
+      ).to.equal(snapshot.name);
     });
 
     percySnapshot(this.test.fullTitle());
+  });
 
-    // Jump to unchanged, "no diff," comparison
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}?comparison=${comparison2.id}`);
+  it('jumps to snapshot for query params in collapsed no diffs', function() {
+    let snapshot = this.comparisons.same.headSnapshot;
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
       expect(
-        find('.ComparisonViewer.ComparisonViewer--focus .ComparisonViewer-title a').text()
-      ).to.equal(comparison2.headSnapshot.name);
+        find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()
+      ).to.equal(snapshot.name);
     });
   });
 

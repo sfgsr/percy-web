@@ -7,13 +7,6 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  diffPercentage: Ember.computed('diffRatio', function() {
-    return this.get('diffPercentageFull').toFixed(2);
-  }),
-  diffPercentageFull: Ember.computed('diffRatio', function() {
-    return this.get('diffRatio') * 100;
-  }),
-
-  isSame: Ember.computed.equal('diffPercentageFull', 0),
+  isSame: Ember.computed.equal('diffRatio', 0),
   isDifferent: Ember.computed.not('isSame'),
 });

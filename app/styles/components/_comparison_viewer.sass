@@ -28,43 +28,8 @@
       border: $grayborderhover
       cursor: pointer
 
-  .ComparisonViewer-header
-    cursor: pointer
-    padding: 5px
-    background-color: $lightgray
-    border: 1px solid $lightgray
-    border-top-left-radius: 2px
-    border-top-right-radius: 2px
-    display: flex
-
-    a,
-    a:hover
-      color: $default-text-color
-
-    &.ComparisonViewer-header--actionable
-      &:hover
-        border: $grayborderhover
-        cursor: pointer
-
-    .ComparisonViewer-title
-      flex: 0 1 auto
-      margin: 4px 10px 0 10px
-      width: calc(100% - 125px)  // 100% - width of details.
-
-      a
-        display: inline-block
-        font-weight: bold
-        text-overflow: ellipsis
-        overflow: hidden
-        white-space: nowrap
-        max-width: 100%
-
     .ComparisonViewer-details
       flex: 1 0 auto
-
-    .ComparisonStatus
-      float: right
-      margin-right: 5px
 
     .ComparisonViewer-info
       color: $gray
@@ -80,6 +45,10 @@
         top: 3px
         font-size: 2rem
 
+
+  .ComparisonViewer-fullColumn
+    padding: 20px
+    justify-content: center
 
   .ComparisonViewer-halfColumn
     float: left

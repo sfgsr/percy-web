@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   queryParams: {
-    activeComparisonId: {as: 'comparison', replace: true}
+    activeSnapshotId: {as: 'snapshot', replace: true}
   },
   afterModel(model) {
     model.reload().then((model) => {
@@ -18,7 +18,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   resetController(controller, isExiting) {
     if (isExiting) {
       // Clear the query parameter when exiting the route.
-      controller.set('activeComparisonId', undefined);
+      controller.set('activeSnapshotId', undefined);
     }
   },
   actions: {
@@ -35,8 +35,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       };
       this.analytics.track('Build Viewed', organization, eventProperties);
     },
-    updateActiveComparisonId(comparisonId) {
-      this.set('controller.activeComparisonId', comparisonId);
+    updateActiveSnapshotId(snapshotId) {
+      this.set('controller.activeSnapshotId', snapshotId);
     }
   }
 });

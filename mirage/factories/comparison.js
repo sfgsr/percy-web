@@ -2,6 +2,9 @@ import {Factory, trait} from 'ember-cli-mirage';
 import moment from 'moment';
 
 export default Factory.extend({
+  id(i) {
+    return `comparison-${i}`;
+  },
   startedProcessingAt() {
     return moment().subtract(65, 'seconds');
   },
