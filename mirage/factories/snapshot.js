@@ -5,6 +5,6 @@ export default Factory.extend({
     return `snapshot-${i}`;
   },
   name(i) {
-    return `Test Snapshot ${i}`;
+    return `Exemplifying Test Snapshot ${i}`;
   },
 });
