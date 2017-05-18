@@ -1,38 +1,37 @@
 /* jshint expr:true */
+import {setupComponentTest} from 'ember-mocha';
 import {
-  describeComponent,
-  it
-} from 'ember-mocha';
-import {beforeEach, afterEach} from 'mocha';
+  beforeEach,
+  afterEach,
+  it,
+  describe
+} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {startMirage} from 'percy-web/initializers/ember-cli-mirage';
 
-describeComponent(
-  'user-menu',
-  'Integration: UserMenuComponent',
-  {
+describe('Integration: UserMenuComponent', function() {
+  setupComponentTest('user-menu', {
     integration: true
-  },
-  function() {
-    beforeEach(function() {
-      this.server = startMirage();
-      let user = server.create('user');
-      this.set('user', user);
-    });
+  });
 
-    afterEach(function() {
-      this.server.shutdown();
-    });
+  beforeEach(function() {
+    this.server = startMirage();
+    let user = server.create('user');
+    this.set('user', user);
+  });
 
-    it('renders', function() {
-      this.render(hbs`{{user-menu user=user}}`);
-      percySnapshot(this.test);
-    });
+  afterEach(function() {
+    this.server.shutdown();
+  });
 
-    it('toggles menu', function() {
-      this.render(hbs`{{user-menu user=user showMenu=true}}`);
-      percySnapshot(this.test.fullTitle() + ' | Menu is visible');
-    });
-  }
-);
+  it('renders', function() {
+    this.render(hbs`{{user-menu user=user}}`);
+    percySnapshot(this.test);
+  });
+
+  it('toggles menu', function() {
+    this.render(hbs`{{user-menu user=user showMenu=true}}`);
+    percySnapshot(this.test.fullTitle() + ' | Menu is visible');
+  });
+});
