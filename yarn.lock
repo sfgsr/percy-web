@@ -5295,9 +5295,9 @@ percy-client@^2.0.0:
     request "^2.40.0"
     request-promise "^4.1.1"
 
-"percy-docs@git+https://github.com/percy/percy-docs.git#d908af6094240ea74201bf23c368abd49962d3a9":
+"percy-docs@git+https://github.com/percy/percy-docs.git#a819bbd7876704d9eca2b2ab07916cb704868ece":
   version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#d908af6094240ea74201bf23c368abd49962d3a9"
+  resolved "git+https://github.com/percy/percy-docs.git#a819bbd7876704d9eca2b2ab07916cb704868ece"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
     broccoli-funnel "^1.0.2"
