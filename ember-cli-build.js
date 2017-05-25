@@ -15,7 +15,11 @@ module.exports = function(defaults) {
     },
     sassOptions: {
       extension: 'sass',
-    }
+    },
+    fingerprint: {
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
+      prepend: '/static/'
+    },
   });
 
   app.import('bower_components/accounting.js/accounting.js');

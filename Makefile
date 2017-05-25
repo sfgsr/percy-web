@@ -3,4 +3,10 @@ build:
 	docker-compose build
 
 test:
-	docker-compose run web npm test
+	docker-compose run web yarn test
+
+deploy:
+	@utils/deploy
+
+activate:
+	@utils/activate

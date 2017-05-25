@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+[ -z "$IMAGE" ] && echo "[ERROR] Need to set IMAGE environment variable." && exit 1
+NOW=`date +%Y-%m-%d-%H%M%S`
+echo "Building: $IMAGE:$NOW"
+
+# Build assets in the container, then copy them into dist/.
+# We have to do this with "docker cp" and not a mounted volume due to CI constraints.
+docker build -t $IMAGE:$NOW .
+
+# Run container temporarily, then cleanup on exit or error.
+CONTAINER_ID=$(docker run -d -i $IMAGE:$NOW)
+function cleanup() {
+  docker stop $CONTAINER_ID
+  echo 'Done.'
+}
+trap cleanup EXIT
+
+docker exec $CONTAINER_ID yarn build-production
+rm -rf dist/
+docker cp $CONTAINER_ID:/app/src/dist/ dist/
+
+# Upload new assets to GCS.
+gsutil -m -h "Cache-Control: public, max-age=2678400" cp \
+  -a public-read \
+  -z "html,js,css,svg,txt,ico,xml" \
+  -r \
+  -n dist/assets dist/images dist/fonts \
+  gs://percy-public-static/static/
+
+gcloud docker -- push $IMAGE:$NOW
+# TODO: decouple activation, but for now we also tag with :latest.
+docker tag $IMAGE:$NOW $IMAGE:latest
+gcloud docker -- push $IMAGE:latest

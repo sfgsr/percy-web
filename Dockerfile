@@ -24,4 +24,4 @@ RUN yarn
 RUN bower install --allow-root
 # Setup the full app directory (do this after package install to speed up docker builds).
 ADD . /app/src/
-RUN npm run build-production
+RUN yarn run build-production

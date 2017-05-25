@@ -7,10 +7,11 @@
     "test": "tests"
   },
   "scripts": {
+    "clean": "rm -rf dist/* tmp/*",
     "build": "ember build",
     "start": "ember server",
     "start-production-for-testing": "ember server --environment=production",
-    "build-production": "ember build --environment=production",
+    "build-production": "yarn run clean && ember build --environment=production",
     "test": "ember test",
     "test:server": "ember test --server",
     "test:node_debug": "node debug node_modules/ember-cli/bin/ember test --server"
