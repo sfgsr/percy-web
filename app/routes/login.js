@@ -11,7 +11,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     // Right now location.href is the URL before the transition to the login route has completed.
     // Make sure to pass redirectTo into the authenticator so that we come back to that URL.
     let options = {};
-    if (!window.location.href.endsWith('/login')) {
+    if (window && !window.location.href.endsWith('/login')) {
       options['redirectTo'] = window.location.href;
     } else {
       options['redirectTo'] = '/';
