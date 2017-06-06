@@ -5405,18 +5405,18 @@ percy-client@^2.0.0:
     request "^2.40.0"
     request-promise "^4.1.1"
 
-"percy-docs@git+https://github.com/percy/percy-docs.git#7f9320e6b96a34e459da5f9b11b311b47542484a":
+"percy-docs@git+https://github.com/percy/percy-docs.git#0e69caed8bb95721557fc5fc11f016e2f4c60a73":
   version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#7f9320e6b96a34e459da5f9b11b311b47542484a"
+  resolved "git+https://github.com/percy/percy-docs.git#0e69caed8bb95721557fc5fc11f016e2f4c60a73"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
     broccoli-funnel "^1.0.2"
     broccoli-merge-trees "^1.1.1"
     ember-cli-babel "^5.1.7"
 
-"percy-docs@git+https://github.com/percy/percy-docs.git#95d48efabf94fc1e2d962980f4c4c522d09dbef7":
+"percy-docs@git+https://github.com/percy/percy-docs.git#7f9320e6b96a34e459da5f9b11b311b47542484a":
   version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#95d48efabf94fc1e2d962980f4c4c522d09dbef7"
+  resolved "git+https://github.com/percy/percy-docs.git#7f9320e6b96a34e459da5f9b11b311b47542484a"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
     broccoli-funnel "^1.0.2"
