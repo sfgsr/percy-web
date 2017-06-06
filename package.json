@@ -64,6 +64,6 @@
     "http-proxy": "^1.16.2",
     "loader.js": "^4.4.0",
     "morgan": "^1.8.2",
-    "percy-docs": "git+https://github.com/percy/percy-docs.git#95d48efabf94fc1e2d962980f4c4c522d09dbef7"
+    "percy-docs": "git+https://github.com/percy/percy-docs.git#7f9320e6b96a34e459da5f9b11b311b47542484a"
   }
 }
