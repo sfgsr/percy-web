@@ -16,6 +16,8 @@ export default Ember.Component.extend({
   selectedNumColumns: 1,
   showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
 
+  shouldPollForUpdates: Ember.computed.or('build.isPending', 'build.isProcessing'),
+
   // TODO(@rosschapman): only necessary because of funky API
   // Builds collection of snapshots with comparisons for display on build page
   snapshots: Ember.computed('build.comparisons', function() {
@@ -36,7 +38,7 @@ export default Ember.Component.extend({
   // Task to poll for updates for pending builds.
   runningTask: null,
   maybeStartPolling: Ember.on('init', function() {
-    if (this.get('build.isPending') || this.get('build.isProcessing')) {
+    if (this.get('shouldPollForUpdates')) {
       this.set('runningTask', this.get('pollForUpdatesTask').perform());
     }
   }),
@@ -45,10 +47,14 @@ export default Ember.Component.extend({
     while (this.get('numPollRequests') < MAX_UPDATE_POLLING_REQUESTS) {
       this.incrementProperty('numPollRequests');
       this.get('build').reload().then((build) => {
-        if (this.get('build.isPending') || this.get('build.isProcessing')) {
-          build.get('comparisons').reload();
-        } else {
-          build.get('comparisons').reload();
+        build.get('comparisons').reload();
+        if (!this.get('shouldPollForUpdates')) {
+          this.get('runningTask').cancel();
+        }
+        // Cancel after 1 iteration if running tests - otherwise acceptance tests break
+        // ember-concurrency is planning on adding a better way to cancel tasks during testing
+        // https://ember-concurrency.com/#/docs/testing-debugging
+        if (Ember.testing) {
           this.get('runningTask').cancel();
         }
       });

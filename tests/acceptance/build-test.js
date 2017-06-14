@@ -2,13 +2,75 @@ import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 
+describe('Acceptance: Pending Build', function() {
+  freezeMoment('2018-05-22');
+  setupAcceptance();
+
+  setupSession(function(server) {
+    let organization = server.create('organization', 'withUser');
+    let project = server.create('project', {name: 'pending build', organization});
+    let build = server.create('build', {
+      project,
+      createdAt: moment().subtract(2, 'minutes'),
+      state:'pending'
+    });
+    this.project = project;
+    this.build = build;
+  });
+
+  it('shows as pending', function() {
+    visit(`/${this.project.fullSlug}`);
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.index');
+    });
+    percySnapshot(this.test.fullTitle() + ' on the project page');
+
+    click('.BuildState');
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.builds.build');
+    });
+    percySnapshot(this.test.fullTitle() + ' on the build page');
+  });
+});
+
+describe('Acceptance: Processing Build', function() {
+  freezeMoment('2018-05-22');
+  setupAcceptance();
+
+  setupSession(function(server) {
+    let organization = server.create('organization', 'withUser');
+    let project = server.create('project', {name: 'processing build', organization});
+    let build = server.create('build', {
+      project,
+      createdAt: moment().subtract(2, 'minutes'),
+      state:'processing'
+    });
+    this.project = project;
+    this.build = build;
+  });
+
+  it('shows as processing', function() {
+    visit(`/${this.project.fullSlug}`);
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.index');
+    });
+    percySnapshot(this.test.fullTitle() + ' on the project page');
+
+    click('.BuildState');
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.builds.build');
+    });
+    percySnapshot(this.test.fullTitle() + ' on the build page');
+  });
+});
+
 describe('Acceptance: Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
-    let project = server.create('project', {name: 'with builds', organization});
+    let project = server.create('project', {name: 'finished build', organization});
     let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});
     this.comparisons = {
       different: server.create('comparison', {build}),
@@ -18,24 +80,32 @@ describe('Acceptance: Build', function() {
       wasRemoved: server.create('comparison', 'wasRemoved', {build}),
       same: server.create('comparison', 'same', {build})
     };
+
+    // Create some mobile width comparisons
+    let headSnapshot = this.comparisons.different.headSnapshot;
+    server.create('comparison', 'mobile', {build, headSnapshot});
+    headSnapshot = this.comparisons.wasAdded.headSnapshot;
+    server.create('comparison', 'mobile', 'wasAdded', {build, headSnapshot});
+
     this.project = project;
     this.build = build;
   });
 
-  it('shows the build page', function() {
+  it('shows as finished', function() {
     visit(`/${this.project.fullSlug}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.index');
     });
+    percySnapshot(this.test.fullTitle() + ' on the project page');
 
     click('.BuildState');
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build');
     });
-    percySnapshot(this.test);
+    percySnapshot(this.test.fullTitle() + ' on the build page');
 
     click('.ComparisonModePicker button');
-    percySnapshot(this.test.fullTitle() + ' | Overview');
+    percySnapshot(this.test.fullTitle() + ' in overview mode');
   });
 
   it('toggles the image and pdiff', function() {
