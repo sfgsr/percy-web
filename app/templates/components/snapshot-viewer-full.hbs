@@ -1,0 +1,42 @@
+<div class="Viewer-header SnapshotViewerFull-header row">
+  <div class="five columns" title="{{snapshot.name}}">
+    <strong class="Viewer-header-title">{{snapshot.name}}</strong>
+  </div>
+  {{comparison-mode-switcher
+    comparison=selectedComparison
+    updateComparisonMode=updateComparisonMode
+    comparisonMode=comparisonMode
+    class="three columns"
+  }}
+  <div class="SnapshotViewerFull-rightControls four columns">
+    {{comparison-switcher
+      comparisons=snapshot.comparisons
+      buildWidths=buildWidths
+      snapshotSelectedWidth=snapshotSelectedWidth
+      updateSelectedWidth=(action 'updateSelectedWidth')
+    }}
+    <button
+      class="ToggleFullViewButton Button Button--transparent u-pull-right"
+      {{action (route-action 'closeSnapshotFullModal' build.id snapshotId)}}
+    >
+        {{fa-icon 'compress'}}
+    </button>
+  </div>
+</div>
+<div class="SnapshotViewerFull-body">
+  {{#if selectedComparison}}
+    {{comparison-viewer-full
+      comparison=selectedComparison
+      comparisonMode=comparisonMode
+      snapshotSelectedWidth=snapshotSelectedWidth
+      cycleComparisonMode='cycleComparisonMode'
+    }}
+  {{else}}
+    <div class="SnapshotViewerFull-noComparison">
+      <div>
+        {{fa-icon "remove" class="LargeXIcon"}}
+        No snapshot taken at {{snapshotSelectedWidth}}px.
+      </div>
+    </div>
+  {{/if}}
+</div>

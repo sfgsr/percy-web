@@ -18,7 +18,7 @@ bower install
 ## Run server
 
 ```bash
-PERCY_DEV_MIRAGE=yes npm run start
+PERCY_DEV_MIRAGE=yes yarn run start
 ```
 
 Then, access [http://localhost:4200](http://localhost:4200)
@@ -35,7 +35,7 @@ Edit `/etc/hosts` to add a local hostname (required):
 Then, run:
 
 ```bash
-npm run start
+yarn run start
 ```
 
 ### Using the production API
@@ -46,7 +46,7 @@ First, add the `dev.percy.local` hostname above. Then, two environment variables
 export PERCY_WEB_AUTH_TOKEN=...
 export PERCY_WEB_API_HOST=https://percy.io
 
-npm run start
+yarn run start
 ```
 
 `PERCY_WEB_AUTH_TOKEN` is a full-access user token, different than the normal project `PERCY_TOKEN`.
@@ -56,7 +56,7 @@ Then, access [http://dev.percy.local:4200](http://dev.percy.local:4200)
 ## Run tests
 
 ```bash
-npm test
+yarn test
 ````
 
 Or, visit [http://dev.percy.local:4200/tests](http://dev.percy.local:4200/tests).
@@ -64,13 +64,13 @@ Or, visit [http://dev.percy.local:4200/tests](http://dev.percy.local:4200/tests)
 Or, to run in `ember test --server` mode:
 
 ```bash
-npm run test:server
+yarn run test:server
 ```
 
 ## Run tests locally with Percy enabled
 
 ```bash
-PERCY_TOKEN=... PERCY_PROJECT=percy/percy-web npm test
+PERCY_TOKEN=... PERCY_PROJECT=percy/percy-web yarn test
 ```
 
 ## Update to new percy-docs version
@@ -93,6 +93,6 @@ yarn upgrade git+https://github.com/percy/percy-docs.git#<COMMIT SHA>
 
 - Run `yarn install`.
 
-- Run `npm run test` and make sure all tests pass.  There might be deprecation warnings and breakages to fix.  
+- Run `yarn run test` and make sure all tests pass.  There might be deprecation warnings and breakages to fix.  
 
 - After a CI build, ensure that the same number of screenshots have been taken, and that no unexpected visual diffs are present.

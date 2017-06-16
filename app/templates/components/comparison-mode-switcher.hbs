@@ -1,0 +1,18 @@
+<nav class="ComparisonModeSwitcher">
+  {{#if wasAdded}}
+    <span
+      class="ComparisonModeSwitcher-switch active"
+      {{action updateComparisonMode 'head'}}>New Snapshot</span>
+  {{else}}
+    <span
+      class="ComparisonModeSwitcher-switch {{if (eq comparisonMode 'base')  'active'}}"
+      {{action updateComparisonMode 'base'}}>Original</span>
+
+    <span
+      class="ComparisonModeSwitcher-switch {{if (eq comparisonMode 'diff')  'active'}}"
+      {{action updateComparisonMode 'diff'}}>Diff</span>
+    <span
+      class="ComparisonModeSwitcher-switch {{if (eq comparisonMode 'head')  'active'}}"
+      {{action updateComparisonMode 'head'}}>New</span>
+  {{/if}}
+</nav>

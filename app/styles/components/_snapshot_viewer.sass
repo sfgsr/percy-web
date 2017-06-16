@@ -50,34 +50,17 @@
         top: 3px
         font-size: 2rem
 
-.SnapshotViewer-header
-  cursor: pointer
-  background-color: $lightgray
-  border: 1px solid $lightgray
-  border-top-left-radius: 2px
-  border-top-right-radius: 2px
-  display: flex
-  padding: 5px 15px
-  align-items: center
+  .SnapshotViewer-header
+    cursor: pointer
+    border: 1px solid $lightgray
+    border-top-left-radius: 2px
+    border-top-right-radius: 2px
+    height: 40px
 
-  a,
-  a:hover
-    color: $default-text-color
+    &.SnapshotViewer-header--actionable
+      &:hover
+        border: $grayborderhover
+        cursor: pointer
 
-  &.SnapshotViewer-header--actionable
-    &:hover
-      border: $grayborderhover
-      cursor: pointer
-
-  .SnapshotViewer-title
-    flex: 0 1 auto
-    width: calc(100% - 125px)  // 100% - width of details.
-    line-height: normal
-
-    a
-      display: inline-block
-      font-weight: bold
-      text-overflow: ellipsis
-      overflow: hidden
-      white-space: nowrap
-      max-width: 100%
+    .SnapshotViewer-title
+      width: calc(100% - 125px)  // 100% - width of details.

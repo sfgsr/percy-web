@@ -37,6 +37,26 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
     updateActiveSnapshotId(snapshotId) {
       this.set('controller.activeSnapshotId', snapshotId);
-    }
+    },
+    updateModalState(state) {
+      this.get('currentModel').set('isShowingModal', state);
+    },
+    openSnapshotFullModal(snapshotId, snapshotSelectedWidth) {
+      this.send('updateModalState', true);
+      this.transitionTo(
+        'organization.project.builds.build.snapshot',
+        snapshotId,
+        snapshotSelectedWidth,
+        {queryParams: {mode: 'diff'}}
+      );
+    },
+    closeSnapshotFullModal(buildId, snapshotId) {
+      this.send('updateModalState', false);
+      this.transitionTo(
+        'organization.project.builds.build',
+        buildId,
+        {queryParams: {activeSnapshotId: snapshotId}}
+      );
+    },
   }
 });

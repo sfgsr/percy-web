@@ -12,28 +12,11 @@ export default Ember.Component.extend({
   maxWidth: Ember.computed.max('build.comparisonWidths'),
   buildContainerSelectedWidth: Ember.computed.oneWay('maxWidth'),
   noWidthSelected: false,
+  currentPosition: null,
 
   selectedNumColumns: 1,
   showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
-
   shouldPollForUpdates: Ember.computed.or('build.isPending', 'build.isProcessing'),
-
-  // TODO(@rosschapman): only necessary because of funky API
-  // Builds collection of snapshots with comparisons for display on build page
-  snapshots: Ember.computed('build.comparisons', function() {
-    let comparisons = this.get('build.comparisons');
-    let collection = [];
-
-    let snapshots = comparisons.map((comparison) => comparison.get('headSnapshot')).filter(x => x);
-    let uniqueSnapshots = [...new Set(snapshots)];
-
-    if (uniqueSnapshots.length > 0) {
-      uniqueSnapshots.forEach((snapshot) => {
-        collection.push(snapshot);
-      });
-    }
-    return collection;
-  }),
 
   // Task to poll for updates for pending builds.
   runningTask: null,
@@ -75,6 +58,9 @@ export default Ember.Component.extend({
     }
   }),
   actions: {
+    showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth) {
+      this.sendAction('openSnapshotFullModal', snapshotId, snapshotSelectedWidth);
+    },
     updateActiveSnapshotId(comparisonId) {
       this.get('updateActiveSnapshotId')(comparisonId);
     },

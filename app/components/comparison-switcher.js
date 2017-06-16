@@ -20,9 +20,8 @@ export default Ember.Component.extend({
         return;
       }
 
-      let updateSelectedWidth = this.get('updateSelectedWidth');
       this.set('selectedWidth', value);
-      updateSelectedWidth(value);
+      this.get('updateSelectedWidth')(value);
     }
   },
 });

@@ -62,35 +62,6 @@
   .ComparisonViewer-halfColumn--right
     padding: 20px 20px 20px 10px
 
-  .ComparisonViewer-pdiffImageBox
-    @include unselectable
-    position: relative
-    border: 1px solid #eaeaea
-    box-shadow: 0px 0px 5px #dadada
-    width: 100%
-
-    .pdiffImageOverlay
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
-
-  .ComparisonViewer-pdiffImageBox--actionable
-    @include unselectable
-    cursor: pointer
-
-    &:hover
-      border: $grayborderhover
-
-  .ComparisonViewer-pdiffImageOverlay
-    @include unselectable
-    cursor: pointer
-    position: absolute
-    top: 0
-    left: 0
-    background-color: rgb(255, 255, 255)
-    opacity: 0.9
-
   .ComparisonViewer-snapshotMissing
     height: 200px
     text-align: center
@@ -98,11 +69,6 @@
     background: $white
     border: $grayborder
     width: 100%
-
-    .fa
-      font-size: 8rem
-      color: $lightergray
-      text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray
 
   .ComparisonViewer-noDiffBox
     padding: 7px

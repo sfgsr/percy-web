@@ -49,23 +49,36 @@ export default Factory.extend({
     }
   }),
 
+  // TODO: this needs a complete rewrite to be much simpler, potentially with explicit comparison
+  // factories types instead of traits that create combinations.
   afterCreate(comparison, server) {
     let settings = {
       prefix: 'bs',
       width: 1280,
-      pdiff: {width: 1280, height: 600, ratio: 0.42, postfix: ''},
-      lossy: {width: 900, height: 422, postfix: ''},
+      height: 1485,
+      postfix: '',
+      pdiff: {width: 1280, height: 1485, ratio: 0.42, postfix: ''},
+      lossy: {width: 900, height: 1044, postfix: ''},
       longer: {
-        pdiff: {width: 1280, height: 953, ratio: 0.62, postfix: '-longer'},
-        lossy: {width: 900, height: 670, postfix: '-longer'}
+        prefix: 'bs',
+        postfix: '',
+        width: 1280,
+        height: 1814,
+        pdiff: {width: 1280, height: 1814, ratio: 0.62, postfix: '-longer'},
+        lossy: {width: 900, height: 1275, postfix: '-longer'}
       }
     };
     if (comparison.includeMobileVersion) {
       settings.prefix = 'bs-mobile';
       settings.width = 320;
-      settings.pdiff = {width: 320, height: 600, ratio: 0.32, postfix: ''};
+      settings.height = 1598;
+      settings.pdiff = {width: 320, height: 1598, ratio: 0.32, postfix: ''};
       settings.lossy = settings.pdiff;
-      settings.longer.pdiff = {width: 320, height: 1040, ratio: 0.72, postfix: '-longer'};
+      settings.longer.prefix = 'bs-mobile';
+      settings.longer.postfix = '-longer';
+      settings.longer.width = 320;
+      settings.longer.height = 2757;
+      settings.longer.pdiff = {width: 320, height: 2757, ratio: 0.72, postfix: '-longer'};
       settings.longer.lossy = settings.longer.pdiff;
     }
     if (comparison.pdiff === null && comparison.includePdiff) {
@@ -82,32 +95,44 @@ export default Factory.extend({
     }
     if (comparison.baseScreenshot === null && comparison.includeBaseScreenshot) {
       let lossy = settings.lossy;
+      let lossless = settings;
       let variant = 'base';
       if (comparison.includeBaseScreenshot === 'longer') {
         lossy = settings.longer.lossy;
+        lossless = settings.longer;
         variant = 'head';
       }
+      let image = server.create('image', {
+        url: `/images/test/${lossless.prefix}-${variant}${lossless.postfix}.png`,
+        width: lossless.width, height: lossless.height
+      });
       let lossyImage = server.create('image', {
         url: `/images/test/${settings.prefix}-${variant}${lossy.postfix}-lossy.jpg`,
         width: lossy.width, height: lossy.height
       });
-      let baseScreenshot = server.create('screenshot', {lossyImage});
+      let baseScreenshot = server.create('screenshot', {image, lossyImage});
       comparison.update({baseScreenshot});
     }
     if (comparison.headScreenshot === null && comparison.includeHeadScreenshot) {
       let lossy = settings.lossy;
+      let lossless = settings;
       let variant = 'head';
       if (comparison.includeBaseScreenshot === 'longer') {
         variant = 'base';
       }
       if (comparison.includeHeadScreenshot === 'longer') {
         lossy = settings.longer.lossy;
+        lossless = settings.longer;
       }
+      let image = server.create('image', {
+        url: `/images/test/${settings.prefix}-${variant}${lossy.postfix}.png`,
+        width: lossless.width, height: lossless.height
+      });
       let lossyImage = server.create('image', {
-          url: `/images/test/${settings.prefix}-${variant}${lossy.postfix}-lossy.jpg`,
-          width: lossy.width, height: lossy.height
-        });
-      let headScreenshot = server.create('screenshot', {lossyImage});
+        url: `/images/test/${settings.prefix}-${variant}${lossy.postfix}-lossy.jpg`,
+        width: lossy.width, height: lossy.height
+      });
+      let headScreenshot = server.create('screenshot', {image, lossyImage});
       comparison.update({headScreenshot});
       if (comparison.headSnapshot === null) {
         let headSnapshot = server.create('snapshot');

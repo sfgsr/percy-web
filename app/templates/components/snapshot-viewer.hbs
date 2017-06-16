@@ -1,14 +1,22 @@
-<div class="SnapshotViewer-header row" {{action "selectChild"}}>
-  <div class="SnapshotViewer-title" title="{{snapshot.name}}">
+<div class="Viewer-header SnapshotViewer-header row" {{action "selectChild"}}>
+  <div class="Viewer-header-title SnapshotViewer-title" title="{{snapshot.name}}">
     <a href="{{snapshotUrl}}">{{snapshot.name}}</a>
   </div>
-  {{comparison-switcher
-    comparisons=snapshot.comparisons
-    buildWidths=buildWidths
-    snapshotSelectedWidth=snapshotSelectedWidth
-    updateSelectedWidth=(action 'updateSelectedWidth')
-    isMultiColumnMode=isMultiColumnMode
-  }}
+  {{#unless (eq selectedNumColumns 4)}}
+    {{comparison-switcher
+      comparisons=snapshot.comparisons
+      buildWidths=buildWidths
+      snapshotSelectedWidth=snapshotSelectedWidth
+      updateSelectedWidth=(action 'updateSelectedWidth')
+      isMultiColumnMode=isMultiColumnMode
+    }}
+    <button
+      class="ToggleFullViewButton Button Button--transparent u-pull-right"
+      {{action 'showSnapshotFullModalTriggered' snapshot.id snapshotSelectedWidth}}
+    >
+        {{fa-icon 'expand'}}
+    </button>
+  {{/unless}}
 </div>
 {{#if isExpanded}}
   {{#if selectedComparison}}

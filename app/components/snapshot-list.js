@@ -14,11 +14,10 @@ export default Ember.Component.extend({
   selectedNumColumns: null,
   selectedSnapshotIndex: -1,
   snapshotComponents: null,
-  snapshots: [],
   updateActiveSnapshotId: null,
   updateSelectedWidth: null,
 
-  sortedSnapshots: Ember.computed('snapshots', 'buildContainerSelectedWidth', function() {
+  sortedSnapshots: Ember.computed('snapshots.[]', 'buildContainerSelectedWidth', function() {
     let snapshots = this.get('snapshots');
     let width = parseInt(this.get('buildContainerSelectedWidth'));
 
@@ -93,10 +92,12 @@ export default Ember.Component.extend({
   }),
   didInsertElement() {
     Ember.$(document).bind('keydown.snapshots', function(e) {
-      if (e.keyCode === 39) {  // right arrow
-        this.send('nextSnapshot');
-      } else if (e.keyCode === 37) {  // left arrow
-        this.send('previousSnapshot');
+      if (!this.get('isShowingModal')) {
+        if (e.keyCode === 39) {  // right arrow
+          this.send('nextSnapshot');
+        } else if (e.keyCode === 37) {  // left arrow
+          this.send('previousSnapshot');
+        }
       }
     }.bind(this));
   },
@@ -104,7 +105,7 @@ export default Ember.Component.extend({
     Ember.$(document).unbind('keydown.snapshots');
   },
   scrollToChild: function(component) {
-    window.scrollTo(0, component.$().offset().top - 250);
+    this.get('parentView').$().animate({scrollTop: component.$().get(0).offsetTop - 250}, 0);
   },
   actions: {
     registerChild(component) {

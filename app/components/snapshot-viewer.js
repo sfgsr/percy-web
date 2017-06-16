@@ -73,6 +73,9 @@ export default Ember.Component.extend({
     updateSelectedWidth(value) {
       this.set('snapshotSelectedWidth', value);
       this.get('snapshotWidthChangeTriggered')();
+    },
+    showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth) {
+      this.attrs.showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth);
     }
   },
 });

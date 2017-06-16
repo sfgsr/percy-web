@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="{{rootURL}}assets/percy-web.css">
     <link rel="stylesheet" href="{{rootURL}}assets/test-support.css">
 
+    <!-- Testing-only style fix that makes snapshots in Percy full-height. -->
+    <style>
+      .BuildContainer {
+        height: auto;
+        overflow-y: auto;
+      }
+    </style>
+
     {{content-for "head-footer"}}
     {{content-for "test-head-footer"}}
   </head>

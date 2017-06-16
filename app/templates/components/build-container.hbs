@@ -1,10 +1,10 @@
 {{build-header
-    build=build
-    defaultSelectedWidth=buildContainerSelectedWidth
-    updateSelectedWidth=(action "updateSelectedWidth")
-    selectNumColumns=(action "selectNumColumns")
-    selectedNumColumns=selectedNumColumns
-    noWidthSelected=noWidthSelected
+  build=build
+  defaultSelectedWidth=buildContainerSelectedWidth
+  updateSelectedWidth=(action "updateSelectedWidth")
+  selectNumColumns=(action "selectNumColumns")
+  selectedNumColumns=selectedNumColumns
+  noWidthSelected=noWidthSelected
 }}
 {{build-header-spacer}}
 
@@ -60,7 +60,7 @@
     {{loading-page}}
   {{else}}
     {{snapshot-list
-      snapshots=snapshots
+      snapshots=build.snapshots
       buildContainerSelectedWidth=buildContainerSelectedWidth
       buildWidths=build.comparisonWidths
       activeSnapshotId=activeSnapshotId
@@ -69,6 +69,9 @@
       selectNumColumns=(action "selectNumColumns")
       selectedNumColumns=selectedNumColumns
       snapshotWidthChangeTriggered=(action "snapshotWidthChangeTriggered")
+      build=build
+      showSnapshotFullModalTriggered=(action 'showSnapshotFullModalTriggered')
+      isShowingModal=isShowingModal
     }}
   {{/if}}
 {{/if}}

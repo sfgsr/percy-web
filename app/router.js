@@ -49,7 +49,9 @@ Router.map(function() {
     this.route('project', {path: '/:project_id'}, function() {
       this.route('settings');
       this.route('builds', {}, function() {
-        this.route('build', {path: '/:build_id'});
+        this.route('build', {path: '/:build_id'}, function() {
+          this.route('snapshot', {path: '/view/:snapshot_id/:width'});
+        });
       });
     });
   });

@@ -1,0 +1,50 @@
+.ember-modal-wrapper
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 1001
+  width: 100vw
+  height: 100vh
+  overflow: overlay
+
+  .SnapshotViewerFull
+    z-index: 1001
+    background: $lightestgray
+    width: 100vw
+    line-height: calc(100vh - #{$header-height})
+    outline: none
+
+    .SnapshotViewerFull-header
+      position: fixed
+      width: 100%
+      height: 40px
+      line-height: 1.5
+      z-index: 1001
+      box-shadow: $base-shadow-flush
+      padding-left: 15px
+      padding-right: 20px // Makes space for scrollbar
+
+    .SnapshotViewerFull-body
+      text-align: center
+      padding-top: 60px
+      vertical-align: middle
+      cursor: pointer
+
+      p
+        // Viewport centering
+        display: inline-block
+        line-height: normal
+        width: 100%
+
+    .SnapshotViewerFull-rightControls
+      text-align: right
+
+    .ComparisonSwitcher
+      width: auto
+      display: inline-block
+
+  .SnapshotViewerFull-noComparison > div
+    display: inline-block
+    line-height: 1

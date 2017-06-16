@@ -1,0 +1,11 @@
+{{#modal-dialog wrapperClass="SnapshotViewerFullModalWrapper"}}
+  {{snapshot-viewer-full
+    build=build
+    snapshotId=snapshotId
+    snapshotSelectedWidth=snapshotSelectedWidth
+    comparisonMode=comparisonMode
+    updateComparisonMode=(route-action 'updateComparisonMode')
+    transitionRouteToWidth=(route-action 'transitionRouteToWidth')
+    closeSnapshotFullModal=(route-action 'closeSnapshotFullModal')
+  }}
+{{/modal-dialog}}

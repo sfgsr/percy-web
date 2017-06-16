@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   comparison: null,
-  
+
   classNames: ['ComparisonViewer'],
   hasNoWidth: Ember.computed('comparison', 'snapshotSelectedWidth', function() {
     return parseInt(this.get('snapshotSelectedWidth')) !== this.get('comparison.width');

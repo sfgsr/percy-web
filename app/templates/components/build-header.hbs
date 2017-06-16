@@ -18,9 +18,9 @@
     <div class="six columns">
       {{#if showActions}}
         {{approval-section build=build}}
-        {{comparison-mode-picker
-            selectedNumColumns=selectedNumColumns
-            selectNumColumns=(action selectNumColumns)
+        {{build-mode-picker
+          selectedNumColumns=selectedNumColumns
+          selectNumColumns=(action selectNumColumns)
         }}
         {{#if (gt build.numComparisonWidths 1)}}
           {{build-width-selector
