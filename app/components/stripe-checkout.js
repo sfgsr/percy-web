@@ -81,7 +81,7 @@ export default Ember.Component.extend({
       if (this.get('updateCard') || this.get('organization.subscription.isTrialOrFree')) {
         this.set('handler', window.StripeCheckout.configure({
           key: config.APP.STRIPE_PUBLISHABLE_KEY,
-          image: '/images/percy-bg.png',
+          image: '/images/touch-icon.png',
           token(token) {
             self._changeSubscription(chosenPlanId, token);
           }
