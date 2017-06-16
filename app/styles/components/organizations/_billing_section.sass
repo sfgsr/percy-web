@@ -2,18 +2,16 @@
   .OrganizationsBillingSection-plan
     @include Card
     padding: 15px
-    border-bottom: none
+
+    &:not(.active)
+      border-bottom: 0
 
     .columns:first-of-type
       font-family: $fancy-font
       font-size: 2rem
 
-    &.active
-      @include Card--selected
-      border-bottom: 1px solid $darkpurple !important
-
     &:last-of-type
-      border-bottom: $grayborder
+      border-bottom: $lighter-gray-border
       margin-bottom: 20px
 
     .SavingIndicator
@@ -31,13 +29,9 @@
 
   h3 span
     display: inline-block
-    color: #adadad
+    color: $gray
     padding-left: 5px
     font-size: 1.9rem
 
   .PricingBucket
     width: 235px !important
-
-  .OrganizationsBillingSection-currentPlan
-    background: $beige
-    padding: 10px

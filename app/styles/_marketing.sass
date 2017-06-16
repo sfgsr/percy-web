@@ -32,7 +32,7 @@
       text-align: center
 
     &.MockPageContainer
-      border-bottom: $grayborder
+      border-bottom: $lighter-gray-border
 
     code
       font-size: 1.2rem
@@ -40,7 +40,7 @@
         opacity: $dim-code-opacity
 
     sup
-      color: $percypurple
+      color: $purple
 
     .MarketingNumDiffs
       margin-top: 40px
@@ -50,14 +50,8 @@
     .Button
       box-shadow: $base-shadow
 
-    .Button--primary
-      background: #8A3D9D
-
-      &:hover
-        background: $darkpurple
-      
     .hljs
-      background: white
+      background: $white
 
   &.TrustedByContainer
     img
@@ -76,10 +70,6 @@
 
   .AboutContainer-header
     text-align: center
-    background: $darkpurple
-    border-radius: 10px
-    color: white
-    padding: 10px
 
     h1
       padding-top: 20px
@@ -111,13 +101,23 @@
 .PulseCircle
   @include animation('pulsate 2s ease-out')
   animation-iteration-count: infinite
-  border: 3px solid #999
+  border: 3px solid $dark-gray
   border-radius: 30px
   height: 28px
   width: 28px
   position: absolute
   opacity: 0.0
   z-index: 1000
+
+.PerformanceContainer
+  img
+    float: right
+    max-width: 55%
+    @media (max-width: 550px)
+      max-width: 35%
+      float: none
+      display: block
+      margin: 0 auto 20px auto
 
 @include keyframes(pulsate)
   0%

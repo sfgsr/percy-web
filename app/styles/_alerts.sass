@@ -1,30 +1,24 @@
 .Alert
-  padding: 8px
+  padding: 10px
   margin-bottom: 20px
-  border: 1px solid transparent
+  border-top: 3px solid transparent
   border-radius: 3px
 
   &.Alert--info
-    color: $darkpurple
-    background-color: $lightestpurple
-    border-color: $lightpurple
+    background-color: $lightest-blue
+    border-color: $blue
 
   &.Alert--success
-    color: $green
-    background-color: $lightestgreen
+    background-color: $lightest-green
     border-color: $green
 
   &.Alert--warning
-    color: #8a6d3b
-    background-color: #fcf8e3
-    border-color: #faebcc
+    background-color: $lightest-yellow
+    border-color: $yellow
 
   &.Alert--error
-    color: $default-text-color
-    background-color: $lightestred
+    background-color: $lightest-red
     border-color: $red
-    strong
-      color: $red
 
   .CodeBlock:last-child pre,
   ul:last-child,

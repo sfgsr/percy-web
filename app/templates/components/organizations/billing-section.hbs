@@ -61,7 +61,7 @@
           <div class="three columns">
             {{organization.subscription.plan.name}}
           </div>
-          <div class="nine columns">
+          <div class="six columns">
             {{#with organization.subscription.plan as |plan|}}
               <strong>
                 {{plan.workerLimit}} parallel workers
@@ -79,6 +79,9 @@
               You are on a custom plan, feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions before changing plans below.
             {{/unless}}
           </div>
+          <div class="three columns">
+            <a href="#" disabled="disabled" class="Button">Selected Plan</a>
+          </div>
         </div>
       </div>
       <br>
@@ -88,10 +91,10 @@
         {{#unless (eq planData.id "free")}}
           <div class="OrganizationsBillingSection-plan container {{if (eq organization.subscription.plan.id planData.id) "active"}}">
             <div class="row">
-              <div class="two columns">
+              <div class="three columns">
                 {{planData.name}}
               </div>
-              <div class="four columns">
+              <div class="three columns">
                 <strong>{{planData.numWorkersTitle}}</strong>
                 <br>
                 {{format-number planData.numDiffs}} snapshots included
@@ -103,7 +106,11 @@
               </div>
               <div class="three columns">
                 {{#if (eq organization.subscription.plan.id planData.id)}}
-                  {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+                  {{#if isSaving}}
+                    {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
+                  {{else}}
+                    <a href="#" disabled="disabled" class="Button">Selected Plan</a>
+                  {{/if}}
                 {{else}}
                   {{!-- TODO: #billingadmins --}}
                   {{#if (eq "admin" organization.currentUserMembership.role)}}
@@ -124,10 +131,10 @@
       {{/each}}
       <div class="OrganizationsBillingSection-plan container">
         <div class="row">
-          <div class="two columns">
+          <div class="three columns">
             Enterprise
           </div>
-          <div class="four columns">
+          <div class="three columns">
             <strong>Custom parallel workers</strong>
             <br>
             Unlimited snapshots

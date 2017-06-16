@@ -1,21 +1,22 @@
-$approved-text-shadow: 2px 2px 1px #487E02
+$approved-text-shadow: 1px 1px 1px $dark-green
 $approved-background: $green
 
 .ApprovalButton
   font-size: 1.4rem
   text-transform: uppercase
   border: 0
-  color: white
+  color: $white
   background-color: $approved-background
   text-shadow: $approved-text-shadow
-  animation-duration: 2s;
+  font-weight: 600
 
   &:hover,
   &:focus,
   &.ApprovalButton--hover,
-    color: white
-    background: #83C32F
-    text-shadow: 2px 2px 1px #629D16
+    color: $white
+    background: $light-green
+    text-shadow: 1px 1px 1px $green
+    border: 0
 
   &.ApprovalButton--approved
     padding: 20px 28px

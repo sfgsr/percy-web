@@ -15,7 +15,7 @@
       margin-top: 0
 
     h2
-      border-bottom: 1px solid #E1E1E1
+      border-bottom: $lighter-gray-border
 
     h2, h3
       &:hover .DocsAnchor
@@ -32,9 +32,8 @@
 
   .DocsNav
     padding: 20px
-    background: $lightergray
-    box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px, rgba(0,0,0,0.09804) 0px 1px 2px 0px
-    border-radius: 3px
+    background: $lightest-gray
+    border-right: $lighter-gray-border
 
     h1
       margin-bottom: 1rem
@@ -48,7 +47,7 @@
         font-size: 1.6rem
         margin-top: 1.4rem
         margin-bottom: 0rem
-        color: #7d7d7d
+        color: $darker-gray
         font-family: $fancy-font
         font-weight: bold
 
@@ -62,7 +61,7 @@
           text-indent: -.7em
         li::before
           content: "-"
-          color: #adadad
+          color: $gray
           padding-right: 7px
 
     header:first-child

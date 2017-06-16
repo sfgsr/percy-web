@@ -1,16 +1,15 @@
 .Panel
   width: 100%
   margin-bottom: 1rem
-  border: $grayborder
-  border-radius: 4px
+  border: $lighter-gray-border
 
   & > .Panel-section
     padding: 10px
 
   .Panel-header
     width: 100%
-    background: $lightergray
-    border-bottom: $grayborder
+    background: $lightest-gray
+    border-bottom: $lighter-gray-border
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
@@ -18,13 +17,22 @@
 
   .Panel-header--withSelect
     background-color: $white
-    border-bottom: $grayborder
+    border-bottom: $lighter-gray-border
     overflow: initial
+
+    input
+      margin-bottom: 0
+
+    .ember-power-select-option
+      padding: 10px
+
     .ember-power-select-trigger
       border: 0
       background: none
       outline: none
     .ember-basic-dropdown-content
+      border: $lighter-gray-border
+      border-top: 0
       margin-top: 12px
       left: auto !important /* fixes bug where dropdown is misaligned */
       top: auto !important /* fixes bug where dropdown is misaligned */

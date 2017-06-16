@@ -19,16 +19,16 @@
 .NamespaceCard
   position: relative
   width: 100%
-  border: 1px solid #ededed
-  border-bottom: 1px solid $lightergray
-  background: #ededed
+  border: $lighter-gray-border
+  border-bottom: $lighter-gray-border
+  background: $lightest-gray
   padding: 10px
   color: $gray
 
   &.NamespaceCard--active
-    background: $lightergray
+    background: $lighter-gray
     font-weight: bold
-    color: $darkgray
+    color: $dark-gray
 
     .NamespaceCard-arrow
       display: block
@@ -37,7 +37,7 @@
     cursor: pointer
 
     &:hover
-      background: $lightergray
+      background: $lighter-gray
 
       .NamespaceCard-arrow
         display: block
@@ -51,4 +51,4 @@
     height: 0;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    border-left: 18px solid $lightergray;
+    border-left: 18px solid $lighter-gray;

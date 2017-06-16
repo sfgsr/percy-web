@@ -1,7 +1,6 @@
 .ProjectCard
   a.ProjectCard-link
     color: $default-text-color
-    font-weight: bold
     padding: 10px
     display: block
     overflow: hidden
@@ -10,12 +9,12 @@
     @include Card
     @include Card--linkable
 
-    background: $lightgray
+    background: $very-light-gray
 
     &:hover
       text-decoration: none
-      background: #d8d8d8
-      border: $grayborder
+      background: $lighter-gray
+      border: $lighter-gray-border
 
     .fa-github
       font-size: 1.8rem

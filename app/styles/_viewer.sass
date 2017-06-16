@@ -2,7 +2,7 @@
   display: flex
   padding: 5px 15px
   align-items: center
-  background-color: $lightgray
+  background-color: $very-light-gray
 
   a,
   a:hover
@@ -30,15 +30,14 @@
 
 .LargeXIcon
   font-size: 8rem
-  color: $lightergray
+  color: $lighter-gray
   text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray
   display: block
 
 .Viewer-pdiffImageBox
   @include unselectable
   position: relative
-  border: 1px solid #eaeaea
-  box-shadow: 0px 0px 5px #dadada
+  border: $very-light-gray-border
   width: 100%
 
   .pdiffImageOverlay
@@ -52,7 +51,7 @@
   cursor: pointer
 
   &:hover
-    border: $grayborderhover
+    border: $lighter-gray-border-hover
 
 .Viewer-pdiffImageOverlay
   @include unselectable

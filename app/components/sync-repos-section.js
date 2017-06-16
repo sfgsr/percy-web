@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   isPrivateReposExpanded: false,
   session: Ember.inject.service(),
 
-  classNames: ['SyncReposSection', 'Alert', 'Alert--info'],
+  classNames: ['SyncReposSection', 'Card'],
   classNameBindings: ['classes', 'isPrivateReposExpanded::SyncReposSection--collapsed'],
   actions: {
     togglePrivateRepos() {

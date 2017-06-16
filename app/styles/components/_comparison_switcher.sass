@@ -7,15 +7,24 @@
 
   .ComparisonSwitcherItem
     display: inline-block
-    border-radius: 3px
+    border-radius: 4px
     padding: 5px
-    margin-left: 10px
+    margin: 0 5px
     font-size: 12px
     font-weight: bold
     cursor: pointer
+    border: 1px solid transparent
+
+    &.ComparisonSwitcherItem--selected,
+    &:hover
+      border: $lighter-gray-border
+
+    &:hover
+      background: $lightest-gray
 
     &.ComparisonSwitcherItem--selected
-      background: #DADADA
+      background: $white
+      color: $default-link-hover
 
     &.ComparisonSwitcherItem--hasDiffs
-      color: $diffred
+      color: $red

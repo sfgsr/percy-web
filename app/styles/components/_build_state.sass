@@ -3,7 +3,7 @@
   font-family: $standard-font
   width: 155px
   height: 40px
-  background-color: $lightergray
+  background-color: $very-light-gray
   border-radius: 4px
   font-weight: lighter
 
@@ -35,33 +35,32 @@
 
   &.BuildState--pending
     .BuildState-icon
-      background-color: $gray
+      background-color: $dark-gray
 
   &.BuildState--processing
     .BuildState-icon
-      background-color: $lightergreen
+      background-color: $lighter-green
 
   &.BuildState--finished
-    background-color: $lightestgreen
+    background-color: $lightest-green
     .BuildState-icon
       background-color: $green
 
     &.BuildState--hasDiffs
-      background-color: $lightyellow
+      background-color: $light-yellow
       .BuildState-icon
-        background-color: $darkyellow
+        background-color: $yellow
 
     &.BuildState--approved
-      background-color: $lightestgreen
+      background-color: $lightest-green
       .BuildState-icon
         background-color: $green
 
   &.BuildState--failed
-    background-color: $lightestred
+    background-color: $lightest-red
     .BuildState-icon
       background-color: $red
 
   &.BuildState--expired
-    background-color: $beige
     .BuildState-icon
-      background-color: $darkyellow
+      background-color: $dark-yellow

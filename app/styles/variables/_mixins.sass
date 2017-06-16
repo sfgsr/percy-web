@@ -61,8 +61,8 @@
 
 @mixin Card
   position: relative
-  background: $lightestgray
-  border: $grayborder
+  background: $lightest-gray
+  border: $lighter-gray-border
   padding: 10px
 
 @mixin Card--white
@@ -70,15 +70,15 @@
 
 @mixin Card--linkable
   &:hover
-    border: $grayborderhover
+    border: $lighter-gray-border-hover
     cursor: pointer
 
 @mixin Card--expando
-  background: $lightgray
+  background: $lightest-gray
 
 @mixin Card--selected
-  background: $lightestpurple
-  border: 1px solid $darkpurple
+  background: $very-light-gray
+  border: 1px solid $lighter-gray
 
 @mixin Card--extraPadded
   padding: 40px
