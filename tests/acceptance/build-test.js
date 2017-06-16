@@ -12,7 +12,7 @@ describe('Acceptance: Pending Build', function() {
     let build = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
-      state:'pending'
+      state: 'pending',
     });
     this.project = project;
     this.build = build;
@@ -43,13 +43,45 @@ describe('Acceptance: Processing Build', function() {
     let build = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
-      state:'processing'
+      state: 'processing',
     });
     this.project = project;
     this.build = build;
   });
 
   it('shows as processing', function() {
+    visit(`/${this.project.fullSlug}`);
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.index');
+    });
+    percySnapshot(this.test.fullTitle() + ' on the project page');
+
+    click('.BuildState');
+    andThen(() => {
+      expect(currentPath()).to.equal('organization.project.builds.build.index');
+    });
+    percySnapshot(this.test.fullTitle() + ' on the build page');
+  });
+});
+
+describe('Acceptance: Failed Build', function() {
+  freezeMoment('2018-05-22');
+  setupAcceptance();
+
+  setupSession(function(server) {
+    let organization = server.create('organization', 'withUser');
+    let project = server.create('project', {name: 'failed build', organization});
+    let build = server.create('build', {
+      project,
+      createdAt: moment().subtract(2, 'minutes'),
+      state: 'failed',
+      failureReason: 'render_timeout',
+    });
+    this.project = project;
+    this.build = build;
+  });
+
+  it('shows as failed', function() {
     visit(`/${this.project.fullSlug}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.index');
