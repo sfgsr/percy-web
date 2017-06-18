@@ -77,7 +77,7 @@ export default function() {
     let subscription = organization.subscription;
 
     // Mimic backend email validation.
-    if (!attrs.billingEmail.match(/^[a-zA-Z0-9_]+\@[a-zA-Z0-9_\.]+$/)) {
+    if (!attrs.billingEmail.match(/^[a-zA-Z0-9_]+@[a-zA-Z0-9_.]+$/)) {
       return new Mirage.Response(400, {}, {
         errors: [
           {
