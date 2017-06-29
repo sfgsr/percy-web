@@ -5456,22 +5456,13 @@ path-type@^1.0.0:
     pinkie-promise "^2.0.0"
 
 percy-client@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-2.1.0.tgz#32522b81b678a1c9cddc5f3f8fba41ddebf5a1d0"
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-2.1.2.tgz#9694162d9044294a6a7b9acc76c8a9df500ac073"
   dependencies:
     base64-js "^1.1.2"
     jssha "^2.1.0"
     request "^2.40.0"
     request-promise "^4.1.1"
-
-"percy-docs@git+https://github.com/percy/percy-docs.git#8c0fe1eec44fc0ad0df18f8ccdf32f109665a881":
-  version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#8c0fe1eec44fc0ad0df18f8ccdf32f109665a881"
-  dependencies:
-    broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
-    broccoli-funnel "^1.0.2"
-    broccoli-merge-trees "^1.1.1"
-    ember-cli-babel "^5.1.7"
 
 "percy-docs@git+https://github.com/percy/percy-docs.git#b95880eec97d17c61a1a0ec819f3e530e8d726cd":
   version "0.0.0"
@@ -5976,11 +5967,7 @@ rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-safe-buffer@^5.0.1:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.0.tgz#fe4c8460397f9eaaaa58e73be46273408a45e223"
-
-safe-buffer@~5.0.1:
+safe-buffer@^5.0.1, safe-buffer@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
 
