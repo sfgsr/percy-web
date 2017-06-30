@@ -91,11 +91,11 @@
         {{#unless (eq planData.id "free")}}
           <div class="OrganizationsBillingSection-plan container {{if (eq organization.subscription.plan.id planData.id) "active"}}">
             <div class="row">
-              <div class="three columns">
+              <div class="two columns">
                 {{planData.name}}
               </div>
-              <div class="three columns">
-                <strong>{{planData.numWorkersTitle}}</strong>
+              <div class="four columns">
+                {{planData.numWorkersTitle}}
                 <br>
                 {{format-number planData.numDiffs}} snapshots included
               </div>
@@ -131,11 +131,11 @@
       {{/each}}
       <div class="OrganizationsBillingSection-plan container">
         <div class="row">
-          <div class="three columns">
+          <div class="two columns">
             Enterprise
           </div>
-          <div class="three columns">
-            <strong>Custom parallel workers</strong>
+          <div class="four columns">
+            Custom concurrent renderers
             <br>
             Unlimited snapshots
           </div>
