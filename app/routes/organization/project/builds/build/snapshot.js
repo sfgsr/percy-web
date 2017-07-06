@@ -34,6 +34,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
     didTransition() {
       this._super(...arguments);
       this.send('updateModalState', true);
+
+      let build = this.modelFor(this.routeName);
+      let organization = build.get('project.organization');
+      let eventProperties = {
+        project_id: build.get('project.id'),
+        project_slug: build.get('project.slug'),
+        build_id: build.get('id'),
+        snapshot_id: this.get('params').snapshot_id,
+      };
+      this.analytics.track('Snapshot Fullscreen Viewed', organization, eventProperties);
     },
     updateComparisonMode(value) {
       this.controllerFor(this.routeName).set('comparisonMode', value.toString());

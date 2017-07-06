@@ -42,6 +42,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.get('currentModel').set('isShowingModal', state);
     },
     openSnapshotFullModal(snapshotId, snapshotSelectedWidth) {
+      let build = this.modelFor(this.routeName);
+      let organization = build.get('project.organization');
+      let eventProperties = {
+        project_id: build.get('project.id'),
+        project_slug: build.get('project.slug'),
+        build_id: build.get('id'),
+        snapshot_id: snapshotId,
+      };
+      this.analytics.track('Snapshot Fullscreen Selected', organization, eventProperties);
+
       this.send('updateModalState', true);
       this.transitionTo(
         'organization.project.builds.build.snapshot',

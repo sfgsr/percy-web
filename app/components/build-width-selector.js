@@ -13,6 +13,8 @@ export default Ember.Component.extend({
       let updateSelectedWidth = this.get('updateSelectedWidth');
       this.set('selectedWidth', value);
       updateSelectedWidth(value);
+
+      this.analytics.track('Build Width Selected', null, {width: value});
     }
   },
 });

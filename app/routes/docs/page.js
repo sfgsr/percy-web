@@ -25,4 +25,12 @@ export default Ember.Route.extend(ResetScrollMixin, {
       pageTitle: pageTitle,
     });
   },
+  actions: {
+    didTransition() {
+      this._super(...arguments);
+
+      let model = this.modelFor(this.routeName);
+      this.analytics.track('Docs Page Viewed', null, {path: model.docPath});
+    },
+  },
 });

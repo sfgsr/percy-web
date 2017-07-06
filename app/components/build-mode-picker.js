@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   selectNumColumns: null,  // Action to pass in.
   selectedNumColumns: 1,
 
-  classNames: ['ComparisonModePicker'],
+  classNames: ['BuildModePicker'],
   classNameBindings: [
     'classes',
   ],
@@ -13,6 +13,8 @@ export default Ember.Component.extend({
     selectNumColumns(numColumns) {
       this.set('numColumns', numColumns);
       this.get('selectNumColumns')(numColumns);
+
+      this.analytics.track('Build Zoom Level Selected', null, {num_columns: numColumns});
     },
   }
 });
