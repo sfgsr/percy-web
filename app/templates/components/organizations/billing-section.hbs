@@ -51,7 +51,7 @@
     <h4>Subscription</h4>
     {{#if organization.subscription.plan.isFree}}
       <div class="Alert Alert--warning">
-        <strong>Your trial has expired.</strong> You're currently on the limited-use free plan, which is throttled to {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} snapshots. You can sign up for a plan below or feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions!
+        <strong>Your trial has expired.</strong> You're currently on the limited-use free plan, which provides {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} snapshots. You can sign up for a plan below or feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions!
       </div>
     {{/if}}
 
@@ -64,7 +64,7 @@
           <div class="six columns">
             {{#with organization.subscription.plan as |plan|}}
               <strong>
-                {{plan.workerLimit}} parallel workers
+                {{plan.workerLimit}} concurrent renderers
                 <br>
                 {{format-number plan.usageIncluded}} snapshots included
                 <br>
@@ -95,6 +95,8 @@
                 {{planData.name}}
               </div>
               <div class="four columns">
+                {{planData.numTeamMembersTitle}}
+                <br>
                 {{planData.numWorkersTitle}}
                 <br>
                 {{format-number planData.numDiffs}} snapshots included
@@ -135,6 +137,8 @@
             Enterprise
           </div>
           <div class="four columns">
+            Unlimited team members
+            <br>
             Custom concurrent renderers
             <br>
             Unlimited snapshots
