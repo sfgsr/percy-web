@@ -38,7 +38,7 @@ module.exports = function(environment) {
         user: '/api/v1/user',
       },
       githubUrls: {
-        integration: 'https://github.com/integrations/percy/installations/new',
+        integration: 'https://github.com/apps/percy/installations/new',
       }
     },
   };
@@ -59,7 +59,7 @@ module.exports = function(environment) {
       }
     }
     ENV.APP.githubUrls = {
-      integration: 'https://github.com/integrations/percy-dev/installations/new',
+      integration: 'https://github.com/apps/percy-dev/installations/new',
     }
 
     ENV.APP.AMPLITUDE_USERS_INSTANCE_NAME = 'Users';
