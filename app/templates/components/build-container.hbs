@@ -11,7 +11,7 @@
 {{#if build.isPending}}
   <div class="container container--fixedWidth Alert Alert--warning">
     <p>
-      {{fa-icon 'fa-spinner fa-pulse'}}
+      {{fa-icon "fa-spinner fa-pulse"}}
       <strong>Receiving snapshots...</strong>
     </p>
     <p>
@@ -20,7 +20,7 @@
   </div>
 {{else if build.isProcessing}}
   <div class="container container--fixedWidth Alert Alert--warning u-text-center">
-    {{fa-icon 'fa-spinner fa-pulse'}}
+    {{fa-icon "fa-spinner fa-pulse"}}
     <strong>Processing visual diffs...</strong> hang tight!
   </div>
 {{else if build.isFailed}}

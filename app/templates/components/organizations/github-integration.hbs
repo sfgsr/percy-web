@@ -14,7 +14,7 @@
   <div class="OrganizationsGithubIntegration-actions">
     <a href="#" class="Button" {{action "cancelIntegrationRequest"}}>Cancel</a>
   </div>
-  {{fa-icon 'fa-spinner fa-pulse' classNames="OrganizationsGithubIntegration-leftAvatar"}}
+  {{fa-icon "fa-spinner fa-pulse" classNames="OrganizationsGithubIntegration-leftAvatar"}}
   <header>Waiting for installation...</header>
   Waiting for <strong>{{organization.githubIntegrationRequest.createdBy.login}}</strong> to install Percy in GitHub.
 {{/if}}

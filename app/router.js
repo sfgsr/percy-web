@@ -29,6 +29,9 @@ Router.map(function() {
   this.route('privacy');
   this.route('security');
   this.route('admin');
+  this.route('setup', {path: '/setup'}, function() {
+    this.route('github-app');
+  });
   this.route('organizations', {path: '/organizations'}, function() {
     this.route('new');
     this.route('organization', {path: '/:organization_id'}, function() {

@@ -39,4 +39,13 @@ export default Factory.extend({
       server.create('organizationUser', {user, organization, role: 'admin'});
     }
   }),
+
+  withGithubIntegration: trait({
+    afterCreate(organization, server) {
+      if (organization.githubIntegration === null) {
+        let githubIntegration = server.create('githubIntegration');
+        organization.update({githubIntegration});
+      }
+    }
+  })
 });

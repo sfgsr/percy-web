@@ -8,13 +8,10 @@
     }}
   {{else}}
     <p>
-      <a {{action "triggerWaitingForInstallation"}} href="{{githubIntegrationUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
+      <a {{action "triggerInstallation"}} href="{{githubIntegrationUrl}}" class="Button Button--primary Button--withLeftIcon" target="_blank">
         {{fa-icon "github" classNames="fa--left"}}
         Install GitHub Integration
       </a>
-    </p>
-    <p>
-      Installation will open in a popup—come back here after it's installed!
     </p>
     <p>
       <strong>Tip:</strong> GitHub requires that you have the "owner" role in an organization to add integrations.

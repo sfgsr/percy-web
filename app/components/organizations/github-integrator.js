@@ -13,7 +13,6 @@ export default Ember.Component.extend({
   session: Ember.inject.service(),
   currentUser: Ember.computed.alias('session.data.authenticated.user'),
 
-  waitingForInstallation: false,
   currentIntegration: Ember.computed.alias('organization.githubIntegration'),
   githubIntegrationUrl: config.APP.githubUrls.integration,
 
@@ -55,31 +54,16 @@ export default Ember.Component.extend({
       integrationRequest.destroyRecord();
       this.get('runningTask').cancel();
     },
-    triggerWaitingForInstallation() {
-      // Open popup. :|
-      let width = 1100;
-      let height = 900;
-      let left = (screen.width / 2) - (width / 2);
-      let top = (screen.height / 2) - (height / 2);
+    triggerInstallation() {
       let url = this.get('githubIntegrationUrl');
-      window.open(
-        url,
-        '_blank',
-        'toolbar=yes, location=yes, directories=no, status=no, menubar=no, scrollbars=yes, ' +
-        'resizable=yes, copyhistory=yes, ' +
-        'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left
-      );
-
       let organization = this.get('organization');
       let githubIntegrationRequest = this.get('store').createRecord('github-integration-request', {
         _orgForAdapter: organization,
       });
       githubIntegrationRequest.save().then(() => {
-        organization.reload();
-        this.startPollingForUpdates();
+        window.location.href = url;
+        return;
       });
-
-      this.set('waitingForInstallation', true);
     },
     showSupport() {
       this.sendAction('showSupport');
