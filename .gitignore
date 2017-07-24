@@ -4,8 +4,9 @@
 /dist
 /tmp
 
-/bower_components
+# dependencies
 /node_modules
+/bower_components
 
 # misc
 /.sass-cache
@@ -13,8 +14,14 @@
 /coverage/*
 /libpeerconnection.log
 npm-debug.log*
+yarn-error.log
 testem.log
 .DS_Store
+
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
 
 # sublime files
 *.sublime-workspace

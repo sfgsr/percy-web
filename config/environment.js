@@ -1,9 +1,9 @@
 /* eslint-env node */
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'percy-web',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -20,6 +20,7 @@ module.exports = function(environment) {
       separator: ' - ',
       prepend: true,
     },
+
     APP: {
       // Don't use these directly; use utils.buildApiUrl instead.
       apiUrls: {
