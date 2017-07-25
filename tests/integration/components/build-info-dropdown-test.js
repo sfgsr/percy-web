@@ -30,6 +30,7 @@ describe('Integration: BuildInfoDropdownComponent', function() {
     ['finished', 'withRepo', 'withBaseBuild', 'withLongHeadCommitMessage'],
     ['finished', 'withRepo', 'withBaseBuild', 'withNoSpacesMessageCommitMessage'],
     ['finished', 'withRepo', 'hasPullRequest'],
+    ['finished', 'withRepo', 'hasPullRequestWithoutTitle'],
   ];
 
   states.forEach((state) => {

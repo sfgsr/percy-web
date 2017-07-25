@@ -32,27 +32,33 @@
         <td>{{build-comparison-info build=build}}</td>
       </tr>
 
-      {{#if build.isGithubPullRequestWithTitle}}
+      {{#if build.isGithubPullRequest}}
         <tr>
           <td>Pull Request</td>
           <td>
             {{build-overview-icon icon='pull-request'}}
-            <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">{{build.pullRequestTitle}}</a>
+            {{#if build.pullRequestTitle}}
+              <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">{{build.pullRequestTitle}}</a>
+            {{/if}}
             {{#if build.pullRequestNumber}}
               <span class="BuildOverviewInfo-prNumber">
-                #{{build.pullRequestNumber}}
+                {{#if build.pullRequestTitle}}
+                  #{{build.pullRequestNumber}}
+                {{else}}
+                  <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">#{{build.pullRequestNumber}}</a>                  
+                {{/if}}
               </span>
             {{/if}}
           </td>
         </tr>
       {{/if}}
 
-      {{#if build.user_agent}}
+      {{#if build.userAgent}}
         <tr class="BuildInfoDropdown-fullWidthLabel">
           <td colspan="2">User agent</td>
         </tr>
         <tr class="BuildInfoDropdown-fullWidthValue">
-          <td colspan="2"><pre>{{build.user_agent}}</pre></td>
+          <td colspan="2"><pre>{{build.userAgent}}</pre></td>
         </tr>
       {{/if}}
     </table>

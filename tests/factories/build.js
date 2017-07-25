@@ -10,6 +10,7 @@ FactoryGuy.define('build', {
     buildNumber: FactoryGuy.generate('buildNumber'),
     state: 'pending',
     branch: 'master',
+    userAgent: faker.internet.userAgent(),
     createdAt: () => new Date(),
     updatedAt: () => new Date(),
     commit: FactoryGuy.belongsTo('commit'),
@@ -36,9 +37,13 @@ FactoryGuy.define('build', {
     noSnapshots: {failureReason: 'no_snapshots'},
     renderTimeout: {failureReason: 'render_timeout'},
     hasPullRequest: {
-      isPullRequest: 'true',
-      pullRequestNumber: '123',
-      pullRequestTitle: 'New Build Header Design',
+      isPullRequest: true,
+      pullRequestNumber: 123,
+      pullRequestTitle: () => faker.lorem.sentence(5),
+    },
+    hasPullRequestWithoutTitle: {
+      isPullRequest: true,
+      pullRequestNumber: 456,
     },
 
     // TODO: refactor these commit message customizations out of this build factory

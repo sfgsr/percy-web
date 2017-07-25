@@ -9,10 +9,9 @@ export default DS.Model.extend({
   // Check isGithubLinked before accessing repo.
   isGithubLinked: Ember.computed.bool('repo'),
 
-  isGithubPullRequestWithTitle: Ember.computed.and(
+  isGithubPullRequest: Ember.computed.and(
     'isGithubLinked',
-    'isPullRequest',
-    'pullRequestTitle',
+    'isPullRequest'
   ),
 
   buildNumber: DS.attr('number'),
@@ -80,6 +79,7 @@ export default DS.Model.extend({
   approvedBy: DS.belongsTo('user', {async: false}),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
+  userAgent: DS.attr(),
 
   duration: Ember.computed('finishedAt', 'createdAt', function() {
     var finished = this.get('finishedAt');

@@ -2,12 +2,18 @@
   {{#if build.isPullRequest}}
     <h2>
       {{build-overview-icon icon='pull-request'}}
-      <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">
-        {{build.pullRequestTitle}}
-      </a>
-      <span class="BuildOverviewInfo-prNumber">
-        #{{build.pullRequestNumber}}
-      </span>
+      {{#if build.pullRequestTitle}}
+        <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">{{build.pullRequestTitle}}</a>
+      {{/if}}
+      {{#if build.pullRequestNumber}}
+        <span class="BuildOverviewInfo-prNumber">
+          {{#if build.pullRequestTitle}}
+            #{{build.pullRequestNumber}}
+          {{else}}
+            <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">#{{build.pullRequestNumber}}</a>                  
+          {{/if}}
+        </span>
+      {{/if}}
     </h2>
   {{else}}
     <h2>

@@ -18,6 +18,7 @@ describe('Integration: BuildOverviewInfoComponent', function() {
 
   let states = [
     ['withRepo', 'hasPullRequest'],
+    ['withRepo', 'hasPullRequestWithoutTitle'],
     ['withRepo'],
     [],
   ];

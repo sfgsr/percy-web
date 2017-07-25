@@ -1,9 +1,16 @@
 .BuildContainer
+  @media (max-width: 750px)
+    // This avoids iOS from zooming in when you select a dropdown
+    // The font size must not be smaller than 16px https://stackoverflow.com/a/30523009
+    select
+      font-size: 16px
+
   &.BuildContainer--snapshotModalOpen
     display: none
 
   .BuildContainer-body
     overflow-y: scroll
+    -webkit-overflow-scrolling: touch
     position: absolute
     top: 60px
     bottom: 0
