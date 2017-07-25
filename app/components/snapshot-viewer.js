@@ -19,12 +19,6 @@ export default Ember.Component.extend({
     return comparisons.findBy('width', parseInt(width, 10));
   }),
 
-  // The selected column mode of the comparison list.
-  // So that comparison viewers can know if they are inside a n-column layout.
-  selectedNumColumns: 1,
-  isFullWidthOnlyMode: Ember.computed.equal('selectedNumColumns', 1),
-  isMultiColumnMode: Ember.computed.gt('selectedNumColumns', 1),
-
   classNameBindings: [
     'isFocus:SnapshotViewer--focus',
     'isExpanded::SnapshotViewer--collapsed',
@@ -38,7 +32,7 @@ export default Ember.Component.extend({
     return this.get('isDefaultExpanded');
   }),
   isNotExpanded: Ember.computed.not('isExpanded'),
-  isActionable: Ember.computed.or('isNotExpanded', 'isMultiColumnMode'),
+  isActionable: Ember.computed.alias('isNotExpanded'),
 
   didInsertElement() {
     this._super(...arguments);

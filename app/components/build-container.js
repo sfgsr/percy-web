@@ -9,12 +9,15 @@ export default Ember.Component.extend({
   activeSnapshotId: null,
   updateActiveSnapshotId: null,
   classNames: ['BuildContainer'],
+  classNameBindings: [
+    'classes',
+    'isShowingModal:BuildContainer--snapshotModalOpen:BuildContainer--snapshotModalClosed',
+  ],
   maxWidth: Ember.computed.max('build.comparisonWidths'),
   buildContainerSelectedWidth: Ember.computed.oneWay('maxWidth'),
   noWidthSelected: false,
   currentPosition: null,
 
-  selectedNumColumns: 1,
   showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
   shouldPollForUpdates: Ember.computed.or('build.isPending', 'build.isProcessing'),
 
@@ -45,18 +48,6 @@ export default Ember.Component.extend({
     }
   }).drop(),
 
-  restoreSelectedModeColumns: Ember.on('init', function() {
-    let numColumns = localStorage.getItem('numColumns');
-
-    // Cleanup bad data (not a number) in localStorage.
-    if (numColumns && Number(numColumns) === numColumns && numColumns % 1 !== 0) {
-      localStorage.deleteItem('numColumns');
-      return;
-    }
-    if (numColumns) {
-      this.send('selectNumColumns', parseInt(numColumns));
-    }
-  }),
   actions: {
     showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth) {
       this.sendAction('openSnapshotFullModal', snapshotId, snapshotSelectedWidth);
@@ -73,15 +64,6 @@ export default Ember.Component.extend({
         this.set('buildContainerSelectedWidth', width);
       }
       window.scrollTo(0, 0);
-    },
-    selectNumColumns(numColumns) {
-      this.set('selectedNumColumns', numColumns);
-
-      try {
-        localStorage.setItem('numColumns', numColumns);
-      } catch (_) {
-        // Safari throws errors while accessing localStorage in private mode.
-      }
     },
     showSupport() {
       this.sendAction('showSupport');

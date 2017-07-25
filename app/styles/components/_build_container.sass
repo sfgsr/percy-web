@@ -1,3 +1,10 @@
 .BuildContainer
-  overflow-y: scroll
-  height: calc(100vh - #{$header-height})
+  &.BuildContainer--snapshotModalOpen
+    display: none
+
+  .BuildContainer-body
+    overflow-y: scroll
+    position: absolute
+    top: 60px
+    bottom: 0
+    width: 100%

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import startApp from 'percy-web/tests/helpers/start-app';
 import destroyApp from 'percy-web/tests/helpers/destroy-app';
+import seedFaker from './seed-faker';
 
 // Import mocha helpers so that they will be included for all tests.
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "it|describe" }]*/
@@ -16,6 +17,7 @@ export default function setupAcceptance() {
   beforeEach(function() {
     this.application = startApp();
     window.localStorage.clear();
+    seedFaker();
   });
 
   afterEach(function() {
@@ -77,4 +79,12 @@ export function setupSession(createData) {
   afterEach(function() {
     this.loginUser = undefined;
   });
+}
+
+// By default `ember-modal-dialog` creates modals at the bottom of the body tag, which is outside
+// the testing container and so it doesn't render.
+// This moves the modal into the testing container so we can view it in our acceptance tests when
+// running Percy snapshots.
+export function moveModalIntoTestContainer() {
+  Ember.$('#ember-testing').prepend(Ember.$('.BuildInfoDropdown-modal'));
 }

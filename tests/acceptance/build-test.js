@@ -1,4 +1,5 @@
-import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
+import setupAcceptance, {setupSession, moveModalIntoTestContainer}
+  from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 
@@ -30,6 +31,11 @@ describe('Acceptance: Pending Build', function() {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
+
+    click('#BuildInfo');
+    andThen(() => moveModalIntoTestContainer());
+
+    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 });
 
@@ -61,6 +67,11 @@ describe('Acceptance: Processing Build', function() {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
+
+    click('#BuildInfo');
+    andThen(() => moveModalIntoTestContainer());
+
+    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 });
 
@@ -93,6 +104,11 @@ describe('Acceptance: Failed Build', function() {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
+
+    click('#BuildInfo');
+    andThen(() => moveModalIntoTestContainer());
+
+    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 });
 
@@ -103,7 +119,11 @@ describe('Acceptance: Build', function() {
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
     let project = server.create('project', {name: 'finished build', organization});
-    let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});
+    let build = server.create('build', {
+      project,
+      createdAt: moment().subtract(2, 'minutes'),
+      finishedAt: moment().subtract(5, 'seconds')
+    });
     this.comparisons = {
       different: server.create('comparison', {build}),
       gotLonger: server.create('comparison', 'gotLonger', {build}),
@@ -137,8 +157,10 @@ describe('Acceptance: Build', function() {
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
-    click('.BuildModePicker button');
-    percySnapshot(this.test.fullTitle() + ' in overview mode');
+    click('#BuildInfo');
+    andThen(() => moveModalIntoTestContainer());
+
+    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 
   it('toggles the image and pdiff', function() {

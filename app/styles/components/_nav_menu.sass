@@ -1,22 +1,30 @@
 .NavMenu
+  $nav-item-spacing: 7px
+
   .NavMenu-item
     display: inline-block
+    float: left
+    padding: 10px $nav-item-spacing
 
     a
-      line-height: 4.3rem
-      float: left
-      display: block
-      padding: 10px 17px
+      padding: 0px 5px
+
+  .NavMenu-item-title
+    font-size: 16px
+
+  .NavMenu-item--text
+    line-height: 4rem
 
   .NavMenu-item--right
     float: right
 
+  .NavMenu-item--right:last-child
+    margin-right: -$nav-item-spacing
+
+  .NavMenu-item--left:first-child
+    margin-left: -$nav-item-spacing
+
   .NavMenu-avatar
-    padding: 11px 11px
+    padding-top: 11px
+    padding-left: $nav-item-spacing + 5px
     float: right
-
-
-@media (max-width: 750px)
-  .NavMenu
-    .NavMenu-item a
-      padding: 10px 5px

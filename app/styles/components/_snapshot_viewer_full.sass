@@ -1,34 +1,62 @@
-.ember-modal-wrapper
+
+.SnapshotViewerFullModalWrapper
   position: absolute
   top: 0
   left: 0
   right: 0
   bottom: 0
   z-index: 1001
-  width: 100vw
   height: 100vh
-  overflow: overlay
+  overflow: hidden
+
+  .ember-modal-dialog, .ember-modal-overlay
+    position: relative
+
+  .ember-modal-overlay
+    height: auto
+    width: auto
+    padding-bottom: 20px
+
+  // This allows us to use the supplied ember-modal-dialog structure CSS for dropdowns etc,
+  // while maintaining full screen support
+  &.ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center
+    .ember-modal-dialog
+      top: 0
+      left: 0
+      transform: none
 
   .SnapshotViewerFull
     z-index: 1001
-    background: $lightest-gray
+    background: $white
     width: 100vw
-    line-height: calc(100vh - #{$header-height})
+    height: 100vh
     outline: none
+    position: relative
 
     .SnapshotViewerFull-header
-      position: fixed
-      width: 100%
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
       height: 40px
       line-height: 1.5
       z-index: 1001
-      box-shadow: $base-shadow-flush
+      border-bottom: $lighter-gray-border
+      background: $lightest-gray
       padding-left: 15px
       padding-right: 20px // Makes space for scrollbar
 
     .SnapshotViewerFull-body
+      position: absolute
+      top: 40px
+      left: 0
+      right: 0
+      bottom: 0
+      overflow-y: scroll
       text-align: center
-      padding-top: 60px
+      padding-top: 40px
+      padding-bottom: 40px
       vertical-align: middle
       cursor: pointer
 

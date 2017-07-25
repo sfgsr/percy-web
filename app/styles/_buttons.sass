@@ -1,10 +1,11 @@
-$button-height: 38px
-
 .Button,
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
+  $button-height: 38px
+  $button-small-height: 28px
+
   background-color: $white
   color: $default-link
   border-radius: 4px
@@ -13,11 +14,11 @@ input[type="button"],
   height: $button-height
   line-height: $button-height
   padding: 0 15px
+  margin: 0px
   position: relative
   text-align: center
   text-decoration: none
   white-space: nowrap
-  margin-right: 5px
   border: $lighter-gray-border
 
   &:hover,
@@ -53,17 +54,6 @@ input[type="button"],
       border: $lighter-gray-border
       cursor: default
 
-  &.Button--onDark,
-    color: $white
-    background-color: $dark-purple
-
-    &:hover,
-      color: $white
-      background-color: $purple
-
-    &:active
-      box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75)
-
   &.Button--onDark.Button--primary,
     color: $white
     background-color: $purple
@@ -76,11 +66,13 @@ input[type="button"],
       background-color: $light-purple
 
     &:active
-      box-shadow: inset 3px 3px 120px -40px rgba(0,0,0,0.75)
+      background-color: $purple
 
   &.Button--small
-    font-size: 10px
-    padding: 0 10px
+    padding: 0 9px
+    font-size: 12px
+    height: $button-small-height
+    line-height: $button-small-height
 
   &.Button--nav
     border: none
@@ -112,10 +104,17 @@ input[type="button"],
 button,
 .Button
   &.Button--withLeftIcon
-    padding: 0 30px 0 50px
+    padding: 0 15px 0 38px
+
+  &.Button--withIconOnly
+    padding: 0 20px
+    color: $default-text-color
+
+    .fa
+      font-size: 2rem
 
   .fa--left
     position: absolute
-    left: 16px
+    left: 10px
     top: 7px
-    font-size: 2.5rem
+    font-size: 2.4rem

@@ -1,0 +1,30 @@
+.BuildToolbar
+  .NavMenu
+    .NavMenu-item
+      a:not(.Button)
+        padding: 0
+
+        &:hover
+          text-decoration: underline
+
+    .Button--small
+      border: none
+      background: none
+      font-size: 1.4rem
+      font-weight: bold
+
+  @media (max-width: 750px)
+    .NavMenu
+      .BuildToolbar-organization,
+      .BuildToolbar-separator
+        display: none
+
+  @media (max-width: 600px)
+    .NavMenu
+      .BuildToolbar-project
+        display: none
+
+  @media (max-width: 350px)
+    .NavMenu
+      .Header-logo
+        display: none

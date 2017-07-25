@@ -1,8 +1,10 @@
 .ApprovalSection
+  &.ApprovalSection--approved
+    display: none
 
-  p
-    text-align: right
-    margin-right: 10px
+    &.ApprovalSection--approvedNow
+      display: block
 
-  .ApprovalButton
-    display: block
+    .NavMenu-item
+      &.NavMenu-item--text
+        padding-right: 0

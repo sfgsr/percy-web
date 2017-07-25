@@ -9,9 +9,15 @@ export default DS.Model.extend({
   // Check isGithubLinked before accessing repo.
   isGithubLinked: Ember.computed.bool('repo'),
 
+  isGithubPullRequestWithTitle: Ember.computed.and(
+    'isGithubLinked',
+    'isPullRequest',
+    'pullRequestTitle',
+  ),
+
   buildNumber: DS.attr('number'),
   buildTitle: Ember.computed('buildNumber', function() {
-    return `Build ${this.get('buildNumber')}`;
+    return `Build #${this.get('buildNumber')}`;
   }),
   branch: DS.attr(),
 

@@ -1,7 +1,10 @@
 .Header
   position: relative
-  background-color: $dark-purple
-  color: $white
+  height: 60px
+  padding: 0px 15px
+
+  .Button
+    margin: 0
 
   &.Header--large
     min-height: 520px
@@ -30,61 +33,54 @@
 
   .Header-logo
     width: 50px
-    margin: 10px 5px 0 15px;
+    margin: 10px 12px 0 0;
 
   .Header-title
     font-family: $fancy-font
     font-size: 2rem
     line-height: 4rem
-    padding: 10px
+    padding: 10px 12px 10px 0px
     font-weight: 600
 
-  .Header-trialBar
-    color: $white
-    background: $purple
-    padding: 2px
-    border-radius: 3px
-    text-align: center
-    position: absolute
-    width: 235px
-    top: 18px
-    margin-left: auto
-    left: 0
-    right: 300px
-    box-shadow: $base-shadow
-
-    a
-      text-decoration: underline
-      font-weight: bold
-
-  .Button
-    color: $white
-    box-shadow: $base-shadow
-
-  &.Header--small
-    height: 60px
-
-  &.Header--fixedTop
-    position: fixed
-    right: 0
-    left: 0
-    z-index: 1000
-
   a
-    color: $white
     text-decoration: none
-  a:hover
-    color: $lightest-purple
 
-.HeaderSpacer
-  height: 60px
+  &.Header--light
+    border-bottom: 1px solid $lighter-gray
+    background: $lightest-gray
 
+  &.Header--dark
+    background-color: $dark-purple
+    color: $white
+
+    select
+      color: $default-text-color
+      border: none
+
+    a:not(.Button)
+      color: $white
+      
+      &:hover
+        color: $lightest-purple
+
+    .NavMenu-item
+      line-height: 4rem
+
+    .Button
+      font-weight: bold
+      background: transparent
+      color: $white
+      background: $purple
+      border: none
+
+      &:hover
+        background: $light-purple
+
+      &:active
+        background-color: $purple
 
 @media (max-width: 550px)
   .Header
-    .Header-trialBar
-      display: none
-
     &.Header--large
       & h2
         font-size: 1.8rem

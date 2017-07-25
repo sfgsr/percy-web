@@ -3,6 +3,7 @@ import utils from '../lib/utils';
 
 export default Ember.Component.extend({
   build: null,
+  approve: null,
 
   isApproved: Ember.computed.alias('build.isApproved'),
   tagName: 'button',
@@ -16,18 +17,23 @@ export default Ember.Component.extend({
     'isApproved:ApprovalButton--approved',
   ],
   click() {
-    // TODO(fotinakis): encapsulate headers for custom API ajax requests.
-    var self = this;
-    return Ember.$.ajax({
-      type: 'POST',
-      url: utils.buildApiUrl('approveBuild', self.get('build.id')),
-    }).then(
-      function() {
-        self.get('build').reloadAll();
-      },
-      function() {
-        self.get('build').reloadAll();
-      }
-    );
+    this.send('buildApproved');
   },
+  actions: {
+    buildApproved() {
+      Ember.$.ajax({
+        type: 'POST',
+        url: utils.buildApiUrl('approveBuild', this.get('build.id')),
+      }).then(
+        () => {
+          this.get('build').reloadAll();
+        },
+        () => {
+          this.get('build').reloadAll();
+        }
+      );
+
+      this.get('approve')();
+    }
+  }
 });

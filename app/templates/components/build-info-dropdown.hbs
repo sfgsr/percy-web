@@ -1,0 +1,72 @@
+<button {{action "toggleModal"}} id="BuildInfo" class="Button Button--small u-pull-right">
+  Build Info
+</button>
+{{#if isShowingModal}}
+  {{#modal-dialog onClose="toggleModal"
+                  hasOverlay=false
+                  clickOutsideToClose=true
+                  translucentOverlay=true
+                  targetAttachment="bottom right"
+                  attachment="top right"
+                  tetherTarget="#BuildInfo"
+                  containerClass="BuildInfoDropdown-modal"
+                  renderInPlace=renderInPlace
+                  build=build}}
+
+    {{fa-icon "caret-up"}}
+
+    {{build-state-badge build=build}}
+
+    <h3>{{build.buildTitle}}</h3>
+    <table>
+      <tr>
+        <td>Created</td>
+        <td>{{build-started build=build}}</td>
+      </tr>
+      <tr>
+        <td>Build time</td>
+        <td>{{build-duration build=build}}</td>
+      </tr>
+      <tr>
+        <td>Baseline build</td>
+        <td>{{build-comparison-info build=build}}</td>
+      </tr>
+
+      {{#if build.isGithubPullRequestWithTitle}}
+        <tr>
+          <td>Pull Request</td>
+          <td>
+            {{build-overview-icon icon='pull-request'}}
+            <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">{{build.pullRequestTitle}}</a>
+            {{#if build.pullRequestNumber}}
+              <span class="BuildOverviewInfo-prNumber">
+                #{{build.pullRequestNumber}}
+              </span>
+            {{/if}}
+          </td>
+        </tr>
+      {{/if}}
+
+      {{#if build.user_agent}}
+        <tr class="BuildInfoDropdown-fullWidthLabel">
+          <td colspan="2">User agent</td>
+        </tr>
+        <tr class="BuildInfoDropdown-fullWidthValue">
+          <td colspan="2"><pre>{{build.user_agent}}</pre></td>
+        </tr>
+      {{/if}}
+    </table>
+
+    {{#if build.commit}}
+      <hr/>
+      <h4>Head commit</h4>
+      {{commit-table build=build commit=build.commit}}
+    {{/if}}
+
+    {{#if build.baseBuild.commit}}
+      <hr/>
+      <h4>Base commit</h4>
+      {{commit-table build=build.baseBuild commit=build.baseBuild.commit}}
+    {{/if}}
+  {{/modal-dialog}}
+{{/if}}

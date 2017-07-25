@@ -1,0 +1,19 @@
+{{#if build.isPending}}
+  Receiving
+{{else if build.isProcessing}}
+  Processing
+{{else if build.isFinished}}
+  {{#if build.isApproved}}
+    Approved
+  {{else}}
+    {{#if build.hasDiffs}}
+      {{pluralize build.totalComparisonsDiff "visual diff"}}
+    {{else}}
+      No visual diffs
+    {{/if}}
+  {{/if}}
+{{else if build.isFailed}}
+  Failed
+{{else if build.isExpired}}
+  Expired
+{{/if}}

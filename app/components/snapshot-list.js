@@ -2,16 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['SnapshotList'],
-  classNameBindings: ['snapshotListMode'],
-  snapshotListMode: Ember.computed('selectedNumColumns', function() {
-    return `SnapshotList--${this.get('selectedNumColumns')}col`;
-  }),
 
   activeSnapshotId: null,
   buildContainerSelectedWidth: null,
   buildWidths: [],
   lastSnapshotIndex: null,
-  selectedNumColumns: null,
   selectedSnapshotIndex: -1,
   snapshotComponents: null,
   updateActiveSnapshotId: null,
@@ -105,7 +100,7 @@ export default Ember.Component.extend({
     Ember.$(document).unbind('keydown.snapshots');
   },
   scrollToChild: function(component) {
-    this.get('parentView').$().animate({scrollTop: component.$().get(0).offsetTop - 250}, 0);
+    Ember.$('.BuildContainer-body').animate({scrollTop: component.$().get(0).offsetTop - 10}, 0);
   },
   actions: {
     registerChild(component) {
@@ -122,9 +117,6 @@ export default Ember.Component.extend({
         if (this.get('activeSnapshotId') == this.get('sortedSnapshots').objectAt(index).get('id')) {
           this.send('changeSelectedSnapshotIndex', () => index);
 
-          // Make sure we're in full-width mode because we are going scroll to a single comparison.
-          this.get('selectNumColumns')(1);
-
           // After the list is inserted and rendered, scroll to this child component.
           Ember.run.next(() => {
             this.scrollToChild(component);
@@ -138,8 +130,6 @@ export default Ember.Component.extend({
       this.get('snapshotComponents').removeObject(component);
     },
     selectChild(component) {
-      // Flip back to full-width mode.
-      this.get('selectNumColumns')(1);
       this.send('changeSelectedSnapshotIndex', () => component.get('listIndex'));
     },
     nextSnapshot() {

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="Header Header--light Header--small">
+    <div class="NavMenu">
+      {{#link-to "index"}}
+        {{#link-to "index"}}
+          <img src="/images/percy-silhouette.svg" class="Header-logo u-pull-left">
+        {{/link-to}}
+      {{/link-to}}
+      <div class="NavMenu-item NavMenu-item--left NavMenu-item-title NavMenu-item--text">
+        {{#link-to "organization" organization class="BuildToolbar-organization"}}{{organization.name}}{{/link-to}}
+        <span class="BuildToolbar-separator"> / </span>
+        {{#link-to "organization.project" organization project class="BuildToolbar-project"}}{{project.name}}{{/link-to}}
+      </div>
+    </div>
+    <div class="NavMenu">
+      {{approval-section build=build}}
+      <div class="NavMenu-item NavMenu-item--right">
+        {{#if (gt build.numComparisonWidths 1)}}
+          {{build-width-selector
+            widths=build.comparisonWidths
+            defaultSelectedWidth=defaultSelectedWidth
+            updateSelectedWidth=(action updateSelectedWidth)
+            noWidthSelected=noWidthSelected
+          }}
+        {{/if}}
+      </div>
+      <div class="NavMenu-item NavMenu-item--text NavMenu-item--right">
+        {{trial-bar organization=organization}}
+      </div>
+    </div>
+  </div>
+</div>

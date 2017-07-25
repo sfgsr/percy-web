@@ -1,6 +1,6 @@
 {{#if user}}
   {{#if currentOrganization}}
-    <div class="NavMenu-item">
+    <div class="NavMenu-item u-hide-on-mobile">
       {{#link-to "organization.index" currentOrganization.slug}}
         Dashboard
       {{/link-to}}
@@ -34,6 +34,9 @@
 <div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
   {{#link-to "docs.page" "tutorials/example-apps"}}Tutorials{{/link-to}}
 </div>
-<div class="NavMenu-item NavMenu-item--right {{if user "u-hide-on-mobile"}}">
+<div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
   {{#link-to "docs.index"}}Docs{{/link-to}}
+</div>
+<div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
+  {{trial-bar organization=currentOrganization}}
 </div>

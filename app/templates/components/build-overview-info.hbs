@@ -1,0 +1,27 @@
+{{#if build.isGithubLinked}}
+  {{#if build.isPullRequest}}
+    <h2>
+      {{build-overview-icon icon='pull-request'}}
+      <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">
+        {{build.pullRequestTitle}}
+      </a>
+      <span class="BuildOverviewInfo-prNumber">
+        #{{build.pullRequestNumber}}
+      </span>
+    </h2>
+  {{else}}
+    <h2>
+      {{build-overview-icon icon='branch'}}
+      <a href="{{build.repo.htmlUrl}}/tree/{{build.branch}}">
+        {{build.branch}}
+      </a>
+    </h2>
+  {{/if}}
+{{else}}
+  <h2>
+    {{build-overview-icon icon='branch'}}
+    {{build.branch}}
+  </h2>
+{{/if}}
+
+{{build-info-dropdown build=build}}

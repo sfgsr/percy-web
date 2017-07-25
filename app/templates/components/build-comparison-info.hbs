@@ -1,9 +1,5 @@
-{{fa-icon "compress"}}
 {{#if build.baseBuild}}
-  Compared to
-  {{!-- NOTE: we use the baseBuild.id instead of the object to force the next build to reload so all relationships are available. TODO: better way? --}}
   {{#link-to "organization.project.builds.build" build.project.organization.slug build.project.slug build.baseBuild.id}}{{build.baseBuild.buildTitle}}{{/link-to}}
-  (<strong>{{build.baseBuild.branch}}</strong>)
 {{else}}
   {{#if build.isFinished}}
     No baseline to compare against

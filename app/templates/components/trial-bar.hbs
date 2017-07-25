@@ -1,0 +1,16 @@
+{{#if organization.subscription.isTrialOrFree}}
+  {{#if organization.subscription.plan.isFree}}
+    <strong>Your trial has expired.</strong>
+  {{else}}
+    {{#if (eq organization.subscription.trialDaysRemaining 0)}}
+      <strong>Trial ends today!</strong>
+    {{else}}
+      <strong>
+        {{pluralize organization.subscription.trialDaysRemaining "day"}}
+      </strong> left in trial.
+    {{/if}}
+  {{/if}}
+  {{#link-to "organizations.organization.billing" organization.slug class="Button Button--small"}}
+    See plans
+  {{/link-to}}
+{{/if}}
