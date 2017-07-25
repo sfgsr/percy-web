@@ -1,1 +1,5 @@
-<img src="/images/icons/{{icon}}.svg"/>
+{{#if (eq icon "branch")}}
+  <img src="/images/icons/branch.svg">
+{{else if (eq icon "pull-request")}}
+  <img src="/images/icons/pull-request.svg">
+{{/if}}
