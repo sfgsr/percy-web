@@ -10,7 +10,7 @@ FactoryGuy.define('build', {
     buildNumber: FactoryGuy.generate('buildNumber'),
     state: 'pending',
     branch: 'master',
-    userAgent: faker.internet.userAgent(),
+    userAgent: () => faker.internet.userAgent(),
     createdAt: () => new Date(),
     updatedAt: () => new Date(),
     commit: FactoryGuy.belongsTo('commit'),
