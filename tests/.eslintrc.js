@@ -1,16 +1,16 @@
 module.exports = {
   env: {
-    'embertest': true,
+    embertest: true,
   },
   globals: {
-    'describe': true,
-    'it': true,
-    'percySnapshot': true,
-    'expect': true,
-    'context': true,
-    'server': true
+    describe: true,
+    it: true,
+    percySnapshot: true,
+    expect: true,
+    context: true,
+    server: true,
   },
   rules: {
-    'max-len': ['error', 100]
-  }
+    'max-len': ['error', 100],
+  },
 };

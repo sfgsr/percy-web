@@ -1,16 +1,12 @@
-import setupAcceptance, {
-  setupSession
-} from '../helpers/setup-acceptance';
+import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 
 describe('Acceptance: GitHub App Setup', function() {
   setupAcceptance();
 
-  setupSession(function (server) {
-    this.organization = server.create('organization',
-      'withUser',
-      'withGithubIntegration',
-      {name: 'test org'}
-    );
+  setupSession(function(server) {
+    this.organization = server.create('organization', 'withUser', 'withGithubIntegration', {
+      name: 'test org',
+    });
   });
 
   it('shows GitHub integration processing page', function() {
@@ -29,7 +25,7 @@ describe('Acceptance: GitHub App Setup', function() {
   });
 
   context('with a project', function() {
-    setupSession(function (server) {
+    setupSession(function(server) {
       server.create('project', {organization: this.organization});
     });
     it('redirects to settings when the installation_id and project present', function() {

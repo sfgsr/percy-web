@@ -18,6 +18,6 @@ export default Ember.Route.extend(ResetScrollMixin, {
       } else {
         this.transitionTo('docs.index');
       }
-    }
-  }
+    },
+  },
 });

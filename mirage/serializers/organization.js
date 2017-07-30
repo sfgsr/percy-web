@@ -4,12 +4,12 @@ export default JSONAPISerializer.extend({
   include: ['subscription', 'githubIntegration'],
   links(organization) {
     return {
-      'projects': {
-        related: `/api/v1/organizations/${organization.slug}/projects`
+      projects: {
+        related: `/api/v1/organizations/${organization.slug}/projects`,
       },
-      'subscription': {
-        related: `/api/v1/organizations/${organization.slug}/subscription`
-      }
+      subscription: {
+        related: `/api/v1/organizations/${organization.slug}/subscription`,
+      },
     };
-  }
+  },
 });

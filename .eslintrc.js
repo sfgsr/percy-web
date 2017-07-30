@@ -2,22 +2,33 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  extends: 'eslint:recommended',
   env: {
-    'browser': true,
-    'es6': true,
+    browser: true,
+    es6: true,
   },
+  plugins: ['prettier'],
+  extends: ['prettier', 'eslint:recommended'],
   rules: {
-    'brace-style': ['error', '1tbs', {'allowSingleLine': false}],
-    'max-len': ['error', 110],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        trailingComma: 'all',
+        bracketSpacing: false,
+        printWidth: 100,
+      },
+    ],
+    'brace-style': ['error', '1tbs', {allowSingleLine: false}],
+    'max-len': ['error', 100],
     'no-unused-expressions': 'error',
     'object-curly-spacing': ['error', 'never'],
-    'quotes': ['error', 'single'],
-    'keyword-spacing': ['error', {'before': true}],
+    quotes: ['error', 'single', {avoidEscape: true}],
+    'keyword-spacing': ['error', {before: true}],
     'space-in-parens': ['error', 'never'],
-    'semi': ['error', 'always'],
-    'space-unary-ops': ['error', {'nonwords': false}],
-  }
+    semi: ['error', 'always'],
+    'space-unary-ops': ['error', {nonwords: false}],
+    'comma-dangle': ['error', 'always-multiline'],
+  },
 };

@@ -17,13 +17,11 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       options['redirectTo'] = '/';
     }
 
-    this.get('session').authenticate('authenticator:custom', options).then(
-      function() {
-        var finalRedirect = utils.getQueryParam('redirect_to');
-        if (finalRedirect) {
-          window.location.href = decodeURIComponent(finalRedirect);
-        }
+    this.get('session').authenticate('authenticator:custom', options).then(function() {
+      var finalRedirect = utils.getQueryParam('redirect_to');
+      if (finalRedirect) {
+        window.location.href = decodeURIComponent(finalRedirect);
       }
-    );
+    });
   },
 });

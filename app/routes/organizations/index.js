@@ -5,6 +5,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   redirect() {
     this.transitionTo('index');
   },
-  actions: {
-  }
+  actions: {},
 });

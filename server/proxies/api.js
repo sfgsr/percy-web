@@ -13,9 +13,10 @@ module.exports = function(app) {
   var proxy = httpProxy.createProxyServer(proxyOptions);
 
   proxy.on('error', function(err, req) {
-    console.error(err, req.url);
+    console.error(err, req.url); // eslint-disable-line
   });
 
+  // eslint-disable-next-line
   app.use(proxyPath, function(req, res, next) {
     // include root path in proxied request
     req.url = proxyPath + req.url;

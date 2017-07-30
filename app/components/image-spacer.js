@@ -22,5 +22,5 @@ export default Ember.Component.extend({
     if (!this.get('bubbles')) {
       e.stopPropagation();
     }
-  }
+  },
 });

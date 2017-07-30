@@ -28,11 +28,11 @@ export default Ember.Component.extend({
       this.set('runningTask', this.get('pollForUpdatesTask').perform());
     }
   }),
-  pollForUpdatesTask: task(function * () {
+  pollForUpdatesTask: task(function*() {
     this.set('numPollRequests', 0);
     while (this.get('numPollRequests') < MAX_UPDATE_POLLING_REQUESTS) {
       this.incrementProperty('numPollRequests');
-      this.get('build').reload().then((build) => {
+      this.get('build').reload().then(build => {
         build.get('comparisons').reload();
         if (!this.get('shouldPollForUpdates')) {
           this.get('runningTask').cancel();

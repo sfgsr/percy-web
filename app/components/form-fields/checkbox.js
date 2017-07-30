@@ -32,6 +32,6 @@ export default Ember.Component.extend({
       } else {
         this.set(`changeset.${this.get('property')}`, this.get('uncheckedValue'));
       }
-    }
-  }
+    },
+  },
 });

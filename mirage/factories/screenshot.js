@@ -6,7 +6,7 @@ export default Factory.extend({
       let image = server.create('image', {
         url: '/images/test/bs-base.png',
         width: 1280,
-        height: 1485
+        height: 1485,
       });
       screenshot.update({image});
     }
@@ -18,5 +18,5 @@ export default Factory.extend({
       });
       screenshot.update({lossyImage});
     }
-  }
+  },
 });

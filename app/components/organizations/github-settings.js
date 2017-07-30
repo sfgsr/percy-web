@@ -15,33 +15,32 @@ export default Ember.Component.extend({
     return new Changeset(this.get('organization'), lookupValidator(validator), validator);
   }),
   disableSave: Ember.computed(
-      'changeset.githubAuthMechanism',
-      'changeset.isPristine',
-      'changeset.isInvalid',
-      'changeset.githubBotUser',
-      'organization.githubIntegration',
-      function() {
-    let mechanism = this.get('changeset.githubAuthMechanism');
+    'changeset.githubAuthMechanism',
+    'changeset.isPristine',
+    'changeset.isInvalid',
+    'changeset.githubBotUser',
+    'organization.githubIntegration',
+    function() {
+      let mechanism = this.get('changeset.githubAuthMechanism');
 
-    // Special case: disable save if on "Bot user" but no bot user assigned.
-    if (mechanism === 'github-bot-user' && !this.get('changeset.githubBotUser')) {
-      return true;
-    }
-    // Special case: disable save if on "Official GitHub Integration" is selected at all.
-    if (mechanism === 'github-integration') {
-      return true;
-    }
+      // Special case: disable save if on "Bot user" but no bot user assigned.
+      if (mechanism === 'github-bot-user' && !this.get('changeset.githubBotUser')) {
+        return true;
+      }
+      // Special case: disable save if on "Official GitHub Integration" is selected at all.
+      if (mechanism === 'github-integration') {
+        return true;
+      }
 
-    return this.get('changeset.isPristine') || this.get('changeset.isInvalid');
-  }),
+      return this.get('changeset.isPristine') || this.get('changeset.isInvalid');
+    },
+  ),
 
   isSaveSuccessful: null,
   isSaving: null,
 
   classNames: ['OrganizationsGithubSettings'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
   actions: {
     showSupport() {
       this.sendAction('showSupport');
@@ -74,13 +73,10 @@ export default Ember.Component.extend({
       // we don't use a standard validations object.
       let currentIntegration = organization.get('githubIntegration');
       if (currentSelection !== 'github-integration' && currentIntegration) {
-        changeset.addError(
-          'base',
-          [
-            'The official Percy GitHub Integration must be uninstalled in GitHub ' +
-            'before you can switch to a different integration type.'
-          ]
-        );
+        changeset.addError('base', [
+          'The official Percy GitHub Integration must be uninstalled in GitHub ' +
+            'before you can switch to a different integration type.',
+        ]);
       } else if (currentSelection === 'github-bot-user' && !changeset.get('githubBotUser')) {
         changeset.addError('base', ['GitHub bot user cannot be blank']);
       }
@@ -91,14 +87,17 @@ export default Ember.Component.extend({
         }
         this.set('isSaveSuccessful', null);
         this.set('isSaving', true);
-        changeset.save().then(() => {
-          this.set('isSaving', false);
-          this.set('isSaveSuccessful', true);
-        }, () => {
-          this.set('isSaving', false);
-          this.set('isSaveSuccessful', false);
-        });
+        changeset.save().then(
+          () => {
+            this.set('isSaving', false);
+            this.set('isSaveSuccessful', true);
+          },
+          () => {
+            this.set('isSaving', false);
+            this.set('isSaveSuccessful', false);
+          },
+        );
       });
     },
-  }
+  },
 });

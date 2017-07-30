@@ -7,5 +7,7 @@ export default Ember.Component.extend({
   isHidden: Ember.computed.empty('comparison'),
   comparison: null,
   comparisonMode: null,
-  updateComparionMode() {/* closure action */},
+  updateComparionMode() {
+    /* closure action */
+  },
 });

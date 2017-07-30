@@ -16,6 +16,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     // whereas currentUserMembership is just an alias to .firstObject.
     return model.get('_filteredOrganizationUsers');
   },
-  actions: {
-  },
+  actions: {},
 });

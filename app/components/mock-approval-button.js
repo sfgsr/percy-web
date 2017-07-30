@@ -6,12 +6,7 @@ export default Ember.Component.extend({
   isButtonActive: false,
 
   tagName: 'button',
-  classNames: [
-    'MockApprovalButton',
-    'ApprovalButton',
-    'Button',
-    'Button--withLeftIcon',
-  ],
+  classNames: ['MockApprovalButton', 'ApprovalButton', 'Button', 'Button--withLeftIcon'],
   classNameBindings: [
     'classes',
     'isApproved:ApprovalButton--approved',

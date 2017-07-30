@@ -6,5 +6,5 @@ export default Model.extend({
   headScreenshot: belongsTo('screenshot'),
   baseScreenshot: belongsTo('screenshot'),
   headSnapshot: belongsTo('snapshot'),
-  baseSnapshot: belongsTo('snapshot')
+  baseSnapshot: belongsTo('snapshot'),
 });

@@ -15,6 +15,6 @@ export default Ember.Component.extend({
   actions: {
     approve() {
       this.set('approvedNow', true);
-    }
-  }
+    },
+  },
 });

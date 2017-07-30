@@ -1,18 +1,24 @@
 import setupAcceptance, {
-  setupSession, renderAdapterErrorsAsPage
+  setupSession,
+  renderAdapterErrorsAsPage,
 } from '../helpers/setup-acceptance';
 
 describe('Acceptance: Join', function() {
   setupAcceptance();
 
-  setupSession(function (server) {
+  setupSession(function(server) {
     server.create('organization', 'withUser', {name: 'Test org'});
-    let anotherOrganization = server.create('organization', {name: 'Other org'});
-    server.create('invite', {id: 'valid-code', organization: anotherOrganization});
+    let anotherOrganization = server.create('organization', {
+      name: 'Other org',
+    });
+    server.create('invite', {
+      id: 'valid-code',
+      organization: anotherOrganization,
+    });
     server.create('invite', {id: 'expired-code', isExpired: true});
   });
 
-  it('expired rejected', function () {
+  it('expired rejected', function() {
     visit('/join/expired-code');
     andThen(() => {
       expect(currentPath()).to.equal('join');

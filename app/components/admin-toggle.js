@@ -17,6 +17,6 @@ export default Ember.Component.extend({
       } else {
         this.get('adminMode').clear();
       }
-    }
+    },
   },
 });

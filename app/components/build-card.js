@@ -7,14 +7,8 @@ export default Ember.Component.extend({
   click() {
     this.send('navigateToBuild');
   },
-  classNames: [
-    'BuildCard',
-    'container',
-  ],
-  classNameBindings: [
-    'classes',
-    'build.isExpired:BuildCard--expired',
-  ],
+  classNames: ['BuildCard', 'container'],
+  classNameBindings: ['classes', 'build.isExpired:BuildCard--expired'],
   actions: {
     navigateToBuild() {
       // Send action directly up to application controller, so we don't have to delegate every

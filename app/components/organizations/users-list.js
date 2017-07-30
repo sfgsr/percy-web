@@ -5,9 +5,6 @@ export default Ember.Component.extend({
   classes: null,
 
   classNames: ['OrganizationsUsersList'],
-  classNameBindings: [
-    'classes',
-  ],
-  actions: {
-  }
+  classNameBindings: ['classes'],
+  actions: {},
 });

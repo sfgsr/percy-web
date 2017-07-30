@@ -5,13 +5,8 @@ export default Ember.Component.extend({
   classes: null,
 
   isMobileExpanded: false,
-  classNames: [
-    'DocsNav',
-  ],
-  classNameBindings: [
-    'isMobileExpanded:DocsNav--expanded',
-    'classes',
-  ],
+  classNames: ['DocsNav'],
+  classNameBindings: ['isMobileExpanded:DocsNav--expanded', 'classes'],
   toggle() {
     this.send('toggle');
   },
@@ -22,5 +17,5 @@ export default Ember.Component.extend({
     toggle() {
       this.toggleProperty('isMobileExpanded');
     },
-  }
+  },
 });

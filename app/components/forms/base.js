@@ -2,7 +2,6 @@ import Ember from 'ember';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
-
 export default Ember.Component.extend({
   // To be defined by superclass:
   model: null,
@@ -34,13 +33,16 @@ export default Ember.Component.extend({
     saving(promise) {
       this.set('isSaveSuccessful', null);
       this.set('isSaving', true);
-      promise.then(() => {
-        this.set('isSaving', false);
-        this.set('isSaveSuccessful', true);
-      }, () => {
-        this.set('isSaving', false);
-        this.set('isSaveSuccessful', false);
-      });
+      promise.then(
+        () => {
+          this.set('isSaving', false);
+          this.set('isSaveSuccessful', true);
+        },
+        () => {
+          this.set('isSaving', false);
+          this.set('isSaveSuccessful', false);
+        },
+      );
     },
 
     validateProperty(changeset, property) {
@@ -57,31 +59,33 @@ export default Ember.Component.extend({
         let savingPromise = changeset.save();
         this.send('saving', savingPromise);
 
-        savingPromise.then((model) => {
-          // Bubble the successfully saved model upward, so the route can react to it.
-          this.sendAction('saveSuccess', model);
-          changeset.rollback();
-        }).catch(() => {
-          // TODO: clean this up when this issue is addressed:
-          // https://github.com/DockYard/ember-changeset/issues/100
-          let errorData = {};
-          this.get('model.errors').forEach(({attribute, message}) => {
-            if (!errorData[attribute]) {
-              errorData[attribute] = [];
+        savingPromise
+          .then(model => {
+            // Bubble the successfully saved model upward, so the route can react to it.
+            this.sendAction('saveSuccess', model);
+            changeset.rollback();
+          })
+          .catch(() => {
+            // TODO: clean this up when this issue is addressed:
+            // https://github.com/DockYard/ember-changeset/issues/100
+            let errorData = {};
+            this.get('model.errors').forEach(({attribute, message}) => {
+              if (!errorData[attribute]) {
+                errorData[attribute] = [];
+              }
+              errorData[attribute].push(message);
+            });
+            Object.keys(errorData).forEach(key => {
+              changeset.addError(key, errorData[key]);
+            });
+            // Make sure the model dirty attrs are rolled back (not for new, unsaved records).
+            // TODO: this causes flashing when page state is bound to a model attribute that is
+            // dirtied by the changeset save(), but it's better than leaving the model dirty
+            // and having page state be out of date. Better way to handle this?
+            if (!model.get('isNew')) {
+              model.rollbackAttributes();
             }
-            errorData[attribute].push(message);
           });
-          Object.keys(errorData).forEach((key) => {
-            changeset.addError(key, errorData[key]);
-          });
-          // Make sure the model dirty attrs are rolled back (not for new, unsaved records).
-          // TODO: this causes flashing when page state is bound to a model attribute that is
-          // dirtied by the changeset save(), but it's better than leaving the model dirty
-          // and having page state be out of date. Better way to handle this?
-          if (!model.get('isNew')) {
-            model.rollbackAttributes();
-          }
-        });
       }
     },
     delete() {

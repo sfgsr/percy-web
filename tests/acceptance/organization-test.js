@@ -1,5 +1,6 @@
 import setupAcceptance, {
-  setupSession, renderAdapterErrorsAsPage
+  setupSession,
+  renderAdapterErrorsAsPage,
 } from '../helpers/setup-acceptance';
 
 describe('Acceptance: Organization', function() {
@@ -79,7 +80,7 @@ describe('Acceptance: Organization', function() {
       });
       click('input[type=radio][name=github-integration-setting][value=github-integration]');
       percySnapshot(this.test.fullTitle() + ' | github-integration');
-     });
+    });
   });
 
   context('user is admin', function() {
@@ -135,31 +136,33 @@ describe('Acceptance: Organization', function() {
       click('.FormsBillingEdit input[type=submit]');
       andThen(() => {
         expect(
-          find('.FormsBillingEdit .FormFieldsSubmit .SavingIndicator i.fa-check-circle').length
+          find('.FormsBillingEdit .FormFieldsSubmit .SavingIndicator i.fa-check-circle').length,
         ).to.equal(1);
-        expect(
-          server.schema.subscriptions.first().billingEmail
-        ).to.equal('a_valid_email@gmail.com');
+        expect(server.schema.subscriptions.first().billingEmail).to.equal(
+          'a_valid_email@gmail.com',
+        );
       });
       percySnapshot(this.test.fullTitle() + ' | ok modification');
 
       renderAdapterErrorsAsPage(() => {
-        fillIn('.FormsBillingEdit span:contains("Billing email") + input',
-          'an invalid email@gmail.com');
+        fillIn(
+          '.FormsBillingEdit span:contains("Billing email") + input',
+          'an invalid email@gmail.com',
+        );
         click('.FormsBillingEdit input[type=submit]');
         andThen(() => {
           expect(
-            find('.FormsBillingEdit .FormFieldsSubmit .SavingIndicator i.fa-check-circle').length
+            find('.FormsBillingEdit .FormFieldsSubmit .SavingIndicator i.fa-check-circle').length,
           ).to.equal(0);
           expect(
-            find('.FormsBillingEdit .FormFieldsSubmit .SavingIndicator i.fa-times-circle').length
+            find('.FormsBillingEdit .FormFieldsSubmit .SavingIndicator i.fa-times-circle').length,
           ).to.equal(1);
-          expect(
-            find('.FormsBillingEdit .FormFieldsInput ul.Form-errors li').text()
-          ).to.equal('Billing email is invalid');
-          expect(
-            server.schema.subscriptions.first().billingEmail
-          ).to.equal('a_valid_email@gmail.com');
+          expect(find('.FormsBillingEdit .FormFieldsInput ul.Form-errors li').text()).to.equal(
+            'Billing email is invalid',
+          );
+          expect(server.schema.subscriptions.first().billingEmail).to.equal(
+            'a_valid_email@gmail.com',
+          );
         });
         return percySnapshot(this.test.fullTitle() + ' | invalid modification');
       });
@@ -176,7 +179,7 @@ describe('Acceptance: Organization', function() {
       percySnapshot(this.test.fullTitle() + '| select organization');
     });
 
-    context('organization is on trial account',function() {
+    context('organization is on trial account', function() {
       setupSession(function(server) {
         this.organization = server.create('organization', 'withAdminUser', 'withTrial');
       });
@@ -190,7 +193,7 @@ describe('Acceptance: Organization', function() {
       });
     });
   });
-  context('user is github bot user',function() {
+  context('user is github bot user', function() {
     setupSession(function(server) {
       let user = server.create('user');
       let organization = server.create('organization', {githubBotUser: user});

@@ -5,7 +5,5 @@ export default Ember.Component.extend({
   classes: null,
 
   classNames: ['CommitInfo'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 });

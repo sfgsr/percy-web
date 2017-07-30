@@ -5,5 +5,5 @@ export default Model.extend({
   baseBuild: belongsTo('build'),
   snapshots: hasMany('snapshot'),
   comparisons: hasMany('comparison'),
-  approvedBy: belongsTo('user')
+  approvedBy: belongsTo('user'),
 });

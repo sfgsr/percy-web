@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import BaseFormComponent from './base';
 
-
 export default BaseFormComponent.extend({
   organization: null,
   classes: null,
@@ -27,12 +26,15 @@ export default BaseFormComponent.extend({
       this._super(...arguments);
 
       this.set('errorMessage', null);
-      promise.then(() => {
-        // Fully reset the model + changeset if saved successfully.
-        this.set('model', this.newModel());
-      }, (errors) => {
-        this.set('errorMessage', errors.errors[0].detail);
-      });
+      promise.then(
+        () => {
+          // Fully reset the model + changeset if saved successfully.
+          this.set('model', this.newModel());
+        },
+        errors => {
+          this.set('errorMessage', errors.errors[0].detail);
+        },
+      );
     },
   },
 });

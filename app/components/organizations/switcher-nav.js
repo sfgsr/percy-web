@@ -9,9 +9,7 @@ export default Ember.Component.extend({
   currentUser: Ember.computed.alias('session.data.authenticated.user'),
 
   classNames: ['OrganizationsSwitcherNav'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 
   actions: {
     toggleSwitcher() {
@@ -21,5 +19,5 @@ export default Ember.Component.extend({
     hideSwitcher() {
       this.set('isExpanded', false);
     },
-  }
+  },
 });

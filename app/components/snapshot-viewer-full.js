@@ -35,10 +35,11 @@ export default Ember.Component.extend({
       this.set('selectedComparison', comparison);
       this.set('snapshotSelectedWidth', value);
 
-      this.sendAction('transitionRouteToWidth',
+      this.sendAction(
+        'transitionRouteToWidth',
         this.get('snapshot'),
         value,
-        this.get('comparisonMode')
+        this.get('comparisonMode'),
       );
     },
     cycleComparisonMode(keyCode) {

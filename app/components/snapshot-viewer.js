@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     },
     set(_, value) {
       return value;
-    }
+    },
   }),
   selectedComparison: Ember.computed('snapshot', 'snapshotSelectedWidth', function() {
     let width = this.get('snapshotSelectedWidth');
@@ -70,6 +70,6 @@ export default Ember.Component.extend({
     },
     showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth) {
       this.attrs.showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth);
-    }
+    },
   },
 });

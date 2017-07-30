@@ -1,18 +1,13 @@
 /* jshint expr:true */
 import {setupComponentTest} from 'ember-mocha';
-import {
-  beforeEach,
-  afterEach,
-  it,
-  describe
-} from 'mocha';
+import {beforeEach, afterEach, it, describe} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {startMirage} from 'percy-web/initializers/ember-cli-mirage';
 
 describe('Integration: QuickstartButtonComponent', function() {
   setupComponentTest('quickstart-button', {
-    integration: true
+    integration: true,
   });
 
   beforeEach(function() {

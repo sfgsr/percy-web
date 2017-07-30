@@ -6,10 +6,6 @@ export default Ember.Component.extend({
   promoted: false,
 
   classNames: ['PricingBucket'],
-  classNameBindings: [
-    'classes',
-    'promoted:PricingBucket--promoted',
-  ],
-  actions: {
-  },
+  classNameBindings: ['classes', 'promoted:PricingBucket--promoted'],
+  actions: {},
 });

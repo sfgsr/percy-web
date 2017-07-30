@@ -30,7 +30,7 @@ var TargetApplicationActionsMixin = Ember.Mixin.create({
     if (Ember.isNone(actionName)) {
       this.set(action, action);
     }
-    return this._super.apply(this, arguments);  // Pass through all original arguments.
+    return this._super.apply(this, arguments); // Pass through all original arguments.
   },
 });
 

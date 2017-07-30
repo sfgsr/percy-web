@@ -1,5 +1,7 @@
-import setupAcceptance, {setupSession, moveModalIntoTestContainer}
-  from '../helpers/setup-acceptance';
+import setupAcceptance, {
+  setupSession,
+  moveModalIntoTestContainer,
+} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 
@@ -122,7 +124,7 @@ describe('Acceptance: Build', function() {
     let build = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
-      finishedAt: moment().subtract(5, 'seconds')
+      finishedAt: moment().subtract(5, 'seconds'),
     });
     this.comparisons = {
       different: server.create('comparison', {build}),
@@ -202,7 +204,6 @@ describe('Acceptance: Build', function() {
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1`);
     });
 
-
     keyEvent('.SnapshotList', 'keydown', RightArrowKey);
     andThen(() => {
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
@@ -228,9 +229,9 @@ describe('Acceptance: Build', function() {
     visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(
-        find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()
-      ).to.equal(snapshot.name);
+      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()).to.equal(
+        snapshot.name,
+      );
     });
 
     percySnapshot(this.test.fullTitle());
@@ -240,9 +241,9 @@ describe('Acceptance: Build', function() {
     let snapshot = this.comparisons.same.headSnapshot;
     visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
-      expect(
-        find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()
-      ).to.equal(snapshot.name);
+      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()).to.equal(
+        snapshot.name,
+      );
     });
   });
 

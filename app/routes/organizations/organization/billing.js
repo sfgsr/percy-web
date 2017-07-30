@@ -15,5 +15,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       let organization = this.modelFor('organizations.organization');
       this.analytics.track('Billing Viewed', organization);
     },
-  }
+  },
 });

@@ -10,5 +10,5 @@ export default Factory.extend({
   },
   fullSlug() {
     return `${this.organization.slug}/${this.slug}`;
-  }
+  },
 });

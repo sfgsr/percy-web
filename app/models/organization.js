@@ -6,7 +6,9 @@ export default DS.Model.extend({
   slug: DS.attr(),
   githubBotUser: DS.belongsTo('user', {async: false, inverse: null}),
   githubIntegration: DS.belongsTo('github-integration', {async: false}),
-  githubIntegrationRequest: DS.belongsTo('github-integration-request', {async: false}),
+  githubIntegrationRequest: DS.belongsTo('github-integration-request', {
+    async: false,
+  }),
   subscription: DS.belongsTo('subscription', {async: false}),
   projects: DS.hasMany('project'),
   billingProvider: DS.attr(),
@@ -38,6 +40,9 @@ export default DS.Model.extend({
   // Use `organization.currentUserMembership` to get the current user's OrganizationUser object.
   currentUserMembership: Ember.computed.alias('_filteredOrganizationUsers.firstObject'),
   _filteredOrganizationUsers: Ember.computed(function() {
-    return this.store.query('organization-user', {organization: this, filter: 'current-user-only'});
+    return this.store.query('organization-user', {
+      organization: this,
+      filter: 'current-user-only',
+    });
   }),
 });

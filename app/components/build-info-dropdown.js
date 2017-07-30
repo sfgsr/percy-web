@@ -9,6 +9,6 @@ export default Ember.Component.extend({
   actions: {
     toggleModal: function() {
       this.toggleProperty('isShowingModal');
-    }
-  }
+    },
+  },
 });

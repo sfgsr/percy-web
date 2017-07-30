@@ -9,5 +9,5 @@ export default Ember.Route.extend(ResetScrollMixin, {
       // TODO: Add organization tracking
       this.analytics.track('Pricing Viewed');
     },
-  }
+  },
 });

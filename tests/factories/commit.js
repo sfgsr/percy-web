@@ -14,6 +14,6 @@ FactoryGuy.define('commit', {
   },
   traits: {
     longMessage: {message: () => faker.lorem.sentence(30)},
-    noSpacesMessage: {message: () => faker.lorem.slug}
-  }
+    noSpacesMessage: {message: () => faker.lorem.slug},
+  },
 });

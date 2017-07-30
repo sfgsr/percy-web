@@ -7,7 +7,7 @@ export function simpleImageHelper(params, options = {}) {
   let classString = Ember.Handlebars.Utils.escapeExpression(options.classes || '');
   return Ember.String.htmlSafe(
     `<img class="${classString}" src="${image.get('url')}" ` +
-    `width="${image.get('width')}" height="${image.get('height')}">`
+      `width="${image.get('width')}" height="${image.get('height')}">`,
   );
 }
 

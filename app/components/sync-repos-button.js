@@ -15,9 +15,7 @@ export default Ember.Component.extend({
     'hint--rounded',
     'hint--centered',
   ],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
   click() {
     this.send('login');
   },

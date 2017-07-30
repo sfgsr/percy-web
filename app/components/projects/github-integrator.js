@@ -12,18 +12,19 @@ export default Ember.Component.extend({
   triggerSavingIndicator(promise) {
     this.set('isSaveSuccessful', null);
     this.set('isSaving', true);
-    promise.then(() => {
-      this.set('isSaving', false);
-      this.set('isSaveSuccessful', true);
-    }, () => {
-      this.set('isSaveSuccessful', false);
-    });
+    promise.then(
+      () => {
+        this.set('isSaving', false);
+        this.set('isSaveSuccessful', true);
+      },
+      () => {
+        this.set('isSaveSuccessful', false);
+      },
+    );
   },
 
   classNames: ['ProjectsGithubIntegrator'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
   actions: {
     chooseRepo(repo) {
       let project = this.get('project');
@@ -35,5 +36,5 @@ export default Ember.Component.extend({
         this.triggerSavingIndicator(project.save());
       }
     },
-  }
+  },
 });

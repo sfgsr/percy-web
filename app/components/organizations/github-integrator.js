@@ -20,11 +20,11 @@ export default Ember.Component.extend({
   startPollingForUpdates: function() {
     this.set('runningTask', this.get('pollForUpdatesTask').perform());
   },
-  pollForUpdatesTask: task(function * () {
+  pollForUpdatesTask: task(function*() {
     this.set('numPollRequests', 0);
     while (this.get('numPollRequests') < MAX_UPDATE_POLLING_REQUESTS) {
       this.incrementProperty('numPollRequests');
-      this.get('organization').reload().then((organization) => {
+      this.get('organization').reload().then(organization => {
         let githubIntegration = organization.get('githubIntegration');
         let githubIntegrationRequest = organization.get('githubIntegrationRequest');
 
@@ -44,9 +44,7 @@ export default Ember.Component.extend({
   }),
 
   classNames: ['OrganizationsGithubIntegrator'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
   actions: {
     cancelIntegrationRequest() {
       let integrationRequest = this.get('organization.githubIntegrationRequest');
@@ -67,6 +65,6 @@ export default Ember.Component.extend({
     },
     showSupport() {
       this.sendAction('showSupport');
-    }
-  }
+    },
+  },
 });

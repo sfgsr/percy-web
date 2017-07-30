@@ -13,13 +13,16 @@ export default Ember.Service.extend({
     });
     let savingPromise = subscription.save();
 
-    savingPromise.then(() => {}, () => {
-      alert(
-        'A Stripe error occurred! Your card may have been declined. Please try again or ' +
-        'contact us at hello@percy.io and we will help you get set up.'
-      );
-      location.reload();
-    });
+    savingPromise.then(
+      () => {},
+      () => {
+        alert(
+          'A Stripe error occurred! Your card may have been declined. Please try again or ' +
+            'contact us at hello@percy.io and we will help you get set up.',
+        );
+        location.reload();
+      },
+    );
     return savingPromise;
-  }
+  },
 });

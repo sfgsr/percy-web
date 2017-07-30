@@ -8,7 +8,7 @@ export default DS.Model.extend({
   fullSlug: DS.attr(),
   isEnabled: DS.attr('boolean'),
   isDisabled: Ember.computed.not('isEnabled'),
-  diffBase: DS.attr(),  // Either "automatic" or "manual".
+  diffBase: DS.attr(), // Either "automatic" or "manual".
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 

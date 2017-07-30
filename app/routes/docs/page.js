@@ -19,7 +19,7 @@ export default Ember.Route.extend(ResetScrollMixin, {
     });
 
     return Ember.RSVP.hash({
-      docPath: `/docs/${params.path}`,  // TODO(fotinakis): make more dynamic?
+      docPath: `/docs/${params.path}`, // TODO(fotinakis): make more dynamic?
       navMarkdown: Ember.get(percyDocs.markdownFiles, 'nav'),
       pageMarkdown: anchoredMarkdown,
       pageTitle: pageTitle,

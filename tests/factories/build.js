@@ -4,7 +4,7 @@ import faker from 'faker';
 
 FactoryGuy.define('build', {
   sequences: {
-    buildNumber: (num) => num,
+    buildNumber: num => num,
   },
   default: {
     buildNumber: FactoryGuy.generate('buildNumber'),
@@ -23,7 +23,7 @@ FactoryGuy.define('build', {
       state: 'finished',
       finishedAt: () => moment().add(2, 'minutes').add(31, 'seconds'),
       totalComparisonsDiff: 10,
-      totalComparisonsFinished: 15
+      totalComparisonsFinished: 15,
     },
     pending: {state: 'pending'},
     processing: {state: 'processing'},
@@ -31,7 +31,7 @@ FactoryGuy.define('build', {
     expired: {state: 'expired'},
     noDiffs: {
       totalComparisonsDiff: 0,
-      totalComparisonsFinished: 12
+      totalComparisonsFinished: 12,
     },
     missingResources: {failureReason: 'missing_resources'},
     noSnapshots: {failureReason: 'no_snapshots'},
@@ -48,7 +48,11 @@ FactoryGuy.define('build', {
 
     // TODO: refactor these commit message customizations out of this build factory
     // https://github.com/percy/percy-web/pull/154#discussion_r129167477
-    withLongHeadCommitMessage: {commit: FactoryGuy.belongsTo('commit', 'longMessage')},
-    withNoSpacesMessageCommitMessage: {commit: FactoryGuy.belongsTo('commit', 'noSpacesMessage')},
-  }
+    withLongHeadCommitMessage: {
+      commit: FactoryGuy.belongsTo('commit', 'longMessage'),
+    },
+    withNoSpacesMessageCommitMessage: {
+      commit: FactoryGuy.belongsTo('commit', 'noSpacesMessage'),
+    },
+  },
 });

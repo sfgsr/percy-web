@@ -5,7 +5,5 @@ export default Ember.Component.extend({
   classes: null,
 
   classNames: ['BuildComparisonInfo'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 });

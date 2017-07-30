@@ -19,7 +19,9 @@ export default BaseFormComponent.extend({
   _billingProviderData: Ember.computed('marketplaceListingPlanId', function() {
     let marketplaceListingPlanId = this.get('marketplaceListingPlanId');
     if (marketplaceListingPlanId) {
-      return JSON.stringify({marketplace_listing_plan_id: parseInt(marketplaceListingPlanId)});
+      return JSON.stringify({
+        marketplace_listing_plan_id: parseInt(marketplaceListingPlanId),
+      });
     }
   }),
 

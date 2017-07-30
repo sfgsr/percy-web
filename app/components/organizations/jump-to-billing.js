@@ -4,9 +4,7 @@ export default Ember.Component.extend({
   classes: null,
 
   classNames: ['OrganizationsJumpToBilling'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 
   session: Ember.inject.service(),
   currentUser: Ember.computed.alias('session.data.authenticated.user'),
@@ -20,5 +18,5 @@ export default Ember.Component.extend({
     hide() {
       this.get('hide')();
     },
-  }
+  },
 });

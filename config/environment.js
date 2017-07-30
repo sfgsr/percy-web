@@ -13,8 +13,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
     pageTitle: {
       separator: ' - ',
@@ -40,7 +40,7 @@ module.exports = function(environment) {
       },
       githubUrls: {
         integration: 'https://github.com/apps/percy/installations/new',
-      }
+      },
     },
   };
 
@@ -56,12 +56,12 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     if (process.env.PERCY_DEV_MIRAGE === 'yes') {
       ENV['ember-cli-mirage'] = {
-        enabled: true
-      }
+        enabled: true,
+      };
     }
     ENV.APP.githubUrls = {
       integration: 'https://github.com/apps/percy-dev/installations/new',
-    }
+    };
 
     ENV.APP.AMPLITUDE_USERS_INSTANCE_NAME = 'Users';
     ENV.APP.AMPLITUDE_USERS_PROJECT_ID = '5a8c0499760103fcd2754fe7d5756214';
@@ -80,8 +80,8 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.percy = {
-      defaultWidths: [375, 1280]
-    }
+      defaultWidths: [375, 1280],
+    };
   }
 
   if (environment === 'production') {

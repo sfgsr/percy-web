@@ -3,10 +3,10 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   queryParams: {
-    activeSnapshotId: {as: 'snapshot', replace: true}
+    activeSnapshotId: {as: 'snapshot', replace: true},
   },
   afterModel(model) {
-    model.reload().then((model) => {
+    model.reload().then(model => {
       if (!model.get('isExpired')) {
         // Force reload because these async-hasMany's won't reload themselves if the build's
         // state has changed, such as going from processing --> finished and we don't want to show
@@ -31,7 +31,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         project_id: build.get('project.id'),
         project_slug: build.get('project.slug'),
         build_id: build.get('id'),
-        state: build.get('state')
+        state: build.get('state'),
       };
       this.analytics.track('Build Viewed', organization, eventProperties);
     },
@@ -57,16 +57,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         'organization.project.builds.build.snapshot',
         snapshotId,
         snapshotSelectedWidth,
-        {queryParams: {mode: 'diff'}}
+        {
+          queryParams: {mode: 'diff'},
+        },
       );
     },
     closeSnapshotFullModal(buildId, snapshotId) {
       this.send('updateModalState', false);
-      this.transitionTo(
-        'organization.project.builds.build',
-        buildId,
-        {queryParams: {activeSnapshotId: snapshotId}}
-      );
+      this.transitionTo('organization.project.builds.build', buildId, {
+        queryParams: {activeSnapshotId: snapshotId},
+      });
     },
-  }
+  },
 });

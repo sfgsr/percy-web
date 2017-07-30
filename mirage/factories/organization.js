@@ -23,21 +23,21 @@ export default Factory.extend({
         trialEnd: moment().add(14, 'days').add(1, 'hour'),
         plan: server.create('plan', 'trial'),
       });
-    }
+    },
   }),
 
   withUser: trait({
     afterCreate(organization, server) {
       let user = server.create('user');
       server.create('organizationUser', {user, organization, role: 'member'});
-    }
+    },
   }),
 
   withAdminUser: trait({
     afterCreate(organization, server) {
       let user = server.create('user');
       server.create('organizationUser', {user, organization, role: 'admin'});
-    }
+    },
   }),
 
   withGithubIntegration: trait({
@@ -46,6 +46,6 @@ export default Factory.extend({
         let githubIntegration = server.create('githubIntegration');
         organization.update({githubIntegration});
       }
-    }
-  })
+    },
+  }),
 });

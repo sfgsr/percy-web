@@ -9,13 +9,10 @@ export default Ember.Component.extend({
 
   isExpanded: false,
   classNames: ['OrganizationsUserCard'],
-  classNameBindings: [
-    'classes',
-    'isExpanded:OrganizationsUserCard--expanded',
-  ],
+  classNameBindings: ['classes', 'isExpanded:OrganizationsUserCard--expanded'],
   actions: {
     toggleExpanded() {
       this.toggleProperty('isExpanded');
     },
-  }
+  },
 });

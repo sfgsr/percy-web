@@ -25,7 +25,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       if (lastOrganizationSlug) {
         this.transitionTo('organization.index', lastOrganizationSlug);
       } else {
-        this.get('currentUser.organizations').then((orgs) => {
+        this.get('currentUser.organizations').then(orgs => {
           let org = orgs.get('firstObject');
           if (org) {
             this.transitionTo('organization.index', org.get('slug'));

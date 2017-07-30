@@ -7,7 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   queryParams: {
     comparisonMode: {as: 'mode'},
   },
-  model(params, /*transition*/) {
+  model(params /*transition*/) {
     this.set('params', params);
     let buildId = this.modelFor('organization.project.builds.build').get('id');
     return this.store.findRecord('build', buildId);
@@ -27,7 +27,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
       build: model,
       snapshotId: params.snapshot_id,
       snapshotSelectedWidth: params.width,
-      comparisonMode: params.comparisonMode
+      comparisonMode: params.comparisonMode,
     });
   },
   actions: {
@@ -49,12 +49,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
       this.controllerFor(this.routeName).set('comparisonMode', value.toString());
     },
     transitionRouteToWidth(snapshot, width, comparisonMode) {
-      this.transitionTo(
-        'organization.project.builds.build.snapshot',
-        snapshot.id,
-        width,
-        {queryParams: {mode: comparisonMode}}
-      );
+      this.transitionTo('organization.project.builds.build.snapshot', snapshot.id, width, {
+        queryParams: {mode: comparisonMode},
+      });
     },
   },
 });

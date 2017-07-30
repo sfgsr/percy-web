@@ -1,13 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  PLAN_IDS: [
-    'free',
-    'v2-small',
-    'v2-medium',
-    'v2-large',
-    'v2-enterprise',
-  ],
+  PLAN_IDS: ['free', 'v2-small', 'v2-medium', 'v2-large', 'v2-enterprise'],
   PLANS: [
     {
       id: 'free',

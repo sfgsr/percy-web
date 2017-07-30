@@ -44,6 +44,6 @@ export default Ember.Component.extend({
   actions: {
     docsNavigate(docsPath) {
       this.sendAction('docsNavigate', docsPath);
-    }
+    },
   },
 });

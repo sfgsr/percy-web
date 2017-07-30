@@ -2,11 +2,11 @@ import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 
 describe('Acceptance: Login', function() {
   setupAcceptance();
-  setupSession(function (server) {
+  setupSession(function(server) {
     this.loginUser = false;
     this.server = server;
   });
-  it ('should login and logout user', function () {
+  it('should login and logout user', function() {
     visit('/');
     percySnapshot(this.test.fullTitle() + ' | Logged out');
 

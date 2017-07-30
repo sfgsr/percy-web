@@ -9,11 +9,7 @@ export default Ember.Component.extend({
     return 'https://github.com/percy/percy-docs/tree/master' + this.get('docPath') + '.md';
   }),
   tagName: 'a',
-  classNames: [
-    'DocsEditButton',
-  ],
+  classNames: ['DocsEditButton'],
   attributeBindings: ['href'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 });

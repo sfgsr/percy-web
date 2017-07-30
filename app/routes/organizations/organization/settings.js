@@ -16,5 +16,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       let destinationUrl = router.generate('organization', organization.get('slug'));
       window.location.href = destinationUrl;
     },
-  }
+  },
 });

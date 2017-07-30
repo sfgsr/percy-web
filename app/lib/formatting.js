@@ -6,5 +6,5 @@ export default {
   formatCurrency(value, options) {
     options = options || {precision: 2};
     return window.accounting.formatMoney(value, null, options.precision);
-  }
+  },
 };

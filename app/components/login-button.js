@@ -6,23 +6,15 @@ export default Ember.Component.extend({
 
   showIcon: true,
   tagName: 'a',
-  classNames: [
-    'LoginButton',
-    'Button',
-    'Button--primary',
-    'Button--onDark',
-  ],
+  classNames: ['LoginButton', 'Button', 'Button--primary', 'Button--onDark'],
   attributeBindings: ['href'],
-  classNameBindings: [
-    'classes',
-    'showIcon:Button--withLeftIcon',
-  ],
+  classNameBindings: ['classes', 'showIcon:Button--withLeftIcon'],
   click() {
     this.send('login');
   },
   actions: {
     login() {
       this.sendAction('redirectToLogin');
-    }
+    },
   },
 });

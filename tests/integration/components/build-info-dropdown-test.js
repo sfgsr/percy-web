@@ -3,13 +3,13 @@ import {setupComponentTest} from 'ember-mocha';
 import {beforeEach, it, describe} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make}  from 'ember-data-factory-guy';
-import {manualSetup}  from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
+import {manualSetup} from 'ember-data-factory-guy';
 import seedFaker from '../../helpers/seed-faker';
 
 describe('Integration: BuildInfoDropdownComponent', function() {
   setupComponentTest('build-info-dropdown', {
-    integration: true
+    integration: true,
   });
 
   beforeEach(function() {
@@ -33,7 +33,7 @@ describe('Integration: BuildInfoDropdownComponent', function() {
     ['finished', 'withRepo', 'hasPullRequestWithoutTitle'],
   ];
 
-  states.forEach((state) => {
+  states.forEach(state => {
     let testTitle = state.join(' ');
 
     it(`renders in state: ${testTitle}`, function() {

@@ -17,10 +17,13 @@ export default Ember.Component.extend({
   }),
 
   setupScrollHandler: Ember.on('didInsertElement', function() {
-    this.$('img').on('load', function() {
-      Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
-      this._showHintsIfVisible();
-    }.bind(this));
+    this.$('img').on(
+      'load',
+      function() {
+        Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
+        this._showHintsIfVisible();
+      }.bind(this),
+    );
   }),
   destroyScrollHandler: Ember.on('willDestroyElement', function() {
     Ember.$(window).unbind('.MockBuildPage');
@@ -32,7 +35,7 @@ export default Ember.Component.extend({
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;
     var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
-    if (elementHeightShowing > elementHeight * (9/10)) {
+    if (elementHeightShowing > elementHeight * (9 / 10)) {
       this.set('showHints', true);
       Ember.$(window).unbind('.MockBuildPage');
     }
@@ -41,6 +44,6 @@ export default Ember.Component.extend({
     toggleOverlay() {
       this.set('anyInteractions', true);
       this.set('showOverlay', !this.get('showOverlay'));
-    }
+    },
   },
 });

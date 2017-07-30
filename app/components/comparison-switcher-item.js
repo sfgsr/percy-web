@@ -21,5 +21,5 @@ export default Ember.Component.extend({
   }),
   click() {
     this.get('updateSelectedWidth')(this.get('width'));
-  }
+  },
 });

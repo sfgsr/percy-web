@@ -11,14 +11,14 @@ module.exports = function(defaults) {
       includePolyfill: true,
     },
     'ember-cli-mocha': {
-      useLintTree: false
+      useLintTree: false,
     },
     sassOptions: {
       extension: 'sass',
     },
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
-      prepend: '/static/'
+      prepend: '/static/',
     },
   });
 
@@ -30,7 +30,7 @@ module.exports = function(defaults) {
   var extraAssets;
   if (app.env === 'development' || app.env === 'test') {
     extraAssets = new Funnel('tests/public/images/test', {
-      destDir: 'images/test'
+      destDir: 'images/test',
     });
   }
   return app.toTree(extraAssets);

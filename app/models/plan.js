@@ -19,4 +19,3 @@ export default DS.Model.extend({
     return this.get('subscriptionData.PLAN_IDS').indexOf(this.get('id')) === -1;
   }),
 });
-

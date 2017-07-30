@@ -52,18 +52,17 @@ export default Ember.Component.extend({
     let activeSnapshotId = this.get('activeSnapshotId');
     let activeSnapshotIsNoDiff = this.get('snapshotsWithoutDiffs').findBy('id', activeSnapshotId);
 
-    return noDiffsCount > 0 && (activeSnapshotIsNoDiff === undefined);
+    return noDiffsCount > 0 && activeSnapshotIsNoDiff === undefined;
   }),
   snapshotsWithDiffs: Ember.computed('sortedSnapshots', function() {
-    return this.get('sortedSnapshots').filter((snapshot) => {
+    return this.get('sortedSnapshots').filter(snapshot => {
       return snapshot.get('comparisons').isAny('isDifferent');
     });
   }),
   snapshotsWithoutDiffs: Ember.computed('snapshots', function() {
-    return this.get('snapshots').filter((snapshot) => {
+    return this.get('snapshots').filter(snapshot => {
       return snapshot.get('comparisons').isEvery('isSame');
     });
-
   }),
   noDiffSnapshotsCount: Ember.computed('snapshotsWithoutDiffs', function() {
     return this.get('snapshotsWithoutDiffs').reduce((total, snapshot) => {
@@ -75,26 +74,31 @@ export default Ember.Component.extend({
     'snapshotsWithDiffs.[]',
     'snapshotsWithoutDiffs.[]',
     function() {
-
-    if (this.get('hideNoDiffs')) {
-      return this.get('snapshotsWithDiffs');
-    } else {
-      return [].concat(this.get('snapshotsWithDiffs'), this.get('snapshotsWithoutDiffs'));
-    }
-  }),
+      if (this.get('hideNoDiffs')) {
+        return this.get('snapshotsWithDiffs');
+      } else {
+        return [].concat(this.get('snapshotsWithDiffs'), this.get('snapshotsWithoutDiffs'));
+      }
+    },
+  ),
   isDefaultExpanded: Ember.computed('snapshotsWithDiffs', function() {
     return this.get('snapshotsWithDiffs.length') < 150;
   }),
   didInsertElement() {
-    Ember.$(document).bind('keydown.snapshots', function(e) {
-      if (!this.get('isShowingModal')) {
-        if (e.keyCode === 39) {  // right arrow
-          this.send('nextSnapshot');
-        } else if (e.keyCode === 37) {  // left arrow
-          this.send('previousSnapshot');
+    Ember.$(document).bind(
+      'keydown.snapshots',
+      function(e) {
+        if (!this.get('isShowingModal')) {
+          if (e.keyCode === 39) {
+            // right arrow
+            this.send('nextSnapshot');
+          } else if (e.keyCode === 37) {
+            // left arrow
+            this.send('previousSnapshot');
+          }
         }
-      }
-    }.bind(this));
+      }.bind(this),
+    );
   },
   willDestroyElement() {
     Ember.$(document).unbind('keydown.snapshots');

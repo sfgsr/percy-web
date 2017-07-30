@@ -11,5 +11,5 @@ export default Factory.extend({
   },
   buildNumber(i) {
     return i + 1;
-  }
+  },
 });

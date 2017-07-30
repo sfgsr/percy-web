@@ -9,10 +9,7 @@ export default DS.Model.extend({
   // Check isGithubLinked before accessing repo.
   isGithubLinked: Ember.computed.bool('repo'),
 
-  isGithubPullRequest: Ember.computed.and(
-    'isGithubLinked',
-    'isPullRequest'
-  ),
+  isGithubPullRequest: Ember.computed.and('isGithubLinked', 'isPullRequest'),
 
   buildNumber: DS.attr('number'),
   buildTitle: Ember.computed('buildNumber', function() {
@@ -40,18 +37,18 @@ export default DS.Model.extend({
     }
   }),
 
-  commit: DS.belongsTo('commit', {async: false}),  // Might be null.
+  commit: DS.belongsTo('commit', {async: false}), // Might be null.
   baseBuild: DS.belongsTo('build', {async: false, inverse: null}),
   comparisons: DS.hasMany('comparison', {async: true}),
 
   snapshots: Ember.computed('comparisons', function() {
     let comparisons = this.get('comparisons');
-    let snapshots = comparisons.map((comparison) => comparison.get('headSnapshot')).filter(x => x);
+    let snapshots = comparisons.map(comparison => comparison.get('headSnapshot')).filter(x => x);
     return [...new Set(snapshots)];
   }),
 
   comparisonWidths: Ember.computed('comparisons', function() {
-    let widths = [...new Set(this.get('comparisons').map((c) => c.get('width')))];
+    let widths = [...new Set(this.get('comparisons').map(c => c.get('width')))];
     return widths.sort((a, b) => a - b);
   }),
 
@@ -67,7 +64,7 @@ export default DS.Model.extend({
     if (!this.get('isFinished')) {
       return false;
     }
-    return (this.get('totalComparisonsDiff') > 0);
+    return this.get('totalComparisonsDiff') > 0;
   }),
 
   isPullRequest: DS.attr('boolean'),

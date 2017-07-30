@@ -5,9 +5,7 @@ export default Ember.Component.extend({
   classes: null,
 
   classNames: ['OrganizationsSettingsNavWrapper'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 
   actions: {
     chooseProject(project) {
@@ -16,5 +14,5 @@ export default Ember.Component.extend({
       let applicationController = Ember.getOwner(this).lookup('controller:application');
       applicationController.send('navigateToProjectSettings', project);
     },
-  }
+  },
 });

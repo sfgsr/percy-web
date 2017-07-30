@@ -5,7 +5,5 @@ export default Ember.Component.extend({
   classes: null,
 
   classNames: ['BuildStarted'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 });

@@ -7,7 +7,5 @@ export default Ember.Component.extend({
   tagName: 'span',
   classNames: ['SavingIndicator'],
   classes: null,
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
 });

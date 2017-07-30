@@ -5,5 +5,5 @@ export default Model.extend({
   projects: hasMany('project'),
   githubBotUser: belongsTo('user'),
   githubIntegration: belongsTo('github-integration', {async: false}),
-  subscription: belongsTo('subscription')
+  subscription: belongsTo('subscription'),
 });

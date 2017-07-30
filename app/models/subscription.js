@@ -27,4 +27,3 @@ export default DS.Model.extend({
     return Math.round(moment(this.get('trialEnd')).diff(moment(), 'days', true));
   }),
 });
-

@@ -6,12 +6,10 @@ export default Ember.Component.extend({
 
   currentIntegration: Ember.computed.alias('organization.githubIntegration'),
   classNames: ['OrganizationsGithubIntegration'],
-  classNameBindings: [
-    'classes',
-  ],
+  classNameBindings: ['classes'],
   actions: {
     cancelIntegrationRequest() {
       this.sendAction('cancelIntegrationRequest');
-    }
-  }
+    },
+  },
 });
