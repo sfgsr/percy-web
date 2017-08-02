@@ -6,13 +6,14 @@ export default DS.Model.extend({
   state: DS.attr(),
   width: DS.attr('number'),
 
+  headBuild: DS.belongsTo('build', {async: false}),
   headSnapshot: DS.belongsTo('snapshot', {async: false}),
   baseSnapshot: DS.belongsTo('snapshot', {async: false}),
 
   // If headScreenshot is null, the comparison was removed (compared to the base build).
-  headScreenshot: DS.belongsTo('snapshot', {async: false}),
+  headScreenshot: DS.belongsTo('screenshot', {async: false}),
   // If baseScreenshot is null, the comparison was added and is new (compared to the base build).
-  baseScreenshot: DS.belongsTo('snapshot', {async: false}),
+  baseScreenshot: DS.belongsTo('screenshot', {async: false}),
   // If pdiff is set, both headScreenshot and baseScreenshot are guaranteed to exist.
   pdiff: DS.belongsTo('pdiff', {async: false}),
 

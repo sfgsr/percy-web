@@ -121,29 +121,29 @@ describe('Acceptance: Build', function() {
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
     let project = server.create('project', {name: 'finished build', organization});
-    let build = server.create('build', {
+    let headBuild = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
       finishedAt: moment().subtract(5, 'seconds'),
     });
     this.comparisons = {
-      different: server.create('comparison', {build}),
-      gotLonger: server.create('comparison', 'gotLonger', {build}),
-      gotShorter: server.create('comparison', 'gotShorter', {build}),
-      wasAdded: server.create('comparison', 'wasAdded', {build}),
-      wasRemoved: server.create('comparison', 'wasRemoved', {build}),
-      same: server.create('comparison', 'same', {build}),
-      differentNoMobile: server.create('comparison', {build}),
+      different: server.create('comparison', {headBuild}),
+      gotLonger: server.create('comparison', 'gotLonger', {headBuild}),
+      gotShorter: server.create('comparison', 'gotShorter', {headBuild}),
+      wasAdded: server.create('comparison', 'wasAdded', {headBuild}),
+      wasRemoved: server.create('comparison', 'wasRemoved', {headBuild}),
+      same: server.create('comparison', 'same', {headBuild}),
+      differentNoMobile: server.create('comparison', {headBuild}),
     };
 
     // Create some mobile width comparisons
     let headSnapshot = this.comparisons.different.headSnapshot;
-    server.create('comparison', 'mobile', {build, headSnapshot});
+    server.create('comparison', 'mobile', {headBuild, headSnapshot});
     headSnapshot = this.comparisons.wasAdded.headSnapshot;
-    server.create('comparison', 'mobile', 'wasAdded', {build, headSnapshot});
+    server.create('comparison', 'mobile', 'wasAdded', {headBuild, headSnapshot});
 
     this.project = project;
-    this.build = build;
+    this.build = headBuild;
   });
 
   it('shows as finished', function() {

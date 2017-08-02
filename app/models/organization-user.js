@@ -8,7 +8,7 @@ const ROLE_ID_TO_TITLE = {
 };
 
 export default DS.Model.extend({
-  organization: DS.belongsTo('user', {async: false}),
+  organization: DS.belongsTo('organization', {async: false}),
   user: DS.belongsTo('user', {async: false, inverse: null}),
   role: DS.attr(),
 
