@@ -7,5 +7,14 @@
       autofocus=true
       placeholder="Acme Co."
   }}
-  {{form-fields/submit value="Create Organization" classes="Button Button--primary" submit=(action "save")}}
+  {{#if errorMessage}}
+    <div class="Form-errors">
+      {{errorMessage}}
+    </div>
+  {{/if}}
+  {{form-fields/submit
+    value="Create Organization"
+    classes="Button Button--primary"
+    submit=(action "save")
+  }}
 </form>

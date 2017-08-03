@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 
   isSaving: false,
   isSaveSuccessful: null,
+  errorMessage: null,
 
   store: Ember.inject.service(),
   changeset: Ember.computed('model', 'validator', function() {
@@ -33,14 +34,20 @@ export default Ember.Component.extend({
     saving(promise) {
       this.set('isSaveSuccessful', null);
       this.set('isSaving', true);
+      this.set('errorMessage', null);
       promise.then(
         () => {
           this.set('isSaving', false);
           this.set('isSaveSuccessful', true);
         },
-        () => {
+        errors => {
           this.set('isSaving', false);
           this.set('isSaveSuccessful', false);
+          if (errors && errors.errors && errors.errors[0].detail) {
+            this.set('errorMessage', errors.errors[0].detail);
+          } else {
+            this.set('errorMessage', 'An unhandled error occured');
+          }
         },
       );
     },
