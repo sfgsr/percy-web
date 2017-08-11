@@ -1,7 +1,4 @@
-import setupAcceptance, {
-  setupSession,
-  moveModalIntoTestContainer,
-} from '../helpers/setup-acceptance';
+import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 
@@ -35,7 +32,6 @@ describe('Acceptance: Pending Build', function() {
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
     click('#BuildInfo');
-    andThen(() => moveModalIntoTestContainer());
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
@@ -71,7 +67,6 @@ describe('Acceptance: Processing Build', function() {
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
     click('#BuildInfo');
-    andThen(() => moveModalIntoTestContainer());
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
@@ -108,7 +103,6 @@ describe('Acceptance: Failed Build', function() {
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
     click('#BuildInfo');
-    andThen(() => moveModalIntoTestContainer());
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
@@ -160,7 +154,6 @@ describe('Acceptance: Build', function() {
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
     click('#BuildInfo');
-    andThen(() => moveModalIntoTestContainer());
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });

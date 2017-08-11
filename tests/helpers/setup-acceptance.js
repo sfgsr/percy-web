@@ -74,11 +74,3 @@ export function setupSession(createData) {
     this.loginUser = undefined;
   });
 }
-
-// By default `ember-modal-dialog` creates modals at the bottom of the body tag, which is outside
-// the testing container and so it doesn't render.
-// This moves the modal into the testing container so we can view it in our acceptance tests when
-// running Percy snapshots.
-export function moveModalIntoTestContainer() {
-  Ember.$('#ember-testing').prepend(Ember.$('.BuildInfoDropdown-modal'));
-}

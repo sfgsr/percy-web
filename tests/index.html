@@ -20,6 +20,11 @@
       .BuildContainer .BuildContainer-body, .SnapshotViewerFull-body {
         bottom: auto;
       }
+
+      /* fixes ember-modal-dialog so that it positions the dialog in view */
+      .ember-modal-dialog {
+        -webkit-transform: none !important;
+      }
     </style>
 
     {{content-for "head-footer"}}
