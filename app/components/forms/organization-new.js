@@ -13,7 +13,7 @@ export default BaseFormComponent.extend({
   _billingProvider: Ember.computed('marketplaceListingPlanId', function() {
     let marketplaceListingPlanId = this.get('marketplaceListingPlanId');
     if (marketplaceListingPlanId) {
-      return 'ghm';
+      return 'github_marketplace';
     }
   }),
   _billingProviderData: Ember.computed('marketplaceListingPlanId', function() {
