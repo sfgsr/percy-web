@@ -9,17 +9,17 @@ export default function(server) {
   server.create('organizationUser', {user, organization, role: 'admin'});
 
   let project = server.create('project', {organization});
-  let build = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});
-  let headSnapshot = server.create('comparison', {build}).headSnapshot;
-  server.create('comparison', 'mobile', {build, headSnapshot});
-  headSnapshot = server.create('comparison', 'gotLonger', {build}).headSnapshot;
-  server.create('comparison', 'mobile', 'gotLonger', {build, headSnapshot});
-  headSnapshot = server.create('comparison', 'gotShorter', {build}).headSnapshot;
-  server.create('comparison', 'mobile', 'gotShorter', {build, headSnapshot});
-  headSnapshot = server.create('comparison', 'wasAdded', {build}).headSnapshot;
-  server.create('comparison', 'mobile', 'wasAdded', {build, headSnapshot});
-  headSnapshot = server.create('comparison', 'wasRemoved', {build}).headSnapshot;
-  server.create('comparison', 'mobile', 'wasRemoved', {build, headSnapshot});
-  headSnapshot = server.create('comparison', 'same', {build}).headSnapshot;
-  server.create('comparison', 'mobile', 'same', {build, headSnapshot});
+  let headBuild = server.create('build', {project, createdAt: moment().subtract(2, 'minutes')});
+  let headSnapshot = server.create('comparison', {headBuild}).headSnapshot;
+  server.create('comparison', 'mobile', {headBuild, headSnapshot});
+  headSnapshot = server.create('comparison', 'gotLonger', {headBuild}).headSnapshot;
+  server.create('comparison', 'mobile', 'gotLonger', {headBuild, headSnapshot});
+  headSnapshot = server.create('comparison', 'gotShorter', {headBuild}).headSnapshot;
+  server.create('comparison', 'mobile', 'gotShorter', {headBuild, headSnapshot});
+  headSnapshot = server.create('comparison', 'wasAdded', {headBuild}).headSnapshot;
+  server.create('comparison', 'mobile', 'wasAdded', {headBuild, headSnapshot});
+  headSnapshot = server.create('comparison', 'wasRemoved', {headBuild}).headSnapshot;
+  server.create('comparison', 'mobile', 'wasRemoved', {headBuild, headSnapshot});
+  headSnapshot = server.create('comparison', 'same', {headBuild}).headSnapshot;
+  server.create('comparison', 'mobile', 'same', {headBuild, headSnapshot});
 }
