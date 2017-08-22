@@ -75,7 +75,7 @@
     "lint-staged": "^4.0.3",
     "loader.js": "^4.6.0",
     "morgan": "^1.8.2",
-    "percy-docs": "git+https://github.com/percy/percy-docs.git#b95880eec97d17c61a1a0ec819f3e530e8d726cd",
+    "percy-docs": "git+https://github.com/percy/percy-docs.git#ac4801f2ada202f5190f51491e5d5aa837ab92d6",
     "prettier": "^1.5.3"
   },
   "engines": {
