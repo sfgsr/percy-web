@@ -3,7 +3,7 @@ build:
 	docker-compose build
 
 test:
-	docker-compose run web yarn test
+	docker-compose run web yarn test:parallel
 
 deploy:
 	@utils/deploy

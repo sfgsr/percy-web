@@ -2860,6 +2860,17 @@ ember-data@2.11.3:
     semver "^5.1.0"
     silent-error "^1.0.0"
 
+ember-exam@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/ember-exam/-/ember-exam-0.7.0.tgz#740ad0e4df3cb6cff8e83ae9c98536d8bb04332a"
+  dependencies:
+    chalk "^1.1.3"
+    cli-table2 "^0.2.0"
+    debug "^2.2.0"
+    ember-cli-babel "^5.1.6"
+    fs-extra "^0.30.0"
+    rimraf "^2.5.4"
+
 ember-export-application-global@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ember-export-application-global/-/ember-export-application-global-2.0.0.tgz#8d6d7619ac8a1a3f8c43003549eb21ebed685bd2"
@@ -3019,9 +3030,9 @@ ember-page-title@^3.2.2:
     ember-cli-head "^0.3.1"
     ember-cli-htmlbars "^2.0.1"
 
-ember-percy@^1.2.14:
-  version "1.2.14"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.14.tgz#8ed086b8f61b3905708f7ce839e080bcd85b8ebc"
+ember-percy@^1.2.15:
+  version "1.2.15"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.15.tgz#72af2f28b1b0b5ebc361b83f7704aff89f56a8d0"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.7"
