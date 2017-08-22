@@ -3019,9 +3019,9 @@ ember-page-title@^3.2.2:
     ember-cli-head "^0.3.1"
     ember-cli-htmlbars "^2.0.1"
 
-ember-percy@^1.2.13:
-  version "1.2.13"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.13.tgz#e0e0b8f4e835ee17cab22a5deb70db6e96b8b658"
+ember-percy@^1.2.14:
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.14.tgz#8ed086b8f61b3905708f7ce839e080bcd85b8ebc"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.7"
