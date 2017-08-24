@@ -6,6 +6,9 @@ set -e
 NOW=`date +%Y-%m-%d-%H%M%S`
 echo "Building: $IMAGE:$NOW"
 
+# Make sure parent baseimage is available locally and up to date.
+gcloud docker -- pull $(grep '^FROM' Dockerfile | grep -o ' .*' | tr -d ' ')
+
 # Build assets in the container, then copy them into dist/.
 # We have to do this with "docker cp" and not a mounted volume due to CI constraints.
 docker build -t $IMAGE:$NOW .
