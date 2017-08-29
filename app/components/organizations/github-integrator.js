@@ -24,15 +24,17 @@ export default Ember.Component.extend({
     this.set('numPollRequests', 0);
     while (this.get('numPollRequests') < MAX_UPDATE_POLLING_REQUESTS) {
       this.incrementProperty('numPollRequests');
-      this.get('organization').reload().then(organization => {
-        let githubIntegration = organization.get('githubIntegration');
-        let githubIntegrationRequest = organization.get('githubIntegrationRequest');
+      this.get('organization')
+        .reload()
+        .then(organization => {
+          let githubIntegration = organization.get('githubIntegration');
+          let githubIntegrationRequest = organization.get('githubIntegrationRequest');
 
-        // If the has been fully installed or uninstalled, stop polling for updates.
-        if (githubIntegration || (!githubIntegration && !githubIntegrationRequest)) {
-          this.get('runningTask').cancel();
-        }
-      });
+          // If the has been fully installed or uninstalled, stop polling for updates.
+          if (githubIntegration || (!githubIntegration && !githubIntegrationRequest)) {
+            this.get('runningTask').cancel();
+          }
+        });
       yield timeout(POLLING_INTERVAL_SECONDS * 1000);
     }
   }).drop(),

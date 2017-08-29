@@ -20,7 +20,9 @@ export default Factory.extend({
       server.create('subscription', {
         organization: organization,
         trialStart: moment(),
-        trialEnd: moment().add(14, 'days').add(1, 'hour'),
+        trialEnd: moment()
+          .add(14, 'days')
+          .add(1, 'hour'),
         plan: server.create('plan', 'trial'),
       });
     },

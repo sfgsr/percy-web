@@ -11,7 +11,9 @@ export default DS.Model.extend({
   currentPeriodStart: DS.attr('date'),
   currentPeriodEnd: DS.attr('date'),
   currentPeriodEndDisplayed: Ember.computed('currentPeriodEnd', function() {
-    return moment(this.get('currentPeriodEnd')).subtract(1, 'day').toDate();
+    return moment(this.get('currentPeriodEnd'))
+      .subtract(1, 'day')
+      .toDate();
   }),
   trialStart: DS.attr('date'),
   trialEnd: DS.attr('date'),

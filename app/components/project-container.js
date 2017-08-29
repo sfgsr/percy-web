@@ -8,11 +8,16 @@ export default Ember.Component.extend({
   actions: {
     refresh() {
       this.set('isRefreshing', true);
-      this.get('project').reload().then(project => {
-        project.get('builds').reload().then(() => {
-          this.set('isRefreshing', false);
+      this.get('project')
+        .reload()
+        .then(project => {
+          project
+            .get('builds')
+            .reload()
+            .then(() => {
+              this.set('isRefreshing', false);
+            });
         });
-      });
     },
     showSupport() {
       this.sendAction('showSupport');

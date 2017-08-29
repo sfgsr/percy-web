@@ -21,7 +21,10 @@ FactoryGuy.define('build', {
     withRepo: {repo: FactoryGuy.belongsTo('repo')},
     finished: {
       state: 'finished',
-      finishedAt: () => moment().add(2, 'minutes').add(31, 'seconds'),
+      finishedAt: () =>
+        moment()
+          .add(2, 'minutes')
+          .add(31, 'seconds'),
       totalComparisonsDiff: 10,
       totalComparisonsFinished: 15,
     },

@@ -26,7 +26,10 @@ export default Ember.Component.extend({
     let hostWithProtocol = window.location.protocol + '//' + window.location.host;
     if (event.target.tagName === 'A' && event.target.href.indexOf(hostWithProtocol) === 0) {
       // The target link is part of this app. Hijack the transition and stop bubbling.
-      let docsPath = event.target.href.split(hostWithProtocol + '/docs')[1].split('#')[0].slice(1);
+      let docsPath = event.target.href
+        .split(hostWithProtocol + '/docs')[1]
+        .split('#')[0]
+        .slice(1);
       this.send('docsNavigate', docsPath);
       return false;
     }

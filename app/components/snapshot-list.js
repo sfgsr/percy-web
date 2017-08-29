@@ -117,8 +117,11 @@ export default Ember.Component.extend({
       // and, if so, setup to scroll to that component after load.
       if (this.get('activeSnapshotId')) {
         let index = this.get('snapshotComponents.length') - 1;
+        let addedSnapshotId = this.get('sortedSnapshots')
+          .objectAt(index)
+          .get('id');
 
-        if (this.get('activeSnapshotId') == this.get('sortedSnapshots').objectAt(index).get('id')) {
+        if (this.get('activeSnapshotId') === addedSnapshotId) {
           this.send('changeSelectedSnapshotIndex', () => index);
 
           // After the list is inserted and rendered, scroll to this child component.

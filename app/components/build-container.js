@@ -32,18 +32,20 @@ export default Ember.Component.extend({
     this.set('numPollRequests', 0);
     while (this.get('numPollRequests') < MAX_UPDATE_POLLING_REQUESTS) {
       this.incrementProperty('numPollRequests');
-      this.get('build').reload().then(build => {
-        build.get('comparisons').reload();
-        if (!this.get('shouldPollForUpdates')) {
-          this.get('runningTask').cancel();
-        }
-        // Cancel after 1 iteration if running tests - otherwise acceptance tests break
-        // ember-concurrency is planning on adding a better way to cancel tasks during testing
-        // https://ember-concurrency.com/#/docs/testing-debugging
-        if (Ember.testing) {
-          this.get('runningTask').cancel();
-        }
-      });
+      this.get('build')
+        .reload()
+        .then(build => {
+          build.get('comparisons').reload();
+          if (!this.get('shouldPollForUpdates')) {
+            this.get('runningTask').cancel();
+          }
+          // Cancel after 1 iteration if running tests - otherwise acceptance tests break
+          // ember-concurrency is planning on adding a better way to cancel tasks during testing
+          // https://ember-concurrency.com/#/docs/testing-debugging
+          if (Ember.testing) {
+            this.get('runningTask').cancel();
+          }
+        });
       yield timeout(POLLING_INTERVAL_SECONDS * 1000);
     }
   }).drop(),
