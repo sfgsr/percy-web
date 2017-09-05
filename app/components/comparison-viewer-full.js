@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   isHead: Ember.computed.equal('comparisonMode', 'head'),
   isDiff: Ember.computed.equal('comparisonMode', 'diff'),
   headImage: Ember.computed.reads('comparison.headScreenshot.image'),
-  diffImage: Ember.computed.reads('comparison.pdiff.diffImage'),
+  diffImage: Ember.computed.reads('comparison.diffImage'),
   baseImage: Ember.computed.reads('comparison.baseScreenshot.image'),
   click() {
     if (!this.get('comparison') || this.get('comparison.wasAdded')) {

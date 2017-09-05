@@ -14,8 +14,8 @@ export default DS.Model.extend({
   headScreenshot: DS.belongsTo('screenshot', {async: false}),
   // If baseScreenshot is null, the comparison was added and is new (compared to the base build).
   baseScreenshot: DS.belongsTo('screenshot', {async: false}),
-  // If pdiff is set, both headScreenshot and baseScreenshot are guaranteed to exist.
-  pdiff: DS.belongsTo('pdiff', {async: false}),
+  diffImage: DS.belongsTo('image', {async: false}),
+  diffRatio: DS.attr('number'),
 
   startedProcessingAt: DS.attr('date'),
   finishedProcessingAt: DS.attr('date'),
@@ -38,18 +38,20 @@ export default DS.Model.extend({
   wasRemoved: Ember.computed('headScreenshot', 'baseScreenshot', function() {
     return !!this.get('baseScreenshot') && !this.get('headScreenshot');
   }),
-  wasCompared: Ember.computed.and('pdiff'),
+  wasCompared: Ember.computed.and('diffImage'),
 
   // Comparison is guaranteed 100% different if head was added or head was removed.
-  // Otherwise, rely on the pdiff diff ratio to tell us if pixels changed.
-  isDifferent: Ember.computed.or('wasAdded', 'wasRemoved', 'pdiff.isDifferent'),
-  isSame: Ember.computed.not('isDifferent'),
-  smartDiffRatio: Ember.computed('wasAdded', 'wasRemoved', 'pdiff.diffRatio', function() {
+  // Otherwise, rely on the diff ratio to tell us if pixels changed.
+  isDifferent: Ember.computed('wasAdded', 'wasRemoved', 'isSame', function() {
+    return this.get('wasAdded') || this.get('wasRemoved') || !this.get('isSame');
+  }),
+  isSame: Ember.computed.equal('diffRatio', 0),
+  smartDiffRatio: Ember.computed('wasAdded', 'wasRemoved', 'diffRatio', function() {
     if (this.get('wasAdded') || this.get('wasRemoved')) {
       // 100% changed pixels if added or removed.
       return 1;
     } else {
-      return this.get('pdiff.diffRatio');
+      return this.get('diffRatio');
     }
   }),
 });

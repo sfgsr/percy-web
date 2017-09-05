@@ -44,8 +44,13 @@ export default Factory.extend({
   same: trait({
     includePdiff: false,
     afterCreate(comparison, server) {
-      let pdiff = server.create('pdiff', {diffRatio: 0.0});
-      comparison.update({pdiff});
+      let diffImage = server.create('image', {
+        url: '/images/test/-pdiff-base-head.png',
+        width: 1280,
+        height: 1485,
+      });
+
+      comparison.update({diffRatio: 0.0, diffImage});
     },
   }),
 
@@ -86,7 +91,7 @@ export default Factory.extend({
       };
       settings.longer.lossy = settings.longer.pdiff;
     }
-    if (comparison.pdiff === null && comparison.includePdiff) {
+    if (comparison.diffImage === null && comparison.includePdiff) {
       let pdiffSettings = settings.pdiff;
       if (comparison.includePdiff === 'longer') {
         pdiffSettings = settings.longer.pdiff;
@@ -96,11 +101,7 @@ export default Factory.extend({
         width: pdiffSettings.width,
         height: pdiffSettings.height,
       });
-      let pdiff = server.create('pdiff', {
-        diffRatio: pdiffSettings.ratio,
-        diffImage,
-      });
-      comparison.update({pdiff});
+      comparison.update({diffRatio: pdiffSettings.ratio, diffImage});
     }
     if (comparison.baseScreenshot === null && comparison.includeBaseScreenshot) {
       let lossy = settings.lossy;

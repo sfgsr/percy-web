@@ -13,7 +13,7 @@
           <div class="Viewer-pdiffImageBox Viewer-pdiffImageBox--actionable" style={{html-safe "max-width: " lossyImage.width "px"}}>
             {{image-spacer action=(action "toggleOverlay") bubbles=false image=lossyImage imageClass="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable"}}
             {{#if isOverlayEnabled}}
-              {{#with comparison.pdiff.diffImage as |diffImage|}}
+              {{#with comparison.diffImage as |diffImage|}}
                 <div class="pdiffImageOverlay">
                   {{image-spacer action=(action "toggleOverlay") bubbles=false image=diffImage imageClass="Viewer-pdiffImageOverlay"}}
                 </div>
