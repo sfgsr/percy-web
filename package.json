@@ -6,16 +6,17 @@
     "test": "tests"
   },
   "scripts": {
-    "clean": "rm -rf dist/* tmp/*",
     "build": "ember build",
+    "build-production": "yarn run clean && ember build --environment=production",
+    "clean": "rm -rf dist/* tmp/*",
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "precommit": "lint-staged",
     "start": "ember server",
     "start-production-for-testing": "ember server --environment=production",
-    "build-production": "yarn run clean && ember build --environment=production",
     "test": "ember test",
-    "test:parallel": "PERCY_PARALLEL_TOTAL=4 ember exam --split=4 --parallel",
-    "test:server": "ember test --server",
     "test:node_debug": "node debug node_modules/ember-cli/bin/ember test --server",
-    "precommit": "lint-staged"
+    "test:parallel": "PERCY_PARALLEL_TOTAL=4 ember exam --split=4 --parallel",
+    "test:server": "ember test --server"
   },
   "lint-staged": {
     "*.js": [
