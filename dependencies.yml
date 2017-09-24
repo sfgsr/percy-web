@@ -6,6 +6,8 @@ collectors:
   # pull requests for updates to our major version
   - type: js-npm
     versions: "L.Y.Y"
+    dependencies_not_matching: "ember-cli$|ember-data$|ember-source$|ember-cli-mirage$"
   # create issues for new major versions
   - type: repo-issue
     versions: "Y.0.0"
+    dependencies_not_matching: "ember-cli$|ember-data$|ember-source$|ember-cli-mirage$"
