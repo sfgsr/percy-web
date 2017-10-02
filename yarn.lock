@@ -1520,7 +1520,7 @@ broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.2, broccoli
     symlink-or-copy "^1.0.0"
     walk-sync "^0.3.1"
 
-broccoli-funnel@^2.0.0:
+broccoli-funnel@^2.0.0, broccoli-funnel@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/broccoli-funnel/-/broccoli-funnel-2.0.1.tgz#6823c73b675ef78fffa7ab800f083e768b51d449"
   dependencies:
@@ -6015,14 +6015,23 @@ percy-client@^2.1.3:
     request "^2.40.0"
     request-promise "^4.1.1"
 
-"percy-docs@git+https://github.com/percy/percy-docs.git#bc459749fbdf98f2d0e087d10359481fb4542b0e":
+"percy-docs@git+https://github.com/percy/percy-docs.git#13b0cf66a32dd95463b483411fb0f70aa149f4ab":
   version "0.0.0"
-  resolved "git+https://github.com/percy/percy-docs.git#bc459749fbdf98f2d0e087d10359481fb4542b0e"
+  resolved "git+https://github.com/percy/percy-docs.git#13b0cf66a32dd95463b483411fb0f70aa149f4ab"
   dependencies:
     broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
-    broccoli-funnel "^1.0.2"
-    broccoli-merge-trees "^1.1.1"
-    ember-cli-babel "^5.1.7"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-babel "^6.8.2"
+
+"percy-docs@git+https://github.com/percy/percy-docs.git#f699e5b9148d44a8dfa9f6eeafe6283f2be292ef":
+  version "0.0.0"
+  resolved "git+https://github.com/percy/percy-docs.git#f699e5b9148d44a8dfa9f6eeafe6283f2be292ef"
+  dependencies:
+    broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-babel "^6.8.2"
 
 performance-now@^0.2.0:
   version "0.2.0"
