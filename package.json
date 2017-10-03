@@ -80,7 +80,7 @@
     "loader.js": "^4.6.0",
     "morgan": "^1.9.0",
     "percy-docs": "git+https://github.com/percy/percy-docs.git#13b0cf66a32dd95463b483411fb0f70aa149f4ab",
-    "prettier": "^1.7.3"
+    "prettier": "^1.7.4"
   },
   "engines": {
     "node": ">= 6.9.1"
