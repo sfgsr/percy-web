@@ -2,8 +2,14 @@
   &.Footer
     border-top: $lighter-gray-border
     text-align: center
-    line-height: 6rem
-    padding: 12px
+    padding: 30px 12px
+
+    .Footer-links
+      margin-bottom: 10px
+      display: inline
+
+      @media (max-width: 550px)
+        display: block
 
     a, .Footer-item
       display: inline-block
