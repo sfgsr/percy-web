@@ -17,6 +17,10 @@ export default BaseAuthenticator.extend({
           });
         }
         this.get('analytics').identifyUser(userRecord);
+
+        // Setting Sentry user context
+        Raven.setUserContext({id: userRecord.id});
+
         resolve({user: userRecord});
       }, reject);
     });
@@ -34,6 +38,10 @@ export default BaseAuthenticator.extend({
             });
           }
           this.get('analytics').identifyUser(userRecord);
+
+          // Setting Sentry user context
+          Raven.setUserContext({id: userRecord.id});
+
           resolve({user: userRecord});
         },
         () => {
@@ -61,6 +69,9 @@ export default BaseAuthenticator.extend({
       logoutResult.done(data => {
         // If a user clicks Logout, make sure we clear all the persistent storage locations.
         this.get('analytics').invalidate();
+
+        Raven.setUserContext();
+
         if (window.localStorage) {
           window.localStorage.clear();
         }

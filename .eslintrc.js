@@ -31,4 +31,7 @@ module.exports = {
     'space-unary-ops': ['error', {nonwords: false}],
     'comma-dangle': ['error', 'always-multiline'],
   },
+  globals: {
+    "Raven": true
+  }
 };
