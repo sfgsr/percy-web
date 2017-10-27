@@ -1,13 +1,15 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import {Promise as EmberPromise} from 'rsvp';
+import {inject as service} from '@ember/service';
 import utils from '../lib/utils';
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 
 export default BaseAuthenticator.extend({
-  store: Ember.inject.service(),
-  analytics: Ember.inject.service(),
+  store: service(),
+  analytics: service(),
   restore() {
     let store = this.get('store');
-    return new Ember.RSVP.Promise((resolve, reject) => {
+    return new EmberPromise((resolve, reject) => {
       store.queryRecord('user', {}).then(userRecord => {
         if (window.Intercom) {
           window.Intercom('update', {
@@ -27,7 +29,7 @@ export default BaseAuthenticator.extend({
   },
   authenticate(options) {
     let store = this.get('store');
-    return new Ember.RSVP.Promise(resolve => {
+    return new EmberPromise(resolve => {
       store.queryRecord('user', {}).then(
         userRecord => {
           if (window.Intercom) {
@@ -64,8 +66,8 @@ export default BaseAuthenticator.extend({
     });
   },
   invalidate() {
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      let logoutResult = Ember.$.ajax({type: 'GET', url: utils.buildApiUrl('logout')});
+    return new EmberPromise((resolve, reject) => {
+      let logoutResult = $.ajax({type: 'GET', url: utils.buildApiUrl('logout')});
       logoutResult.done(data => {
         // If a user clicks Logout, make sure we clear all the persistent storage locations.
         this.get('analytics').invalidate();

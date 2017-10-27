@@ -1,6 +1,11 @@
-import Ember from 'ember';
+import {later} from '@ember/runloop';
+import $ from 'jquery';
+import {on} from '@ember/object/evented';
+import {htmlSafe} from '@ember/string';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   showHints: false,
   isApproved: false,
   isButtonHovered: false,
@@ -9,23 +14,23 @@ export default Ember.Component.extend({
   classNames: ['MockApprovalFlow'],
   classNameBindings: ['classes'],
 
-  showWhenApproved: Ember.computed('isApproved', function() {
-    return Ember.String.htmlSafe(!this.get('isApproved') ? 'display: none' : '');
+  showWhenApproved: computed('isApproved', function() {
+    return htmlSafe(!this.get('isApproved') ? 'display: none' : '');
   }),
-  hideWhenApproved: Ember.computed('isApproved', function() {
-    return Ember.String.htmlSafe(this.get('isApproved') ? 'display: none' : '');
+  hideWhenApproved: computed('isApproved', function() {
+    return htmlSafe(this.get('isApproved') ? 'display: none' : '');
   }),
-  setupScrollHandler: Ember.on('didInsertElement', function() {
+  setupScrollHandler: on('didInsertElement', function() {
     this.$('img').on(
       'load',
       function() {
-        Ember.$(window).bind('scroll.MockApprovalFlow', this._animateApprovalIfVisible.bind(this));
+        $(window).bind('scroll.MockApprovalFlow', this._animateApprovalIfVisible.bind(this));
         this._animateApprovalIfVisible();
       }.bind(this),
     );
   }),
-  destroyScrollHandler: Ember.on('willDestroyElement', function() {
-    Ember.$(window).unbind('.MockApprovalFlow');
+  destroyScrollHandler: on('willDestroyElement', function() {
+    $(window).unbind('.MockApprovalFlow');
   }),
   _animateApprovalIfVisible() {
     if (this.get('isDestroyed')) {
@@ -33,16 +38,16 @@ export default Ember.Component.extend({
     }
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;
-    var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
+    var elementHeightShowing = $(window).height() - elementTop + $(window).scrollTop();
     if (elementHeightShowing > elementHeight * (2 / 3)) {
-      Ember.run.later(
+      later(
         function() {
           if (this.isDestroyed) {
             // If the user has navigated away before this timer fired, skip.
             return;
           }
           this.set('isButtonHovered', true);
-          Ember.run.later(
+          later(
             function() {
               this.set('isButtonHovered', false);
               if (!this.get('isApproved')) {
@@ -54,7 +59,7 @@ export default Ember.Component.extend({
         }.bind(this),
         1000,
       );
-      Ember.$(window).unbind('.MockApprovalFlow');
+      $(window).unbind('.MockApprovalFlow');
     }
   },
 });

@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
+import Service, {inject as service} from '@ember/service';
 import config from '../config/environment';
 
-export default Ember.Service.extend({
-  session: Ember.inject.service(),
-  adminMode: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+export default Service.extend({
+  session: service(),
+  adminMode: service(),
+  currentUser: alias('session.data.authenticated.user'),
 
   userInstance: null,
   organizationInstance: null,

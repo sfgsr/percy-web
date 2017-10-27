@@ -1,7 +1,8 @@
+import $ from 'jquery';
 import Ember from 'ember';
 
 export function initialize() {
-  Ember.$.ajaxPrefilter((options, originalOptions, xhr) => {
+  $.ajaxPrefilter((options, originalOptions, xhr) => {
     if (!options.crossDomain && !Ember.testing) {
       const cookieValue = document.cookie.match(/XSRF-TOKEN=([^;]*)/);
       if (cookieValue && cookieValue.length > 1) {

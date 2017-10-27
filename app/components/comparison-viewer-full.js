@@ -1,14 +1,15 @@
-import Ember from 'ember';
+import {equal, reads} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['ComparisonViewerFull'],
   comparison: null,
-  isBase: Ember.computed.equal('comparisonMode', 'base'),
-  isHead: Ember.computed.equal('comparisonMode', 'head'),
-  isDiff: Ember.computed.equal('comparisonMode', 'diff'),
-  headImage: Ember.computed.reads('comparison.headScreenshot.image'),
-  diffImage: Ember.computed.reads('comparison.diffImage'),
-  baseImage: Ember.computed.reads('comparison.baseScreenshot.image'),
+  isBase: equal('comparisonMode', 'base'),
+  isHead: equal('comparisonMode', 'head'),
+  isDiff: equal('comparisonMode', 'diff'),
+  headImage: reads('comparison.headScreenshot.image'),
+  diffImage: reads('comparison.diffImage'),
+  baseImage: reads('comparison.baseScreenshot.image'),
   click() {
     if (!this.get('comparison') || this.get('comparison.wasAdded')) {
       return;

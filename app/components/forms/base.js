@@ -1,8 +1,12 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import {assert} from '@ember/debug';
+import {computed, get} from '@ember/object';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
-export default Ember.Component.extend({
+export default Component.extend({
   // To be defined by superclass:
   model: null,
   validator: null,
@@ -11,8 +15,8 @@ export default Ember.Component.extend({
   isSaveSuccessful: null,
   errorMessage: null,
 
-  store: Ember.inject.service(),
-  changeset: Ember.computed('model', 'validator', function() {
+  store: service(),
+  changeset: computed('model', 'validator', function() {
     let model = this.get('model');
     let validator = this.get('validator') || {};
 
@@ -20,12 +24,12 @@ export default Ember.Component.extend({
       // TODO: re-evaluate this when ember-changeset promise support lands.
       // https://github.com/DockYard/ember-changeset/pull/130
       // https://github.com/percy/percy-web/pull/48
-      Ember.assert('Promises are not supported in forms!');
+      assert('Promises are not supported in forms!');
     }
 
     return new Changeset(model, lookupValidator(validator), validator);
   }),
-  focusOnInsert: Ember.on('didInsertElement', function() {
+  focusOnInsert: on('didInsertElement', function() {
     // We can't only use autofocus=true because it apparently only works on first load.
     this.$('[autofocus]').focus();
   }),
@@ -62,7 +66,7 @@ export default Ember.Component.extend({
 
       changeset.validate();
 
-      if (Ember.get(changeset, 'isValid')) {
+      if (get(changeset, 'isValid')) {
         let savingPromise = changeset.save();
         this.send('saving', savingPromise);
 

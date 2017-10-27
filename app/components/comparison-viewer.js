@@ -1,15 +1,16 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   comparison: null,
 
   classNames: ['ComparisonViewer'],
-  hasNoWidth: Ember.computed('comparison', 'snapshotSelectedWidth', function() {
+  hasNoWidth: computed('comparison', 'snapshotSelectedWidth', function() {
     return parseInt(this.get('snapshotSelectedWidth')) !== this.get('comparison.width');
   }),
   showNoDiffSnapshot: false,
   isOverlayEnabled: true,
-  comparisonUrl: Ember.computed(function() {
+  comparisonUrl: computed(function() {
     return `?comparison=${this.get('comparison.id')}`;
   }),
   actions: {

@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = Ember.Router.extend({
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
 
-  notifyGoogleAnalytics: Ember.on('didTransition', function() {
+  notifyGoogleAnalytics: on('didTransition', function() {
     if (window.ga) {
       window.ga('send', 'pageview', {page: this.get('url')});
     }

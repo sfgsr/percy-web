@@ -1,9 +1,12 @@
+import {alias} from '@ember/object/computed';
+import {inject as service} from '@ember/service';
+import Route from '@ember/routing/route';
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-export default Ember.Route.extend(ApplicationRouteMixin, {
-  session: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+export default Route.extend(ApplicationRouteMixin, {
+  session: service(),
+  currentUser: alias('session.data.authenticated.user'),
 
   // ESA relies on `config.baseURL` which is gone in our version of Ember. Fix logout manually.
   // https://github.com/simplabs/ember-simple-auth/issues/1048

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
 import DS from 'ember-data';
 
 const ROLE_ID_TO_TITLE = {
@@ -12,7 +12,7 @@ export default DS.Model.extend({
   user: DS.belongsTo('user', {async: false, inverse: null}),
   role: DS.attr(),
 
-  roleTitle: Ember.computed('role', function() {
+  roleTitle: computed('role', function() {
     return ROLE_ID_TO_TITLE[this.get('role')];
   }),
 });

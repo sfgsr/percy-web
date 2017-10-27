@@ -1,13 +1,14 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   project: null,
   classes: null,
 
   isSaving: null,
   isSaveSuccessful: null,
 
-  organization: Ember.computed.alias('project.organization'),
+  organization: alias('project.organization'),
 
   triggerSavingIndicator(promise) {
     this.set('isSaveSuccessful', null);

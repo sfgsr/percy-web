@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import utils from '../lib/utils';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classes: null,
   redirectTo: null,
 

@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {bool, and, equal, max} from '@ember/object/computed';
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -7,26 +8,26 @@ export default DS.Model.extend({
   repo: DS.belongsTo('repo', {async: false}),
 
   // Check isGithubLinked before accessing repo.
-  isGithubLinked: Ember.computed.bool('repo'),
+  isGithubLinked: bool('repo'),
 
-  isGithubPullRequest: Ember.computed.and('isGithubLinked', 'isPullRequest'),
+  isGithubPullRequest: and('isGithubLinked', 'isPullRequest'),
 
   buildNumber: DS.attr('number'),
-  buildTitle: Ember.computed('buildNumber', function() {
+  buildTitle: computed('buildNumber', function() {
     return `Build #${this.get('buildNumber')}`;
   }),
   branch: DS.attr(),
 
   // States.
   state: DS.attr(),
-  isPending: Ember.computed.equal('state', 'pending'),
-  isProcessing: Ember.computed.equal('state', 'processing'),
-  isFinished: Ember.computed.equal('state', 'finished'),
-  isFailed: Ember.computed.equal('state', 'failed'),
-  isExpired: Ember.computed.equal('state', 'expired'),
+  isPending: equal('state', 'pending'),
+  isProcessing: equal('state', 'processing'),
+  isFinished: equal('state', 'finished'),
+  isFailed: equal('state', 'failed'),
+  isExpired: equal('state', 'expired'),
 
   failureReason: DS.attr(),
-  failureReasonHumanized: Ember.computed('failureReason', function() {
+  failureReasonHumanized: computed('failureReason', function() {
     let failureReason = this.get('failureReason');
     if (failureReason === 'missing_resources') {
       return 'Missing resources';
@@ -41,25 +42,25 @@ export default DS.Model.extend({
   baseBuild: DS.belongsTo('build', {async: false, inverse: null}),
   comparisons: DS.hasMany('comparison', {async: true}),
 
-  snapshots: Ember.computed('comparisons', function() {
+  snapshots: computed('comparisons', function() {
     let comparisons = this.get('comparisons');
     let snapshots = comparisons.map(comparison => comparison.get('headSnapshot')).filter(x => x);
     return [...new Set(snapshots)];
   }),
 
-  comparisonWidths: Ember.computed('comparisons', function() {
+  comparisonWidths: computed('comparisons', function() {
     let widths = [...new Set(this.get('comparisons').map(c => c.get('width')))];
     return widths.sort((a, b) => a - b);
   }),
 
-  defaultSelectedWidth: Ember.computed.max('comparisonWidths'),
-  numComparisonWidths: Ember.computed('comparisonWidths', function() {
+  defaultSelectedWidth: max('comparisonWidths'),
+  numComparisonWidths: computed('comparisonWidths', function() {
     return this.get('comparisonWidths').length;
   }),
 
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),
-  hasDiffs: Ember.computed('totalComparisonsDiff', function() {
+  hasDiffs: computed('totalComparisonsDiff', function() {
     // Only have the chance to return true if the build is finished.
     if (!this.get('isFinished')) {
       return false;
@@ -78,7 +79,7 @@ export default DS.Model.extend({
   updatedAt: DS.attr('date'),
   userAgent: DS.attr(),
 
-  duration: Ember.computed('finishedAt', 'createdAt', function() {
+  duration: computed('finishedAt', 'createdAt', function() {
     var finished = this.get('finishedAt');
     if (!finished) {
       finished = moment();
@@ -89,17 +90,17 @@ export default DS.Model.extend({
   }),
 
   // Convenience methods for accessing common methods in templates.
-  durationHours: Ember.computed('duration', function() {
+  durationHours: computed('duration', function() {
     return this.get('duration').hours();
   }),
-  durationMinutes: Ember.computed('duration', function() {
+  durationMinutes: computed('duration', function() {
     return this.get('duration').minutes();
   }),
-  durationSeconds: Ember.computed('duration', function() {
+  durationSeconds: computed('duration', function() {
     return this.get('duration').seconds();
   }),
 
-  isApproved: Ember.computed('approvedAt', function() {
+  isApproved: computed('approvedAt', function() {
     return !!this.get('approvedAt');
   }),
 

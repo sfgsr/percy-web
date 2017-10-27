@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
+import {alias} from '@ember/object/computed';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
-  intercom: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, {
+  currentUser: alias('session.data.authenticated.user'),
+  intercom: service(),
 
   afterModel(model) {
     this.get('intercom').associateWithCompany(this.get('currentUser'), model);

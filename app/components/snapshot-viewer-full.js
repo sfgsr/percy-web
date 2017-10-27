@@ -1,25 +1,27 @@
-import Ember from 'ember';
+import {alias, reads} from '@ember/object/computed';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['SnapshotViewerFull'],
   build: null,
   comparisonMode: null,
   snapshotId: null,
   galleryMap: ['base', 'diff', 'head'],
-  galleryIndex: Ember.computed('comparisonMode', function() {
+  galleryIndex: computed('comparisonMode', function() {
     return this.get('galleryMap').indexOf(this.get('comparisonMode'));
   }),
 
-  snapshot: Ember.computed('build.snapshots.[]', 'snapshotId', function() {
+  snapshot: computed('build.snapshots.[]', 'snapshotId', function() {
     return this.get('build.snapshots').findBy('id', this.get('snapshotId'));
   }),
-  buildWidths: Ember.computed.alias('build.comparisonWidths'),
-  selectedComparison: Ember.computed('snapshot', 'snapshotSelectedWidth', function() {
+  buildWidths: alias('build.comparisonWidths'),
+  selectedComparison: computed('snapshot', 'snapshotSelectedWidth', function() {
     let comparisons = this.get('snapshot.comparisons') || [];
     let width = parseInt(this.get('snapshotSelectedWidth'), 10);
     return comparisons.findBy('width', width);
   }),
-  snapshotSelectedWidth: Ember.computed.reads('selectedComparison.width'),
+  snapshotSelectedWidth: reads('selectedComparison.width'),
   didRender() {
     this._super(...arguments);
 

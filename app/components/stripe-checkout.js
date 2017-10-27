@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import config from '../config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
   organization: null,
   planId: null,
   planName: null,
@@ -14,8 +16,8 @@ export default Ember.Component.extend({
   updateCard: false,
   checkoutLabelText: 'Select Plan ({{amount}})',
 
-  store: Ember.inject.service(),
-  subscriptionService: Ember.inject.service('subscriptions'),
+  store: service(),
+  subscriptionService: service('subscriptions'),
   handler: null,
   classes: null,
   attributeBindings: ['href'],
@@ -23,7 +25,7 @@ export default Ember.Component.extend({
   classNames: ['StripeCheckout', 'Button'],
   classNameBindings: ['classes'],
 
-  loadStripeCheckout: Ember.on('willInsertElement', function() {
+  loadStripeCheckout: on('willInsertElement', function() {
     if (!window.StripeCheckout) {
       var scriptEl = document.createElement('script');
       scriptEl.setAttribute('src', 'https://checkout.stripe.com/checkout.js');
@@ -33,7 +35,7 @@ export default Ember.Component.extend({
       document.head.appendChild(scriptEl);
     }
   }),
-  destroyStripeHandler: Ember.on('willDestroyElement', function() {
+  destroyStripeHandler: on('willDestroyElement', function() {
     if (this.get('handler')) {
       this.get('handler').close();
     }

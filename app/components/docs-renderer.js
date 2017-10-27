@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import {next} from '@ember/runloop';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   markdown: null,
   isDocsNav: null,
 
@@ -8,7 +10,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     if (window.location.hash && !this.get('isDocsNav')) {
-      Ember.run.next(this, function() {
+      next(this, function() {
         this.get('_scrollToAnchor')(window.location.hash);
       });
     }
@@ -38,8 +40,8 @@ export default Ember.Component.extend({
     // Manually resetting the hash seems necessary to "hijack" normal browser anchor jumping
     // behavior.
     window.location.hash = '';
-    let scrollTarget = Ember.$(`#_${hash.slice(1)}`);
-    let offset = Ember.$(scrollTarget).position().top - 15;
+    let scrollTarget = $(`#_${hash.slice(1)}`);
+    let offset = $(scrollTarget).position().top - 15;
 
     window.scrollTo(0, offset);
     window.location.hash = hash;

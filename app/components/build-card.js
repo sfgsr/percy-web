@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import {getOwner} from '@ember/application';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   build: null,
   classes: null,
 
@@ -13,7 +14,7 @@ export default Ember.Component.extend({
     navigateToBuild() {
       // Send action directly up to application controller, so we don't have to delegate every
       // time in the template.
-      let applicationController = Ember.getOwner(this).lookup('controller:application');
+      let applicationController = getOwner(this).lookup('controller:application');
       applicationController.send('navigateToBuild', this.get('build'));
     },
   },

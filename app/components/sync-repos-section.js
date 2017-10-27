@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   organization: null,
   classes: null,
 
   isPrivateReposExpanded: false,
-  session: Ember.inject.service(),
+  session: service(),
 
   classNames: ['SyncReposSection', 'Card'],
   classNameBindings: ['classes', 'isPrivateReposExpanded::SyncReposSection--collapsed'],

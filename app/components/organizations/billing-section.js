@@ -1,17 +1,19 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   organization: null,
   classes: null,
 
   isSaving: null,
   isSaveSuccessful: null,
 
-  subscriptionData: Ember.inject.service(),
+  subscriptionData: service(),
   classNames: ['OrganizationsBillingSection'],
   classNameBindings: ['classes'],
-  adminMode: Ember.inject.service(),
-  showCancel: Ember.computed('organization.subscription.isCustomer', function() {
+  adminMode: service(),
+  showCancel: computed('organization.subscription.isCustomer', function() {
     let isCustomer = this.get('organization.subscription.isCustomer');
     return isCustomer && this.get('adminMode').get() == 'admin';
   }),

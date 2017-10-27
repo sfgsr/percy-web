@@ -1,10 +1,13 @@
+import {on} from '@ember/object/evented';
+import {max, oneWay, or} from '@ember/object/computed';
+import Component from '@ember/component';
 import Ember from 'ember';
 import {task, timeout} from 'ember-concurrency';
 
 const POLLING_INTERVAL_SECONDS = 5;
 const MAX_UPDATE_POLLING_REQUESTS = 2000;
 
-export default Ember.Component.extend({
+export default Component.extend({
   build: null,
   activeSnapshotId: null,
   updateActiveSnapshotId: null,
@@ -13,17 +16,17 @@ export default Ember.Component.extend({
     'classes',
     'isShowingModal:BuildContainer--snapshotModalOpen:BuildContainer--snapshotModalClosed',
   ],
-  maxWidth: Ember.computed.max('build.comparisonWidths'),
-  buildContainerSelectedWidth: Ember.computed.oneWay('maxWidth'),
+  maxWidth: max('build.comparisonWidths'),
+  buildContainerSelectedWidth: oneWay('maxWidth'),
   noWidthSelected: false,
   currentPosition: null,
 
-  showComparisons: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
-  shouldPollForUpdates: Ember.computed.or('build.isPending', 'build.isProcessing'),
+  showComparisons: or('build.isPending', 'build.isProcessing', 'build.isFinished'),
+  shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 
   // Task to poll for updates for pending builds.
   runningTask: null,
-  maybeStartPolling: Ember.on('init', function() {
+  maybeStartPolling: on('init', function() {
     if (this.get('shouldPollForUpdates')) {
       this.set('runningTask', this.get('pollForUpdatesTask').perform());
     }

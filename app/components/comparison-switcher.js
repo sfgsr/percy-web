@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   snapshotSelectedWidth: null,
   comparisons: [],
   buildWidths: [],
   updateSelectedWidth() {},
   classNames: ['ComparisonSwitcher'],
-  selectedWidth: Ember.computed('snapshotSelectedWidth', {
+  selectedWidth: computed('snapshotSelectedWidth', {
     get() {
       return this.get('snapshotSelectedWidth');
     },

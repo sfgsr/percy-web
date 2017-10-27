@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
+import Route from '@ember/routing/route';
 import utils from '../lib/utils';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
 // TODO: fix broken login route when user is already logged in.
 
-export default Ember.Route.extend(UnauthenticatedRouteMixin, {
-  session: Ember.inject.service(),
+export default Route.extend(UnauthenticatedRouteMixin, {
+  session: service(),
 
   afterModel() {
     // Right now location.href is the URL before the transition to the login route has completed.

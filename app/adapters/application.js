@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
 import DS from 'ember-data';
 import utils from 'percy-web/lib/utils';
 
 export default DS.JSONAPIAdapter.extend({
   namespace: 'api/v1',
-  adminMode: Ember.inject.service(),
+  adminMode: service(),
 
-  headers: Ember.computed(function() {
+  headers: computed(function() {
     let headers = {};
 
     let percyMode = this.get('adminMode').get();

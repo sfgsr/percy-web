@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import {or} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   build: null,
   classNames: ['BuildHeader'],
 
-  showActions: Ember.computed.or('build.isPending', 'build.isProcessing', 'build.isFinished'),
+  showActions: or('build.isPending', 'build.isProcessing', 'build.isFinished'),
 });

@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import {isNone} from '@ember/utils';
+import {getOwner} from '@ember/application';
+import {computed} from '@ember/object';
+import Mixin from '@ember/object/mixin';
 /**
   Targets a component's actions to bubble immediately to the application controller and
   through the route hierarchy, skipping any parent component action handlers.
@@ -12,11 +15,11 @@ import Ember from 'ember';
 
   This mixin should be used for simple components where this high-coupling is desirable.
 */
-var TargetApplicationActionsMixin = Ember.Mixin.create({
-  target: Ember.computed(function() {
+var TargetApplicationActionsMixin = Mixin.create({
+  target: computed(function() {
     // Note: high-coupling to the container. We always return the main application controller, which
     // will trigger standard bubbling through the route hierarchy if not handled.
-    return Ember.getOwner(this).lookup('controller:application');
+    return getOwner(this).lookup('controller:application');
   }),
 
   /**
@@ -27,7 +30,7 @@ var TargetApplicationActionsMixin = Ember.Mixin.create({
   */
   send(action) {
     var actionName = this.get(action);
-    if (Ember.isNone(actionName)) {
+    if (isNone(actionName)) {
       this.set(action, action);
     }
     return this._super.apply(this, arguments); // Pass through all original arguments.

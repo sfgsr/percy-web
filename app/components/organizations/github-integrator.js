@@ -1,19 +1,22 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import {alias} from '@ember/object/computed';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import config from 'percy-web/config/environment';
 import {task, timeout} from 'ember-concurrency';
 
 const POLLING_INTERVAL_SECONDS = 3;
 const MAX_UPDATE_POLLING_REQUESTS = 2000;
 
-export default Ember.Component.extend({
+export default Component.extend({
   organization: null,
   classes: null,
 
-  store: Ember.inject.service(),
-  session: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+  store: service(),
+  session: service(),
+  currentUser: alias('session.data.authenticated.user'),
 
-  currentIntegration: Ember.computed.alias('organization.githubIntegration'),
+  currentIntegration: alias('organization.githubIntegration'),
   githubIntegrationUrl: config.APP.githubUrls.integration,
 
   runningTask: null,
@@ -38,7 +41,7 @@ export default Ember.Component.extend({
       yield timeout(POLLING_INTERVAL_SECONDS * 1000);
     }
   }).drop(),
-  maybeStartPollingOnLoad: Ember.on('init', function() {
+  maybeStartPollingOnLoad: on('init', function() {
     // The user refreshed the page, and there is still a pending request, so start polling.
     if (this.get('organization.githubIntegrationRequest')) {
       this.startPollingForUpdates();

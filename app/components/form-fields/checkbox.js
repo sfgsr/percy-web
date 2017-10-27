@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import {computed, observer, get} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   changeset: null,
   title: null,
   property: null,
@@ -10,11 +11,11 @@ export default Ember.Component.extend({
   checkedValue: null,
   uncheckedValue: null,
 
-  shouldBeChecked: Ember.computed('changeset.isPristine', 'checkedValue', function() {
+  shouldBeChecked: computed('changeset.isPristine', 'checkedValue', function() {
     return this.get('changeset.' + this.get('property')) === this.get('checkedValue');
   }),
   // Update the checked property if the changeset changes.
-  _updateChecked: Ember.observer('shouldBeChecked', function() {
+  _updateChecked: observer('shouldBeChecked', function() {
     this.$('input').prop('checked', this.get('shouldBeChecked'));
   }),
 
@@ -22,8 +23,8 @@ export default Ember.Component.extend({
   classNames: ['FormFieldsCheckbox'],
   classNameBindings: ['classes'],
 
-  fieldErrors: Ember.computed('changeset.error', function() {
-    return Ember.get(this.get('changeset.error'), this.get('property'));
+  fieldErrors: computed('changeset.error', function() {
+    return get(this.get('changeset.error'), this.get('property'));
   }),
   actions: {
     updateValue(event) {

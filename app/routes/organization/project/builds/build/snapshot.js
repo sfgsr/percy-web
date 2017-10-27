@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import ResetScrollMixin from 'percy-web/mixins/reset-scroll';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
+export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   params: {},
   queryParams: {
     comparisonMode: {as: 'mode'},

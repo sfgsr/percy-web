@@ -1,13 +1,14 @@
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import utils from 'percy-web/lib/utils';
-import Ember from 'ember';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['PricingSection'],
   classNameBindings: ['classes'],
 
   showJumpToBilling: false,
-  session: Ember.inject.service(),
-  subscriptionData: Ember.inject.service(),
+  session: service(),
+  subscriptionData: service(),
   actions: {
     jumpToBilling() {
       window.scrollTo(0, 0);

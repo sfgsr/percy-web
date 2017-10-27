@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   build: null,
 
   approvedNow: false,
   classNames: ['ApprovalSection'],
-  isApproved: Ember.computed.alias('build.isApproved'),
+  isApproved: alias('build.isApproved'),
   classNameBindings: [
     'classes',
     'isApproved:ApprovalSection--approved',

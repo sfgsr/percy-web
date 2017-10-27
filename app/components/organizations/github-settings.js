@@ -1,20 +1,23 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {alias} from '@ember/object/computed';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
-export default Ember.Component.extend({
+export default Component.extend({
   organization: null,
   classes: null,
 
-  store: Ember.inject.service(),
-  session: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+  store: service(),
+  session: service(),
+  currentUser: alias('session.data.authenticated.user'),
 
-  changeset: Ember.computed('organization', function() {
+  changeset: computed('organization', function() {
     let validator = this.get('validator') || {};
     return new Changeset(this.get('organization'), lookupValidator(validator), validator);
   }),
-  disableSave: Ember.computed(
+  disableSave: computed(
     'changeset.githubAuthMechanism',
     'changeset.isPristine',
     'changeset.isInvalid',

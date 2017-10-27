@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import {getOwner} from '@ember/application';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
   actions: {
     didTransition() {
       this._super.apply(this, arguments);
@@ -12,7 +13,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     organizationUpdated(organization) {
       // If an organization slug changes, we prefer to reload the entire application
       // to prevent odd bugs, since we rely on the org slug for basically everything.
-      let router = Ember.getOwner(this).lookup('router:main');
+      let router = getOwner(this).lookup('router:main');
       let destinationUrl = router.generate('organization', organization.get('slug'));
       window.location.href = destinationUrl;
     },

@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 import TargetApplicationActionsMixin from '../mixins/target-application-actions';
 
-export default Ember.Component.extend(TargetApplicationActionsMixin, {
+export default Component.extend(TargetApplicationActionsMixin, {
   user: null,
   classes: null,
 
-  session: Ember.inject.service(),
+  session: service(),
   classNames: ['NavMenu'],
   classNameBindings: ['classes'],
 });

@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  subscriptionData: Ember.inject.service(),
+  subscriptionData: service(),
 
   name: DS.attr(),
   interval: DS.attr(),
@@ -15,7 +16,7 @@ export default DS.Model.extend({
   isTrial: DS.attr('boolean'),
   isFree: DS.attr('boolean'),
 
-  isCustom: Ember.computed('id', function() {
+  isCustom: computed('id', function() {
     return this.get('subscriptionData.PLAN_IDS').indexOf(this.get('id')) === -1;
   }),
 });

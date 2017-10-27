@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
 import BaseFormComponent from './base';
 
 export default BaseFormComponent.extend({
@@ -8,6 +8,6 @@ export default BaseFormComponent.extend({
   classNames: ['FormsBillingEdit', 'Form'],
   classNameBindings: ['classes'],
 
-  model: Ember.computed.alias('subscription'),
+  model: alias('subscription'),
   validator: null,
 });

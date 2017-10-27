@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
 import BaseFormComponent from './base';
 import ProjectEditValidations from '../../validations/project-edit';
 
@@ -9,6 +9,6 @@ export default BaseFormComponent.extend({
   classNames: ['FormsProjectEdit', 'Form'],
   classNameBindings: ['classes'],
 
-  model: Ember.computed.alias('project'),
+  model: alias('project'),
   validator: ProjectEditValidations,
 });

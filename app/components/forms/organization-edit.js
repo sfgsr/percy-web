@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
 import BaseFormComponent from './base';
 import OrganizationEditValidations from '../../validations/organization-edit';
 
@@ -9,6 +9,6 @@ export default BaseFormComponent.extend({
   classNames: ['FormsOrganizationEdit', 'Form'],
   classNameBindings: ['classes'],
 
-  model: Ember.computed.alias('organization'),
+  model: alias('organization'),
   validator: OrganizationEditValidations,
 });

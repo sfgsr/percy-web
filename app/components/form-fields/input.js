@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import {computed, get} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   changeset: null,
   title: null,
   property: null,
@@ -11,7 +12,7 @@ export default Ember.Component.extend({
   classNames: ['FormFieldsInput'],
   classNameBindings: ['classes'],
 
-  fieldErrors: Ember.computed('changeset.error', function() {
-    return Ember.get(this.get('changeset.error'), this.get('property'));
+  fieldErrors: computed('changeset.error', function() {
+    return get(this.get('changeset.error'), this.get('property'));
   }),
 });

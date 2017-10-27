@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Service, {inject as service} from '@ember/service';
 
-export default Ember.Service.extend({
-  store: Ember.inject.service(),
+export default Service.extend({
+  store: service(),
   changeSubscription(organization, plan, token) {
     // Always create a new POST request to change subscription, don't modify the subscription
     // object directly unless just changing attributes.

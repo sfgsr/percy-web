@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import {hash} from 'rsvp';
+import {get} from '@ember/object';
+import Route from '@ember/routing/route';
 import ResetScrollMixin from '../../mixins/reset-scroll';
 import percyDocs from 'percy-docs';
 
-export default Ember.Route.extend(ResetScrollMixin, {
+export default Route.extend(ResetScrollMixin, {
   model(params) {
-    let pageMarkdown = Ember.get(percyDocs.markdownFiles, params.path.replace(/\//g, '.')) || '';
+    let pageMarkdown = get(percyDocs.markdownFiles, params.path.replace(/\//g, '.')) || '';
     let pageTitleMatch = /# (.*)/.exec(pageMarkdown);
     let pageTitle = pageTitleMatch ? pageTitleMatch[1] : 'Docs';
 
@@ -18,9 +20,9 @@ export default Ember.Route.extend(ResetScrollMixin, {
         </a>\n`;
     });
 
-    return Ember.RSVP.hash({
+    return hash({
       docPath: `/docs/${params.path}`, // TODO(fotinakis): make more dynamic?
-      navMarkdown: Ember.get(percyDocs.markdownFiles, 'nav'),
+      navMarkdown: get(percyDocs.markdownFiles, 'nav'),
       pageMarkdown: anchoredMarkdown,
       pageTitle: pageTitle,
     });

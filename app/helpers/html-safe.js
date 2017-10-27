@@ -1,5 +1,6 @@
-import Ember from 'ember';
+import {htmlSafe} from '@ember/string';
+import {helper} from '@ember/component/helper';
 
-export default Ember.Helper.helper(function(params) {
-  return Ember.String.htmlSafe(params.join(''));
+export default helper(function(params) {
+  return htmlSafe(params.join(''));
 });

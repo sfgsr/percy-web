@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import {readOnly} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   user: null,
   classes: null,
   linked: false,
-  href: Ember.computed.readOnly('user.githubUrl'),
+  href: readOnly('user.githubUrl'),
   width: 40,
-  height: Ember.computed.readOnly('width'),
+  height: readOnly('width'),
 
   classNames: ['UserAvatar'],
   classNameBindings: ['classes'],

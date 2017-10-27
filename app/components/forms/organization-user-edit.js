@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {alias} from '@ember/object/computed';
+import {inject as service} from '@ember/service';
 import BaseFormComponent from './base';
 
 export default BaseFormComponent.extend({
@@ -8,19 +10,19 @@ export default BaseFormComponent.extend({
   classNames: ['FormsOrganizationUserEdit', 'Form'],
   classNameBindings: ['classes'],
 
-  session: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
-  isCurrentUser: Ember.computed('organizationUser', 'currentUser', function() {
+  session: service(),
+  currentUser: alias('session.data.authenticated.user'),
+  isCurrentUser: computed('organizationUser', 'currentUser', function() {
     // TODO: why can't we use Ember.computed.equal for this?
     return this.get('organizationUser.user.id') === this.get('currentUser.id');
   }),
-  deleteText: Ember.computed('isCurrentUser', function() {
+  deleteText: computed('isCurrentUser', function() {
     if (this.get('isCurrentUser')) {
       return 'Leave Organization';
     } else {
       return 'Remove User';
     }
   }),
-  model: Ember.computed.alias('organizationUser'),
+  model: alias('organizationUser'),
   validator: null,
 });

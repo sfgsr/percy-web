@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
 import BaseFormComponent from './base';
 import OrganizationNewValidations from '../../validations/organization-new';
 
@@ -10,13 +10,13 @@ export default BaseFormComponent.extend({
   classNameBindings: ['classes'],
 
   // Setup data for creating an org from different billing providers and marketplaces.
-  _billingProvider: Ember.computed('marketplaceListingPlanId', function() {
+  _billingProvider: computed('marketplaceListingPlanId', function() {
     let marketplaceListingPlanId = this.get('marketplaceListingPlanId');
     if (marketplaceListingPlanId) {
       return 'github_marketplace';
     }
   }),
-  _billingProviderData: Ember.computed('marketplaceListingPlanId', function() {
+  _billingProviderData: computed('marketplaceListingPlanId', function() {
     let marketplaceListingPlanId = this.get('marketplaceListingPlanId');
     if (marketplaceListingPlanId) {
       return JSON.stringify({
@@ -25,7 +25,7 @@ export default BaseFormComponent.extend({
     }
   }),
 
-  model: Ember.computed(function() {
+  model: computed(function() {
     return this.get('store').createRecord('organization', {
       billingProvider: this.get('_billingProvider'),
       billingProviderData: this.get('_billingProviderData'),

@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import {oneWay} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['WidthSelector'],
   defaultSelectedWidth: null,
-  selectedWidth: Ember.computed.oneWay('defaultSelectedWidth'),
+  selectedWidth: oneWay('defaultSelectedWidth'),
   actions: {
     updateSelectedWidth(value) {
       if (value === 'select-width') {

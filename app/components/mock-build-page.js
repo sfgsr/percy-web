@@ -1,6 +1,10 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import {on} from '@ember/object/evented';
+import {htmlSafe} from '@ember/string';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   showHints: false,
   showOverlay: true,
   anyInteractions: false,
@@ -9,24 +13,24 @@ export default Ember.Component.extend({
   classNameBindings: ['classes', 'showHints:MockBuildPage--showHints'],
 
   // We set style directly because we want both images to be in the initial DOM to avoid flicker.
-  showWhenOverlay: Ember.computed('showOverlay', function() {
-    return new Ember.String.htmlSafe(!this.get('showOverlay') ? 'display: none' : '');
+  showWhenOverlay: computed('showOverlay', function() {
+    return new htmlSafe(!this.get('showOverlay') ? 'display: none' : '');
   }),
-  hideWhenOverlay: Ember.computed('showOverlay', function() {
-    return new Ember.String.htmlSafe(this.get('showOverlay') ? 'display: none' : '');
+  hideWhenOverlay: computed('showOverlay', function() {
+    return new htmlSafe(this.get('showOverlay') ? 'display: none' : '');
   }),
 
-  setupScrollHandler: Ember.on('didInsertElement', function() {
+  setupScrollHandler: on('didInsertElement', function() {
     this.$('img').on(
       'load',
       function() {
-        Ember.$(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
+        $(window).bind('scroll.MockBuildPage', this._showHintsIfVisible.bind(this));
         this._showHintsIfVisible();
       }.bind(this),
     );
   }),
-  destroyScrollHandler: Ember.on('willDestroyElement', function() {
-    Ember.$(window).unbind('.MockBuildPage');
+  destroyScrollHandler: on('willDestroyElement', function() {
+    $(window).unbind('.MockBuildPage');
   }),
   _showHintsIfVisible() {
     if (this.get('isDestroyed')) {
@@ -34,10 +38,10 @@ export default Ember.Component.extend({
     }
     var elementHeight = this.$().height();
     var elementTop = this.$().offset().top;
-    var elementHeightShowing = Ember.$(window).height() - elementTop + Ember.$(window).scrollTop();
+    var elementHeightShowing = $(window).height() - elementTop + $(window).scrollTop();
     if (elementHeightShowing > elementHeight * (9 / 10)) {
       this.set('showHints', true);
-      Ember.$(window).unbind('.MockBuildPage');
+      $(window).unbind('.MockBuildPage');
     }
   },
   actions: {

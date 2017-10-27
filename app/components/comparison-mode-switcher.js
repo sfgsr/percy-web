@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import {alias, empty} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['ComparisonModeSwitcher'],
   classNameBindings: ['isHidden:ComparisonModeSwitcher--hidden'],
-  wasAdded: Ember.computed.alias('comparison.wasAdded'),
-  isHidden: Ember.computed.empty('comparison'),
+  wasAdded: alias('comparison.wasAdded'),
+  isHidden: empty('comparison'),
   comparison: null,
   comparisonMode: null,
   updateComparionMode() {

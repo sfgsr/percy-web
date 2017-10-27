@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   hash: null,
 
-  isVisible: Ember.computed('hash', function() {
+  isVisible: computed('hash', function() {
     return '#' + this.get('hash') === location.hash;
   }),
 });

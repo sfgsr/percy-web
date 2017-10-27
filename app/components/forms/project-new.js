@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
 import BaseFormComponent from './base';
 import ProjectNewValidations from '../../validations/project-new';
 
@@ -9,7 +9,7 @@ export default BaseFormComponent.extend({
   classNames: ['FormsProjectNew', 'Form'],
   classNameBindings: ['classes'],
 
-  model: Ember.computed(function() {
+  model: computed(function() {
     return this.get('store').createRecord('project', {
       organization: this.get('organization'),
     });

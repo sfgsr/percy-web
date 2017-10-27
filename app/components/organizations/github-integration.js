@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   organization: null,
   classes: null,
 
-  currentIntegration: Ember.computed.alias('organization.githubIntegration'),
+  currentIntegration: alias('organization.githubIntegration'),
   classNames: ['OrganizationsGithubIntegration'],
   classNameBindings: ['classes'],
   actions: {

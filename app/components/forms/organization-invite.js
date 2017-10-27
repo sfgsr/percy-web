@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
 import BaseFormComponent from './base';
 
 export default BaseFormComponent.extend({
@@ -17,7 +17,7 @@ export default BaseFormComponent.extend({
       organization: this.get('organization'),
     });
   },
-  model: Ember.computed('organization', 'store', function() {
+  model: computed('organization', 'store', function() {
     return this.newModel();
   }),
   validator: null,

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
+export default Service.extend({
   // We're using get and set here instead of a computed property
   // so the value returned always matches what's in local storage
   // even if the value in local storage is updated on another tab etc.

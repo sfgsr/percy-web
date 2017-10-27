@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {filterBy, alias} from '@ember/object/computed';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -16,7 +17,7 @@ export default DS.Model.extend({
   billingLocked: DS.attr('boolean'),
 
   // Filtered down to saved projects, does not include unsaved project objects:
-  savedProjects: Ember.computed.filterBy('projects', 'isNew', false),
+  savedProjects: filterBy('projects', 'isNew', false),
 
   organizationUsers: DS.hasMany('organization-user'),
 
@@ -24,10 +25,10 @@ export default DS.Model.extend({
   // useful on their own other than for listing. A repo must be linked to a project.
   repos: DS.hasMany('repo'),
 
-  isGithubIntegrated: Ember.computed('githubAuthMechanism', function() {
+  isGithubIntegrated: computed('githubAuthMechanism', function() {
     return this.get('githubAuthMechanism') !== 'no-access';
   }),
-  githubAuthMechanism: Ember.computed('githubBotUser', 'githubIntegration', function() {
+  githubAuthMechanism: computed('githubBotUser', 'githubIntegration', function() {
     if (this.get('githubBotUser')) {
       return 'github-bot-user';
     } else if (this.get('githubIntegration')) {
@@ -38,8 +39,8 @@ export default DS.Model.extend({
 
   // A funky, but efficient, way to query the API for only the current user's membership.
   // Use `organization.currentUserMembership` to get the current user's OrganizationUser object.
-  currentUserMembership: Ember.computed.alias('_filteredOrganizationUsers.firstObject'),
-  _filteredOrganizationUsers: Ember.computed(function() {
+  currentUserMembership: alias('_filteredOrganizationUsers.firstObject'),
+  _filteredOrganizationUsers: computed(function() {
     return this.store.query('organization-user', {
       organization: this,
       filter: 'current-user-only',

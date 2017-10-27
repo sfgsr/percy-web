@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Ember from 'ember';
 import config from '../config/environment';
 
@@ -25,7 +26,7 @@ export default {
       options = {};
     }
     var params = options.params;
-    var queryParams = params ? '?' + Ember.$.param(params) : '';
+    var queryParams = params ? '?' + $.param(params) : '';
 
     var path = config.APP.apiUrls[key];
     if (!path) {

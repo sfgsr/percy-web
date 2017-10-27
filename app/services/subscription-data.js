@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
+export default Service.extend({
   PLAN_IDS: ['free', 'v2-small', 'v2-medium', 'v2-large', 'v2-enterprise'],
   PLANS: [
     {

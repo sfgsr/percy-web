@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   changeset: null,
   classes: null,
   selectionChanged: null,
 
-  session: Ember.inject.service(),
+  session: service(),
   classNames: ['OrganizationsGithubBotIntegrator'],
   classNameBindings: ['classes'],
   actions: {

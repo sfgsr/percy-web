@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   user: null,
   classes: null,
   linked: true,
@@ -9,7 +10,7 @@ export default Ember.Component.extend({
   classNames: ['UserName'],
   classNameBindings: ['classes'],
 
-  href: Ember.computed('user.githubUrl', function() {
+  href: computed('user.githubUrl', function() {
     return this.get('user.githubUrl');
   }),
 });

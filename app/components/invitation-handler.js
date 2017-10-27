@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import {alias} from '@ember/object/computed';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   invitation: null,
 
   classNames: ['InvitationHandler'],
-  session: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+  session: service(),
+  currentUser: alias('session.data.authenticated.user'),
 
   actions: {
     invalidateSession() {

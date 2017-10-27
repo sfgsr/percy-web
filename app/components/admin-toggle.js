@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   isAdminEnabled: false,
-  adminMode: Ember.inject.service(),
+  adminMode: service(),
 
-  setup: Ember.on('init', function() {
+  setup: on('init', function() {
     this.set('isAdminEnabled', this.get('adminMode').get() == 'admin');
   }),
 

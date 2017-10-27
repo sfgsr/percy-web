@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import TargetApplicationActionsMixin from '../mixins/target-application-actions';
 
-export default Ember.Component.extend(TargetApplicationActionsMixin, {
+export default Component.extend(TargetApplicationActionsMixin, {
   classNames: ['UserMenu'],
   showMenu: false,
   click() {

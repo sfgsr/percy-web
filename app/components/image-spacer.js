@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import {htmlSafe} from '@ember/string';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   image: null,
   imageClass: '',
 
@@ -9,9 +11,9 @@ export default Ember.Component.extend({
 
   classNames: ['ImageSpacer'],
   attributeBindings: ['style'],
-  style: Ember.computed('image.width', 'image.height', function() {
+  style: computed('image.width', 'image.height', function() {
     let scale = this.get('image.height') * 100.0 / this.get('image.width');
-    return Ember.String.htmlSafe(`padding-top: ${scale}%`);
+    return htmlSafe(`padding-top: ${scale}%`);
   }),
 
   click(e) {

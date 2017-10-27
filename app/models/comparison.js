@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import {and, equal} from '@ember/object/computed';
+import {computed} from '@ember/object';
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -19,34 +20,30 @@ export default DS.Model.extend({
 
   startedProcessingAt: DS.attr('date'),
   finishedProcessingAt: DS.attr('date'),
-  processingDurationSeconds: Ember.computed(
-    'startedProcessingAt',
-    'finishedProcessingAt',
-    function() {
-      var finished = this.get('finishedProcessingAt');
-      var started = this.get('startedProcessingAt');
-      var milliseconds = moment(finished).diff(started);
-      return milliseconds / 1000;
-    },
-  ),
+  processingDurationSeconds: computed('startedProcessingAt', 'finishedProcessingAt', function() {
+    var finished = this.get('finishedProcessingAt');
+    var started = this.get('startedProcessingAt');
+    var milliseconds = moment(finished).diff(started);
+    return milliseconds / 1000;
+  }),
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
 
-  wasAdded: Ember.computed('headScreenshot', 'baseScreenshot', function() {
+  wasAdded: computed('headScreenshot', 'baseScreenshot', function() {
     return !!this.get('headScreenshot') && !this.get('baseScreenshot');
   }),
-  wasRemoved: Ember.computed('headScreenshot', 'baseScreenshot', function() {
+  wasRemoved: computed('headScreenshot', 'baseScreenshot', function() {
     return !!this.get('baseScreenshot') && !this.get('headScreenshot');
   }),
-  wasCompared: Ember.computed.and('diffImage'),
+  wasCompared: and('diffImage'),
 
   // Comparison is guaranteed 100% different if head was added or head was removed.
   // Otherwise, rely on the diff ratio to tell us if pixels changed.
-  isDifferent: Ember.computed('wasAdded', 'wasRemoved', 'isSame', function() {
+  isDifferent: computed('wasAdded', 'wasRemoved', 'isSame', function() {
     return this.get('wasAdded') || this.get('wasRemoved') || !this.get('isSame');
   }),
-  isSame: Ember.computed.equal('diffRatio', 0),
-  smartDiffRatio: Ember.computed('wasAdded', 'wasRemoved', 'diffRatio', function() {
+  isSame: equal('diffRatio', 0),
+  smartDiffRatio: computed('wasAdded', 'wasRemoved', 'diffRatio', function() {
     if (this.get('wasAdded') || this.get('wasRemoved')) {
       // 100% changed pixels if added or removed.
       return 1;

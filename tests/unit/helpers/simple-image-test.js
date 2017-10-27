@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import {expect} from 'chai';
 import {describe, it} from 'mocha';
 import {simpleImageHelper} from 'percy-web/helpers/simple-image';
 
 describe('simple-image helper', function() {
   it('renders image tag', function() {
-    let image = Ember.Object.create({
+    let image = EmberObject.create({
       url: '/foo',
       width: 100,
       height: 200,

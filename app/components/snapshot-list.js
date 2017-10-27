@@ -1,6 +1,11 @@
-import Ember from 'ember';
+import {next} from '@ember/runloop';
+import {A} from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
+import $ from 'jquery';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['SnapshotList'],
 
   activeSnapshotId: null,
@@ -12,7 +17,7 @@ export default Ember.Component.extend({
   updateActiveSnapshotId: null,
   updateSelectedWidth: null,
 
-  sortedSnapshots: Ember.computed('snapshots.[]', 'buildContainerSelectedWidth', function() {
+  sortedSnapshots: computed('snapshots.[]', 'buildContainerSelectedWidth', function() {
     let snapshots = this.get('snapshots');
     let width = parseInt(this.get('buildContainerSelectedWidth'));
 
@@ -47,29 +52,29 @@ export default Ember.Component.extend({
       return maxComparisonDiffB + maxComparisonDiffA;
     });
   }),
-  hideNoDiffs: Ember.computed('noDiffSnapshotsCount', function() {
+  hideNoDiffs: computed('noDiffSnapshotsCount', function() {
     let noDiffsCount = this.get('noDiffSnapshotsCount');
     let activeSnapshotId = this.get('activeSnapshotId');
     let activeSnapshotIsNoDiff = this.get('snapshotsWithoutDiffs').findBy('id', activeSnapshotId);
 
     return noDiffsCount > 0 && activeSnapshotIsNoDiff === undefined;
   }),
-  snapshotsWithDiffs: Ember.computed('sortedSnapshots', function() {
+  snapshotsWithDiffs: computed('sortedSnapshots', function() {
     return this.get('sortedSnapshots').filter(snapshot => {
       return snapshot.get('comparisons').isAny('isDifferent');
     });
   }),
-  snapshotsWithoutDiffs: Ember.computed('snapshots', function() {
+  snapshotsWithoutDiffs: computed('snapshots', function() {
     return this.get('snapshots').filter(snapshot => {
       return snapshot.get('comparisons').isEvery('isSame');
     });
   }),
-  noDiffSnapshotsCount: Ember.computed('snapshotsWithoutDiffs', function() {
+  noDiffSnapshotsCount: computed('snapshotsWithoutDiffs', function() {
     return this.get('snapshotsWithoutDiffs').reduce((total, snapshot) => {
       return total + snapshot.get('comparisons.length');
     }, 0);
   }),
-  computedSnapshots: Ember.computed(
+  computedSnapshots: computed(
     'hideNoDiffs',
     'snapshotsWithDiffs.[]',
     'snapshotsWithoutDiffs.[]',
@@ -81,11 +86,11 @@ export default Ember.Component.extend({
       }
     },
   ),
-  isDefaultExpanded: Ember.computed('snapshotsWithDiffs', function() {
+  isDefaultExpanded: computed('snapshotsWithDiffs', function() {
     return this.get('snapshotsWithDiffs.length') < 150;
   }),
   didInsertElement() {
-    Ember.$(document).bind(
+    $(document).bind(
       'keydown.snapshots',
       function(e) {
         if (!this.get('isShowingModal')) {
@@ -101,15 +106,15 @@ export default Ember.Component.extend({
     );
   },
   willDestroyElement() {
-    Ember.$(document).unbind('keydown.snapshots');
+    $(document).unbind('keydown.snapshots');
   },
   scrollToChild: function(component) {
-    Ember.$('.BuildContainer-body').animate({scrollTop: component.$().get(0).offsetTop - 10}, 0);
+    $('.BuildContainer-body').animate({scrollTop: component.$().get(0).offsetTop - 10}, 0);
   },
   actions: {
     registerChild(component) {
       if (!this.get('snapshotComponents')) {
-        this.set('snapshotComponents', Ember.ArrayProxy.create({content: Ember.A()}));
+        this.set('snapshotComponents', ArrayProxy.create({content: A()}));
       }
       this.get('snapshotComponents').pushObject(component);
 
@@ -125,7 +130,7 @@ export default Ember.Component.extend({
           this.send('changeSelectedSnapshotIndex', () => index);
 
           // After the list is inserted and rendered, scroll to this child component.
-          Ember.run.next(() => {
+          next(() => {
             this.scrollToChild(component);
           });
         }
@@ -143,7 +148,7 @@ export default Ember.Component.extend({
       this.send('changeSelectedSnapshotIndex', lastIndex => lastIndex + 1);
       let lastIndex = this.get('selectedSnapshotIndex');
 
-      Ember.run.next(() => {
+      next(() => {
         this.scrollToChild(this.get('snapshotComponents').objectAtContent([lastIndex]));
       });
     },
@@ -151,7 +156,7 @@ export default Ember.Component.extend({
       this.send('changeSelectedSnapshotIndex', lastIndex => lastIndex - 1);
       let lastIndex = this.get('selectedSnapshotIndex');
 
-      Ember.run.next(() => {
+      next(() => {
         this.scrollToChild(this.get('snapshotComponents').objectAtContent([lastIndex]));
       });
     },

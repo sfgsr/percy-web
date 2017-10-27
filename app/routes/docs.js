@@ -1,12 +1,14 @@
-import Ember from 'ember';
+import {get} from '@ember/object';
+import {hash} from 'rsvp';
+import Route from '@ember/routing/route';
 import ResetScrollMixin from '../mixins/reset-scroll';
 import percyDocs from 'percy-docs';
 
-export default Ember.Route.extend(ResetScrollMixin, {
+export default Route.extend(ResetScrollMixin, {
   model() {
-    return Ember.RSVP.hash({
-      navMarkdown: Ember.get(percyDocs.markdownFiles, 'nav'),
-      pageMarkdown: Ember.get(percyDocs.markdownFiles, 'index'),
+    return hash({
+      navMarkdown: get(percyDocs.markdownFiles, 'nav'),
+      pageMarkdown: get(percyDocs.markdownFiles, 'index'),
     });
   },
   actions: {

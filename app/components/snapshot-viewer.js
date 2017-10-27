@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import {not, alias} from '@ember/object/computed';
+import {computed} from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   snapshot: null,
 
   classNames: ['SnapshotViewer'],
   buildContainerSelectedWidth: null,
-  snapshotSelectedWidth: Ember.computed('buildContainerSelectedWidth', {
+  snapshotSelectedWidth: computed('buildContainerSelectedWidth', {
     get() {
       return this.get('buildContainerSelectedWidth');
     },
@@ -13,7 +15,7 @@ export default Ember.Component.extend({
       return value;
     },
   }),
-  selectedComparison: Ember.computed('snapshot', 'snapshotSelectedWidth', function() {
+  selectedComparison: computed('snapshot', 'snapshotSelectedWidth', function() {
     let width = this.get('snapshotSelectedWidth');
     let comparisons = this.get('snapshot.comparisons') || [];
     return comparisons.findBy('width', parseInt(width, 10));
@@ -26,13 +28,13 @@ export default Ember.Component.extend({
   ],
   isDefaultExpanded: true,
   isFocus: false,
-  isExpanded: Ember.computed('isDefaultExpanded', function() {
+  isExpanded: computed('isDefaultExpanded', function() {
     // TODO: this is just to break the binding with isDefaultExpanded,
     // fix this when migrating to later ember versions with default one-way bindings.
     return this.get('isDefaultExpanded');
   }),
-  isNotExpanded: Ember.computed.not('isExpanded'),
-  isActionable: Ember.computed.alias('isNotExpanded'),
+  isNotExpanded: not('isExpanded'),
+  isActionable: alias('isNotExpanded'),
 
   didInsertElement() {
     this._super(...arguments);

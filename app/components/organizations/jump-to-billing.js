@@ -1,18 +1,21 @@
-import Ember from 'ember';
+import {getOwner} from '@ember/application';
+import {alias} from '@ember/object/computed';
+import {inject as service} from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classes: null,
 
   classNames: ['OrganizationsJumpToBilling'],
   classNameBindings: ['classes'],
 
-  session: Ember.inject.service(),
-  currentUser: Ember.computed.alias('session.data.authenticated.user'),
+  session: service(),
+  currentUser: alias('session.data.authenticated.user'),
   actions: {
     chooseOrganization(organization) {
       // Send action directly up to application controller, so we don't have to delegate every
       // time in the template.
-      let applicationController = Ember.getOwner(this).lookup('controller:application');
+      let applicationController = getOwner(this).lookup('controller:application');
       applicationController.send('navigateToOrganizationBilling', organization);
     },
     hide() {

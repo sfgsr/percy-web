@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
-var ResetScrollMixin = Ember.Mixin.create({
+var ResetScrollMixin = Mixin.create({
   actions: {
     didTransition() {
       window.scrollTo(0, 0);

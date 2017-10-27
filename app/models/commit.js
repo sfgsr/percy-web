@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
   sha: DS.attr(),
-  shaShort: Ember.computed('sha', function() {
+  shaShort: computed('sha', function() {
     var sha = this.get('sha');
     return sha && sha.slice(0, 7);
   }),

@@ -1,14 +1,16 @@
 /*eslint max-len: ['error', { 'ignoreStrings': true }]*/
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
 
-export default Ember.Component.extend({
-  store: Ember.inject.service(),
+import Component from '@ember/component';
+
+export default Component.extend({
+  store: service(),
 
   organization: null,
   classes: null,
   changingSubscription: null,
 
-  subscriptionService: Ember.inject.service('subscriptions'),
+  subscriptionService: service('subscriptions'),
   tagName: 'button',
   classNames: ['Button'],
   classNameBindings: ['classes'],

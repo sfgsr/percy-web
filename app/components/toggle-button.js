@@ -1,18 +1,20 @@
-import Ember from 'ember';
+import {computed} from '@ember/object';
+import {not} from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   object: null,
   enabled: false,
   classes: null,
   enabledText: 'Disable',
   disabledText: 'Enable',
 
-  disabled: Ember.computed.not('enabled'),
+  disabled: not('enabled'),
   tagName: 'button',
   classNames: ['ToggleButton', 'Button'],
   classNameBindings: ['enabled:Button--primary', 'classes'],
 
-  text: Ember.computed('enabled', 'enabledText', 'disabledText', function() {
+  text: computed('enabled', 'enabledText', 'disabledText', function() {
     if (this.get('enabled')) {
       return this.get('enabledText');
     } else {

@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Service, {inject as service} from '@ember/service';
 
-export default Ember.Service.extend({
-  adminMode: Ember.inject.service(),
+export default Service.extend({
+  adminMode: service(),
 
   associateWithCompany(user, organization) {
     if (this.get('adminMode').excludeFromAnalytics()) {

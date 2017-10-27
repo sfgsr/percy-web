@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import {on} from '@ember/object/evented';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   lang: null,
 
   classNames: ['CodeBlock'],
-  highlight: Ember.on('didInsertElement', function() {
+  highlight: on('didInsertElement', function() {
     this.$('pre code').each(function(i, block) {
       window.hljs.highlightBlock(block);
     });
