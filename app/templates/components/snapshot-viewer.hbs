@@ -1,20 +1,20 @@
-<div class="Viewer-header SnapshotViewer-header row" {{action "selectChild"}}>
-  <div class="Viewer-header-title SnapshotViewer-title u-hide-on-mobile" title="{{snapshot.name}}">
-    <a href="{{snapshotUrl}}">{{snapshot.name}}</a>
+<div class="Viewer-header SnapshotViewer-header" {{action "selectChild"}}>
+  <a class="Viewer-header-title SnapshotViewer-title truncate" title="{{snapshot.name}}" href="{{snapshotUrl}}">{{snapshot.name}}</a>
+  <div class="SnapshotViewer-header-controls">
+    {{comparison-switcher
+      comparisons=snapshot.comparisons
+      buildWidths=buildWidths
+      snapshotSelectedWidth=snapshotSelectedWidth
+      updateSelectedWidth=(action 'updateSelectedWidth')
+      isMultiColumnMode=isMultiColumnMode
+    }}
+    <button
+      class="ToggleFullViewButton Button"
+      {{action 'showSnapshotFullModalTriggered' snapshot.id snapshotSelectedWidth}}
+    >
+        {{fa-icon 'expand'}}
+    </button>
   </div>
-  {{comparison-switcher
-    comparisons=snapshot.comparisons
-    buildWidths=buildWidths
-    snapshotSelectedWidth=snapshotSelectedWidth
-    updateSelectedWidth=(action 'updateSelectedWidth')
-    isMultiColumnMode=isMultiColumnMode
-  }}
-  <button
-    class="ToggleFullViewButton Button u-pull-right"
-    {{action 'showSnapshotFullModalTriggered' snapshot.id snapshotSelectedWidth}}
-  >
-      {{fa-icon 'expand'}}
-  </button>
 </div>
 {{#if isExpanded}}
   {{#if selectedComparison}}

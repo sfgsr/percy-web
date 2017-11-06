@@ -165,7 +165,7 @@ describe('Acceptance: Build', function() {
     });
 
     let comparison = this.comparisons.different;
-    let comparisonSelector = `.SnapshotViewer:has(div[title="${comparison.headSnapshot.name}"])`;
+    let comparisonSelector = `.SnapshotViewer:has(a[title="${comparison.headSnapshot.name}"])`;
 
     andThen(() => {
       expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(1);
@@ -222,7 +222,7 @@ describe('Acceptance: Build', function() {
     visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()).to.equal(
+      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title').text()).to.equal(
         snapshot.name,
       );
     });
@@ -234,7 +234,7 @@ describe('Acceptance: Build', function() {
     let snapshot = this.comparisons.same.headSnapshot;
     visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
-      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title a').text()).to.equal(
+      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title').text()).to.equal(
         snapshot.name,
       );
     });
