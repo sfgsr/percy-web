@@ -16,6 +16,9 @@ module.exports = function(defaults) {
     sassOptions: {
       extension: 'sass',
     },
+    autoprefixer: {
+      browsers: ['last 2 versions'],
+    },
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
       prepend: '/static/',

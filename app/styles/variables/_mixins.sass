@@ -10,54 +10,10 @@
   .u-show-if-desktop
     display: none
 
-@mixin unselectable
-   -moz-user-select: none
-   -khtml-user-select: none
-   -webkit-user-select: none
-   -ms-user-select: none
-   user-select: none
-
 @mixin clearfix
   content: ""
   display: table
   clear: both
-
-@mixin keyframes($animation-name)
-  @-webkit-keyframes #{$animation-name}
-    @content
-  @-moz-keyframes #{$animation-name}
-    @content
-  @-ms-keyframes #{$animation-name}
-    @content
-  @-o-keyframes #{$animation-name}
-    @content
-  @keyframes #{$animation-name}
-    @content
-
-@mixin transition($str)
-  -webkit-transition: #{$str}
-  -moz-transition: #{$str}
-  -o-transition: #{$str}
-  transition: #{$str}
-
-@mixin animation($str)
-  -webkit-animation: #{$str}
-  -moz-animation: #{$str}
-  -ms-animation: #{$str}
-  -o-animation: #{$str}
-  animation: #{$str}
-
-@mixin animation-fill-mode($str)
-  -webkit-animation-fill-mode: #{$str}
-  -moz-animation-fill-mode: #{$str}
-  -ms-animation-fill-mode: #{$str}
-  -o-animation-fill-mode: #{$str}
-  animation-fill-mode: #{$str}
-
-@mixin rotate($deg)
-  -ms-transform: rotate(#{$deg}deg)
-  -webkit-transform: rotate(#{$deg}deg)
-  transform: rotate(#{$deg}deg)
 
 @mixin Card
   position: relative
