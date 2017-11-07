@@ -2913,14 +2913,15 @@ ember-cookies@^0.0.13:
     ember-cli-babel "^5.1.7"
     ember-getowner-polyfill "^1.2.2"
 
-ember-data-factory-guy@^2.13.7:
-  version "2.13.8"
-  resolved "https://registry.yarnpkg.com/ember-data-factory-guy/-/ember-data-factory-guy-2.13.8.tgz#496e41986f9e0d09e7808c18d8ce58d67cebe3b1"
+ember-data-factory-guy@^2.13.13:
+  version "2.13.13"
+  resolved "https://registry.yarnpkg.com/ember-data-factory-guy/-/ember-data-factory-guy-2.13.13.tgz#1fb6d8db863428cfedf99ab2a4de4377dd0b900c"
   dependencies:
     broccoli-funnel "^1.0.1"
     broccoli-merge-trees "^1.1.1"
     ember-cli-babel "^6.7.0"
-    jquery-mockjax "^2.2.1"
+    pretender "^1.6.0"
+    resolve "^1.2.0"
 
 ember-data@2.11.3:
   version "2.11.3"
@@ -4636,13 +4637,7 @@ jest-validate@^21.1.0:
     leven "^2.1.0"
     pretty-format "^21.2.1"
 
-jquery-mockjax@^2.2.1:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/jquery-mockjax/-/jquery-mockjax-2.2.2.tgz#9c7d2b103a44cf61c99cc78a9ee7878504b60907"
-  dependencies:
-    jquery ">=1.5.2"
-
-jquery@>=1.5.2, jquery@^3.2.1:
+jquery@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
@@ -6082,7 +6077,7 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-pretender@^1.4.2:
+pretender@^1.4.2, pretender@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/pretender/-/pretender-1.6.0.tgz#0bb6dc9622b576772938814bc36f7cf2f86660dd"
   dependencies:
@@ -6445,7 +6440,7 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.2, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.0, resolve@^1.3.3, resolve@^1.4.0:
+resolve@^1.1.2, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0, resolve@^1.3.0, resolve@^1.3.3, resolve@^1.4.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:
