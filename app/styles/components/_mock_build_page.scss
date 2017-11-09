@@ -1,0 +1,105 @@
+.MockBuildPage {
+  position: relative;
+  max-width: 1200px;
+  padding-top: 20px;
+  margin: 0 auto;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  .PulseCircle {
+    top: 87%;
+    right: 12%;
+    cursor: pointer;
+  }
+
+  &.MockBuildPage--showHints {
+    .hint--always {
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+  }
+
+  .hint--always {
+    opacity: 0;
+  }
+
+  .hint--bottom::before {
+    border-bottom-color: rgba(65, 65, 65, 0.8);
+  }
+
+  .hint--right::before {
+    border-right-color: rgba(65, 65, 65, 0.8);
+  }
+
+  .hint--always::after {
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+    text-align: left;
+    background-color: rgba(65, 65, 65, 0.8);
+  }
+
+  .MockBuildPage-note1 {
+    position: absolute;
+    top: 47%;
+    right: 26%;
+    z-index: 100;
+  }
+
+  .MockBuildPage-note2 {
+    position: absolute;
+    top: 58.5%;
+    right: 29%;
+    z-index: 100;
+  }
+
+  .MockBuildPage-note3 {
+    position: absolute;
+    top: 77%;
+    right: 21.5%;
+    z-index: 100;
+  }
+
+  .MockBuildPage-responsiveNote {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .MockBuildPage {
+    padding: 0 20px 10px;
+
+    img {
+      margin: 0 auto;
+    }
+
+    .MockBuildPage-note1,
+    .MockBuildPage-note2,
+    .MockBuildPage-note3 {
+      &.hint--always {
+        display: none;
+      }
+    }
+
+    .MockBuildPage-responsiveNote {
+      display: block;
+      position: relative;
+      height: 70px;
+
+      &.hint--always::before {
+        top: 15px;
+        left: 50%;
+      }
+
+      &.hint--always::after {
+        top: 15px;
+        left: 35%;
+      }
+    }
+  }
+}

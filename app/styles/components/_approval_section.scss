@@ -1,0 +1,15 @@
+.ApprovalSection {
+  &.ApprovalSection--approved {
+    display: none;
+
+    &.ApprovalSection--approvedNow {
+      display: block;
+    }
+
+    .NavMenu-item {
+      &.NavMenu-item--text {
+        padding-right: 0;
+      }
+    }
+  }
+}

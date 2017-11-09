@@ -1,0 +1,46 @@
+$approved-text-shadow: 1px 1px 1px $dark-green;
+$approved-background: $green;
+
+.ApprovalButton {
+  font-weight: 600;
+  color: $white;
+  text-transform: uppercase;
+  background-color: $approved-background;
+  border: 0;
+
+  &.Button--withLeftIcon {
+    padding: 0 15px 0 38px;
+  }
+
+  .fa--left {
+    font-size: 2.3rem;
+  }
+
+  &:hover,
+  &:focus,
+  &.ApprovalButton--hover {
+    color: $white;
+    text-shadow: 1px 1px 1px $green;
+    background: $light-green;
+    border: 0;
+
+    &:active {
+      background: $green;
+    }
+  }
+
+  &.ApprovalButton--approved {
+    padding: 20px;
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &.ApprovalButton--hover {
+      background-color: $approved-background;
+    }
+
+    span {
+      display: none;
+    }
+  }
+}

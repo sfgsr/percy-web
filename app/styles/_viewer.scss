@@ -1,0 +1,64 @@
+.Viewer-header {
+  display: flex;
+  padding: 5px 15px;
+  align-items: center;
+  background-color: $very-light-gray;
+
+  a,
+  a:hover {
+    color: $default-text-color;
+  }
+
+  .Button {
+    height: 30px;
+    padding: 0 6px;
+    margin-left: 15px;
+    font-size: 20px;
+    line-height: 29px;
+    text-align: center;
+  }
+}
+
+.Viewer-header-title {
+  font-weight: bold;
+}
+
+.LargeXIcon {
+  display: block;
+  font-size: 8rem;
+  color: $lighter-gray;
+  text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray;
+}
+
+.Viewer-pdiffImageBox {
+  position: relative;
+  width: 100%;
+  user-select: none;
+  border: $very-light-gray-border;
+
+  .pdiffImageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.Viewer-pdiffImageBox--actionable {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    border: $lighter-gray-border-hover;
+  }
+}
+
+.Viewer-pdiffImageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  user-select: none;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.9;
+}

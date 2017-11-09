@@ -1,0 +1,26 @@
+.BuildCard {
+  width: 100%;
+  padding: 10px 10px 0;
+  font-size: $smaller-font-size;
+  cursor: pointer;
+
+  &.BuildCard--expired {
+    opacity: 0.5;
+  }
+
+  .BuildState {
+    margin-bottom: 8px;
+  }
+
+  h6 {
+    font-size: 1.7rem;
+  }
+
+  &:hover {
+    background: $lightest-gray;
+  }
+
+  &:first-child {
+    border-top: $lighter-gray-border;
+  }
+}

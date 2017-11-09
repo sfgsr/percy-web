@@ -1,0 +1,48 @@
+@media (min-width: 551px) {
+  .u-show-if-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .u-show-if-desktop {
+    display: none;
+  }
+}
+
+@mixin clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@mixin Card {
+  position: relative;
+  padding: 10px;
+  background: $lightest-gray;
+  border: $lighter-gray-border;
+}
+
+@mixin Card--white {
+  background: $white;
+}
+
+@mixin Card--linkable {
+  &:hover {
+    cursor: pointer;
+    border: $lighter-gray-border-hover;
+  }
+}
+
+@mixin Card--expando {
+  background: $lightest-gray;
+}
+
+@mixin Card--selected {
+  background: $very-light-gray;
+  border: 1px solid $lighter-gray;
+}
+
+@mixin Card--extraPadded {
+  padding: 40px;
+}

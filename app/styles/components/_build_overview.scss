@@ -1,0 +1,78 @@
+.BuildOverview {
+  $statusBarWidth: 10px;
+
+  .BuildOverview-status {
+    position: relative;
+    padding: 5px 5px 5px ($statusBarWidth + 10px);
+  }
+
+  .BuildOverview-info {
+    margin-top: 10px;
+  }
+
+  .BuildOverview-statusBar {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $statusBarWidth;
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: normal;
+  }
+
+  h1,
+  h2 {
+    margin: 0;
+  }
+
+  &.BuildOverview--pending {
+    .BuildOverview-statusBar {
+      background-color: $dark-gray;
+    }
+  }
+
+  &.BuildOverview--processing {
+    .BuildOverview-statusBar {
+      background-color: $lighter-green;
+    }
+  }
+
+  &.BuildOverview--finished {
+    .BuildOverview-statusBar {
+      background-color: $green;
+    }
+
+    &.BuildOverview--hasDiffs {
+      .BuildOverview-statusBar {
+        background-color: $yellow;
+      }
+    }
+
+    &.BuildOverview--approved {
+      .BuildOverview-statusBar {
+        background-color: $green;
+      }
+    }
+  }
+
+  &.BuildOverview--failed {
+    .BuildOverview-statusBar {
+      background-color: $red;
+    }
+  }
+
+  &.BuildOverview--expired {
+    .BuildOverview-statusBar {
+      background-color: $dark-yellow;
+    }
+  }
+}

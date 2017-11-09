@@ -50,6 +50,7 @@
     "ember-cli-sass": "^7.0.0",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
+    "ember-cli-stylelint": "^1.0.0",
     "ember-cli-uglify": "^2.0.0",
     "ember-concurrency": "^0.8.12",
     "ember-data": "2.11.3",
@@ -84,10 +85,15 @@
     "morgan": "^1.9.0",
     "percy-docs": "git+https://github.com/percy/percy-docs.git#69541cc83a6ddae7dc91cd097a6aa5c783c2987b",
     "prettier": "^1.8.1",
+    "stylelint-config-standard": "^17.0.0",
     "prettier-eslint-cli": "^4.4.0"
   },
   "engines": {
     "node": ">= 6.9.1"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "stylelint-order": "^0.7.0",
+    "stylelint-scss": "^2.1.0"
+  }
 }

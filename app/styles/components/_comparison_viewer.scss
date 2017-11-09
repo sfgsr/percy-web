@@ -1,0 +1,103 @@
+.ComparisonViewer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  background: $lightest-gray;
+  border-radius: 3px;
+  // translatez hack to force this box to its own layer.
+  // TODO(fotinakis): I think we can remove this when Chrome 51 has majority stake.
+  transform: translateZ(0);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.ComparisonViewer--collapsed {
+    margin-top: 0;
+    // Hacky way to make inner borders overlap, plus the z-index in hover.
+    margin-top: -1px;
+    margin-bottom: 0;
+  }
+
+  &.ComparisonViewer--focus {
+    border: $lighter-gray-border-hover;
+  }
+
+  &.ComparisonViewer--actionable {
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+      border: $lighter-gray-border-hover;
+    }
+
+    .ComparisonViewer-details {
+      flex: 1 0 auto;
+    }
+
+    .ComparisonViewer-info {
+      color: $gray;
+    }
+
+    .Button {
+      float: right;
+      height: 27px;
+      padding: 0 20px;
+      margin: 0 10px 0 0;
+
+      .fa {
+        top: 3px;
+        left: 10px;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .ComparisonViewer-fullColumn {
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .ComparisonViewer-halfColumn {
+    display: flex;
+    float: left;
+    width: 50%;
+    justify-content: center;
+  }
+
+  .ComparisonViewer-halfColumn--left {
+    padding: 20px 10px 20px 20px;
+  }
+
+  .ComparisonViewer-halfColumn--right {
+    padding: 20px 20px 20px 10px;
+  }
+
+  .ComparisonViewer-snapshotMissing {
+    width: 100%;
+    height: 200px;
+    padding-top: 50px;
+    text-align: center;
+    background: $white;
+    border: $lighter-gray-border;
+  }
+
+  .ComparisonViewer-noDiffBox {
+    padding: 7px;
+    font-style: italic;
+    color: $gray;
+    text-align: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .ComparisonViewer {
+    .ComparisonViewer-halfColumn--left {
+      padding: 15px 7px 15px 15px;
+    }
+
+    .ComparisonViewer-halfColumn--right {
+      padding: 15px 15px 15px 7px;
+    }
+  }
+}

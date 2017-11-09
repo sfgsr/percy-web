@@ -1,0 +1,89 @@
+.BuildState {
+  display: inline-block;
+  width: 155px;
+  height: 40px;
+  font-family: $standard-font;
+  font-weight: lighter;
+  background-color: $very-light-gray;
+  border-radius: 4px;
+
+  .BuildState-textAligner {
+    display: flex;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .BuildState-text {
+    font-size: 85%;
+
+    strong {
+      font-size: $smaller-font-size;
+      font-weight: normal;
+    }
+  }
+
+  .BuildState-icon {
+    float: left;
+    width: 25px;
+    height: 40px;
+    padding-top: 11px;
+    font-size: 1.7rem;
+    line-height: 0;
+    color: $white;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+    box-shadow: inset 3px -7px 62px -30px rgba(0, 0, 0, 0.25);
+  }
+
+  &.BuildState--pending {
+    .BuildState-icon {
+      background-color: $dark-gray;
+    }
+  }
+
+  &.BuildState--processing {
+    .BuildState-icon {
+      background-color: $lighter-green;
+    }
+  }
+
+  &.BuildState--finished {
+    background-color: $lightest-green;
+
+    .BuildState-icon {
+      background-color: $green;
+    }
+  }
+
+  &.BuildState--hasDiffs {
+    background-color: $light-yellow;
+
+    .BuildState-icon {
+      background-color: $yellow;
+    }
+  }
+
+  &.BuildState--approved {
+    background-color: $lightest-green;
+
+    .BuildState-icon {
+      background-color: $green;
+    }
+  }
+
+  &.BuildState--failed {
+    background-color: $lightest-red;
+
+    .BuildState-icon {
+      background-color: $red;
+    }
+  }
+
+  &.BuildState--expired {
+    .BuildState-icon {
+      background-color: $dark-yellow;
+    }
+  }
+}

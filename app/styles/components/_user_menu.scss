@@ -1,0 +1,68 @@
+.UserMenu {
+  cursor: pointer;
+  z-index: 100;
+
+  // TODO: Much of the styling below is copied from _switcher_nav.sass and should be consolidated
+  // to a separate, more generic, menu mixin
+  .UserMenu-arrow {
+    position: absolute;
+    top: 34px;
+    margin-left: 7px;
+    font-size: 4rem;
+    color: $dark-purple;
+    z-index: 100;
+  }
+
+  ul {
+    position: absolute;
+    top: 60px;
+    right: 13px;
+    width: 100px;
+    height: 32px;
+    background: $dark-purple;
+    border: 1px solid $dark-purple;
+    border-radius: 4px;
+    box-shadow: $base-shadow;
+    z-index: 99;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  li {
+    padding: 5px 10px;
+    margin: 0;
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $darker-purple;
+    }
+  }
+}
+
+// TODO: add page-level classes
+.Header--large {
+  .UserMenu-arrow {
+    top: 34px;
+    color: $white;
+  }
+
+  .UserMenu {
+    ul {
+      top: 60px;
+      background: $white;
+    }
+
+    li {
+      color: $default-text-color;
+
+      &:hover {
+        background-color: $very-light-gray;
+      }
+    }
+  }
+}

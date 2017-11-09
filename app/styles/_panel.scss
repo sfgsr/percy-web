@@ -1,0 +1,73 @@
+.Panel {
+  width: 100%;
+  margin-bottom: 1rem;
+  border: $lighter-gray-border;
+
+  .Panel-section {
+    padding: 10px;
+  }
+
+  .Panel-header {
+    width: 100%;
+    font-size: 1.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: $lightest-gray;
+    border-bottom: $lighter-gray-border;
+    overflow: hidden;
+  }
+
+  .Panel-header--withSelect {
+    background-color: $white;
+    border-bottom: $lighter-gray-border;
+
+    input {
+      margin-bottom: 0;
+    }
+
+    .ember-power-select-option {
+      padding: 10px;
+    }
+
+    .ember-power-select-trigger {
+      background: none;
+      border: 0;
+      outline: none;
+    }
+
+    .ember-basic-dropdown-content {
+      top: auto !important; /* fixes bug where dropdown is misaligned */
+      left: auto !important; /* fixes bug where dropdown is misaligned */
+      margin-top: 12px;
+      border: $lighter-gray-border;
+      border-top: 0;
+    }
+
+    .ember-power-select-selected-item,
+    .ember-power-select-placeholder {
+      margin-left: 0;
+    }
+  }
+
+  .Panel-nav {
+    .Button {
+      margin: 0;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 0;
+    }
+
+    a {
+      padding: 0 10px;
+      font-weight: normal;
+      text-align: left;
+    }
+  }
+}

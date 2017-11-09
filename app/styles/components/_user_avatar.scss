@@ -1,0 +1,21 @@
+.UserAvatar {
+  display: inline-block;
+
+  img {
+    box-sizing: content-box;
+    border-radius: 4px;
+  }
+
+  .UserAvatar-placeholder {
+    display: flex;
+    background: $white;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+
+    .fa {
+      font-size: 2rem;
+      color: $gray;
+    }
+  }
+}

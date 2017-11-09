@@ -1,0 +1,122 @@
+/* stylelint-disable selector-max-specificity */
+
+.Header {
+  position: relative;
+  height: 60px;
+  padding: 0 15px;
+
+  .Button {
+    margin: 0;
+  }
+
+  &.Header--large {
+    min-height: 520px;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 7rem;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      font-size: $h3-font-size;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .Header-logo {
+      width: auto;
+      height: 180px;
+      padding: 0;
+      margin-top: 35px;
+    }
+
+    .Alert--info {
+      max-width: 650px;
+      margin: 30px auto 40px;
+      font-size: 1.6rem;
+    }
+  }
+
+  .Header-logo {
+    width: 50px;
+    margin: 10px 12px 0 0;
+  }
+
+  .Header-title {
+    padding: 10px 12px 10px 0;
+    font-family: $fancy-font;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 4rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  &.Header--light {
+    background: $lightest-gray;
+    border-bottom: 1px solid $lighter-gray;
+  }
+
+  &.Header--dark {
+    color: $white;
+    background-color: $dark-purple;
+
+    select {
+      color: $default-text-color;
+      border: 0;
+    }
+
+    a:not(.Button) {
+      color: $white;
+
+      &:hover {
+        color: $lightest-purple; // TODO need to class these header items to prevent the nesting specificity
+      }
+    }
+
+    .NavMenu-item {
+      line-height: 4rem;
+    }
+
+    .Button {
+      font-weight: bold;
+      color: $white;
+      background: $purple;
+      border: 0;
+
+      &:hover {
+        background: $light-purple;
+      }
+
+      &:active {
+        background-color: $purple;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .Header {
+    &.Header--large {
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    &.Header--small {
+      .Header-title {
+        display: none;
+      }
+    }
+
+    &.Header--light {
+      .Header-logo {
+        margin-top: 10px;
+      }
+    }
+  }
+}

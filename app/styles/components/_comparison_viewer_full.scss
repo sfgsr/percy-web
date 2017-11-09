@@ -1,0 +1,15 @@
+.ComparisonViewerFull {
+  text-align: center;
+
+  img {
+    border: $very-light-gray-border;
+  }
+
+  .Viewer-pdiffImageOverlay {
+    position: relative;
+  }
+
+  .Viewer-pdiffImageBox {
+    border: 0;
+  }
+}

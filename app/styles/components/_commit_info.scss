@@ -1,0 +1,50 @@
+.CommitInfo {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+
+  .CommitInfo-branch {
+    display: inline-block;
+    float: left;
+    max-width: 50%;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    .fa {
+      color: $default-text-color;
+    }
+  }
+
+  .CommitInfo-author {
+    display: inline-block;
+    float: left;
+    padding-left: 4px;
+  }
+
+  .CommitInfo-pr {
+    display: inline-block;
+    float: left;
+    padding-left: 4px;
+  }
+
+  .CommitInfo-commit {
+    display: inline-block;
+    float: left;
+    padding-left: 4px;
+    font-family: $monospace-font;
+    font-size: 90%;
+  }
+
+  .CommitInfo-message {
+    display: inline-block;
+    max-width: 100%;
+    padding-right: 5px;
+    font-style: italic;
+    color: $dark-gray;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

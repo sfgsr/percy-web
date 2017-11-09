@@ -1,0 +1,13 @@
+.TrialBar {
+  overflow: hidden;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.Header.Header--dark {
+  .TrialBar {
+    padding-right: 12px;
+  }
+}

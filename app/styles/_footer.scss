@@ -1,0 +1,44 @@
+/* stylelint-disable selector-no-qualifying-type */
+
+.container {
+  &.Footer {
+    padding: 30px 12px;
+    text-align: center;
+    border-top: $lighter-gray-border;
+
+    .Footer-links {
+      display: inline;
+      margin-bottom: 10px;
+
+      @media (max-width: 550px) {
+        display: block;
+      }
+    }
+
+    a,
+    .Footer-item {
+      display: inline-block;
+      padding: 10px;
+      color: $gray;
+
+      &.Footer-copyright {
+        color: $light-gray;
+      }
+    }
+
+    img {
+      width: 20px;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .container {
+    &.Footer {
+      a,
+      .Footer-item {
+        padding: 10px 2px 0;
+      }
+    }
+  }
+}

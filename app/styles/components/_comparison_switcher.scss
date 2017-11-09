@@ -1,0 +1,36 @@
+.ComparisonSwitcher {
+  display: flex;
+
+  .ComparisonSwitcherItem--noComparison {
+    color: $gray;
+  }
+
+  .ComparisonSwitcherItem {
+    display: inline-block;
+    padding: 5px;
+    margin: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &.ComparisonSwitcherItem--selected,
+    &:hover {
+      border: $lighter-gray-border;
+    }
+
+    &:hover {
+      background: $lightest-gray;
+    }
+
+    &.ComparisonSwitcherItem--selected {
+      color: $default-link-hover;
+      background: $white;
+    }
+
+    &.ComparisonSwitcherItem--hasDiffs {
+      color: $red;
+    }
+  }
+}

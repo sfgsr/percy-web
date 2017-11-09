@@ -1,0 +1,143 @@
+/* stylelint-disable selector-no-qualifying-type, selector-max-specificity  */
+
+.Button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  $button-height: 38px;
+  $button-small-height: 28px;
+
+  display: inline-block;
+  position: relative;
+  height: $button-height;
+  padding: 0 15px;
+  margin: 0;
+  line-height: $button-height;
+  color: $default-link;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: $white;
+  border: $lighter-gray-border;
+  border-radius: 4px;
+
+  &:hover,
+  &:focus {
+    color: $default-link-hover;
+    text-decoration: none;
+    background-color: $lightest-gray;
+    border: $light-gray-border;
+    outline: 0;
+
+    &:active {
+      background-color: $very-light-gray;
+    }
+  }
+
+  &[disabled] {
+    color: $dark-gray;
+    cursor: default;
+    background: $lighter-gray;
+    border: $light-gray;
+  }
+
+  &.Button--primary {
+    color: $white;
+    background-color: $purple;
+    border: 0;
+
+    &:hover,
+    &:focus {
+      background-color: $dark-purple;
+    }
+
+    &:active {
+      background-color: $darker-purple;
+    }
+
+    &[disabled] {
+      color: $gray;
+      cursor: default;
+      background: none;
+      border: $lighter-gray-border;
+    }
+  }
+
+  &.Button--onDark.Button--primary {
+    font-size: 1.6rem;
+    line-height: 4rem;
+    color: $white;
+    background-color: $purple;
+    border: 0;
+
+    &:hover {
+      color: $white;
+      background-color: $light-purple;
+    }
+
+    &:active {
+      background-color: $purple;
+    }
+  }
+
+  &.Button--small {
+    height: $button-small-height;
+    padding: 0 9px;
+    font-size: 12px;
+    line-height: $button-small-height;
+  }
+
+  &.Button--nav {
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+
+    &.Button--active,
+    &.active {
+      color: $default-link-hover;
+      background-color: $very-light-gray;
+
+      &:hover {
+        background: $lighter-gray !important;
+      }
+    }
+
+    &.Button--nav:hover {
+      background-color: $lightest-gray;
+    }
+  }
+  // Ugh, we try to avoid these things but this one is kind of necessary because of the default
+  // right padding on buttons to allow them to stack horizontally.
+  &.u-pull-right {
+    margin-right: 0;
+    margin-left: 5px;
+  }
+}
+
+/**
+ * Spacing.
+ */
+button,
+.Button {
+  &.Button--withLeftIcon {
+    padding: 0 15px 0 38px;
+  }
+
+  &.Button--withIconOnly {
+    padding: 0 20px;
+    color: $default-text-color;
+
+    .fa {
+      font-size: 2rem;
+    }
+  }
+
+  .fa--left {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    font-size: 2.4rem;
+  }
+}

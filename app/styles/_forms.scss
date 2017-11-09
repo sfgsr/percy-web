@@ -1,0 +1,45 @@
+/* stylelint-disable selector-no-qualifying-type */
+
+.Form {
+  width: 100%;
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+  }
+
+  input[type="checkbox"] {
+    float: left;
+    margin-top: 3px;
+  }
+
+  textarea {
+    height: 100px;
+    margin-bottom: 0;
+  }
+
+  .Form-errors {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: $red;
+    list-style: none;
+
+    li {
+      margin-bottom: 0;
+    }
+  }
+}
+
+select {
+  padding-right: 25px;
+  appearance: none;
+  background-image: url("/images/caret-down.svg");
+  background-repeat: no-repeat;
+  background-position: right center;
+
+  &:hover {
+    background-color: $lightest-gray;
+    border: $light-gray-border;
+  }
+}

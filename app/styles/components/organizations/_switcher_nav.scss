@@ -1,0 +1,91 @@
+/* stylelint-disable selector-max-compound-selectors */
+
+.OrganizationsSwitcherNav {
+  a,
+  a:hover {
+    color: $white;
+  }
+
+  .LoadingPage {
+    padding: 50px;
+    padding-top: 60px;
+
+    .fa-spinner {
+      font-size: 4rem;
+    }
+  }
+
+  .OrganizationsSwitcherNav-item {
+    display: block;
+    padding: 10px 12px;
+    line-height: 4rem;
+    cursor: pointer;
+  }
+
+  .OrganizationsSwitcherNav-arrow {
+    position: absolute;
+    top: 35px;
+    margin-left: 10px;
+    font-size: 4rem;
+    color: $dark-purple;
+    z-index: 100;
+  }
+
+  .OrganizationsSwitcherNav-switcher {
+    position: absolute;
+    top: 71px;
+    width: 300px;
+    height: 285px;
+    background: $dark-purple;
+    border: 1px solid $dark-purple;
+    border-radius: 4px;
+    box-shadow: $base-shadow;
+    z-index: 99;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .Button {
+      width: 289px;
+      margin-top: 5px;
+      margin-left: 5px;
+      text-align: left;
+      border: 0;
+      overflow: hidden;
+    }
+
+    .Button--onDark {
+      background: $purple;
+
+      &:hover {
+        background: $light-purple;
+      }
+    }
+
+    ul {
+      margin: 0 0 5px;
+      list-style: none;
+
+      li {
+        margin-bottom: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-bottom: 1px solid $darker-purple;
+        overflow: hidden;
+
+        a {
+          padding: 15px;
+          line-height: 1rem;
+        }
+
+        a:hover {
+          color: $white;
+          background-color: $darker-purple;
+        }
+      }
+    }
+  }
+}

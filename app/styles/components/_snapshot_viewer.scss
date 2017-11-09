@@ -1,0 +1,62 @@
+.SnapshotViewer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  background: $lightest-gray;
+  border: $lightest-gray-border;
+  border-radius: 3px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .SnapshotViewer-noComparison {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+
+  &.SnapshotViewer--collapsed {
+    margin-top: 0;
+    // Hacky way to make inner borders overlap, plus the z-index in hover.
+    margin-top: -1px;
+    margin-bottom: 0;
+  }
+
+  &.SnapshotViewer--actionable {
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+      border: $lighter-gray-border-hover;
+    }
+  }
+}
+
+.SnapshotViewer--focus {
+  border: $lighter-gray-border;
+}
+
+.SnapshotViewer-header {
+  display: flex;
+  height: 40px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  justify-content: space-between;
+
+  &.SnapshotViewer-header--actionable {
+    &:hover {
+      cursor: pointer;
+      border: $gray-border-hover;
+    }
+  }
+}
+
+.SnapshotViewer-title {
+  margin-right: 30px;
+}
+
+.SnapshotViewer-header-controls {
+  display: flex;
+}

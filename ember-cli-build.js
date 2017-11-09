@@ -14,7 +14,7 @@ module.exports = function(defaults) {
       useLintTree: false,
     },
     sassOptions: {
-      extension: 'sass',
+      extension: 'scss',
     },
     autoprefixer: {
       browsers: ['last 2 versions'],
