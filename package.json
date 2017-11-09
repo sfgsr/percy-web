@@ -6,6 +6,7 @@
     "test": "tests"
   },
   "scripts": {
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "build": "ember build",
     "build-production": "yarn run clean && ember build --environment=production",
     "clean": "rm -rf dist/* tmp/*",
@@ -72,6 +73,7 @@
     "ember-tether": "^1.0.0-beta.0",
     "ember-truth-helpers": "^2.0.0",
     "ember-watson": "^0.9.1",
+    "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.7.0",
     "eslint-plugin-prettier": "^2.3.1",
     "glob": "^7.1.2",
@@ -81,7 +83,8 @@
     "loader.js": "^4.6.0",
     "morgan": "^1.9.0",
     "percy-docs": "git+https://github.com/percy/percy-docs.git#69541cc83a6ddae7dc91cd097a6aa5c783c2987b",
-    "prettier": "^1.8.1"
+    "prettier": "^1.8.1",
+    "prettier-eslint-cli": "^4.4.0"
   },
   "engines": {
     "node": ">= 6.9.1"
