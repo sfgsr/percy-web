@@ -64,7 +64,7 @@
     "ember-modal-dialog": "^2.3.0",
     "ember-moment": "^7.5.0",
     "ember-page-title": "^3.2.2",
-    "ember-percy": "^1.2.19",
+    "ember-percy": "^1.2.21",
     "ember-power-select": "^1.9.6",
     "ember-remarkable": "^3.6.1",
     "ember-resolver": "^4.5.0",

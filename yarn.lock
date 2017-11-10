@@ -3147,14 +3147,14 @@ ember-page-title@^3.2.2:
     ember-cli-head "^0.3.1"
     ember-cli-htmlbars "^2.0.1"
 
-ember-percy@^1.2.19:
-  version "1.2.20"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.20.tgz#6add21179a0066f9701ac0a46ef555f36680b47f"
+ember-percy@^1.2.21:
+  version "1.2.21"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.2.21.tgz#97201bd850bb65d3c8544cda1aea2ea3fa6d1120"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^5.1.7"
     es6-promise-pool "^2.4.1"
-    percy-client "^2.1.3"
+    percy-client "^2.4.2"
     walk "^2.3.9"
 
 ember-power-select@^1.9.6:
@@ -6215,7 +6215,7 @@ path-type@^2.0.0:
   dependencies:
     pify "^2.0.0"
 
-percy-client@^2.1.3:
+percy-client@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-2.4.2.tgz#e0548cbab92bf1279929a322f1d097b13750181d"
   dependencies:
