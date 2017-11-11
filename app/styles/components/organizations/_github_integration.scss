@@ -1,9 +1,9 @@
 .OrganizationsGithubIntegration {
+  @include Card;
   min-height: 9rem;
   padding-left: 9rem;
   margin-top: 10px;
   margin-bottom: 10px;
-  @include Card;
 
   header {
     margin-top: 0.5rem;
