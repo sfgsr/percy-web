@@ -10,7 +10,7 @@ export default Service.extend({
 
     if (window.Intercom && user.get('id')) {
       window.Intercom('update', {
-        user_id: user.get('id'),
+        user_hash: user.get('userHash'),
         company: {
           id: organization.get('id'),
           name: organization.get('name'),

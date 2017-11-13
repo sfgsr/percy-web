@@ -13,6 +13,7 @@ export default BaseAuthenticator.extend({
       store.queryRecord('user', {}).then(userRecord => {
         if (window.Intercom) {
           window.Intercom('update', {
+            user_hash: userRecord.get('userHash'),
             name: userRecord.get('name'),
             email: userRecord.get('email'),
             created_at: userRecord.get('createdAt').getTime() / 1000,
@@ -34,6 +35,7 @@ export default BaseAuthenticator.extend({
         userRecord => {
           if (window.Intercom) {
             window.Intercom('update', {
+              user_hash: userRecord.get('userHash'),
               name: userRecord.get('name'),
               email: userRecord.get('email'),
               created_at: userRecord.get('createdAt').getTime() / 1000,
