@@ -11,9 +11,8 @@ export default BaseFormComponent.extend({
   classNameBindings: ['classes'],
 
   session: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
   isCurrentUser: computed('organizationUser', 'currentUser', function() {
-    // TODO: why can't we use Ember.computed.equal for this?
     return this.get('organizationUser.user.id') === this.get('currentUser.id');
   }),
   deleteText: computed('isCurrentUser', function() {

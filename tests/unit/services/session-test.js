@@ -1,0 +1,144 @@
+/* eslint-disable no-unused-expressions */
+import {expect} from 'chai';
+import {it, describe, beforeEach} from 'mocha';
+import {setupTest} from 'ember-mocha';
+import {make, manualSetup} from 'ember-data-factory-guy';
+import {resolve, reject} from 'rsvp';
+import sinon from 'sinon';
+
+describe('SessionService', function() {
+  setupTest('service:session', {
+    needs: ['service:analytics', 'service:adminMode', 'model:user'],
+  });
+
+  describe('loadCurrentUser', function() {
+    let subject = null;
+    let store = null;
+    let user;
+
+    beforeEach(function() {
+      subject = this.subject();
+      store = subject.get('store');
+
+      manualSetup(this.container);
+      user = make('user', {id: 'foo'});
+    });
+
+    describe('when isAuthenticated is false', function() {
+      it('returns a resolved promise ', function() {
+        subject.set('isAuthenticated', false);
+        const promise = subject.loadCurrentUser();
+
+        expect(promise).to.be.fulfilled;
+      });
+    });
+
+    describe('when isAuthenticated is true and the user query passes', function() {
+      beforeEach(function() {
+        subject.set('isAuthenticated', true);
+        store.queryRecord = sinon.stub().returns(resolve(user));
+      });
+
+      it('sets current user', function() {
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(subject.get('currentUser.id')).to.equal(user.get('id'));
+        });
+      });
+
+      it('sets raven user context', function() {
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(Raven.getContext().user.id).to.equal(user.get('id'));
+        });
+      });
+
+      it('sends intercom data', function() {
+        window.Intercom = sinon.stub();
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(window.Intercom).to.have.been.calledWith('update', {
+            user_hash: user.get('userHash'),
+            name: user.get('name'),
+            email: user.get('email'),
+            created_at: user.get('createdAt').getTime() / 1000,
+          });
+        });
+      });
+
+      it('sends sets up analytics data', function() {
+        const setupAnalyticsStub = sinon.stub();
+        subject.set('analytics.identifyUser', setupAnalyticsStub);
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(setupAnalyticsStub).to.have.been.calledWith(user);
+        });
+      });
+    });
+
+    describe('when isAuthenticated is true and the user query fails', function() {
+      beforeEach(function() {
+        subject.set('isAuthenticated', true);
+        store.queryRecord = sinon.stub().returns(reject());
+      });
+
+      it('invalidates the session', function() {
+        const invalidateStub = sinon.stub();
+        subject.invalidate = invalidateStub;
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(invalidateStub).to.have.been.called;
+        });
+      });
+
+      it('clears raven user context', function() {
+        subject.invalidate = sinon.stub();
+        Raven.setUserContext = sinon.stub();
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(Raven.setUserContext).to.have.been.calledWith();
+        });
+      });
+
+      it('clears analytics user context', function() {
+        subject.invalidate = sinon.stub();
+        const analyticsInvalidateStub = sinon.stub();
+        subject.set('analytics.invalidate', analyticsInvalidateStub);
+
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(analyticsInvalidateStub).to.have.been.called;
+        });
+      });
+    });
+
+    // TODO: unsure how to test a function failing but not break tests.
+    describe.skip('when isAuthenticated is true and the third party setup fails', function() {
+      beforeEach(function() {
+        subject.set('isAuthenticated', true);
+        store.queryRecord = sinon.stub().returns(resolve(user));
+      });
+
+      it('does not invalidate the session', function() {
+        subject.set('_setupSentry', function() {
+          throw new Error('foo');
+        });
+        const invalidateStub = sinon.stub();
+        subject.set('invalidate', invalidateStub);
+
+        const promise = subject.loadCurrentUser();
+
+        return promise.then(() => {
+          expect(invalidateStub).to.not.have.been.called;
+        });
+      });
+    });
+  });
+});

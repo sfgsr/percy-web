@@ -17,7 +17,7 @@
     </div>
 
     {{#if session.isAuthenticated}}
-      {{nav-menu user=session.data.authenticated.user currentOrganization=currentOrganization}}
+      {{nav-menu user=session.currentUser currentOrganization=currentOrganization}}
     {{else}}
       {{nav-menu}}
     {{/if}}

@@ -31,6 +31,7 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.6.0",
+    "chai-as-promised": "^7.1.1",
     "ember-ajax": "^3.0.0",
     "ember-changeset": "^1.2.3",
     "ember-changeset-validations": "^1.2.8",
@@ -70,6 +71,8 @@
     "ember-resolver": "^4.5.0",
     "ember-route-action-helper": "^2.0.6",
     "ember-simple-auth": "^1.4.0",
+    "ember-simple-auth-auth0": "^3.0.1",
+    "ember-sinon": "^1.0.1",
     "ember-source": "~2.16.0",
     "ember-tether": "^1.0.0-beta.0",
     "ember-truth-helpers": "^2.0.0",

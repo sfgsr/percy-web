@@ -1,4 +1,4 @@
-{{#if user}}
+{{#if session.isAuthenticated}}
   {{#if currentOrganization}}
     <div class="NavMenu-item u-hide-on-mobile">
       {{#link-to "organization.index" currentOrganization.slug}}
@@ -19,7 +19,7 @@
   </div>
 {{else}}
   <div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
-    <a href="#" {{action "redirectToLogin"}}>Sign In</a>
+    <a href="#" {{action "showLoginModal"}}>Sign In</a>
   </div>
   <div class="NavMenu-item NavMenu-item--right">
     {{#link-to "enterprise"}}Enterprise{{/link-to}}

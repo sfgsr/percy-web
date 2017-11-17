@@ -7,7 +7,7 @@ export default Component.extend({
   classes: null,
 
   session: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
 
   isExpanded: false,
   classNames: ['OrganizationsUserCard'],

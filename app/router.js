@@ -2,6 +2,8 @@ import {on} from '@ember/object/evented';
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
+export const AUTH_CALLBACK_ROUTE = 'auth/callback';
+
 const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
@@ -18,12 +20,13 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('login');
   this.route('join', {path: '/join/:invite_code'});
   this.route('auth-failure', {path: 'auth/failure'});
+  this.route('auth-callback', {path: AUTH_CALLBACK_ROUTE});
   this.route('docs', {path: '/docs'}, function() {
     this.route('page', {path: '*path'});
   });
+  this.route('login');
   this.route('pricing');
   this.route('enterprise');
   this.route('about');

@@ -1,6 +1,6 @@
 <div class="container Header Header--large Header--dark">
   {{#if session.isAuthenticated}}
-    {{nav-menu user=session.data.authenticated.user}}
+    {{nav-menu user=session.currentUser}}
   {{else}}
     {{nav-menu}}
   {{/if}}
@@ -11,7 +11,7 @@
   {{#if session.isAuthenticated}}
     {{goto-app redirectToDefaultOrganization="redirectToDefaultOrganization"}}
   {{else}}
-    {{login-button redirectToLogin="redirectToLogin"}}
+    {{login-button showLoginModal="showLoginModal"}}
   {{/if}}
 </div>
 <div class="container container--marketing InviteContainer">
@@ -155,7 +155,7 @@ $ ember install ember-percy
             {{#if session.isAuthenticated}}
               {{goto-app redirectToDefaultOrganization="redirectToDefaultOrganization"}}
             {{else}}
-              {{login-button redirectToLogin="redirectToLogin" text="Start free trial" showIcon=false}}
+              {{login-button showLoginModal="showLoginModal" text="Start free trial" showIcon=false}}
             {{/if}}
           </p>
           <p>

@@ -7,11 +7,11 @@ export default Component.extend({
 
   classNames: ['InvitationHandler'],
   session: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
 
   actions: {
-    invalidateSession() {
-      this.sendAction('invalidateSession');
+    logout() {
+      this.sendAction('logout');
     },
     accept() {
       // Invitations are accepted with a PATCH request against the invite endpoint.

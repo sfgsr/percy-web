@@ -2,17 +2,21 @@ import Ember from 'ember';
 import startApp from 'percy-web/tests/helpers/start-app';
 import destroyApp from 'percy-web/tests/helpers/destroy-app';
 import seedFaker from './seed-faker';
+import {authenticateSession} from 'percy-web/tests/helpers/ember-simple-auth';
 
 // Import mocha helpers so that they will be included for all tests.
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "it|describe" }]*/
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {expect} from 'chai';
 
-export default function setupAcceptance() {
+export default function setupAcceptance({authenticate = true} = {}) {
   beforeEach(function() {
     this.application = startApp();
     window.localStorage.clear();
     seedFaker();
+    if (authenticate) {
+      authenticateSession(this.application);
+    }
   });
 
   afterEach(function() {

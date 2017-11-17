@@ -13,8 +13,6 @@ export default Component.extend({
   classes: null,
 
   store: service(),
-  session: service(),
-  currentUser: alias('session.data.authenticated.user'),
 
   currentIntegration: alias('organization.githubIntegration'),
   githubIntegrationUrl: config.APP.githubUrls.integration,

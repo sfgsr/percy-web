@@ -42,6 +42,13 @@ module.exports = function(environment) {
         integration: 'https://github.com/apps/percy/installations/new',
       },
     },
+
+    'ember-simple-auth': {
+      auth0: {
+        domain: 'percy-io.auth0.com',
+        logoutReturnToURL: '/',
+      },
+    },
   };
 
   ENV.APP.STRIPE_PUBLISHABLE_KEY = 'pk_test_N5PmOTEMBIbsZMjbxnaWthNy';
@@ -67,6 +74,7 @@ module.exports = function(environment) {
     ENV.APP.AMPLITUDE_USERS_PROJECT_ID = '5a8c0499760103fcd2754fe7d5756214';
     ENV.APP.AMPLITUDE_ORGANIZATIONS_INSTANCE_NAME = 'Organizations';
     ENV.APP.AMPLITUDE_ORGANIZATIONS_PROJECT_ID = '89f8fae9aab3fccc0740237f17e43745';
+    ENV['ember-simple-auth']['auth0'].clientID = 'xFX5PgBn_v8iGt97dDsk36h8GjQ1WqC2';
   }
 
   if (environment === 'test') {
@@ -83,6 +91,7 @@ module.exports = function(environment) {
     ENV.percy = {
       defaultWidths: [375, 1280],
     };
+    ENV['ember-simple-auth']['auth0'].clientID = 'foo';
   }
 
   if (environment === 'production') {
@@ -96,6 +105,7 @@ module.exports = function(environment) {
     ENV.APP.AMPLITUDE_ORGANIZATIONS_PROJECT_ID = '43ed24c6891251bbbdddc310a5371afd';
 
     ENV.APP.SENTRY_URL = 'https://4c28a8c59c934d729d261b988d6187c3@sentry.io/235025';
+    ENV['ember-simple-auth']['auth0'].clientID = '9oRqSsl0iEbVK4Zh5AGHeC7pu3ACmnN3';
   }
 
   return ENV;

@@ -11,7 +11,7 @@ export default Component.extend({
 
   store: service(),
   session: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
 
   changeset: computed('organization', function() {
     let validator = this.get('validator') || {};

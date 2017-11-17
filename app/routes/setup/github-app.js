@@ -1,13 +1,16 @@
+import Ember from 'ember';
 import {alias} from '@ember/object/computed';
 import Route from '@ember/routing/route';
-import Ember from 'ember';
+import {inject as service} from '@ember/service';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import {task, timeout} from 'ember-concurrency';
+
 const POLLING_INTERVAL_SECONDS = 1;
 const MAX_UPDATE_POLLING_REQUESTS = 600;
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  currentUser: alias('session.data.authenticated.user'),
+  session: service(),
+  currentUser: alias('session.currentUser'),
 
   queryParams: {
     installationId: {

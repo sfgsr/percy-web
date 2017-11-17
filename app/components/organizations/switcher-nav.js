@@ -8,7 +8,7 @@ export default Component.extend({
   isExpanded: false,
 
   session: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
 
   classNames: ['OrganizationsSwitcherNav'],
   classNameBindings: ['classes'],

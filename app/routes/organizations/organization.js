@@ -4,8 +4,9 @@ import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  currentUser: alias('session.data.authenticated.user'),
   intercom: service(),
+  session: service(),
+  currentUser: alias('session.currentUser'),
 
   afterModel(model) {
     this.get('intercom').associateWithCompany(this.get('currentUser'), model);

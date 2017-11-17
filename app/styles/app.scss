@@ -16,9 +16,9 @@
   "variables/layouts";
 
 // Vendor styles
-@import
-  "vendor/normalize",
-  "vendor/skeleton";
+@import "vendor/normalize";
+@import "vendor/skeleton";
+@import "vendor/auth0";
 
 // Base components.
 @import

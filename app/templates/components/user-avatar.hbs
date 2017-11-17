@@ -1,4 +1,4 @@
-{{#if showPlaceholder}}
+{{#if (or showPlaceholder (not user))}}
   <div class="UserAvatar-placeholder" style="width: {{width}}px; height: {{height}}px">
     {{fa-icon "user"}}
   </div>

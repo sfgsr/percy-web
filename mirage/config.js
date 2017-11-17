@@ -3,6 +3,10 @@ import Mirage from 'ember-cli-mirage';
 export default function() {
   this.passthrough('http://api.amplitude.com');
 
+  this.get('/api/auth/session', function() {
+    return {state: 'foo'};
+  });
+
   this.get('/api/auth/logout', function(schema /*, request */) {
     let user = schema.users.findBy({_currentLoginInTest: true});
     if (user) {

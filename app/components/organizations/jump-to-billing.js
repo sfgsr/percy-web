@@ -10,7 +10,8 @@ export default Component.extend({
   classNameBindings: ['classes'],
 
   session: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
+
   actions: {
     chooseOrganization(organization) {
       // Send action directly up to application controller, so we don't have to delegate every

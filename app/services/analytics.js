@@ -5,7 +5,7 @@ import config from '../config/environment';
 export default Service.extend({
   session: service(),
   adminMode: service(),
-  currentUser: alias('session.data.authenticated.user'),
+  currentUser: alias('session.currentUser'),
 
   userInstance: null,
   organizationInstance: null,

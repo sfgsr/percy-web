@@ -22,6 +22,7 @@ module.exports = function(defaults) {
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
       prepend: '/static/',
+      exclude: ['images/percy.svg'],
     },
   });
 
@@ -31,6 +32,7 @@ module.exports = function(defaults) {
   app.import('bower_components/highlightjs/highlight.pack.js');
   app.import('bower_components/raven-js/dist/raven.js');
   app.import('bower_components/raven-js/dist/plugins/ember.js');
+  app.import('bower_components/sinon-chai/lib/sinon-chai.js', {type: 'test'});
 
   var extraAssets;
   if (app.env === 'development' || app.env === 'test') {
