@@ -11,7 +11,7 @@ export default {
     passwordInputPlaceholder: 'Password',
   },
   theme: {
-    logo: 'https://percy.io/static/images/percy.svg',
+    logo: 'https://percy.io/static/images/percy-1f98595db6111fe2e1c86f8fbae815bc.svg',
     primaryColor: '#5c007b',
   },
   socialButtonStyle: 'big',
