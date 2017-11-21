@@ -13,6 +13,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "lint:fix": "./node_modules/eslint/bin/eslint.js . --fix",
     "precommit": "lint-staged",
+    "postinstall": "bower install --allow-root",
     "start": "ember server",
     "start-production-for-testing": "ember server --environment=production",
     "test": "ember test",
