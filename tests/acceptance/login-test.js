@@ -23,8 +23,6 @@ describe('Acceptance: Login', function() {
       this.server.create('user', {_currentLoginInTest: true});
     });
 
-    click('a.LoginButton');
-
     andThen(() => {
       authenticateSession(this.application);
     });
