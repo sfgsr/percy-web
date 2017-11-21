@@ -18,28 +18,6 @@
   {{#if (eq changeset.githubAuthMechanism "github-integration")}}
     {{organizations/github-integrator organization=organization showSupport="showSupport"}}
   {{/if}}
-  {{#if (eq organization.githubAuthMechanism "github-bot-user")}}
-    <label>
-      <input type="radio" name="github-integration-setting" value="github-bot-user"
-        checked={{if (eq changeset.githubAuthMechanism "github-bot-user") "checked"}}
-        {{action "changeSelection" preventDefault=false}}
-      >
-      <span class="label-body">Bot user</span>
-      <p>
-        Pick a GitHub user with access to your organization's repositories.
-      </p>
-    </label>
-    {{#if (eq changeset.githubAuthMechanism "github-bot-user")}}
-      {{organizations/github-bot-integrator organization=organization changeset=changeset assignMe=(action "assignBotUser")}}
-    {{/if}}
-
-    {{!-- Show special "sync private repos" section if on bot user and the current user is the bot user. --}}
-    {{#if (eq changeset.githubAuthMechanism "github-bot-user")}}
-      {{#if (eq organization.githubBotUser session.currentUser)}}
-        {{sync-repos-section organization=organization}}
-      {{/if}}
-    {{/if}}
-  {{/if}}
 
   {{#if changeset.errors}}
     <ul class="Form-errors">
@@ -51,16 +29,14 @@
     </ul>
   {{/if}}
 
-  {{#if (eq organization.githubAuthMechanism "github-bot-user")}}
-    {{form-fields/submit
-      isSaving=isSaving
-      isSaveSuccessful=isSaveSuccessful
-      value="Save"
-      disabled=disableSave
-      classes="Button Button--primary"
-      submit=(action "saveSelection")
-    }}
-  {{/if}}
+  {{form-fields/submit
+    isSaving=isSaving
+    isSaveSuccessful=isSaveSuccessful
+    value="Save"
+    disabled=disableSave
+    classes="Button Button--primary"
+    submit=(action "saveSelection")
+  }}
 
 </form>
 <p class="OrganizationsGithubFootnote">

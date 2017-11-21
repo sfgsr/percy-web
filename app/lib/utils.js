@@ -3,17 +3,6 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 export default {
-  redirectToLogin(options) {
-    options = options || {};
-    var params = {
-      redirect_to: options.redirectTo || window.location.href,
-    };
-    if (options.extendedPermissions) {
-      params['extended_permissions'] = options.extendedPermissions;
-    }
-    var urlName = options.extendedPermissions ? 'loginExtended' : 'login';
-    window.location = this.buildApiUrl(urlName, {params: params});
-  },
   buildApiUrl() {
     var key = arguments[0];
     var otherArgs = Array.prototype.slice.call(arguments, 1);

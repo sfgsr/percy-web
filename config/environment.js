@@ -24,8 +24,6 @@ module.exports = function(environment) {
     APP: {
       // Don't use these directly; use utils.buildApiUrl instead.
       apiUrls: {
-        login: '/api/auth/github',
-        loginExtended: '/api/auth/github_extended',
         logout: '/api/auth/logout',
 
         builds: '/api/v1/builds',

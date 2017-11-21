@@ -21,15 +21,10 @@ export default Component.extend({
     'changeset.githubAuthMechanism',
     'changeset.isPristine',
     'changeset.isInvalid',
-    'changeset.githubBotUser',
     'organization.githubIntegration',
     function() {
       let mechanism = this.get('changeset.githubAuthMechanism');
 
-      // Special case: disable save if on "Bot user" but no bot user assigned.
-      if (mechanism === 'github-bot-user' && !this.get('changeset.githubBotUser')) {
-        return true;
-      }
       // Special case: disable save if on "Official GitHub Integration" is selected at all.
       if (mechanism === 'github-integration') {
         return true;
@@ -59,18 +54,10 @@ export default Component.extend({
 
       this.get('changeset').set('githubAuthMechanism', newSelection);
     },
-    assignBotUser() {
-      let changeset = this.get('changeset');
-      changeset.set('githubBotUser', this.get('currentUser'));
-    },
     saveSelection() {
       let organization = this.get('organization');
       let currentSelection = this.get('changeset.githubAuthMechanism');
       let changeset = this.get('changeset');
-
-      if (currentSelection !== 'github-bot-user') {
-        changeset.set('githubBotUser', null);
-      }
 
       // Some custom validations, these require state outside of the attributes themselves so
       // we don't use a standard validations object.
@@ -80,8 +67,6 @@ export default Component.extend({
           'The official Percy GitHub Integration must be uninstalled in GitHub ' +
             'before you can switch to a different integration type.',
         ]);
-      } else if (currentSelection === 'github-bot-user' && !changeset.get('githubBotUser')) {
-        changeset.addError('base', ['GitHub bot user cannot be blank']);
       }
 
       changeset.validate().then(() => {

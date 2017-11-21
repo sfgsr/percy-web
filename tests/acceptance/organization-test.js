@@ -193,23 +193,4 @@ describe('Acceptance: Organization', function() {
       });
     });
   });
-  context('user is github bot user', function() {
-    setupSession(function(server) {
-      let user = server.create('user');
-      let organization = server.create('organization', {githubBotUser: user});
-      server.create('organizationUser', {user, organization, role: 'admin'});
-      this.organization = organization;
-    });
-
-    it('shows private repos access', function() {
-      visit(`/organizations/${this.organization.slug}/settings`);
-      andThen(() => {
-        expect(currentPath()).to.equal('organizations.organization.settings');
-      });
-      percySnapshot(this.test);
-
-      click('.SyncReposSection p:contains("Private repository access")');
-      percySnapshot(this.test.fullTitle() + ' | private repository access');
-    });
-  });
 });

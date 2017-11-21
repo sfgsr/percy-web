@@ -5,7 +5,6 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   name: DS.attr(),
   slug: DS.attr(),
-  githubBotUser: DS.belongsTo('user', {async: false, inverse: null}),
   githubIntegration: DS.belongsTo('github-integration', {async: false}),
   githubIntegrationRequest: DS.belongsTo('github-integration-request', {
     async: false,
@@ -28,10 +27,8 @@ export default DS.Model.extend({
   isGithubIntegrated: computed('githubAuthMechanism', function() {
     return this.get('githubAuthMechanism') !== 'no-access';
   }),
-  githubAuthMechanism: computed('githubBotUser', 'githubIntegration', function() {
-    if (this.get('githubBotUser')) {
-      return 'github-bot-user';
-    } else if (this.get('githubIntegration')) {
+  githubAuthMechanism: computed('githubIntegration', function() {
+    if (this.get('githubIntegration')) {
       return 'github-integration';
     }
     return 'no-access';

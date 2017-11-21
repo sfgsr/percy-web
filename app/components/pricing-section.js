@@ -1,6 +1,5 @@
 import {inject as service} from '@ember/service';
 import Component from '@ember/component';
-import utils from 'percy-web/lib/utils';
 
 export default Component.extend({
   classNames: ['PricingSection'],
@@ -17,8 +16,8 @@ export default Component.extend({
     hideModal() {
       this.set('showJumpToBilling', false);
     },
-    login() {
-      utils.redirectToLogin({redirectTo: '/organizations/new'});
+    startTrial() {
+      this.sendAction('redirectToDefaultOrganization');
     },
     showSupport() {
       this.sendAction('showSupport');
