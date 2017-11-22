@@ -75,6 +75,7 @@
     "ember-simple-auth-auth0": "^3.0.1",
     "ember-sinon": "^1.0.1",
     "ember-source": "~2.16.0",
+    "ember-test-selectors": "^0.3.8",
     "ember-tether": "^1.0.0-beta.0",
     "ember-truth-helpers": "^2.0.0",
     "ember-watson": "^0.9.1",
@@ -97,6 +98,7 @@
   },
   "private": true,
   "dependencies": {
+    "ember-inline-svg": "^0.1.11",
     "stylelint-order": "^0.7.0",
     "stylelint-scss": "^2.1.0"
   }

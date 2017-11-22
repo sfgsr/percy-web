@@ -1,10 +1,4 @@
-{{#if isMultiColumnMode}}
-  {{comparison-switcher-item
-    selectedWidth=selectedWidth
-    width=selectedWidth
-    comparisons=comparisons
-  }}
-{{else}}
+<div class="btn-group btn-group-alt">
   {{#each buildWidths as |width|}}
     {{comparison-switcher-item
       selectedWidth=selectedWidth
@@ -13,4 +7,4 @@
       updateSelectedWidth=(action 'updateSelectedWidth')
     }}
   {{/each}}
-{{/if}}
+</div>

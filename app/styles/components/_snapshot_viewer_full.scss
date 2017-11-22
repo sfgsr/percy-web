@@ -39,31 +39,11 @@
     outline: none;
     z-index: 1001;
 
-    .SnapshotViewerFull-header {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 40px;
-      padding-right: 20px; // Makes space for scrollbar
-      padding-left: 15px;
-      line-height: 1.5;
-      background: $lightest-gray;
-      border-bottom: $lighter-gray-border;
-      z-index: 1001;
-    }
-
     .SnapshotViewerFull-body {
-      position: absolute;
-      top: 40px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding-top: 40px;
+      height: 100vh;
+      padding-top: 41px;
       padding-bottom: 40px;
       text-align: center;
-      vertical-align: middle;
       cursor: pointer;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;

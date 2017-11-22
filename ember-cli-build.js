@@ -23,6 +23,10 @@ module.exports = function(defaults) {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
       prepend: '/static/',
     },
+    svg: {
+      paths: ['public/images/icons'],
+      optimize: false,
+    },
   });
 
   app.import('bower_components/accounting.js/accounting.js');

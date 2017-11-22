@@ -1,12 +1,14 @@
 .Viewer-header {
   display: flex;
-  padding: 5px 15px;
+  padding: 5px 8px;
   align-items: center;
   background-color: $very-light-gray;
 
   a,
   a:hover {
     color: $default-text-color;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   .Button {

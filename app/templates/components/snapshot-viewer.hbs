@@ -1,19 +1,30 @@
 <div class="Viewer-header SnapshotViewer-header" {{action "selectChild"}}>
-  <a class="Viewer-header-title SnapshotViewer-title truncate" title="{{snapshot.name}}" href="{{snapshotUrl}}">{{snapshot.name}}</a>
-  <div class="SnapshotViewer-header-controls">
-    {{comparison-switcher
-      comparisons=snapshot.comparisons
-      buildWidths=buildWidths
-      snapshotSelectedWidth=snapshotSelectedWidth
-      updateSelectedWidth=(action 'updateSelectedWidth')
-      isMultiColumnMode=isMultiColumnMode
-    }}
-    <button
-      class="ToggleFullViewButton Button"
-      {{action 'showSnapshotFullModalTriggered' snapshot.id snapshotSelectedWidth}}
-    >
-        {{fa-icon 'expand'}}
-    </button>
+  <div class="flex align-center truncate">
+    <figure class="svg-container">
+      {{comparison-icon
+        hasComparison=hasComparisonAtSelectedWidth
+        svgClassName="mr-2"
+      }}
+    </figure>
+    <a class="Viewer-header-title SnapshotViewer-title truncate" title="{{snapshot.name}}" href="{{snapshotUrl}}">{{snapshot.name}}</a>
+  </div>
+  <div class="btn-toolbar" role="group" aria-label="Viewport Comparison Switcher">
+    <div class="btn-group btn-group-alt mr-2" role="group" aria-label="First Group">
+      {{comparison-switcher
+        comparisons=snapshot.comparisons
+        buildWidths=buildWidths
+        snapshotSelectedWidth=snapshotSelectedWidth
+        updateSelectedWidth=(action 'updateSelectedWidth')
+      }}
+    </div>
+    <div class="btn-group" role="group" aria-label="Second Group">
+      <button type="button" class="ToggleFullViewButton btn btn-square maximize-snapshot"
+        {{action 'showSnapshotFullModalTriggered' snapshot.id snapshotSelectedWidth}}>
+        <figure class="svg-container">
+          {{inline-svg "maximize-icon"}}
+        </figure>
+      </button>
+    </div>
   </div>
 </div>
 {{#if isExpanded}}

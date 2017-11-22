@@ -1,28 +1,40 @@
-<div class="Viewer-header SnapshotViewerFull-header row">
-  <div class="five columns" title="{{snapshot.name}}">
-    <strong class="Viewer-header-title">{{snapshot.name}}</strong>
+<div class="Viewer-header SnapshotViewer-header SnapshotViewer-header-full">
+  <div class="flex align-center truncate">
+    <figure class="svg-container">
+      {{comparison-icon
+        hasComparison=hasComparisonAtSelectedWidth
+        svgClassName="mr-2"
+      }}
+    </figure>
+    <a class="Viewer-header-title SnapshotViewer-title truncate" title="{{snapshot.name}}" href="{{snapshotUrl}}">{{snapshot.name}}</a>
   </div>
   {{comparison-mode-switcher
     comparison=selectedComparison
     updateComparisonMode=updateComparisonMode
     comparisonMode=comparisonMode
-    class="three columns"
   }}
-  <div class="SnapshotViewerFull-rightControls four columns">
-    {{comparison-switcher
-      comparisons=snapshot.comparisons
-      buildWidths=buildWidths
-      snapshotSelectedWidth=snapshotSelectedWidth
-      updateSelectedWidth=(action 'updateSelectedWidth')
-    }}
-    <button
-      class="ToggleFullViewButton Button u-pull-right"
-      {{action (route-action 'closeSnapshotFullModal' build.id snapshotId)}}
-    >
-        {{fa-icon 'compress'}}
-    </button>
+  <div class="flex justify-end">
+    <div class="btn-toolbar" role="group" aria-label="Viewport Comparison Switcher">
+      <div class="btn-group btn-group-alt mr-2" role="group" aria-label="First Group">
+        {{comparison-switcher
+          comparisons=snapshot.comparisons
+          buildWidths=buildWidths
+          snapshotSelectedWidth=snapshotSelectedWidth
+          updateSelectedWidth=(action 'updateSelectedWidth')
+        }}
+      </div>
+      <div class="btn-group" role="group" aria-label="Second Group">
+        <button type="button" class="ToggleFullViewButton btn btn-square minimize-snapshot"
+          {{action (route-action 'closeSnapshotFullModal' build.id snapshotId)}}>
+          <figure class="svg-container">
+            {{inline-svg "minimize-icon"}}
+          </figure>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="SnapshotViewerFull-body">
   {{#if selectedComparison}}
     {{comparison-viewer-full

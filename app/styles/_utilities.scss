@@ -3,3 +3,35 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.mr-2 {
+  margin-right: 8px;
+}
+
+.is-invisible {
+  visibility: hidden;
+}
+
+.is-hidden {
+  display: none;
+}

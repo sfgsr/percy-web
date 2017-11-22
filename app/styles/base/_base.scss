@@ -30,3 +30,7 @@ textarea {
   font: inherit;
   color: inherit;
 }
+
+svg:not(:root) {
+  overflow: visible;
+}

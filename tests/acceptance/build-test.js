@@ -299,7 +299,7 @@ describe('Acceptance: Build', function() {
 
     visit(`/${this.project.fullSlug}/builds/${this.build.id}/view/${snapshot.id}/320?mode=diff`);
     andThen(() => {
-      expect(find('.ComparisonModeSwitcher').css('visibility')).to.equal('hidden');
+      expect(find('[data-test-comparison-mode-switcher]').css('visibility')).to.equal('hidden');
     });
   });
 
@@ -308,8 +308,8 @@ describe('Acceptance: Build', function() {
 
     visit(`/${this.project.fullSlug}/builds/${this.build.id}/view/${snapshot.id}/1280?mode=diff`);
     andThen(() => {
-      expect(find('.ComparisonModeSwitcher span').length).to.equal(1);
-      expect(find('.ComparisonModeSwitcher span').text()).to.equal('New Snapshot');
+      expect(find('[data-test-comparison-mode-switcher] button').length).to.equal(1);
+      expect(find('[data-test-comparison-mode-switcher] button').text()).to.equal('New Snapshot');
     });
   });
 });

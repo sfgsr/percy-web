@@ -1,18 +1,13 @@
-<nav class="ComparisonModeSwitcher">
+<div class="btn-group" data-test-comparison-mode-switcher role="group" aria-label="Snapshot Comparison Switcher">
   {{#if wasAdded}}
-    <span
-      class="ComparisonModeSwitcher-switch active"
-      {{action updateComparisonMode 'head'}}>New Snapshot</span>
+    <button type="button" class="btn is-active"
+      {{action updateComparisonMode 'head'}}>New Snapshot</button>
   {{else}}
-    <span
-      class="ComparisonModeSwitcher-switch {{if (eq comparisonMode 'base')  'active'}}"
-      {{action updateComparisonMode 'base'}}>Original</span>
-
-    <span
-      class="ComparisonModeSwitcher-switch {{if (eq comparisonMode 'diff')  'active'}}"
-      {{action updateComparisonMode 'diff'}}>Diff</span>
-    <span
-      class="ComparisonModeSwitcher-switch {{if (eq comparisonMode 'head')  'active'}}"
-      {{action updateComparisonMode 'head'}}>New</span>
+    <button type="button" class="btn {{if (eq comparisonMode 'base') 'is-active'}}"
+      {{action updateComparisonMode 'base'}}>Original</button>
+    <button type="button" class="btn {{if (eq comparisonMode 'diff') 'is-active'}}"
+      {{action updateComparisonMode 'diff'}}>Diff</button>
+    <button type="button" class="btn {{if (eq comparisonMode 'head') 'is-active'}}"
+      {{action updateComparisonMode 'head'}}>New</button>
   {{/if}}
-</nav>
+</div>

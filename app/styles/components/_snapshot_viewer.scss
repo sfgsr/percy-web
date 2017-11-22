@@ -3,7 +3,7 @@
   width: 100%;
   margin-bottom: 10px;
   background: $lightest-gray;
-  border: $lightest-gray-border;
+  border: $lighter-gray-border;
   border-radius: 3px;
 
   &:last-child {
@@ -35,15 +35,17 @@
 }
 
 .SnapshotViewer--focus {
-  border: $lighter-gray-border;
+  border: $gray-border;
 }
 
 .SnapshotViewer-header {
-  display: flex;
-  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 32px;
+  background: $lightest-gray;
+  border-bottom: $lighter-gray-border;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  justify-content: space-between;
 
   &.SnapshotViewer-header--actionable {
     &:hover {
@@ -53,10 +55,37 @@
   }
 }
 
-.SnapshotViewer-title {
-  margin-right: 30px;
+.SnapshotViewer-header-full {
+  position: fixed;
+  width: 100vw;
+  z-index: 1;
+  grid-template-columns: 1fr auto 1fr;
 }
 
 .SnapshotViewer-header-controls {
   display: flex;
+}
+
+.maximize-snapshot {
+  &:hover {
+    path:first-child {
+      transform: translate3d(1px, -1px, 0);
+    }
+
+    path:last-child {
+      transform: translate3d(-1px, 1px, 0);
+    }
+  }
+}
+
+.minimize-snapshot {
+  &:hover {
+    path:first-child {
+      transform: translate3d(1px, -1px, 0);
+    }
+
+    path:last-child {
+      transform: translate3d(-1px, 1px, 0);
+    }
+  }
 }

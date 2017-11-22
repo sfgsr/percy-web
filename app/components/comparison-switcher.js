@@ -5,8 +5,9 @@ export default Component.extend({
   snapshotSelectedWidth: null,
   comparisons: [],
   buildWidths: [],
+
   updateSelectedWidth() {},
-  classNames: ['ComparisonSwitcher'],
+
   selectedWidth: computed('snapshotSelectedWidth', {
     get() {
       return this.get('snapshotSelectedWidth');
@@ -15,6 +16,7 @@ export default Component.extend({
       return value;
     },
   }),
+
   actions: {
     updateSelectedWidth(value) {
       if (value === parseInt(this.get('selectedWidth'))) {
