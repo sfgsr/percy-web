@@ -12,7 +12,6 @@ Then, run:
 
 ```bash
 yarn
-bower install
 ```
 
 ## Run server
