@@ -6,10 +6,12 @@ export default Component.extend({
   width: null,
   comparisons: [],
   tagName: 'button',
-
   classNames: ['btn'],
-
-  classNameBindings: ['isSelected:is-active:', 'matchingComparison::is-disabled'],
+  classNameBindings: [
+    'isSelected:is-active:',
+    'matchingComparison::is-disabled',
+    'matchingComparison.isDifferent:has-diffs',
+  ],
 
   updateSelectedWidth() {},
 

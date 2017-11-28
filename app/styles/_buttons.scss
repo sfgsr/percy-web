@@ -214,20 +214,29 @@ button,
 
 .btn-group-alt {
   .btn {
-    color: rgba($red, 0.4);
+    color: rgba($default-text-color, 0.5);
     background: $white;
 
-    &:hover {
-      color: $red;
-    }
-
+    &:hover,
     &.is-active {
-      color: $red;
+      color: $default-text-color;
     }
 
     &.is-disabled {
       color: rgba($default-text-color, 0.5);
       opacity: 0.5;
+    }
+
+    &.has-diffs {
+      color: rgba($red, 0.4);
+
+      &:hover {
+        color: $red;
+      }
+
+      &.is-active {
+        color: $red;
+      }
     }
   }
 }
