@@ -5,6 +5,7 @@ import ApplicationRouteMixin from 'ember-simple-auth-auth0/mixins/application-ro
 import localStorageProxy from 'percy-web/lib/localstorage';
 import {AUTH_CALLBACK_ROUTE} from 'percy-web/router';
 import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
+import isDevWithProductionAPI from 'percy-web/lib/dev-auth';
 
 const AUTH_REDIRECT_LOCALSTORAGE_KEY = 'percyAttemptedTransition';
 
@@ -16,6 +17,13 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
     this._super(...arguments);
     if (!this.get('session.isAuthenticated')) {
       this._storeTargetTransition(transition);
+
+      // When running our development environment with a production API, we need to shortcut the
+      // auth flow otherwise you'll get CSRF detected errors from Auth0. This is somewhat of a hack
+      // and means you won't be able to log out or test login functionality in this mode.
+      if (isDevWithProductionAPI()) {
+        this.set('session.isAuthenticated', true);
+      }
     }
     return this._loadCurrentUser();
   },

@@ -68,6 +68,9 @@ module.exports = function(environment) {
       integration: 'https://github.com/apps/percy-dev/installations/new',
     };
 
+    ENV.APP.percyWebApiHost = process.env.PERCY_WEB_API_HOST;
+    ENV.APP.percyWebAuthToken = process.env.PERCY_WEB_AUTH_TOKEN;
+
     ENV.APP.AMPLITUDE_USERS_INSTANCE_NAME = 'Users';
     ENV.APP.AMPLITUDE_USERS_PROJECT_ID = '5a8c0499760103fcd2754fe7d5756214';
     ENV.APP.AMPLITUDE_ORGANIZATIONS_INSTANCE_NAME = 'Organizations';
