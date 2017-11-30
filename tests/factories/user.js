@@ -1,5 +1,6 @@
 import FactoryGuy from 'ember-data-factory-guy';
 import faker from 'faker';
+import {makeList} from 'ember-data-factory-guy';
 
 FactoryGuy.define('user', {
   default: {
@@ -14,8 +15,13 @@ FactoryGuy.define('user', {
     createdAt: () => new Date(),
     updatedAt: () => new Date(),
 
-    // add this when we need it
-    // orgainzations: FactoryGuy.belongsTo('organization'),
+    organizations: FactoryGuy.hasMany('organization'),
   },
-  traits: {},
+  traits: {
+    withOrganizations: {
+      organizations: () => {
+        return makeList('organization', 5);
+      },
+    },
+  },
 });

@@ -2,9 +2,12 @@ import {run} from '@ember/runloop';
 import {merge} from '@ember/polyfills';
 import Application from '../../app';
 import config from '../../config/environment';
+import registerPowerSelectHelpers from 'ember-power-select/test-support/helpers';
 
 // This import registers Percy's async test helpers for all acceptance tests.
 import './percy/register-helpers';
+
+registerPowerSelectHelpers();
 
 export default function startApp(attrs) {
   let attributes = merge({}, config.APP);

@@ -5,6 +5,7 @@ FactoryGuy.define('repo', {
   default: {
     name: () => faker.lorem.slug(20),
     htmlUrl: () => faker.internet.url(),
+    slug: () => faker.lorem.slug(),
     isPrivate: false,
   },
 });

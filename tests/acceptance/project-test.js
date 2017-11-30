@@ -49,8 +49,13 @@ describe('Acceptance: Project', function() {
   });
 
   context('settings', function() {
+    let organization;
+    let githubIntegration;
+    let repos;
     setupSession(function(server) {
-      let organization = server.create('organization', 'withUser');
+      organization = server.create('organization', 'withUser');
+      githubIntegration = server.create('githubIntegration');
+      repos = [server.create('repo'), server.create('repo'), server.create('repo')];
       let enabled = server.create('project', {name: 'Enabled', organization});
       let disabled = server.create('project', {
         name: 'Disabled',
@@ -74,6 +79,14 @@ describe('Acceptance: Project', function() {
       visit(`/${this.enabledProject.fullSlug}/settings`);
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.settings');
+      });
+      percySnapshot(this.test);
+    });
+
+    it('displays github integration select menu', function() {
+      organization.update({githubIntegration, repos});
+      andThen(() => {
+        visit(`/${this.enabledProject.fullSlug}/settings`);
       });
       percySnapshot(this.test);
     });
