@@ -17,38 +17,6 @@
     overflow: hidden;
   }
 
-  .Panel-header--withSelect {
-    background-color: $white;
-    border-bottom: $lighter-gray-border;
-
-    input {
-      margin-bottom: 0;
-    }
-
-    .ember-power-select-option {
-      padding: 10px;
-    }
-
-    .ember-power-select-trigger {
-      background: none;
-      border: 0;
-      outline: none;
-    }
-
-    .ember-basic-dropdown-content {
-      top: auto !important; /* fixes bug where dropdown is misaligned */
-      left: auto !important; /* fixes bug where dropdown is misaligned */
-      margin-top: 12px;
-      border: $lighter-gray-border;
-      border-top: 0;
-    }
-
-    .ember-power-select-selected-item,
-    .ember-power-select-placeholder {
-      margin-left: 0;
-    }
-  }
-
   .Panel-nav {
     .Button {
       margin: 0;

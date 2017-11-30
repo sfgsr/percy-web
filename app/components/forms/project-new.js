@@ -15,4 +15,9 @@ export default BaseFormComponent.extend({
     });
   }),
   validator: ProjectNewValidations,
+
+  willDestroyElement() {
+    // Don't leave an unsaved new project model in the store.
+    this.get('model').rollbackAttributes();
+  },
 });
