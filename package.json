@@ -56,7 +56,7 @@
     "ember-cli-uglify": "^2.0.0",
     "ember-concurrency": "^0.8.12",
     "ember-data": "2.11.3",
-    "ember-data-factory-guy": "^2.13.14",
+    "ember-data-factory-guy": "^2.13.16",
     "ember-exam": "^1.0.0",
     "ember-export-application-global": "^2.0.0",
     "ember-fakerjs": "^0.1.0",
