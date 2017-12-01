@@ -9,6 +9,7 @@ export default Component.extend({
   session: service(),
   currentUser: alias('session.currentUser'),
 
+  flashMessages: service(),
   actions: {
     logout() {
       this.sendAction('logout');
@@ -22,7 +23,7 @@ export default Component.extend({
             this.sendAction('inviteAccepted', model);
           },
           () => {
-            alert(
+            this.get('flashMessages').danger(
               'Something went wrong! You might already be in this organization. ' +
                 'Feel free to reach out to hello@percy.io for help.',
             );
