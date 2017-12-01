@@ -63,7 +63,7 @@
     "ember-font-awesome": "^3.0.5",
     "ember-inflector": "^2.0.1",
     "ember-load-initializers": "^1.0.0",
-    "ember-modal-dialog": "^2.3.0",
+    "ember-modal-dialog": "^2.4.0",
     "ember-moment": "^7.5.0",
     "ember-page-title": "^3.2.2",
     "ember-percy": "^1.2.21",
