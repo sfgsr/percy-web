@@ -12,6 +12,7 @@ const AUTH_REDIRECT_LOCALSTORAGE_KEY = 'percyAttemptedTransition';
 
 export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
   session: service(),
+  flashMessages: service(),
   currentUser: alias('session.currentUser'),
 
   beforeModel(transition) {
@@ -41,7 +42,20 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
   },
 
   _loadCurrentUser() {
-    return this.get('session').loadCurrentUser();
+    return this.get('session')
+      .loadCurrentUser()
+      .catch(() => {
+        this.get('flashMessages').createPersistentFlashMessage(
+          {
+            type: 'danger',
+            message:
+              'There was a problem with logging in. \
+            Please try again or contact us if the issue does not resolve.',
+            sticky: true,
+          },
+          {persistentReloads: 1},
+        );
+      });
   },
 
   actions: {
@@ -87,7 +101,7 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
 
   _redirectToDefaultOrganization() {
     if (!this.get('currentUser')) {
-      this.transitionTo('/');
+      return this.transitionTo('/');
     }
 
     let lastOrganizationSlug = localStorageProxy.get('lastOrganizationSlug');
@@ -126,6 +140,10 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
     } else {
       this._redirectToDefaultOrganization();
     }
+  },
+
+  activate() {
+    this.get('flashMessages').displayLocalStorageMessages();
   },
 });
 

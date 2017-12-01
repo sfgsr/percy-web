@@ -1,0 +1,32 @@
+<svg width="27" height="24" viewBox="0 0 27 24">
+  <defs>
+    <path id="flash-warning-icon-b" d="M14.2564189,1.20066667 C13.8842568,0.567866667 13.2429054,0.200666667 12.4999324,0.200666667 C11.7569595,0.200666667 11.1142568,0.567866667 10.7434459,1.20066667 L0.573851351,18.8333333 C0.201689189,19.4661333 0.201689189,20.2005333 0.573851351,20.8333333 C0.946013514,21.4661333 1.58736486,21.8333333 2.33033784,21.8333333 L22.6678378,21.8333333 C23.4108108,21.8333333 24.0535135,21.4661333 24.4243243,20.8333333 C24.7964865,20.2005333 24.7964865,19.4661333 24.4243243,18.8333333 L14.2564189,1.20066667 Z M23.2435811,20.1666667 C23.176277,20.2669267 23.0073581,20.5 22.669527,20.5 L2.33067568,20.5 C1.99283784,20.5 1.78959459,20.2669267 1.75662162,20.1666667 C1.68931757,20.0664067 1.5877027,19.7994667 1.75662162,19.5 L11.9262162,1.86733333 C12.0951351,1.56785333 12.3986486,1.534 12.5002703,1.534 C12.6018919,1.534 12.9054054,1.56785333 13.0743243,1.86733333 L23.2439189,19.5 C23.4458311,19.79948 23.311223,20.0664 23.2439189,20.1666667 L23.2435811,20.1666667 Z"/>
+    <filter id="flash-warning-icon-a" width="116.4%" height="118.5%" x="-8.2%" y="-4.6%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0"/>
+    </filter>
+    <path id="flash-warning-icon-d" d="M12.6344595,7.966 C12.2622973,7.966 11.9587838,8.26548 11.9587838,8.63266667 L11.9587838,13.2993333 C11.9587838,13.6665333 12.2623108,13.966 12.6344595,13.966 C13.0066216,13.966 13.3101351,13.66652 13.3101351,13.2993333 L13.3101351,8.63266667 C13.3101351,8.26676667 13.0066081,7.966 12.6344595,7.966 Z"/>
+    <filter id="flash-warning-icon-c" width="396%" height="166.7%" x="-148%" y="-16.7%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0"/>
+    </filter>
+    <path id="flash-warning-icon-f" d="M12.6344595,15.2993333 C12.2622973,15.2993333 11.9587838,15.5988133 11.9587838,15.966 L11.9587838,16.966 C11.9587838,17.3332 12.2623108,17.6326667 12.6344595,17.6326667 C13.0066216,17.6326667 13.3101351,17.3331867 13.3101351,16.966 L13.3101351,15.966 C13.3101351,15.6001 13.0066081,15.2993333 12.6344595,15.2993333 Z"/>
+    <filter id="flash-warning-icon-e" width="396%" height="271.4%" x="-148%" y="-42.9%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(1)">
+    <use fill="#000" filter="url(#flash-warning-icon-a)" xlink:href="#flash-warning-icon-b"/>
+    <use fill="#FFF" xlink:href="#flash-warning-icon-b"/>
+    <use fill="#000" filter="url(#flash-warning-icon-c)" xlink:href="#flash-warning-icon-d"/>
+    <use fill="#FFF" xlink:href="#flash-warning-icon-d"/>
+    <g>
+      <use fill="#000" filter="url(#flash-warning-icon-e)" xlink:href="#flash-warning-icon-f"/>
+      <use fill="#FFF" xlink:href="#flash-warning-icon-f"/>
+    </g>
+  </g>
+</svg>

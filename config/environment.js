@@ -21,6 +21,12 @@ module.exports = function(environment) {
       prepend: true,
     },
 
+    flashMessageDefaults: {
+      timeout: 5500,
+      extendedTimeout: 500,
+      destroyOnClick: false,
+    },
+
     APP: {
       // Don't use these directly; use utils.buildApiUrl instead.
       apiUrls: {

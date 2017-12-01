@@ -52,8 +52,14 @@ $lighter-gray-border-hover: $base-border-width solid #a0a0a0;
 $errorborder: $base-border-width solid $red;
 
 $default-text-color: $darkest-gray;
+$light-text-color: #988c9c;
 
 $default-link: $blue;
 $default-link-hover: $dark-blue;
 $on-dark-link: #fcf;
 $on-dark-link-hover: #fef;
+
+$green-gradient: linear-gradient(-45deg, #43cb54 0%, #4fd960 100%);
+$red-gradient: linear-gradient(-45deg, #e74e3e 0%, #f36c5e 100%);
+$yellow-gradient: linear-gradient(-45deg, #ffd542 0%, #ffe178 100%);
+$light-gradient: linear-gradient(-45deg, #fcfafd 0%, #fff 100%);

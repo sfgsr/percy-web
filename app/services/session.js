@@ -1,12 +1,12 @@
 import {inject as service} from '@ember/service';
 import SessionService from 'ember-simple-auth/services/session';
-import {resolve} from 'rsvp';
+import {resolve, reject} from 'rsvp';
 import {Promise as EmberPromise} from 'rsvp';
+import localStorageProxy from 'percy-web/lib/localstorage';
 
 export default SessionService.extend({
   store: service(),
   analytics: service(),
-
   // set by load method
   currentUser: null,
 
@@ -22,10 +22,11 @@ export default SessionService.extend({
           // This catch will be triggered if the queryRecord or set currentUser
           // fails. If we don't have a user, the site will be very broken
           // so kick them out.
-          .catch(() => {
+          .catch(e => {
             this.invalidate();
 
             this._clearThirdPartyUserContext();
+            return reject(e);
           })
       );
     } else {
@@ -52,10 +53,8 @@ export default SessionService.extend({
   _clearThirdPartyUserContext() {
     this._clearSentry();
     this._clearAnalytics();
-
-    if (window.localStorage) {
-      window.localStorage.clear();
-    }
+    this._clearIntercom();
+    localStorageProxy.removeKeysWithString('auth');
   },
 
   _setupSentry(user) {
@@ -73,6 +72,7 @@ export default SessionService.extend({
   },
   _clearAnalytics() {
     this.get('analytics').invalidate();
+    localStorageProxy.removeKeysWithString('amplitude');
   },
   _setupIntercom(user) {
     if (window.Intercom) {
@@ -83,5 +83,8 @@ export default SessionService.extend({
         created_at: user.get('createdAt').getTime() / 1000,
       });
     }
+  },
+  _clearIntercom() {
+    localStorageProxy.removeKeysWithString('intercom');
   },
 });

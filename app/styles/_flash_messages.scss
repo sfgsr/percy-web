@@ -1,0 +1,74 @@
+//TODO move this map to a maps file when used elsewhere
+$flash-message-states: (
+  "success": $green-gradient,
+  "danger": $red-gradient,
+  "warning": $yellow-gradient,
+  "info": $light-gradient,
+);
+
+.flash-message-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: calc(100vw - 128px);
+}
+
+.flash-message {
+  display: grid;
+  margin-bottom: 8px;
+  background: $white;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 4px rgba(87, 16, 16, 0.1), 0 6px 16px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 500ms, transform 500ms;
+  transform: translate3d(0, 48px, 0);
+
+  &.active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+
+    &.exiting {
+      opacity: 0;
+      transform: translate3d(0, 48px, 0);
+    }
+  }
+
+  &:last-child {
+    margin: 0;
+  }
+}
+
+@each $state, $gradient in $flash-message-states {
+  .flash-message-detail-#{$state} {
+    background: $gradient;
+  }
+}
+
+.flash-message-close {
+  opacity: 0.2;
+  transition: opacity 250ms;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .flash-message-detail,
+  .flash-message-close {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 544px) {
+  .flash-message {
+    grid-template-columns: 56px auto 46px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .flash-message-container {
+    width: calc(100vw - 434px);
+  }
+}

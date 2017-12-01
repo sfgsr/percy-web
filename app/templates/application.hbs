@@ -1,2 +1,25 @@
 {{title "Percy | Continuous visual reviews for web apps"}}
 {{outlet}}
+
+{{#if flashMessages.queue}}
+  <div class="flash-message-container">
+    {{#each flashMessages.queue as |flash|}}
+      {{#flash-message flash=flash classNames=(concat "flash-message-" flash.type) as |component flash close|}}
+        <div class="flash-message-detail flash-message-detail-{{flash.type}} flex justify-center align-center">
+          <figure class="svg-container">
+            {{inline-svg (concat "flash-" flash.type "-icon")}}
+          </figure>
+        </div>
+        <div class="px-3 py-2">
+          <div class="text-md text-sb">{{flash.title}}</div>
+          <p class="text-sm text-light">{{flash.message}}</p>
+        </div>
+        <div class="flash-message-close flex justify-center align-center c-pointer" {{action close}}>
+          <figure class="svg-container">
+            {{inline-svg "close-icon"}}
+          </figure>
+        </div>
+      {{/flash-message}}
+    {{/each}}
+  </div>
+{{/if}}

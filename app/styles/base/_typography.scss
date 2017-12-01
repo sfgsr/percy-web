@@ -7,3 +7,19 @@ samp {
   font-family: $monospace-font;
   font-size: 1.3rem;
 }
+
+.text-sb {
+  font-weight: 600;
+}
+
+.text-light {
+  color: $light-text-color;
+}
+
+.text-md {
+  font-size: 16px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
