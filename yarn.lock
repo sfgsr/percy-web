@@ -2790,22 +2790,16 @@ ember-basic-dropdown@^0.34.0:
     ember-native-dom-helpers "^0.5.4"
     ember-wormhole "^0.5.2"
 
-ember-changeset-validations@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/ember-changeset-validations/-/ember-changeset-validations-1.2.8.tgz#80c14fac5ee35dfff3538e6e9bc905c0686e193c"
+ember-changeset-validations@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/ember-changeset-validations/-/ember-changeset-validations-1.2.9.tgz#cb275b8e4eb6f87a0332099f8e5996856f776f64"
   dependencies:
-    ember-changeset "1.3.0"
+    ember-changeset "1.4.1"
     ember-cli-babel "^6.0.0"
     ember-cli-htmlbars "^1.1.1"
     ember-validators "^1.0.0"
 
-ember-changeset@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/ember-changeset/-/ember-changeset-1.3.0.tgz#ae4cb06ae8add4550a46363263cd5958b522b9a6"
-  dependencies:
-    ember-cli-babel "^5.1.7"
-
-ember-changeset@^1.4.1:
+ember-changeset@1.4.1, ember-changeset@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/ember-changeset/-/ember-changeset-1.4.1.tgz#e9a8f9c2bb3bfc1bc973c21a9e86a8cf8143df38"
   dependencies:
