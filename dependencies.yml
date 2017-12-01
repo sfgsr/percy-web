@@ -3,10 +3,20 @@ collectors:
 - type: js-npm
   path: /
   actors:
-  # pull requests for updates to our major version
+  # pull requests for updates to our minor version
   - type: js-npm
-    versions: "L.Y.Y"
+    versions: "L.Y.0"
     dependencies_not_matching: "ember-cli$|ember-data$|ember-source$|ember-cli-mirage$"
+    # an optional prefix to add to all commit messages, be sure to add a space at the end if you want one
+    commit_message_prefix: "[DEPENDENCY BOT]: "
+    # false by default, set to true if you want all dependency updates in a single PR
+    batch_mode: true
+    settings:
+      github_labels:
+      - dependencies
+      github_assignees:  # list of usernames
+      - cadeparade
+
   # create issues for new major versions
   - type: repo-issue
     versions: "Y.0.0"
