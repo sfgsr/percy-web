@@ -8,8 +8,6 @@ export default DS.Model.extend({
   avatarUrl: DS.attr(),
   githubId: DS.attr(),
   githubUrl: DS.attr(),
-  lastSyncedAt: DS.attr('date'),
-  lastPrivateSyncedAt: DS.attr('date'),
 
   // These endpoints are only available on the current user and should not be accessed otherwise.
   organizations: DS.hasMany('organizations', {inverse: null}),

@@ -9,8 +9,6 @@ FactoryGuy.define('user', {
     email: () => faker.internet.email(),
     avatarUrl: () => faker.internet.avatar(),
     githuId: () => faker.random.number(),
-    lastSyncedAt: () => faker.date.past(),
-    lastPrivateSyncedAt: () => faker.date.past(),
     userHash: () => faker.random.number(),
     createdAt: () => new Date(),
     updatedAt: () => new Date(),
