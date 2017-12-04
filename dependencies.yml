@@ -21,3 +21,11 @@ collectors:
   - type: repo-issue
     versions: "Y.0.0"
     dependencies_not_matching: "ember-cli$|ember-data$|ember-source$|ember-cli-mirage$"
+    settings:
+      github_assignees:
+        - cadeparade
+
+   - type: slack
+      versions: "L.Y.Y"
+      settings:
+        slack_webhook_url: https://hooks.slack.com/services/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
