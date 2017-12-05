@@ -15,6 +15,7 @@ module.exports = function(defaults) {
     },
     sassOptions: {
       extension: 'scss',
+      sourcemap: true,
     },
     autoprefixer: {
       browsers: ['last 2 versions'],
@@ -26,6 +27,9 @@ module.exports = function(defaults) {
     svg: {
       paths: ['public/images/icons'],
       optimize: false,
+    },
+    sourcemaps: {
+      enable: true,
     },
   });
 
