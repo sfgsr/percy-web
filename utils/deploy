@@ -26,7 +26,7 @@ rm -rf dist/
 docker cp $CONTAINER_ID:/app/src/dist/ dist/
 
 # Upload new assets to GCS.
-gsutil -m -h "Cache-Control: public, max-age=2678400" cp \
+gsutil -m -h "Cache-Control: public,max-age=2678400" cp \
   -a public-read \
   -z "html,js,css,svg,txt,ico,xml" \
   -r \
