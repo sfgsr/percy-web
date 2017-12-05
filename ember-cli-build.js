@@ -15,10 +15,12 @@ module.exports = function(defaults) {
     },
     sassOptions: {
       extension: 'scss',
+      sourceMapEmbed: true,
       sourcemap: true,
     },
     autoprefixer: {
       browsers: ['last 2 versions'],
+      sourcemap: true,
     },
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
