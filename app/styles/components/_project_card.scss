@@ -2,17 +2,17 @@
   .ProjectCard-link {
     display: block;
     padding: 10px;
-    color: $default-text-color;
+    color: var(--default-text-color);
     text-overflow: ellipsis;
-    background: $very-light-gray;
+    background: var(--very-light-gray);
     overflow: hidden;
     @include Card;
     @include Card--linkable;
 
     &:hover {
       text-decoration: none;
-      background: $lighter-gray;
-      border: $lighter-gray-border;
+      background: var(--lighter-gray);
+      border: var(--lighter-gray-border);
     }
 
     .fa-github {
@@ -23,7 +23,7 @@
   .fa-chevron-right {
     float: right;
     margin-top: 5px;
-    color: $gray;
+    color: var(--gray);
   }
 
   .ProjectCard-title {
@@ -32,7 +32,7 @@
 
   &.ProjectCard--disabled {
     .ProjectCard-link {
-      color: $gray;
+      color: var(--gray);
     }
   }
 }

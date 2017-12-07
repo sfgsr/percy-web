@@ -4,7 +4,7 @@
   &.Footer {
     padding: 30px 12px;
     text-align: center;
-    border-top: $lighter-gray-border;
+    border-top: var(--lighter-gray-border);
 
     .Footer-links {
       display: inline;
@@ -19,10 +19,10 @@
     .Footer-item {
       display: inline-block;
       padding: 10px;
-      color: $gray;
+      color: var(--gray);
 
       &.Footer-copyright {
-        color: $light-gray;
+        color: var(--light-gray);
       }
     }
 

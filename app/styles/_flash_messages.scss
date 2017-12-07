@@ -1,9 +1,9 @@
 //TODO move this map to a maps file when used elsewhere
 $flash-message-states: (
-  "success": $green-gradient,
-  "danger": $red-gradient,
-  "warning": $yellow-gradient,
-  "info": $light-gradient,
+  "success": var(--green-gradient),
+  "danger": var(--red-gradient),
+  "warning": var(--yellow-gradient),
+  "info": var(--light-gradient),
 );
 
 .flash-message-container {
@@ -16,7 +16,7 @@ $flash-message-states: (
 .flash-message {
   display: grid;
   margin-bottom: 8px;
-  background: $white;
+  background: var(--white);
   border-radius: $border-radius;
   box-shadow: 0 1px 4px rgba(87, 16, 16, 0.1), 0 6px 16px rgba(0, 0, 0, 0.1);
   opacity: 0;

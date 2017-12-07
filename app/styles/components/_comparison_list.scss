@@ -41,11 +41,11 @@
     text-align: center;
 
     &:hover span {
-      color: $default-link-hover;
+      color: var(--default-link-hover);
     }
 
     span {
-      color: $default-link;
+      color: var(--default-link);
     }
   }
 }

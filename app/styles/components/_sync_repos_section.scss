@@ -23,7 +23,7 @@
     }
 
     &:hover {
-      border: $gray-border;
+      border: var(--gray-border);
     }
   }
 

@@ -5,80 +5,80 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  $button-height: 38px;
+  --button-height: 38px;
   $button-small-height: 28px;
 
   display: inline-block;
   position: relative;
-  height: $button-height;
+  height: var(--button-height);
   padding: 0 15px;
   margin: 0;
-  line-height: $button-height;
-  color: $default-link;
+  line-height: var(--button-height);
+  color: var(--default-link);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  background-color: $white;
-  border: $lighter-gray-border;
+  background-color: var(--white);
+  border: var(--lighter-gray-border);
   border-radius: 4px;
 
   &:hover,
   &:focus {
-    color: $default-link-hover;
+    color: var(--default-link-hover);
     text-decoration: none;
-    background-color: $lightest-gray;
-    border: $light-gray-border;
+    background-color: var(--lightest-gray);
+    border: var(--light-gray-border);
     outline: 0;
 
     &:active {
-      background-color: $very-light-gray;
+      background-color: var(--very-light-gray);
     }
   }
 
   &[disabled] {
-    color: $dark-gray;
+    color: var(--dark-gray);
     cursor: default;
-    background: $lighter-gray;
-    border: $light-gray;
+    background: var(--lighter-gray);
+    border: var(--light-gray);
   }
 
   &.Button--primary {
-    color: $white;
-    background-color: $purple;
+    color: var(--white);
+    background-color: var(--purple);
     border: 0;
 
     &:hover,
     &:focus {
-      background-color: $dark-purple;
+      background-color: var(--dark-purple);
     }
 
     &:active {
-      background-color: $darker-purple;
+      background-color: var(--darker-purple);
     }
 
     &[disabled] {
-      color: $gray;
+      color: var(--gray);
       cursor: default;
       background: none;
-      border: $lighter-gray-border;
+      border: var(--lighter-gray-border);
     }
   }
 
   &.Button--onDark.Button--primary {
     font-size: 1.6rem;
     line-height: 4rem;
-    color: $white;
-    background-color: $purple;
+    color: var(--white);
+    background-color: var(--purple);
     border: 0;
 
     &:hover {
-      color: $white;
-      background-color: $light-purple;
+      color: var(--white);
+      background-color: var(--light-purple);
     }
 
     &:active {
-      background-color: $purple;
+      background-color: var(--purple);
     }
   }
 
@@ -96,16 +96,16 @@ input[type="button"] {
 
     &.Button--active,
     &.active {
-      color: $default-link-hover;
-      background-color: $very-light-gray;
+      color: var(--default-link-hover);
+      background-color: var(--very-light-gray);
 
       &:hover {
-        background: $lighter-gray !important;
+        background: var(--lighter-gray) !important;
       }
     }
 
     &.Button--nav:hover {
-      background-color: $lightest-gray;
+      background-color: var(--lightest-gray);
     }
   }
   // Ugh, we try to avoid these things but this one is kind of necessary because of the default
@@ -127,7 +127,7 @@ button,
 
   &.Button--withIconOnly {
     padding: 0 20px;
-    color: $default-text-color;
+    color: var(--default-text-color);
 
     .fa {
       font-size: 2rem;
@@ -151,14 +151,14 @@ button,
   line-height: $line-height;
   white-space: nowrap;
   user-select: none;
-  background: $white;
+  background: var(--white);
   border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(#333, 0.08);
   transition: color 250ms, background 250ms;
 
   &:hover {
-    color: $blue;
+    color: var(--blue);
     background: lighten($blue, 49%);
     border: 1px solid transparent;
   }
@@ -168,12 +168,12 @@ button,
   }
 
   &:focus:active {
-    background: $lightest-gray;
+    background: var(--lightest-gray);
   }
 
   &.is-active {
-    color: $white;
-    background: $blue;
+    color: var(--white);
+    background: var(--blue);
   }
 
   &.btn-square {
@@ -215,11 +215,11 @@ button,
 .btn-group-alt {
   .btn {
     color: rgba($default-text-color, 0.5);
-    background: $white;
+    background: var(--white);
 
     &:hover,
     &.is-active {
-      color: $default-text-color;
+      color: var(--default-text-color);
     }
 
     &.is-disabled {
@@ -231,11 +231,11 @@ button,
       color: rgba($red, 0.4);
 
       &:hover {
-        color: $red;
+        color: var(--red);
       }
 
       &.is-active {
-        color: $red;
+        color: var(--red);
       }
     }
   }

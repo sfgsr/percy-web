@@ -23,7 +23,7 @@
     }
 
     h2 {
-      border-bottom: $lighter-gray-border;
+      border-bottom: var(--lighter-gray-border);
     }
 
     h2,
@@ -47,8 +47,8 @@
 
   .DocsNav {
     padding: 20px;
-    background: $lightest-gray;
-    border-right: $lighter-gray-border;
+    background: var(--lightest-gray);
+    border-right: var(--lighter-gray-border);
 
     h1 {
       margin-top: 2rem;
@@ -65,7 +65,7 @@
         font-family: $fancy-font;
         font-size: 1.6rem;
         font-weight: bold;
-        color: $darker-gray;
+        color: var(--darker-gray);
       }
 
       ul {
@@ -81,7 +81,7 @@
         li::before {
           content: "-";
           padding-right: 7px;
-          color: $gray;
+          color: var(--gray);
         }
       }
     }

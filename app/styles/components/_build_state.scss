@@ -4,7 +4,7 @@
   height: 40px;
   font-family: $standard-font;
   font-weight: lighter;
-  background-color: $very-light-gray;
+  background-color: var(--very-light-gray);
   border-radius: 4px;
 
   .BuildState-textAligner {
@@ -31,7 +31,7 @@
     padding-top: 11px;
     font-size: 1.7rem;
     line-height: 0;
-    color: $white;
+    color: var(--white);
     text-align: center;
     border-radius: 4px 0 0 4px;
     box-shadow: inset 3px -7px 62px -30px rgba(0, 0, 0, 0.25);
@@ -39,51 +39,51 @@
 
   &.BuildState--pending {
     .BuildState-icon {
-      background-color: $dark-gray;
+      background-color: var(--dark-gray);
     }
   }
 
   &.BuildState--processing {
     .BuildState-icon {
-      background-color: $lighter-green;
+      background-color: var(--lighter-green);
     }
   }
 
   &.BuildState--finished {
-    background-color: $lightest-green;
+    background-color: var(--lightest-green);
 
     .BuildState-icon {
-      background-color: $green;
+      background-color: var(--green);
     }
   }
 
   &.BuildState--hasDiffs {
-    background-color: $light-yellow;
+    background-color: var(--light-yellow);
 
     .BuildState-icon {
-      background-color: $yellow;
+      background-color: var(--yellow);
     }
   }
 
   &.BuildState--approved {
-    background-color: $lightest-green;
+    background-color: var(--lightest-green);
 
     .BuildState-icon {
-      background-color: $green;
+      background-color: var(--green);
     }
   }
 
   &.BuildState--failed {
-    background-color: $lightest-red;
+    background-color: var(--lightest-red);
 
     .BuildState-icon {
-      background-color: $red;
+      background-color: var(--red);
     }
   }
 
   &.BuildState--expired {
     .BuildState-icon {
-      background-color: $dark-yellow;
+      background-color: var(--dark-yellow);
     }
   }
 }

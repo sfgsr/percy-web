@@ -1,9 +1,9 @@
-$approved-text-shadow: 1px 1px 1px $dark-green;
-$approved-background: $green;
+$approved-text-shadow: 1px 1px 1px var(--dark-green);
+$approved-background: var(--green);
 
 .ApprovalButton {
   font-weight: 600;
-  color: $white;
+  color: var(--white);
   text-transform: uppercase;
   background-color: $approved-background;
   border: 0;
@@ -19,13 +19,13 @@ $approved-background: $green;
   &:hover,
   &:focus,
   &.ApprovalButton--hover {
-    color: $white;
-    text-shadow: 1px 1px 1px $green;
-    background: $light-green;
+    color: var(--white);
+    text-shadow: 1px 1px 1px var(--green);
+    background: var(--light-green);
     border: 0;
 
     &:active {
-      background: $green;
+      background: var(--green);
     }
   }
 

@@ -1,7 +1,7 @@
 .Panel {
   width: 100%;
   margin-bottom: 1rem;
-  border: $lighter-gray-border;
+  border: var(--lighter-gray-border);
 
   .Panel-section {
     padding: 10px;
@@ -12,8 +12,8 @@
     font-size: 1.2rem;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background: $lightest-gray;
-    border-bottom: $lighter-gray-border;
+    background: var(--lightest-gray);
+    border-bottom: var(--lighter-gray-border);
     overflow: hidden;
   }
 

@@ -17,10 +17,10 @@
   }
 
   &:hover {
-    background: $lightest-gray;
+    background: var(--lightest-gray);
   }
 
   &:first-child {
-    border-top: $lighter-gray-border;
+    border-top: var(--lighter-gray-border);
   }
 }

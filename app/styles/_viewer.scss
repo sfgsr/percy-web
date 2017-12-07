@@ -2,11 +2,11 @@
   display: flex;
   padding: 5px 8px;
   align-items: center;
-  background-color: $very-light-gray;
+  background-color: var(--very-light-gray);
 
   a,
   a:hover {
-    color: $default-text-color;
+    color: var(--default-text-color);
     text-decoration: none;
     cursor: pointer;
   }
@@ -28,15 +28,15 @@
 .LargeXIcon {
   display: block;
   font-size: 8rem;
-  color: $lighter-gray;
-  text-shadow: -1px 0 $gray, 0 1px $gray, 1px 0 $gray, 0 -1px $gray;
+  color: var(--lighter-gray);
+  text-shadow: -1px 0 var(--gray), 0 1px var(--gray), 1px 0 var(--gray), 0 -1px var(--gray);
 }
 
 .Viewer-pdiffImageBox {
   position: relative;
   width: 100%;
   user-select: none;
-  border: $very-light-gray-border;
+  border: var(--very-light-gray-border);
 
   .pdiffImageOverlay {
     position: absolute;
@@ -51,7 +51,7 @@
   user-select: none;
 
   &:hover {
-    border: $lighter-gray-border-hover;
+    border: var(--lighter-gray-border-hover);
   }
 }
 

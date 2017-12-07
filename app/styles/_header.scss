@@ -57,24 +57,24 @@
   }
 
   &.Header--light {
-    background: $lightest-gray;
-    border-bottom: 1px solid $lighter-gray;
+    background: var(--lightest-gray);
+    border-bottom: 1px solid var(--lighter-gray);
   }
 
   &.Header--dark {
-    color: $white;
-    background-color: $dark-purple;
+    color: var(--white);
+    background-color: var(--dark-purple);
 
     select {
-      color: $default-text-color;
+      color: var(--default-text-color);
       border: 0;
     }
 
     a:not(.Button) {
-      color: $white;
+      color: var(--white);
 
       &:hover {
-        color: $lightest-purple; // TODO need to class these header items to prevent the nesting specificity
+        color: var(--lightest-purple); // TODO need to class these header items to prevent the nesting specificity
       }
     }
 
@@ -84,16 +84,16 @@
 
     .Button {
       font-weight: bold;
-      color: $white;
-      background: $purple;
+      color: var(--white);
+      background: var(--purple);
       border: 0;
 
       &:hover {
-        background: $light-purple;
+        background: var(--light-purple);
       }
 
       &:active {
-        background-color: $purple;
+        background-color: var(--purple);
       }
     }
   }

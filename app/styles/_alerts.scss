@@ -5,23 +5,23 @@
   border-radius: 3px;
 
   &.Alert--info {
-    background-color: $lightest-blue;
-    border-color: $blue;
+    background-color: var(--lightest-blue);
+    border-color: var(--blue);
   }
 
   &.Alert--success {
-    background-color: $lightest-green;
-    border-color: $green;
+    background-color: var(--lightest-green);
+    border-color: var(--green);
   }
 
   &.Alert--warning {
-    background-color: $lightest-yellow;
-    border-color: $yellow;
+    background-color: var(--lightest-yellow);
+    border-color: var(--yellow);
   }
 
   &.Alert--error {
-    background-color: $lightest-red;
-    border-color: $red;
+    background-color: var(--lightest-red);
+    border-color: var(--red);
   }
 
   .CodeBlock:last-child pre,

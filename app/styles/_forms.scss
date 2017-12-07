@@ -22,7 +22,7 @@
     margin-top: 0;
     margin-bottom: 10px;
     font-weight: bold;
-    color: $red;
+    color: var(--red);
     list-style: none;
 
     li {
@@ -39,7 +39,7 @@ select {
   background-position: right center;
 
   &:hover {
-    background-color: $lightest-gray;
-    border: $light-gray-border;
+    background-color: var(--lightest-gray);
+    border: var(--light-gray-border);
   }
 }

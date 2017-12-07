@@ -2,7 +2,7 @@
   display: flex;
 
   .ComparisonSwitcherItem--noComparison {
-    color: $gray;
+    color: var(--gray);
   }
 
   .ComparisonSwitcherItem {
@@ -17,20 +17,20 @@
 
     &.ComparisonSwitcherItem--selected,
     &:hover {
-      border: $lighter-gray-border;
+      border: var(--lighter-gray-border);
     }
 
     &:hover {
-      background: $lightest-gray;
+      background: var(--lightest-gray);
     }
 
     &.ComparisonSwitcherItem--selected {
-      color: $default-link-hover;
-      background: $white;
+      color: var(--default-link-hover);
+      background: var(--white);
     }
 
     &.ComparisonSwitcherItem--hasDiffs {
-      color: $red;
+      color: var(--red);
     }
   }
 }

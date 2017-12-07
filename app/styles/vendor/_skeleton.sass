@@ -63,29 +63,29 @@
     max-width: 1040px
 
   &.container--dark
-    background-color: $dark-purple
-    color: $white
+    background-color: var(--dark-purple)
+    color: var(--white)
 
     a
-      color: $on-dark-link
+      color: var(--on-dark-link)
       text-decoration: none
     a:hover
-      color: $on-dark-link-hover
+      color: var(--on-dark-link-hover)
       text-decoration: none
 
   &.container--darker
-    background-color: $darker-purple
-    color: $white
+    background-color: var(--darker-purple)
+    color: var(--white)
 
     a
-      color: $on-dark-link
+      color: var(--on-dark-link)
       text-decoration: none
     a:hover
-      color: $on-dark-link-hover
+      color: var(--on-dark-link-hover)
       text-decoration: none
 
   &.container--light
-    background-color: $beige
+    background-color: var(--beige)
 
 .column,
 .columns
@@ -218,7 +218,7 @@ body
   font-size: $standard-font-size
   line-height: 1.5
   font-family: $standard-font
-  color: $default-text-color
+  color: var(--default-text-color)
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
   text-rendering: optimizelegibility
@@ -274,10 +274,10 @@ h6
  * Links.
  */
 a
-  color: $default-link
+  color: var(--default-link)
   text-decoration: none
 a:hover
-  color: $default-link-hover
+  color: var(--default-link-hover)
   text-decoration: underline
 
 
@@ -313,16 +313,16 @@ select
   height: 38px
   /* The 6px vertically centers text on FF, ignored by Webkit */
   padding: 6px 10px
-  background-color: $white
-  border: $lighter-gray-border
+  background-color: var(--white)
+  border: var(--lighter-gray-border)
   border-radius: 4px
 
   &:disabled
-    border: 1px solid $light-purple
-    color: $gray
+    border: 1px solid var(--light-purple)
+    color: var(--gray)
 
   &.error
-    border: $errorborder
+    border: var(--errorborder)
 
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
@@ -358,10 +358,10 @@ textarea:focus,
 textarea:active,
 select:focus,
 select:active,
-  border: $gray-border
+  border: var(--gray-border)
   outline: 0
   &.error
-    border: 1px solid $red
+    border: 1px solid var(--red)
 label,
 legend
   display: block
@@ -409,7 +409,7 @@ code
   padding: .2rem 0.6rem
   margin: 0 .2rem
   white-space: nowrap
-  background: $very-light-gray
+  background: var(--very-light-gray)
   border-radius: 4px
 pre > code
   display: block
@@ -425,7 +425,7 @@ th,
 td
   padding: 12px 15px
   text-align: left
-  border-bottom: $lightest-gray-border
+  border-bottom: var(--lightest-gray-border)
 th:first-child,
 td:first-child
   padding-left: 0

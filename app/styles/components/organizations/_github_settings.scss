@@ -21,7 +21,7 @@
   .OrganizationsGithubSettings-errors {
     margin-top: 0;
     font-weight: bold;
-    color: $red;
+    color: var(--red);
     list-style: none;
 
     li {
@@ -33,7 +33,7 @@
   .OrganizationsGithubIntegrator {
     padding: 20px 0 15px 20px;
     margin: 0 0 21px 23px;
-    border-left: $lighter-gray-border;
+    border-left: var(--lighter-gray-border);
   }
 
   .OrganizationsGithubFootnote {

@@ -7,7 +7,7 @@
   }
 
   .BuildOverviewInfo-prNumber {
-    color: $dark-gray;
+    color: var(--dark-gray);
   }
 
   @media (max-width: 550px) {

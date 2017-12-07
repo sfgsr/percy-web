@@ -4,8 +4,8 @@
   left: calc(50% - 600px / 2);
   width: 600px;
   height: 332px;
-  background: $dark-purple;
-  border: 1px solid $dark-purple;
+  background: var(--dark-purple);
+  border: 1px solid var(--dark-purple);
   border-radius: 4px;
   box-shadow: $base-shadow;
   z-index: 99;
@@ -14,7 +14,7 @@
   header {
     margin-top: 20px;
     font-size: 2rem;
-    color: $white;
+    color: var(--white);
   }
 
   .ember-basic-dropdown {

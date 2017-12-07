@@ -7,12 +7,12 @@
   }
 
   .fa-check-circle {
-    color: $green;
+    color: var(--green);
     opacity: 0;
     animation: fadeinout 5s ease;
   }
 
   .fa-times-circle {
-    color: $red;
+    color: var(--red);
   }
 }

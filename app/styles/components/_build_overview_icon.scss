@@ -8,7 +8,7 @@
   height: $icon-size;
   padding: $icon-padding;
   vertical-align: text-bottom;
-  background: $very-light-gray;
+  background: var(--very-light-gray);
   border-radius: 3px;
 
   img {

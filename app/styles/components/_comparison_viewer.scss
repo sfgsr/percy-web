@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   margin-bottom: 10px;
-  background: $lightest-gray;
+  background: var(--lightest-gray);
   border-radius: 3px;
   // translatez hack to force this box to its own layer.
   // TODO(fotinakis): I think we can remove this when Chrome 51 has majority stake.
@@ -20,7 +20,7 @@
   }
 
   &.ComparisonViewer--focus {
-    border: $lighter-gray-border-hover;
+    border: var(--lighter-gray-border-hover);
   }
 
   &.ComparisonViewer--actionable {
@@ -28,7 +28,7 @@
 
     &:hover {
       cursor: pointer;
-      border: $lighter-gray-border-hover;
+      border: var(--lighter-gray-border-hover);
     }
 
     .ComparisonViewer-details {
@@ -36,7 +36,7 @@
     }
 
     .ComparisonViewer-info {
-      color: $gray;
+      color: var(--gray);
     }
 
     .Button {
@@ -78,14 +78,14 @@
     height: 200px;
     padding-top: 50px;
     text-align: center;
-    background: $white;
-    border: $lighter-gray-border;
+    background: var(--white);
+    border: var(--lighter-gray-border);
   }
 
   .ComparisonViewer-noDiffBox {
     padding: 7px;
     font-style: italic;
-    color: $gray;
+    color: var(--gray);
     text-align: center;
   }
 }

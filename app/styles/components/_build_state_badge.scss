@@ -5,33 +5,33 @@
   border-radius: 3px;
 
   &.BuildStateBadge--pending {
-    background-color: $dark-gray;
+    background-color: var(--dark-gray);
   }
 
   &.BuildStateBadge--processing {
-    color: $dark-green;
-    background-color: $lighter-green;
+    color: var(--dark-green);
+    background-color: var(--lighter-green);
   }
 
   &.BuildStateBadge--finished {
-    background-color: $green;
+    background-color: var(--green);
 
     &.BuildStateBadge--hasDiffs {
-      color: $darker-yellow;
-      background-color: $yellow;
+      color: var(--darker-yellow);
+      background-color: var(--yellow);
     }
 
     &.BuildStateBadge--approved {
       color: white;
-      background-color: $green;
+      background-color: var(--green);
     }
   }
 
   &.BuildStateBadge--failed {
-    background-color: $red;
+    background-color: var(--red);
   }
 
   &.BuildStateBadge--expired {
-    background-color: $dark-yellow;
+    background-color: var(--dark-yellow);
   }
 }

@@ -36,43 +36,43 @@
 
   &.BuildOverview--pending {
     .BuildOverview-statusBar {
-      background-color: $dark-gray;
+      background-color: var(--dark-gray);
     }
   }
 
   &.BuildOverview--processing {
     .BuildOverview-statusBar {
-      background-color: $lighter-green;
+      background-color: var(--lighter-green);
     }
   }
 
   &.BuildOverview--finished {
     .BuildOverview-statusBar {
-      background-color: $green;
+      background-color: var(--green);
     }
 
     &.BuildOverview--hasDiffs {
       .BuildOverview-statusBar {
-        background-color: $yellow;
+        background-color: var(--yellow);
       }
     }
 
     &.BuildOverview--approved {
       .BuildOverview-statusBar {
-        background-color: $green;
+        background-color: var(--green);
       }
     }
   }
 
   &.BuildOverview--failed {
     .BuildOverview-statusBar {
-      background-color: $red;
+      background-color: var(--red);
     }
   }
 
   &.BuildOverview--expired {
     .BuildOverview-statusBar {
-      background-color: $dark-yellow;
+      background-color: var(--dark-yellow);
     }
   }
 }

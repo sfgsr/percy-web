@@ -2,7 +2,7 @@
   text-align: center;
 
   img {
-    border: $very-light-gray-border;
+    border: var(--very-light-gray-border);
   }
 
   .Viewer-pdiffImageOverlay {

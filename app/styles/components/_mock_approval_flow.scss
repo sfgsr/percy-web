@@ -32,7 +32,7 @@
     .MockApprovalFlow-window {
       float: none;
       margin: 0 auto;
-      border-bottom: $lighter-gray-border;
+      border-bottom: var(--lighter-gray-border);
     }
 
     .MockApprovalFlow-github {

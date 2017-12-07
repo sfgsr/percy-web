@@ -48,7 +48,7 @@
     }
 
     &.MockPageContainer {
-      border-bottom: $lighter-gray-border;
+      border-bottom: var(--lighter-gray-border);
     }
 
     code {
@@ -60,7 +60,7 @@
     }
 
     sup {
-      color: $purple;
+      color: var(--purple);
     }
 
     .MarketingNumDiffs {
@@ -74,7 +74,7 @@
     }
 
     .hljs {
-      background: $white;
+      background: var(--white);
     }
   }
 
@@ -146,7 +146,7 @@
   position: absolute;
   width: 28px;
   height: 28px;
-  border: 3px solid $dark-gray;
+  border: 3px solid var(--dark-gray);
   border-radius: 30px;
   opacity: 0;
   z-index: 1000;

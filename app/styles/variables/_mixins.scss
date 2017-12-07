@@ -19,28 +19,28 @@
 @mixin Card {
   position: relative;
   padding: 10px;
-  background: $lightest-gray;
-  border: $lighter-gray-border;
+  background: var(--lightest-gray);
+  border: var(--lighter-gray-border);
 }
 
 @mixin Card--white {
-  background: $white;
+  background: var(--white);
 }
 
 @mixin Card--linkable {
   &:hover {
     cursor: pointer;
-    border: $lighter-gray-border-hover;
+    border: var(--lighter-gray-border-hover);
   }
 }
 
 @mixin Card--expando {
-  background: $lightest-gray;
+  background: var(--lightest-gray);
 }
 
 @mixin Card--selected {
-  background: $very-light-gray;
-  border: 1px solid $lighter-gray;
+  background: var(--very-light-gray);
+  border: 1px solid var(--lighter-gray);
 }
 
 @mixin Card--extraPadded {

@@ -17,7 +17,7 @@
   .ProjectsList-recentBuilds {
     // This is the default height of the recent builds display, to prevent resizing after load.
     min-height: 117px;
-    border: $lighter-gray-border;
+    border: var(--lighter-gray-border);
     border-top: 0;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;

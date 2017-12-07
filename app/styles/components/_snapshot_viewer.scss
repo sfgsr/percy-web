@@ -2,8 +2,8 @@
   position: relative;
   width: 100%;
   margin-bottom: 10px;
-  background: $lightest-gray;
-  border: $lighter-gray-border;
+  background: var(--lightest-gray);
+  border: var(--lighter-gray-border);
   border-radius: 3px;
 
   &:last-child {
@@ -29,28 +29,28 @@
 
     &:hover {
       cursor: pointer;
-      border: $lighter-gray-border-hover;
+      border: var(--lighter-gray-border-hover);
     }
   }
 }
 
 .SnapshotViewer--focus {
-  border: $gray-border;
+  border: var(--gray-border);
 }
 
 .SnapshotViewer-header {
   display: grid;
   grid-template-columns: 1fr auto;
   grid-gap: 32px;
-  background: $lightest-gray;
-  border-bottom: $lighter-gray-border;
+  background: var(--lightest-gray);
+  border-bottom: var(--lighter-gray-border);
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
 
   &.SnapshotViewer-header--actionable {
     &:hover {
       cursor: pointer;
-      border: $gray-border-hover;
+      border: var(--gray-border-hover);
     }
   }
 }
