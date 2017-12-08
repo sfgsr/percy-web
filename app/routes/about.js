@@ -1,4 +1,7 @@
-import Route from '@ember/routing/route';
-import ResetScrollMixin from '../mixins/reset-scroll';
+import Ember from 'ember';
 
-export default Route.extend(ResetScrollMixin, {});
+export default Ember.Route.extend({
+  beforeModel() {
+    this.replaceWith('team');
+  },
+});

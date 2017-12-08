@@ -21,9 +21,9 @@ describe('Acceptance: Marketing pages', function() {
         percySnapshot(this.test);
       }
     });
-    it('can visit /about', function() {
-      visit('/about');
-      andThen(() => expect(currentPath()).to.equal('about'));
+    it('can visit /team', function() {
+      visit('/team');
+      andThen(() => expect(currentPath()).to.equal('team'));
       if (takeSnapshot) {
         percySnapshot(this.test);
       }

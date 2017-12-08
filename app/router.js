@@ -29,7 +29,8 @@ Router.map(function() {
   this.route('login');
   this.route('pricing');
   this.route('enterprise');
-  this.route('about');
+  this.route('team');
+  this.route('about'); // Redirects to team in route.
   this.route('terms');
   this.route('privacy');
   this.route('security');

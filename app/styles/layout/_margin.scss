@@ -1,0 +1,28 @@
+// stylelint-disable block-opening-brace-space-before, declaration-colon-space-before
+// stylelint-disable comment-empty-line-before
+
+@for $i from 1 through length($spacers) {
+  $size: #{nth($spacers, $i)};
+  $scale: #{$i - 1};
+
+  .m-#{$scale}   { margin       : #{$size} !important; }
+  .mt-#{$scale}  { margin-top   : #{$size} !important; }
+  .mr-#{$scale}  { margin-right : #{$size} !important; }
+  .mb-#{$scale}  { margin-bottom: #{$size} !important; }
+  .ml-#{$scale}  { margin-left  : #{$size} !important; }
+
+  .mx-#{$scale} {
+    margin-right: #{$size} !important;
+    margin-left: #{$size} !important;
+  }
+
+  .my-#{$scale} {
+    margin-top: #{$size} !important;
+    margin-bottom: #{$size} !important;
+  }
+}
+
+.mx {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}

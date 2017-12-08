@@ -13,7 +13,8 @@
   "variables/animations",
   "variables/shadows",
   "variables/code",
-  "variables/layout";
+  "variables/layout",
+  "variables/typography";
 
 // Vendor styles
 @import "vendor/normalize";
@@ -30,6 +31,12 @@
   "flash_messages",
   "panel",
   "alerts";
+
+@import
+  "layout/container",
+  "layout/padding",
+  "layout/grid",
+  "layout/margin";
 
 // Non-component styles.
 @import
@@ -71,6 +78,7 @@
   "components/forms/organization_user_edit",
   "components/icons",
   "components/image_spacer",
+  "components/label",
   "components/loading_page",
   "components/marketing_num_diffs",
   "components/mock_approval_flow",
@@ -97,3 +105,5 @@
   "components/user_avatar",
   "components/user_menu",
   "components/user_name";
+
+@import "pages/team";

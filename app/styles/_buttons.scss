@@ -149,18 +149,20 @@ button,
   font-size: 12px;
   font-weight: $bold;
   line-height: $line-height;
+  text-decoration: none !important;
   white-space: nowrap;
   user-select: none;
   background: var(--white);
   border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(#333, 0.08);
-  transition: color 250ms, background 250ms;
+  transition: color 250ms, background 250ms, transform 250ms;
 
   &:hover {
     color: var(--blue);
     background: lighten($blue, 49%);
     border: 1px solid transparent;
+    transform: translate3d(0, -2px, 0);
   }
 
   &:focus {
@@ -185,11 +187,39 @@ button,
   }
 }
 
+.btn-md {
+  padding: 10px 32px;
+  font-size: 14px;
+}
+
+.btn-primary {
+  color: var(--white);
+  background: var(--purple-gradient);
+
+  &:hover {
+    color: var(--white);
+    background: var(--purple-gradient);
+  }
+
+  &.shadow-on-light {
+    box-shadow: 0 2px 8px 0 rgba(46, 0, 62, 0.26), 0 8px 20px 0 rgba(39, 0, 52, 0.08);
+  }
+
+  &:focus:active {
+    background: var(--purple-gradient);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .btn-group {
   display: flex;
 
   > .btn {
     margin-right: 1px;
+
+    &:hover {
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   > .btn:only-child {
@@ -220,6 +250,7 @@ button,
     &:hover,
     &.is-active {
       color: var(--default-text-color);
+      transform: translate3d(0, 0, 0);
     }
 
     &.is-disabled {

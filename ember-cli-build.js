@@ -16,7 +16,6 @@ module.exports = function(defaults) {
     sassOptions: {
       extension: 'scss',
       sourceMapEmbed: true,
-      sourcemap: true,
     },
     autoprefixer: {
       browsers: ['last 2 versions'],
