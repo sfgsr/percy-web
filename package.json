@@ -81,7 +81,7 @@
     "ember-tether": "^1.0.0-beta.0",
     "ember-truth-helpers": "^2.0.0",
     "ember-watson": "^0.9.1",
-    "eslint": "^4.12.0",
+    "eslint": "^4.13.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.3.1",
     "glob": "^7.1.2",
@@ -91,7 +91,7 @@
     "loader.js": "^4.6.0",
     "morgan": "^1.9.0",
     "percy-docs": "git+https://github.com/percy/percy-docs.git#bca3144da8c1750ce81a365a40841d4c9a921c13",
-    "prettier": "^1.8.1",
+    "prettier": "^1.9.0",
     "prettier-eslint-cli": "^4.4.0",
     "stylelint-config-standard": "^18.0.0"
   },
@@ -102,7 +102,7 @@
   "dependencies": {
     "ember-inline-svg": "^0.1.11",
     "stylelint": "^8.3.1",
-    "stylelint-order": "^0.7.0",
+    "stylelint-order": "^0.8.0",
     "stylelint-scss": "^2.1.0"
   }
 }
