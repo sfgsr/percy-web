@@ -60,7 +60,6 @@ export default Service.extend({
     }
 
     let userProperties = {
-      login: user.get('login'),
       email: user.get('email'),
       name: user.get('name'),
     };

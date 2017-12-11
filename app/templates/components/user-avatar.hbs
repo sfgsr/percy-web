@@ -3,11 +3,5 @@
     {{fa-icon "user"}}
   </div>
 {{else}}
-  {{#if linked}}
-    <a href="{{href}}">
-      <img width="{{width}}" height="{{height}}" src="{{user.avatarUrl}}&s={{width}}">
-    </a>
-  {{else}}
-    <img width="{{width}}" height="{{height}}" src="{{user.avatarUrl}}&s={{width}}">
-  {{/if}}
+  <img width="{{width}}" height="{{height}}" src="{{user.avatarUrl}}&s={{width}}">
 {{/if}}

@@ -1,7 +1,7 @@
 <div class="Card Card--linkable" {{action "toggleExpanded"}}>
   {{user-avatar user=organizationUser.user width=36 linked=true}}
   <div>
-    {{user-name user=organizationUser.user}}
+    {{organizationUser.user.name}}
     <br>
     <span class="OrganizationsUserCard-role">{{organizationUser.roleTitle}}</span>
   </div>

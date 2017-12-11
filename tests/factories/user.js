@@ -4,11 +4,9 @@ import {makeList} from 'ember-data-factory-guy';
 
 FactoryGuy.define('user', {
   default: {
-    login: () => faker.internet.userName(),
     name: () => `${faker.name.firstName()} ${faker.name.lastName()}`,
     email: () => faker.internet.email(),
     avatarUrl: () => faker.internet.avatar(),
-    githuId: () => faker.random.number(),
     userHash: () => faker.random.number(),
     createdAt: () => new Date(),
     updatedAt: () => new Date(),
