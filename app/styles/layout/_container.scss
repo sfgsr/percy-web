@@ -1,4 +1,5 @@
 $container-sizes: (
+  "xs"   : $container-xs, // 460px
   "sm"   : $container-sm, // 544px
   "md"   : $container-md, // 768px
   "lg"   : $container-lg, // 1012px
@@ -22,4 +23,8 @@ $container-sizes: (
       margin-left: auto;
     }
   }
+}
+
+.container-vh {
+  height: calc(100vh - (var(--header-height) + var(--footer-height)));
 }

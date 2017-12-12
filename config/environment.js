@@ -24,6 +24,7 @@ module.exports = function(environment) {
     flashMessageDefaults: {
       timeout: 5500,
       extendedTimeout: 500,
+      destroyOnClick: false,
       preventDuplicates: true,
     },
 

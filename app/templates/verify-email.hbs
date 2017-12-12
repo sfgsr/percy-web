@@ -1,0 +1,34 @@
+{{fixed-top-header}}
+
+{{#if model.success}}
+  <div class="container-full container-vh bg-white-pattern flex align-center justify-center">
+    <div class="container-xs animate-fade-in-up">
+      <div class="bg-white br shadow-l p-5 text-center">
+        <figure class="svg-container mb-3 animate-tada">
+          {{inline-svg "thumbs-up-large-icon" class="mx"}}
+        </figure>
+        <h2 class="text-weight-regular f2 mb-3">Success!</h2>
+        <p class="alt-p text-light">
+          Your email address is now verified.
+        </p>
+        {{#link-to 'login' classNames='Button Button--primary test-verify-email-signin-link'}}Continue to Sign In{{/link-to}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="container-full container-vh bg-white-pattern flex align-center justify-center">
+    <div class="container-xs animate-fade-in-up">
+      <div class="bg-white br shadow-l p-5 text-center">
+        <figure class="svg-container mb-3 animate-tada">
+          {{inline-svg "error-large-icon" class="mx"}}
+        </figure>
+        <h2 class="text-weight-regular f2 mb-3">Uh Oh...</h2>
+        <p class="alt-p text-light">
+          {{model}}
+        </p>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+{{main-footer}}

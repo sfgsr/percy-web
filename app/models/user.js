@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import {computed} from '@ember/object';
 
 export default DS.Model.extend({
   userHash: DS.attr(),
@@ -11,4 +12,6 @@ export default DS.Model.extend({
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
+
+  isVerified: computed.notEmpty('email'),
 });

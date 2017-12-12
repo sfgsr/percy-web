@@ -3,6 +3,14 @@ import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
 export const AUTH_CALLBACK_ROUTE = 'auth-callback';
+const VERIFY_EMAIL_ROUTE = 'verify-email';
+const VERIFICATION_REQUIRED_ROUTE = 'email-verification-required';
+
+export const DO_NOT_FORWARD_REDIRECT_ROUTES = [
+  AUTH_CALLBACK_ROUTE,
+  VERIFY_EMAIL_ROUTE,
+  VERIFICATION_REQUIRED_ROUTE,
+];
 
 const Router = EmberRouter.extend({
   location: config.locationType,
@@ -23,6 +31,8 @@ Router.map(function() {
   this.route('join', {path: '/join/:invite_code'});
   this.route('auth-failure', {path: 'auth/failure'});
   this.route(AUTH_CALLBACK_ROUTE, {path: '/auth/callback'});
+  this.route(VERIFY_EMAIL_ROUTE, {path: '/auth/verify-email'});
+  this.route(VERIFICATION_REQUIRED_ROUTE, {path: '/auth/email-verification-required'});
   this.route('docs', {path: '/docs'}, function() {
     this.route('page', {path: '*path'});
   });

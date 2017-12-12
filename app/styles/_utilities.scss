@@ -52,12 +52,20 @@
   background: var(--white);
 }
 
+.shadow-l {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
 .bg-purple-gradient {
   background: var(--purple-gradient);
 }
 
 .bg-purple-gradient-pattern {
   background: url("/images/pattern-on-purple.svg"), var(--purple-gradient);
+}
+
+.bg-white-pattern {
+  background: url("/images/pattern-on-white.svg");
 }
 
 .bg-purple-light {

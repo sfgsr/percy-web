@@ -17,6 +17,25 @@ export default function() {
 
   this.namespace = '/api/v1';
 
+  this.patch('/email-verifications/**', function(schema, request) {
+    if (request.params['*'] === 'goodCode') {
+      return new Mirage.Response(200, {}, {success: true});
+    } else {
+      return new Mirage.Response(
+        400,
+        {},
+        {
+          errors: [
+            {
+              status: 'bad_request',
+              detail: 'it did not work',
+            },
+          ],
+        },
+      );
+    }
+  });
+
   this.get('/user', function(schema /*, request*/) {
     let user = schema.users.findBy({_currentLoginInTest: true});
     if (user) {

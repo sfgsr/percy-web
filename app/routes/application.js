@@ -3,12 +3,12 @@ import {inject as service} from '@ember/service';
 import Route from '@ember/routing/route';
 import ApplicationRouteMixin from 'ember-simple-auth-auth0/mixins/application-route-mixin';
 import localStorageProxy from 'percy-web/lib/localstorage';
-import {AUTH_CALLBACK_ROUTE} from 'percy-web/router';
+import {DO_NOT_FORWARD_REDIRECT_ROUTES} from 'percy-web/router';
 import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
 import $ from 'jquery';
 import isDevWithProductionAPI from 'percy-web/lib/dev-auth';
 
-const AUTH_REDIRECT_LOCALSTORAGE_KEY = 'percyAttemptedTransition';
+export const AUTH_REDIRECT_LOCALSTORAGE_KEY = 'percyAttemptedTransition';
 
 export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
   session: service(),
@@ -45,16 +45,7 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
     return this.get('session')
       .loadCurrentUser()
       .catch(() => {
-        this.get('flashMessages').createPersistentFlashMessage(
-          {
-            type: 'danger',
-            message:
-              'There was a problem with logging in. \
-            Please try again or contact us if the issue does not resolve.',
-            sticky: true,
-          },
-          {persistentReloads: 1},
-        );
+        return this._showLoginFailedFlashMessage();
       });
   },
 
@@ -122,7 +113,7 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
 
   _storeTargetTransition(transition) {
     const attemptedRoute = transition.targetName;
-    if (attemptedRoute !== AUTH_CALLBACK_ROUTE) {
+    if (!DO_NOT_FORWARD_REDIRECT_ROUTES.includes(attemptedRoute)) {
       const attemptedTransitionUrl = transition.intent.url;
       localStorageProxy.set(AUTH_REDIRECT_LOCALSTORAGE_KEY, attemptedTransitionUrl);
     }
@@ -144,6 +135,19 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
 
   activate() {
     this.get('flashMessages').displayLocalStorageMessages();
+  },
+
+  _showLoginFailedFlashMessage() {
+    this.get('flashMessages').createPersistentFlashMessage(
+      {
+        type: 'danger',
+        message:
+          'There was a problem with logging in. \
+        Please try again or contact us if the issue does not resolve.',
+        sticky: true,
+      },
+      {persistentReloads: 1},
+    );
   },
 });
 
