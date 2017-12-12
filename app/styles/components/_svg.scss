@@ -1,0 +1,11 @@
+.light-icon {
+  path {
+    fill: var(--light-text-color);
+  }
+
+  &:hover {
+    path {
+      fill: var(--default-text-color) !important;
+    }
+  }
+}

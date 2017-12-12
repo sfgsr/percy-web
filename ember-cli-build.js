@@ -26,7 +26,7 @@ module.exports = function(defaults) {
       prepend: '/static/',
     },
     svg: {
-      paths: ['public/images/icons'],
+      paths: ['public/images/icons', 'public/images/logos'],
       optimize: false,
     },
     sourcemaps: {

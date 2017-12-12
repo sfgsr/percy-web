@@ -1,15 +1,31 @@
-<div class="container Footer">
-  <div class="Footer-links">
-    {{#link-to "docs"}}Docs{{/link-to}}
-    <a href="https://blog.percy.io">Blog</a>
-    {{#link-to "pricing"}}Pricing{{/link-to}}
-    <a href="https://status.percy.io/">Status</a>
-    {{#link-to "security"}}Security{{/link-to}}
-    {{#link-to "terms"}}Terms{{/link-to}}
-    {{#link-to "privacy"}}Privacy{{/link-to}}
-    {{#link-to "team"}}Team{{/link-to}}
+<footer class="main-footer container-full grid justify-center py-4">
+  <div class="grid col-auto gap-2 align-center justify-center main-footer-link-set-left">
+    {{#link-to "docs" class="main-footer-item"}}Docs{{/link-to}}
+    <a href="https://blog.percy.io" class="main-footer-item">Blog</a>
+    {{#link-to "pricing" class="main-footer-item"}}Pricing{{/link-to}}
+    <a href="https://status.percy.io/" class="main-footer-item">Status</a>
   </div>
-  <div class="Footer-item Footer-copyright">
-    &copy; Perceptual Inc.
+  <div class="grid col-auto gap-2 align-center justify-center mx-2 main-footer-icons">
+    <a href="https://twitter.com/percy_io" target="_blank" class="light-icon">
+      <figure class="svg-container">
+        {{inline-svg "twitter-icon" class="light-icon"}}
+      </figure>
+    </a>
+    <a href="https://percy.io">
+      <figure class="svg-container">
+        {{inline-svg "percy-logo-small-on-light"}}
+      </figure>
+    </a>
+    <a href="https://github.com/percy" target="_blank" class="light-icon">
+      <figure class="svg-container">
+        {{inline-svg "github-icon" class="light-icon"}}
+      </figure>
+    </a>
   </div>
-</div>
+  <div class="grid col-auto gap-2 align-center justify-center main-footer-link-set-right">
+    {{#link-to "security" class="main-footer-item"}}Security{{/link-to}}
+    {{#link-to "terms" class="main-footer-item"}}Terms{{/link-to}}
+    {{#link-to "privacy" class="main-footer-item"}}Privacy{{/link-to}}
+    {{#link-to "team" class="main-footer-item"}}Team{{/link-to}}
+  </div>
+</footer>
