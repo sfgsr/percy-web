@@ -16,7 +16,7 @@ export default {
   },
   additionalSignUpFields: [
     {
-      name: 'Name',
+      name: 'name',
       placeholder: 'Name',
       validator: function(name) {
         return {
