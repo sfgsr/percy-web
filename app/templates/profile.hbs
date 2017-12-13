@@ -1,20 +1,33 @@
 {{fixed-top-header}}
 
-<div class="container-sm pt-6 px-3">
-  {{forms/profile-edit
-    user=model
-  }}
 
-  <div class="mt-6">
-    <label>
-      <span class="label-body">Password</span>
-      <div>
-        <button type="button" class="Button" {{action "showResetPasswordModal"}}>Reset Password</button>
+
+
+<div class="container container--fixedWidth container--forContent">
+  <div class="row">
+
+    <div class="three columns">
+
+      <div class="Panel">
+        <div class="Panel-section Panel-header">
+          Account Settings
+        </div>
+
+        <div class="Panel-nav">
+          <ul>
+            <li>
+              {{#link-to 'profile.info' classNames="Button Button--nav"}}Information{{/link-to}}
+            </li>
+            <li>
+              {{#link-to 'profile.connected-accounts' classNames="Button Button--nav"}}Connected Accounts{{/link-to}}
+            </li>
+          </ul>
+        </div>
+
       </div>
-    </label>
-  </div>
+    </div>
 
-  <div class="mt-6">
-    <button type="button" class="button" {{action "showGithubLockModal"}}>Connect your github account</button>
+    <div class="nine columns">{{outlet}}</div>
+
   </div>
 </div>
