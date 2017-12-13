@@ -34,6 +34,5 @@ gsutil -m -h "Cache-Control: public,max-age=2678400" cp \
   gs://percy-public-static/static/
 
 gcloud docker -- push $IMAGE:$NOW
-# TODO: decouple activation, but for now we also tag with :latest.
-docker tag $IMAGE:$NOW $IMAGE:latest
-gcloud docker -- push $IMAGE:latest
+
+echo "Deployed $IMAGE:$NOW"
