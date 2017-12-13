@@ -2,7 +2,7 @@
   <span class="label-body">{{title}}</span>
   <input
     type={{type}}
-    class="{{if fieldErrors 'error'}}"
+    class="form-control {{if fieldErrors 'error'}}"
     value={{get changeset property}}
     onchange={{action (mut (get changeset property)) value="target.value"}}
     oninput={{action (mut (get changeset property)) value="target.value"}}

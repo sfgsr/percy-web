@@ -1,5 +1,14 @@
-<div class="container-sm pt-6 px-3">
-  <div class="mt-6">
-    <button type="button" class="button" {{action "showGithubLockModal"}}>Connect your github account</button>
+<div class="container-sm">
+  <h2 class="f1 text-weight-regular">Connected Accounts</h2>
+  <div class="flex space-between mb-4">
+    <div class="text-mono flex align-center">
+      {{inline-svg "github-icon" class="mr-2"}}
+      PixelJanitor
+    </div>
+    <button type="button" class="btn">Disconnect</button>
+  </div>
+  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "showGithubLockModal"}}>Connect your Github account</button>
+  <div class="note">
+    Connecting your GitHub account allows you to sign in with GitHub and <a href="https://percy.io/organizations/percy/settings">manage your GitHub integration</a> with Percy.
   </div>
 </div>

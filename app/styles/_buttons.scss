@@ -2,7 +2,6 @@
 
 .Button,
 button,
-input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   --button-height: 38px;
@@ -166,12 +165,16 @@ button,
     transform: translate3d(0, -2px, 0);
   }
 
-  &:focus {
+  &:focus,
+  &:active,
+  &:focus:active {
+    background: var(--lightest-gray);
     border: 1px solid transparent;
   }
 
-  &:focus:active {
-    background: var(--lightest-gray);
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.25;
   }
 
   &.is-active {
@@ -188,9 +191,15 @@ button,
   }
 }
 
+.btn-md {
+  padding: 10px 32px;
+  font-size: 14px;
+}
+
 .btn-primary {
   color: var(--white);
   background: var(--purple-gradient);
+  box-shadow: 0 2px 8px 0 rgba(46, 0, 62, 0.26), 0 8px 20px 0 rgba(39, 0, 52, 0.08);
 
   &:hover {
     color: var(--white);
@@ -204,6 +213,17 @@ button,
   &:focus:active {
     background: var(--purple-gradient);
     transform: translate3d(0, 0, 0);
+  }
+}
+
+.btn-github {
+  color: var(--white);
+  background: var(--darkest-gray);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.26), 0 8px 20px 0 rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    color: var(--white);
+    background: var(--darkest-gray);
   }
 }
 
@@ -231,11 +251,6 @@ button,
     background: none;
     border: 1px solid var(--dark-green);
   }
-}
-
-.btn-md {
-  padding: 10px 32px;
-  font-size: 14px;
 }
 
 .btn-group {

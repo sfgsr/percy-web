@@ -51,7 +51,11 @@
 }
 
 .br {
-  border-radius: $border-radius;
+  border-radius: var(--border-radius);
+}
+
+.w-full {
+  width: 100%;
 }
 
 .bg-white {

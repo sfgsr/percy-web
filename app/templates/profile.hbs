@@ -1,33 +1,26 @@
 {{fixed-top-header}}
 
-
-
-
-<div class="container container--fixedWidth container--forContent">
-  <div class="row">
-
-    <div class="three columns">
-
-      <div class="Panel">
-        <div class="Panel-section Panel-header">
-          Account Settings
+<div class="container-vh">
+  <div class="container-md py-5">
+    <div class="row">
+      <div class="three columns">
+        <div class="Panel">
+          <div class="Panel-section Panel-header">Account Settings</div>
+          <div class="Panel-nav">
+            <ul>
+              <li>
+                {{#link-to 'profile.info' classNames="Button Button--nav"}}Information{{/link-to}}
+              </li>
+              <li>
+                {{#link-to 'profile.connected-accounts' classNames="Button Button--nav"}}Connected Accounts{{/link-to}}
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <div class="Panel-nav">
-          <ul>
-            <li>
-              {{#link-to 'profile.info' classNames="Button Button--nav"}}Information{{/link-to}}
-            </li>
-            <li>
-              {{#link-to 'profile.connected-accounts' classNames="Button Button--nav"}}Connected Accounts{{/link-to}}
-            </li>
-          </ul>
-        </div>
-
       </div>
+      <div class="nine columns">{{outlet}}</div>
     </div>
-
-    <div class="nine columns">{{outlet}}</div>
-
   </div>
 </div>
+
+{{main-footer}}
