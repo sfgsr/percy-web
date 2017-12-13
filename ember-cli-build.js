@@ -41,6 +41,7 @@ module.exports = function(defaults) {
   app.import('bower_components/raven-js/dist/raven.js');
   app.import('bower_components/raven-js/dist/plugins/ember.js');
   app.import('bower_components/sinon-chai/lib/sinon-chai.js', {type: 'test'});
+  app.import('bower_components/seedrandom/seedrandom.js');
 
   var extraAssets;
   if (app.env === 'development' || app.env === 'test') {

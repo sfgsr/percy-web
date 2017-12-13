@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import seededRandom from 'percy-web/lib/random';
 
 export default Component.extend({
   classNames: ['team-member', 'mb-8'],
@@ -6,7 +7,7 @@ export default Component.extend({
   style: '',
 
   setGridItemOrder: function() {
-    let gridItemOrder = Math.floor(Math.random() * 100 + 1);
+    let gridItemOrder = Math.floor(seededRandom() * 100 + 1);
     this.set('style', 'order: ' + gridItemOrder);
   }.on('didInsertElement'),
 });
