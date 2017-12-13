@@ -13,8 +13,7 @@ export default SessionService.extend({
   loadCurrentUser() {
     if (this.get('isAuthenticated')) {
       return (
-        this.get('store')
-          .queryRecord('user', {})
+        this.forceReloadUser()
           .then(user => {
             this.set('currentUser', user);
             this._setupThirdPartyUserContexts(user);
@@ -34,6 +33,10 @@ export default SessionService.extend({
       // ember-simple-auth application route mixin needs a resolved promise.
       return resolve();
     }
+  },
+
+  forceReloadUser() {
+    return this.get('store').queryRecord('user', {});
   },
 
   _setupThirdPartyUserContexts(user) {

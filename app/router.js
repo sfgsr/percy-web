@@ -45,6 +45,7 @@ Router.map(function() {
   this.route('privacy');
   this.route('security');
   this.route('admin');
+  this.route('profile');
   this.route('setup', {path: '/setup'}, function() {
     this.route('github-app');
   });

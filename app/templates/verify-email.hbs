@@ -11,7 +11,11 @@
         <p class="alt-p text-light">
           Your email address is now verified.
         </p>
-        {{#link-to 'login' classNames='Button Button--primary test-verify-email-signin-link'}}Continue to Sign In{{/link-to}}
+        {{#if session.currentUser}}
+          {{#link-to 'profile' classNames='Button Button--primary test-verify-email-profile-link'}}Continue to Profile{{/link-to}}
+        {{else}}
+          {{#link-to 'login' classNames='Button Button--primary test-verify-email-signin-link'}}Continue to Sign In{{/link-to}}
+        {{/if}}
       </div>
     </div>
   </div>
@@ -23,8 +27,13 @@
           {{inline-svg "error-large-icon" class="mx"}}
         </figure>
         <h2 class="text-weight-regular f2 mb-3">Uh Oh...</h2>
+        <p class="alt-p text-light"></p>
         <p class="alt-p text-light">
-          {{model}}
+          {{#if model}}
+            {{model}}
+          {{else}}
+            Something went wrong. Please try again or contact support.
+          {{/if}}
         </p>
       </div>
     </div>

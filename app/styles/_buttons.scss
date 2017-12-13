@@ -37,10 +37,10 @@ input[type="button"] {
   }
 
   &[disabled] {
-    color: var(--dark-gray);
+    color: var(--light-gray);
     cursor: default;
-    background: var(--lighter-gray);
-    border: var(--light-gray);
+    background: var(--very-light-gray);
+    border: var(--gray);
   }
 
   &.Button--primary {
@@ -187,11 +187,6 @@ button,
   }
 }
 
-.btn-md {
-  padding: 10px 32px;
-  font-size: 14px;
-}
-
 .btn-primary {
   color: var(--white);
   background: var(--purple-gradient);
@@ -209,6 +204,37 @@ button,
     background: var(--purple-gradient);
     transform: translate3d(0, 0, 0);
   }
+}
+
+.btn-success {
+  color: var(--white);
+  background: var(--green);
+
+  &:hover,
+  &:focus,
+  &:focus:active {
+    color: var(--white);
+    background: var(--dark-green);
+  }
+}
+
+.btn-alt-success {
+  color: var(--green);
+  background: none;
+  border: 1px solid var(--green);
+
+  &:hover,
+  &:focus,
+  &:focus:active {
+    color: var(--dark-green);
+    background: none;
+    border: 1px solid var(--dark-green);
+  }
+}
+
+.btn-md {
+  padding: 10px 32px;
+  font-size: 14px;
 }
 
 .btn-group {

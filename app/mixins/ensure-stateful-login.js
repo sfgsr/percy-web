@@ -5,7 +5,7 @@ import $ from 'jquery';
 import {Promise, resolve} from 'rsvp';
 
 // This mixin should be used when accessing the lock.js authentication modal.
-// This mixin fires a request to our backend's `/api/auth/session` endoint and
+// This mixin fires a request to our backend's `/api/auth/session` endpoint and
 // gets back an object with a state token (`{state: 'foo'}`).
 // We wait for this token to get back, set it in the lock options, and
 // only then have the lock modal show up.
@@ -34,17 +34,19 @@ var EnsureStatefulLogin = Mixin.create({
     });
   },
 
-  _showLock(options) {
+  _showLock(lockOptions, {redirectToHome = true} = {}) {
     // This code is taken from
     // https://github.com/auth0-community/ember-simple-auth-auth0/
     //   blob/develop/addon/services/auth0.js#L93
     return new Promise((resolve, reject) => {
       // Despite the name of the method,
       // getAuth0LockInstance actually _creates_ an instance
-      const lock = this.get('auth0').getAuth0LockInstance(options);
+      const lock = this.get('auth0').getAuth0LockInstance(lockOptions);
 
       this.get('auth0')._setupLock(lock, resolve, reject);
-      lock.on('hide', this._onLockClosed.bind(this));
+      if (redirectToHome) {
+        lock.on('hide', this._onLockClosed.bind(this));
+      }
       lock.show();
     });
   },
@@ -52,6 +54,26 @@ var EnsureStatefulLogin = Mixin.create({
   _onLockClosed() {
     this.set('_hasOpenedLoginModal', false);
     this.transitionTo('/');
+  },
+
+  _setLockPasswordSettings() {
+    lockOptions.allowLogin = false;
+    lockOptions.initialScreen = 'forgotPassword';
+    lockOptions.allowForgotPassword = true;
+    lockOptions.allowSignup = false;
+  },
+
+  showResetPasswordModal() {
+    this._setLockPasswordSettings();
+    this._showLock(lockOptions, {redirectToHome: false});
+    this.resetLockOptionsToDefault();
+  },
+
+  resetLockOptionsToDefault() {
+    lockOptions.allowLogin = undefined;
+    lockOptions.initialScreen = undefined;
+    lockOptions.allowForgotPassword = undefined;
+    lockOptions.allowSignup = undefined;
   },
 });
 

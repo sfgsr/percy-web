@@ -17,6 +17,34 @@ export default function() {
 
   this.namespace = '/api/v1';
 
+  this.patch('/user', function(schema /*request*/) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    let attrs = this.normalizedRequestAttrs();
+
+    user.update({name: attrs.name, unverifiedEmail: attrs.email});
+    return user;
+  });
+
+  this.get('/user', function(schema /*request*/) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    if (user) {
+      return user;
+    } else {
+      return new Mirage.Response(
+        401,
+        {},
+        {
+          errors: [
+            {
+              status: 'unauthorized',
+              detail: 'Authentication required.',
+            },
+          ],
+        },
+      );
+    }
+  });
+
   this.patch('/email-verifications/**', function(schema, request) {
     if (request.params['*'] === 'goodCode') {
       return new Mirage.Response(200, {}, {success: true});
@@ -36,25 +64,6 @@ export default function() {
     }
   });
 
-  this.get('/user', function(schema /*, request*/) {
-    let user = schema.users.findBy({_currentLoginInTest: true});
-    if (user) {
-      return user;
-    } else {
-      return new Mirage.Response(
-        401,
-        {},
-        {
-          errors: [
-            {
-              status: 'unauthorized',
-              detail: 'Authentication required.',
-            },
-          ],
-        },
-      );
-    }
-  });
   this.get('/organizations/:slug', function(schema, request) {
     return schema.organizations.findBy({slug: request.params.slug});
   });

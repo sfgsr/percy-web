@@ -1,0 +1,35 @@
+<form action="javascript:;">
+  <div class="flex space-between">
+    <h3>Profile</h3>
+  </div>
+
+  {{form-fields/input
+    property="name"
+    title="Name"
+    changeset=changeset
+    validateProperty=(action "validateProperty" changeset "name")
+    classNames="data-test-profile-edit-name"
+  }}
+  {{form-fields/input
+    property="email"
+    title="Email"
+    changeset=changeset
+    disabled=user.unverifiedEmail
+    validateProperty=(action "validateProperty" changeset "email")
+    classNames="data-test-profile-edit-email"
+  }}
+
+  {{#if user.unverifiedEmail}}
+    <strong>{{user.unverifiedEmail}}</strong> is unvalidated. Please check your email to complete this change.
+  {{/if}}
+
+  {{form-fields/submit
+    value="Save"
+    classes="Button"
+    isSaving=isSaving
+    isSaveSuccessful=isSaveSuccessful
+    submit=(action "save")
+    disabled=changeset.isPristine
+    classNames="mt-4 data-test-profile-edit-submit"
+  }}
+</form>

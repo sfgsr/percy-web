@@ -1,5 +1,4 @@
 import {on} from '@ember/object/evented';
-import {assert} from '@ember/debug';
 import {computed, get} from '@ember/object';
 import {inject as service} from '@ember/service';
 import Component from '@ember/component';
@@ -19,13 +18,6 @@ export default Component.extend({
   changeset: computed('model', 'validator', function() {
     let model = this.get('model');
     let validator = this.get('validator') || {};
-
-    if (model.content) {
-      // TODO: re-evaluate this when ember-changeset promise support lands.
-      // https://github.com/DockYard/ember-changeset/pull/130
-      // https://github.com/percy/percy-web/pull/48
-      assert('Promises are not supported in forms!');
-    }
 
     return new Changeset(model, lookupValidator(validator), validator);
   }),

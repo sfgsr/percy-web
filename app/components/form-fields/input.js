@@ -8,6 +8,7 @@ export default Component.extend({
   type: 'text',
   autofocus: false,
   classes: null,
+  disabled: false,
 
   classNames: ['FormFieldsInput'],
   classNameBindings: ['classes'],
