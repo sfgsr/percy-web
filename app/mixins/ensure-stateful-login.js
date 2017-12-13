@@ -56,17 +56,22 @@ var EnsureStatefulLogin = Mixin.create({
     this.transitionTo(onCloseDestinationRoute);
   },
 
-  _setLockPasswordSettings() {
+  showResetPasswordModal() {
     lockOptions.allowLogin = false;
     lockOptions.initialScreen = 'forgotPassword';
     lockOptions.allowForgotPassword = true;
     lockOptions.allowSignup = false;
+
+    this._showLock(lockOptions, {redirectToHome: false}).then(() => {
+      this.resetLockOptionsToDefault();
+    });
   },
 
-  showResetPasswordModal() {
-    this._setLockPasswordSettings();
-    this.showLoginModalEnsuringState();
-    this.resetLockOptionsToDefault();
+  showConnectToServiceModal(serviceName) {
+    lockOptions.allowedConnections = [serviceName];
+    this.showLoginModalEnsuringState().then(() => {
+      this.resetLockOptionsToDefault();
+    });
   },
 
   resetLockOptionsToDefault() {
@@ -74,6 +79,7 @@ var EnsureStatefulLogin = Mixin.create({
     lockOptions.initialScreen = undefined;
     lockOptions.allowForgotPassword = undefined;
     lockOptions.allowSignup = undefined;
+    lockOptions.allowedConnections = undefined;
   },
 });
 

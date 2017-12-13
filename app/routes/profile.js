@@ -16,5 +16,9 @@ export default Route.extend(EnsureStatefulLogin, AuthenticatedRouteMixin, {
     showResetPasswordModal() {
       this.showResetPasswordModal();
     },
+
+    showGithubLockModal() {
+      this.showConnectToServiceModal('github');
+    },
   },
 });
