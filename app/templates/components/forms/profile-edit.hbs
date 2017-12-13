@@ -18,7 +18,9 @@
   }}
 
   {{#if user.unverifiedEmail}}
-    <strong>{{user.unverifiedEmail}}</strong> is unvalidated. Please check your email to complete this change.
+    <div class="mb-4">
+      <strong>{{user.unverifiedEmail}}</strong> is unvalidated. Please check your email to complete this change.
+    </div>
   {{/if}}
 
   {{form-fields/submit

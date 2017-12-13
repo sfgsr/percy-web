@@ -7,8 +7,10 @@
     </div>
     <button type="button" class="btn">Disconnect</button>
   </div>
-  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "showGithubLockModal"}}>Connect your Github account</button>
-  <div class="note">
-    Connecting your GitHub account allows you to sign in with GitHub and <a href="https://percy.io/organizations/percy/settings">manage your GitHub integration</a> with Percy.
+  <div class="ifthisthenthat">
+    <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "showGithubLockModal"}}>Connect your Github account</button>
+    <div class="note">
+      Connecting your GitHub account allows you to sign in with GitHub and {{#link-to 'organizations.organization.settings' TODO}}manage your GitHub integration{{/link-to}} with Percy.
+    </div>
   </div>
 </div>
