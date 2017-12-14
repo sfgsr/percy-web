@@ -165,11 +165,14 @@ button,
     transform: translate3d(0, -2px, 0);
   }
 
+  &:active {
+    transform: translate3d(0, 0, 0);
+  }
+
   &:focus,
   &:focus:active {
     background: var(--lightest-gray);
     border: 1px solid transparent;
-    transform: translate3d(0, 0, 0);
   }
 
   &[disabled] {
@@ -189,6 +192,29 @@ button,
     width: 30px;
     padding: 0;
   }
+}
+
+.btn-alt {
+  color: var(--light-text-color);
+  border: 1px solid var(--lighter-gray);
+
+  &:hover {
+    color: var(--light-text-color);
+    background: var(--lightest-gray);
+    border: 1px solid var(--lighter-gray);
+  }
+
+  &:focus,
+  &:focus:active {
+    color: var(--light-text-color);
+    background: var(--lightest-gray);
+    border: 1px solid var(--lighter-gray);
+  }
+}
+
+.btn-sm {
+  padding: 2px 6px;
+  font-size: 12px;
 }
 
 .btn-md {
