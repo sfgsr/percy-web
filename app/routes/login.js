@@ -8,6 +8,6 @@ import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
 export default Route.extend(UnauthenticatedRouteMixin, EnsureStatefulLogin, {
   session: service(),
   afterModel() {
-    this.showLoginModalEnsuringState();
+    this.showLoginModalEnsuringState({onCloseDestinationRoute: '/'});
   },
 });

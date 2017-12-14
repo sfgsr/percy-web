@@ -16,13 +16,13 @@ var EnsureStatefulLogin = Mixin.create({
   _hasOpenedLoginModal: false,
 
   // Use this instead of calling `this.get('session').authenticate...` from your routes
-  showLoginModalEnsuringState() {
+  showLoginModalEnsuringState({onCloseDestinationRoute = null} = {}) {
     if (this.get('_hasOpenedLoginModal')) {
       return resolve();
     }
     return this._getStateToken().then(stateToken => {
       lockOptions.auth.params.state = stateToken.state;
-      this._showLock(lockOptions);
+      this._showLock(lockOptions, onCloseDestinationRoute);
     });
   },
 
@@ -34,7 +34,7 @@ var EnsureStatefulLogin = Mixin.create({
     });
   },
 
-  _showLock(lockOptions, {redirectToHome = true} = {}) {
+  _showLock(lockOptions, onCloseDestinationRoute) {
     // This code is taken from
     // https://github.com/auth0-community/ember-simple-auth-auth0/
     //   blob/develop/addon/services/auth0.js#L93
@@ -44,16 +44,16 @@ var EnsureStatefulLogin = Mixin.create({
       const lock = this.get('auth0').getAuth0LockInstance(lockOptions);
 
       this.get('auth0')._setupLock(lock, resolve, reject);
-      if (redirectToHome) {
-        lock.on('hide', this._onLockClosed.bind(this));
+      if (onCloseDestinationRoute) {
+        lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
       }
       lock.show();
     });
   },
 
-  _onLockClosed() {
+  _onLockClosed(onCloseDestinationRoute) {
     this.set('_hasOpenedLoginModal', false);
-    this.transitionTo('/');
+    this.transitionTo(onCloseDestinationRoute);
   },
 
   _setLockPasswordSettings() {
@@ -65,7 +65,7 @@ var EnsureStatefulLogin = Mixin.create({
 
   showResetPasswordModal() {
     this._setLockPasswordSettings();
-    this._showLock(lockOptions, {redirectToHome: false});
+    this.showLoginModalEnsuringState();
     this.resetLockOptionsToDefault();
   },
 

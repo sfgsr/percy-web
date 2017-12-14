@@ -101,7 +101,7 @@ describe('EnsureStatefulLoginMixin', function() {
     });
 
     it('sets behavior on hide', function() {
-      subject._showLock();
+      subject._showLock({}, 'thisArgIsPresent');
 
       expect(fakeLockInstance.on).to.have.been.calledWith('hide', sinon.match.func);
     });
@@ -122,9 +122,10 @@ describe('EnsureStatefulLoginMixin', function() {
     });
 
     it('transitions to root', function() {
-      subject._onLockClosed();
+      const redirectRoute = 'route';
+      subject._onLockClosed(redirectRoute);
 
-      expect(subject.transitionTo).to.have.been.calledWith('/');
+      expect(subject.transitionTo).to.have.been.calledWith(redirectRoute);
     });
   });
 });
