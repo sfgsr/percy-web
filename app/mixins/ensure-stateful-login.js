@@ -57,17 +57,14 @@ var EnsureStatefulLogin = Mixin.create({
   },
 
   showResetPasswordModal() {
-    lockOptions.allowLogin = false;
-    lockOptions.initialScreen = 'forgotPassword';
-    lockOptions.allowForgotPassword = true;
-    lockOptions.allowSignup = false;
-
+    this._setLockPasswordSettings();
     this._showLock(lockOptions, {redirectToHome: false}).then(() => {
       this.resetLockOptionsToDefault();
     });
   },
 
   showConnectToServiceModal(serviceName) {
+    lockOptions.auth.redirectUrl = `${lockOptions.auth.redirectUrl}?connect=true`;
     lockOptions.allowedConnections = [serviceName];
     this.showLoginModalEnsuringState().then(() => {
       this.resetLockOptionsToDefault();
