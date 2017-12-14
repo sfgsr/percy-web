@@ -3,7 +3,6 @@ import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
 import {inject as service} from '@ember/service';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import {alias} from '@ember/object/computed';
-import {hash} from 'rsvp';
 
 export default Route.extend(EnsureStatefulLogin, AuthenticatedRouteMixin, {
   session: service(),
@@ -12,27 +11,35 @@ export default Route.extend(EnsureStatefulLogin, AuthenticatedRouteMixin, {
 
   model() {
     // TODO REMOVE
-    // const identity = this.get('store').createRecord('identity', {
-    //   id: Math.random(),
-    //   user: this.get('session.currentUser'),
-    //   provider: 'github',
-    //   uid: '1239023',
-    // });
-
-    return hash({
-      identities: [],
-      // organizations: this.get('currentUser.organizations')
+    const githubIdentity = this.get('store').createRecord('identity', {
+      id: Math.random(),
+      user: this.get('session.currentUser'),
+      provider: 'github',
+      uid: '1239023',
     });
-    // return this.get('store').query('identity', {filter: {
-    //   // user: this.get('session.currentUser')
-    // }});
+    const auth0Identity = this.get('store').createRecord('identity', {
+      id: Math.random(),
+      user: this.get('session.currentUser'),
+      provider: 'auth0',
+      uid: '1239023',
+    });
+    // debugger;
+    return [githubIdentity, auth0Identity];
+    // return hash({
+    //   identities: [identity],
+    //   // organizations: this.get('currentUser.organizations')
+    // });
+    // // return this.get('store').query('identity', {filter: {
+    // //   // user: this.get('session.currentUser')
+    // // }});
   },
 
   setupController(controller, model) {
-    controller.set(
-      'hasGithubConnection',
-      model.identities.filterBy('provider', 'github').length > 0,
-    );
+    controller.set('model', model);
+    // controller.set(
+    //   'hasGithubConnection',
+    //   model.filterBy('provider', 'github').length > 0,
+    // );
     // controller.set('organizations', model.organizations);
     // controller.set('defaultOrgSlug', this._defaultOrgSlug());
   },
