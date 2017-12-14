@@ -21,7 +21,7 @@
 }
 
 .main-footer-item {
-  font-weight: 600;
+  font-weight: var(--bold);
   color: var(--light-text-color);
   transition: color 250ms;
 

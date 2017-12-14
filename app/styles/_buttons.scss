@@ -13,6 +13,7 @@ input[type="button"] {
   height: var(--button-height);
   padding: 0 15px;
   margin: 0;
+  font-weight: var(--bold);
   line-height: var(--button-height);
   color: var(--default-link);
   text-align: center;
@@ -147,7 +148,7 @@ button,
   height: auto;
   padding: 5px 16px;
   font-size: 12px;
-  font-weight: $bold;
+  font-weight: var(--bold);
   line-height: $line-height;
   text-decoration: none !important;
   white-space: nowrap;

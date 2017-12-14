@@ -4,6 +4,7 @@
   position: relative;
   height: 60px;
   padding: 0 15px;
+  font-weight: var(--bold);
 
   .Button {
     margin: 0;
@@ -48,7 +49,7 @@
     padding: 10px 12px 10px 0;
     font-family: $standard-font;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: var(--bold);
     line-height: 4rem;
   }
 
