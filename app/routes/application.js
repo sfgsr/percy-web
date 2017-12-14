@@ -7,6 +7,7 @@ import {DO_NOT_FORWARD_REDIRECT_ROUTES} from 'percy-web/router';
 import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
 import $ from 'jquery';
 import isDevWithProductionAPI from 'percy-web/lib/dev-auth';
+import utils from 'percy-web/lib/utils';
 
 export const AUTH_REDIRECT_LOCALSTORAGE_KEY = 'percyAttemptedTransition';
 
@@ -60,6 +61,7 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
 
     logout() {
       this.get('session').invalidate();
+      $.ajax({url: utils.buildApiUrl('logout')});
     },
 
     redirectToDefaultOrganization() {
