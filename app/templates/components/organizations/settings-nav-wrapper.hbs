@@ -1,51 +1,38 @@
 <div class="container container--fixedWidth container--forContent">
   <div class="row">
     <div class="three columns">
-      <div class="Panel">
-        <div class="Panel-section Panel-header">
-          {{organization.name}}
-        </div>
-        <div class="Panel-nav">
-
-          <ul>
-            <li>
-              {{#link-to "organizations.organization.settings" organization.slug classNames="Button Button--nav"}}
-                Settings
-              {{/link-to}}
+      <aside class="sidenav" data-test-sidenav>
+        <section class="sidenav-group">
+          <header class="sidenav-header">{{organization.name}}</header>
+          <ul class="sidenav-list">
+            <li class="sidenav-list-item">
+              {{#link-to "organizations.organization.settings" organization.slug classNames="sidenav-list-item-link"}}Settings{{/link-to}}
             </li>
-            <li>
-              {{#link-to "organizations.organization.users" organization.slug classNames="Button Button--nav"}}
-                Users
-              {{/link-to}}
+            <li class="sidenav-list-item">
+              {{#link-to "organizations.organization.users" organization.slug classNames="sidenav-list-item-link"}}Users{{/link-to}}
             </li>
-            <li>
-              {{#link-to "organizations.organization.billing" organization.slug classNames="Button Button--nav"}}
-                Billing
-              {{/link-to}}
+            <li class="sidenav-list-item">
+              {{#link-to "organizations.organization.billing" organization.slug classNames="sidenav-list-item-link"}}Billing{{/link-to}}
             </li>
           </ul>
-        </div>
-
-
-      </div>
-
-      <div class="Panel">
-        <div class="Panel-section Panel-header">Project Settings</div>
-
-        <div class="Panel-nav">
-          <ul>
+        </section>
+        <section class="sidenav-group">
+          <header class="sidenav-header">Project Settings</header>
+          <ul class="sidenav-list">
             {{#if organization.projects}}
               {{#each organization.projects as |project|}}
-                <li>{{#link-to "organization.project.settings" organization.slug project.slug classNames="Button Button--nav"}}{{project.name}}{{/link-to}}</li>
+                <li class="sidenav-list-item">
+                  {{#link-to "organization.project.settings" organization.slug project.slug classNames="sidenav-list-item-link"}}{{project.name}}{{/link-to}}
+                </li>
               {{/each}}
             {{/if}}
-            <li>{{#link-to "organizations.organization.projects.new" organization.slug classNames="Button Button--nav"}}Start new project{{/link-to}}</li>
+            <li class="sidenav-list-item">
+              {{#link-to "organizations.organization.projects.new" organization.slug classNames="sidenav-list-item-link"}}Start new project{{/link-to}}
+            </li>
           </ul>
-        </div>
-
-      </div>
+        </section>
+      </aside>
     </div>
-
     <div class="nine columns">
       {{yield}}
     </div>

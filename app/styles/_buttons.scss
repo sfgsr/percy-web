@@ -166,10 +166,10 @@ button,
   }
 
   &:focus,
-  &:active,
   &:focus:active {
     background: var(--lightest-gray);
     border: 1px solid transparent;
+    transform: translate3d(0, 0, 0);
   }
 
   &[disabled] {
@@ -224,6 +224,13 @@ button,
   &:hover {
     color: var(--white);
     background: var(--darkest-gray);
+  }
+
+  &:focus,
+  &:focus:active {
+    color: var(--white);
+    background: var(--darkest-gray);
+    border: 1px solid transparent;
   }
 }
 

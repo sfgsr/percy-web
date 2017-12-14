@@ -30,7 +30,7 @@ describe('Acceptance: Organization', function() {
         expect(currentPath()).to.equal('organization.project.settings');
       });
 
-      click('.Panel .Panel-nav a:contains("Billing")');
+      click('[data-test-sidenav] a:contains("Billing")');
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.billing');
       });
@@ -106,7 +106,7 @@ describe('Acceptance: Organization', function() {
         return percySnapshot(this.test.fullTitle() + ' | Error when invalid slug');
       });
 
-      click('.Panel .Panel-nav a:contains("Users")');
+      click('[data-test-sidenav] a:contains("Users")');
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.users.index');
       });
@@ -118,7 +118,7 @@ describe('Acceptance: Organization', function() {
       });
       percySnapshot(this.test.fullTitle() + ' | Users settings expanded');
 
-      click('.Panel .Panel-nav a:contains("Billing")');
+      click('[data-test-sidenav] a:contains("Billing")');
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.billing');
       });

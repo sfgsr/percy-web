@@ -3,22 +3,20 @@
 <div class="container-vh">
   <div class="container-md py-5">
     <div class="row">
-      <div class="three columns">
-        <div class="Panel">
-          <div class="Panel-section Panel-header">Account Settings</div>
-          <div class="Panel-nav">
-            <ul>
-              <li>
-                {{#link-to 'profile.info' classNames="Button Button--nav"}}Information{{/link-to}}
-              </li>
-              <li>
-                {{#link-to 'profile.connected-accounts' classNames="Button Button--nav"}}Connected Accounts{{/link-to}}
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="four columns">
+        <aside class="sidenav">
+          <header class="sidenav-header">Account Settings</header>
+          <ul class="sidenav-list">
+            <li class="sidenav-list-item">
+              {{#link-to 'profile.info' classNames="sidenav-list-item-link"}}Information{{/link-to}}
+            </li>
+            <li class="sidenav-list-item">
+              {{#link-to 'profile.connected-accounts' classNames="sidenav-list-item-link"}}Connected Accounts{{/link-to}}
+            </li>
+          </ul>
+        </aside>
       </div>
-      <div class="nine columns">{{outlet}}</div>
+      <div class="eight columns">{{outlet}}</div>
     </div>
   </div>
 </div>

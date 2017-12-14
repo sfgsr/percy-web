@@ -6,7 +6,7 @@
     title="Name"
     changeset=changeset
     validateProperty=(action "validateProperty" changeset "name")
-    classNames="data-test-profile-edit-name"
+    data-test-profile-edit-name=true
   }}
   {{form-fields/input
     property="email"
@@ -14,7 +14,7 @@
     changeset=changeset
     disabled=user.unverifiedEmail
     validateProperty=(action "validateProperty" changeset "email")
-    classNames="data-test-profile-edit-email"
+    data-test-profile-edit-email=true
   }}
 
   {{#if user.unverifiedEmail}}
@@ -30,6 +30,6 @@
     isSaveSuccessful=isSaveSuccessful
     submit=(action "save")
     disabled=changeset.isPristine
-    classNames="data-test-profile-edit-submit"
+    data-test-profile-edit-submit=true
   }}
 </form>
