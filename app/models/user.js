@@ -8,6 +8,8 @@ export default DS.Model.extend({
   avatarUrl: DS.attr(),
   unverifiedEmail: DS.attr('string'),
 
+  identities: DS.hasMany('identities', {inverse: null}),
+
   // These endpoints are only available on the current user and should not be accessed otherwise.
   organizations: DS.hasMany('organizations', {inverse: null}),
 
@@ -15,4 +17,7 @@ export default DS.Model.extend({
   updatedAt: DS.attr('date'),
 
   isVerified: computed.notEmpty('email'),
+  hasGithubIdentity: computed('identities.@each.provider', function() {
+    return this.get('identities').filterBy('provider', 'github').length > 0;
+  }),
 });

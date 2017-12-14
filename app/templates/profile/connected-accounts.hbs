@@ -1,16 +1,24 @@
 <div class="container-sm">
   <h2 class="f1 text-weight-regular">Connected Accounts</h2>
-  <div class="flex space-between mb-4">
-    <div class="text-mono flex align-center">
-      {{inline-svg "github-icon" class="mr-2"}}
-      PixelJanitor
+
+  {{#if hasGithubConnection}}
+    <div class="flex space-between mb-4">
+      <div class="text-mono flex align-center">
+        {{inline-svg "github-icon" class="mr-2"}}
+        PixelJanitor
+      </div>
+      <button type="button" class="btn">Disconnect</button>
     </div>
-    <button type="button" class="btn">Disconnect</button>
-  </div>
-  <div class="ifthisthenthat">
-    <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "showGithubLockModal"}}>Connect your Github account</button>
-    <div class="note">
-      Connecting your GitHub account allows you to sign in with GitHub and {{#link-to 'organizations.organization.settings' TODO}}manage your GitHub integration{{/link-to}} with Percy.
+  {{else}}
+
+    <div class="ifthisthenthat">
+      <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "showGithubLockModal"}}>Connect your Github account</button>
+      <div class="note">
+        Connecting your GitHub account allows you to sign in with GitHub and
+          {{#link-to 'organizations.index'}}manage your GitHub integration{{/link-to}}
+         with Percy.
+      </div>
     </div>
-  </div>
+  {{/if}}
+
 </div>
