@@ -5,7 +5,8 @@ describe('Acceptance: Profile', function() {
   setupAcceptance();
 
   setupSession(function(server) {
-    server.create('user', {name: 'Tyrion Lannister', email: 'tyrion@lannisters.net'});
+    const user = server.create('user', {name: 'Tyrion Lannister', email: 'tyrion@lannisters.net'});
+    server.create('identity', 'githubIdentity', {user});
   });
 
   it('displays profile info page', function() {
@@ -20,11 +21,10 @@ describe('Acceptance: Profile', function() {
     percySnapshot(this.test.fullTitle() + 'after submitting');
   });
 
-  it('displays profile info page', function() {
+  it('displays connected-accounts info page', function() {
     ProfilePageObject.visitConnectedAccountsPage();
+    andThen(() => {});
 
     percySnapshot(this.test.fullTitle() + 'without github integration');
-
-    // TODO add test for what it looks like when there is a connected github account
   });
 });

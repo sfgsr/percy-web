@@ -1,6 +1,7 @@
 import Mirage from 'ember-cli-mirage';
 
 export default function() {
+  this.logging = true;
   this.passthrough('http://api.amplitude.com');
 
   this.get('/api/auth/session', function() {
@@ -16,6 +17,12 @@ export default function() {
   });
 
   this.namespace = '/api/v1';
+
+  // this.get('/users/:id/identities', (schema, request) => {
+  //   debugger;
+  //   let user = schema.users.findBy({_currentLoginInTest: true});
+  //   return schema.identities.where({user});
+  // });
 
   this.patch('/user', function(schema /*request*/) {
     let user = schema.users.findBy({_currentLoginInTest: true});
