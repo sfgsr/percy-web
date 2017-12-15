@@ -53,6 +53,14 @@
   }
 }
 
+.current-opening {
+  color: var(--default-text-color);
+
+  &:hover {
+    color: var(--dark-purple);
+  }
+}
+
 .current-opening:not(last-child) {
   margin-bottom: $spacer;
 }
