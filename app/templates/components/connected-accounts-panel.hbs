@@ -4,10 +4,10 @@
       {{inline-svg "percy-logo-small-on-light" class="mr-2"}}
       {{session.currentUser.name}}
     </div>
-    <button type="button" class="btn">Disconnect</button>
+    <button type="button" class="btn" {{action 'disconnectIdentity' emailPasswordIdentity.id}} disabled={{isDisconnectIdentityDisabled}}>Disconnect</button>
   </div>
 {{else}}
-  <button type="button" class="btn btn-md btn-primary w-full mb-4" {{action "showEmailPassLockModal"}}>Add email/password account</button>
+  <button type="button" class="btn btn-md btn-primary w-full mb-4" {{action "addService" "auth0"}}>Add email/password account</button>
 {{/if}}
 
 
@@ -17,10 +17,10 @@
       {{inline-svg "github-icon" class="mr-2"}}
       {{githubIdentity.login}}
     </div>
-    <button type="button" class="btn">Disconnect</button>
+    <button type="button" class="btn" disabled={{isDisconnectIdentityDisabled}} {{action 'disconnectIdentity' githubIdentity.id}}>Disconnect</button>
   </div>
 {{else}}
-  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "showGithubLockModal"}}>Connect your Github account</button>
+  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "addService" "github"}}>Connect your Github account</button>
   <div class="note">
     Connecting your GitHub account allows you to sign in with GitHub and {{#link-to 'organizations.organization.settings' TODO}}manage your GitHub integration{{/link-to}} with Percy.
   </div>

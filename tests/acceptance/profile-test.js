@@ -23,7 +23,6 @@ describe('Acceptance: Profile', function() {
 
   it('displays connected-accounts info page', function() {
     ProfilePageObject.visitConnectedAccountsPage();
-    andThen(() => {});
 
     percySnapshot(this.test.fullTitle() + 'without github integration');
   });
