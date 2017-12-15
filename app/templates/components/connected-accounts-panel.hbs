@@ -1,4 +1,4 @@
-{{#if (or emailPasswordIdentity githubIdentity)}}
+{{#if isAnyIdentities}}
   <div class="mb-4">
     {{#if emailPasswordIdentity}}
       <div class="flex space-between align-center mb-2">
