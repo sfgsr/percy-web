@@ -44,7 +44,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     });
 
     it('displays correctly', function() {
-      percySnapshot(this.test.fullTitle(), this.$());
+      percySnapshot(this.test.fullTitle());
       expect(CAPPageObject.isDeleteGithubIdentityDisabled).to.equal(true);
       expect(CAPPageObject.isAddAuth0IdentityVisible).to.equal(true);
       expect(CAPPageObject.isAddGithubIdentityVisible).to.equal(false);
@@ -85,7 +85,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     });
 
     it('displays correctly', function() {
-      percySnapshot(this.test.fullTitle(), this.$());
+      percySnapshot(this.test.fullTitle());
       expect(CAPPageObject.isDeleteAuth0IdentityDisabled).to.equal(true);
       expect(CAPPageObject.isAddAuth0IdentityVisible).to.equal(false);
       expect(CAPPageObject.isAddGithubIdentityVisible).to.equal(true);
@@ -128,7 +128,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     });
 
     it('displays correctly', function() {
-      percySnapshot(this.test.fullTitle(), this.$());
+      percySnapshot(this.test.fullTitle());
       expect(CAPPageObject.isDeleteAuth0IdentityDisabled).to.equal(false);
       expect(CAPPageObject.isDeleteGithubIdentityDisabled).to.equal(false);
       expect(CAPPageObject.isAddAuth0IdentityVisible).to.equal(false);
