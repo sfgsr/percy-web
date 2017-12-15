@@ -18,10 +18,11 @@ export default DS.Model.extend({
 
   isVerified: computed.notEmpty('email'),
 
-  // hasGithubIdentity: computed('identities.@each.provider', function() {
-  //   return this.get('identities').filterBy('provider', 'github').length > 0;
-  // }),
-  // hasEmailPasswordIdentity: computed('identities.@each.provider', function() {
-  //   return this.get('identities').filterBy('provider', 'auth0');
-  // }),
+  hasGithubIdentity: computed('identities.@each.provider', function() {
+    return this.get('identities').findBy('provider', 'github');
+  }),
+
+  hasEmailPasswordIdentity: computed('identities.@each.provider', function() {
+    return this.get('identities').findBy('provider', 'auth0');
+  }),
 });
