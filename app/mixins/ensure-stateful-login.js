@@ -57,7 +57,10 @@ var EnsureStatefulLogin = Mixin.create({
   },
 
   showResetPasswordModal() {
-    this._setLockPasswordSettings();
+    lockOptions.allowLogin = false;
+    lockOptions.initialScreen = 'forgotPassword';
+    lockOptions.allowForgotPassword = true;
+    lockOptions.allowSignup = false;
     this._showLock(lockOptions, {redirectToHome: false}).then(() => {
       this.resetLockOptionsToDefault();
     });
