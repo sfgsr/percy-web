@@ -15,4 +15,19 @@ export default Route.extend(AuthenticatedRouteMixin, {
   setupController(controller, model) {
     controller.set('model', model);
   },
+
+  actions: {
+    deleteIdentity(identityId) {
+      this.get('store')
+        .peekRecord('identity', identityId)
+        .destroyRecord()
+        .catch(e => {
+          this.get('flashMessages').danger(
+            e +
+              'There was a problem disconnecting your account.' +
+              ' Please try again or contact customer support.',
+          );
+        });
+    },
+  },
 });
