@@ -5,6 +5,7 @@ import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {make, manualSetup} from 'ember-data-factory-guy';
+import sinon from 'sinon';
 
 describe('Integration: ConnectedAccountsPanel', function() {
   setupComponentTest('connected-accounts-panel', {
@@ -16,11 +17,27 @@ describe('Integration: ConnectedAccountsPanel', function() {
   });
 
   describe('when a user has a github identity', function() {
-    it('displays correctly', function() {
+    beforeEach(function() {
       const user = make('user');
       const identity = make('identity', 'githubProvider', {user});
+      const deleteStub = sinon.stub();
+      const addStub = sinon.stub();
+
       this.set('identities', [identity]);
-      this.render(hbs`{{connected-accounts-panel identities=identities}}`);
+      this.set('actions', {
+        deleteIdentity: deleteStub,
+        addIdentity: addStub,
+      });
+
+      this.render(hbs`{{
+        connected-accounts-panel
+        identities=identities
+        deleteIdentity=(action "deleteIdentity")
+        addIdentity=(action "addIdentity")
+      }}`);
+    });
+
+    it('displays correctly', function() {
       percySnapshot(this.test.fullTitle(), this.$());
     });
 
@@ -30,11 +47,27 @@ describe('Integration: ConnectedAccountsPanel', function() {
   });
 
   describe('when a user has an email/password identity', function() {
-    it('displays correctly', function() {
+    beforeEach(function() {
       const user = make('user');
       const identity = make('identity', 'auth0Provider', {user});
+      const deleteStub = sinon.stub();
+      const addStub = sinon.stub();
+
       this.set('identities', [identity]);
-      this.render(hbs`{{connected-accounts-panel identities=identities}}`);
+      this.set('actions', {
+        deleteIdentity: deleteStub,
+        addIdentity: addStub,
+      });
+
+      this.render(hbs`{{
+        connected-accounts-panel
+        identities=identities
+        deleteIdentity=(action "deleteIdentity")
+        addIdentity=(action "addIdentity")
+      }}`);
+    });
+
+    it('displays correctly', function() {
       percySnapshot(this.test.fullTitle(), this.$());
     });
 
@@ -44,12 +77,28 @@ describe('Integration: ConnectedAccountsPanel', function() {
   });
 
   describe('when a user has both an email/password identity and a github identity', function() {
-    it('displays correctly', function() {
+    beforeEach(function() {
       const user = make('user');
       const auth0Identity = make('identity', 'auth0Provider', {user});
       const githubIdentity = make('identity', 'auth0Provider', {user});
+      const deleteStub = sinon.stub();
+      const addStub = sinon.stub();
+
       this.set('identities', [auth0Identity, githubIdentity]);
-      this.render(hbs`{{connected-accounts-panel identities=identities}}`);
+      this.set('actions', {
+        deleteIdentity: deleteStub,
+        addIdentity: addStub,
+      });
+
+      this.render(hbs`{{
+        connected-accounts-panel
+        identities=identities
+        deleteIdentity=(action "deleteIdentity")
+        addIdentity=(action "addIdentity")
+      }}`);
+    });
+
+    it('displays correctly', function() {
       percySnapshot(this.test.fullTitle(), this.$());
     });
 
