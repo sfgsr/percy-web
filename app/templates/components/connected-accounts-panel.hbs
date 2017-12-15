@@ -1,38 +1,46 @@
-{{#if emailPasswordIdentity}}
-  <div class="flex space-between mb-4">
-    <div class="text-mono flex align-center">
-      {{inline-svg "percy-logo-small-on-light" class="mr-2"}}
-      {{emailPasswordIdentity.user.name}}
-    </div>
-    <button type="button" class="btn btn-sm btn-alt"
-      {{action deleteIdentity emailPasswordIdentity.id target=route}}disabled={{isDisconnectIdentityDisabled}}
-      data-test-connected-accounts-panel-delete-ep-identity>
-      Disconnect
-    </button>
+{{#if (or emailPasswordIdentity githubIdentity)}}
+  <div class="mb-4">
+    {{#if emailPasswordIdentity}}
+      <div class="flex space-between align-center mb-2">
+        <div class="text-mono flex align-center">
+          {{inline-svg "percy-logo-tiny-on-light" class="mr-2"}}
+          {{session.currentUser.name}}
+        </div>
+
+        <button type="button" class="btn btn-sm btn-alt"
+          {{action deleteIdentity emailPasswordIdentity.id target=route}}
+          disabled={{isDisconnectIdentityDisabled}}
+          data-test-connected-accounts-panel-delete-ep-identity>
+          Disconnect
+        </button>
+      </div>
+    {{/if}}
+    {{#if githubIdentity}}
+      <div class="flex space-between align-center mb-2">
+        <div class="text-mono flex align-center">
+          {{inline-svg "github-icon" class="mr-2"}}
+          FE doesn't get this information
+        </div>
+        <button type="button" class="btn btn-sm btn-alt"
+          {{action deleteIdentity githubIdentity.id}}
+          disabled={{isDisconnectIdentityDisabled}}
+          data-test-connected-accounts-panel-delete-github-identity>
+          Disconnect
+        </button>
+      </div>
+    {{/if}}
   </div>
-{{else}}
-  <button type="button" class="btn btn-md btn-primary w-full mb-4"
+{{/if}}
+
+{{#if (not emailPasswordIdentity)}}
+  <button type="button" class="btn btn-md btn-primary w-full mb-2"
     {{action addIdentity "auth0"}}
     data-test-connected-accounts-panel-add-ep-identity>
     Add email/password account
   </button>
 {{/if}}
 
-
-{{#if githubIdentity}}
-  <div class="flex space-between mb-4">
-    <div class="text-mono flex align-center">
-      {{inline-svg "github-icon" class="mr-2"}}
-      FE doesn't get this information
-    </div>
-    <button type="button" class="btn btn-sm btn-alt"
-      {{action deleteIdentity githubIdentity.id}}
-      disabled={{isDisconnectIdentityDisabled}}
-      data-test-connected-accounts-panel-delete-github-identity>
-      Disconnect
-    </button>
-  </div>
-{{else}}
+{{#if (not githubIdentity)}}
   <button type="button" class="btn btn-md btn-github w-full mb-4"
     {{action addIdentity "github"}}
     data-test-connected-accounts-panel-add-github-identity>
