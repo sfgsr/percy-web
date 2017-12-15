@@ -1,26 +1,32 @@
-{{#if emailPasswordIdentity}}
-  <div class="flex space-between mb-4">
-    <div class="text-mono flex align-center">
-      {{inline-svg "percy-logo-small-on-light" class="mr-2"}}
-      {{emailPasswordIdentity.user.name}}
-    </div>
-    <button type="button" class="btn btn-sm btn-alt" {{action deleteIdentity emailPasswordIdentity.id target=route}} disabled={{isDisconnectIdentityDisabled}}>Disconnect</button>
+{{#if (or emailPasswordIdentity githubIdentity)}}
+  <div class="mb-4">
+    {{#if emailPasswordIdentity}}
+      <div class="flex space-between align-center mb-2">
+        <div class="text-mono flex align-center">
+          {{inline-svg "percy-logo-tiny-on-light" class="mr-2"}}
+          {{session.currentUser.name}}
+        </div>
+        <button type="button" class="btn btn-sm btn-alt" {{action 'disconnectIdentity' emailPasswordIdentity.id}} disabled={{isDisconnectIdentityDisabled}}>Disconnect</button>
+      </div>
+    {{/if}}
+    {{#if githubIdentity}}
+      <div class="flex space-between align-center mb-2">
+        <div class="text-mono flex align-center">
+          {{inline-svg "github-icon" class="mr-2"}}
+          FE doesn't get this information
+        </div>
+        <button type="button" class="btn btn-sm btn-alt" disabled={{isDisconnectIdentityDisabled}} {{action 'disconnectIdentity' githubIdentity.id}}>Disconnect</button>
+      </div>
+    {{/if}}
   </div>
-{{else}}
-  <button type="button" class="btn btn-md btn-primary w-full mb-4" {{action addIdentity "auth0"}}>Add email/password account</button>
 {{/if}}
 
+{{#if (not emailPasswordIdentity)}}
+  <button type="button" class="btn btn-md btn-primary w-full mb-2" {{action "addService" "auth0"}}>Add email/password account</button>
+{{/if}}
 
-{{#if githubIdentity}}
-  <div class="flex space-between mb-4">
-    <div class="text-mono flex align-center">
-      {{inline-svg "github-icon" class="mr-2"}}
-      FE doesn't get this information
-    </div>
-    <button type="button" class="btn btn-sm btn-alt" disabled={{isDisconnectIdentityDisabled}} {{action deleteIdentity githubIdentity.id}}>Disconnect</button>
-  </div>
-{{else}}
-  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action addIdentity "github"}}>Connect your Github account</button>
+{{#if (not githubIdentity)}}
+  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "addService" "github"}}>Connect your Github account</button>
   <div class="note">
     Connecting your GitHub account allows you to sign in with GitHub and {{#link-to 'organizations.organization.settings' TODO}}manage your GitHub integration{{/link-to}} with Percy.
   </div>
