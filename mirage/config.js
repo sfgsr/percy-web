@@ -46,6 +46,10 @@ export default function() {
     }
   });
 
+  this.get('/identities/:id', function(schema, request) {
+    return schema.identities.findBy({id: request.params.id});
+  });
+
   this.patch('/email-verifications/**', function(schema, request) {
     if (request.params['*'] === 'goodCode') {
       return new Mirage.Response(200, {}, {success: true});
