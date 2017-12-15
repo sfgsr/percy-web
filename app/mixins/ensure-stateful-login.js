@@ -44,16 +44,16 @@ var EnsureStatefulLogin = Mixin.create({
       const lock = this.get('auth0').getAuth0LockInstance(lockOptions);
 
       this.get('auth0')._setupLock(lock, resolve, reject);
-      if (onCloseDestinationRoute) {
-        lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
-      }
+      lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
       lock.show();
     });
   },
 
   _onLockClosed(onCloseDestinationRoute) {
     this.set('_hasOpenedLoginModal', false);
-    this.transitionTo(onCloseDestinationRoute);
+    if (onCloseDestinationRoute) {
+      this.transitionTo(onCloseDestinationRoute);
+    }
   },
 
   showResetPasswordModal() {
