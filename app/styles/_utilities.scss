@@ -62,6 +62,11 @@
   background: var(--white);
 }
 
+.alt-hr {
+  margin: 0;
+  border-top: 1px solid var(--lightest-gray);
+}
+
 .shadow-l {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 }
