@@ -7,7 +7,7 @@
     <button type="button" class="btn btn-sm btn-alt" {{action deleteIdentity emailPasswordIdentity.id target=route}} disabled={{isDisconnectIdentityDisabled}}>Disconnect</button>
   </div>
 {{else}}
-  <button type="button" class="btn btn-md btn-primary w-full mb-4" {{action "addService" "auth0"}}>Add email/password account</button>
+  <button type="button" class="btn btn-md btn-primary w-full mb-4" {{action addIdentity "auth0"}}>Add email/password account</button>
 {{/if}}
 
 
@@ -20,7 +20,7 @@
     <button type="button" class="btn btn-sm btn-alt" disabled={{isDisconnectIdentityDisabled}} {{action deleteIdentity githubIdentity.id}}>Disconnect</button>
   </div>
 {{else}}
-  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action "addService" "github"}}>Connect your Github account</button>
+  <button type="button" class="btn btn-md btn-github w-full mb-4" {{action addIdentity "github"}}>Connect your Github account</button>
   <div class="note">
     Connecting your GitHub account allows you to sign in with GitHub and {{#link-to 'organizations.organization.settings' TODO}}manage your GitHub integration{{/link-to}} with Percy.
   </div>

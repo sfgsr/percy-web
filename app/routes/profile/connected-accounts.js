@@ -2,8 +2,9 @@ import Route from '@ember/routing/route';
 import {inject as service} from '@ember/service';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import {alias} from '@ember/object/computed';
+import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
 
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, EnsureStatefulLogin, {
   session: service(),
   store: service(),
   currentUser: alias('session.currentUser'),
@@ -17,14 +18,19 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
+    addIdentity(providerName) {
+      if (providerName === 'auth0') {
+        providerName = 'Username-Password-Authentication';
+      }
+      this.showConnectToServiceModal(providerName);
+    },
     deleteIdentity(identityId) {
       this.get('store')
         .peekRecord('identity', identityId)
         .destroyRecord()
-        .catch(e => {
+        .catch(() => {
           this.get('flashMessages').danger(
-            e +
-              'There was a problem disconnecting your account.' +
+            'There was a problem disconnecting your account.' +
               ' Please try again or contact customer support.',
           );
         });
