@@ -9,9 +9,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   currentUser: alias('session.currentUser'),
 
   model() {
-    const x = this.get('currentUser.identities');
-
-    return x;
+    return this.get('currentUser.identities');
   },
 
   setupController(controller, model) {

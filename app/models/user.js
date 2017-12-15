@@ -8,7 +8,7 @@ export default DS.Model.extend({
   avatarUrl: DS.attr(),
   unverifiedEmail: DS.attr('string'),
 
-  identities: DS.hasMany('identities', {inverse: null}),
+  identities: DS.hasMany('identities'),
 
   // These endpoints are only available on the current user and should not be accessed otherwise.
   organizations: DS.hasMany('organizations', {inverse: null}),

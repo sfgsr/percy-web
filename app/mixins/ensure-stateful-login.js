@@ -67,10 +67,12 @@ var EnsureStatefulLogin = Mixin.create({
   },
 
   showConnectToServiceModal(serviceName) {
+    const originalRedirectUrl = lockOptions.auth.redirectUrl;
     lockOptions.auth.redirectUrl = `${lockOptions.auth.redirectUrl}?connect=true`;
     lockOptions.allowedConnections = [serviceName];
     this.showLoginModalEnsuringState().then(() => {
       this.resetLockOptionsToDefault();
+      lockOptions.auth.redirectUrl = originalRedirectUrl;
     });
   },
 
