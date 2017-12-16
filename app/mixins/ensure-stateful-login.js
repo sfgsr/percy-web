@@ -12,6 +12,7 @@ import {Promise, resolve} from 'rsvp';
 // This should protect against CSRF attacks.
 var EnsureStatefulLogin = Mixin.create({
   auth0: service(),
+  flashMessages: service(),
 
   _hasOpenedLoginModal: false,
 
@@ -44,7 +45,11 @@ var EnsureStatefulLogin = Mixin.create({
       const lock = this.get('auth0').getAuth0LockInstance(lockOptions);
 
       this.get('auth0')._setupLock(lock, resolve, reject);
+
+      // all valid event hooks here: http://bit.ly/2Btihk6
+      lock.on('forgot_password submit', this._onPasswordResetSubmit.bind(this));
       lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
+
       lock.show();
     });
   },
@@ -56,12 +61,16 @@ var EnsureStatefulLogin = Mixin.create({
     }
   },
 
+  _onPasswordResetSubmit() {
+    this.get('flashMessages').success("We've sent an email to the address you've entered.");
+  },
+
   showResetPasswordModal() {
     lockOptions.allowLogin = false;
     lockOptions.initialScreen = 'forgotPassword';
     lockOptions.allowForgotPassword = true;
     lockOptions.allowSignup = false;
-    this._showLock(lockOptions, {redirectToHome: false}).then(() => {
+    this.showLoginModalEnsuringState().then(() => {
       this.resetLockOptionsToDefault();
     });
   },
