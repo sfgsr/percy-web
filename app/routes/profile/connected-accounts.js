@@ -7,6 +7,7 @@ import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
 export default Route.extend(AuthenticatedRouteMixin, EnsureStatefulLogin, {
   session: service(),
   store: service(),
+  flashMessages: service(),
   currentUser: alias('session.currentUser'),
 
   model() {
@@ -25,9 +26,20 @@ export default Route.extend(AuthenticatedRouteMixin, EnsureStatefulLogin, {
       this.showConnectToServiceModal(providerName);
     },
     deleteIdentity(identityId) {
+      let identityProvider = this.get('store')
+        .peekRecord('identity', identityId)
+        .get('provider');
+      if (identityProvider == 'auth0') {
+        identityProvider = 'Email/Password';
+      }
       this.get('store')
         .peekRecord('identity', identityId)
         .destroyRecord()
+        .then(() => {
+          this.get('flashMessages').success(
+            `Your ${identityProvider} account has been disconnected from Percy`,
+          );
+        })
         .catch(() => {
           this.get('flashMessages').danger(
             'There was a problem disconnecting your account.' +
