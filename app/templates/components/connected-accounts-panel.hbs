@@ -19,7 +19,11 @@
       <div class="flex space-between align-center mb-2">
         <div class="text-mono flex align-center">
           {{inline-svg "github-icon" class="mr-2"}}
-          FE doesn't get this information
+          {{#if githubIdentity.nickname}}
+            {{githubIdentity.nickname}}
+          {{else}}
+            {{githubIdentity.user.name}}
+          {{/if}}
         </div>
         <button type="button" class="btn btn-sm btn-alt"
           {{action deleteIdentity githubIdentity.id}}
