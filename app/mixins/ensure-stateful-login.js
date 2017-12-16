@@ -46,7 +46,7 @@ var EnsureStatefulLogin = Mixin.create({
 
       this.get('auth0')._setupLock(lock, resolve, reject);
 
-      // all valid event hooks here: http://bit.ly/2Btihk6
+      // all possible valid event hooks are listed here: http://bit.ly/2Btihk6
       lock.on('forgot_password submit', this._onPasswordResetSubmit.bind(this));
       lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
 

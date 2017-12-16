@@ -26,14 +26,14 @@ export default Route.extend(AuthenticatedRouteMixin, EnsureStatefulLogin, {
       this.showConnectToServiceModal(providerName);
     },
     deleteIdentity(identityId) {
-      let identityProvider = this.get('store')
-        .peekRecord('identity', identityId)
-        .get('provider');
-      if (identityProvider == 'auth0') {
+      const identity = this.get('store').peekRecord('identity', identityId);
+
+      let identityProvider = identity.get('provider');
+      if (identityProvider === 'auth0') {
         identityProvider = 'Email/Password';
       }
-      this.get('store')
-        .peekRecord('identity', identityId)
+
+      identity
         .destroyRecord()
         .then(() => {
           this.get('flashMessages').success(
