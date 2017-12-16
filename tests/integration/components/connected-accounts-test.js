@@ -19,7 +19,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     CAPPageObject.setContext(this);
   });
 
-  describe('when a user has a github identity', function() {
+  describe('when a user has only a github identity', function() {
     let deleteStub;
     let addStub;
     let identity;
@@ -45,14 +45,9 @@ describe('Integration: ConnectedAccountsPanel', function() {
 
     it('displays correctly', function() {
       percySnapshot(this.test.fullTitle());
-      expect(CAPPageObject.isDeleteGithubIdentityDisabled).to.equal(true);
+      expect(CAPPageObject.isDeleteGithubIdentityVisible).to.equal(false);
       expect(CAPPageObject.isAddAuth0IdentityVisible).to.equal(true);
       expect(CAPPageObject.isAddGithubIdentityVisible).to.equal(false);
-    });
-
-    it('does not call delete method when delete button is clicked', function() {
-      CAPPageObject.clickDeleteGithubIdentity();
-      expect(deleteStub).to.not.have.been.called;
     });
 
     it('calls addIdentity action when add button is clicked', function() {
@@ -61,7 +56,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     });
   });
 
-  describe('when a user has an email/password identity', function() {
+  describe('when a user has only an email/password identity', function() {
     let deleteStub;
     let addStub;
     beforeEach(function() {
@@ -86,14 +81,9 @@ describe('Integration: ConnectedAccountsPanel', function() {
 
     it('displays correctly', function() {
       percySnapshot(this.test.fullTitle());
-      expect(CAPPageObject.isDeleteAuth0IdentityDisabled).to.equal(true);
+      expect(CAPPageObject.isDeleteAuth0IdentityVisible).to.equal(false);
       expect(CAPPageObject.isAddAuth0IdentityVisible).to.equal(false);
       expect(CAPPageObject.isAddGithubIdentityVisible).to.equal(true);
-    });
-
-    it('does not call delete method when delete button is clicked', function() {
-      CAPPageObject.clickDeleteAuth0Identity();
-      expect(deleteStub).to.not.have.been.called;
     });
 
     it('calls addIdentity action when add button is clicked', function() {
@@ -129,8 +119,8 @@ describe('Integration: ConnectedAccountsPanel', function() {
 
     it('displays correctly', function() {
       percySnapshot(this.test.fullTitle());
-      expect(CAPPageObject.isDeleteAuth0IdentityDisabled).to.equal(false);
-      expect(CAPPageObject.isDeleteGithubIdentityDisabled).to.equal(false);
+      expect(CAPPageObject.isDeleteAuth0IdentityVisible).to.equal(true);
+      expect(CAPPageObject.isDeleteGithubIdentityVisible).to.equal(true);
       expect(CAPPageObject.isAddAuth0IdentityVisible).to.equal(false);
       expect(CAPPageObject.isAddGithubIdentityVisible).to.equal(false);
     });

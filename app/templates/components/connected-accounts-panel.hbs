@@ -7,12 +7,13 @@
           {{emailPasswordIdentity.user.name}}
         </div>
 
-        <button type="button" class="btn btn-sm btn-alt"
-          {{action deleteIdentity emailPasswordIdentity.id target=route}}
-          disabled={{isDisconnectIdentityDisabled}}
-          data-test-connected-accounts-panel-delete-ep-identity>
-          Disconnect
-        </button>
+        {{#if isDisconnectIdentityEnabled}}
+          <button type="button" class="btn btn-sm btn-alt"
+            {{action deleteIdentity emailPasswordIdentity.id target=route}}
+            data-test-connected-accounts-panel-delete-ep-identity>
+            Disconnect
+          </button>
+        {{/if}}
       </div>
     {{/if}}
     {{#if githubIdentity}}
@@ -25,12 +26,13 @@
             {{githubIdentity.user.name}}
           {{/if}}
         </div>
-        <button type="button" class="btn btn-sm btn-alt"
-          {{action deleteIdentity githubIdentity.id}}
-          disabled={{isDisconnectIdentityDisabled}}
-          data-test-connected-accounts-panel-delete-github-identity>
-          Disconnect
-        </button>
+        {{#if isDisconnectIdentityEnabled}}
+          <button type="button" class="btn btn-sm btn-alt"
+            {{action deleteIdentity githubIdentity.id}}
+            data-test-connected-accounts-panel-delete-github-identity>
+            Disconnect
+          </button>
+        {{/if}}
       </div>
     {{/if}}
   </div>
