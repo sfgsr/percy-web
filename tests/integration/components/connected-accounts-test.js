@@ -24,7 +24,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     let addStub;
     let identity;
     beforeEach(function() {
-      const user = make('user');
+      const user = make('user', {name: 'fardeedoo'});
       identity = make('identity', 'githubProvider', {user});
       deleteStub = sinon.stub();
       addStub = sinon.stub();
@@ -65,7 +65,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     let deleteStub;
     let addStub;
     beforeEach(function() {
-      const user = make('user');
+      const user = make('user', {name: 'fardeedoo'});
       const identity = make('identity', 'auth0Provider', {user});
       deleteStub = sinon.stub();
       addStub = sinon.stub();
@@ -107,7 +107,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
     let auth0Identity;
 
     beforeEach(function() {
-      const user = make('user');
+      const user = make('user', {name: 'fardeedoo'});
       auth0Identity = make('identity', 'auth0Provider', {user});
       const githubIdentity = make('identity', 'githubProvider', {user});
       const addStub = sinon.stub();
