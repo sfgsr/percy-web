@@ -1,22 +1,15 @@
-<div class="OrganizationsSwitcherNav-item" {{action "toggleSwitcher"}}>
+<div class="OrganizationsSwitcherNav-item mr-4" {{action "toggleSwitcher"}}>
   {{#if currentOrganization}}
     {{currentOrganization.name}}
   {{else}}
     Jump to org<span class="u-hide-on-mobile">anization</span>
   {{/if}}
-  {{fa-icon "chevron-down"}}
+  {{inline-svg "dropdown-light-icon" class="ml-1"}}
 </div>
 {{#if isExpanded}}
   <div class="PageClickOverlay" {{action "hideSwitcher"}}></div>
   <div class="OrganizationsSwitcherNav-arrow">{{fa-icon "caret-up"}}</div>
   <div class="OrganizationsSwitcherNav-switcher" {{action "hideSwitcher"}}>
-    {{!--
-    {{#if currentOrganization}}
-      {{#link-to "organizations.organization.settings" currentOrganization.slug classNames="Button Button--onDark Button--withLeftIcon"}}
-        {{fa-icon "cog fa--left"}} Settings
-      {{/link-to}}
-    {{/if}}
-    --}}
     {{#link-to "organizations.new" classNames="Button Button--onDark Button--withLeftIcon"}}
       {{fa-icon "plus-circle fa--left"}} Create new organization
     {{/link-to}}

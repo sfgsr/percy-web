@@ -1,16 +1,20 @@
 {{#if organization.subscription.isTrialOrFree}}
-  {{#if organization.subscription.plan.isFree}}
-    <strong>Your trial has expired.</strong>
-  {{else}}
-    {{#if (eq organization.subscription.trialDaysRemaining 0)}}
-      <strong>Trial ends today!</strong>
-    {{else}}
-      <strong>
-        {{pluralize organization.subscription.trialDaysRemaining "day"}}
-      </strong> left in trial.
-    {{/if}}
-  {{/if}}
-  {{#link-to "organizations.organization.billing" organization.slug class="Button Button--small"}}
-    See plans
-  {{/link-to}}
+  <div class="flex align-center hide-on-laptop">
+    <div class="trial-bar px-3 py-1 rounded-left {{if organization.subscription.plan.isFree 'is-expired'}} {{type}}" style="margin-right: 1px;">
+      {{#if organization.subscription.plan.isFree}}
+        <strong>Your trial has expired.</strong>
+      {{else}}
+        {{#if (eq organization.subscription.trialDaysRemaining 0)}}
+          <strong>Your trial ends today!</strong>
+        {{else}}
+          You have <strong>{{pluralize organization.subscription.trialDaysRemaining "day"}}</strong> left in your trial.
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="trial-bar px-3 py-1 rounded-right {{if organization.subscription.plan.isFree 'is-expired'}} {{type}}">
+      {{#link-to "organizations.organization.billing" organization.slug}}
+        See plans
+      {{/link-to}}
+    </div>
+  </div>
 {{/if}}

@@ -4,7 +4,7 @@
   position: relative;
   height: 60px;
   padding: 0 15px;
-  font-weight: var(--bold);
+  font-weight: var(--semibold);
 
   .Button {
     margin: 0;
@@ -49,7 +49,7 @@
     padding: 10px 12px 10px 0;
     font-family: $standard-font;
     font-size: 2rem;
-    font-weight: var(--bold);
+    font-weight: var(--semibold);
     line-height: 4rem;
   }
 
@@ -120,4 +120,16 @@
       }
     }
   }
+}
+
+.main-header {
+  position: fixed;
+  width: 100vw;
+  height: var(--header-height);
+  background: var(--dark-purple);
+}
+
+.main-header-alt {
+  background: var(--lightest-gray);
+  border-bottom: 1px solid var(--lighter-gray);
 }

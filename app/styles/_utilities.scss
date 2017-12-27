@@ -4,6 +4,11 @@
   overflow: hidden;
 }
 
+.truncate-target {
+  display: inline-block;
+  max-width: 160px;
+}
+
 .c-pointer {
   cursor: pointer;
 }
@@ -50,12 +55,24 @@
   display: none;
 }
 
-.br {
-  border-radius: $border-radius;
+.rounded {
+  border-radius: var(--border-radius);
+}
+
+.rounded-left {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.rounded-right {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .bg-white {
   background: var(--white);
+}
+
+.bg-purple-light {
+  background: var(--bg-purple-light);
 }
 
 .shadow-l {
@@ -72,8 +89,4 @@
 
 .bg-white-pattern {
   background: url("/images/pattern-on-white.svg");
-}
-
-.bg-purple-light {
-  background: var(--bg-purple-light);
 }

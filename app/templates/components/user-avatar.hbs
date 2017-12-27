@@ -1,7 +1,5 @@
 {{#if (or showPlaceholder (not user))}}
-  <div class="UserAvatar-placeholder" style="width: {{width}}px; height: {{height}}px">
-    {{fa-icon "user"}}
-  </div>
+  <img src="images/placeholder-avatar.jpg">
 {{else}}
-  <img width="{{width}}" height="{{height}}" src="{{user.avatarUrl}}&s={{width}}">
+  <img src="{{user.avatarUrl}}">
 {{/if}}

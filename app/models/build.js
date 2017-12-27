@@ -105,6 +105,6 @@ export default DS.Model.extend({
   }),
 
   reloadAll() {
-    this.store.findRecord('build', this.get('id'), {reload: true});
+    return this.store.findRecord('build', this.get('id'), {reload: true});
   },
 });

@@ -5,7 +5,6 @@ export default Component.extend({
   build: null,
 
   approvedNow: false,
-  classNames: ['ApprovalSection'],
   isApproved: alias('build.isApproved'),
   classNameBindings: [
     'classes',

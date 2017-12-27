@@ -94,7 +94,7 @@ describe('Acceptance: Organization', function() {
         expect(currentPath()).to.equal('organization.index');
       });
 
-      click('.NavMenu-item a:contains("Settings")');
+      click('[data-test-settings-link]:contains("Settings")');
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.settings');
       });
