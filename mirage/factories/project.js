@@ -3,7 +3,7 @@ import {Factory} from 'ember-cli-mirage';
 export default Factory.extend({
   isEnabled: true,
   name(i) {
-    return `Project ${i}`;
+    return `The Project That We All Adore And Love Working On ${i}`;
   },
   slug() {
     return this.name.underscore();

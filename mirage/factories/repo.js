@@ -6,7 +6,7 @@ export default Factory.extend({
   },
 
   name(i) {
-    return `Repo-${i}`;
+    return `Repo That Gets Lots of Commits From a Large Team ${i}`;
   },
 
   slug(i) {

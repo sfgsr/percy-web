@@ -3,7 +3,7 @@ import {Factory, trait} from 'ember-cli-mirage';
 
 export default Factory.extend({
   name(i) {
-    return `My Organization ${i}`;
+    return `My Organization That I Love And Cherish ${i}`;
   },
   slug() {
     return this.name.underscore();
