@@ -36,7 +36,7 @@
           <ul>
             {{#if organization.projects}}
               {{#each organization.projects as |project|}}
-                <li>{{#link-to "organization.project.settings" organization.slug project.slug classNames="Button Button--nav"}}{{project.name}}{{/link-to}}</li>
+                <li>{{#link-to "organization.project.settings" organization.slug project.slug classNames="Button Button--nav truncate"}}{{project.name}}{{/link-to}}</li>
               {{/each}}
             {{/if}}
             <li>{{#link-to "organizations.organization.projects.new" organization.slug classNames="Button Button--nav"}}Start new project{{/link-to}}</li>
