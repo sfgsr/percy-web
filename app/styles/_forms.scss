@@ -54,17 +54,11 @@ select {
   transition: border-color 250ms, box-shadow 250ms;
 
   &:focus,
-<<<<<<< HEAD
-  &:active {
-=======
   &:focus:active {
->>>>>>> master
     border-color: var(--lightest-purple);
     box-shadow: 0 0 2px var(--lightest-purple);
   }
 }
-<<<<<<< HEAD
-=======
 
 .alt-select {
   position: relative;
@@ -125,4 +119,3 @@ select {
     transform: translate3d(0, -50%, 0);
   }
 }
->>>>>>> master
