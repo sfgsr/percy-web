@@ -1,17 +1,13 @@
-import {fillable, clickable, visitable, create} from 'ember-cli-page-object';
+import {visitable, create} from 'ember-cli-page-object';
+import {ProfileEdit} from './components/forms/profile-edit';
+import {ConnectedAccountsPanel} from './components/connected-accounts-panel';
 
-const SELECTORS = {
-  NAME_INPUT: '[data-test-profile-edit-name] input[type=text]',
-  EMAIL_INPUT: '[data-test-profile-edit-email] input[type=text]',
-  INFO_SUBMIT_BUTTON: '[data-test-profile-edit-submit] input[type=submit]',
+const ProfilePage = {
+  visitInfoPage: visitable('/profile'),
+  infoForm: ProfileEdit,
+
+  visitConnectedAccountsPage: visitable('/profile/connected-accounts'),
+  connectedAccountsPanel: ConnectedAccountsPanel,
 };
 
-export default create({
-  visitInfoPage: visitable('/profile'),
-  visitConnectedAccountsPage: visitable('/profile/connected-accounts'),
-
-  fillInName: fillable(SELECTORS.NAME_INPUT),
-  fillInEmail: fillable(SELECTORS.EMAIL_INPUT),
-
-  submitInfoForm: clickable(SELECTORS.INFO_SUBMIT_BUTTON),
-});
+export default create(ProfilePage);

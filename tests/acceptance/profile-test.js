@@ -14,10 +14,10 @@ describe('Acceptance: Profile', function() {
 
     percySnapshot(this.test.fullTitle() + ' before submitting');
 
-    ProfilePageObject.fillInName('Tyrion Targaryen')
+    ProfilePageObject.infoForm
+      .fillInName('Tyrion Targaryen')
       .fillInEmail('tyrion@motherofdragons.biz')
       .submitInfoForm();
-
     percySnapshot(this.test.fullTitle() + ' after submitting');
   });
 

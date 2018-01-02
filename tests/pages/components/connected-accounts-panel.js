@@ -7,7 +7,7 @@ const SELECTORS = {
   DELETE_GITHUB_IDENTITY_BUTTON: '[data-test-connected-accounts-panel-delete-github-identity]',
 };
 
-export default create({
+export const ConnectedAccountsPanel = {
   isAddAuth0IdentityVisible: isVisible(SELECTORS.ADD_EMAIL_PASSWORD_IDENTITY_BUTTON),
   clickAddAuth0Identity: clickable(SELECTORS.ADD_EMAIL_PASSWORD_IDENTITY_BUTTON),
 
@@ -19,4 +19,6 @@ export default create({
 
   isDeleteGithubIdentityVisible: isVisible(SELECTORS.DELETE_GITHUB_IDENTITY_BUTTON),
   clickDeleteGithubIdentity: clickable(SELECTORS.DELETE_GITHUB_IDENTITY_BUTTON),
-});
+};
+
+export default create(ConnectedAccountsPanel);
