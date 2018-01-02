@@ -1,13 +1,34 @@
-.TrialBar {
-  overflow: hidden;
+.trial-bar {
+  --text-color: var(--default-text-color);
+  --background-color: var(--very-light-gray);
 
-  @media (max-width: 900px) {
-    display: none;
+  font-weight: 400;
+  color: var(--text-color);
+  background: var(--background-color);
+
+  a {
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
-}
 
-.Header.Header--dark {
-  .TrialBar {
-    padding-right: 12px;
+  &.is-on-dark {
+    --text-color: var(--white);
+    --background-color: var(--darker-purple);
+  }
+
+  &.is-expired {
+    --text-color: var(--white);
+    --background-color: var(--red);
+
+    a {
+      color: var(--white);
+
+      &:hover {
+        color: var(--white) !important;
+      }
+    }
   }
 }

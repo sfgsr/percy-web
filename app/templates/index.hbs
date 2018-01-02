@@ -1,8 +1,12 @@
 <div class="container Header Header--large Header--dark">
   {{#if session.isAuthenticated}}
-    {{nav-menu user=session.currentUser}}
+    <div class="flex justify-end pt-2">
+      {{nav-menu user=session.currentUser}}
+    </div>
   {{else}}
-    {{nav-menu}}
+    <div class="flex justify-end pt-3">
+      {{nav-menu}}
+    </div>
   {{/if}}
   <br clear="all">
   <img class="Header-logo" src="/images/percy.svg">

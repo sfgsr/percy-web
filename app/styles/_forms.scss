@@ -40,14 +40,6 @@ select {
   }
 }
 
-.form-section {
-  border-bottom: 1px solid var(--very-light-gray);
-
-  &:last-child {
-    border: 0;
-  }
-}
-
 .form-control {
   display: block;
   width: 100%;
@@ -62,8 +54,75 @@ select {
   transition: border-color 250ms, box-shadow 250ms;
 
   &:focus,
+<<<<<<< HEAD
   &:active {
+=======
+  &:focus:active {
+>>>>>>> master
     border-color: var(--lightest-purple);
     box-shadow: 0 0 2px var(--lightest-purple);
   }
 }
+<<<<<<< HEAD
+=======
+
+.alt-select {
+  position: relative;
+  height: auto;
+  padding: 10px 32px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--white);
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    background: var(--white);
+    border: 1px solid transparent;
+  }
+
+  &:focus,
+  &:focus:active {
+    border: 1px solid transparent;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+  }
+}
+
+.select-dropdown {
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 10px;
+    height: 6px;
+    background-image: url("/images/icons/dropdown-icon.svg");
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+  }
+
+  &:hover {
+    &::after {
+      animation: up-down 500ms linear infinite;
+    }
+  }
+}
+
+@keyframes up-down {
+  33% {
+    transform: translateY(-30%);
+  }
+
+  66% {
+    transform: translate3d(0, -70%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+>>>>>>> master

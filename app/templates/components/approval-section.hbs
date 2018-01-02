@@ -1,5 +1,3 @@
 {{#if build.isFinished}}
-  <div class="NavMenu-item NavMenu-item--right">
-    {{approval-button build=build approve=(action "approve")}}
-  </div>
+  {{approval-button build=build approve=(action "approve")}}
 {{/if}}

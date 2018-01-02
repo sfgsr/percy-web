@@ -7,6 +7,5 @@ export default Component.extend(TargetApplicationActionsMixin, {
   classes: null,
 
   session: service(),
-  classNames: ['NavMenu'],
   classNameBindings: ['classes'],
 });

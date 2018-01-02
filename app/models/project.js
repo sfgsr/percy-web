@@ -24,7 +24,6 @@ export default DS.Model.extend({
   }),
 
   writeOnlyToken: computed('tokens', function() {
-    // Right now the tokens API only returns a list of one write-only token.
-    return this.get('tokens.firstObject');
+    return this.get('tokens').findBy('role', 'write_only');
   }),
 });

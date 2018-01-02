@@ -2,7 +2,7 @@ import {oneWay} from '@ember/object/computed';
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ['WidthSelector'],
+  classNames: ['select-dropdown'],
   defaultSelectedWidth: null,
   selectedWidth: oneWay('defaultSelectedWidth'),
   actions: {

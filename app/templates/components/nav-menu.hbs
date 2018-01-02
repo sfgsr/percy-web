@@ -1,42 +1,12 @@
-{{#if session.isAuthenticated}}
-  {{#if currentOrganization}}
-    <div class="NavMenu-item u-hide-on-mobile">
-      {{#link-to "organization.index" currentOrganization.slug}}
-        Dashboard
-      {{/link-to}}
-    </div>
-    {{!-- TODO: #billingadmins --}}
-    {{#if (eq "admin" currentOrganization.currentUserMembership.role)}}
-      <div class="NavMenu-item u-hide-on-mobile">
-        {{#link-to "organizations.organization.settings" currentOrganization.slug}}
-          Settings
-        {{/link-to}}
-      </div>
-    {{/if}}
+<div class="flex align-center">
+  {{#link-to "docs.index" class="hide-on-tablet"}}Docs{{/link-to}}
+  {{#link-to "docs.page" "tutorials/example-apps" class="ml-4 hide-on-tablet"}}Tutorials{{/link-to}}
+  {{#if session.isAuthenticated}}
+    {{user-menu user=user class="ml-4"}}
+  {{else}}
+    <a href="https://blog.percy.io" class="ml-4">Blog</a>
+    {{#link-to "pricing" class="ml-4"}}Pricing{{/link-to}}
+    {{#link-to "enterprise" class="ml-4"}}Enterprise{{/link-to}}
+    <a href="#" {{action "showLoginModal"}} class="mx-4 hide-on-mobile">Sign In</a>
   {{/if}}
-  <div class="NavMenu-avatar">
-    {{user-menu user=user}}
-  </div>
-{{else}}
-  <div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
-    <a href="#" {{action "showLoginModal"}}>Sign In</a>
-  </div>
-  <div class="NavMenu-item NavMenu-item--right">
-    {{#link-to "enterprise"}}Enterprise{{/link-to}}
-  </div>
-  <div class="NavMenu-item NavMenu-item--right">
-    {{#link-to "pricing"}}Pricing{{/link-to}}
-  </div>
-{{/if}}
-<div class="NavMenu-item NavMenu-item--right {{if user "u-hide-on-mobile"}}">
-  <a href="https://blog.percy.io">Blog</a>
-</div>
-<div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
-  {{#link-to "docs.page" "tutorials/example-apps"}}Tutorials{{/link-to}}
-</div>
-<div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
-  {{#link-to "docs.index"}}Docs{{/link-to}}
-</div>
-<div class="NavMenu-item NavMenu-item--right u-hide-on-mobile">
-  {{trial-bar organization=currentOrganization}}
 </div>

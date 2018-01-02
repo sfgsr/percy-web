@@ -1,7 +1,13 @@
 .truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
+  vertical-align: top;
   overflow: hidden;
+}
+
+.truncate-target {
+  display: inline-block;
+  max-width: 160px;
 }
 
 .c-pointer {
@@ -50,12 +56,19 @@
   display: none;
 }
 
-.br {
+.w-full {
+  width: 100%;
+
+.rounded {
   border-radius: var(--border-radius);
 }
 
-.w-full {
-  width: 100%;
+.rounded-left {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.rounded-right {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .bg-white {
@@ -65,6 +78,9 @@
 .alt-hr {
   margin: 0;
   border-top: 1px solid var(--lightest-gray);
+
+.bg-purple-light {
+  background: var(--bg-purple-light);
 }
 
 .shadow-l {
@@ -81,8 +97,4 @@
 
 .bg-white-pattern {
   background: url("/images/pattern-on-white.svg");
-}
-
-.bg-purple-light {
-  background: var(--bg-purple-light);
 }

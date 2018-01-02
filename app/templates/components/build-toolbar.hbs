@@ -1,32 +1,26 @@
-<div class="container">
-  <div class="Header Header--light Header--small">
-    <div class="NavMenu">
-      {{#link-to "index"}}
-        {{#link-to "index"}}
-          <img src="/images/percy-silhouette.svg" class="Header-logo u-pull-left">
-        {{/link-to}}
-      {{/link-to}}
-      <div class="NavMenu-item NavMenu-item--left NavMenu-item-title NavMenu-item--text">
-        {{#link-to "organization" organization class="BuildToolbar-organization"}}{{organization.name}}{{/link-to}}
-        <span class="BuildToolbar-separator"> / </span>
-        {{#link-to "organization.project" organization project class="BuildToolbar-project"}}{{project.name}}{{/link-to}}
-      </div>
-    </div>
-    <div class="NavMenu">
-      {{approval-section build=build}}
-      <div class="NavMenu-item NavMenu-item--right">
-        {{#if (gt build.numComparisonWidths 1)}}
-          {{build-width-selector
-            widths=build.comparisonWidths
-            defaultSelectedWidth=defaultSelectedWidth
-            updateSelectedWidth=(action updateSelectedWidth)
-            noWidthSelected=noWidthSelected
-          }}
-        {{/if}}
-      </div>
-      <div class="NavMenu-item NavMenu-item--text NavMenu-item--right">
-        {{trial-bar organization=organization}}
-      </div>
+<header class="main-header main-header-alt flex space-between align-center px-3">
+  <div class="flex align-center">
+    {{#link-to "index"}}
+      <figure class="svg-container mr-3">
+        {{inline-svg "percy-logo-on-light"}}
+      </figure>
+    {{/link-to}}
+    <div class=" flex align-center bg-purple-300 f6 rounded px-2 py-1 hide-on-mobile">
+      {{#link-to "organization" organization class="text-mono text-purple truncate truncate-target hide-on-tablet"}}{{organization.name}}{{/link-to}}
+      <span class="text-weight-semibold mx-1 hide-on-tablet">/</span>
+      {{#link-to "organization.project" organization project class="text-mono text-purple truncate truncate-target"}}{{project.name}}{{/link-to}}
     </div>
   </div>
-</div>
+  {{trial-bar organization=organization}}
+  <div class="flex align-center">
+    {{#if (gt build.numComparisonWidths 1)}}
+      {{build-width-selector
+        widths=build.comparisonWidths
+        defaultSelectedWidth=defaultSelectedWidth
+        updateSelectedWidth=(action updateSelectedWidth)
+        noWidthSelected=noWidthSelected
+      }}
+    {{/if}}
+    {{approval-section build=build}}
+  </div>
+</header>

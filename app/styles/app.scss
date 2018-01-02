@@ -6,6 +6,7 @@
   "ember-modal-dialog/ember-modal-structure";
 
 @import
+  "variables/color_system",
   "variables/colors",
   "variables/fonts",
   "variables/mixins",
@@ -30,11 +31,14 @@
   "flash_messages",
   "alerts";
 
+@import "colors/colors";
+
 @import
   "layout/container",
-  "layout/padding",
   "layout/grid",
-  "layout/margin";
+  "layout/margin",
+  "layout/padding",
+  "layout/responsive";
 
 // Non-component styles.
 @import
@@ -50,7 +54,6 @@
 // Ember components.
 @import
   "components/approval_button",
-  "components/approval_section",
   "components/build_card",
   "components/build_comparison_info",
   "components/build_duration",
