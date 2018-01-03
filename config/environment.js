@@ -81,7 +81,7 @@ module.exports = function(environment) {
     ENV.APP.AMPLITUDE_USERS_PROJECT_ID = '5a8c0499760103fcd2754fe7d5756214';
     ENV.APP.AMPLITUDE_ORGANIZATIONS_INSTANCE_NAME = 'Organizations';
     ENV.APP.AMPLITUDE_ORGANIZATIONS_PROJECT_ID = '89f8fae9aab3fccc0740237f17e43745';
-    ENV['ember-simple-auth']['auth0'].clientID = 'c5DJKko83id1QSakUPfnS6cKioygK3XI';
+    ENV['ember-simple-auth']['auth0'].clientID = '1W3CbZu2iYnvJsilsVV2QG3DCTAcUpp3';
     ENV['ember-simple-auth']['auth0'].domain = 'percy-io-dev.auth0.com';
   }
 
