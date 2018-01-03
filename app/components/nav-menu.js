@@ -1,8 +1,7 @@
 import {inject as service} from '@ember/service';
 import Component from '@ember/component';
-import TargetApplicationActionsMixin from '../mixins/target-application-actions';
 
-export default Component.extend(TargetApplicationActionsMixin, {
+export default Component.extend({
   user: null,
   classes: null,
 

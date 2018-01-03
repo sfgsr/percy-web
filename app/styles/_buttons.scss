@@ -73,7 +73,8 @@ input[type="button"] {
     background-color: var(--purple);
     border: 0;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: var(--white);
       background-color: var(--light-purple);
     }

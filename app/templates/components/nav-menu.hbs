@@ -7,6 +7,8 @@
     <a href="https://blog.percy.io" class="ml-4">Blog</a>
     {{#link-to "pricing" class="ml-4"}}Pricing{{/link-to}}
     {{#link-to "enterprise" class="ml-4"}}Enterprise{{/link-to}}
-    <a href="#" {{action "showLoginModal"}} class="mx-4 hide-on-mobile">Sign In</a>
+    {{sign-in-header-link
+      classNames="mx-4 hide-on-mobile"
+    }}
   {{/if}}
 </div>
