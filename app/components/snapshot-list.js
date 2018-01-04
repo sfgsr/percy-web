@@ -118,6 +118,9 @@ export default Component.extend({
     $(document).unbind('keydown.snapshots');
   },
   scrollToChild: function(component) {
+    if (!component) {
+      return;
+    }
     $('.BuildContainer-body').animate({scrollTop: component.$().get(0).offsetTop - 10}, 0);
   },
   actions: {
