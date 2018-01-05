@@ -34,6 +34,8 @@ export default Component.extend({
     },
   ),
 
+  isEligibleForGithubIntegration: alias('currentUser.hasGithubIdentity'),
+
   isSaveSuccessful: null,
   isSaving: null,
 

@@ -100,6 +100,7 @@ module.exports = function(environment) {
       defaultWidths: [375, 1280],
     };
     ENV['ember-simple-auth']['auth0'].clientID = 'foo';
+    ENV['ember-simple-auth']['auth0'].domain = 'foo.bar.com';
   }
 
   if (environment === 'production') {
