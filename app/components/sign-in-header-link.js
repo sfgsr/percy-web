@@ -3,7 +3,8 @@ import TargetApplicationActionsMixin from 'percy-web/mixins/target-application-a
 
 export default Component.extend(TargetApplicationActionsMixin, {
   tagName: 'a',
-  attributeBindings: ['tabindex'],
+  href: '#',
+  attributeBindings: ['tabindex', 'href'],
   tabindex: 0,
 
   click() {
