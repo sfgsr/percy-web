@@ -7,7 +7,6 @@ export default Component.extend({
   showIcon: true,
   tagName: 'a',
   classNames: ['LoginButton', 'Button', 'Button--primary', 'Button--onDark'],
-  classNameBindings: ['classes', 'showIcon:Button--withLeftIcon'],
   attributeBindings: ['tabindex'],
   tabindex: 0,
 
