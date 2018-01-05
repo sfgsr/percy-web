@@ -13,7 +13,10 @@
   <h1 class="alt">Percy</h1>
   <h2>Continuous visual reviews for web apps</h2>
   {{#if session.isAuthenticated}}
-    {{goto-app redirectToDefaultOrganization="redirectToDefaultOrganization"}}
+    {{goto-app
+      redirectToDefaultOrganization="redirectToDefaultOrganization"
+      data-test-index-goto-app=true
+    }}
   {{else}}
     {{login-button showLoginModal="showLoginModal"}}
   {{/if}}
@@ -157,7 +160,10 @@ $ ember install ember-percy
           </p>
           <p>
             {{#if session.isAuthenticated}}
-              {{goto-app redirectToDefaultOrganization="redirectToDefaultOrganization"}}
+              {{goto-app
+                redirectToDefaultOrganization="redirectToDefaultOrganization"
+                data-test-index-goto-app=true
+              }}
             {{else}}
               {{login-button showLoginModal="showLoginModal" text="Start free trial" showIcon=false}}
             {{/if}}

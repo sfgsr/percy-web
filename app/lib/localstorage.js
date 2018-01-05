@@ -28,7 +28,7 @@ export default {
     }
   },
 
-  keys() {
+  _keys() {
     try {
       const ret = [];
       for (var i = 0; i < localStorage.length; i++) {
@@ -37,11 +37,12 @@ export default {
       return ret;
     } catch (_) {
       // Safari throws errors while accessing localStorage in private mode.
+      return [];
     }
   },
 
   keysWithString(string) {
-    return this.keys().filter(key => {
+    return this._keys().filter(key => {
       return new RegExp(string).test(key);
     });
   },

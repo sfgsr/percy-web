@@ -41,7 +41,7 @@ describe('Acceptance: Organization', function() {
       visit('/login');
       visit('/');
 
-      click('.ReposLink a');
+      click('[data-test-index-goto-app]');
       andThen(() => {
         expect(currentPath()).to.equal('organization.index');
       });
