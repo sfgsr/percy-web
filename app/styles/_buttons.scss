@@ -237,9 +237,11 @@ button,
     box-shadow: 0 2px 8px 0 rgba(46, 0, 62, 0.26), 0 8px 20px 0 rgba(39, 0, 52, 0.08);
   }
 
+  &:focus,
   &:focus:active {
+    color: var(--white);
     background: var(--purple-gradient);
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, -2px, 0);
   }
 }
 
