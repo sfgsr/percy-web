@@ -1,8 +1,9 @@
 steps:
   - label: ":percy::hamster: test"
+    artifact_paths: 'tmp-junit/*.xml'
     commands:
       - "make build"
-      - "make test"
+      - "make test; make publish-artifacts"
     timeout_in_minutes: 20
 
   - label: ":percy::hamster: publish"
@@ -10,6 +11,13 @@ steps:
     commands:
       - "make publish"
     timeout_in_minutes: 20
+
+  - wait: ~
+    continue_on_failure: true
+
+  - label: ":junit:"
+    commands:
+      - .buildkite/junit.sh
 
   - wait
 
@@ -22,3 +30,5 @@ steps:
       branch: "${BUILDKITE_BRANCH}"
       env:
         TAG: "${BUILDKITE_COMMIT}"
+
+
