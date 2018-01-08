@@ -21,11 +21,13 @@
           <ul class="sidenav-list">
             {{#if organization.projects}}
               {{#each organization.projects as |project|}}
-                <li>{{#link-to "organization.project.settings" organization.slug project.slug classNames="Button Button--nav truncate"}}{{project.name}}{{/link-to}}</li>
+                <li class="sidenav-list-item">
+                  {{#link-to "organization.project.settings" organization.slug project.slug classNames="sidenav-list-item-link truncate"}}{{project.name}}{{/link-to}}
+                </li>
               {{/each}}
             {{/if}}
             <li class="sidenav-list-item">
-              {{#link-to "organizations.organization.projects.new" organization.slug classNames="sidenav-list-item-link"}}Start new project{{/link-to}}
+              {{#link-to "organizations.organization.projects.new" organization.slug classNames="sidenav-list-item-link text-weight-semibold"}}Start new project{{/link-to}}
             </li>
           </ul>
         </section>
