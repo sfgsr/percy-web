@@ -5,6 +5,5 @@ export default Component.extend({
   showComparisonInfo: true,
   classes: null,
 
-  classNames: ['BuildInfo'],
-  classNameBindings: ['classes'],
+  tagName: '',
 });

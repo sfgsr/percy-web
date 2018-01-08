@@ -129,7 +129,7 @@ button,
 
   &.Button--withIconOnly {
     padding: 0 20px;
-    color: var(--default-text-color);
+    color: var(--text-color);
 
     .fa {
       font-size: 2rem;
@@ -300,6 +300,25 @@ button,
   }
 }
 
+.btn-icon-only {
+  height: auto !important;
+  padding: 0;
+  background: none;
+  border: 0;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:focus:active {
+    background: none;
+    border: 0;
+  }
+
+  > svg {
+    display: block;
+  }
+}
+
 .btn-md {
   padding: 10px 32px;
   font-size: 14px;
@@ -343,7 +362,7 @@ button,
 
     &:hover,
     &.is-active {
-      color: var(--default-text-color);
+      color: var(--text-color);
       transform: translate3d(0, 0, 0);
     }
 

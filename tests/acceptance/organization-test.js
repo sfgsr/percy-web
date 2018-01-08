@@ -20,12 +20,12 @@ describe('Acceptance: Organization', function() {
         expect(currentPath()).to.equal('organization.index');
       });
 
-      click('a.ProjectCard-link');
+      click('[data-test-project-link]');
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.index');
       });
 
-      click('.ProjectContainer a:contains("Settings")');
+      click('[data-test-settings-icon]');
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.settings');
       });

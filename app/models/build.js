@@ -1,7 +1,13 @@
 import {computed} from '@ember/object';
-import {bool, and, equal, max} from '@ember/object/computed';
+import {bool, and, equal, max, not, or} from '@ember/object/computed';
 import DS from 'ember-data';
 import moment from 'moment';
+
+const WAITING_LABEL = 'Processing';
+const UNREVIEWED_LABEL = 'Needs Review';
+const APPROVED_LABEL = 'Approved';
+const FAILED_LABEL = 'Failed';
+const EXPIRED_LABEL = 'Expired';
 
 export default DS.Model.extend({
   project: DS.belongsTo('project', {async: false}),
@@ -25,6 +31,23 @@ export default DS.Model.extend({
   isFinished: equal('state', 'finished'),
   isFailed: equal('state', 'failed'),
   isExpired: equal('state', 'expired'),
+  isWaiting: or('isPending', 'isProcessing'),
+
+  buildStatusLabel: computed('state', function() {
+    if (this.get('isWaiting')) {
+      return WAITING_LABEL;
+    } else if (this.get('isFinished')) {
+      if (this.get('isApproved') || this.get('hasNoDiffs')) {
+        return APPROVED_LABEL;
+      } else {
+        return UNREVIEWED_LABEL;
+      }
+    } else if (this.get('isFailed')) {
+      return FAILED_LABEL;
+    } else if (this.get('isExpired')) {
+      return EXPIRED_LABEL;
+    }
+  }),
 
   failureReason: DS.attr(),
   failureReasonHumanized: computed('failureReason', function() {
@@ -68,6 +91,7 @@ export default DS.Model.extend({
     return this.get('totalComparisonsDiff') > 0;
   }),
 
+  hasNoDiffs: not('hasDiffs'),
   isPullRequest: DS.attr('boolean'),
   pullRequestNumber: DS.attr('number'),
   pullRequestTitle: DS.attr(),

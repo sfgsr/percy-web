@@ -1,23 +1,33 @@
 {{#each projects as |project|}}
-  {{project-card project=project}}
-  {{#if project.isEnabled}}
-    <div class="ProjectsList-recentBuilds">
-      {{#if project.recentBuilds.isPending}}
-        {{loading-page}}
-      {{else}}
-        {{#if project.recentBuilds}}
-          {{#each project.recentBuilds as |build|}}
-            {{build-card build=build}}
-          {{/each}}
+  <div class="mb-5">
+    {{#link-to "organization.project.index" project.organization.slug project.slug class="no-underline transition-hover-container" data-test-project-link=true}}
+      <header class="flex space-between align-center py-2 px-5 f2 bg-white sticky z-top project-list-header">
+        <div class="flex align-center">
+          <span class="{{if project.isDisabled 'opacity-50'}} text-dark" style="text-decoration: none !important;">{{project.name}}</span>
+          {{#if project.isDisabled}}
+            <div class="label ml-2">disabled project</div>
+          {{/if}}
+          {{inline-svg "chevron-right-icon" class="ml-3 transition-fade-in-right"}}
+        </div>
+      </header>
+    {{/link-to}}
+    {{#if project.isEnabled}}
+      <div>
+        {{#if project.recentBuilds.isPending}}
+          {{loading-page}}
         {{else}}
-          <div class="ProjectsList-empty">
-            <p>
-              Waiting for first snapshot.&nbsp;
-              {{#link-to "organization.project.index" project.organization.slug project.slug class="Button"}}Get started{{/link-to}}
-            </p>
-          </div>
+          {{#if project.recentBuilds}}
+            {{#each project.recentBuilds as |build|}}
+              {{build-card build=build}}
+            {{/each}}
+          {{else}}
+            <div class="p-5 text-center bg-gray-000">
+              Waiting for first snapshot.
+              {{#link-to "organization.project.index" project.organization.slug project.slug class="btn ml-4"}}Get started{{/link-to}}
+            </div>
+          {{/if}}
         {{/if}}
-      {{/if}}
-    </div>
-  {{/if}}
+      </div>
+    {{/if}}
+  </div>
 {{/each}}

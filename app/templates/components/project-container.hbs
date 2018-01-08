@@ -1,70 +1,79 @@
-<div class="container container--fixedWidth">
-  <div class="container container--forContent ProjectContainer">
-    <a {{action "refresh"}} href="#" class="Button Button--withLeftIcon u-pull-right">
-      {{#if isRefreshing}}
-        {{fa-icon "refresh" classNames="fa--left fa-spin"}}
-      {{else}}
-        {{fa-icon "refresh" classNames="fa--left"}}
+<header class="sticky bg-white z-top">
+  <div class="flex space-between align-center py-4 px-5">
+    <div class="flex align-center">
+      <h2 class="m-0 mr-3 f2 text-weight-regular">{{project.name}}</h2>
+      {{#if project.isDisabled}}
+        <div class="label">disabled</div>
       {{/if}}
-      Refresh
-    </a>
-    {{#link-to "organization.project.settings" project.organization.slug project.slug classNames="Button  u-pull-right"}}
-      Settings
-    {{/link-to}}
-    <header>
-      <h3>
-        {{project.name}}
-        {{#if project.isDisabled}}
-          <span class="ProjectContainer-state">(disabled)</span>
-        {{/if}}
-      </h3>
-      {{#if project.organization.isGithubIntegrated}}
-        {{#if project.repo}}
-          Linked to <a href="{{project.repo.htmlUrl}}">{{project.repo.slug}}</a> {{fa-icon "github"}}
-        {{/if}}
-      {{/if}}
-    </header>
-    {{#if project.builds.isPending}}
-      {{loading-page}}
-    {{else}}
-      {{#if project.builds}}
-        <div>
-          {{#each project.builds as |build|}}
-            {{build-card build=build}}
-          {{/each}}
+      {{#link-to "organization.project.settings" project.organization.slug project.slug class="mr-3" data-test-settings-icon=true}}
+        <figure class="svg-container">
+          {{inline-svg "settings-icon"}}
+        </figure>
+      {{/link-to}}
+      <button {{action "refresh"}} class="btn-icon-only {{if isRefreshing 'animate-rotate-360'}}">
+        {{inline-svg "refresh-icon"}}
+      </button>
+    </div>
+    {{#if project.organization.isGithubIntegrated}}
+      {{#if project.repo}}
+        <div class="flex align-center">
+          <figure class="svg-container mr-2">
+            {{inline-svg "github-icon"}}
+          </figure>
+          <span class="text-weight-semibold mr-2">Linked to</span>
+          <a href="{{project.repo.htmlUrl}}"><code>{{project.repo.slug}}</code></a>
         </div>
-      {{else}}
-        {{#if project.isEnabled}}
-          <div class="Alert Alert--warning">
-            <strong>Waiting for first snapshot:</strong> complete setup below to generate first snapshot.
-          </div>
-          <h5>Getting started</h5>
-          <p>Here's an overview of how to get started:</p>
-
-          <ol>
-          <li>Set <code>PERCY_TOKEN</code> and <code>PERCY_PROJECT</code> environment variables in your CI environment.</li>
-          <li>Integrate Percy's client library to take snapshots in your test suite.</li>
-          <li>Run your tests in CI or create a GitHub PR.</li>
-          </ol>
-
-          <p>
-            {{#link-to "docs.index" class="Button"}}View setup documentation{{/link-to}}
-          </p>
-
-          <h5>Environment variables</h5>
-          {{projects/env-vars project=project}}
-
-          <h5>Just want to see a demo?</h5>
-          <p>
-            {{quickstart-button showQuickstart=showQuickstart}}
-          </p>
-          {{#if showQuickstart}}
-            {{projects/quickstart-code project=project}}
-          {{/if}}
-        {{else}}
-          <p>No builds yet, and this project is disabled.</p>
-        {{/if}}
       {{/if}}
     {{/if}}
   </div>
-</div>
+  <div class="build-list-header px-5">
+    <div class="f6 text-light text-weight-semibold pb-1">Build #</div>
+    <div class="f6 text-light text-weight-semibold pb-1">Details</div>
+    <div class="f6 text-light text-weight-semibold pb-1">Diffs</div>
+    <div class="f6 text-light text-weight-semibold pb-1">Status</div>
+  </div>
+</header>
+{{#if project.builds.isPending}}
+  {{loading-page}}
+{{else}}
+  {{#if project.builds}}
+    <div class="build-list">
+      {{#each project.builds as |build|}}
+        {{build-card build=build}}
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="container-lg py-9">
+      {{#if project.isEnabled}}
+        <div class="Alert Alert--warning">
+          <strong>Waiting for first snapshot:</strong> complete setup below to generate first snapshot.
+        </div>
+        <h5>Getting started</h5>
+        <p>Here's an overview of how to get started:</p>
+
+        <ol>
+        <li>Set <code>PERCY_TOKEN</code> and <code>PERCY_PROJECT</code> environment variables in your CI environment.</li>
+        <li>Integrate Percy's client library to take snapshots in your test suite.</li>
+        <li>Run your tests in CI or create a GitHub PR.</li>
+        </ol>
+
+        <p>
+          {{#link-to "docs.index" class="Button"}}View setup documentation{{/link-to}}
+        </p>
+
+        <h5>Environment variables</h5>
+        {{projects/env-vars project=project}}
+
+        <h5>Just want to see a demo?</h5>
+        <p>
+          {{quickstart-button showQuickstart=showQuickstart}}
+        </p>
+        {{#if showQuickstart}}
+          {{projects/quickstart-code project=project}}
+        {{/if}}
+      {{else}}
+        <p>No builds yet, and this project is disabled.</p>
+      {{/if}}
+    </div>
+  {{/if}}
+{{/if}}

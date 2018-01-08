@@ -3,7 +3,7 @@ import Component from '@ember/component';
 export default Component.extend({
   project: null,
   showQuickstart: false,
-  classNames: ['ProjectContainer'],
+  tagName: 'main',
   classNameBindings: ['classes'],
   actions: {
     refresh() {

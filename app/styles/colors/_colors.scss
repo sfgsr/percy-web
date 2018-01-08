@@ -4,10 +4,20 @@
   background: var(--purple-300) !important;
 }
 
+.bg-gray-000 {
+  background: var(--gray-000) !important;
+}
+
 // text
 
 .text-dark {
   color: var(--gray-700) !important;
+  transition: color 250ms;
+}
+
+a:hover .text-dark {
+  color: var(--blue-500) !important;
+  text-decoration: none;
 }
 
 .text-purple {

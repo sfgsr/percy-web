@@ -4,12 +4,8 @@ import Component from '@ember/component';
 export default Component.extend({
   build: null,
   classes: null,
+  tagName: '',
 
-  click() {
-    this.send('navigateToBuild');
-  },
-  classNames: ['BuildCard', 'container'],
-  classNameBindings: ['classes', 'build.isExpired:BuildCard--expired'],
   actions: {
     navigateToBuild() {
       // Send action directly up to application controller, so we don't have to delegate every

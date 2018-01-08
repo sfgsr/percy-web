@@ -1,14 +1,74 @@
-<div class="row">
-  <div class="two columns">
-    {{!-- NOTE: we use the baseBuild.id instead of the object to force the next build to reload so all relationships are available. TODO: better way? --}}
-    <h6>{{#link-to "organization.project.builds.build" build.project.organization.slug build.project.slug build.id}}{{build.buildTitle}}{{/link-to}}</h6>
+<div class="build-card c-pointer {{if build.isExpired 'opacity-50'}} is-{{dasherize build.buildStatusLabel}}" {{action "navigateToBuild"}}>
+  <div>
+    <div style="margin-bottom: -6px;">
+      {{#link-to "organization.project.builds.build" build.project.organization.slug build.project.slug build.id class="f2 text-mono"}}{{build.buildNumber}}{{/link-to}}
+    </div>
+    <div class="f6 text-light text-weight-semibold no-wrap truncate">
+      {{moment-from-now build.createdAt interval=60000}}
+    </div>
   </div>
-  <div class="six columns">
-    {{commit-info build=build}}
+  <div style="min-width: 0">
+    <div class="flex align-center mb-1 pt-1">
+      {{#if build.isGithubLinked}}
+        {{inline-svg "github-icon" class="mr-2"}}
+      {{/if}}
+      <code class="truncate mr-2">
+        {{build.branch}}
+      </code>
+      {{#if build.isGithubLinked}}
+        <a class="f6 text-mono" href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+      {{else}}
+        <span class="f6 text-mono">{{build.commit.shaShort}}</span>
+      {{/if}}
+    </div>
+    <div class="flex align-center">
+      {{#if build.isGithubLinked}}
+        {{#if build.isPullRequest}}
+          {{inline-svg "pull-request-icon" class="mr-2"}}
+          <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="no-wrap truncate text-weight-semibold mr-2">#{{build.pullRequestNumber}} {{build.pullRequestTitle}}</a>
+        {{else}}
+          {{inline-svg "commit-icon" class="mr-2"}}
+        {{/if}}
+      {{/if}}
+      <strong class="no-wrap mr-2">{{build.commit.authorName}}</strong>
+      <span class="text-light truncate">{{build.commit.message}}</span>
+    </div>
   </div>
-  <div class="two columns">
-    {{! TODO(fotinakis): figure out why comparison data is not loaded correctly here. }}
-    {{build-info build=build showComparisonInfo=false}}
+  <div>
+    <div class="flex align-center">
+      {{#if build.isWaiting}}
+        {{inline-svg "loader-icon" class="mr-3"}}
+      {{else if build.isFailed}}
+        {{inline-svg "null-comparison-icon" class="mr-3"}}
+      {{else if build.hasNoDiffs}}
+        {{inline-svg "no-comparison-icon" class="mr-3"}}
+      {{else}}
+        {{inline-svg "comparison-icon" class="mr-3"}}
+      {{/if}}
+      <div>
+        {{#if build.isWaiting}}
+          <span class="f6 text-weight-semibold text-light">Processing snapshots</span>
+        {{else if build.isFailed}}
+          <span class="text-weight-semibold text-light">{{build.failureReasonHumanized}}</span>
+        {{else}}
+          <div class="no-wrap">
+            {{#if build.hasDiffs}}
+              <strong>{{build.totalComparisonsDiff}}</strong>
+              <span class="f6 text-light text-weight-semibold">{{pluralize build.totalComparisonsDiff "visual diff" without-count=true}}</span>
+            {{else}}
+              <strong>0</strong>
+              <span class="f6 text-light text-weight-semibold">visual diffs</span>
+            {{/if}}
+          </div>
+          <div class="no-wrap">
+            <strong>{{build.totalComparisonsFinished}}</strong>
+            <span class="f6 text-light text-weight-semibold">{{pluralize build.totalComparisonsFinished "total snapshot" without-count=true}}</span>
+          </div>
+        {{/if}}
+      </div>
+    </div>
   </div>
-  <div class="two columns">{{build-state build=build classes="u-pull-right"}}</div>
+  <div>
+    <div class="status-pill is-{{dasherize build.buildStatusLabel}}" data-test-build-state>{{build.buildStatusLabel}}</div>
+  </div>
 </div>

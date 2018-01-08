@@ -5,6 +5,14 @@
   overflow: hidden;
 }
 
+// stylelint-disable value-no-vendor-prefix
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+// stylelint-enable value-no-vendor-prefix
+
 .truncate-target {
   display: inline-block;
   max-width: 160px;
@@ -90,4 +98,32 @@
 
 .bg-white-pattern {
   background: url("/images/pattern-on-white.svg");
+}
+
+.opacity-1 {
+  opacity: 1;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.z-top {
+  z-index: 1;
+}
+
+.no-underline {
+  text-decoration: none !important;
 }

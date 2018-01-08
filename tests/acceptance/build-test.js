@@ -25,7 +25,7 @@ describe('Acceptance: Pending Build', function() {
     });
     percySnapshot(this.test.fullTitle() + ' on the project page');
 
-    click('.BuildState');
+    click('[data-test-build-state]');
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
@@ -60,7 +60,7 @@ describe('Acceptance: Processing Build', function() {
     });
     percySnapshot(this.test.fullTitle() + ' on the project page');
 
-    click('.BuildState');
+    click('[data-test-build-state]');
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
@@ -96,7 +96,7 @@ describe('Acceptance: Failed Build', function() {
     });
     percySnapshot(this.test.fullTitle() + ' on the project page');
 
-    click('.BuildState');
+    click('[data-test-build-state]');
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
@@ -147,7 +147,7 @@ describe('Acceptance: Build', function() {
     });
     percySnapshot(this.test.fullTitle() + ' on the project page');
 
-    click('.BuildState');
+    click('[data-test-build-state]');
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });

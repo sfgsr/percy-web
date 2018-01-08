@@ -74,3 +74,42 @@
 .animate-fade-in-up {
   animation: fade-in-up 500ms;
 }
+
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    transform: translate3d(-60px, 0, 0);
+  }
+}
+
+.animate-fade-in-right {
+  animation: fade-in-right 500ms;
+}
+
+.transition-hover-container:hover {
+  .transition-fade-in-right {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.transition-fade-in-right {
+  opacity: 0;
+  transition: opacity 250ms, transform 250ms;
+  transform: translate3d(-30px, 0, 0);
+
+  &:hover {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes rotate-360 {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-rotate-360 {
+  animation: rotate-360 500ms linear infinite;
+}

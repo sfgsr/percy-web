@@ -1,26 +1,54 @@
-.BuildCard {
-  width: 100%;
-  padding: 10px 10px 0;
-  font-size: $smaller-font-size;
-  cursor: pointer;
+.build-card,
+.build-list-header {
+  display: grid;
+  grid-template-columns: 108px 4fr 180px 108px;
+  grid-gap: var(--spacer-4);
+  padding: 0 var(--spacer-3);
+  box-shadow: inset 2px 0 0 var(--status-color, transparent);
+}
 
-  &.BuildCard--expired {
-    opacity: 0.5;
-  }
+.build-list-header,
+.project-list-header {
+  box-shadow: 0 1px 0 var(--gray-100);
+}
 
-  .BuildState {
-    margin-bottom: 8px;
-  }
-
-  h6 {
-    font-size: 1.7rem;
-  }
+.build-card {
+  align-items: center;
+  padding: var(--spacer-3) var(--spacer-4);
+  background: var(--white);
+  transition: box-shadow 250ms;
 
   &:hover {
-    background: var(--lightest-gray);
+    position: relative;
+    box-shadow: inset 2px 0 0 var(--status-color, transparent), 0 2px 10px rgba(#000, 0.1);
+    z-index: 0;
   }
 
-  &:first-child {
-    border-top: var(--lighter-gray-border);
+  &:nth-child(even) {
+    background: var(--gray-000);
+
+    &:hover {
+      box-shadow: inset 2px 0 0 var(--status-color, transparent), 0 2px 10px rgba(#000, 0.15);
+    }
+  }
+
+  &.is-processing {
+    --status-color: var(--gray-200);
+  }
+
+  &.is-needs-review {
+    --status-color: var(--purple-600);
+  }
+
+  &.is-approved {
+    --status-color: var(--green-500);
+  }
+
+  &.is-failed {
+    --status-color: var(--red-500);
+  }
+
+  &.is-expired {
+    --status-color: var(--gray-100);
   }
 }

@@ -1,13 +1,42 @@
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
 code,
 kbd,
 pre,
 samp {
   font-family: $monospace-font;
-  font-size: 1.3rem;
+  font-size: var(--f6-size);
+  letter-spacing: 0.5px;
+}
+
+code {
+  padding: 0 var(--spacer-1);
+  color: var(--text-color);
+  white-space: nowrap;
+  background: var(--gray-100);
+  border-radius: var(--border-radius);
+}
+
+pre > code {
+  display: block;
+  padding: var(--spacer-1);
+  white-space: pre;
 }
 
 strong {
   font-weight: var(--semibold);
+}
+
+a {
+  color: var(--blue-500);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--blue-500);
+    text-decoration: underline;
+  }
 }
 
 .alt-p {
@@ -18,6 +47,10 @@ strong {
   padding: 2px 8px;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }
 
 .text-weight-regular {
@@ -43,17 +76,6 @@ strong {
 
 .text-center {
   text-align: center !important;
-}
-
-.f0,
-.f1,
-.f2,
-.f3,
-.f4,
-.f5,
-.f6 {
-  -webkit-font-smoothing: antialiased;
-  font-family: $standard-font;
 }
 
 .f00 {

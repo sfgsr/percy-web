@@ -20,7 +20,7 @@ export default DS.Model.extend({
   tokens: DS.hasMany('token', {async: true}),
 
   recentBuilds: computed('organization', 'slug', 'builds', function() {
-    return this.store.query('build', {project: this, page: {limit: 2}});
+    return this.store.query('build', {project: this, page: {limit: 3}});
   }),
 
   writeOnlyToken: computed('tokens', function() {
