@@ -9,3 +9,5 @@ steps:
   - label: ":junit:"
     commands:
       - .buildkite/junit.sh
+
+  - wait
