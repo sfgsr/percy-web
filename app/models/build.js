@@ -4,7 +4,7 @@ import DS from 'ember-data';
 import moment from 'moment';
 
 const WAITING_LABEL = 'Processing';
-const UNREVIEWED_LABEL = 'Needs Review';
+const UNREVIEWED_LABEL = 'Unreviewed';
 const APPROVED_LABEL = 'Approved';
 const FAILED_LABEL = 'Failed';
 const EXPIRED_LABEL = 'Expired';

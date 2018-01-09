@@ -1,10 +1,13 @@
 .build-card,
 .build-list-header {
   display: grid;
-  grid-template-columns: 108px 4fr 180px 108px;
   grid-gap: var(--spacer-4);
   padding: 0 var(--spacer-3);
-  box-shadow: inset 2px 0 0 var(--status-color, transparent);
+  box-shadow: inset 4px 0 0 var(--status-color, transparent);
+
+  @media screen and (min-width: $width-md) {
+    grid-template-columns: 108px 4fr 180px 108px;
+  }
 }
 
 .build-list-header,
@@ -12,11 +15,30 @@
   box-shadow: 0 1px 0 var(--gray-100);
 }
 
+// TODO add border bottom utility classes when created
+.build-list-header {
+  display: none;
+  min-height: 1px;
+
+  @media screen and (min-width: $width-md) {
+    display: grid;
+  }
+}
+
 .build-card {
   align-items: center;
   padding: var(--spacer-3) var(--spacer-4);
   background: var(--white);
   transition: box-shadow 250ms;
+  grid-template-areas:
+    "build"
+    "details"
+    "diffs"
+    "status";
+
+  @media screen and (min-width: $width-md) {
+    grid-template-areas: "build details diffs status";
+  }
 
   &:hover {
     position: relative;
@@ -36,7 +58,7 @@
     --status-color: var(--gray-200);
   }
 
-  &.is-needs-review {
+  &.is-unreviewed {
     --status-color: var(--purple-600);
   }
 

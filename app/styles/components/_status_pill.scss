@@ -20,7 +20,7 @@
     --background-color: var(--green-000);
   }
 
-  &.is-needs-review {
+  &.is-unreviewed {
     --text-color: var(--purple-800);
     --background-color: var(--purple-300);
   }

@@ -17,8 +17,8 @@
     background-color: var(--green);
 
     &.BuildStateBadge--hasDiffs {
-      color: var(--darker-yellow);
-      background-color: var(--yellow);
+      color: var(--purple-800);
+      background-color: var(--purple-300);
     }
 
     &.BuildStateBadge--approved {

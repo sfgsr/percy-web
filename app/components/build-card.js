@@ -13,5 +13,9 @@ export default Component.extend({
       let applicationController = getOwner(this).lookup('controller:application');
       applicationController.send('navigateToBuild', this.get('build'));
     },
+
+    stopPropagation(e) {
+      e.stopPropagation();
+    },
   },
 });

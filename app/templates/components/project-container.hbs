@@ -27,10 +27,12 @@
     {{/if}}
   </div>
   <div class="build-list-header px-5">
-    <div class="f6 text-light text-weight-semibold pb-1">Build #</div>
-    <div class="f6 text-light text-weight-semibold pb-1">Details</div>
-    <div class="f6 text-light text-weight-semibold pb-1">Diffs</div>
-    <div class="f6 text-light text-weight-semibold pb-1">Status</div>
+    {{#if project.builds}}
+      <div class="f6 text-light text-weight-semibold pb-1">Build #</div>
+      <div class="f6 text-light text-weight-semibold pb-1">Details</div>
+      <div class="f6 text-light text-weight-semibold pb-1">Diffs</div>
+      <div class="f6 text-light text-weight-semibold pb-1">Status</div>
+    {{/if}}
   </div>
 </header>
 {{#if project.builds.isPending}}
