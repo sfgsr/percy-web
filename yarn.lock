@@ -368,9 +368,20 @@ auth0-js@6.8.0:
     winchan "^0.1.1"
     xtend "~2.1.1"
 
-auth0-js@^8.2.0, auth0-js@~8.11.2:
-  version "8.11.3"
-  resolved "https://registry.yarnpkg.com/auth0-js/-/auth0-js-8.11.3.tgz#97385a17c8aad1cd612bf82fded328a4396eebdf"
+auth0-js@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/auth0-js/-/auth0-js-9.0.1.tgz#cd51eafd513d182b67708acd0792d7d4808435e5"
+  dependencies:
+    base64-js "^1.2.0"
+    idtoken-verifier "^1.1.0"
+    qs "^6.4.0"
+    superagent "^3.3.1"
+    url-join "^1.1.0"
+    winchan "^0.2.0"
+
+auth0-js@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/auth0-js/-/auth0-js-9.0.2.tgz#435c2c9c4b819ff33b9a3137644ba7c6035555eb"
   dependencies:
     base64-js "^1.2.0"
     idtoken-verifier "^1.1.0"
@@ -395,11 +406,11 @@ auth0-lock-passwordless@^2.2.3:
     reqwest "^1.1.4"
     trim "0.0.1"
 
-auth0-lock@^10.10.1:
-  version "10.24.1"
-  resolved "https://registry.yarnpkg.com/auth0-lock/-/auth0-lock-10.24.1.tgz#f85a87c3a9309b9a7a7df369040fc663bde6ec9c"
+auth0-lock@^11.0.1:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/auth0-lock/-/auth0-lock-11.0.1.tgz#a51dadfdbce43dd0c52d7c79de78edd8555ad838"
   dependencies:
-    auth0-js "~8.11.2"
+    auth0-js "9.0.1"
     blueimp-md5 "2.3.1"
     fbjs "^0.3.1"
     idtoken-verifier "^1.0.1"
@@ -3709,12 +3720,12 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
     ember-cli-babel "^6.9.0"
     ember-cli-version-checker "^2.1.0"
 
-ember-simple-auth-auth0@^3.1.0:
+ember-simple-auth-auth0@auth0-community/ember-simple-auth-auth0:
   version "3.1.0"
-  resolved "https://registry.yarnpkg.com/ember-simple-auth-auth0/-/ember-simple-auth-auth0-3.1.0.tgz#365ed4047afc2b82770e09ead169399f13d29877"
+  resolved "https://codeload.github.com/auth0-community/ember-simple-auth-auth0/tar.gz/ba9cae10514bbc78e096d8fe998f32e87da71447"
   dependencies:
-    auth0-js "^8.2.0"
-    auth0-lock "^10.10.1"
+    auth0-js "^9.0.2"
+    auth0-lock "^11.0.1"
     auth0-lock-passwordless "^2.2.3"
     broccoli-webpack "^1.0.0"
     ember-cli-babel "^6.0.0"
