@@ -12,7 +12,7 @@
       checked={{if (eq changeset.githubAuthMechanism "github-integration") "checked"}}
       {{action "changeSelection" preventDefault=false}}
     >
-    <span class="label-body">GitHub Integration</span>
+    <span class="label-body">GitHub App</span>
     <p>Shows visual change status in GitHub pull requests. Has customizable access control.</p>
   </label>
   {{#if (eq changeset.githubAuthMechanism "github-integration")}}
@@ -39,6 +39,3 @@
   }}
 
 </form>
-<p class="OrganizationsGithubFootnote">
-  Note that projects must still be linked to a specific GitHub repo for Percy's full {{#link-to "docs.page" "learn/github-integration"}}Pull Request integration{{/link-to}} to work. You can verify the repo link in each project's settings.
-</p>

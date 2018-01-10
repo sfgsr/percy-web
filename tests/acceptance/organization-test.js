@@ -60,26 +60,9 @@ describe('Acceptance: Organization', function() {
       fillIn('.FormsOrganizationNew input[type=text]', 'New organization');
       click('.FormsOrganizationNew input[type=submit]');
       andThen(() => {
-        expect(currentPath()).to.equal('organizations.organization.setup');
+        expect(currentPath()).to.equal('organization.index');
       });
       percySnapshot(this.test.fullTitle() + ' | setup');
-    });
-
-    it('can create new organization with github', function() {
-      visit(`/${this.organization.slug}`);
-
-      click('.OrganizationsSwitcherNav-item');
-      click('a:contains("Create new organization")');
-      andThen(() => {
-        expect(currentPath()).to.equal('organizations.new');
-      });
-      fillIn('.FormsOrganizationNew input[type=text]', 'New organization');
-      click('.FormsOrganizationNew input[type=submit]');
-      andThen(() => {
-        expect(currentPath()).to.equal('organizations.organization.setup');
-      });
-      click('input[type=radio][name=github-integration-setting][value=github-integration]');
-      percySnapshot(this.test.fullTitle() + ' | github-integration');
     });
   });
 

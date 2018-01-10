@@ -64,7 +64,7 @@ export default Component.extend({
       let currentIntegration = organization.get('githubIntegration');
       if (currentSelection !== 'github-integration' && currentIntegration) {
         changeset.addError('base', [
-          'The official Percy GitHub Integration must be uninstalled in GitHub ' +
+          'The official Percy GitHub App must be uninstalled in GitHub ' +
             'before you can switch to a different integration type.',
         ]);
       }

@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
   actions: {
     organizationCreated(organization) {
-      this.transitionTo('organizations.organization.setup', organization.get('slug'));
+      this.transitionTo('organizations.organization.index', organization.get('slug'));
     },
   },
 });

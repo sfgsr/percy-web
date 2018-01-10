@@ -10,6 +10,7 @@ const MAX_UPDATE_POLLING_REQUESTS = 600;
 
 export default Route.extend(AuthenticatedRouteMixin, {
   session: service(),
+  flashMessages: service(),
   currentUser: alias('session.currentUser'),
 
   queryParams: {
@@ -53,6 +54,14 @@ export default Route.extend(AuthenticatedRouteMixin, {
             // If the organization has projects redirect to the settings page,
             // else redirect to add a project page.
             organization.get('projects').then(projects => {
+              this.get('flashMessages').success(
+                'Remember to link your project in settings for Pull Request integration \
+                to work.',
+                {
+                  title: 'GitHub App installed!',
+                },
+              );
+
               if (projects.get('length') > 0) {
                 this.replaceWith('organizations.organization.settings', organization.get('slug'));
               } else {
