@@ -1,0 +1,12 @@
+steps:
+  - label: ":percy::hamster: test"
+    commands:
+      - "make build"
+      - "make test"
+    timeout_in_minutes: 20
+
+  - label: ":percy::hamster: publish"
+    branches: "master"
+    commands:
+      - "make publish"
+    timeout_in_minutes: 20
