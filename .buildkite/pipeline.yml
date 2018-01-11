@@ -13,7 +13,7 @@ steps:
 
   - wait
 
-  - label: "deploy :rocket:w:percy::rocket"
+  - label: "deploy :rocket::percy::rocket:"
     trigger: "deploy-web"
     branches: "master"
     async: true
