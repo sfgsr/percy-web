@@ -4,12 +4,7 @@ import stubLockModal from 'percy-web/tests/helpers/stub-lock-modal';
 describe('Acceptance: PasswordUpdated', function() {
   setupAcceptance({authenticate: false});
 
-  setupSession(function(server) {
-    this.server = server;
-    this.loginUser = false;
-  });
-
-  it('shows page with password update message', function() {
+  it('shows page with password update message and login button', function() {
     stubLockModal(this.application);
 
     visit('/auth/password-updated');
@@ -18,6 +13,26 @@ describe('Acceptance: PasswordUpdated', function() {
     click('.test-password-updated-signin-link');
     andThen(() => {
       expect(currentURL()).to.equal('/login');
+    });
+  });
+});
+
+describe('Acceptance: PasswordUpdated', function() {
+  setupAcceptance({authenticate: true});
+
+  setupSession(function(server) {
+    server.create('user');
+  });
+
+  it('shows page with password update message and continue to profile button', function() {
+    stubLockModal(this.application);
+
+    visit('/auth/password-updated');
+    percySnapshot(this.test.fullTitle());
+
+    click('.test-password-updated-settings-link');
+    andThen(() => {
+      expect(currentURL()).to.equal('/settings/profile');
     });
   });
 });
