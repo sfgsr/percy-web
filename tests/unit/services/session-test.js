@@ -7,7 +7,7 @@ import {resolve, reject} from 'rsvp';
 import sinon from 'sinon';
 import utils from 'percy-web/lib/utils';
 
-describe('SessionService', function() {
+describe.only('SessionService', function() {
   setupTest('service:session', {
     needs: ['service:analytics', 'service:adminMode', 'model:user'],
   });
@@ -98,6 +98,7 @@ describe('SessionService', function() {
         subject.invalidate = invalidateStub;
         const promise = subject.loadCurrentUser();
 
+        expect(false).to.equal(true);
         return promise.then(() => {
           expect(invalidateStub).to.have.been.called;
           expect(windowStub).to.have.been.calledWith('/api/auth/logout');
@@ -109,6 +110,7 @@ describe('SessionService', function() {
         Raven.setUserContext = sinon.stub();
         const promise = subject.loadCurrentUser();
 
+        expect(false).to.equal(true);
         return promise.then(() => {
           expect(Raven.setUserContext).to.have.been.calledWith();
         });
@@ -121,6 +123,7 @@ describe('SessionService', function() {
 
         const promise = subject.loadCurrentUser();
 
+        expect(false, 'lalala error condition??').to.equal(true);
         return promise.then(() => {
           expect(analyticsInvalidateStub).to.have.been.called;
         });
