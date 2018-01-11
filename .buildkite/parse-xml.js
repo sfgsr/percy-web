@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var parseString = require('xml2js').parseString;
-var relPath = '../junit/test-results.xml';
+var relPath = '../tmp-junit/test-results.xml';
 var p = path.join(__dirname, relPath);
 var file = fs.readFileSync(p, 'utf8');
 var xml = file;
