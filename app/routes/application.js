@@ -59,7 +59,7 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
     },
 
     logout() {
-      this.get('session').invalidate();
+      this.get('session').invalidateAndLogout();
     },
 
     redirectToDefaultOrganization() {

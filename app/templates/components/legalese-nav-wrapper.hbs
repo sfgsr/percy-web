@@ -1,15 +1,21 @@
 <div class="container container--fixedWidth container--forContent">
   <div class="row">
     <div class="three columns">
-      <div class="Panel">
-        <div class="Panel-nav">
-          <ul>
-            <li>{{#link-to "team" classNames="Button Button--nav"}}Team{{/link-to}}</li>
-            <li>{{#link-to "security" classNames="Button Button--nav"}}Security{{/link-to}}</li>
-            <li>{{#link-to "terms" classNames="Button Button--nav"}}Terms{{/link-to}}</li>
-            <li>{{#link-to "privacy" classNames="Button Button--nav"}}Privacy{{/link-to}}</li>
-          </ul>
-        </div>
+      <div class="sidenav">
+        <ul class="sidenav-list">
+          <li class="sidenav-list-item">
+            {{#link-to "team" classNames="sidenav-list-item-link"}}Team{{/link-to}}
+          </li>
+          <li class="sidenav-list-item">
+            {{#link-to "security" classNames="sidenav-list-item-link"}}Security{{/link-to}}
+          </li>
+          <li class="sidenav-list-item">
+            {{#link-to "terms" classNames="sidenav-list-item-link"}}Terms{{/link-to}}
+          </li>
+          <li class="sidenav-list-item">
+            {{#link-to "privacy" classNames="sidenav-list-item-link"}}Privacy{{/link-to}}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="nine columns">

@@ -30,7 +30,7 @@ export default Factory.extend({
 
   withUser: trait({
     afterCreate(organization, server) {
-      let user = server.create('user');
+      let user = server.create('user', 'withGithubIdentity');
       server.create('organizationUser', {user, organization, role: 'member'});
     },
   }),

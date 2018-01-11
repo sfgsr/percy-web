@@ -5,11 +5,13 @@ import config from './config/environment';
 export const AUTH_CALLBACK_ROUTE = 'auth-callback';
 const VERIFY_EMAIL_ROUTE = 'verify-email';
 const VERIFICATION_REQUIRED_ROUTE = 'email-verification-required';
+const PASSWORD_UPDATED_ROUTE = 'password-updated';
 
 export const DO_NOT_FORWARD_REDIRECT_ROUTES = [
   AUTH_CALLBACK_ROUTE,
   VERIFY_EMAIL_ROUTE,
   VERIFICATION_REQUIRED_ROUTE,
+  PASSWORD_UPDATED_ROUTE,
 ];
 
 const Router = EmberRouter.extend({
@@ -33,6 +35,7 @@ Router.map(function() {
   this.route(AUTH_CALLBACK_ROUTE, {path: '/auth/callback'});
   this.route(VERIFY_EMAIL_ROUTE, {path: '/auth/verify-email'});
   this.route(VERIFICATION_REQUIRED_ROUTE, {path: '/auth/email-verification-required'});
+  this.route(PASSWORD_UPDATED_ROUTE, {path: '/auth/password-updated'});
   this.route('docs', {path: '/docs'}, function() {
     this.route('page', {path: '*path'});
   });
@@ -45,7 +48,10 @@ Router.map(function() {
   this.route('privacy');
   this.route('security');
   this.route('admin');
-  this.route('profile');
+  this.route('settings', function() {
+    this.route('profile');
+    this.route('connected-accounts');
+  });
   this.route('setup', {path: '/setup'}, function() {
     this.route('github-app');
   });

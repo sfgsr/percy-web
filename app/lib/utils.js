@@ -37,6 +37,11 @@ export default {
     }
     return window.location.origin + path + queryParams;
   },
+
+  setWindowLocation(url) {
+    window.location.replace(url);
+  },
+
   getQueryParam(param) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');

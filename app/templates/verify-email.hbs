@@ -12,7 +12,7 @@
           Your email address is now verified.
         </p>
         {{#if session.currentUser}}
-          {{#link-to 'profile' classNames='Button Button--primary test-verify-email-profile-link'}}Continue to Profile{{/link-to}}
+          {{#link-to 'settings.profile' classNames='Button Button--primary test-verify-email-profile-link'}}Continue to Profile{{/link-to}}
         {{else}}
           {{#link-to 'login' classNames='Button Button--primary test-verify-email-signin-link'}}Continue to Sign In{{/link-to}}
         {{/if}}

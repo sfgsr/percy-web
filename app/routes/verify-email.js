@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import $ from 'jquery';
+import utils from 'percy-web/lib/utils';
 
 export default Route.extend({
   queryParams: {
@@ -8,7 +9,7 @@ export default Route.extend({
   model(params) {
     return $.ajax({
       type: 'PATCH',
-      url: `/api/v1/email-verifications/${params.code}`,
+      url: utils.buildApiUrl('emailVerifications', params.code),
     })
       .then(() => {
         return {success: true};

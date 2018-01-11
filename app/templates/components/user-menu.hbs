@@ -3,6 +3,7 @@
   <div class="PageClickOverlay"></div>
   <div class="UserMenu-arrow">{{fa-icon "caret-up"}}</div>
   <ul>
-    <li {{action "logout"}}>Logout</li>
+    <li>{{#link-to "settings.profile"}}Profile{{/link-to}}</li>
+    <li><a href="#" {{action "logout"}}>Logout</a></li>
   </ul>
 {{/if}}

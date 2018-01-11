@@ -39,6 +39,10 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
     if (requestType === 'updateRecord' && modelName === 'user' && id) {
       return utils.buildApiUrl('user');
     }
+    // DELETE /api/v1/user/identities/:identity_id
+    if (requestType === 'deleteRecord' && modelName === 'identity' && id) {
+      return utils.buildApiUrl('userIdentity', id);
+    }
     // Use organization nested, singular /organizations/:org_id/github-integration-request route.
     if (modelName === 'github-integration-request') {
       // TODO: use adapterOptions for this.

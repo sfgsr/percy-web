@@ -1,0 +1,59 @@
+{{#if hasAnyIdentities}}
+  <div class="mb-4">
+    {{#if emailPasswordIdentity}}
+      <div class="flex space-between align-center mb-2">
+        <div class="text-mono flex align-center">
+          {{inline-svg "percy-logo-tiny-on-light" class="mr-2"}}
+          {{emailPasswordIdentity.user.name}}
+        </div>
+
+        {{#if isDisconnectIdentityEnabled}}
+          <button type="button" class="btn btn-sm btn-alt"
+            {{action deleteIdentity emailPasswordIdentity.id target=route}}
+            data-test-connected-accounts-panel-delete-ep-identity>
+            Disconnect
+          </button>
+        {{/if}}
+      </div>
+    {{/if}}
+    {{#if githubIdentity}}
+      <div class="flex space-between align-center mb-2">
+        <div class="text-mono flex align-center">
+          {{inline-svg "github-icon" class="mr-2"}}
+          {{#if githubIdentity.nickname}}
+            {{githubIdentity.nickname}}
+          {{else}}
+            {{githubIdentity.user.name}}
+          {{/if}}
+        </div>
+        {{#if isDisconnectIdentityEnabled}}
+          <button type="button" class="btn btn-sm btn-alt"
+            {{action deleteIdentity githubIdentity.id}}
+            data-test-connected-accounts-panel-delete-github-identity>
+            Disconnect
+          </button>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+  <hr class="alt-hr mb-4">
+{{/if}}
+
+{{#if (not emailPasswordIdentity)}}
+  <button type="button" class="btn btn-md btn-primary w-full mb-2"
+    {{action addIdentity "auth0"}}
+    data-test-connected-accounts-panel-add-ep-identity>
+    Add email/password account
+  </button>
+{{/if}}
+
+{{#if (not githubIdentity)}}
+  <button type="button" class="btn btn-md btn-github w-full mb-4"
+    {{action addIdentity "github"}}
+    data-test-connected-accounts-panel-add-github-identity>
+    Connect your GitHub account
+  </button>
+  <div class="note">
+    Connecting your GitHub account allows you to sign in with GitHub and manage your GitHub integration with Percy.
+  </div>
+{{/if}}

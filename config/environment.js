@@ -41,6 +41,8 @@ module.exports = function(environment) {
         subscription: '/api/v1/organizations/%@/subscription',
         invites: '/api/v1/organizations/%@/invites',
         user: '/api/v1/user',
+        userIdentity: '/api/v1/user/identities/%@',
+        emailVerifications: '/api/v1/email-verifications/%@',
       },
       githubUrls: {
         integration: 'https://github.com/apps/percy/installations/new',

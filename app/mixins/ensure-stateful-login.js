@@ -12,6 +12,7 @@ import {Promise, resolve} from 'rsvp';
 // This should protect against CSRF attacks.
 var EnsureStatefulLogin = Mixin.create({
   auth0: service(),
+  flashMessages: service(),
 
   _hasOpenedLoginModal: false,
 
@@ -44,29 +45,45 @@ var EnsureStatefulLogin = Mixin.create({
       const lock = this.get('auth0').getAuth0LockInstance(lockOptions);
 
       this.get('auth0')._setupLock(lock, resolve, reject);
-      if (onCloseDestinationRoute) {
-        lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
-      }
+
+      // all possible valid event hooks are listed here: http://bit.ly/2Btihk6
+      lock.on('forgot_password submit', this._onPasswordResetSubmit.bind(this));
+      lock.on('hide', this._onLockClosed.bind(this, onCloseDestinationRoute));
+
       lock.show();
     });
   },
 
   _onLockClosed(onCloseDestinationRoute) {
     this.set('_hasOpenedLoginModal', false);
-    this.transitionTo(onCloseDestinationRoute);
+    if (onCloseDestinationRoute) {
+      this.transitionTo(onCloseDestinationRoute);
+    }
   },
 
-  _setLockPasswordSettings() {
+  _onPasswordResetSubmit() {
+    this.get('flashMessages').success("We've sent an email to the address you've entered.");
+  },
+
+  showResetPasswordModal() {
     lockOptions.allowLogin = false;
     lockOptions.initialScreen = 'forgotPassword';
     lockOptions.allowForgotPassword = true;
     lockOptions.allowSignup = false;
+    this.showLoginModalEnsuringState().then(() => {
+      this.resetLockOptionsToDefault();
+    });
   },
 
-  showResetPasswordModal() {
-    this._setLockPasswordSettings();
-    this.showLoginModalEnsuringState();
-    this.resetLockOptionsToDefault();
+  showConnectToServiceModal(serviceName) {
+    const originalRedirectUrl = lockOptions.auth.redirectUrl;
+    lockOptions.auth.redirectUrl = `${lockOptions.auth.redirectUrl}?connect=true`;
+    lockOptions.allowLogin = false;
+    lockOptions.allowedConnections = [serviceName];
+    this.showLoginModalEnsuringState().then(() => {
+      this.resetLockOptionsToDefault();
+      lockOptions.auth.redirectUrl = originalRedirectUrl;
+    });
   },
 
   resetLockOptionsToDefault() {
@@ -74,6 +91,7 @@ var EnsureStatefulLogin = Mixin.create({
     lockOptions.initialScreen = undefined;
     lockOptions.allowForgotPassword = undefined;
     lockOptions.allowSignup = undefined;
+    lockOptions.allowedConnections = undefined;
   },
 });
 

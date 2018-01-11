@@ -3,6 +3,7 @@ import SessionService from 'ember-simple-auth/services/session';
 import {resolve, reject} from 'rsvp';
 import {Promise as EmberPromise} from 'rsvp';
 import localStorageProxy from 'percy-web/lib/localstorage';
+import utils from 'percy-web/lib/utils';
 
 export default SessionService.extend({
   store: service(),
@@ -22,7 +23,7 @@ export default SessionService.extend({
           // fails. If we don't have a user, the site will be very broken
           // so kick them out.
           .catch(e => {
-            this.invalidate();
+            this.invalidateAndLogout();
 
             this._clearThirdPartyUserContext();
             return reject(e);
@@ -33,6 +34,12 @@ export default SessionService.extend({
       // ember-simple-auth application route mixin needs a resolved promise.
       return resolve();
     }
+  },
+
+  invalidateAndLogout() {
+    this.invalidate().then(() => {
+      utils.setWindowLocation('/api/auth/logout');
+    });
   },
 
   forceReloadUser() {

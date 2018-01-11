@@ -1,4 +1,4 @@
-import {Factory} from 'ember-cli-mirage';
+import {Factory, trait} from 'ember-cli-mirage';
 import moment from 'moment';
 
 export default Factory.extend({
@@ -14,4 +14,10 @@ export default Factory.extend({
   createdAt() {
     return moment();
   },
+
+  withGithubIdentity: trait({
+    afterCreate(user, server) {
+      server.create('identity', 'githubIdentity', {user});
+    },
+  }),
 });

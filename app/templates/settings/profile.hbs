@@ -1,0 +1,18 @@
+<div class="container-sm">
+  <section class="form-section mb-4">
+    {{forms/profile-edit
+      user=model
+    }}
+  </section>
+
+  {{#if model.hasEmailPasswordIdentity}}
+    <section class="form-section">
+      <label>
+        <span class="label-body">Password</span>
+        <div>
+          <button type="button" class="btn btn-md btn-primary w-full" {{action "showResetPasswordModal"}}>Reset Password</button>
+        </div>
+      </label>
+    </section>
+  {{/if}}
+</div>

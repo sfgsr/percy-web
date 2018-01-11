@@ -1,14 +1,12 @@
 <form action="javascript:;">
-  <div class="flex space-between">
-    <h3>Profile</h3>
-  </div>
+  <h2 class="f1 text-weight-regular">Profile</h2>
 
   {{form-fields/input
     property="name"
     title="Name"
     changeset=changeset
     validateProperty=(action "validateProperty" changeset "name")
-    classNames="data-test-profile-edit-name"
+    data-test-profile-edit-name=true
   }}
   {{form-fields/input
     property="email"
@@ -16,20 +14,22 @@
     changeset=changeset
     disabled=user.unverifiedEmail
     validateProperty=(action "validateProperty" changeset "email")
-    classNames="data-test-profile-edit-email"
+    data-test-profile-edit-email=true
   }}
 
   {{#if user.unverifiedEmail}}
-    <strong>{{user.unverifiedEmail}}</strong> is unvalidated. Please check your email to complete this change.
+    <div class="mb-4" data-test-profile-edit-unverified-email-message>
+      Please check your <strong>{{user.unverifiedEmail}}</strong> email and click the verification link to complete this change.
+    </div>
   {{/if}}
 
   {{form-fields/submit
     value="Save"
-    classes="Button"
+    classes="btn btn-md btn-primary"
     isSaving=isSaving
     isSaveSuccessful=isSaveSuccessful
     submit=(action "save")
     disabled=changeset.isPristine
-    classNames="mt-4 data-test-profile-edit-submit"
+    data-test-profile-edit-submit=true
   }}
 </form>

@@ -7,7 +7,7 @@ export default function() {
     return {state: 'foo'};
   });
 
-  this.get('/api/auth/logout', function(schema /*, request */) {
+  this.get('/api/auth/logout', function(schema) {
     let user = schema.users.findBy({_currentLoginInTest: true});
     if (user) {
       user.update({_currentLoginInTest: false});
@@ -17,15 +17,7 @@ export default function() {
 
   this.namespace = '/api/v1';
 
-  this.patch('/user', function(schema /*request*/) {
-    let user = schema.users.findBy({_currentLoginInTest: true});
-    let attrs = this.normalizedRequestAttrs();
-
-    user.update({name: attrs.name, unverifiedEmail: attrs.email});
-    return user;
-  });
-
-  this.get('/user', function(schema /*request*/) {
+  this.get('/user', function(schema) {
     let user = schema.users.findBy({_currentLoginInTest: true});
     if (user) {
       return user;
@@ -43,6 +35,36 @@ export default function() {
         },
       );
     }
+  });
+
+  this.patch('/user', function(schema) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    let attrs = this.normalizedRequestAttrs();
+
+    user.update({name: attrs.name, unverifiedEmail: attrs.email});
+    return user;
+  });
+
+  this.get('/user/identities', function(schema) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    if (!user) {
+      return {errors: [{status: '403', title: 'unauthorized'}]};
+    }
+    return schema.identities.where({userId: user.id});
+  });
+
+  this.get('/user/identities/:id', function(schema, request) {
+    return schema.identities.findBy({id: request.params.id});
+  });
+
+  this.get('/user/organizations', function(schema) {
+    let user = schema.users.findBy({_currentLoginInTest: true});
+    if (!user) {
+      return {errors: [{status: '403', title: 'unauthorized'}]};
+    }
+    let organizationUsers = schema.organizationUsers.where({userId: user.id});
+    let organizationIds = organizationUsers.models.map(obj => obj.organizationId);
+    return schema.organizations.where({id: organizationIds});
   });
 
   this.patch('/email-verifications/**', function(schema, request) {
@@ -67,6 +89,7 @@ export default function() {
   this.get('/organizations/:slug', function(schema, request) {
     return schema.organizations.findBy({slug: request.params.slug});
   });
+
   this.patch('/organizations/:slug', function(schema, request) {
     let attrs = this.normalizedRequestAttrs();
     if (!attrs.slug.match(/^[a-zA-Z][a-zA-Z_]*[a-zA-Z]$/)) {
@@ -94,6 +117,7 @@ export default function() {
     organization.update(attrs);
     return organization;
   });
+
   this.post('/organizations', function(schema) {
     let attrs = this.normalizedRequestAttrs();
     let currentUser = schema.users.findBy({_currentLoginInTest: true});
@@ -105,17 +129,20 @@ export default function() {
     });
     return result;
   });
+
   this.post('/organizations/:id/projects', function(schema, request) {
     let attrs = this.normalizedRequestAttrs();
     schema.organizations.findBy({slug: request.params.slug});
     let project = schema.projects.create(attrs);
     return project;
   });
-  this.get('organizations/:slug/subscription', function(schema, request) {
+
+  this.get('/organizations/:slug/subscription', function(schema, request) {
     let organization = schema.organizations.findBy({slug: request.params.slug});
     return organization.subscription;
   });
-  this.patch('organizations/:slug/subscription', function(schema, request) {
+
+  this.patch('/organizations/:slug/subscription', function(schema, request) {
     let attrs = this.normalizedRequestAttrs();
     let organization = schema.organizations.findBy({slug: request.params.slug});
     let subscription = organization.subscription;
@@ -143,45 +170,44 @@ export default function() {
     subscription.update(attrs);
     return subscription;
   });
-  this.get('/users/:id/organizations', (schema, request) => {
-    let user = schema.users.find(request.params.id);
-    if (!user._currentLoginInTest) {
-      return {errors: [{status: '403', title: 'unauthorized'}]};
-    }
-    let organizationUsers = schema.organizationUsers.where({userId: user.id});
-    let organizationIds = organizationUsers.models.map(obj => obj.organizationId);
-    return schema.organizations.where({id: organizationIds});
-  });
-  this.get('/organizations/:slug/organization-users', (schema, request) => {
+
+  this.get('/organizations/:slug/organization-users', function(schema, request) {
     // TODO handle ?filter=current-user-only
     let organization = schema.organizations.findBy({slug: request.params.slug});
     return schema.organizationUsers.where({organizationId: organization.id});
   });
-  this.get('/organizations/:slug/projects', (schema, request) => {
+
+  this.get('/organizations/:slug/projects', function(schema, request) {
     let organization = schema.organizations.findBy({slug: request.params.slug});
     return schema.projects.where({organizationId: organization.id});
   });
-  this.get('/projects/:full_slug/', (schema, request) => {
+
+  this.get('/projects/:full_slug/', function(schema, request) {
     let fullSlug = decodeURIComponent(request.params.full_slug);
     return schema.projects.findBy({fullSlug: fullSlug});
   });
-  this.get('/projects/:organization_slug/:project_slug/tokens', (schema, request) => {
+
+  this.get('/projects/:organization_slug/:project_slug/tokens', function(schema, request) {
     let fullSlug = `${request.params.organization_slug}/${request.params.project_slug}`;
     let project = schema.projects.findBy({fullSlug: fullSlug});
     return schema.tokens.where({projectId: project.id});
   });
-  this.get('/projects/:organization_slug/:project_slug/builds', (schema, request) => {
+
+  this.get('/projects/:organization_slug/:project_slug/builds', function(schema, request) {
     let fullSlug = `${request.params.organization_slug}/${request.params.project_slug}`;
     let project = schema.projects.findBy({fullSlug: fullSlug});
     return schema.builds.where({projectId: project.id});
   });
+
   this.get('/invites/:id');
+
   this.patch('/invites/:id', function(schema, request) {
     let invite = schema.invites.find(request.params.id);
     let attrs = this.normalizedRequestAttrs();
     invite.update(attrs);
     return invite;
   });
+
   this.get('/builds/:id');
   this.get('/builds/:build_id/snapshots');
   this.get('/builds/:build_id/comparisons');

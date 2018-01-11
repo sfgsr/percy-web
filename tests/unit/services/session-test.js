@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-expressions */
 import {expect} from 'chai';
-import {it, describe, beforeEach} from 'mocha';
+import {it, describe, beforeEach, afterEach} from 'mocha';
 import {setupTest} from 'ember-mocha';
 import {make, manualSetup} from 'ember-data-factory-guy';
 import {resolve, reject} from 'rsvp';
 import sinon from 'sinon';
+import utils from 'percy-web/lib/utils';
 
 describe('SessionService', function() {
   setupTest('service:session', {
@@ -81,23 +82,30 @@ describe('SessionService', function() {
     });
 
     describe('when isAuthenticated is true and the user query fails', function() {
+      let windowStub;
       beforeEach(function() {
         subject.set('isAuthenticated', true);
         store.queryRecord = sinon.stub().returns(reject());
+        windowStub = sinon.stub(utils, 'setWindowLocation');
+      });
+
+      afterEach(function() {
+        windowStub.restore();
       });
 
       it('invalidates the session', function() {
-        const invalidateStub = sinon.stub();
+        const invalidateStub = sinon.stub().returns(resolve());
         subject.invalidate = invalidateStub;
         const promise = subject.loadCurrentUser();
 
         return promise.then(() => {
           expect(invalidateStub).to.have.been.called;
+          expect(windowStub).to.have.been.calledWith('/api/auth/logout');
         });
       });
 
       it('clears raven user context', function() {
-        subject.invalidate = sinon.stub();
+        subject.invalidate = sinon.stub().returns(resolve());
         Raven.setUserContext = sinon.stub();
         const promise = subject.loadCurrentUser();
 
@@ -107,7 +115,7 @@ describe('SessionService', function() {
       });
 
       it('clears analytics user context', function() {
-        subject.invalidate = sinon.stub();
+        subject.invalidate = sinon.stub().returns(resolve());
         const analyticsInvalidateStub = sinon.stub();
         subject.set('analytics.invalidate', analyticsInvalidateStub);
 

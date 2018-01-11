@@ -5,6 +5,7 @@ import {setupTest} from 'ember-mocha';
 import sinon from 'sinon';
 import $ from 'jquery';
 import {resolve, reject} from 'rsvp';
+import utils from 'percy-web/lib/utils';
 
 describe('VerifyEmailRoute', function() {
   let subject;
@@ -30,7 +31,7 @@ describe('VerifyEmailRoute', function() {
       ajaxStub.returns(resolve());
       const expectedArgs = {
         type: 'PATCH',
-        url: `/api/v1/email-verifications/${fakeCode}`,
+        url: utils.buildApiUrl('emailVerifications', fakeCode),
       };
 
       const modelPromise = subject.model({code: fakeCode});

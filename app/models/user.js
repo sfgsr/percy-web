@@ -6,7 +6,17 @@ export default DS.Model.extend({
   name: DS.attr(),
   email: DS.attr(),
   avatarUrl: DS.attr(),
-  unverifiedEmail: DS.attr('string'),
+  unverifiedEmail: DS.attr(),
+
+  identities: DS.hasMany('identities'),
+
+  hasGithubIdentity: computed('identities.@each.provider', function() {
+    return this._hasIdentityType('github');
+  }),
+
+  hasEmailPasswordIdentity: computed('identities.@each.provider', function() {
+    return this._hasIdentityType('auth0');
+  }),
 
   // These endpoints are only available on the current user and should not be accessed otherwise.
   organizations: DS.hasMany('organizations', {inverse: null}),
@@ -15,4 +25,12 @@ export default DS.Model.extend({
   updatedAt: DS.attr('date'),
 
   isVerified: computed.notEmpty('email'),
+
+  _hasIdentityType(provider) {
+    return DS.PromiseObject.create({
+      promise: this.get('identities').then(identity => {
+        return identity.findBy('provider', provider);
+      }),
+    });
+  },
 });

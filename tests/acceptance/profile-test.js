@@ -1,20 +1,29 @@
 import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
+import UserSettingsPageObject from '../pages/user-settings';
 
-describe('Acceptance: Profile', function() {
+describe('Acceptance: User Settings', function() {
   setupAcceptance();
 
   setupSession(function(server) {
-    server.create('user', {name: 'Tyrion Lannister', email: 'tyrion@lannisters.net'});
+    const user = server.create('user', {name: 'Tyrion Lannister', email: 'tyrion@lannisters.net'});
+    server.create('identity', 'githubIdentity', {user});
   });
 
-  it('displays profile page', function() {
-    visit('/profile/');
-    percySnapshot(this.test.fullTitle() + 'before submitting');
+  it('displays profile info page', function() {
+    UserSettingsPageObject.visitUserSettingsPage();
 
-    fillIn('.data-test-profile-edit-name input[type=text]', 'Tyrion Targaryen');
-    fillIn('.data-test-profile-edit-email input[type=text]', 'tyrion@motherofdragons.biz');
-    click('.data-test-profile-edit-submit input[type=submit]');
+    percySnapshot(this.test.fullTitle() + ' before submitting');
 
-    percySnapshot(this.test.fullTitle() + 'after submitting');
+    UserSettingsPageObject.profileForm
+      .fillInName('Tyrion Targaryen')
+      .fillInEmail('tyrion@motherofdragons.biz')
+      .submitForm();
+    percySnapshot(this.test.fullTitle() + ' after submitting');
+  });
+
+  it('displays connected-accounts info page', function() {
+    UserSettingsPageObject.visitConnectedAccountsPage();
+
+    percySnapshot(this.test.fullTitle() + ' with github integration');
   });
 });
