@@ -33,6 +33,13 @@ export default Route.extend(AuthenticatedRouteMixin, EnsureStatefulLogin, {
         identityProvider = 'Email/Password';
       }
 
+      let confirmation = confirm(
+        `Are you sure you want to disconnect your ${identityProvider} account?`,
+      );
+      if (!confirmation) {
+        return;
+      }
+
       identity
         .destroyRecord()
         .then(() => {
