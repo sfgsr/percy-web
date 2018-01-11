@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-[ -z "$IMAGE" ] && echo "[ERROR] Need to set IMAGE environment variable." && exit 1
-[ -z "$TAG" ] && echo "[ERROR] Need to set TAG environment variable." && exit 1
-
-docker tag $IMAGE:$TAG $IMAGE:latest
-gcloud docker -- push $IMAGE:latest
