@@ -3,18 +3,20 @@
 set -e
 
 [ -z "$IMAGE" ] && echo "[ERROR] Need to set IMAGE environment variable." && exit 1
-NOW=`date +%Y-%m-%d-%H%M%S`
-echo "Building: $IMAGE:$NOW"
+[ -z "$BUILDKITE_COMMIT" ] && echo "[ERROR] Need to set BUILDKITE_COMMIT environment variable." && exit 1
+
+TAG="$BUILDKITE_COMMIT"
+echo "Building: $IMAGE:$TAG"
 
 # Make sure parent baseimage is available locally and up to date.
 gcloud docker -- pull $(grep '^FROM' Dockerfile | grep -o ' .*' | tr -d ' ')
 
 # Build assets in the container, then copy them into dist/.
 # We have to do this with "docker cp" and not a mounted volume due to CI constraints.
-docker build -t $IMAGE:$NOW .
+docker build -t $IMAGE:$TAG .
 
 # Run container temporarily, then cleanup on exit or error.
-CONTAINER_ID=$(docker run -d -i $IMAGE:$NOW)
+CONTAINER_ID=$(docker run -d -i $IMAGE:$TAG)
 function cleanup() {
   docker stop $CONTAINER_ID
   echo 'Done.'
@@ -33,6 +35,6 @@ gsutil -m -h "Cache-Control: public,max-age=2678400" cp \
   -n dist/assets dist/images dist/fonts \
   gs://percy-public-static/static/
 
-gcloud docker -- push $IMAGE:$NOW
+gcloud docker -- push $IMAGE:$TAG
 
-echo "Deployed $IMAGE:$NOW"
+echo "Deployed $IMAGE:$TAG"

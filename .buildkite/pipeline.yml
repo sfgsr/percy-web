@@ -10,3 +10,15 @@ steps:
     commands:
       - "make publish"
     timeout_in_minutes: 20
+
+  - wait
+
+  - label: "deploy :rocket:w:percy::rocket"
+    trigger: "deploy-web"
+    branches: "master"
+    async: true
+    build:
+      message: "${BUILDKITE_MESSAGE}"
+      branch: "${BUILDKITE_BRANCH}"
+      env:
+        TAG: "${BUILDKITE_COMMIT}"
