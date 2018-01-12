@@ -7,7 +7,7 @@ var testemReportFile = false;
 // TODO how to only do this on buildkite
 // if (true) {
 testemReporter = 'xunit';
-testemReportFile = 'tmp-junit/test-results.xml';
+testemReportFile = `tmp-junit/${process.pid}test-results.xml`;
 // }
 
 module.exports = {

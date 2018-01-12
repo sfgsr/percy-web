@@ -1,26 +1,29 @@
 var fs = require('fs');
 var path = require('path');
 var parseString = require('xml2js').parseString;
+var process = require('process');
 
-fs.readdir('tmp-junit', (err, fileNames) => {
-  var failures = [];
-  // get all the failures out and put them in array failures
-  fileNames.forEach(fileName => {
-    var p = path.join(__dirname, `${fileName}`);
-    var file = fs.readFileSync(p, 'utf8');
+// glob('tmp-junit/tmp-junit/*.xml', (err, fileNames) => {
+// glob('tmp-junit/tmp-junit/*.xml', (err, fileNames) => {
 
-    parseString(file, function(err, result) {
-      var parsedXml = result;
-      failures.push.apply(
-        failures,
-        parsedXml.testsuite.testcase.filter(test => {
-          return !!test.error;
-        }),
-      );
+// fs.readdir('.buildkite/merged-xml.xml', (err, fileNames) => {
+var file = fs.readFileSync('.buildkite/merged-xml.xml');
+
+var failures = [];
+var numTests = 0;
+
+parseString(file, (err, result) => {
+  result.testsuites.testsuite.forEach(test => {
+    var testArray = test.testcase;
+    testArray.forEach(t => {
+      numTests += 1;
+      if (t.error) {
+        failures.push(t);
+      }
     });
   });
 
-  var markdown = `There were ${failures.length} failures.`;
+  var markdown = `There were ${failures.length} failures out of ${numTests} tests.`;
   if (failures.length) {
     markdown += ':(';
     failures.forEach(failure => {

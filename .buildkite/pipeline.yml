@@ -3,7 +3,7 @@ steps:
     artifact_paths: 'tmp-junit/*.xml'
     commands:
       - "make build"
-      - "make test; make publish-artifacts"
+      - "make test"
     timeout_in_minutes: 20
 
   - label: ":percy::hamster: publish"

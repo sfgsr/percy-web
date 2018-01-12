@@ -20,9 +20,12 @@ docker cp .buildkite/parse-xml.js $CONTAINER_ID:/app/.buildkite/parse-xml.js
 docker cp tmp-junit $CONTAINER_ID:/app/tmp-junit
 docker exec "$CONTAINER_ID" bash -c "
   cd /app &&
+    npm install -g junit-merge --quiet --silent &> /dev/null &&
     npm install xml2js --quiet --silent &> /dev/null &&
-    node /app/.buildkite/parse-xml.js /app/tmp-junit/*.xml
-" > tmp-junit/annotation.md
+    junit-merge -r -d tmp-junit/ -o .buildkite/merged-xml.xml &&
+    node /app/.buildkite/parse-xml.js
+" > ./annotation.md
+
 
 echo "--- :buildkite: Creating annotation"
-buildkite-agent annotate --context junit --style error < tmp-junit/annotation.md
+buildkite-agent annotate --context junit --style error < ./annotation.md
