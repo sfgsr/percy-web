@@ -5,7 +5,7 @@ set -euo pipefail
 mkdir -p tmp-junit
 
 echo "--- :junit: Download the junits"
-buildkite-agent artifact download tmp-junit/*.xml tmp-junit
+buildkite-agent artifact download tmp-junit/tmp-junit/*.xml tmp-junit
 
 echo "--- :junit:: Processing the junits"
 CONTAINER_ID=$(docker run -d -i node:carbon)
