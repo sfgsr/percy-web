@@ -1,28 +1,39 @@
 var fs = require('fs');
 var path = require('path');
 var parseString = require('xml2js').parseString;
-var relPath = '../tmp-junit/test-results.xml';
-var p = path.join(__dirname, relPath);
-var file = fs.readFileSync(p, 'utf8');
-var xml = file;
+var process = require('process');
 
-var parsedXml;
-parseString(xml, function(err, result) {
-  parsedXml = result;
-});
+var file = fs.readFileSync('.buildkite/merged-xml.xml');
 
-var failures = parsedXml.testsuite.testcase.filter(test => {
-  return !!test.error;
-});
-
-var markdown = `There were ${parsedXml.testsuite.$.failures} out of ${parsedXml.testsuite.$.tests} tests.`;
-if (failures.length) {
-  failures.forEach(failure => {
-    markdown += '<details>';
-    markdown += `<summary><code>${failure.$.name}</code></summary>\n`;
-    markdown += `<code>${failure.error[0].$.message}</code>\n\n\n`;
-    markdown += '</details>';
-  });
+if (!file) {
+  process.stdout.write('NO FILE FOUND');
+  process.exit();
 }
 
-process.stdout.write(markdown);
+var failures = [];
+var numTests = 0;
+
+parseString(file, (err, result) => {
+  result.testsuites.testsuite.forEach(test => {
+    var testArray = test.testcase;
+    testArray.forEach(t => {
+      numTests += 1;
+      if (t.error) {
+        failures.push(t);
+      }
+    });
+  });
+
+  var markdown = `There were ${failures.length} failures out of ${numTests} tests.`;
+  if (failures.length) {
+    markdown += ':(';
+    failures.forEach(failure => {
+      markdown += '<details>';
+      markdown += `<summary><code>${failure.$.name}</code></summary>\n`;
+      markdown += `<code>${failure.error[0].$.message}</code>\n\n\n`;
+      markdown += '</details>';
+    });
+  }
+
+  process.stdout.write(markdown);
+});
