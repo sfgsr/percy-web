@@ -3,7 +3,7 @@ build:
 	docker-compose build
 
 test:
-	docker-compose up web
+	docker-compose up -d web
 	docker-compose exec web yarn test:parallel
 	docker-compose down web
 	@utils/publish-test-artifacts
