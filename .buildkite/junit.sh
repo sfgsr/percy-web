@@ -15,6 +15,7 @@ function cleanup() {
 }
 trap cleanup EXIT
 
+docker exec "$CONTAINER_ID" mkdir -p /app/.buildkite /app/tmp-junit
 docker cp .buildkite/parse-xml.js $CONTAINER_ID:/app/.buildkite/parse-xml.js
 docker cp "tmp-junit/*.xml" $CONTAINER_ID:/app/tmp-junit
 docker exec "$CONTAINER_ID" bash -c "
