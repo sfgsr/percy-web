@@ -87,6 +87,7 @@ export default SessionService.extend({
   _setupIntercom(user) {
     if (window.Intercom) {
       window.Intercom('update', {
+        user_id: user.get('id'),
         user_hash: user.get('userHash'),
         name: user.get('name'),
         email: user.get('email'),
