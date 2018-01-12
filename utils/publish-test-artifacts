@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Make sure the current working dir is the same as this script.
+cd "$(dirname "$0")" || exit 1; CURDIR="$(pwd)"
+
+CONTAINER_ID="$(docker-compose ps -q web)"
+docker cp $CONTAINER_ID:/app/src/tmp-junit ../tmp-junit/

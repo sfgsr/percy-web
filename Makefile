@@ -5,8 +5,8 @@ build:
 test:
 	docker-compose up -d web
 	docker-compose exec web yarn test:parallel
-	docker-compose down web
 	@utils/publish-test-artifacts
+	docker-compose down web
 
 publish:
 	@utils/publish
