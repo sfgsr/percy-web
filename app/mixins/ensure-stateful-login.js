@@ -36,6 +36,7 @@ var EnsureStatefulLogin = Mixin.create({
   },
 
   _showLock(lockOptions, onCloseDestinationRoute) {
+    _removeAuth0PasswordlessStyle();
     // This code is taken from
     // https://github.com/auth0-community/ember-simple-auth-auth0/
     //   blob/develop/addon/services/auth0.js#L93
@@ -94,5 +95,11 @@ var EnsureStatefulLogin = Mixin.create({
     lockOptions.allowedConnections = undefined;
   },
 });
+
+function _removeAuth0PasswordlessStyle() {
+  $('style:contains("auth0-lock-cred-pane")')
+    .not('#auth0-lock-style')
+    .remove();
+}
 
 export default EnsureStatefulLogin;

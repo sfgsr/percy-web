@@ -5,7 +5,6 @@ import ApplicationRouteMixin from 'ember-simple-auth-auth0/mixins/application-ro
 import localStorageProxy from 'percy-web/lib/localstorage';
 import {DO_NOT_FORWARD_REDIRECT_ROUTES} from 'percy-web/router';
 import EnsureStatefulLogin from 'percy-web/mixins/ensure-stateful-login';
-import $ from 'jquery';
 import isDevWithProductionAPI from 'percy-web/lib/dev-auth';
 
 export const AUTH_REDIRECT_LOCALSTORAGE_KEY = 'percyAttemptedTransition';
@@ -16,8 +15,6 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
   currentUser: alias('session.currentUser'),
 
   beforeModel(transition) {
-    _removeAuth0PasswordlessStyle();
-
     this._super(...arguments);
     if (!this.get('session.isAuthenticated')) {
       this._storeTargetTransition(transition);
@@ -150,9 +147,3 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
     );
   },
 });
-
-function _removeAuth0PasswordlessStyle() {
-  $('style:contains("auth0-lock-cred-pane")')
-    .not('#auth0-lock-style')
-    .remove();
-}
