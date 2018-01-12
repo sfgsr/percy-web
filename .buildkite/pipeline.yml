@@ -3,6 +3,8 @@ steps:
     commands:
       - "make build"
       - "make test"
+      - "make publish-test-artifacts"
+      - "make teardown"
     timeout_in_minutes: 20
 
   - label: ":percy::hamster: publish"

@@ -5,7 +5,11 @@ build:
 test:
 	docker-compose up -d web
 	docker-compose exec web yarn test:parallel
+
+pusblish-test-artifacts:
 	@utils/publish-test-artifacts
+
+teardown:
 	docker-compose down web
 
 publish:
