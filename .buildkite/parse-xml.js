@@ -2,17 +2,15 @@ var fs = require('fs');
 var path = require('path');
 var parseString = require('xml2js').parseString;
 
-fs.readdir('../tmp-junit', (err, fileNames) => {
-  var markdown = '';
+fs.readdir('tmp-junit', (err, fileNames) => {
   var failures = [];
-
+  // get all the failures out and put them in array failures
   fileNames.forEach(fileName => {
-    var parsedXml;
-    var p = path.join(__dirname, `../tmp-junit/${fileName}`);
+    var p = path.join(__dirname, `${fileName}`);
     var file = fs.readFileSync(p, 'utf8');
 
     parseString(file, function(err, result) {
-      parsedXml = result;
+      var parsedXml = result;
       failures.push.apply(
         failures,
         parsedXml.testsuite.testcase.filter(test => {
@@ -22,7 +20,7 @@ fs.readdir('../tmp-junit', (err, fileNames) => {
     });
   });
 
-  markdown = `There were ${failures.length}.`;
+  var markdown = `There were ${failures.length} failures.`;
   if (failures.length) {
     markdown += ':(';
     failures.forEach(failure => {
