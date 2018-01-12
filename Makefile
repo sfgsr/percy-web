@@ -8,7 +8,7 @@ test:
 	docker-compose up -d web
 	docker-compose exec web yarn test:parallel
 
-pusblish-test-artifacts:
+publish-test-artifacts:
 	echo "PUBLISH TEST ARTIFACTS"
 	@utils/publish-test-artifacts
 

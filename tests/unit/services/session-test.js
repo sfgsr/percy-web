@@ -98,7 +98,7 @@ describe.only('SessionService', function() {
         subject.invalidate = invalidateStub;
         const promise = subject.loadCurrentUser();
 
-        expect(false).to.equal(true);
+        // expect(false).to.equal(true);
         return promise.then(() => {
           expect(invalidateStub).to.have.been.called;
           expect(windowStub).to.have.been.calledWith('/api/auth/logout');
@@ -110,7 +110,7 @@ describe.only('SessionService', function() {
         Raven.setUserContext = sinon.stub();
         const promise = subject.loadCurrentUser();
 
-        expect(false).to.equal(true);
+        // expect(false).to.equal(true);
         return promise.then(() => {
           expect(Raven.setUserContext).to.have.been.calledWith();
         });
@@ -123,7 +123,7 @@ describe.only('SessionService', function() {
 
         const promise = subject.loadCurrentUser();
 
-        expect(false, 'lalala error condition??').to.equal(true);
+        // expect(false, 'lalala error condition??').to.equal(true);
         return promise.then(() => {
           expect(analyticsInvalidateStub).to.have.been.called;
         });
