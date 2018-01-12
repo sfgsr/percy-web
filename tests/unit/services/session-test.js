@@ -62,6 +62,7 @@ describe('SessionService', function() {
 
         return promise.then(() => {
           expect(window.Intercom).to.have.been.calledWith('update', {
+            user_id: user.get('id'),
             user_hash: user.get('userHash'),
             name: user.get('name'),
             email: user.get('email'),
