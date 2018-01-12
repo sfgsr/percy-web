@@ -4,4 +4,13 @@
 cd "$(dirname "$0")" || exit 1; CURDIR="$(pwd)"
 
 CONTAINER_ID="$(docker-compose ps -q web)"
+echo "LS"
+echo $(docker exec "$CONTAINER_ID" ls)
+echo "LS app"
+echo $(docker exec "$CONTAINER_ID" ls app)
+echo "LS app/src"
+echo $(docker exec "$CONTAINER_ID" ls app/src)
+echo "LS app/src/tmp-junit"
+echo $(docker exec "$CONTAINER_ID" ls app/src/tmp-junit)
+
 docker cp $CONTAINER_ID:/app/src/tmp-junit ../tmp-junit/
