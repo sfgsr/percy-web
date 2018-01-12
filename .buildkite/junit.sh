@@ -5,17 +5,17 @@ set -euo pipefail
 mkdir -p tmp-junit
 
 echo "--- :junit: Download the junits -- tmp-junit/tmp-junit/*.xml"
-buildkite-agent artifact download tmp-junit/tmp-junit/*.xml tmp-junit
+buildkite-agent artifact download "tmp-junit/tmp-junit/*.xml" tmp-junit
 echo "--- :junit: Download the junits -- tmp-junit/*.xml"
-buildkite-agent artifact download tmp-junit/*.xml tmp-junit
+buildkite-agent artifact download "tmp-junit/*.xml" tmp-junit
 echo "--- :junit: Download the junits -- *.xml"
-buildkite-agent artifact download *.xml tmp-junit
+buildkite-agent artifact download "*.xml" tmp-junit
 echo "--- :junit: Download the junits -- app/tmp-junit/tmp-junit/*.xml"
-buildkite-agent artifact download app/tmp-junit/tmp-junit/*.xml tmp-junit
+buildkite-agent artifact download "app/tmp-junit/tmp-junit/*.xml" tmp-junit
 echo "--- :junit: Download the junits -- tmp-junit/*.xml"
-buildkite-agent artifact download app/tmp-junit/*.xml tmp-junit
+buildkite-agent artifact download "app/tmp-junit/*.xml" tmp-junit
 echo "--- :junit: Download the junits -- *.xml"
-buildkite-agent artifact download app/*.xml tmp-junit
+buildkite-agent artifact download "app/*.xml" tmp-junit
 
 
 

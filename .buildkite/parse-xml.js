@@ -3,11 +3,12 @@ var path = require('path');
 var parseString = require('xml2js').parseString;
 var process = require('process');
 
-// glob('tmp-junit/tmp-junit/*.xml', (err, fileNames) => {
-// glob('tmp-junit/tmp-junit/*.xml', (err, fileNames) => {
-
-// fs.readdir('.buildkite/merged-xml.xml', (err, fileNames) => {
 var file = fs.readFileSync('.buildkite/merged-xml.xml');
+
+if (!file) {
+  process.stdout.write('NO FILE FOUND');
+  process.exit();
+}
 
 var failures = [];
 var numTests = 0;
