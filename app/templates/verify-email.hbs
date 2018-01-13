@@ -1,43 +1,25 @@
 {{fixed-top-header}}
 
-{{#if model.success}}
-  <div class="container-full container-vh bg-white-pattern flex align-center justify-center">
-    <div class="container-xs animate-fade-in-up">
-      <div class="bg-white rounded shadow-l p-5 text-center">
-        <figure class="svg-container mb-3 animate-tada">
-          {{inline-svg "thumbs-up-large-icon" class="mx"}}
-        </figure>
-        <h2 class="text-weight-regular f2 mb-3">Success!</h2>
-        <p class="alt-p text-light">
-          Your email address is now verified.
-        </p>
-        {{#if session.currentUser}}
-          {{#link-to 'settings.profile' classNames='Button Button--primary test-verify-email-profile-link'}}Continue to Profile{{/link-to}}
-        {{else}}
-          {{#link-to 'login' classNames='Button Button--primary test-verify-email-signin-link'}}Continue to Sign In{{/link-to}}
-        {{/if}}
-      </div>
-    </div>
-  </div>
-{{else}}
-  <div class="container-full container-vh bg-white-pattern flex align-center justify-center">
-    <div class="container-xs animate-fade-in-up">
-      <div class="bg-white rounded shadow-l p-5 text-center">
-        <figure class="svg-container mb-3 animate-tada">
-          {{inline-svg "error-large-icon" class="mx"}}
-        </figure>
-        <h2 class="text-weight-regular f2 mb-3">Uh Oh...</h2>
-        <p class="alt-p text-light"></p>
-        <p class="alt-p text-light">
-          {{#if model}}
-            {{model}}
-          {{else}}
-            Something went wrong. Please try again or contact support.
-          {{/if}}
-        </p>
-      </div>
-    </div>
-  </div>
-{{/if}}
+<div class="container-full container-vh bg-white-pattern flex align-center justify-center">
+  {{#if model.success}}
+    {{#status-panel
+      inlineSvgName="thumbs-up-large-icon"
+      mainText="Success!"
+      secondaryText="Your email address is now verified"
+    }}
+      {{#if session.currentUser}}
+        {{#link-to 'settings.profile' classNames='Button Button--primary test-verify-email-profile-link'}}Continue to Profile{{/link-to}}
+      {{else}}
+        {{#link-to 'login' classNames='Button Button--primary test-verify-email-signin-link'}}Continue to Sign In{{/link-to}}
+      {{/if}}
+    {{/status-panel}}
+  {{else}}
+    {{status-panel
+      inlineSvgName="error-large-icon"
+      mainText="Uh Oh..."
+      secondaryText=(or model "Something went wrong. Please try again or contact support")
+    }}
+  {{/if}}
+</div>
 
 {{main-footer}}
