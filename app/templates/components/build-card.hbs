@@ -46,7 +46,9 @@
         {{inline-svg "comparison-icon" class="mr-3"}}
       {{/if}}
       <div>
-        {{#if build.isWaiting}}
+        {{#if build.isPending}}
+          <span class="f6 text-weight-semibold text-light">Receiving Build</span>
+        {{else if build.isProcessing}}
           <span class="f6 text-weight-semibold text-light">Processing snapshots</span>
         {{else if build.isFailed}}
           <span class="text-weight-semibold text-light">{{build.failureReasonHumanized}}</span>
