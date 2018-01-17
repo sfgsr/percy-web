@@ -1,6 +1,6 @@
 steps:
   - label: ":percy::hamster: test"
-    artifact_paths: 'tmp-junit/*.xml'
+    artifact_paths: "*/**/*.xml,**/*.xml"
     commands:
       - "make build"
       - "make test"
