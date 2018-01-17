@@ -4,7 +4,11 @@
 cd "$(dirname "$0")" || exit 1; CURDIR="$(pwd)"
 
 CONTAINER_ID="$(docker-compose ps -q web)"
-DOCKER_DIR='$(docker exec "$CONTAINER_ID" pwd)'
+DOCKER_DIR="$(docker exec "$CONTAINER_ID" pwd)"
+echo "CONTAINER_ID"
+echo $CONTAINER_ID
+echo "DOCKER_DIR"
+echo $DOCKER_DIR
 echo "PWD"
 echo $(docker exec "$CONTAINER_ID" pwd)
 echo "LS"
@@ -12,5 +16,6 @@ echo $(docker exec "$CONTAINER_ID" ls)
 echo "LS"
 echo $(docker exec "$CONTAINER_ID" ls tmp-junit)
 
+echo "docker cp $CONTAINER_ID:$DOCKER_DIR/tmp-junit tmp-junit/"
 docker cp $CONTAINER_ID:$DOCKER_DIR/tmp-junit tmp-junit/
 docker cp $CONTAINER_ID:tmp-junit tmp-junit/
