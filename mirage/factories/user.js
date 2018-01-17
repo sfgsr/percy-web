@@ -20,4 +20,10 @@ export default Factory.extend({
       server.create('identity', 'githubIdentity', {user});
     },
   }),
+
+  withAuth0Identity: trait({
+    afterCreate(user, server) {
+      server.create('identity', 'auth0Identity', {user});
+    },
+  }),
 });

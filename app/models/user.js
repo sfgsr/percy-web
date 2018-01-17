@@ -15,6 +15,10 @@ export default DS.Model.extend({
   }),
 
   hasEmailPasswordIdentity: computed('identities.@each.provider', function() {
+    return this.get('emailPasswordIdentity');
+  }),
+
+  emailPasswordIdentity: computed('identities.@each.provider', function() {
     return this._hasIdentityType('auth0');
   }),
 

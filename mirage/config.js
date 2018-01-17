@@ -57,6 +57,10 @@ export default function() {
     return schema.identities.findBy({id: request.params.id});
   });
 
+  this.post('/user/identities/:id/password-change-request', function() {
+    return new Mirage.Response(204, {}, {success: true});
+  });
+
   this.get('/user/organizations', function(schema) {
     let user = schema.users.findBy({_currentLoginInTest: true});
     if (!user) {

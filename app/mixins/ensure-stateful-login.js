@@ -66,16 +66,6 @@ var EnsureStatefulLogin = Mixin.create({
     this.get('flashMessages').success("We've sent an email to the address you've entered.");
   },
 
-  showResetPasswordModal() {
-    lockOptions.allowLogin = false;
-    lockOptions.initialScreen = 'forgotPassword';
-    lockOptions.allowForgotPassword = true;
-    lockOptions.allowSignup = false;
-    this.showLoginModalEnsuringState().then(() => {
-      this.resetLockOptionsToDefault();
-    });
-  },
-
   showConnectToServiceModal(serviceName) {
     const originalRedirectUrl = lockOptions.auth.redirectUrl;
     lockOptions.auth.redirectUrl = `${lockOptions.auth.redirectUrl}?connect=true`;

@@ -11,10 +11,4 @@ export default Route.extend(EnsureStatefulLogin, AuthenticatedRouteMixin, {
     // we could display stale information about verified email addresses
     return this.get('session').forceReloadUser();
   },
-
-  actions: {
-    showResetPasswordModal() {
-      this.showResetPasswordModal();
-    },
-  },
 });

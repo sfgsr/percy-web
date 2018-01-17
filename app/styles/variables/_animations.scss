@@ -113,3 +113,13 @@
 .animate-rotate-360 {
   animation: rotate-360 500ms linear infinite;
 }
+
+@keyframes loading {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 128px;
+  }
+}

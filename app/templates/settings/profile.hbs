@@ -9,10 +9,10 @@
     <section class="form-section">
       <label>
         <span class="label-body">Password</span>
-        <div>
-          <button type="button" class="btn btn-md btn-primary w-full" {{action "showResetPasswordModal"}}>Reset Password</button>
-        </div>
       </label>
+      <div>
+        {{password-change-button user=model}}
+      </div>
     </section>
   {{/if}}
 </div>
