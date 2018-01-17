@@ -18,4 +18,3 @@ echo $(docker exec "$CONTAINER_ID" ls tmp-junit)
 
 echo "docker cp $CONTAINER_ID:$DOCKER_DIR/tmp-junit tmp-junit/"
 docker cp $CONTAINER_ID:$DOCKER_DIR/tmp-junit tmp-junit/
-docker cp $CONTAINER_ID:tmp-junit tmp-junit/
