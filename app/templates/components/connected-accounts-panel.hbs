@@ -1,9 +1,9 @@
 {{#if hasAnyIdentities}}
-  <div class="mb-4">
+  <div class="mb-3">
     {{#if emailPasswordIdentity}}
-      <div class="flex space-between align-center mb-2">
+      <div class="flex justify-between align-center mb-1">
         <div class="text-mono flex align-center">
-          {{inline-svg "percy-logo-tiny-on-light" class="mr-2"}}
+          {{inline-svg "percy-logo-tiny-on-light" class="mr-1"}}
           {{emailPasswordIdentity.user.name}}
         </div>
 
@@ -17,9 +17,9 @@
       </div>
     {{/if}}
     {{#if githubIdentity}}
-      <div class="flex space-between align-center mb-2">
+      <div class="flex justify-between align-center mb-1">
         <div class="text-mono flex align-center">
-          {{inline-svg "github-icon" class="mr-2"}}
+          {{inline-svg "github-icon" class="mr-1"}}
           {{#if githubIdentity.nickname}}
             {{githubIdentity.nickname}}
           {{else}}
@@ -36,11 +36,11 @@
       </div>
     {{/if}}
   </div>
-  <hr class="alt-hr mb-4">
+  <hr class="alt-hr mb-3">
 {{/if}}
 
 {{#if (not emailPasswordIdentity)}}
-  <button type="button" class="btn btn-md btn-primary w-full mb-2"
+  <button type="button" class="btn btn-md btn-primary w-full mb-1"
     {{action addIdentity "auth0"}}
     data-test-connected-accounts-panel-add-ep-identity>
     Add email/password account
@@ -48,7 +48,7 @@
 {{/if}}
 
 {{#if (not githubIdentity)}}
-  <button type="button" class="btn btn-md btn-github w-full mb-4"
+  <button type="button" class="btn btn-md btn-github w-full mb-3"
     {{action addIdentity "github"}}
     data-test-connected-accounts-panel-add-github-identity>
     Connect your GitHub account

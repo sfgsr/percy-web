@@ -1,13 +1,13 @@
 {{#each projects as |project|}}
-  <div class="mb-5">
+  <div class="mb-4">
     {{#link-to "organization.project.index" project.organization.slug project.slug class="no-underline transition-hover-container" data-test-project-link=true}}
-      <header class="flex space-between align-center py-2 px-5 f2 bg-white sticky z-top project-list-header">
+      <header class="flex justify-between align-center py-1 px-4 f2 bg-white sticky z-top project-list-header">
         <div class="flex align-center">
           <span class="{{if project.isDisabled 'opacity-50'}} text-dark" style="text-decoration: none !important;">{{project.name}}</span>
           {{#if project.isDisabled}}
             <div class="label ml-2">disabled project</div>
           {{/if}}
-          {{inline-svg "chevron-right-icon" class="ml-3 transition-fade-in-right"}}
+          {{inline-svg "chevron-right-icon" class="ml-2 transition-fade-in-right"}}
         </div>
       </header>
     {{/link-to}}
@@ -21,9 +21,9 @@
               {{build-card build=build}}
             {{/each}}
           {{else}}
-            <div class="p-5 text-center bg-gray-000">
+            <div class="p-4 text-center bg-gray-000">
               Waiting for first snapshot.
-              {{#link-to "organization.project.index" project.organization.slug project.slug class="btn ml-4"}}Get started{{/link-to}}
+              {{#link-to "organization.project.index" project.organization.slug project.slug class="btn ml-3"}}Get started{{/link-to}}
             </div>
           {{/if}}
         {{/if}}

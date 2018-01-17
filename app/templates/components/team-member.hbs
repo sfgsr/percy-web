@@ -1,6 +1,6 @@
 <img src="{{img}}" alt="team-member-photo" class="team-member-photo">
 <div class="social-toolbar flex justify-center">
-  <div class="social-toolbar-items flex align-center px-2">
+  <div class="social-toolbar-items flex align-center px-1">
     {{#if social-twitter}}
       <a href="http://www.twitter.com/{{social-twitter}}" class="social-toolbar-item">
         {{inline-svg "twitter-icon"}}
@@ -29,8 +29,8 @@
   </div>
 </div>
 <div class="team-member-name f4 text-weight-semibold text-center">{{name}}</div>
-<div class="team-member-title text-light text-center mb-2">{{title}}</div>
-<div class="label-container pr-5">
+<div class="team-member-title text-light text-center mb-1">{{title}}</div>
+<div class="label-container pr-4">
   {{#each labels as |label|}}
     <div class="label">{{label}}</div>
   {{/each}}

@@ -1,12 +1,15 @@
 @charset "UTF-8";
 
+@import
+  "keratin/keratin",
+  "keratin-config";
+
 // Addons.
 @import
   "ember-power-select",
   "ember-modal-dialog/ember-modal-structure";
 
 @import
-  "variables/color_system",
   "variables/colors",
   "variables/fonts",
   "variables/mixins",
@@ -17,9 +20,9 @@
   "variables/typography";
 
 // Vendor styles
-@import "vendor/normalize";
-@import "vendor/skeleton";
-@import "vendor/auth0";
+@import
+  "vendor/skeleton",
+  "vendor/auth0";
 
 // Base components.
 @import
@@ -35,9 +38,6 @@
 
 @import
   "layout/container",
-  "layout/grid",
-  "layout/margin",
-  "layout/padding",
   "layout/responsive";
 
 // Non-component styles.

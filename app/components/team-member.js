@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import seededRandom from 'percy-web/lib/random';
 
 export default Component.extend({
-  classNames: ['team-member', 'mb-8'],
+  classNames: ['team-member', 'mb-7'],
   attributeBindings: ['style'],
   style: '',
 

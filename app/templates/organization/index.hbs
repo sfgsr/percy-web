@@ -4,8 +4,8 @@
   {{loading-page}}
 {{else}}
   {{#if model.savedProjects}}
-    <header class="flex space-between align-center py-4 px-5">
-      <h2 class="m-0 mr-3 f2 text-weight-regular">{{model.name}}</h2>
+    <header class="flex justify-between align-center py-3 px-4">
+      <h2 class="m-0 mr-2 f2 text-weight-regular">{{model.name}}</h2>
       {{#link-to "organizations.organization.projects.new" model.slug classNames="btn btn-primary"}}
         New Project
       {{/link-to}}

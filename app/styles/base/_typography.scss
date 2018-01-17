@@ -49,35 +49,6 @@ a {
   border-radius: 4px;
 }
 
-.no-wrap {
-  white-space: nowrap;
-}
-
-.text-weight-regular {
-  font-weight: 400;
-}
-
-.text-weight-semibold {
-  font-weight: var(--semibold);
-}
-
-.text-mono {
-  font-family: $monospace-font;
-  letter-spacing: 0.5px;
-}
-
-.text-white {
-  color: var(--white) !important;
-}
-
-.text-light {
-  color: var(--light-text-color);
-}
-
-.text-center {
-  text-align: center !important;
-}
-
 .f00 {
   font-size: var(--f00-size) !important;
 }

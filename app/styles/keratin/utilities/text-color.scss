@@ -1,0 +1,26 @@
+.text-dark { color: var(--gray-700) !important; }
+.text-light { color: var(--light-text-color) !important; }
+.text-white { color: var(--white) !important; }
+.text-blue { color: var(--blue-500) !important; }
+.text-red { color: var(--red-700) !important; }
+.text-green { color: var(--green-500) !important; }
+.text-purple { color: var(--purple-800) !important; }
+.text-yellow { color: var(--yellow-500) !important; }
+
+/* Link colors */
+
+.link-gray {
+  color: var(--gray-500) !important;
+
+  &:hover {
+    color: var(--gray-500) !important;
+  }
+}
+
+.link-dark {
+  color: var(--gray-700) !important;
+
+  &:hover {
+    color: var(--gray-700) !important;
+  }
+}

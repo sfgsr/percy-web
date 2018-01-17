@@ -1,11 +1,11 @@
 <header class="sticky bg-white z-top">
-  <div class="flex space-between align-center py-4 px-5">
+  <div class="flex justify-between align-center py-3 px-4">
     <div class="flex align-center">
-      <h2 class="m-0 mr-3 f2 text-weight-regular">{{project.name}}</h2>
+      <h2 class="m-0 mr-2 f2 text-weight-regular">{{project.name}}</h2>
       {{#if project.isDisabled}}
         <div class="label">disabled</div>
       {{/if}}
-      {{#link-to "organization.project.settings" project.organization.slug project.slug class="mr-3" data-test-settings-icon=true}}
+      {{#link-to "organization.project.settings" project.organization.slug project.slug class="mr-2" data-test-settings-icon=true}}
         <figure class="svg-container">
           {{inline-svg "settings-icon"}}
         </figure>
@@ -17,21 +17,21 @@
     {{#if project.organization.isGithubIntegrated}}
       {{#if project.repo}}
         <div class="flex align-center">
-          <figure class="svg-container mr-2">
+          <figure class="svg-container mr-1">
             {{inline-svg "github-icon"}}
           </figure>
-          <span class="text-weight-semibold mr-2">Linked to</span>
+          <span class="text-weight-semibold mr-1">Linked to</span>
           <a href="{{project.repo.htmlUrl}}"><code>{{project.repo.slug}}</code></a>
         </div>
       {{/if}}
     {{/if}}
   </div>
-  <div class="build-list-header px-5">
+  <div class="build-list-header px-4">
     {{#if project.builds}}
-      <div class="f6 text-light text-weight-semibold pb-1">Build #</div>
-      <div class="f6 text-light text-weight-semibold pb-1">Details</div>
-      <div class="f6 text-light text-weight-semibold pb-1">Diffs</div>
-      <div class="f6 text-light text-weight-semibold pb-1">Status</div>
+      <div class="f6 text-light text-weight-semibold pb-sm">Build #</div>
+      <div class="f6 text-light text-weight-semibold pb-sm">Details</div>
+      <div class="f6 text-light text-weight-semibold pb-sm">Diffs</div>
+      <div class="f6 text-light text-weight-semibold pb-sm">Status</div>
     {{/if}}
   </div>
 </header>
@@ -45,7 +45,7 @@
       {{/each}}
     </div>
   {{else}}
-    <div class="container-lg py-9">
+    <div class="container-lg py-8">
       {{#if project.isEnabled}}
         <div class="Alert Alert--warning">
           <strong>Waiting for first snapshot:</strong> complete setup below to generate first snapshot.

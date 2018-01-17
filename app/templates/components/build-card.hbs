@@ -8,11 +8,11 @@
     </div>
   </div>
   <div style="min-width: 0">
-    <div class="flex align-center mb-1 pt-1">
+    <div class="flex align-center mb-sm pt-sm">
       {{#if build.isGithubLinked}}
-        {{inline-svg "github-icon" class="mr-2"}}
+        {{inline-svg "github-icon" class="mr-1"}}
       {{/if}}
-      <code class="truncate mr-2">
+      <code class="truncate mr-1">
         {{build.branch}}
       </code>
       {{#if build.isGithubLinked}}
@@ -24,26 +24,26 @@
     <div class="flex align-center">
       {{#if build.isGithubLinked}}
         {{#if build.isPullRequest}}
-          {{inline-svg "pull-request-icon" class="mr-2"}}
-          <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="no-wrap truncate text-weight-semibold mr-2" onclick={{action "stopPropagation"}}>#{{build.pullRequestNumber}} {{build.pullRequestTitle}}</a>
+          {{inline-svg "pull-request-icon" class="mr-1"}}
+          <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="no-wrap truncate text-weight-semibold mr-1" onclick={{action "stopPropagation"}}>#{{build.pullRequestNumber}} {{build.pullRequestTitle}}</a>
         {{else}}
-          {{inline-svg "commit-icon" class="mr-2"}}
+          {{inline-svg "commit-icon" class="mr-1"}}
         {{/if}}
       {{/if}}
-      <strong class="no-wrap mr-2">{{build.commit.authorName}}</strong>
+      <strong class="no-wrap mr-1">{{build.commit.authorName}}</strong>
       <span class="text-light truncate">{{build.commit.message}}</span>
     </div>
   </div>
   <div>
     <div class="flex align-center">
       {{#if build.isWaiting}}
-        {{inline-svg "loader-icon" class="mr-3"}}
+        {{inline-svg "loader-icon" class="mr-2"}}
       {{else if build.isFailed}}
-        {{inline-svg "null-comparison-icon" class="mr-3"}}
+        {{inline-svg "null-comparison-icon" class="mr-2"}}
       {{else if build.hasNoDiffs}}
-        {{inline-svg "no-comparison-icon" class="mr-3"}}
+        {{inline-svg "no-comparison-icon" class="mr-2"}}
       {{else}}
-        {{inline-svg "comparison-icon" class="mr-3"}}
+        {{inline-svg "comparison-icon" class="mr-2"}}
       {{/if}}
       <div>
         {{#if build.isPending}}

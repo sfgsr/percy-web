@@ -1,14 +1,14 @@
 <div class="flex align-center">
   {{#link-to "docs.index" class="hide-on-tablet"}}Docs{{/link-to}}
-  {{#link-to "docs.page" "tutorials/example-apps" class="ml-4 hide-on-tablet"}}Tutorials{{/link-to}}
+  {{#link-to "docs.page" "tutorials/example-apps" class="ml-3 hide-on-tablet"}}Tutorials{{/link-to}}
   {{#if session.isAuthenticated}}
-    {{user-menu user=user class="ml-4"}}
+    {{user-menu user=user class="ml-3"}}
   {{else}}
-    <a href="https://blog.percy.io" class="ml-4">Blog</a>
-    {{#link-to "pricing" class="ml-4"}}Pricing{{/link-to}}
-    {{#link-to "enterprise" class="ml-4"}}Enterprise{{/link-to}}
+    <a href="https://blog.percy.io" class="ml-3">Blog</a>
+    {{#link-to "pricing" class="ml-3"}}Pricing{{/link-to}}
+    {{#link-to "enterprise" class="ml-3"}}Enterprise{{/link-to}}
     {{sign-in-header-link
-      classNames="mx-4 hide-on-mobile"
+      classNames="mx-3 hide-on-mobile"
     }}
   {{/if}}
 </div>

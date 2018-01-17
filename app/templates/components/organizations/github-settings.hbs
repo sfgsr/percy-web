@@ -1,7 +1,7 @@
 {{#if (not (await isEligibleForGithubIntegration))}}
-    <label class="mt-5">
-      To install the GitHub integration you first need to {{#link-to 'settings.connected-accounts'}}connect your GitHub account{{/link-to}}.
-    </label>
+  <label class="mt-4">
+    To install the GitHub integration you first need to {{#link-to 'settings.connected-accounts'}}connect your GitHub account{{/link-to}}.
+  </label>
 {{else}}
   <form action="javascript:;" class="Form">
     <label>

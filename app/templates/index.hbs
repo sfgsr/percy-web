@@ -1,10 +1,10 @@
 <div class="container Header Header--large Header--dark">
   {{#if session.isAuthenticated}}
-    <div class="flex justify-end pt-2">
+    <div class="flex justify-end pt-1">
       {{nav-menu user=session.currentUser}}
     </div>
   {{else}}
-    <div class="flex justify-end pt-3">
+    <div class="flex justify-end pt-2">
       {{nav-menu}}
     </div>
   {{/if}}

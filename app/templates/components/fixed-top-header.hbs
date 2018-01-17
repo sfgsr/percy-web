@@ -1,14 +1,14 @@
 <div class="container">
-  <div class="Header Header--dark flex space-between align-center">
+  <div class="Header Header--dark flex justify-between align-center">
     <div class="flex align-center">
       {{#link-to "index"}}
-        <img src="/images/percy.svg" class="Header-logo mr-4">
+        <img src="/images/percy.svg" class="Header-logo mr-3">
       {{/link-to}}
       {{#if session.isAuthenticated}}
         {{organizations/switcher-nav currentOrganization=currentOrganization}}
       {{/if}}
       {{#if currentOrganization}}
-        {{#link-to "organization.index" currentOrganization.slug class="mr-4 hide-on-mobile"}}Dashboard{{/link-to}}
+        {{#link-to "organization.index" currentOrganization.slug class="mr-3 hide-on-mobile"}}Dashboard{{/link-to}}
         {{#if (eq "admin" currentOrganization.currentUserMembership.role)}}
           {{#link-to "organizations.organization.settings" currentOrganization.slug data-test-settings-link=true class="hide-on-mobile"}}Settings{{/link-to}}
         {{/if}}

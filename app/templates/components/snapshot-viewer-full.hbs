@@ -3,7 +3,7 @@
     <figure class="svg-container">
       {{comparison-icon
         hasComparison=hasComparisonAtSelectedWidth
-        svgClassName="mr-2"
+        svgClassName="mr-1"
       }}
     </figure>
     <a class="Viewer-header-title SnapshotViewer-title truncate" title="{{snapshot.name}}" href="{{snapshotUrl}}">{{snapshot.name}}</a>
@@ -15,7 +15,7 @@
   }}
   <div class="flex justify-end">
     <div class="btn-toolbar" role="group" aria-label="Viewport Comparison Switcher">
-      <div class="btn-group btn-group-alt mr-2" role="group" aria-label="First Group">
+      <div class="btn-group btn-group-alt mr-1" role="group" aria-label="First Group">
         {{comparison-switcher
           comparisons=snapshot.comparisons
           buildWidths=buildWidths

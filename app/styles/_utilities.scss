@@ -1,59 +1,5 @@
-.truncate {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: top;
-  overflow: hidden;
-}
-
-// stylelint-disable value-no-vendor-prefix
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-}
-// stylelint-enable value-no-vendor-prefix
-
-.truncate-target {
-  display: inline-block;
-  max-width: 160px;
-}
-
 .c-pointer {
   cursor: pointer;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.flex {
-  display: flex;
-}
-
-.justify-center {
-  justify-content: center;
-  justify-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.justify-end {
-  justify-content: flex-end;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
-.align-center {
-  align-content: center;
-  align-items: center;
-}
-
-.align-end {
-  align-items: flex-end;
 }
 
 .is-invisible {
@@ -66,22 +12,6 @@
 
 .w-full {
   width: 100%;
-}
-
-.rounded {
-  border-radius: var(--border-radius);
-}
-
-.rounded-left {
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
-
-.rounded-right {
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-}
-
-.bg-white {
-  background: var(--white);
 }
 
 .alt-hr {
@@ -107,26 +37,6 @@
 
 .bg-white-pattern {
   background: url("/images/pattern-on-white.svg");
-}
-
-.opacity-1 {
-  opacity: 1;
-}
-
-.opacity-75 {
-  opacity: 0.75;
-}
-
-.opacity-50 {
-  opacity: 0.5;
-}
-
-.opacity-25 {
-  opacity: 0.25;
-}
-
-.opacity-0 {
-  opacity: 0;
 }
 
 .z-top {
