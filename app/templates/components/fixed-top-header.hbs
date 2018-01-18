@@ -1,7 +1,7 @@
 <header class="authenticated-header bg-purple-000 px-3 text-weight-semibold flex justify-between align-center">
   <div class="flex align-center">
     {{#link-to "index"}}
-      <img src="/images/logos/percy-logo-on-light.svg" class="mr-3 d-block">
+      {{inline-svg 'percy-logo-on-light' class="mr-3 d-block"}}
     {{/link-to}}
     {{#if session.isAuthenticated}}
       {{organizations/switcher-nav currentOrganization=currentOrganization}}
