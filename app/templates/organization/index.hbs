@@ -1,32 +1,20 @@
 {{fixed-top-header currentOrganization=model}}
-{{!-- Note: use model.projects here to get the promise proxy, but use savedProjects below for filtering. --}}
-{{#if model.projects.isPending}}
-  {{loading-page}}
-{{else}}
-  {{#if model.savedProjects}}
-    <header class="flex justify-between align-center py-3 px-4">
-      <h2 class="m-0 mr-2 f2 text-weight-regular">{{model.name}}</h2>
-      {{#link-to "organizations.organization.projects.new" model.slug classNames="btn btn-primary"}}
-        New Project
-      {{/link-to}}
-    </header>
-    {{projects-list projects=model.savedProjects}}
-  {{else}}
-    <div class="Card Card--extraPadded u-text-center">
-      <h3>Welcome <strong>{{model.name}}</strong>!</h3>
-      <p>
-        {{#link-to "organizations.organization.projects.new" model.slug classNames="btn btn-primary"}}
-          Create your first project
-        {{/link-to}}
-      </p>
-      <p>
-        After you've created a project, you can use our demo apps for experimentation.
-      </p>
-      {{!-- TODO: #billingadmins --}}
-      {{#if (eq "admin" model.currentUserMembership.role)}}
-        <p>You can also {{#link-to "organizations.organization.users.invite" model.slug}}invite team members{{/link-to}} or {{#link-to "organizations.organization.settings" model.slug}}install the GitHub integration{{/link-to}}.</p>
-      {{/if}}
-    </div>
+
+{{! Note: if any projects exist, the user will be redirected to the project list. }}
+<div class="Card Card--extraPadded u-text-center">
+  <h3>Welcome <strong>{{model.name}}</strong>!</h3>
+  <p>
+    {{#link-to "organizations.organization.projects.new" model.slug classNames="btn btn-primary"}}
+      Create your first project
+    {{/link-to}}
+  </p>
+  <p>
+    After you've created a project, you can use our demo apps for experimentation.
+  </p>
+  {{!-- TODO: #billingadmins --}}
+  {{#if (eq "admin" model.currentUserMembership.role)}}
+    <p>You can also {{#link-to "organizations.organization.users.invite" model.slug}}invite team members{{/link-to}} or {{#link-to "organizations.organization.settings" model.slug}}install the GitHub integration{{/link-to}}.</p>
   {{/if}}
-{{/if}}
+</div>
+
 {{main-footer}}

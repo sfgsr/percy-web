@@ -10,11 +10,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   currentUser: alias('session.currentUser'),
 
   afterModel(model) {
-    try {
-      localStorageProxy.set('lastOrganizationSlug', model.get('slug'));
-    } catch (_) {
-      // Safari throws errors while accessing localStorage in private mode.
-    }
+    localStorageProxy.set('lastOrganizationSlug', model.get('slug'));
 
     this.get('intercom').associateWithCompany(this.get('currentUser'), model);
   },

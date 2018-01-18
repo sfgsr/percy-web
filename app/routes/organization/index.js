@@ -1,12 +1,29 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import localStorageProxy from 'percy-web/lib/localstorage';
 
 export default Route.extend(AuthenticatedRouteMixin, {
   redirect() {
     this.send('redirectToDefaultOrganization');
   },
   afterModel(model) {
-    model.get('projects').reload();
+    return model
+      .get('projects')
+      .reload()
+      .then(projects => {
+        let organizationSlug = model.get('slug');
+        let recentProjectSlugs = localStorageProxy.get('recentProjectSlugs') || {};
+        let recentProjectSlug = recentProjectSlugs[organizationSlug];
+        if (recentProjectSlug) {
+          this.transitionTo('organization.project.index', organizationSlug, recentProjectSlug);
+        } else {
+          if (projects.get('length')) {
+            let project = projects.sortBy('isDisabled', 'name').get('firstObject');
+            let projectSlug = project.get('slug');
+            this.transitionTo('organization.project.index', organizationSlug, projectSlug);
+          }
+        }
+      });
   },
   actions: {
     didTransition() {

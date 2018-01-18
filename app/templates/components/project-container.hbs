@@ -1,6 +1,11 @@
 <header class="sticky bg-white z-top">
   <div class="flex justify-between align-center py-3 px-4">
     <div class="flex align-center">
+      {{menu-icon
+        class="mr-2 c-pointer show-on-tablet"
+        toggleSidebar=toggleSidebar
+        isSidebarVisible=isSidebarVisible
+      }}
       <h2 class="m-0 mr-2 f2 text-weight-regular">{{project.name}}</h2>
       {{#if project.isDisabled}}
         <div class="label">disabled</div>
@@ -26,7 +31,7 @@
       {{/if}}
     {{/if}}
   </div>
-  <div class="build-list-header px-4">
+  <div class="build-list-header px-4 border-bottom border-gray-100">
     {{#if project.builds}}
       <div class="f6 text-light text-weight-semibold pb-sm">Build #</div>
       <div class="f6 text-light text-weight-semibold pb-sm">Details</div>
@@ -45,7 +50,7 @@
       {{/each}}
     </div>
   {{else}}
-    <div class="container-lg py-8">
+    <div class="container-full p-8">
       {{#if project.isEnabled}}
         <div class="Alert Alert--warning">
           <strong>Waiting for first snapshot:</strong> complete setup below to generate first snapshot.

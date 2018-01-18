@@ -15,3 +15,9 @@
     display: none !important;
   }
 }
+
+.show-on-tablet {
+  @media (min-width: $width-lg) {
+    display: none !important;
+  }
+}
