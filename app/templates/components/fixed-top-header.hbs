@@ -1,26 +1,25 @@
-<div class="container">
-  <div class="Header Header--dark flex justify-between align-center">
-    <div class="flex align-center">
-      {{#link-to "index"}}
-        <img src="/images/percy.svg" class="Header-logo mr-3">
-      {{/link-to}}
-      {{#if session.isAuthenticated}}
-        {{organizations/switcher-nav currentOrganization=currentOrganization}}
-      {{/if}}
-      {{#if currentOrganization}}
-        {{#link-to "organization.index" currentOrganization.slug class="mr-3 hide-on-mobile"}}Dashboard{{/link-to}}
-        {{#if (eq "admin" currentOrganization.currentUserMembership.role)}}
-          {{#link-to "organizations.organization.settings" currentOrganization.slug data-test-settings-link=true class="hide-on-mobile"}}Settings{{/link-to}}
-        {{/if}}
-      {{/if}}
-    </div>
-
-    {{trial-bar organization=currentOrganization type="is-on-dark"}}
-
+<header class="authenticated-header bg-purple-000 px-3 text-weight-semibold flex justify-between align-center">
+  <div class="flex align-center">
+    {{#link-to "index"}}
+      <img src="/images/logos/percy-logo-on-light.svg" class="mr-3 d-block">
+    {{/link-to}}
     {{#if session.isAuthenticated}}
-      {{nav-menu user=session.currentUser currentOrganization=currentOrganization}}
-    {{else}}
-      {{nav-menu}}
+      {{organizations/switcher-nav currentOrganization=currentOrganization}}
+    {{/if}}
+    {{#if currentOrganization}}
+      {{#if (eq "admin" currentOrganization.currentUserMembership.role)}}
+        {{#link-to "organizations.organization.settings" currentOrganization.slug data-test-settings-link=true class="flex align-center link-dark no-underline hide-on-mobile opacity-50 hoverable"}}
+          {{inline-svg "settings-icon" class="mr-1"}} Settings
+        {{/link-to}}
+      {{/if}}
     {{/if}}
   </div>
-</div>
+
+  {{trial-bar organization=currentOrganization type="is-on-dark"}}
+
+  {{#if session.isAuthenticated}}
+    {{nav-menu user=session.currentUser currentOrganization=currentOrganization}}
+  {{else}}
+    {{nav-menu}}
+  {{/if}}
+</header>

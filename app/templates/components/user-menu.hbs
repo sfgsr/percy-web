@@ -1,9 +1,9 @@
-{{user-avatar user=user}}
+{{user-avatar user=user class="user-avatar rounded-circle"}}
 {{#if showMenu}}
   <div class="PageClickOverlay"></div>
   <div class="UserMenu-arrow">{{fa-icon "caret-up"}}</div>
-  <ul>
-    <li>{{#link-to "settings.profile"}}Profile{{/link-to}}</li>
-    <li><a href="#" {{action "logout"}}>Logout</a></li>
+  <ul class="user-menu">
+    <li>{{#link-to "settings.profile" class="link-light"}}Profile{{/link-to}}</li>
+    <li><a class="link-light" href="#" {{action "logout"}}>Logout</a></li>
   </ul>
 {{/if}}

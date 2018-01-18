@@ -1,10 +1,10 @@
-<div class="OrganizationsSwitcherNav-item mr-3" {{action "toggleSwitcher"}}>
+<div style="text-transform: capitalize;" class="c-pointer org-switcher rounded border border-purple-600 f6 py-sm px-2 text-light-purple text-mono text-weight-regular mr-3" {{action "toggleSwitcher"}}>
   {{#if currentOrganization}}
     {{currentOrganization.name}}
   {{else}}
     Jump to org<span class="u-hide-on-mobile">anization</span>
   {{/if}}
-  {{inline-svg "dropdown-light-icon" class="ml-sm"}}
+  {{inline-svg "dropdown-purple-icon" class="ml-sm"}}
 </div>
 {{#if isExpanded}}
   <div class="PageClickOverlay" {{action "hideSwitcher"}}></div>

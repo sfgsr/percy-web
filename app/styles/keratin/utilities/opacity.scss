@@ -3,3 +3,6 @@
 .opacity-50 { opacity: 0.5; }
 .opacity-25 { opacity: 0.25; }
 .opacity-0 { opacity: 0; }
+
+.hoverable { transition: opacity 250ms; }
+.hoverable:hover { opacity: 1; }

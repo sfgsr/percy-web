@@ -6,17 +6,17 @@
   // to a separate, more generic, menu mixin
   .UserMenu-arrow {
     position: absolute;
-    top: 34px;
-    right: 21px;
-    font-size: 4rem;
+    top: 38px;
+    right: 36px;
+    font-size: 3rem;
     color: var(--dark-purple);
     z-index: 98;
   }
 
   ul {
     position: absolute;
-    top: 60px;
-    right: 13px;
+    top: 54px;
+    right: 24px;
     width: 100px;
     background: var(--dark-purple);
     border: 1px solid var(--dark-purple);

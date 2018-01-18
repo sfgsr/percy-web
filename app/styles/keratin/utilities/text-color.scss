@@ -4,6 +4,7 @@
 .text-blue { color: var(--blue-500) !important; }
 .text-red { color: var(--red-700) !important; }
 .text-green { color: var(--green-500) !important; }
+.text-light-purple { color: var(--purple-700) !important; }
 .text-purple { color: var(--purple-800) !important; }
 .text-yellow { color: var(--yellow-500) !important; }
 
@@ -22,5 +23,13 @@
 
   &:hover {
     color: var(--gray-700) !important;
+  }
+}
+
+.link-light {
+  color: var(--white) !important;
+
+  &:hover {
+    color: var(--white) !important;
   }
 }
