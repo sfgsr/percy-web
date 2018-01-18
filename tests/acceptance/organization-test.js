@@ -17,11 +17,6 @@ describe('Acceptance: Organization', function() {
     it('denies billing settings', function() {
       visit(`/${this.organization.slug}`);
       andThen(() => {
-        expect(currentPath()).to.equal('organization.index');
-      });
-
-      click('[data-test-project-link]');
-      andThen(() => {
         expect(currentPath()).to.equal('organization.project.index');
       });
 
@@ -33,17 +28,6 @@ describe('Acceptance: Organization', function() {
       click('[data-test-sidenav] a:contains("Billing")');
       andThen(() => {
         expect(currentPath()).to.equal('organizations.organization.billing');
-      });
-      percySnapshot(this.test);
-    });
-
-    it('lists projects', function() {
-      visit('/login');
-      visit('/');
-
-      click('[data-test-index-goto-app]');
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.index');
       });
       percySnapshot(this.test);
     });

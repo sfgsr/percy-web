@@ -1,0 +1,22 @@
+<section class="flex position-relative {{if isSidebarVisible 'sidebar-is-visible'}}">
+  <aside class="project-list-sidebar vh-full overflow-y-scroll shrink-0 p-4 sticky">
+    <ul class="list-reset mb-3">
+      {{#each model.sortedProjects as |project|}}
+        <li class="flex align-center mb-2 {{if project.isDisabled 'opacity-25'}}" {{action 'toggleSidebar'}}>
+          <div class="status-indicator shrink-0 mr-2 is-{{dasherize project.lastBuild.buildStatusLabel}}"></div>
+          {{#link-to "organization.project.index" project.organization.slug project.slug class="text-weight-semibold link-gray truncate"}}
+            {{project.name}}
+          {{/link-to}}
+        </li>
+      {{/each}}
+    </ul>
+    {{#link-to "organizations.organization.projects.new" model.project.organization.slug classNames="btn btn-sm btn-alt w-full text-center"}}
+      New Project
+    {{/link-to}}
+  </aside>
+  {{project-container
+    project=project
+    showSupport="showSupport"
+    isSidebarVisible=isSidebarVisible
+    toggleSidebar=(action 'toggleSidebar')}}
+</section>

@@ -43,7 +43,7 @@ describe('Acceptance: Processing Build', function() {
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
-    let project = server.create('project', {name: 'processing build', organization});
+    let project = server.create('project', {name: 'project-with-processing-build', organization});
     let build = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
@@ -78,7 +78,7 @@ describe('Acceptance: Failed Build', function() {
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
-    let project = server.create('project', {name: 'failed build', organization});
+    let project = server.create('project', {name: 'project-with-failed-build', organization});
     let build = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
@@ -114,7 +114,7 @@ describe('Acceptance: Build', function() {
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
-    let project = server.create('project', {name: 'finished build', organization});
+    let project = server.create('project', {name: 'project-with-finished-build', organization});
     let headBuild = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),

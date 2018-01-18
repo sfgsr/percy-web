@@ -4,7 +4,7 @@ export default Component.extend({
   project: null,
   showQuickstart: false,
   tagName: 'main',
-  classNameBindings: ['classes'],
+  classNames: ['project-container flex-1 border-left border-gray-100'],
   actions: {
     refresh() {
       this.set('isRefreshing', true);

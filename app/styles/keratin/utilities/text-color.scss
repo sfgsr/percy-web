@@ -10,10 +10,16 @@
 /* Link colors */
 
 .link-gray {
-  color: var(--gray-500) !important;
+  color: var(--gray-300) !important;
 
   &:hover {
-    color: var(--gray-500) !important;
+    color: var(--gray-700) !important;
+    text-decoration: none;
+  }
+
+  &.active {
+    font-weight: 700;
+    color: var(--gray-700) !important;
   }
 }
 

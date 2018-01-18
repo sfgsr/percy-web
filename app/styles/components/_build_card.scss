@@ -10,7 +10,6 @@
   }
 }
 
-.build-list-header,
 .project-list-header {
   box-shadow: 0 1px 0 var(--gray-100);
 }
@@ -41,17 +40,15 @@
   }
 
   &:hover {
-    position: relative;
-    box-shadow: inset 2px 0 0 var(--status-color, transparent), 0 2px 10px rgba(#000, 0.1);
-    z-index: 0;
+    box-shadow: inset 8px 0 0 var(--status-color, transparent), inset 0 1px 0 var(--gray-100), inset 0 -1px 0 var(--gray-100);
+
+    .status-pill {
+      transform: scale(1.05);
+    }
   }
 
   &:nth-child(even) {
     background: var(--gray-000);
-
-    &:hover {
-      box-shadow: inset 2px 0 0 var(--status-color, transparent), 0 2px 10px rgba(#000, 0.15);
-    }
   }
 
   &.is-processing {

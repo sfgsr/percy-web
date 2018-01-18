@@ -9,6 +9,7 @@
   white-space: nowrap;
   background: var(--background-color);
   border-radius: 13px;
+  transition: transform 250ms;
 
   &.is-processing {
     --text-color: var(--text-color);

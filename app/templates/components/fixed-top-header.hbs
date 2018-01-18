@@ -8,7 +8,6 @@
         {{organizations/switcher-nav currentOrganization=currentOrganization}}
       {{/if}}
       {{#if currentOrganization}}
-        {{#link-to "organization.index" currentOrganization.slug class="mr-3 hide-on-mobile"}}Dashboard{{/link-to}}
         {{#if (eq "admin" currentOrganization.currentUserMembership.role)}}
           {{#link-to "organizations.organization.settings" currentOrganization.slug data-test-settings-link=true class="hide-on-mobile"}}Settings{{/link-to}}
         {{/if}}

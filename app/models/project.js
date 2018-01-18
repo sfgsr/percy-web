@@ -19,9 +19,10 @@ export default DS.Model.extend({
   builds: DS.hasMany('build', {async: true}),
   tokens: DS.hasMany('token', {async: true}),
 
-  recentBuilds: computed('organization', 'slug', 'builds', function() {
-    return this.store.query('build', {project: this, page: {limit: 3}});
+  _lastBuild: computed('organization', 'slug', 'builds', function() {
+    return this.store.query('build', {project: this, page: {limit: 1}});
   }),
+  lastBuild: computed.alias('_lastBuild.lastObject'),
 
   writeOnlyToken: computed('tokens', function() {
     return this.get('tokens').findBy('role', 'write_only');
