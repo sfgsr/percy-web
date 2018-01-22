@@ -23,7 +23,9 @@
       in {{pluralize build.totalComparisonsFinished "snapshot"}}
       {{#if build.isApproved}}
         were <strong>approved</strong>
-        <span class="ApprovalSection-user">by {{build.approvedBy.name}}</span>
+        {{#if build.approvedBy}}
+          <span class="ApprovalSection-user">by {{build.approvedBy.name}}</span>
+        {{/if}}
       {{/if}}
     </h2>
   {{else if build.isFailed}}
