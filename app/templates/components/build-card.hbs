@@ -26,12 +26,12 @@
         {{#if build.isPullRequest}}
           {{inline-svg "pull-request-icon" class="mr-1"}}
           <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="no-wrap truncate text-weight-semibold mr-1" onclick={{action "stopPropagation"}}>#{{build.pullRequestNumber}} {{build.pullRequestTitle}}</a>
-        {{else}}
+        {{else if build.commit}}
           {{inline-svg "commit-icon" class="mr-1"}}
+          <strong class="no-wrap mr-1">{{build.commit.authorName}}</strong>
+          <span class="text-light truncate">{{build.commit.message}}</span>
         {{/if}}
       {{/if}}
-      <strong class="no-wrap mr-1">{{build.commit.authorName}}</strong>
-      <span class="text-light truncate">{{build.commit.message}}</span>
     </div>
   </div>
   <div>
