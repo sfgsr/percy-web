@@ -14,7 +14,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
         let organizationSlug = model.get('slug');
         let recentProjectSlugs = localStorageProxy.get('recentProjectSlugs') || {};
         let recentProjectSlug = recentProjectSlugs[organizationSlug];
-        if (recentProjectSlug) {
+        if (recentProjectSlug && projects.findBy('slug', recentProjectSlug)) {
           this.transitionTo('organization.project.index', organizationSlug, recentProjectSlug);
         } else {
           if (projects.get('length')) {
