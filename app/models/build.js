@@ -24,7 +24,7 @@ export default DS.Model.extend({
   }),
   branch: DS.attr(),
 
-  // States.
+  // Processing state.
   state: DS.attr(),
   isPending: equal('state', 'pending'),
   isProcessing: equal('state', 'processing'),
@@ -32,6 +32,50 @@ export default DS.Model.extend({
   isFailed: equal('state', 'failed'),
   isExpired: equal('state', 'expired'),
   isWaiting: or('isPending', 'isProcessing'),
+  failureReason: DS.attr(),
+  failureReasonHumanized: computed('failureReason', function() {
+    let failureReason = this.get('failureReason');
+    if (failureReason === 'missing_resources') {
+      return 'Missing resources';
+    } else if (failureReason === 'no_snapshots') {
+      return 'No snapshots';
+    } else if (failureReason === 'render_timeout') {
+      return 'Timed out';
+    }
+  }),
+
+  // Review state, aggregated across all reviews. This will only be set for finished builds.
+  reviewState: DS.attr(),
+  isUnreviewed: equal('reviewState', 'unreviewed'),
+  isApproved: equal('reviewState', 'approved'),
+
+  // reviewStateReason provides disambiguation for how reviewState was set, such as when a
+  // build was approved automatically by the system when there are no diffs vs. when it is
+  // approved by user review.
+  //
+  // reviewState --> reviewStateReason
+  // - 'unreviewed' --> 'unreviewed_snapshots': Not all snapshots have been reviewed.
+  // - 'approved' --> 'all_snapshots_approved': All snapshots were approved by user review.
+  // - 'approved' --> 'all_snapshots_approved_previously': All snapshots were automatically approved
+  //   because a user had previously approved the same snapshots in this branch.
+  // - 'approved' --> 'no_diffs': All snapshots were automatically approved because there were no
+  //    visual differences when compared with the baseline.
+  reviewStateReason: DS.attr(),
+
+  // Aggregate numbers for snapshots and comparisons. These will only be set for finished builds.
+  // Each snapshot is a top-level UI state that may encompass multiple comparisons.
+  // Each comparison represents a single individual rendering at a width and browser.
+  totalSnapshots: DS.attr('number'),
+  totalSnapshotsUnreviewed: DS.attr('number'),
+  totalComparisonsFinished: DS.attr('number'),
+  totalComparisonsDiff: DS.attr('number'),
+  hasDiffs: computed('totalComparisonsDiff', function() {
+    // Only have the chance to return true if the build is finished.
+    if (!this.get('isFinished')) {
+      return false;
+    }
+    return this.get('totalComparisonsDiff') > 0;
+  }),
 
   buildStatusLabel: computed('state', function() {
     if (this.get('isWaiting')) {
@@ -46,18 +90,6 @@ export default DS.Model.extend({
       return FAILED_LABEL;
     } else if (this.get('isExpired')) {
       return EXPIRED_LABEL;
-    }
-  }),
-
-  failureReason: DS.attr(),
-  failureReasonHumanized: computed('failureReason', function() {
-    let failureReason = this.get('failureReason');
-    if (failureReason === 'missing_resources') {
-      return 'Missing resources';
-    } else if (failureReason === 'no_snapshots') {
-      return 'No snapshots';
-    } else if (failureReason === 'render_timeout') {
-      return 'Timed out';
     }
   }),
 
@@ -79,16 +111,6 @@ export default DS.Model.extend({
   defaultSelectedWidth: max('comparisonWidths'),
   numComparisonWidths: computed('comparisonWidths', function() {
     return this.get('comparisonWidths').length;
-  }),
-
-  totalComparisonsFinished: DS.attr('number'),
-  totalComparisonsDiff: DS.attr('number'),
-  hasDiffs: computed('totalComparisonsDiff', function() {
-    // Only have the chance to return true if the build is finished.
-    if (!this.get('isFinished')) {
-      return false;
-    }
-    return this.get('totalComparisonsDiff') > 0;
   }),
 
   hasNoDiffs: not('hasDiffs'),
@@ -122,10 +144,6 @@ export default DS.Model.extend({
   }),
   durationSeconds: computed('duration', function() {
     return this.get('duration').seconds();
-  }),
-
-  isApproved: computed('approvedAt', function() {
-    return !!this.get('approvedAt');
   }),
 
   reloadAll() {
