@@ -3,9 +3,14 @@ import {computed} from '@ember/object';
 import Component from '@ember/component';
 
 export default Component.extend({
-  snapshot: null,
   classNames: ['SnapshotViewer'],
+
+  snapshot: null,
   buildContainerSelectedWidth: null,
+  registerChild() {},
+  unregisterChild() {},
+  selectChild() {},
+
   snapshotSelectedWidth: computed('buildContainerSelectedWidth', {
     get() {
       return this.get('buildContainerSelectedWidth');
@@ -84,7 +89,7 @@ export default Component.extend({
     },
 
     showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth) {
-      this.attrs.showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth);
+      this.showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth);
     },
   },
 });
