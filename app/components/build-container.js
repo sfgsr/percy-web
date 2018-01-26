@@ -22,6 +22,7 @@ export default Component.extend(PollingMixin, {
     this.get('build')
       .reload()
       .then(build => {
+        // TODO replace with snapshots?
         build.get('comparisons').reload();
       });
   },
