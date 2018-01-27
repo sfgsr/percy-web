@@ -1,6 +1,7 @@
 import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
+import sinon from 'sinon';
 
 // TODO convert this file to use page objects
 describe('Acceptance: Pending Build', function() {
@@ -106,6 +107,13 @@ describe('Acceptance: Failed Build', function() {
     click('#BuildInfo');
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
+
+    window.Intercom = sinon.stub();
+
+    click('[data-test-build-overview-show-support]');
+    andThen(() => {
+      expect(window.Intercom).to.have.been.calledWith('show');
+    });
   });
 });
 
