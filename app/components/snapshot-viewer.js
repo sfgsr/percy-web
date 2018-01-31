@@ -4,7 +4,6 @@ import Component from '@ember/component';
 
 export default Component.extend({
   classNames: ['SnapshotViewer'],
-
   snapshot: null,
   buildContainerSelectedWidth: null,
   registerChild() {},

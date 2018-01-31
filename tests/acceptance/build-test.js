@@ -174,7 +174,7 @@ describe('Acceptance: Build', function() {
     });
 
     let comparison = this.comparisons.different;
-    let comparisonSelector = `.SnapshotViewer:has(a[title="${comparison.headSnapshot.name}"])`;
+    let comparisonSelector = `.SnapshotViewer:has([title="${comparison.headSnapshot.name}"])`;
 
     andThen(() => {
       expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(1);
