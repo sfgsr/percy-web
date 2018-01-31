@@ -102,7 +102,7 @@ export default DS.Model.extend({
 
   commit: DS.belongsTo('commit', {async: false}), // Might be null.
   baseBuild: DS.belongsTo('build', {async: false, inverse: null}),
-  comparisons: DS.hasMany('comparison', {async: false}),
+  // comparisons: DS.hasMany('comparison', {async: false}),
   snapshots: DS.hasMany('snapshot', {async: true}),
 
   // snapshots: computed('comparisons', function() {
@@ -110,6 +110,12 @@ export default DS.Model.extend({
   //   let snapshots = comparisons.map(comparison => comparison.get('headSnapshot')).filter(x => x);
   //   return [...new Set(snapshots)];
   // }),
+
+  comparisons: computed('snapshots', function() {
+    return this.get('snapshots').reduce((acc, snapshot) => {
+      return acc.concat(snapshot.get('comparisons').toArray());
+    }, []);
+  }),
 
   comparisonWidths: computed('comparisons', function() {
     let widths = [...new Set(this.get('comparisons').map(c => c.get('width')))];
