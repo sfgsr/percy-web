@@ -198,27 +198,27 @@ describe('Acceptance: Build', function() {
   });
 
   it('walk across snapshots with arrow keys', function() {
-    const RightArrowKey = 39;
-    const LeftArrowKey = 37;
+    const DownArrowKey = 40;
+    const UpArrowKey = 38;
     visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1`);
     });
 
-    keyEvent('.SnapshotList', 'keydown', RightArrowKey);
+    keyEvent('.SnapshotList', 'keydown', DownArrowKey);
     andThen(() => {
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right');
 
-    keyEvent('.SnapshotList', 'keydown', RightArrowKey);
+    keyEvent('.SnapshotList', 'keydown', DownArrowKey);
     andThen(() => {
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-1`);
     });
     percySnapshot(this.test.fullTitle() + ' | Right*2');
 
-    keyEvent('.SnapshotList', 'keydown', LeftArrowKey);
+    keyEvent('.SnapshotList', 'keydown', UpArrowKey);
     andThen(() => {
       expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
     });
