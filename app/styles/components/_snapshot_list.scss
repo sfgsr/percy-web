@@ -1,16 +1,6 @@
 /* stylelint-disable selector-max-compound-selectors, selector-max-specificity */
 
 .SnapshotList {
-  display: flex;
-  width: 100%;
-  padding: 0 15px 15px;
-  flex-flow: row wrap;
-  justify-content: space-between;
-
-  .Alert {
-    width: 100%;
-  }
-
   &.SnapshotList--1col {
     .SnapshotViewer {
       width: 100%;

@@ -121,7 +121,7 @@ export default Component.extend({
     if (!component) {
       return;
     }
-    $('.BuildContainer-body').animate({scrollTop: component.$().get(0).offsetTop - 16}, 250);
+    $('.BuildContainer-body').animate({scrollTop: component.$().get(0).offsetTop}, 250);
   },
   actions: {
     registerChild(component) {

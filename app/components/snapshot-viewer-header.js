@@ -13,6 +13,7 @@ export default Component.extend({
   // optional params
   fullscreen: false,
   comparisonMode: '',
+  tagName: '',
 
   // required actions
   toggleViewMode: null,

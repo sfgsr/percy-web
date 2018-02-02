@@ -3,7 +3,7 @@ import {computed} from '@ember/object';
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ['SnapshotViewer'],
+  classNames: ['SnapshotViewer mb-2'],
   snapshot: null,
   buildContainerSelectedWidth: null,
   registerChild() {},

@@ -104,14 +104,6 @@
   }
 }
 
-.main-header {
-  position: fixed;
-  width: 100vw;
+.build-toolbar {
   height: var(--header-height);
-  background: var(--dark-purple);
-}
-
-.main-header-alt {
-  background: var(--lightest-gray);
-  border-bottom: 1px solid var(--lighter-gray);
 }
