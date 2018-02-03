@@ -8,7 +8,8 @@ describe('Acceptance: GitHub App Setup', function() {
     this.organization = server.create('organization', 'withUser', 'withGithubIntegration', {
       name: 'test org',
     });
-    githubInstallationId = this.organization.versionControlIntegrations[0].githubInstallationId;
+    githubInstallationId = this.organization.versionControlIntegrations.models[0]
+      .githubInstallationId;
     expect(githubInstallationId).to.be.ok; // eslint-disable-line no-unused-expressions
   });
 

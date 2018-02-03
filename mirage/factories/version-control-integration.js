@@ -5,7 +5,7 @@ export default Factory.extend({
     afterCreate(integration) {
       integration.update({
         integrationType: 'github',
-        githubInstallationId: `${integration.id}-installation_id`,
+        githubInstallationId: `${integration.id}`,
       });
     },
   }),
