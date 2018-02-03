@@ -37,10 +37,6 @@
   grid-template-columns: 1fr auto 1fr;
 }
 
-.SnapshotViewer-header-controls {
-  display: flex;
-}
-
 .maximize-snapshot {
   &:hover {
     path:first-child {

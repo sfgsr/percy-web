@@ -2,10 +2,6 @@
   visibility: hidden;
 }
 
-.is-hidden {
-  display: none;
-}
-
 .alt-hr {
   margin: 0;
   border-top: 1px solid var(--lightest-gray);
@@ -29,8 +25,4 @@
 
 .bg-white-pattern {
   background: url("/images/pattern-on-white.svg");
-}
-
-.no-underline {
-  text-decoration: none !important;
 }
