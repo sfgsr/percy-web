@@ -53,7 +53,7 @@
 
       <div class="btn-group btn-group-alt">
         {{comparison-switcher
-          comparisons=snapshot.comparisons
+          comparisons=(if isShowingAllComparisons snapshot.comparisons comparisonsWithDiffs)
           buildWidths=buildWidths
           selectedWidth=selectedWidth
           updateSelectedWidth=updateSelectedWidth
