@@ -355,6 +355,8 @@ button,
 .btn-icon-only {
   height: auto !important;
   padding: 0;
+  line-height: 1.5;
+  color: var(--dark-text-color) !important;
   background: none;
   border: 0;
 

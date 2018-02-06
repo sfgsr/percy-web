@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import {inject as service} from '@ember/service';
+import {computed} from '@ember/object';
 import {alias, equal, filterBy, not, or} from '@ember/object/computed';
 
 export default Component.extend({
@@ -31,6 +32,9 @@ export default Component.extend({
   comparisonsWithDiffs: filterBy('snapshot.comparisons', 'isDifferent'),
   noComparisonsHaveDiffs: equal('comparisonsWithDiffs.length', 0),
   isShowingAllComparisons: or('noComparisonsHaveDiffs', 'isNotShowingFilteredComparisons'),
+  allWidthsHaveComparisons: computed('comparisons.[]', 'comparisonsWithDiffs.[]', function() {
+    return this.get('comparisons.length') === this.get('comparisonsWithDiffs.length');
+  }),
 
   actions: {
     onCopySnapshotUrlToClipboard() {

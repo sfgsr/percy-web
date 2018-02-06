@@ -22,33 +22,40 @@
 
   <div class="flex justify-end">
     <div class="btn-toolbar">
-
+      {{snapshot.comparisons.length}}
+      {{comparisonsWithDiffs.length}}
+      {{allWidthsHaveComparisons}}
       <div class="btn-group">
-        <div class="dropdown {{if dropdownVisible 'is-visible'}}">
+        {{!-- <div class="dropdown {{if dropdownVisible 'is-visible'}}"> --}}
+        <div class="dropdown {{if true 'is-visible'}}">
           <button type="button" class="btn btn-square dropdown-toggle" {{action 'toggleDropdownVisibility' bubbles=false}}>
             {{inline-svg "blue-dropdown-icon"}}
           </button>
           <div class="dropdown-menu">
             <ul class="list-reset">
-              <li class="c-pointer f6 text-weight-semibold py-sm pl-2" {{action 'toggleFilteredComparisons' bubbles=false}}>
+              <li class="dropdown-menu-list-item flex justify-between align-center c-pointer f6 text-weight-semibold border-bottom border-gray-000 py-1 pl-2 pr-1" {{action 'toggleFilteredComparisons' bubbles=false}}>
                 {{#if isShowingFilteredComparisons}}
-                  Show all widths
+                  <span>Show all widths</span>
+                  {{inline-svg "width-icon"}}
                   {{else}}
-                  Show only widths with diffs
+                  <span>Show only widths with diffs</span>
+                  {{inline-svg "tiny-comparison-icon"}}
+
                 {{/if}}
               </li>
-              <li class="c-pointer f6 text-weight-semibold py-sm pl-2">Copy snapshot URL</li>
+              <li class="dropdown-menu-list-item c-pointer f6 text-weight-semibold py-1 pl-2 pr-1">
+                {{#copy-button
+                  class="btn-icon-only w-full flex justify-between align-center"
+                  clipboardText=(generate-fullscreen-snapshot-url snapshot.id selectedWidth comparisonMode fullscreen)
+                  success=(action "onCopySnapshotUrlToClipboard")
+                }}
+                  <span>Copy snapshot URL</span>
+                  {{inline-svg "link-icon"}}
+                {{/copy-button}}
+              </li>
             </ul>
           </div>
         </div>
-        {{!-- {{#copy-button
-          class="btn-icon-only mr-1 opacity-25 opacity-hoverable"
-          clipboardText=(generate-fullscreen-snapshot-url snapshot.id selectedWidth comparisonMode fullscreen)
-          title="Copy snapshot URL to clipboard"
-          success=(action "onCopySnapshotUrlToClipboard")
-        }}
-          {{inline-svg "link-icon" class="mr-sm"}}
-        {{/copy-button}} --}}
       </div>
 
       <div class="btn-group btn-group-alt">
