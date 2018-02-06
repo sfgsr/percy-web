@@ -419,14 +419,16 @@ button,
     }
 
     &.has-diffs {
-      color: rgba($red, 0.4);
+      color: var(--purple-700);
 
       &:hover {
-        color: var(--red);
+        background: var(--purple-100);
       }
 
       &.is-active {
-        color: var(--red);
+        color: var(--white);
+        background: var(--purple-700);
+        box-shadow: none;
       }
     }
   }
