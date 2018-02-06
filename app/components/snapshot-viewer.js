@@ -9,19 +9,25 @@ export default Component.extend({
   registerChild() {},
   unregisterChild() {},
   selectChild() {},
-
-  snapshotSelectedWidth: computed('buildContainerSelectedWidth', {
-    get() {
-      return this.get('buildContainerSelectedWidth');
-    },
-    set(_, value) {
-      return value;
-    },
-  }),
+  snapshotSelectedWidth: alias('selectedComparison.width'),
+  // snapshotSelectedWidth: computed('buildContainerSelectedWidth', {
+  //   get() {
+  //     return this.get('buildContainerSelectedWidth');
+  //   },
+  //   set(_, value) {
+  //     return value;
+  //   },
+  // }),
   selectedComparison: computed('snapshot', 'snapshotSelectedWidth', function() {
-    let width = this.get('snapshotSelectedWidth');
-    let comparisons = this.get('snapshot.comparisons') || [];
-    return comparisons.findBy('width', parseInt(width, 10));
+    const sortedComparisonsWithDiffs = this.get('snapshot.comparisons')
+      .filterBy('isDifferent')
+      .sortBy('width');
+    // const maxDiffWIdth = max(comparisionsWithDiffs.widths)
+
+    // let width = this.get('snapshotSelectedWidth');
+    // let comparisons = this.get('snapshot.comparisons') || [];
+    // return comparisonsWithDiffs.findBy('width', parseInt(width, 10));
+    return sortedComparisonsWithDiffs.get('lastObject');
   }),
   classNameBindings: [
     'isFocus:SnapshotViewer--focus',
