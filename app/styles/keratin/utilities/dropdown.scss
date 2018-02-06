@@ -1,0 +1,40 @@
+.dropdown {
+  display: flex;
+  position: relative;
+
+  &.is-visible {
+    .dropdown-toggle {
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+
+      &:hover {
+        background: var(--white);
+      }
+
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .dropdown-menu {
+      display: block;
+    }
+  }
+
+  .dropdown-toggle {
+    &:focus,
+    &:focus:active {
+      background: var(--white);
+    }
+  }
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 220px;
+  background: var(--white);
+  border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+}
