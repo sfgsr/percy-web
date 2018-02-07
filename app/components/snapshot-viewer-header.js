@@ -49,5 +49,9 @@ export default Component.extend({
       this.toggleProperty('isShowingFilteredComparisons');
       this.set('dropdownVisible', false);
     },
+
+    closeDropdown() {
+      this.set('dropdownVisible', false);
+    },
   },
 });

@@ -22,27 +22,25 @@
 
   <div class="flex justify-end">
     <div class="btn-toolbar">
-      {{snapshot.comparisons.length}}
-      {{comparisonsWithDiffs.length}}
-      {{allWidthsHaveComparisons}}
       <div class="btn-group">
-        {{!-- <div class="dropdown {{if dropdownVisible 'is-visible'}}"> --}}
-        <div class="dropdown {{if true 'is-visible'}}">
+        <div class="dropdown {{if dropdownVisible 'is-visible'}}" {{action 'closeDropdown' bubbles=false}}>
           <button type="button" class="btn btn-square dropdown-toggle" {{action 'toggleDropdownVisibility' bubbles=false}}>
             {{inline-svg "blue-dropdown-icon"}}
           </button>
           <div class="dropdown-menu">
             <ul class="list-reset">
-              <li class="dropdown-menu-list-item flex justify-between align-center c-pointer f6 text-weight-semibold border-bottom border-gray-000 py-1 pl-2 pr-1" {{action 'toggleFilteredComparisons' bubbles=false}}>
-                {{#if isShowingFilteredComparisons}}
-                  <span>Show all widths</span>
-                  {{inline-svg "width-icon"}}
-                  {{else}}
-                  <span>Show only widths with diffs</span>
-                  {{inline-svg "tiny-comparison-icon"}}
+              {{#unless allWidthsHaveComparisons}}
+                <li class="dropdown-menu-list-item flex justify-between align-center c-pointer f6 text-weight-semibold border-bottom border-gray-000 py-1 pl-2 pr-1" {{action 'toggleFilteredComparisons' bubbles=false}}>
+                  {{#if isShowingFilteredComparisons}}
+                    <span>Show all widths</span>
+                    {{inline-svg "width-icon"}}
+                    {{else}}
+                    <span>Show only widths with diffs</span>
+                    {{inline-svg "tiny-comparison-icon"}}
 
-                {{/if}}
-              </li>
+                  {{/if}}
+                </li>
+              {{/unless}}
               <li class="dropdown-menu-list-item c-pointer f6 text-weight-semibold py-1 pl-2 pr-1">
                 {{#copy-button
                   class="btn-icon-only w-full flex justify-between align-center"
