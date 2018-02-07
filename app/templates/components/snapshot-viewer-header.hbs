@@ -29,7 +29,7 @@
           </button>
           <div class="dropdown-menu">
             <ul class="list-reset">
-              {{#unless allWidthsHaveComparisons}}
+              {{#unless (or allComparisonsHaveDiffs noComparisonsHaveDiffs)}}
                 <li class="dropdown-menu-list-item flex justify-between align-center c-pointer f6 text-weight-semibold border-bottom border-gray-000 py-1 pl-2 pr-1" {{action 'toggleFilteredComparisons' bubbles=false}}>
                   {{#if isShowingFilteredComparisons}}
                     <span>Show all widths</span>
