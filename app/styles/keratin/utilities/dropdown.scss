@@ -1,3 +1,5 @@
+// stylelint-disable selector-max-specificity
+
 .dropdown {
   display: flex;
   position: relative;
@@ -8,6 +10,10 @@
 
       &:hover {
         background: var(--white);
+
+        svg {
+          animation: none;
+        }
       }
 
       svg {
@@ -24,6 +30,10 @@
     &:focus,
     &:focus:active {
       background: var(--white);
+    }
+
+    &:hover svg {
+      animation: up-down 500ms linear infinite;
     }
   }
 }
