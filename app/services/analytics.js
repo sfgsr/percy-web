@@ -1,10 +1,10 @@
 import {alias} from '@ember/object/computed';
 import Service, {inject as service} from '@ember/service';
 import config from '../config/environment';
+import AdminMode from 'percy-web/lib/admin-mode';
 
 export default Service.extend({
   session: service(),
-  adminMode: service(),
   currentUser: alias('session.currentUser'),
 
   userInstance: null,
@@ -39,7 +39,7 @@ export default Service.extend({
   },
 
   isEnabled() {
-    return window.amplitude && !this.get('adminMode').excludeFromAnalytics();
+    return window.amplitude && !AdminMode.excludeFromAnalytics();
   },
 
   invalidate() {
