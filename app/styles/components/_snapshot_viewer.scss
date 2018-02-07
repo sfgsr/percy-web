@@ -1,4 +1,6 @@
 .SnapshotViewer {
+  transition: box-shadow 250ms;
+
   &.SnapshotViewer--actionable {
     cursor: pointer;
 
@@ -9,8 +11,7 @@
 }
 
 .SnapshotViewer--focus {
-  border-top: var(--gray-border);
-  border-bottom: var(--gray-border);
+  box-shadow: 0 1px 0 var(--gray-200), 0 -1px 0 var(--gray-200);
 }
 
 .SnapshotViewer-header {
