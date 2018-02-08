@@ -1,4 +1,4 @@
-import {not, alias, notEmpty} from '@ember/object/computed';
+import {not, alias, notEmpty, or} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -9,25 +9,22 @@ export default Component.extend({
   registerChild() {},
   unregisterChild() {},
   selectChild() {},
-  snapshotSelectedWidth: alias('selectedComparison.width'),
-  // snapshotSelectedWidth: computed('buildContainerSelectedWidth', {
-  //   get() {
-  //     return this.get('buildContainerSelectedWidth');
-  //   },
-  //   set(_, value) {
-  //     return value;
-  //   },
-  // }),
-  selectedComparison: computed('snapshot', 'snapshotSelectedWidth', function() {
-    const sortedComparisonsWithDiffs = this.get('snapshot.comparisons')
+
+  comparisons: alias('snapshot.comparisons'),
+  snapshotSelectedWidth: or('userSelectedWidth', 'defaultWidth'),
+  userSelectedWidth: null,
+
+  defaultWidth: computed('comparisons.@each.width', function() {
+    const sortedComparisonsWithDiffs = this.get('comparisons')
       .filterBy('isDifferent')
       .sortBy('width');
-    // const maxDiffWIdth = max(comparisionsWithDiffs.widths)
+    return sortedComparisonsWithDiffs.get('lastObject.width');
+  }),
 
-    // let width = this.get('snapshotSelectedWidth');
-    // let comparisons = this.get('snapshot.comparisons') || [];
-    // return comparisonsWithDiffs.findBy('width', parseInt(width, 10));
-    return sortedComparisonsWithDiffs.get('lastObject');
+  selectedComparison: computed('comparisons.@each.width', 'snapshotSelectedWidth', function() {
+    let width = this.get('snapshotSelectedWidth');
+    let comparisons = this.get('comparisons') || [];
+    return comparisons.findBy('width', parseInt(width, 10));
   }),
   classNameBindings: [
     'isFocus:SnapshotViewer--focus',
@@ -89,8 +86,7 @@ export default Component.extend({
     },
 
     updateSelectedWidth(value) {
-      this.set('snapshotSelectedWidth', value);
-      this.get('snapshotWidthChangeTriggered')();
+      this.set('userSelectedWidth', value);
     },
   },
 });
