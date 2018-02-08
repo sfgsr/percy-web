@@ -1,10 +1,9 @@
-import Service, {inject as service} from '@ember/service';
+import Service from '@ember/service';
+import AdminMode from 'percy-web/lib/admin-mode';
 
 export default Service.extend({
-  adminMode: service(),
-
   associateWithCompany(user, organization) {
-    if (this.get('adminMode').excludeFromAnalytics()) {
+    if (AdminMode.excludeFromAnalytics()) {
       return;
     }
 

@@ -1,20 +1,18 @@
 import {computed} from '@ember/object';
-import {inject as service} from '@ember/service';
 import DS from 'ember-data';
 import utils from 'percy-web/lib/utils';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
+import AdminMode from 'percy-web/lib/admin-mode';
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   namespace: 'api/v1',
   authorizer: 'authorizer:jwt',
-  adminMode: service(),
 
   headers: computed(function() {
     let headers = {};
 
-    let percyMode = this.get('adminMode').get();
-    if (percyMode) {
-      headers['X-Percy-Mode'] = percyMode;
+    if (AdminMode.isAdmin()) {
+      headers['X-Percy-Mode'] = AdminMode.getAdminMode();
     }
     return headers;
   }),

@@ -9,7 +9,7 @@ import utils from 'percy-web/lib/utils';
 
 describe('SessionService', function() {
   setupTest('service:session', {
-    needs: ['service:analytics', 'service:adminMode', 'model:user'],
+    needs: ['service:analytics', 'model:user'],
   });
 
   describe('loadCurrentUser', function() {
