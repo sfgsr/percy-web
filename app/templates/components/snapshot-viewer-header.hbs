@@ -26,8 +26,7 @@
       {{comparisonsWithDiffs.length}}
       {{allWidthsHaveComparisons}}
       <div class="btn-group">
-        {{!-- <div class="dropdown {{if dropdownVisible 'is-visible'}}"> --}}
-        <div class="dropdown {{if true 'is-visible'}}">
+        <div class="dropdown {{if dropdownVisible 'is-visible'}}">
           <button type="button" class="btn btn-square dropdown-toggle" {{action 'toggleDropdownVisibility' bubbles=false}}>
             {{inline-svg "blue-dropdown-icon"}}
           </button>
