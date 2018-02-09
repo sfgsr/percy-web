@@ -11,6 +11,8 @@ const SELECTORS = {
   COMPARISON_MODE_SWITCHER_BASE: '[data-test-ComparisonModeSwitcher-base]',
   COMPARISON_MODE_SWITCHER_DIFF: '[data-test-ComparisonModeSwitcher-diff]',
   COMPARISON_MODE_SWITCHER_HEAD: '[data-test-ComparisonModeSwitcher-head]',
+  DROPDOWN_TOGGLE: '[data-test-snapshot-header-dropdown-toggle]',
+  DROPDOWN_PANE: '[data-test-snapshot-header-dropdown-pane]',
 };
 
 export const SnapshotViewerHeader = {
@@ -39,6 +41,17 @@ export const SnapshotViewerHeader = {
   clickBaseComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_BASE),
   clickDiffComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_DIFF),
   clickHeadComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_HEAD),
+
+  clickDropdownToggle: clickable(SELECTORS.DROPDOWN_TOGGLE),
+  isDropdownToggleVisible: isVisible(SELECTORS.DROPDOWN_TOGGLE),
+  isDropdownPaneVisible: isVisible(SELECTORS.DROPDOWN_PANE),
+  dropdownOptions: collection({
+    itemScope: SELECTORS.DROPDOWN_PANE,
+    item: {
+      scope: 'li',
+      text: text(),
+    }
+  })
 };
 
 export default create(SnapshotViewerHeader);

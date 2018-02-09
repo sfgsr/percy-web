@@ -24,10 +24,10 @@
     <div class="btn-toolbar">
       <div class="btn-group">
         <div class="dropdown {{if dropdownVisible 'is-visible'}}" {{action 'closeDropdown' bubbles=false}}>
-          <button type="button" class="btn btn-square dropdown-toggle" {{action 'toggleDropdownVisibility' bubbles=false}}>
+          <button type="button" class="btn btn-square dropdown-toggle" {{action 'toggleDropdownVisibility' bubbles=false}} data-test-snapshot-header-dropdown-toggle>
             {{inline-svg "blue-dropdown-icon"}}
           </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" data-test-snapshot-header-dropdown-pane>
             <ul class="list-reset">
               {{#unless (or allComparisonsHaveDiffs noComparisonsHaveDiffs)}}
                 <li class="dropdown-menu-list-item flex justify-between align-center c-pointer f6 text-weight-semibold border-bottom border-gray-000 py-1 pl-2 pr-1" {{action 'toggleFilteredComparisons' bubbles=false}}>

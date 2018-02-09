@@ -9,11 +9,6 @@ import {make, manualSetup} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import SnapshotViewerPO from 'percy-web/tests/pages/components/snapshot-viewer';
 
-// TODO: acceptance test for clicking different comparison modes
-// TODO: acceptance test for clicking snapshot title and see query params change
-// TODO: clicking comparison mode buttons switch img src
-// TODO: clicking on right comparison, toggles diff image
-
 describe('Integration: SnapshotViewer', function() {
   setupComponentTest('snapshot-viewer', {
     integration: true,
@@ -94,7 +89,7 @@ describe('Integration: SnapshotViewer', function() {
       });
     });
 
-    it('displays correct number as selected', function() {
+    it('shows widest width with diff as active by default', function() {
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(true);
