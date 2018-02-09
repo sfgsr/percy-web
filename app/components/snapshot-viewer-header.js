@@ -30,9 +30,9 @@ export default Component.extend({
   isNotShowingFilteredComparisons: not('isShowingFilteredComparisons'),
   comparisons: alias('snapshot.comparisons'),
   comparisonsWithDiffs: filterBy('snapshot.comparisons', 'isDifferent'),
-  noComparisonsHaveDiffs: equal('comparisonsWithDiffs.length', 0),
   isShowingAllComparisons: or('noComparisonsHaveDiffs', 'isNotShowingFilteredComparisons'),
-  allWidthsHaveComparisons: computed('comparisons.[]', 'comparisonsWithDiffs.[]', function() {
+  noComparisonsHaveDiffs: equal('comparisonsWithDiffs.length', 0),
+  allComparisonsHaveDiffs: computed('comparisons.[]', 'comparisonsWithDiffs.[]', function() {
     return this.get('comparisons.length') === this.get('comparisonsWithDiffs.length');
   }),
 
@@ -47,6 +47,10 @@ export default Component.extend({
 
     toggleFilteredComparisons() {
       this.toggleProperty('isShowingFilteredComparisons');
+      this.set('dropdownVisible', false);
+    },
+
+    closeDropdown() {
       this.set('dropdownVisible', false);
     },
   },
