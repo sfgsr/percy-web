@@ -14,17 +14,30 @@ export default Component.extend({
   snapshotSelectedWidth: or('userSelectedWidth', 'defaultWidth'),
   userSelectedWidth: null,
 
-  defaultWidth: computed('comparisons.@each.width', function() {
-    const sortedComparisonsWithDiffs = this.get('comparisons')
-      .filterBy('isDifferent')
-      .sortBy('width');
-    return sortedComparisonsWithDiffs.get('lastObject.width');
+  defaultWidth: computed('comparisons.@each.width', 'isExpanded', function() {
+    const sortedComparisons = this.get('comparisons').sortBy('width');
+
+    let width = sortedComparisons.filterBy('isDifferent').get('lastObject.width');
+
+    if (!width) {
+      width = sortedComparisons.get('lastObject.width');
+    }
+
+    return width;
   }),
 
   selectedComparison: computed('comparisons.@each.width', 'snapshotSelectedWidth', function() {
     let width = this.get('snapshotSelectedWidth');
     let comparisons = this.get('comparisons') || [];
-    return comparisons.findBy('width', parseInt(width, 10));
+    let comparison = comparisons.findBy('width', parseInt(width, 10));
+
+    if (!comparison) {
+      comparison = this.get('comparisons')
+        .sortBy('width')
+        .get('lastObject');
+    }
+
+    return comparison;
   }),
   classNameBindings: [
     'isFocus:SnapshotViewer--focus',

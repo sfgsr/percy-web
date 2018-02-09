@@ -20,11 +20,8 @@ describe('Integration: SnapshotViewer', function() {
   });
 
   let snapshotTitle;
-  const widthIndex = 1;
-  // NOTE: these need to be the same as the widths in the snapshot factory
-  const buildWidths = [375, 550, 1024];
-  const buildContainerSelectedWidth = buildWidths[widthIndex];
   let showSnapshotFullModalTriggeredStub;
+  let snapshot;
 
   beforeEach(function() {
     manualSetup(this.container);
@@ -32,7 +29,7 @@ describe('Integration: SnapshotViewer', function() {
 
     showSnapshotFullModalTriggeredStub = sinon.stub();
     snapshotTitle = 'Awesome snapshot title';
-    const snapshot = make('snapshot', {name: snapshotTitle});
+    snapshot = make('snapshot', 'withComparisons', {name: snapshotTitle});
     const build = make('build');
     const stub = sinon.stub();
 
@@ -40,18 +37,16 @@ describe('Integration: SnapshotViewer', function() {
       stub,
       snapshot,
       build,
-      buildWidths,
-      buildContainerSelectedWidth,
+      userSelectedWidth: null,
       showSnapshotFullModalTriggered: showSnapshotFullModalTriggeredStub,
     });
 
     this.render(hbs`{{snapshot-viewer
       snapshot=snapshot
       build=build
-      buildWidths=buildWidths
-      buildContainerSelectedWidth=buildContainerSelectedWidth
       showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
       snapshotWidthChangeTriggered=stub
+      userSelectedWidth=userSelectedWidth
     }}`);
   });
 
@@ -88,21 +83,21 @@ describe('Integration: SnapshotViewer', function() {
       expect(
         SnapshotViewerPO.header.widthSwitcher.buttons().count,
         'there should be correct number of buttons',
-      ).to.equal(buildWidths.length);
+      ).to.equal(snapshot.get('comparisons.length'));
     });
 
     it('displays correct text on the buttons', function() {
       SnapshotViewerPO.header.widthSwitcher.buttons().forEach((button, i) => {
         expect(button.text, `button ${i} should contain correct width`).to.equal(
-          `${buildWidths[i]}px`,
+          `${snapshot.get('comparisons').toArray()[i].get('width')}px` // eslint-disable-line
         );
       });
     });
 
     it('displays correct number as selected', function() {
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(widthIndex).isActive).to.equal(true);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(false);
+      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
+      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(true);
     });
 
     it('updates active button when clicked', function() {
@@ -129,10 +124,13 @@ describe('Integration: SnapshotViewer', function() {
     });
 
     it('sends closeSnapshotFullModal when toggle fullscreen button is clicked', function() {
+      const selectedWidth = snapshot.get('comparisons.firstObject.width');
+      this.set('userSelectedWidth', selectedWidth);
+
       SnapshotViewerPO.header.clickToggleFullscreen();
       expect(showSnapshotFullModalTriggeredStub).to.have.been.calledWith(
         this.get('snapshot.id'),
-        this.get('buildContainerSelectedWidth'),
+        selectedWidth,
       );
     });
   });
