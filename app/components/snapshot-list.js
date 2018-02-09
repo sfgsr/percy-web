@@ -13,13 +13,12 @@ export default Component.extend({
   'data-test-snapshot-list': true,
 
   activeSnapshotId: null,
-  buildContainerSelectedWidth: null,
   lastSnapshotIndex: null,
   selectedSnapshotIndex: -1,
   snapshotComponents: null,
   updateActiveSnapshotId: null,
 
-  sortedSnapshots: computed('snapshots.[]', 'buildContainerSelectedWidth', function() {
+  sortedSnapshots: computed('snapshots.[]', function() {
     return snapshotSort(this.get('snapshots'));
   }),
 
