@@ -1,4 +1,4 @@
-import {not, alias, notEmpty, or} from '@ember/object/computed';
+import {not, alias, notEmpty, or, sort} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -11,16 +11,19 @@ export default Component.extend({
   selectChild() {},
 
   comparisons: alias('snapshot.comparisons'),
+  comparisonsSortedByWidth: sort('comparisons', 'widthSort'),
+  widthSort: ['width'],
+
   snapshotSelectedWidth: or('userSelectedWidth', 'defaultWidth'),
   userSelectedWidth: null,
 
   defaultWidth: computed('comparisons.@each.width', 'isExpanded', function() {
-    const sortedComparisons = this.get('comparisons').sortBy('width');
-
-    let width = sortedComparisons.filterBy('isDifferent').get('lastObject.width');
+    let width = this.get('comparisonsSortedByWidth')
+      .filterBy('isDifferent')
+      .get('lastObject.width');
 
     if (!width) {
-      width = sortedComparisons.get('lastObject.width');
+      width = this.get('comparisonsSortedByWidth').get('lastObject.width');
     }
 
     return width;
@@ -32,13 +35,12 @@ export default Component.extend({
     let comparison = comparisons.findBy('width', parseInt(width, 10));
 
     if (!comparison) {
-      comparison = this.get('comparisons')
-        .sortBy('width')
-        .get('lastObject');
+      comparison = this.get('comparisonsSortedByWidth').get('lastObject');
     }
 
     return comparison;
   }),
+
   classNameBindings: [
     'isFocus:SnapshotViewer--focus',
     'isExpanded::SnapshotViewer--collapsed',
