@@ -67,28 +67,6 @@ describe('Integration: SnapshotViewer', function() {
   });
 
   describe('width switcher', function() {
-    it('displays', function() {
-      expect(
-        SnapshotViewerPO.header.isWidthSwitcherVisible,
-        'width switcher should be visible',
-      ).to.equal(true);
-    });
-
-    it('has the right number of buttons', function() {
-      expect(
-        SnapshotViewerPO.header.widthSwitcher.buttons().count,
-        'there should be correct number of buttons',
-      ).to.equal(snapshot.get('comparisons.length'));
-    });
-
-    it('displays correct text on the buttons', function() {
-      SnapshotViewerPO.header.widthSwitcher.buttons().forEach((button, i) => {
-        expect(button.text, `button ${i} should contain correct width`).to.equal(
-          `${snapshot.get('comparisons').toArray()[i].get('width')}px` // eslint-disable-line
-        );
-      });
-    });
-
     it('shows widest width with diff as active by default', function() {
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);

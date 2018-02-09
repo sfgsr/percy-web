@@ -25,6 +25,14 @@ FactoryGuy.define('snapshot', {
         });
       },
     },
+    withNoDiffs: {
+      comparisons: () => {
+        const widths = [375, 550, 1024];
+        return widths.map(width => {
+          return make('comparison', {width, diffRatio: 0});
+        });
+      },
+    },
     withScreenshots: {},
     completeExample: {},
   },
