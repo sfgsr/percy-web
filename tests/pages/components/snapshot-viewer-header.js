@@ -1,4 +1,6 @@
 import {create, clickable, isVisible, hasClass, text, collection} from 'ember-cli-page-object';
+import {SnapshotApprovalButton} from 'percy-web/tests/pages/components/snapshot-approval-button';
+import {alias} from 'ember-cli-page-object/macros';
 
 const SELECTORS = {
   HEADER: '[data-test-SnapshotViewer-header]',
@@ -39,6 +41,11 @@ export const SnapshotViewerHeader = {
   clickBaseComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_BASE),
   clickDiffComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_DIFF),
   clickHeadComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_HEAD),
+
+  snapshotApprovalButton: SnapshotApprovalButton,
+  clickApprove: alias('snapshotApprovalButton.clickButton'),
+  isApproved: alias('snapshotApprovalButton.isApproved'),
+  isUnapproved: alias('snapshotApprovalButton.isUnapproved'),
 };
 
 export default create(SnapshotViewerHeader);

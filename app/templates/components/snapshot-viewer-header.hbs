@@ -25,7 +25,7 @@
 
       <div class="btn-group">
         {{#copy-button
-          class="btn-icon-only mr-1 opacity-25 opacity-hoverable"
+          class="btn-icon-only opacity-25 opacity-hoverable"
           clipboardText=(generate-fullscreen-snapshot-url snapshot.id selectedWidth comparisonMode fullscreen)
           title="Copy snapshot URL to clipboard"
           success=(action "onCopySnapshotUrlToClipboard")
@@ -44,7 +44,7 @@
         }}
       </div>
 
-      <div class="btn-group ml-1" role="group" aria-label="Second Group">
+      <div class="btn-group" role="group" aria-label="Second Group">
         <button type="button" class="ToggleFullViewButton btn btn-square {{if fullscreen 'minimize-snapshot' 'maximize-snapshot'}}"
           {{action toggleViewMode}} data-test-SnapshotViewer-toggleFullScreen>
           <figure class="svg-container">
@@ -56,6 +56,16 @@
           </figure>
         </button>
       </div>
+
+      {{#if (is-admin)}}
+        <div class="btn-group">
+          {{snapshot-approval-button
+            snapshot=snapshot
+            createReview=createReview
+          }}
+        </div>
+      {{/if}}
+
     </div>
   </div>
 </header>
