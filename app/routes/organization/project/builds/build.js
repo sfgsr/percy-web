@@ -85,7 +85,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       });
       return review.save().then(() => {
         const build = this.modelFor(this.routeName);
-        build.get('comparisons').reload();
+        build.get('snapshots').reload();
         build.reload();
       });
     },
