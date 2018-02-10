@@ -35,7 +35,9 @@ describe('Integration: SnapshotViewer', function() {
       userSelectedWidth: null,
       showSnapshotFullModalTriggered: showSnapshotFullModalTriggeredStub,
     });
+  });
 
+  it('displays snapshot name', function() {
     this.render(hbs`{{snapshot-viewer
       snapshot=snapshot
       build=build
@@ -43,9 +45,7 @@ describe('Integration: SnapshotViewer', function() {
       snapshotWidthChangeTriggered=stub
       userSelectedWidth=userSelectedWidth
     }}`);
-  });
 
-  it('displays snapshot name', function() {
     expect(SnapshotViewerPO.header.isTitleVisible, 'title should be visible').to.equal(true);
 
     expect(SnapshotViewerPO.header.titleText, 'title text should be correct').to.equal(
@@ -54,10 +54,28 @@ describe('Integration: SnapshotViewer', function() {
   });
 
   it('compares visually to previous screenshot', function() {
+    this.render(hbs`{{snapshot-viewer
+      snapshot=snapshot
+      build=build
+      showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+      snapshotWidthChangeTriggered=stub
+      userSelectedWidth=userSelectedWidth
+    }}`);
+
     percySnapshot(this.test);
   });
 
   describe('comparison mode switcher', function() {
+    beforeEach(function() {
+      this.render(hbs`{{snapshot-viewer
+        snapshot=snapshot
+        build=build
+        showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+        snapshotWidthChangeTriggered=stub
+        userSelectedWidth=userSelectedWidth
+      }}`);
+    });
+
     it('does does not display', function() {
       expect(
         SnapshotViewerPO.header.isComparisonModeSwitcherVisible,
@@ -67,13 +85,46 @@ describe('Integration: SnapshotViewer', function() {
   });
 
   describe('width switcher', function() {
-    it('shows widest width with diff as active by default', function() {
+    it('shows widest width with diff as active by default when some comparisons have diffs', function() { // eslint-disable-line
+      this.render(hbs`{{snapshot-viewer
+        snapshot=snapshot
+        build=build
+        showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+        snapshotWidthChangeTriggered=stub
+        userSelectedWidth=userSelectedWidth
+      }}`);
+
+      expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
+      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
+      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(true);
+    });
+
+    it('shows widest width with diff as active by default when no comparisons have diffs', function() { // eslint-disable-line
+      const snapshot = make('snapshot', 'withNoDiffs');
+      this.set('snapshot', snapshot);
+
+      this.render(hbs`{{snapshot-viewer
+        snapshot=snapshot
+        build=build
+        showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+        snapshotWidthChangeTriggered=stub
+        userSelectedWidth=userSelectedWidth
+      }}`);
+
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(true);
     });
 
     it('updates active button when clicked', function() {
+      this.render(hbs`{{snapshot-viewer
+        snapshot=snapshot
+        build=build
+        showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+        snapshotWidthChangeTriggered=stub
+        userSelectedWidth=userSelectedWidth
+      }}`);
+
       SnapshotViewerPO.header.widthSwitcher.buttons(0).click();
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(true);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
@@ -92,6 +143,16 @@ describe('Integration: SnapshotViewer', function() {
   });
 
   describe('full screen toggle button', function() {
+    beforeEach(function() {
+      this.render(hbs`{{snapshot-viewer
+        snapshot=snapshot
+        build=build
+        showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+        snapshotWidthChangeTriggered=stub
+        userSelectedWidth=userSelectedWidth
+      }}`);
+    });
+
     it('displays', function() {
       expect(SnapshotViewerPO.header.isFullScreenToggleVisible).to.equal(true);
     });
