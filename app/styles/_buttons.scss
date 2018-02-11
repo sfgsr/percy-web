@@ -156,7 +156,7 @@ button,
   background: var(--white);
   border: 1px solid transparent;
   border-radius: 4px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 1px rgba(#333, 0.08);
   transition: color 250ms, background 250ms, transform 250ms;
 
   &:hover {
@@ -433,4 +433,8 @@ button,
   display: grid;
   grid-auto-flow: column;
   grid-gap: var(--spacing-1);
+
+  .btn {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+  }
 }
