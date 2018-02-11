@@ -414,7 +414,7 @@ button,
     }
 
     &.has-diffs {
-      color: var(--purple-700);
+      color: var(--purple-600);
 
       &:hover {
         background: var(--purple-100);
@@ -422,7 +422,7 @@ button,
 
       &.is-active {
         color: var(--white);
-        background: var(--purple-700);
+        background: var(--purple-600);
         box-shadow: inset 0 1px 1px rgba(92, 0, 123, 0.2);
       }
     }
