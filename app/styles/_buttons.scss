@@ -145,6 +145,17 @@ button,
 
 .btn {
   display: inline-block;
+  height: auto;
+  padding: 5px 16px;
+  font-size: 12px;
+  font-weight: var(--semibold);
+  line-height: $line-height;
+  text-decoration: none !important;
+  white-space: nowrap;
+
+  border-radius: 8px;
+  box-shadow: 0 1px 1px rgba(#333, 0.08);
+  transition: color 250ms, background 250ms, transform 250ms;
 
   &:hover {
     color: var(--blue);
