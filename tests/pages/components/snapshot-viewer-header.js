@@ -13,6 +13,7 @@ const SELECTORS = {
   COMPARISON_MODE_SWITCHER_BASE: '[data-test-ComparisonModeSwitcher-base]',
   COMPARISON_MODE_SWITCHER_DIFF: '[data-test-ComparisonModeSwitcher-diff]',
   COMPARISON_MODE_SWITCHER_HEAD: '[data-test-ComparisonModeSwitcher-head]',
+  APPROVAL_BUTTON_SCOPE: '[data-test-snapshot-approval-button]',
 };
 
 export const SnapshotViewerHeader = {
@@ -42,7 +43,14 @@ export const SnapshotViewerHeader = {
   clickDiffComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_DIFF),
   clickHeadComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_HEAD),
 
-  snapshotApprovalButton: SnapshotApprovalButton,
+  // We are setting scope here because this component doesn't have a tag
+  // and therefore cannot set its own scope.
+  snapshotApprovalButton: Object.assign(
+    {
+      scope: SELECTORS.APPROVAL_BUTTON_SCOPE,
+    },
+    SnapshotApprovalButton,
+  ),
   clickApprove: alias('snapshotApprovalButton.clickButton'),
   isApproved: alias('snapshotApprovalButton.isApproved'),
   isUnapproved: alias('snapshotApprovalButton.isUnapproved'),
