@@ -13,6 +13,7 @@ export default Component.extend(PollingMixin, {
   ],
   maxWidth: max('build.comparisonWidths'),
   buildContainerSelectedWidth: oneWay('maxWidth'),
+  noWidthSelected: false,
   currentPosition: null,
 
   showComparisons: or('build.isPending', 'build.isProcessing', 'build.isFinished'),
@@ -33,7 +34,16 @@ export default Component.extend(PollingMixin, {
     updateActiveSnapshotId(comparisonId) {
       this.get('updateActiveSnapshotId')(comparisonId);
     },
+    updateSelectedWidth(width) {
+      // Clear the query parameter selected snapshot.
+      this.sendAction('updateActiveSnapshotId', undefined);
 
+      this.set('noWidthSelected', false);
+      if (width) {
+        this.set('buildContainerSelectedWidth', width);
+      }
+      window.scrollTo(0, 0);
+    },
     showSupport() {
       this.sendAction('showSupport');
     },

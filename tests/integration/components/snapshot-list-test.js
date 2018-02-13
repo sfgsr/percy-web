@@ -98,8 +98,7 @@ describe('Integration: SnapshotList', function() {
     const build = make('build', 'finished');
 
     const numSnapshots = 3;
-    const snapshots = makeList('snapshot', numSnapshots, 'withNoDiffs');
-    this.set('snapshots', snapshots);
+    const snapshots = makeList('snapshot', numSnapshots, 'withNoDiffComparisons');
 
     this.setProperties({
       snapshots,

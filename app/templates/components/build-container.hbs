@@ -1,4 +1,5 @@
 {{build-toolbar
+  updateSelectedWidth=(action "updateSelectedWidth")
   build=build
   project=build.project
   organization=build.project.organization
@@ -7,6 +8,9 @@
 <div class="BuildContainer-body position-absolute overflow-y-scroll w-full">
   {{build-header
     build=build
+    defaultSelectedWidth=buildContainerSelectedWidth
+    updateSelectedWidth=(action "updateSelectedWidth")
+    noWidthSelected=noWidthSelected
     showSupport=showSupport
   }}
 

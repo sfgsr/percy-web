@@ -13,9 +13,6 @@ const SELECTORS = {
   COMPARISON_MODE_SWITCHER_BASE: '[data-test-ComparisonModeSwitcher-base]',
   COMPARISON_MODE_SWITCHER_DIFF: '[data-test-ComparisonModeSwitcher-diff]',
   COMPARISON_MODE_SWITCHER_HEAD: '[data-test-ComparisonModeSwitcher-head]',
-  DROPDOWN_TOGGLE: '[data-test-snapshot-header-dropdown-toggle]',
-  DROPDOWN_PANE: '[data-test-snapshot-header-dropdown-pane]',
-  DROPDOWN_TOGGLE_WIDTHS_OPTION: '[data-test-toggle-widths-option]',
   APPROVAL_BUTTON_SCOPE: '[data-test-snapshot-approval-button]',
 };
 
@@ -46,19 +43,6 @@ export const SnapshotViewerHeader = {
   clickDiffComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_DIFF),
   clickHeadComparisonMode: clickable(SELECTORS.COMPARISON_MODE_SWITCHER_HEAD),
 
-  clickDropdownToggle: clickable(SELECTORS.DROPDOWN_TOGGLE),
-  isDropdownToggleVisible: isVisible(SELECTORS.DROPDOWN_TOGGLE),
-  isDropdownPaneVisible: isVisible(SELECTORS.DROPDOWN_PANE),
-  dropdownOptions: collection({
-    itemScope: SELECTORS.DROPDOWN_PANE,
-    item: {
-      scope: 'li',
-      text: text(),
-    },
-  }),
-  isToggleWidthsOptionVisible: isVisible(SELECTORS.DROPDOWN_TOGGLE_WIDTHS_OPTION),
-  clickToggleAllWidths: clickable(SELECTORS.DROPDOWN_TOGGLE_WIDTHS_OPTION),
-
   // We are setting scope here because this component doesn't have a tag
   // and therefore cannot set its own scope.
   snapshotApprovalButton: Object.assign(
@@ -67,7 +51,6 @@ export const SnapshotViewerHeader = {
     },
     SnapshotApprovalButton,
   ),
-
   clickApprove: alias('snapshotApprovalButton.clickButton'),
   isApproved: alias('snapshotApprovalButton.isApproved'),
   isUnapproved: alias('snapshotApprovalButton.isUnapproved'),
