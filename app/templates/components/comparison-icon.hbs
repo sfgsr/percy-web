@@ -1,5 +1,5 @@
-{{#if noComparisonsHaveDiffs}}
-  {{inline-svg "no-comparison-icon"}}
+{{#if hasComparison}}
+  {{inline-svg "comparison-icon" class=svgClassName}}
 {{else}}
-  {{inline-svg "comparison-icon"}}
+  {{inline-svg "no-comparison-icon" class=svgClassName}}
 {{/if}}
