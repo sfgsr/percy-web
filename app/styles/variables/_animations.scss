@@ -123,3 +123,17 @@
     background-position: 128px;
   }
 }
+
+@keyframes up-down {
+  33% {
+    transform: translateY(20%);
+  }
+
+  66% {
+    transform: translate3d(0, -20%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0%, 0);
+  }
+}

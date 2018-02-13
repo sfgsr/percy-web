@@ -8,11 +8,19 @@ FactoryGuy.define('comparison', {
 
     headScreenshot: f => {
       // TODO: make the screenshot and image a real FactoryGuy model instead of POJO
-      return {id: f.id, image: {id: f.id, url: '/head/screenshot/url', width: 375, height: 500}};
+      return {
+        id: f.id,
+        diffRatio: 0.23,
+        image: {id: f.id, url: '/head/screenshot/url', width: 375, height: 500},
+      };
     },
     baseScreenshot: f => {
       // TODO: make the screenshot and image a real FactoryGuy model instead of POJO
-      return {id: f.id, image: {id: f.id, url: '/base/screenshot/url', width: 375, height: 500}};
+      return {
+        id: f.id,
+        diffRatio: 0.23,
+        image: {id: f.id, url: '/base/screenshot/url', width: 375, height: 500},
+      };
     },
     diffImage: f => {
       // TODO: make the screenshot and image a real FactoryGuy model instead of POJO
