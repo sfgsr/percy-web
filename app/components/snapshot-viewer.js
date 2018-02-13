@@ -1,4 +1,4 @@
-import {not, alias, notEmpty} from '@ember/object/computed';
+import {not, alias, notEmpty, or, sort} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -18,18 +18,35 @@ export default Component.extend({
   unregisterChild() {},
   selectChild() {},
 
-  snapshotSelectedWidth: computed('buildContainerSelectedWidth', {
-    get() {
-      return this.get('buildContainerSelectedWidth');
-    },
-    set(_, value) {
-      return value;
-    },
+  comparisons: alias('snapshot.comparisons'),
+  comparisonsSortedByWidth: sort('comparisons', 'widthSort'),
+  widthSort: ['width'],
+
+  snapshotSelectedWidth: or('userSelectedWidth', 'defaultWidth'),
+  userSelectedWidth: null,
+
+  defaultWidth: computed('comparisons.@each.width', 'isExpanded', function() {
+    let width = this.get('comparisonsSortedByWidth')
+      .filterBy('isDifferent')
+      .get('lastObject.width');
+
+    if (!width) {
+      width = this.get('comparisonsSortedByWidth').get('lastObject.width');
+    }
+
+    return width;
   }),
-  selectedComparison: computed('snapshot', 'snapshotSelectedWidth', function() {
+
+  selectedComparison: computed('comparisons.@each.width', 'snapshotSelectedWidth', function() {
     let width = this.get('snapshotSelectedWidth');
-    let comparisons = this.get('snapshot.comparisons') || [];
-    return comparisons.findBy('width', parseInt(width, 10));
+    let comparisons = this.get('comparisons') || [];
+    let comparison = comparisons.findBy('width', parseInt(width, 10));
+
+    if (!comparison) {
+      comparison = this.get('comparisonsSortedByWidth').get('lastObject');
+    }
+
+    return comparison;
   }),
 
   isDefaultExpanded: true,
@@ -91,8 +108,7 @@ export default Component.extend({
     },
 
     updateSelectedWidth(value) {
-      this.set('snapshotSelectedWidth', value);
-      this.get('snapshotWidthChangeTriggered')();
+      this.set('userSelectedWidth', value);
     },
   },
 });

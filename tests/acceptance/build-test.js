@@ -171,6 +171,13 @@ describe('Acceptance: Build', function() {
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 
+  // TODO test more specifically what happens when approving a build
+  // once build-test refactor is merged
+  it('clicks approve build button without error', function() {
+    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
+    click('[data-test-build-approval-button]');
+  });
+
   it('toggles the image and pdiff', function() {
     visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
     andThen(() => {

@@ -1,10 +1,9 @@
 <header class="SnapshotViewer-header sticky grid gap-4 z-1 px-2 py-1 bg-gray-000 border-top border-bottom border-gray-100 {{if fullscreen 'SnapshotViewer-header-full position-fixed vw-full z-1'}}" data-test-SnapshotViewer-header>
   <div class="flex align-center truncate">
 
-    <figure class="svg-container" data-test-SnapshotViewer-comparisonIcon>
+    <figure class="svg-container mr-1" data-test-SnapshotViewer-comparisonIcon>
       {{comparison-icon
-        hasComparison=hasComparisonAtSelectedWidth
-        svgClassName="mr-1"
+        noComparisonsHaveDiffs=noComparisonsHaveDiffs
       }}
     </figure>
 
@@ -22,21 +21,43 @@
 
   <div class="flex justify-end">
     <div class="btn-toolbar">
-
       <div class="btn-group">
-        {{#copy-button
-          class="btn-icon-only opacity-25 opacity-hoverable"
-          clipboardText=(generate-fullscreen-snapshot-url snapshot.id selectedWidth comparisonMode fullscreen)
-          title="Copy snapshot URL to clipboard"
-          success=(action "onCopySnapshotUrlToClipboard")
-        }}
-          {{inline-svg "link-icon" class="mr-sm"}}
-        {{/copy-button}}
+        <div class="dropdown {{if dropdownVisible 'is-visible'}}" {{action 'closeDropdown' bubbles=false}}>
+          <button type="button" class="btn btn-square dropdown-toggle" {{action 'toggleDropdownVisibility' bubbles=false}} data-test-snapshot-header-dropdown-toggle>
+            {{inline-svg "blue-dropdown-icon"}}
+          </button>
+          <div class="dropdown-menu" data-test-snapshot-header-dropdown-pane>
+            <ul class="list-reset">
+              {{#unless (or allComparisonsHaveDiffs noComparisonsHaveDiffs)}}
+                <li class="dropdown-menu-list-item flex justify-between align-center c-pointer f6 text-weight-semibold border-bottom border-gray-000 py-1 pl-2 pr-1" {{action 'toggleFilteredComparisons' bubbles=false}} data-test-toggle-widths-option>
+                  {{#if isShowingFilteredComparisons}}
+                    <span>Show all widths</span>
+                    {{inline-svg "width-icon"}}
+                    {{else}}
+                    <span>Show only widths with diffs</span>
+                    {{inline-svg "tiny-comparison-icon"}}
+
+                  {{/if}}
+                </li>
+              {{/unless}}
+              <li class="dropdown-menu-list-item c-pointer f6 text-weight-semibold py-1 pl-2 pr-1">
+                {{#copy-button
+                  class="btn-icon-only w-full flex justify-between align-center"
+                  clipboardText=(generate-fullscreen-snapshot-url snapshot.id selectedWidth comparisonMode fullscreen)
+                  success=(action "onCopySnapshotUrlToClipboard")
+                }}
+                  <span>Copy snapshot URL</span>
+                  {{inline-svg "link-icon"}}
+                {{/copy-button}}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div class="btn-group btn-group-alt">
         {{comparison-switcher
-          comparisons=snapshot.comparisons
+          comparisons=(if isShowingAllComparisons snapshot.comparisons comparisonsWithDiffs)
           buildWidths=buildWidths
           selectedWidth=selectedWidth
           updateSelectedWidth=updateSelectedWidth

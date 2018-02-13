@@ -247,4 +247,5 @@ export default function() {
   this.get('/builds/:build_id/snapshots');
   this.get('/builds/:build_id/comparisons');
   this.get('/repos/:id');
+  this.post('/reviews');
 }
