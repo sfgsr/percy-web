@@ -9,7 +9,6 @@ import sinon from 'sinon';
 import {resolve} from 'rsvp';
 import adminMode from 'percy-web/lib/admin-mode';
 import FullSnapshotPage from 'percy-web/tests/pages/components/snapshot-viewer-full';
-import {TEST_BUILD_WIDTHS} from 'percy-web/tests/factories/comparison';
 
 describe('Integration: SnapshotViewerFull', function() {
   setupComponentTest('snapshot-viewer-full', {
@@ -38,10 +37,11 @@ describe('Integration: SnapshotViewerFull', function() {
     updateComparisonModeStub = sinon.stub();
     createReviewStub = sinon.stub().returns(resolve());
 
-    const snapshotSelectedWidth = snapshots[0]
+    const snapshotSelectedWidth = snapshot
       .get('comparisons')
       .sortBy('width')
-      .get('lastObject.width');
+      .objectAt(1)
+      .get('width');
 
     this.setProperties({
       build,
