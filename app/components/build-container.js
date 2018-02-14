@@ -22,7 +22,7 @@ export default Component.extend(PollingMixin, {
     this.get('build')
       .reload()
       .then(build => {
-        build.get('comparisons').reload();
+        build.get('snapshots').reload();
       });
   },
 

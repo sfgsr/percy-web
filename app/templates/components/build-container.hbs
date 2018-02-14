@@ -11,11 +11,11 @@
   }}
 
   {{#if showComparisons}}
-    {{#if build.comparisons.isPending}}
+    {{#if snapshots.isPending}}
       {{loading-page}}
     {{else}}
       {{snapshot-list
-        snapshots=build.snapshots
+        snapshots=snapshots
         buildContainerSelectedWidth=buildContainerSelectedWidth
         buildWidths=build.comparisonWidths
         activeSnapshotId=activeSnapshotId

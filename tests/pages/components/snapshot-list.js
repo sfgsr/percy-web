@@ -17,7 +17,7 @@ export const SnapshotList = {
   snapshotTitles: {
     isDescriptor: true,
     get() {
-      return this.snapshots().map(snapshot => snapshot.titleText);
+      return this.snapshots().map(snapshot => snapshot.name);
     },
   },
 

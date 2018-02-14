@@ -1,5 +1,4 @@
 /* jshint expr:true */
-/* eslint-disable no-unused-expressions */
 import {setupComponentTest} from 'ember-mocha';
 import {expect} from 'chai';
 import {it, describe, beforeEach, afterEach} from 'mocha';
@@ -7,9 +6,10 @@ import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {make, makeList, manualSetup} from 'ember-data-factory-guy';
 import sinon from 'sinon';
-import SnapshotViewerPO from 'percy-web/tests/pages/components/snapshot-viewer-full';
 import {resolve} from 'rsvp';
 import adminMode from 'percy-web/lib/admin-mode';
+import FullSnapshotPage from 'percy-web/tests/pages/components/snapshot-viewer-full';
+import {TEST_BUILD_WIDTHS} from 'percy-web/tests/factories/comparison';
 
 describe('Integration: SnapshotViewerFull', function() {
   setupComponentTest('snapshot-viewer-full', {
@@ -19,20 +19,23 @@ describe('Integration: SnapshotViewerFull', function() {
   let closeSnapshotFullModalStub;
   let updateComparisonModeStub;
   let createReviewStub;
+  let addedSnapshot;
   const snapshotTitle = 'Awesome snapshot title';
   const widthIndex = 1;
-  // NOTE: these need to be the same as the widths in the snapshot factory
-  const buildWidths = [375, 550, 1024];
+  const buildWidths = TEST_BUILD_WIDTHS;
   const snapshotSelectedWidth = buildWidths[widthIndex];
 
   beforeEach(function() {
     manualSetup(this.container);
-    SnapshotViewerPO.setContext(this);
+    FullSnapshotPage.setContext(this);
 
-    const snapshots = makeList('snapshot', 5, 'withComparisons');
-    snapshots[0].set('name', snapshotTitle);
     const build = make('build');
-    build.set('snapshots', snapshots);
+    const snapshot = make('snapshot', 'withComparisons', {
+      build,
+      name: snapshotTitle,
+    });
+
+    addedSnapshot = make('snapshot', 'new', {build});
 
     closeSnapshotFullModalStub = sinon.stub();
     updateComparisonModeStub = sinon.stub();
@@ -42,7 +45,7 @@ describe('Integration: SnapshotViewerFull', function() {
       build,
       buildWidths,
       snapshotSelectedWidth,
-      snapshotId: build.get('snapshots.firstObject.id'),
+      snapshotId: snapshot.get('id'),
       comparisonMode: 'diff',
       closeSnapshotFullModal: closeSnapshotFullModalStub,
       updateComparisonMode: updateComparisonModeStub,
@@ -64,9 +67,9 @@ describe('Integration: SnapshotViewerFull', function() {
   });
 
   it('displays snapshot name', function() {
-    expect(SnapshotViewerPO.header.isTitleVisible, 'title should be visible').to.equal(true);
+    expect(FullSnapshotPage.header.isTitleVisible, 'title should be visible').to.equal(true);
 
-    expect(SnapshotViewerPO.header.titleText, 'title text should be correct').to.equal(
+    expect(FullSnapshotPage.header.titleText, 'title text should be correct').to.equal(
       snapshotTitle,
     );
   });
@@ -74,40 +77,55 @@ describe('Integration: SnapshotViewerFull', function() {
   describe('comparison mode switcher', function() {
     it('displays comparison mode switcher', function() {
       expect(
-        SnapshotViewerPO.header.isComparisonModeSwitcherVisible,
+        FullSnapshotPage.header.isComparisonModeSwitcherVisible,
         'comparison mode switcher should be visible',
       ).to.equal(true);
     });
 
     it('sends updateComparisonMode action when comparison switcher is clicked', function() {
-      SnapshotViewerPO.header.clickBaseComparisonMode();
+      FullSnapshotPage.header.clickBaseComparisonMode();
       expect(updateComparisonModeStub).to.have.been.calledWith('base');
 
-      SnapshotViewerPO.header.clickDiffComparisonMode();
+      FullSnapshotPage.header.clickDiffComparisonMode();
       expect(updateComparisonModeStub).to.have.been.calledWith('diff');
 
-      SnapshotViewerPO.header.clickHeadComparisonMode();
+      FullSnapshotPage.header.clickHeadComparisonMode();
       expect(updateComparisonModeStub).to.have.been.calledWith('head');
+    });
+
+    it('hides comparison mode controls when no comparison for specified width', function() {
+      // A comparison for this width doesn't exist
+      this.set('snapshotSelectedWidth', 99999);
+
+      expect(FullSnapshotPage.isComparisonModeSwitcherVisible).to.equal(false);
+      percySnapshot(this.test);
+    });
+
+    it('shows "New" button when snapshot is new', function() {
+      this.set('snapshotId', addedSnapshot.get('id'));
+
+      expect(FullSnapshotPage.isNewComparisonModeButtonVisible).to.equal(true);
+      percySnapshot(this.test);
     });
   });
 
   describe('width switcher', function() {
     it('displays', function() {
       expect(
-        SnapshotViewerPO.header.isWidthSwitcherVisible,
+        FullSnapshotPage.header.isWidthSwitcherVisible,
         'width switcher should be visible',
       ).to.equal(true);
     });
 
     it('has the right number of buttons', function() {
       expect(
-        SnapshotViewerPO.header.widthSwitcher.buttons().count,
+        FullSnapshotPage.header.widthSwitcher.buttons().count,
         'there should be correct number of buttons',
       ).to.equal(buildWidths.length);
     });
 
     it('displays the correct text on the buttons', function() {
-      SnapshotViewerPO.header.widthSwitcher.buttons().forEach((button, i) => {
+      FullSnapshotPage.header.widthSwitcher.buttons().forEach((button, i) => {
         expect(button.text, `button ${i} should contain correct width`).to.equal(
           `${buildWidths[i]}px`,
         );
@@ -115,26 +133,26 @@ describe('Integration: SnapshotViewerFull', function() {
     });
 
     it('displays correct number as selected', function() {
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(widthIndex).isActive).to.equal(true);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(false);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(0).isActive).to.equal(false);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(widthIndex).isActive).to.equal(true);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(2).isActive).to.equal(false);
     });
 
     it('updates active button when clicked', function() {
-      SnapshotViewerPO.header.widthSwitcher.buttons(0).click();
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(true);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(false);
+      FullSnapshotPage.header.widthSwitcher.buttons(0).click();
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(0).isActive).to.equal(true);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(1).isActive).to.equal(false);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(2).isActive).to.equal(false);
 
-      SnapshotViewerPO.header.widthSwitcher.buttons(2).click();
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(true);
+      FullSnapshotPage.header.widthSwitcher.buttons(2).click();
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(0).isActive).to.equal(false);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(1).isActive).to.equal(false);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(2).isActive).to.equal(true);
 
-      SnapshotViewerPO.header.widthSwitcher.buttons(1).click();
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(true);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(false);
+      FullSnapshotPage.header.widthSwitcher.buttons(1).click();
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(0).isActive).to.equal(false);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(1).isActive).to.equal(true);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(2).isActive).to.equal(false);
     });
   });
 
@@ -144,11 +162,11 @@ describe('Integration: SnapshotViewerFull', function() {
 
   describe('full screen toggle button', function() {
     it('displays', function() {
-      expect(SnapshotViewerPO.header.isFullScreenToggleVisible).to.equal(true);
+      expect(FullSnapshotPage.header.isFullScreenToggleVisible).to.equal(true);
     });
 
     it('sends closeSnapshotFullModal when toggle fullscreen button is clicked', function() {
-      SnapshotViewerPO.header.clickToggleFullscreen();
+      FullSnapshotPage.header.clickToggleFullscreen();
       expect(closeSnapshotFullModalStub).to.have.been.calledWith(
         this.get('build.id'),
         this.get('snapshotId'),
@@ -180,7 +198,7 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
 
   beforeEach(function() {
     manualSetup(this.container);
-    SnapshotViewerPO.setContext(this);
+    FullSnapshotPage.setContext(this);
 
     const snapshots = makeList('snapshot', 5, 'withComparisons');
     snapshots[0].set('name', snapshotTitle);
@@ -219,7 +237,7 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
   // TODO: move this test into main block when the feature ships for real
   describe('approve snapshot button', function() {
     it('sends createReview with correct arguments when approve button is clicked', function() {
-      SnapshotViewerPO.header.clickApprove();
+      FullSnapshotPage.header.clickApprove();
       expect(createReviewStub).to.have.been.calledWith('approve', this.get('build'), [
         this.get('build.snapshots.firstObject'),
       ]);
@@ -227,7 +245,7 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
 
     it('does not display when build is not finished', function() {
       this.set('build.state', 'pending');
-      expect(SnapshotViewerPO.header.snapshotApprovalButton.isVisible).to.equal(false);
+      expect(FullSnapshotPage.header.snapshotApprovalButton.isVisible).to.equal(false);
     });
   });
 });

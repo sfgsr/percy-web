@@ -37,17 +37,22 @@ export default Component.extend({
     return width;
   }),
 
-  selectedComparison: computed('comparisons.@each.width', 'snapshotSelectedWidth', function() {
-    let width = this.get('snapshotSelectedWidth');
-    let comparisons = this.get('comparisons') || [];
-    let comparison = comparisons.findBy('width', parseInt(width, 10));
+  selectedComparison: computed(
+    'comparisons.@each.width',
+    'snapshotSelectedWidth',
+    'comaparisonsSortedByWidth',
+    function() {
+      let width = this.get('snapshotSelectedWidth');
+      let comparisons = this.get('comparisons') || [];
+      let comparison = comparisons.findBy('width', parseInt(width, 10));
 
-    if (!comparison) {
-      comparison = this.get('comparisonsSortedByWidth').get('lastObject');
-    }
+      if (!comparison) {
+        comparison = this.get('comparisonsSortedByWidth').get('lastObject');
+      }
 
-    return comparison;
-  }),
+      return comparison;
+    },
+  ),
 
   isDefaultExpanded: true,
   isFocus: false,

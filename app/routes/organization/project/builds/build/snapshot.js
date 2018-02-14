@@ -16,7 +16,7 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
     // Avoids race condition to get snapshots on build in components. Because the underlying
     // lookup is an async relationship, the get triggers a promise which allows route cycle
     // blocking behavior.
-    return resolvedModel.get('comparisons');
+    return resolvedModel.get('snapshots');
   },
   setupController(controller, model) {
     this._super(...arguments);
