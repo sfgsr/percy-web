@@ -52,7 +52,6 @@ describe('Integration: SnapshotViewer', function() {
       snapshot=snapshot
       build=build
       showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-      snapshotWidthChangeTriggered=stub
       userSelectedWidth=userSelectedWidth
       createReview=createReview
     }}`);
@@ -69,7 +68,6 @@ describe('Integration: SnapshotViewer', function() {
       snapshot=snapshot
       build=build
       showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-      snapshotWidthChangeTriggered=stub
       userSelectedWidth=userSelectedWidth
       createReview=createReview
     }}`);
@@ -83,7 +81,6 @@ describe('Integration: SnapshotViewer', function() {
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-        snapshotWidthChangeTriggered=stub
         userSelectedWidth=userSelectedWidth
         createReview=createReview
       }}`);
@@ -103,7 +100,6 @@ describe('Integration: SnapshotViewer', function() {
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-        snapshotWidthChangeTriggered=stub
         userSelectedWidth=userSelectedWidth
         createReview=createReview
       }}`);
@@ -121,7 +117,6 @@ describe('Integration: SnapshotViewer', function() {
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-        snapshotWidthChangeTriggered=stub
         userSelectedWidth=userSelectedWidth
         createReview=createReview
       }}`);
@@ -136,7 +131,6 @@ describe('Integration: SnapshotViewer', function() {
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-        snapshotWidthChangeTriggered=stub
         userSelectedWidth=userSelectedWidth
         createReview=createReview
       }}`);
@@ -164,7 +158,6 @@ describe('Integration: SnapshotViewer', function() {
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-        snapshotWidthChangeTriggered=stub
         userSelectedWidth=userSelectedWidth
         createReview=createReview
       }}`);
@@ -192,7 +185,6 @@ describe('Integration: SnapshotViewer', function() {
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-        snapshotWidthChangeTriggered=stub
         userSelectedWidth=userSelectedWidth
         createReview=createReview
       }}`);
@@ -266,7 +258,6 @@ describe('Integration: SnapshotViewer with per snapshot approval', function() {
       snapshot=snapshot
       build=build
       showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-      snapshotWidthChangeTriggered=stub
       createReview=createReview
     }}`);
   });

@@ -36,8 +36,5 @@ export default Component.extend(PollingMixin, {
     showSupport() {
       this.sendAction('showSupport');
     },
-    snapshotWidthChangeTriggered() {
-      this.set('noWidthSelected', true);
-    },
   },
 });
