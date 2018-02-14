@@ -21,9 +21,6 @@ describe('Integration: SnapshotViewerFull', function() {
   let createReviewStub;
   let addedSnapshot;
   const snapshotTitle = 'Awesome snapshot title';
-  const widthIndex = 1;
-  const buildWidths = TEST_BUILD_WIDTHS;
-  const snapshotSelectedWidth = buildWidths[widthIndex];
 
   beforeEach(function() {
     manualSetup(this.container);
@@ -41,9 +38,13 @@ describe('Integration: SnapshotViewerFull', function() {
     updateComparisonModeStub = sinon.stub();
     createReviewStub = sinon.stub().returns(resolve());
 
+    const snapshotSelectedWidth = snapshots[0]
+      .get('comparisons')
+      .sortBy('width')
+      .get('lastObject.width');
+
     this.setProperties({
       build,
-      buildWidths,
       snapshotSelectedWidth,
       snapshotId: snapshot.get('id'),
       comparisonMode: 'diff',
@@ -56,7 +57,6 @@ describe('Integration: SnapshotViewerFull', function() {
     this.render(hbs`{{snapshot-viewer-full
       snapshotId=snapshotId
       build=build
-      buildWidths=buildWidths
       snapshotSelectedWidth=snapshotSelectedWidth
       comparisonMode=comparisonMode
       transitionRouteToWidth=stub
@@ -117,24 +117,9 @@ describe('Integration: SnapshotViewerFull', function() {
       ).to.equal(true);
     });
 
-    it('has the right number of buttons', function() {
-      expect(
-        FullSnapshotPage.header.widthSwitcher.buttons().count,
-        'there should be correct number of buttons',
-      ).to.equal(buildWidths.length);
-    });
-
-    it('displays the correct text on the buttons', function() {
-      FullSnapshotPage.header.widthSwitcher.buttons().forEach((button, i) => {
-        expect(button.text, `button ${i} should contain correct width`).to.equal(
-          `${buildWidths[i]}px`,
-        );
-      });
-    });
-
     it('displays correct number as selected', function() {
       expect(FullSnapshotPage.header.widthSwitcher.buttons(0).isActive).to.equal(false);
-      expect(FullSnapshotPage.header.widthSwitcher.buttons(widthIndex).isActive).to.equal(true);
+      expect(FullSnapshotPage.header.widthSwitcher.buttons(1).isActive).to.equal(true);
       expect(FullSnapshotPage.header.widthSwitcher.buttons(2).isActive).to.equal(false);
     });
 
@@ -184,10 +169,6 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
   let updateComparisonModeStub;
   let createReviewStub;
   const snapshotTitle = 'Awesome snapshot title';
-  const widthIndex = 1;
-  // NOTE: these need to be the same as the widths in the snapshot factory
-  const buildWidths = [375, 550, 1024];
-  const snapshotSelectedWidth = buildWidths[widthIndex];
 
   beforeEach(function() {
     adminMode.setAdminMode();
@@ -204,6 +185,10 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
     snapshots[0].set('name', snapshotTitle);
     const build = make('build', 'finished');
     build.set('snapshots', snapshots);
+    const snapshotSelectedWidth = snapshots[0]
+      .get('comparisons')
+      .sortBy('width')
+      .get('lastObject.width');
 
     closeSnapshotFullModalStub = sinon.stub();
     updateComparisonModeStub = sinon.stub();
@@ -211,7 +196,6 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
 
     this.setProperties({
       build,
-      buildWidths,
       snapshotSelectedWidth,
       snapshotId: build.get('snapshots.firstObject.id'),
       comparisonMode: 'diff',
@@ -224,7 +208,6 @@ describe('Integration: SnapshotViewerFull with per snapshot approval', function(
     this.render(hbs`{{snapshot-viewer-full
       snapshotId=snapshotId
       build=build
-      buildWidths=buildWidths
       snapshotSelectedWidth=snapshotSelectedWidth
       comparisonMode=comparisonMode
       transitionRouteToWidth=stub
