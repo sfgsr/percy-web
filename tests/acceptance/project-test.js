@@ -1,6 +1,7 @@
 import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
+import ProjectPage from 'percy-web/tests/pages/project-page';
 
 describe('Acceptance: Project', function() {
   setupAcceptance();
@@ -95,12 +96,20 @@ describe('Acceptance: Project', function() {
   context('builds', function() {
     freezeMoment('2018-05-22');
 
+    let urlParams;
+
     setupSession(function(server) {
       let organization = server.create('organization', 'withUser');
       let project = server.create('project', {
         name: 'with builds',
         organization,
       });
+
+      urlParams = {
+        orgSlug: organization.slug,
+        projectSlug: project.slug,
+      };
+
       server.create('build', {
         project,
         createdAt: moment().subtract(60, 'days'),
@@ -145,12 +154,27 @@ describe('Acceptance: Project', function() {
       });
       this.project = project;
     });
+
     it('shows builds on index', function() {
-      visit(`/${this.project.fullSlug}`);
+      ProjectPage.visitProject(urlParams);
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.index');
       });
       percySnapshot(this.test);
+    });
+
+    it('navigates to build page after clicking build', function() {
+      ProjectPage.visitProject(urlParams);
+
+      andThen(() => {
+        expect(currentPath()).to.equal('organization.project.index');
+        ProjectPage.finishedBuilds[0].click();
+      });
+
+      andThen(() => {
+        expect(currentPath()).to.equal('organization.project.builds.build.index');
+      });
+      percySnapshot(this.test.fullTitle());
     });
   });
 });
