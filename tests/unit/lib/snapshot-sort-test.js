@@ -35,16 +35,28 @@ describe('snapshot-sort', function() {
   });
 
   it('returns snapshots with diffs at widest widths before snapshots with no diffs at widest width', function() { // eslint-disable-line
-    const snapshotWithWideDiff = Object.create({comparisons: [wideComparisonWithHighDiff]});
-    const snapshotWithNarrowDiff = Object.create({comparisons: [narrowComparisonWithHighDiff]});
+    const snapshotWithWideDiff = Object.create({
+      maxComparisonWidth: wideWidth,
+      comparisons: [wideComparisonWithHighDiff],
+    });
+    const snapshotWithNarrowDiff = Object.create({
+      maxComparisonWidth: narrowWidth,
+      comparisons: [narrowComparisonWithHighDiff],
+    });
     const unorderedSnapshots = [snapshotWithNarrowDiff, snapshotWithWideDiff];
 
     expect(snapshotSort(unorderedSnapshots)).to.eql([snapshotWithWideDiff, snapshotWithNarrowDiff]);
   });
 
   it('returns snapshots with high diff ratio before snapshots with low diff ratio', function() {
-    const snapshotWithHighDiffRatio = Object.create({comparisons: [wideComparisonWithHighDiff]});
-    const snapshotWithLowDiffRatio = Object.create({comparisons: [wideComparisonWithLowDiff]});
+    const snapshotWithHighDiffRatio = Object.create({
+      maxComparisonWidth: wideWidth,
+      comparisons: [wideComparisonWithHighDiff],
+    });
+    const snapshotWithLowDiffRatio = Object.create({
+      maxComparisonWidth: wideWidth,
+      comparisons: [wideComparisonWithLowDiff],
+    });
     const unorderedSnapshots = [snapshotWithLowDiffRatio, snapshotWithHighDiffRatio];
 
     expect(snapshotSort(unorderedSnapshots)).to.eql([
