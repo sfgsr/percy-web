@@ -1,4 +1,4 @@
-import {alias, notEmpty, sort} from '@ember/object/computed';
+import {alias, sort} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -33,8 +33,6 @@ export default Component.extend({
     }
     return comparison;
   }),
-
-  hasComparisonAtSelectedWidth: notEmpty('selectedComparison'),
 
   didRender() {
     this._super(...arguments);

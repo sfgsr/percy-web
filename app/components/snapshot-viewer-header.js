@@ -7,7 +7,6 @@ export default Component.extend({
   // required params
   snapshot: null,
   flashMessages: service(),
-  hasComparisonAtSelectedWidth: null,
   selectedWidth: null,
   selectedComparison: null,
 

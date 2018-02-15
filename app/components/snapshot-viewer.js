@@ -1,4 +1,4 @@
-import {not, alias, notEmpty, or, sort} from '@ember/object/computed';
+import {not, alias, or, sort} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -13,7 +13,6 @@ export default Component.extend({
   attributeBindings: ['data-test-snapshot-viewer'],
   'data-test-snapshot-viewer': true,
 
-  buildContainerSelectedWidth: null,
   registerChild() {},
   unregisterChild() {},
   selectChild() {},
@@ -72,8 +71,6 @@ export default Component.extend({
     let comparisons = this.get('snapshot.comparisons') || [];
     return comparisons.findBy('width', this.get('snapshotSelectedWidth'));
   }),
-
-  hasComparisonAtSelectedWidth: notEmpty('comparisonForSelectedWidth'),
 
   didInsertElement() {
     this._super(...arguments);
