@@ -1,9 +1,7 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import {inject as service} from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  cachedSnapshotOrder: service(),
   queryParams: {
     activeSnapshotId: {as: 'snapshot', replace: true},
   },
@@ -22,8 +20,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
     });
   },
   resetController(controller, isExiting) {
-    // Clear cached snapshot order between route transitions.
-    this.get('cachedSnapshotOrder').resetCachedSnapshotOrder();
     if (isExiting) {
       // Clear the query parameter when exiting the route.
       controller.set('activeSnapshotId', undefined);

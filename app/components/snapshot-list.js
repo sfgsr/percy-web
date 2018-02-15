@@ -4,7 +4,6 @@ import ArrayProxy from '@ember/array/proxy';
 import $ from 'jquery';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
 import snapshotSort from 'percy-web/lib/snapshot-sort';
 
 export default Component.extend({
@@ -45,20 +44,11 @@ export default Component.extend({
     }, 0);
   }),
 
-  cachedSnapshotOrder: service(),
   computedSnapshots: computed(
-    'build.isFinished',
     'hideNoDiffs',
     'snapshotsWithDiffs.@each.isApproved',
     'snapshotsWithoutDiffs.@each.isApproved',
     function() {
-      if (
-        this.get('build.isFinished') &&
-        this.get('cachedSnapshotOrder').shouldUseCachedSnapshots()
-      ) {
-        return this.get('cachedSnapshotOrder').getOrderedSnapshots();
-      }
-
       const snapshots = this.get('hideNoDiffs')
         ? this.get('snapshotsWithDiffs')
         : [].concat(this.get('snapshotsWithDiffs'), this.get('snapshotsWithoutDiffs'));
@@ -73,7 +63,6 @@ export default Component.extend({
       });
 
       const orderedSnapshots = [].concat(unapprovedSnapshots, approvedSnapshots);
-      this.get('cachedSnapshotOrder').setOrderedSnapshots(orderedSnapshots);
       return orderedSnapshots;
     },
   ),
@@ -188,7 +177,6 @@ export default Component.extend({
     },
     toggleNoDiffSnapshots() {
       this.toggleProperty('hideNoDiffs');
-      this.get('cachedSnapshotOrder').setHideNoDiffsChanged();
       window.scrollTo(0, 0);
     },
   },
