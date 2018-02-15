@@ -19,7 +19,7 @@ export default Component.extend({
   updateActiveSnapshotId: null,
 
   sortedSnapshots: computed('snapshots.[]', function() {
-    return snapshotSort(this.get('snapshots'));
+    return snapshotSort(this.get('snapshots').toArray());
   }),
 
   hideNoDiffs: computed('noDiffSnapshotsCount', function() {
