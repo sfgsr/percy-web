@@ -1,7 +1,7 @@
 import FactoryGuy from 'ember-data-factory-guy';
 import moment from 'moment';
 
-export const TEST_BUILD_WIDTHS = [375, 550, 1024];
+export const TEST_COMPARISON_WIDTHS = [375, 550, 1024];
 
 FactoryGuy.define('comparison', {
   default: {
