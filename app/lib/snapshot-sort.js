@@ -42,19 +42,7 @@ export default function(snapshots) {
 }
 
 function _maxWidthForSnapshots(snapshots) {
-  // TODO: put `maxComparisonWidth` on snapshot model after snapshots api work is done
-  let maxWidth = snapshots.get('firstObject.comparisons.firstObject.width');
-  snapshots.forEach(snapshot => {
-    let comparisons = snapshot.get('comparisons');
-    comparisons.forEach(comparison => {
-      const tmpWidth = comparison.get('width');
-      if (tmpWidth > maxWidth) {
-        maxWidth = tmpWidth;
-      }
-    });
-  });
-
-  return maxWidth;
+  return Math.max(...snapshots.mapBy('maxComparisonWidth'));
 }
 
 function _comparisonAtCurrentWidth(snapshot, width) {

@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import {equal} from '@ember/object/computed';
+import {mapBy, max} from '@ember/object/computed';
 
 export const SNAPSHOT_APPROVED_STATE = 'approved';
 export const SNAPSHOT_UNAPPROVED_STATE = 'unreviewed';
@@ -30,6 +31,9 @@ export default DS.Model.extend({
   // - 'approved' --> 'no_diffs': automatically approved because there were no visual differences
   //    when compared the baseline.
   reviewStateReason: DS.attr(),
+
+  comparisonWidths: mapBy('comparisons', 'width'),
+  maxComparisonWidth: max('comparisonWidths'),
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
