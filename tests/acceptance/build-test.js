@@ -5,11 +5,6 @@ import sinon from 'sinon';
 import BuildPage from 'percy-web/tests/pages/build-page';
 import {TEST_IMAGE_URLS} from 'percy-web/mirage/factories/screenshot';
 
-// TODO once PR#403 is merged, write tests for approving snapshot, make sure order is correct
-// TODO once PR#403 is merged, write test for being on build page with batched collapsed snapshots,
-// expand batched snapshots, navigate to another build, assert snapshots are correct for that build
-
-// TODO convert this file to use page objects
 describe('Acceptance: Pending Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();

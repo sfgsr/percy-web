@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 import {equal} from '@ember/object/computed';
-import {mapBy, max} from '@ember/object/computed';
+import {alias, mapBy, max, sort} from '@ember/object/computed';
+import {computed} from '@ember/object';
 
 export const SNAPSHOT_APPROVED_STATE = 'approved';
 export const SNAPSHOT_UNAPPROVED_STATE = 'unreviewed';
@@ -32,9 +33,24 @@ export default DS.Model.extend({
   //    when compared the baseline.
   reviewStateReason: DS.attr(),
 
-  comparisonWidths: mapBy('comparisons', 'width'),
-  maxComparisonWidth: max('comparisonWidths'),
-
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
+
+  comparisonWidths: mapBy('comparisons', 'width'),
+  maxComparisonWidth: max('comparisonWidths'),
+  widestComparison: alias('comparisonsSortedByWidth.lastObject'),
+
+  comparisonsSortedByWidth: sort('comparisons', 'widthSort'),
+  widthSort: ['width'],
+
+  maxWidthComparisonWithDiff: computed('comparisonsSortedByWidth.[]', function() {
+    return this.get('comparisonsSortedByWidth')
+      .filterBy('isDifferent')
+      .get('lastObject');
+  }),
+  maxComparisonWidthWithDiff: alias('maxWidthComparisonWidthDiff.width'),
+
+  comparisonForWidth(width) {
+    return this.get('comparisons').findBy('width', parseInt(width, 10));
+  },
 });

@@ -93,14 +93,6 @@ describe('Integration: SnapshotViewerFull', function() {
       expect(updateComparisonModeStub).to.have.been.calledWith('head');
     });
 
-    it('hides comparison mode controls when no comparison for specified width', function() {
-      // A comparison for this width doesn't exist
-      this.set('snapshotSelectedWidth', 99999);
-
-      expect(FullSnapshotPage.isComparisonModeSwitcherVisible).to.equal(false);
-      percySnapshot(this.test);
-    });
-
     it('shows "New" button when snapshot is new', function() {
       this.set('snapshotId', addedSnapshot.get('id'));
 
