@@ -1,4 +1,4 @@
-import {not, alias, notEmpty, or, sort} from '@ember/object/computed';
+import {not, alias, or} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -13,46 +13,23 @@ export default Component.extend({
   attributeBindings: ['data-test-snapshot-viewer'],
   'data-test-snapshot-viewer': true,
 
-  buildContainerSelectedWidth: null,
   registerChild() {},
   unregisterChild() {},
   selectChild() {},
 
   comparisons: alias('snapshot.comparisons'),
-  comparisonsSortedByWidth: sort('comparisons', 'widthSort'),
-  widthSort: ['width'],
 
   snapshotSelectedWidth: or('userSelectedWidth', 'defaultWidth'),
   userSelectedWidth: null,
 
-  defaultWidth: computed('comparisons.@each.width', 'isExpanded', function() {
-    let width = this.get('comparisonsSortedByWidth')
-      .filterBy('isDifferent')
-      .get('lastObject.width');
+  defaultWidth: or('snapshot.maxComparisonWidthWithDiff', 'snapshot.maxComparisonWidth'),
 
-    if (!width) {
-      width = this.get('comparisonsSortedByWidth').get('lastObject.width');
-    }
-
-    return width;
+  selectedComparison: computed('snapshot.widestComparison', 'snapshotSelectedWidth', function() {
+    return (
+      this.get('snapshot').comparisonForWidth(this.get('snapshotSelectedWidth')) ||
+      this.get('snapshot.widestComparison')
+    );
   }),
-
-  selectedComparison: computed(
-    'comparisons.@each.width',
-    'snapshotSelectedWidth',
-    'comaparisonsSortedByWidth',
-    function() {
-      let width = this.get('snapshotSelectedWidth');
-      let comparisons = this.get('comparisons') || [];
-      let comparison = comparisons.findBy('width', parseInt(width, 10));
-
-      if (!comparison) {
-        comparison = this.get('comparisonsSortedByWidth').get('lastObject');
-      }
-
-      return comparison;
-    },
-  ),
 
   isDefaultExpanded: true,
   isFocus: false,
@@ -67,13 +44,6 @@ export default Component.extend({
   }),
   isNotExpanded: not('isExpanded'),
   isActionable: alias('isNotExpanded'),
-
-  comparisonForSelectedWidth: computed('snapshot.comparisons', 'snapshotSelectedWidth', function() {
-    let comparisons = this.get('snapshot.comparisons') || [];
-    return comparisons.findBy('width', this.get('snapshotSelectedWidth'));
-  }),
-
-  hasComparisonAtSelectedWidth: notEmpty('comparisonForSelectedWidth'),
 
   didInsertElement() {
     this._super(...arguments);

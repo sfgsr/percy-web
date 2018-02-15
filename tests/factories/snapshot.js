@@ -1,7 +1,7 @@
 import FactoryGuy from 'ember-data-factory-guy';
 import {make} from 'ember-data-factory-guy';
 import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_UNAPPROVED_STATE} from 'percy-web/models/snapshot';
-import {TEST_BUILD_WIDTHS} from 'percy-web/tests/factories/comparison';
+import {TEST_COMPARISON_WIDTHS} from 'percy-web/tests/factories/comparison';
 
 FactoryGuy.define('snapshot', {
   default: {
@@ -27,7 +27,7 @@ FactoryGuy.define('snapshot', {
     },
     withComparisons: {
       comparisons: () => {
-        return TEST_BUILD_WIDTHS.map(width => {
+        return TEST_COMPARISON_WIDTHS.map(width => {
           return make('comparison', {width});
         });
       },
@@ -44,7 +44,7 @@ FactoryGuy.define('snapshot', {
 
     new: {
       comparisons: () => {
-        return TEST_BUILD_WIDTHS.map(width => {
+        return TEST_COMPARISON_WIDTHS.map(width => {
           return make('comparison', 'new', {width});
         });
       },

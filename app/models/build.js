@@ -1,5 +1,5 @@
 import {computed} from '@ember/object';
-import {bool, and, equal, max, not} from '@ember/object/computed';
+import {bool, and, equal, not} from '@ember/object/computed';
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -108,16 +108,6 @@ export default DS.Model.extend({
     return this.get('snapshots').reduce((acc, snapshot) => {
       return acc.concat(snapshot.get('comparisons').toArray());
     }, []);
-  }),
-
-  comparisonWidths: computed('comparisons.@each.width', function() {
-    let widths = [...new Set(this.get('comparisons').map(c => c.get('width')))];
-    return widths.sort((a, b) => a - b);
-  }),
-
-  defaultSelectedWidth: max('comparisonWidths'),
-  numComparisonWidths: computed('comparisonWidths', function() {
-    return this.get('comparisonWidths').length;
   }),
 
   hasNoDiffs: not('hasDiffs'),
