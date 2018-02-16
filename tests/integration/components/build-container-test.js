@@ -21,12 +21,16 @@ describe('Integration: BuildContainer', function() {
     const build = make('build', 'processing');
     const snapshots = makeList('snapshot', ['withComparisons', 'withNoDiffs'], {build});
     const stub = sinon.stub();
-    this.setProperties({build, snapshots, stub});
+    // override the pollRefresh method for the test. This does not happen IRL, but we can't have
+    // the component make requests in this integration test.
+    const pollRefreshStub = sinon.stub();
+    this.setProperties({build, snapshots, stub, pollRefreshStub});
 
     this.render(hbs`{{build-container
       build=build
       snapshots=snapshots
       createReview=stub
+      pollRefresh=pollRefreshStub
     }}`);
 
     percySnapshot(this.test.fullTitle());

@@ -20,11 +20,11 @@ export default Component.extend(PollingMixin, {
   shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 
   pollRefresh() {
-    // this.get('build')
-    //   .reload()
-    //   .then(build => {
-    //     build.get('snapshots').reload();
-    //   });
+    this.get('build')
+      .reload()
+      .then(build => {
+        build.get('snapshots').reload();
+      });
   },
 
   actions: {
