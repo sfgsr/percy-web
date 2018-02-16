@@ -2,8 +2,10 @@
   fullscreen=true
   snapshot=snapshot
   isBuildFinished=build.isFinished
+  buildWidths=buildWidths
   selectedWidth=snapshotSelectedWidth
   selectedComparison=selectedComparison
+  hasComparisonAtSelectedWidth=hasComparisonAtSelectedWidth
   toggleViewMode=(action closeSnapshotFullModal build.id snapshot.id)
   updateSelectedWidth=(action "updateSelectedWidth")
 
@@ -17,6 +19,7 @@
     {{comparison-viewer-full
       comparison=selectedComparison
       comparisonMode=comparisonMode
+      snapshotSelectedWidth=snapshotSelectedWidth
       cycleComparisonMode='cycleComparisonMode'
       data-test-SnapshotViewerFull-comparison-viewer=true
     }}

@@ -10,11 +10,11 @@
       </div>
       <div class="ComparisonViewer-halfColumn ComparisonViewer-halfColumn--right">
         {{#with comparison.headScreenshot.lossyImage as |lossyImage|}}
-          <div class="Viewer-pdiffImageBox Viewer-pdiffImageBox--actionable" style={{html-safe "max-width: " lossyImage.width "px"}} data-test-comparison-viewer-diff-image-container>
+          <div class="Viewer-pdiffImageBox Viewer-pdiffImageBox--actionable" style={{html-safe "max-width: " lossyImage.width "px"}}>
             {{image-spacer action=(action "toggleOverlay") bubbles=false image=lossyImage imageClass="ComparisonViewer-pdiffImage ComparisonViewer-pdiffImage--actionable"}}
             {{#if isOverlayEnabled}}
               {{#with comparison.diffImage as |diffImage|}}
-                <div class="pdiffImageOverlay" data-test-comparison-viewer-full-diff-image-overlay>
+                <div class="pdiffImageOverlay">
                   {{image-spacer action=(action "toggleOverlay") bubbles=false image=diffImage imageClass="Viewer-pdiffImageOverlay"}}
                 </div>
               {{/with}}
@@ -27,7 +27,7 @@
   {{else}}
     {{!-- Compared, but not different. --}}
     {{#unless showNoDiffSnapshot}}
-      <div class="row ComparisonViewer-noDiffBox" data-test-comparison-viewer-unchanged>
+      <div class="row ComparisonViewer-noDiffBox">
         No visual changes at {{comparison.width}}px.
           <a {{action "toggleNoDiffResource" bubbles=false}} href="#">Show snapshot</a>
       </div>

@@ -72,14 +72,7 @@ export default Route.extend(ApplicationRouteMixin, EnsureStatefulLogin, {
     navigateToBuild(build) {
       let organizationSlug = build.get('project.organization.slug');
       let projectSlug = build.get('project.slug');
-      // VERY IMPORTANT: pass the build id rather than the build object
-      // in order to always activate the model hook in org.project.builds.build route
-      this.transitionTo(
-        'organization.project.builds.build',
-        organizationSlug,
-        projectSlug,
-        build.get('id'),
-      );
+      this.transitionTo('organization.project.builds.build', organizationSlug, projectSlug, build);
     },
 
     navigateToOrganizationBilling(organization) {

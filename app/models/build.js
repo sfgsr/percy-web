@@ -1,5 +1,5 @@
 import {computed} from '@ember/object';
-import {bool, and, equal, not} from '@ember/object/computed';
+import {bool, and, equal, max, not} from '@ember/object/computed';
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -102,12 +102,22 @@ export default DS.Model.extend({
 
   commit: DS.belongsTo('commit', {async: false}), // Might be null.
   baseBuild: DS.belongsTo('build', {async: false, inverse: null}),
-  snapshots: DS.hasMany('snapshot', {async: true}),
+  comparisons: DS.hasMany('comparison', {async: true}),
 
-  comparisons: computed('snapshots', function() {
-    return this.get('snapshots').reduce((acc, snapshot) => {
-      return acc.concat(snapshot.get('comparisons').toArray());
-    }, []);
+  snapshots: computed('comparisons', function() {
+    let comparisons = this.get('comparisons');
+    let snapshots = comparisons.map(comparison => comparison.get('headSnapshot')).filter(x => x);
+    return [...new Set(snapshots)];
+  }),
+
+  comparisonWidths: computed('comparisons', function() {
+    let widths = [...new Set(this.get('comparisons').map(c => c.get('width')))];
+    return widths.sort((a, b) => a - b);
+  }),
+
+  defaultSelectedWidth: max('comparisonWidths'),
+  numComparisonWidths: computed('comparisonWidths', function() {
+    return this.get('comparisonWidths').length;
   }),
 
   hasNoDiffs: not('hasDiffs'),

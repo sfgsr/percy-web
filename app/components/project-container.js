@@ -6,8 +6,6 @@ export default Component.extend(PollingMixin, {
   showQuickstart: false,
   tagName: 'main',
   classNames: ['project-container flex-1 border-left border-gray-100'],
-  attributeBindings: ['data-test-project-container'],
-  'data-test-project-container': true,
 
   _refresh() {
     this.set('isRefreshing', true);

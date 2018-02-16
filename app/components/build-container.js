@@ -1,4 +1,4 @@
-import {or} from '@ember/object/computed';
+import {max, oneWay, or} from '@ember/object/computed';
 import Component from '@ember/component';
 import PollingMixin from 'percy-web/mixins/polling';
 
@@ -11,7 +11,8 @@ export default Component.extend(PollingMixin, {
     'classes',
     'isShowingModal:BuildContainer--snapshotModalOpen:BuildContainer--snapshotModalClosed',
   ],
-
+  maxWidth: max('build.comparisonWidths'),
+  buildContainerSelectedWidth: oneWay('maxWidth'),
   currentPosition: null,
 
   showComparisons: or('build.isPending', 'build.isProcessing', 'build.isFinished'),
@@ -21,7 +22,7 @@ export default Component.extend(PollingMixin, {
     this.get('build')
       .reload()
       .then(build => {
-        build.get('snapshots').reload();
+        build.get('comparisons').reload();
       });
   },
 
@@ -35,6 +36,9 @@ export default Component.extend(PollingMixin, {
 
     showSupport() {
       this.sendAction('showSupport');
+    },
+    snapshotWidthChangeTriggered() {
+      this.set('noWidthSelected', true);
     },
   },
 });

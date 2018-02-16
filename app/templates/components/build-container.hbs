@@ -11,13 +11,17 @@
   }}
 
   {{#if showComparisons}}
-    {{#if snapshots.isPending}}
+    {{#if build.comparisons.isPending}}
       {{loading-page}}
     {{else}}
       {{snapshot-list
-        snapshots=snapshots
+        snapshots=build.snapshots
+        buildContainerSelectedWidth=buildContainerSelectedWidth
+        buildWidths=build.comparisonWidths
         activeSnapshotId=activeSnapshotId
         updateActiveSnapshotId=(action "updateActiveSnapshotId")
+        selectedWidth=selectedWidth
+        snapshotWidthChangeTriggered=(action "snapshotWidthChangeTriggered")
         build=build
         showSnapshotFullModalTriggered=(action 'showSnapshotFullModalTriggered')
         isShowingModal=isShowingModal

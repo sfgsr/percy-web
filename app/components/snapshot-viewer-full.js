@@ -1,4 +1,4 @@
-import {alias} from '@ember/object/computed';
+import {alias, reads, notEmpty} from '@ember/object/computed';
 import {computed} from '@ember/object';
 import Component from '@ember/component';
 
@@ -7,11 +7,7 @@ export default Component.extend({
   build: null,
   comparisonMode: null,
   snapshotId: null,
-  snapshotSelectedWidth: null,
-
   galleryMap: ['base', 'diff', 'head'],
-  attributeBindings: ['data-test-snapshot-viewer-full'],
-  'data-test-snapshot-viewer-full': true,
 
   galleryIndex: computed('comparisonMode', function() {
     return this.get('galleryMap').indexOf(this.get('comparisonMode'));
@@ -21,15 +17,16 @@ export default Component.extend({
     return this.get('build.snapshots').findBy('id', this.get('snapshotId'));
   }),
 
-  comparisons: alias('snapshot.comparisons'),
-
-  selectedComparison: computed('snapshot.widestComparison', 'snapshotSelectedWidth', function() {
-    return (
-      this.get('snapshot').comparisonForWidth(this.get('snapshotSelectedWidth')) ||
-      this.get('snapshot.widestComparison')
-    );
+  buildWidths: alias('build.comparisonWidths'),
+  selectedComparison: computed('snapshot.comparisons', 'snapshotSelectedWidth', function() {
+    let comparisons = this.get('snapshot.comparisons') || [];
+    let width = parseInt(this.get('snapshotSelectedWidth'), 10);
+    return comparisons.findBy('width', width);
   }),
 
+  hasComparisonAtSelectedWidth: notEmpty('selectedComparison'),
+
+  snapshotSelectedWidth: reads('selectedComparison.width'),
   didRender() {
     this._super(...arguments);
 
@@ -40,7 +37,8 @@ export default Component.extend({
 
   actions: {
     updateSelectedWidth(value) {
-      let comparison = this.get('snapshot').comparisonForWidth(value);
+      let comparisons = this.get('snapshot.comparisons') || [];
+      let comparison = comparisons.findBy('width', parseInt(value, 10));
 
       this.set('selectedComparison', comparison);
       this.set('snapshotSelectedWidth', value);

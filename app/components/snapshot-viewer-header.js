@@ -6,7 +6,9 @@ import {alias, equal, filterBy, not, or} from '@ember/object/computed';
 export default Component.extend({
   // required params
   snapshot: null,
+  buildWidths: null,
   flashMessages: service(),
+  hasComparisonAtSelectedWidth: null,
   selectedWidth: null,
   selectedComparison: null,
 
