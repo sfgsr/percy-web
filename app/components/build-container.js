@@ -1,4 +1,4 @@
-import {or} from '@ember/object/computed';
+import {alias, and, not, or} from '@ember/object/computed';
 import Component from '@ember/component';
 import PollingMixin from 'percy-web/mixins/polling';
 
@@ -14,7 +14,9 @@ export default Component.extend(PollingMixin, {
 
   currentPosition: null,
 
-  showComparisons: or('build.isPending', 'build.isProcessing', 'build.isFinished'),
+  isSnapshotsPending: alias('snapshots.isPending'),
+  isSnapshotsFinished: not('isSnapshotsPending'),
+  showSnapshots: and('build.isFinished', 'isSnapshotsFinished'),
   shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 
   pollRefresh() {
