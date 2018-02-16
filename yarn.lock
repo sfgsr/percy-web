@@ -7611,6 +7611,15 @@ percy-client@^2.4.2:
     broccoli-merge-trees "^2.0.0"
     ember-cli-babel "^6.8.2"
 
+"percy-docs@git+https://github.com/percy/percy-docs.git#a1abef06a3e5cad793bc5c7813fed704bdf92f4d":
+  version "0.0.0"
+  resolved "git+https://github.com/percy/percy-docs.git#a1abef06a3e5cad793bc5c7813fed704bdf92f4d"
+  dependencies:
+    broccoli-flatiron "git+https://github.com/percy/broccoli-flatiron.git"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-babel "^6.8.2"
+
 performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
