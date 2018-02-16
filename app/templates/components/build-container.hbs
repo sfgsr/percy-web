@@ -11,7 +11,7 @@
   }}
 
   {{#if showComparisons}}
-    {{#if snapshots.isPending}}
+    {{#if (not build.isFinished)}}
       {{loading-page}}
     {{else}}
       {{snapshot-list
