@@ -23,28 +23,13 @@ export const TEST_IMAGE_URLS = {
 };
 
 export default Factory.extend({
-  afterCreate(screenshot, server) {
-    if (screenshot.image === null) {
-      let image = server.create('image');
-      screenshot.update({image});
-    }
-    if (screenshot.lossyImage === null) {
-      let lossyImage = server.create('image', {
-        height: TEST_IMAGE_DIMS.LOSSY_HEIGHTS,
-        width: TEST_IMAGE_DIMS.LOSSY_WIDTH,
-        url: TEST_IMAGE_URLS.V2_LOSSY,
-      });
-      screenshot.update({lossyImage});
-    }
-  },
-
   v1: trait({
     afterCreate(screenshot, server) {
       const image = server.create('image', {
         url: TEST_IMAGE_URLS.V1,
       });
       const lossyImage = server.create('image', {
-        height: TEST_IMAGE_DIMS.LOSSY_HEIGHTS,
+        height: TEST_IMAGE_DIMS.LOSSY_HEIGHT,
         width: TEST_IMAGE_DIMS.LOSSY_WIDTH,
         url: TEST_IMAGE_URLS.V1_LOSSY,
       });
@@ -53,24 +38,36 @@ export default Factory.extend({
     },
   }),
 
+  v2: trait({
+    afterCreate(screenshot, server) {
+      const image = server.create('image', {
+        url: TEST_IMAGE_URLS.V2,
+      });
+      const lossyImage = server.create('image', {
+        height: TEST_IMAGE_DIMS.LOSSY_HEIGHT,
+        width: TEST_IMAGE_DIMS.LOSSY_WIDTH,
+        url: TEST_IMAGE_URLS.V2_LOSSY,
+      });
+
+      screenshot.update({image, lossyImage});
+    },
+  }),
+
   mobile: trait({
     afterCreate(screenshot, server) {
-      if (!screenshot.image) {
-        screenshot.update({image: server.create('image')});
-      }
+      const image = server.create('image', {
+        width: TEST_IMAGE_DIMS.MOBILE_WIDTH,
+        height: TEST_IMAGE_DIMS.MOBILE_HEIGHT,
+        url: TEST_IMAGE_URLS.V2_MOBILE,
+      });
 
-      if (!screenshot.lossyImage) {
-        screenshot.update({
-          lossyImage: server.create('image', {
-            height: TEST_IMAGE_DIMS.LOSSY_HEIGHTS,
-            width: TEST_IMAGE_DIMS.LOSSY_WIDTH,
-            url: TEST_IMAGE_URLS.V2_LOSSY,
-          }),
-        });
-      }
+      const lossyImage = server.create('image', {
+        width: TEST_IMAGE_DIMS.MOBILE_WIDTH,
+        height: TEST_IMAGE_DIMS.MOBILE_HEIGHT,
+        url: TEST_IMAGE_URLS.V2_LOSSY_MOBILE,
+      });
 
-      screenshot.image.update({width: TEST_IMAGE_DIMS.MOBILE_WIDTH});
-      screenshot.lossyImage.update({width: TEST_IMAGE_DIMS.MOBILE_WIDTH});
+      screenshot.update({image, lossyImage});
     },
   }),
 });

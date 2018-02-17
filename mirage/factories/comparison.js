@@ -23,7 +23,7 @@ export default Factory.extend({
   default: trait({
     afterCreate(comparison, server) {
       const diffRatio = LOW_DIFF_RATIO;
-      const headScreenshot = server.create('screenshot');
+      const headScreenshot = server.create('screenshot', 'v2');
       const baseScreenshot = server.create('screenshot', 'v1');
       const diffImage = server.create('image', {url: TEST_IMAGE_URLS.DIFF_URL});
 
@@ -39,7 +39,7 @@ export default Factory.extend({
   same: trait({
     afterCreate(comparison, server) {
       const diffRatio = NO_DIFF_RATIO;
-      const headScreenshot = server.create('screenshot');
+      const headScreenshot = server.create('screenshot', 'v2');
       const baseScreenshot = server.create('screenshot', 'v1');
       const diffImage = server.create('image', {url: ''});
 
@@ -56,7 +56,9 @@ export default Factory.extend({
     afterCreate(comparison, server) {
       const width = TEST_IMAGE_DIMS.MOBILE_WIDTH;
       const headScreenshot = server.create('screenshot', 'mobile');
-      const baseScreenshot = server.create('screenshot', 'v1', 'mobile');
+      const baseScreenshot = server.create('screenshot', 'mobile');
+      baseScreenshot.image.update({url: TEST_IMAGE_URLS.V1_MOBILE});
+
       const diffImage = server.create('image', {
         height: TEST_IMAGE_DIMS.MOBILE_HEIGHT,
         width: TEST_IMAGE_DIMS.MOBILE_WIDTH,
