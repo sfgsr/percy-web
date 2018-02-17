@@ -6,6 +6,7 @@
 {{/unless}}
 {{#each computedSnapshots as |snapshot index|}}
   {{snapshot-viewer
+    build=build
     snapshot=snapshot
     listIndex=index
     isDefaultExpanded=isDefaultExpanded
