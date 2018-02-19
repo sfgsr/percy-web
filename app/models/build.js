@@ -1,5 +1,5 @@
 import {computed} from '@ember/object';
-import {bool, and, equal, not} from '@ember/object/computed';
+import {bool, and, equal, not, or} from '@ember/object/computed';
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -44,6 +44,7 @@ export default DS.Model.extend({
       return 'Timed out';
     }
   }),
+  isRunning: or('isFinished', 'isFailed', 'isExpired'),
 
   // Review state, aggregated across all reviews. This will only be set for finished builds.
   reviewState: DS.attr(),

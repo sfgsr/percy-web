@@ -16,7 +16,7 @@ export default Component.extend(PollingMixin, {
 
   isSnapshotsPending: alias('snapshots.isPending'),
   isSnapshotsFinished: not('isSnapshotsPending'),
-  showSnapshots: and('build.isFinished', 'isSnapshotsFinished'),
+  showSnapshots: and('build.isRunning', 'isSnapshotsFinished'),
   shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 
   pollRefresh() {
