@@ -3153,10 +3153,10 @@ ember-cli-mirage@0.3.3:
     route-recognizer "^0.2.3"
 
 ember-cli-mocha@^0.14.4:
-  version "0.14.4"
-  resolved "https://registry.yarnpkg.com/ember-cli-mocha/-/ember-cli-mocha-0.14.4.tgz#5f63907f952ec6d6609d551ce321dc83823ba63f"
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/ember-cli-mocha/-/ember-cli-mocha-0.14.5.tgz#c37f76b28b8262b87ed3b75c0d20dca609fff1a6"
   dependencies:
-    broccoli-funnel "^1.0.1"
+    broccoli-funnel "^2.0.0"
     broccoli-merge-trees "^2.0.0"
     ember-cli-babel "^6.0.0"
     ember-cli-test-loader "^2.0.0"
@@ -4095,9 +4095,9 @@ eslint-config-prettier@^2.9.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-plugin-prettier@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.5.0.tgz#39a91dd7528eaf19cd42c0ee3f2c1f684606a05f"
+eslint-plugin-prettier@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.6.0.tgz#33e4e228bdb06142d03c560ce04ec23f6c767dd7"
   dependencies:
     fast-diff "^1.1.1"
     jest-docblock "^21.0.0"
@@ -9068,9 +9068,9 @@ stylelint-order@^0.8.0:
     postcss "^6.0.14"
     postcss-sorting "^3.1.0"
 
-stylelint-scss@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-2.2.0.tgz#3e324bf13346db7af21cd24ad57fe3202f7c3823"
+stylelint-scss@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-2.3.0.tgz#95089fa0c1cc5690be19ca80f901a4905c95dedc"
   dependencies:
     lodash "^4.17.4"
     postcss-media-query-parser "^0.2.3"
