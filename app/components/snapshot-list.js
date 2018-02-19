@@ -52,13 +52,18 @@ export default Component.extend({
     'snapshotsWithDiffs.@each.isApproved',
     'snapshotsWithoutDiffs.@each.isApproved',
     function() {
-      if (
-        this.get('build.isFinished') &&
-        this.get('cachedSnapshotOrder').shouldUseCachedSnapshots()
-      ) {
+      // don't do any sorting or caching if the build is not finished
+      if (!this.get('build.isFinished')) {
+        return;
+      }
+
+      // If the build is finished, we should have all the snapshots.
+      // Now we can look at the cached snapshots.
+      if (this.get('cachedSnapshotOrder').shouldUseCachedSnapshots()) {
         return this.get('cachedSnapshotOrder').getOrderedSnapshots();
       }
 
+      // sort snapshots, then sort by approved vs unapproved
       const snapshots = this.get('hideNoDiffs')
         ? this.get('snapshotsWithDiffs')
         : [].concat(this.get('snapshotsWithDiffs'), this.get('snapshotsWithoutDiffs'));
@@ -72,14 +77,18 @@ export default Component.extend({
         }
       });
 
+      // recombine approved/unapproved into one list
       const orderedSnapshots = [].concat(unapprovedSnapshots, approvedSnapshots);
+      // cache approve/unapprove order for the current page load
       this.get('cachedSnapshotOrder').setOrderedSnapshots(orderedSnapshots);
       return orderedSnapshots;
     },
   ),
+
   isDefaultExpanded: computed('snapshotsWithDiffs', function() {
     return this.get('snapshotsWithDiffs.length') < 150;
   }),
+
   didInsertElement() {
     $(document).bind(
       'keydown.snapshots',

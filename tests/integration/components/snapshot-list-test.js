@@ -61,15 +61,12 @@ describe('Integration: SnapshotList', function() {
     });
   });
 
-  it('does not load cached snapshot order when build is not yet finished', function() {
+  it('does not render any snapshots when build is not finished', function() {
     const stub = sinon.stub();
     const build = make('build');
-    const snapshots = makeList('snapshot', 4);
-    let [snapshot1, snapshot2, snapshot3, snapshot4] = snapshots;
+    const snapshots = makeList('snapshot', 2);
 
     const cacheService = getContext().container.lookup('service:cached-snapshot-order');
-    // set cached snapshots in random order
-    cacheService.setOrderedSnapshots([snapshot3, snapshot1, snapshot4, snapshot2]);
 
     this.setProperties({
       build,
@@ -84,11 +81,8 @@ describe('Integration: SnapshotList', function() {
         showSnapshotFullModalTriggered=stub
       }}`);
 
-    const titles = SnapshotList.snapshotTitles;
-    expect(titles[0]).to.equal(snapshot1.get('name'));
-    expect(titles[1]).to.equal(snapshot2.get('name'));
-    expect(titles[2]).to.equal(snapshot3.get('name'));
-    expect(titles[3]).to.equal(snapshot4.get('name'));
+    expect(SnapshotList.snapshots().count).to.equal(0);
+    expect(cacheService.getOrderedSnapshots()).to.equal(null);
   });
 
   it('expands batched hidden snapshots', function() {
