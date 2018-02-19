@@ -13,11 +13,11 @@ describe('Integration: GithubIntegratorComponent', function() {
 
   beforeEach(function() {
     GithubIntegrator.setContext(this);
+    manualSetup(this.container);
   });
 
   describe('with a github integration', function() {
     beforeEach(function() {
-      manualSetup(this.container);
       const project = make('project');
       const organization = make('organization', 'withGithubIntegration', 'withGithubRepos');
       project.organization = organization;
@@ -27,7 +27,7 @@ describe('Integration: GithubIntegratorComponent', function() {
 
     it('renders powerselect closed', function() {
       this.render(hbs`{{projects/github-integrator project=project}}`);
-      expect(GithubIntegrator.groupsVisible).to.eq(false);
+      expect(GithubIntegrator.isSelectorOpen).to.eq(false);
 
       percySnapshot(this.test.fullTitle());
     });
@@ -35,7 +35,8 @@ describe('Integration: GithubIntegratorComponent', function() {
     it('renders powerselect open', function() {
       this.render(hbs`{{projects/github-integrator project=project}}`);
       clickTrigger();
-      expect(GithubIntegrator.groupsVisible).to.eq(true);
+      expect(GithubIntegrator.isSelectorOpen).to.eq(true);
+      expect(GithubIntegrator.groups(0).name).to.eq('GitHub');
 
       percySnapshot(this.test.fullTitle());
     });
@@ -43,7 +44,6 @@ describe('Integration: GithubIntegratorComponent', function() {
 
   describe('with a github enterprise integration', function() {
     beforeEach(function() {
-      manualSetup(this.container);
       const project = make('project');
       const organization = make(
         'organization',
@@ -56,7 +56,7 @@ describe('Integration: GithubIntegratorComponent', function() {
 
     it('renders powerselect closed', function() {
       this.render(hbs`{{projects/github-integrator project=project}}`);
-      expect(GithubIntegrator.groupsVisible).to.eq(false);
+      expect(GithubIntegrator.isSelectorOpen).to.eq(false);
 
       percySnapshot(this.test.fullTitle());
     });
@@ -64,7 +64,7 @@ describe('Integration: GithubIntegratorComponent', function() {
     it('renders powerselect open', function() {
       this.render(hbs`{{projects/github-integrator project=project}}`);
       clickTrigger();
-      expect(GithubIntegrator.groupsVisible).to.eq(true);
+      expect(GithubIntegrator.isSelectorOpen).to.eq(true);
       expect(GithubIntegrator.groups(0).name).to.eq('GitHub Enterprise');
 
       percySnapshot(this.test.fullTitle());
@@ -73,7 +73,6 @@ describe('Integration: GithubIntegratorComponent', function() {
 
   describe('with multiple integrations', function() {
     beforeEach(function() {
-      manualSetup(this.container);
       const project = make('project');
       const organization = make('organization', 'withMultipleIntegrations');
       project.organization = organization;
@@ -82,7 +81,7 @@ describe('Integration: GithubIntegratorComponent', function() {
 
     it('renders powerselect closed', function() {
       this.render(hbs`{{projects/github-integrator project=project}}`);
-      expect(GithubIntegrator.groupsVisible).to.eq(false);
+      expect(GithubIntegrator.isSelectorOpen).to.eq(false);
 
       percySnapshot(this.test.fullTitle());
     });
@@ -90,7 +89,7 @@ describe('Integration: GithubIntegratorComponent', function() {
     it('renders powerselect open', function() {
       this.render(hbs`{{projects/github-integrator project=project}}`);
       clickTrigger();
-      expect(GithubIntegrator.groupsVisible).to.eq(true);
+      expect(GithubIntegrator.isSelectorOpen).to.eq(true);
       expect(GithubIntegrator.groups(0).name).to.eq('GitHub');
       expect(GithubIntegrator.lastGroup.name).to.eq('GitHub Enterprise');
 

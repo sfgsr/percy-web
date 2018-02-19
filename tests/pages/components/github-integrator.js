@@ -11,7 +11,7 @@ const SELECTORS = {
 
 export const GithubIntegrator = {
   scope: SELECTORS.POWER_SELECT_DROPDOWN,
-  groupsVisible: isVisible(SELECTORS.POWER_SELECT_GROUPS, {multiple: true}),
+  isSelectorOpen: isVisible(SELECTORS.POWER_SELECT_GROUPS, {multiple: true}),
 
   groups: collection({
     itemScope: SELECTORS.POWER_SELECT_GROUPS,
