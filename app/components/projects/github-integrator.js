@@ -8,7 +8,9 @@ export default Component.extend({
   isSaving: null,
   isSaveSuccessful: null,
 
+  selectedRepo: alias('project.repo'),
   organization: alias('project.organization'),
+  groupedRepos: alias('organization.groupedRepos'),
 
   triggerSavingIndicator(promise) {
     this.set('isSaveSuccessful', null);

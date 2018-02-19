@@ -1,6 +1,11 @@
 import {computed} from '@ember/object';
-import {filterBy, alias, bool} from '@ember/object/computed';
+import {filterBy, alias, bool, or, mapBy, uniq} from '@ember/object/computed';
 import DS from 'ember-data';
+
+const DISPLAY_NAMES = {
+  github: 'GitHub',
+  githubEnterprise: 'GitHub Enterprise',
+};
 
 export default DS.Model.extend({
   name: DS.attr(),
@@ -44,6 +49,10 @@ export default DS.Model.extend({
 
   isGithubEnterpriseIntegrated: bool('githubEnterpriseIntegration'),
 
+  isGithubEnterpriseIntegration: bool('githubEnterpriseIntegration'),
+  isGithubIntegration: bool('githubIntegration'),
+  isVersionControlIntegrated: or('isGithubEnterpriseIntegration', 'isGithubIntegration'),
+
   githubAuthMechanism: computed('githubIntegration', function() {
     if (this.get('githubIntegration')) {
       return 'github-integration';
@@ -60,4 +69,36 @@ export default DS.Model.extend({
       filter: 'current-user-only',
     });
   }),
+
+  githubRepos: filterBy('repos', 'source', 'github'),
+  githubEnterpriseRepos: filterBy('repos', 'source', 'github_enterprise'),
+  repoSources: mapBy('repos', 'source'),
+  uniqueRepoSources: uniq('repoSources'),
+
+  // Return repos grouped by source:
+  // groupedRepos: [
+  //   { groupName: 'GitHub', options: [repo:model, repo:model, ...] },
+  //   { groupName: 'GitHub Enterprise', options: [repo:model, repo:model, ...] },
+  // ]
+  groupedRepos: computed(
+    'githubRepos.[]',
+    'githubEnterpriseRepos.[]',
+    'uniqueRepoSources.[]',
+    function() {
+      const groups = [];
+      this.get('uniqueRepoSources').forEach(source => {
+        if (source) {
+          const displayName = source.camelize();
+          const reposForGroup = this.get(`${displayName}Repos`);
+          if (reposForGroup) {
+            groups.push({
+              groupName: DISPLAY_NAMES[displayName],
+              options: this.get(`${displayName}Repos`),
+            });
+          }
+        }
+      });
+      return groups;
+    },
+  ),
 });

@@ -4,6 +4,8 @@ export default DS.Model.extend({
   githubId: DS.attr('number'),
   name: DS.attr(),
   slug: DS.attr(),
+  hostname: DS.attr(),
+  source: DS.attr(),
   htmlUrl: DS.attr(),
   isPrivate: DS.attr('boolean'),
   description: DS.attr(),
