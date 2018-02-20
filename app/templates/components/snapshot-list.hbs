@@ -6,16 +6,13 @@
 {{/unless}}
 {{#each computedSnapshots as |snapshot index|}}
   {{snapshot-viewer
+    build=build
     snapshot=snapshot
-    buildContainerSelectedWidth=buildContainerSelectedWidth
-    buildWidths=buildWidths
     listIndex=index
     isDefaultExpanded=isDefaultExpanded
     selectChild=(action 'selectChild')
     registerChild=(action 'registerChild')
     unregisterChild=(action 'unregisterChild')
-    snapshotWidthChangeTriggered=snapshotWidthChangeTriggered
-    build=build
     showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
     createReview=createReview
   }}

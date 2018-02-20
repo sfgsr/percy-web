@@ -2,15 +2,13 @@ import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 import sinon from 'sinon';
+import BuildPage from 'percy-web/tests/pages/build-page';
+import {TEST_IMAGE_URLS} from 'percy-web/mirage/factories/screenshot';
 
-// TODO once PR#403 is merged, write tests for approving snapshot, make sure order is correct
-// TODO once PR#403 is merged, write test for being on build page with batched collapsed snapshots,
-// expand batched snapshots, navigate to another build, assert snapshots are correct for that build
-
-// TODO convert this file to use page objects
 describe('Acceptance: Pending Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();
+  let urlParams;
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
@@ -20,24 +18,22 @@ describe('Acceptance: Pending Build', function() {
       createdAt: moment().subtract(2, 'minutes'),
       state: 'pending',
     });
-    this.project = project;
-    this.build = build;
+
+    urlParams = {
+      orgSlug: organization.slug,
+      projectSlug: project.slug,
+      buildId: build.id,
+    };
   });
 
   it('shows as pending', function() {
-    visit(`/${this.project.fullSlug}`);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the project page');
-
-    click('[data-test-build-state]');
+    BuildPage.visitBuild(urlParams);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
-    click('#BuildInfo');
+    BuildPage.toggleBuildInfoDropdown();
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
@@ -46,6 +42,7 @@ describe('Acceptance: Pending Build', function() {
 describe('Acceptance: Processing Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();
+  let urlParams;
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
@@ -55,24 +52,22 @@ describe('Acceptance: Processing Build', function() {
       createdAt: moment().subtract(2, 'minutes'),
       state: 'processing',
     });
-    this.project = project;
-    this.build = build;
+
+    urlParams = {
+      orgSlug: organization.slug,
+      projectSlug: project.slug,
+      buildId: build.id,
+    };
   });
 
   it('shows as processing', function() {
-    visit(`/${this.project.fullSlug}`);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the project page');
-
-    click('[data-test-build-state]');
+    BuildPage.visitBuild(urlParams);
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
-    click('#BuildInfo');
+    BuildPage.toggleBuildInfoDropdown();
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
@@ -81,6 +76,7 @@ describe('Acceptance: Processing Build', function() {
 describe('Acceptance: Failed Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();
+  let urlParams;
 
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
@@ -91,30 +87,29 @@ describe('Acceptance: Failed Build', function() {
       state: 'failed',
       failureReason: 'render_timeout',
     });
-    this.project = project;
-    this.build = build;
+
+    urlParams = {
+      orgSlug: organization.slug,
+      projectSlug: project.slug,
+      buildId: build.id,
+    };
   });
 
   it('shows as failed', function() {
-    visit(`/${this.project.fullSlug}`);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the project page');
+    BuildPage.visitBuild(urlParams);
 
-    click('[data-test-build-state]');
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
     });
     percySnapshot(this.test.fullTitle() + ' on the build page');
 
-    click('#BuildInfo');
+    BuildPage.toggleBuildInfoDropdown();
 
     percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
 
     window.Intercom = sinon.stub();
 
-    click('[data-test-build-overview-show-support]');
+    BuildPage.clickShowSupportLink();
     andThen(() => {
       expect(window.Intercom).to.have.been.calledWith('show');
     });
@@ -125,261 +120,287 @@ describe('Acceptance: Build', function() {
   freezeMoment('2018-05-22');
   setupAcceptance();
 
+  let project;
+  let defaultSnapshot;
+  let noDiffsSnapshot;
+  let twoWidthsSnapshot;
+  let urlParams;
+
   setupSession(function(server) {
-    let organization = server.create('organization', 'withUser');
-    let project = server.create('project', {name: 'project-with-finished-build', organization});
-    let headBuild = server.create('build', {
+    const organization = server.create('organization', 'withUser');
+    project = server.create('project', {name: 'project-with-finished-build', organization});
+    const build = server.create('build', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
       finishedAt: moment().subtract(5, 'seconds'),
     });
-    this.comparisons = {
-      different: server.create('comparison', {headBuild}),
-      gotLonger: server.create('comparison', 'gotLonger', {headBuild}),
-      gotShorter: server.create('comparison', 'gotShorter', {headBuild}),
-      wasAdded: server.create('comparison', 'wasAdded', {headBuild}),
-      wasRemoved: server.create('comparison', 'wasRemoved', {headBuild}),
-      same: server.create('comparison', 'same', {headBuild}),
-      differentNoMobile: server.create('comparison', {headBuild}),
+
+    defaultSnapshot = server.create('snapshot', 'withComparison', {build});
+    noDiffsSnapshot = server.create('snapshot', 'noDiffs', {
+      build,
+      name: 'No Diffs snapshot',
+    });
+    twoWidthsSnapshot = server.create('snapshot', 'withComparison', 'withMobile', {
+      build,
+      name: 'Two widths snapshot',
+    });
+    // not used yet, but assign to variable when it's important
+    server.create('snapshot', 'withMobile', {
+      build,
+      name: 'Mobile only snapshot',
+    });
+
+    urlParams = {
+      orgSlug: organization.slug,
+      projectSlug: project.slug,
+      buildId: build.id,
     };
-
-    // Create some mobile width comparisons
-    let headSnapshot = this.comparisons.different.headSnapshot;
-    server.create('comparison', 'mobile', {headBuild, headSnapshot});
-    headSnapshot = this.comparisons.wasAdded.headSnapshot;
-    server.create('comparison', 'mobile', 'wasAdded', {headBuild, headSnapshot});
-
-    this.project = project;
-    this.build = headBuild;
   });
 
-  it('shows as finished', function() {
-    visit(`/${this.project.fullSlug}`);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the project page');
-
-    click('[data-test-build-state]');
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the build page');
-
-    click('#BuildInfo');
-
-    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
-  });
-
-  // TODO test more specifically what happens when approving a build
-  // once build-test refactor is merged
-  it('clicks approve build button without error', function() {
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
-    click('[data-test-build-approval-button]');
+  // TODO: test number of snapshots, expanded, actionable status for all
+  it('shows build overview info dropdown', function() {
+    BuildPage.visitBuild(urlParams);
+    BuildPage.toggleBuildInfoDropdown();
+    percySnapshot(this.test.fullTitle());
   });
 
   it('toggles the image and pdiff', function() {
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
+    let snapshot;
+    BuildPage.visitBuild(urlParams);
+
     andThen(() => {
+      snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-    });
+      expect(BuildPage.snapshots(0).isDiffImageVisible).to.equal(true);
 
-    let comparison = this.comparisons.different;
-    let comparisonSelector = `.SnapshotViewer:has([title="${comparison.headSnapshot.name}"])`;
+      snapshot.clickDiffImage();
+    });
 
     andThen(() => {
-      expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(1);
+      expect(snapshot.isDiffImageVisible).to.equal(false);
     });
 
-    click(`${comparisonSelector} .pdiffImageOverlay img`);
-    andThen(() => {
-      expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(0);
-    });
     percySnapshot(this.test.fullTitle() + ' | hides overlay');
 
-    // TODO somehow click is not happening with regular click, had to trigger('click')
-    //click(`${comparisonSelector} .SnapshotViewer-pdiffImageBox img`);
     andThen(() => {
-      find(`${comparisonSelector} .Viewer-pdiffImageBox img`).trigger('click');
+      snapshot.clickDiffImageBox();
     });
+
     andThen(() => {
-      expect(find(`${comparisonSelector} .pdiffImageOverlay img`).length).to.equal(1);
+      expect(snapshot.isDiffImageVisible).to.equal(true);
     });
+
     percySnapshot(this.test.fullTitle() + ' | shows overlay');
   });
 
   it('walk across snapshots with arrow keys', function() {
-    const DownArrowKey = 40;
-    const UpArrowKey = 38;
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
+    let firstSnapshot;
+    let secondSnapshot;
+    let thirdSnapshot;
+    const urlBase = `/${project.fullSlug}/builds/1`;
+
+    BuildPage.visitBuild(urlParams);
+
     andThen(() => {
+      firstSnapshot = BuildPage.snapshots(0);
+      secondSnapshot = BuildPage.snapshots(1);
+      thirdSnapshot = BuildPage.snapshots(2);
+
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1`);
+      expect(currentURL()).to.equal(urlBase);
     });
 
-    keyEvent('.SnapshotList', 'keydown', DownArrowKey);
-    andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
-    });
-    percySnapshot(this.test.fullTitle() + ' | Right');
+    BuildPage.typeDownArrow();
+    percySnapshot(this.test.fullTitle() + ' | Down');
 
-    keyEvent('.SnapshotList', 'keydown', DownArrowKey);
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-1`);
+      expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
+      expect(currentURL()).to.equal(`${urlBase}?snapshot=${defaultSnapshot.id}`);
+      expect(firstSnapshot.isFocused).to.equal(true);
+      expect(secondSnapshot.isFocused).to.equal(false);
+      expect(thirdSnapshot.isFocused).to.equal(false);
     });
-    percySnapshot(this.test.fullTitle() + ' | Right*2');
 
-    keyEvent('.SnapshotList', 'keydown', UpArrowKey);
+    BuildPage.typeDownArrow();
+    percySnapshot(this.test.fullTitle() + ' | Down > Down');
+
     andThen(() => {
-      expect(currentURL()).to.equal(`/${this.project.fullSlug}/builds/1?snapshot=snapshot-3`);
+      expect(BuildPage.focusedSnapshot().name).to.equal(twoWidthsSnapshot.name);
+      expect(currentURL()).to.equal(`${urlBase}?snapshot=${twoWidthsSnapshot.id}`);
+      expect(firstSnapshot.isFocused).to.equal(false);
+      expect(secondSnapshot.isFocused).to.equal(true);
+      expect(thirdSnapshot.isFocused).to.equal(false);
     });
-    percySnapshot(this.test.fullTitle() + ' | Right*2 + Left');
+
+    BuildPage.typeUpArrow();
+    percySnapshot(this.test.fullTitle() + ' | Down > Down > Up');
+
+    andThen(() => {
+      expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
+      expect(currentURL()).to.equal(`${urlBase}?snapshot=${defaultSnapshot.id}`);
+      expect(firstSnapshot.isFocused).to.equal(true);
+      expect(secondSnapshot.isFocused).to.equal(false);
+      expect(thirdSnapshot.isFocused).to.equal(false);
+    });
   });
 
   it('adds query param when clicking on snapshot header', function() {
-    let snapshot = this.comparisons.wasAdded.headSnapshot;
-
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
-    click('[data-test-SnapshotViewer-header]:eq(0)');
+    let snapshot;
+    BuildPage.visitBuild(urlParams);
+    andThen(() => {
+      snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
+      snapshot.header.click();
+    });
 
     andThen(() => {
       expect(currentURL()).to.equal(
-        `/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`,
+        BuildPage.urlWithSnapshotQueryParam(defaultSnapshot, defaultSnapshot.build),
       );
     });
   });
 
   it('jumps to snapshot for query params', function() {
-    let snapshot = this.comparisons.wasAdded.headSnapshot;
+    BuildPage.visitBuild(Object.assign(urlParams, {snapshot: twoWidthsSnapshot.id}));
 
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
     andThen(() => {
+      const focusedSnapshot = BuildPage.focusedSnapshot();
+
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title').text()).to.equal(
-        snapshot.name,
-      );
+      expect(focusedSnapshot.isFocused).to.equal(true);
+      expect(focusedSnapshot.name).to.equal(twoWidthsSnapshot.name);
     });
 
     percySnapshot(this.test.fullTitle());
   });
 
-  it('jumps to snapshot for query params in collapsed no diffs', function() {
-    let snapshot = this.comparisons.same.headSnapshot;
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}?snapshot=${snapshot.id}`);
+  it('jumps to snapshot for query params when snapshot has no diffs ', function() {
+    BuildPage.visitBuild(Object.assign(urlParams, {snapshot: noDiffsSnapshot.id}));
     andThen(() => {
-      expect(find('.SnapshotViewer.SnapshotViewer--focus .SnapshotViewer-title').text()).to.equal(
-        snapshot.name,
-      );
+      const focusedSnapshot = BuildPage.focusedSnapshot();
+
+      expect(focusedSnapshot.name).to.equal(noDiffsSnapshot.name);
+      expect(focusedSnapshot.isExpanded).to.equal(true);
     });
+
+    percySnapshot(this.test.fullTitle());
   });
 
   it('shows and hides unchanged diffs', function() {
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
+    const snapshotName = noDiffsSnapshot.name;
+
+    BuildPage.visitBuild(urlParams);
+
+    andThen(() => {
+      expect(BuildPage.isNoDiffsPanelVisible).to.equal(true);
+      expect(BuildPage.findSnapshotByName(snapshotName)).to.not.exist;
+    });
 
     percySnapshot(this.test.fullTitle() + ' | shows batched no diffs');
 
-    click('[data-test-toggle-no-diffs]');
+    BuildPage.clickToggleNoDiffsSection();
     andThen(() => {
-      expect(find('.ComparisonViewer-noDiffBox')).to.have.lengthOf(1);
+      const snapshot = BuildPage.findSnapshotByName(snapshotName);
+
+      expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
+      expect(snapshot.isExpanded, 'three').to.equal(true);
+      expect(snapshot.isNoDiffBoxVisible).to.equal(true);
     });
 
     percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
   });
 
   it('toggles full view', function() {
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}`);
-    click('.SnapshotViewer:first .ToggleFullViewButton');
+    BuildPage.visitBuild(urlParams);
+    BuildPage.snapshots(0).header.clickToggleFullscreen();
+
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.snapshot');
-      expect(find('.SnapshotViewerFullModalWrapper ').length).to.equal(1);
+      expect(BuildPage.snapshotFullscreen.isVisible).to.equal(true);
     });
 
-    click('.ToggleFullViewButton');
+    BuildPage.snapshotFullscreen.header.clickToggleFullscreen();
+
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(find('.SnapshotViewerFullModalWrapper ').length).to.equal(0);
+      expect(BuildPage.snapshotFullscreen.isVisible).to.equal(false);
     });
+  });
+});
+
+describe('Acceptance: Fullscreen Snapshot', function() {
+  freezeMoment('2018-05-22');
+  setupAcceptance();
+
+  let project;
+  let snapshot;
+  let urlParams;
+
+  setupSession(function(server) {
+    const organization = server.create('organization', 'withUser');
+    project = server.create('project', {name: 'project-with-finished-build', organization});
+    const build = server.create('build', {
+      project,
+      createdAt: moment().subtract(2, 'minutes'),
+      finishedAt: moment().subtract(5, 'seconds'),
+    });
+    snapshot = server.create('snapshot', 'withComparison', {build});
+
+    urlParams = {
+      orgSlug: organization.slug,
+      projectSlug: project.slug,
+      buildId: build.id,
+      snapshotId: snapshot.id,
+      width: snapshot.comparisons.models[0].width,
+      mode: 'diff',
+    };
   });
 
   it('responds to keystrokes and click in full view', function() {
-    let snapshot = this.comparisons.different.headSnapshot;
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}/view/${snapshot.id}/1280?mode=diff`);
+    BuildPage.visitFullPageSnapshot(urlParams);
 
-    keyEvent('.SnapshotViewerFull', 'keydown', 39);
+    BuildPage.snapshotFullscreen.typeRightArrow();
+
     andThen(() => {
       expect(currentURL()).to.include('mode=head');
     });
 
-    keyEvent('.SnapshotViewerFull', 'keydown', 37);
+    BuildPage.snapshotFullscreen.typeLeftArrow();
+
     andThen(() => {
       expect(currentURL()).to.include('mode=diff');
     });
 
-    click('.ComparisonViewerFull');
+    BuildPage.snapshotFullscreen.clickComparisonViewer();
     andThen(() => {
       expect(currentURL()).to.include('mode=head');
     });
 
-    keyEvent('.SnapshotViewerFull', 'keydown', 27);
+    BuildPage.snapshotFullscreen.typeEscape();
     andThen(() => {
       expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(find('.SnapshotViewerFullModalWrapper ').length).to.equal(0);
-    });
-  });
-
-  it('hides comparison mode controls in full view if no snapshot taken', function() {
-    let snapshot = this.comparisons.differentNoMobile.headSnapshot;
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}/view/${snapshot.id}/320?mode=diff`);
-    andThen(() => {
-      expect(find('[data-test-comparison-mode-switcher]').css('visibility')).to.equal('hidden');
-    });
-  });
-
-  it('shows "New" comparison mode controls in full view if snapshot is new', function() {
-    let snapshot = this.comparisons.wasAdded.headSnapshot;
-
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}/view/${snapshot.id}/1280?mode=diff`);
-    andThen(() => {
-      expect(find('[data-test-comparison-mode-switcher] button').length).to.equal(1);
-      expect(find('[data-test-comparison-mode-switcher] button').text()).to.equal('New Snapshot');
+      expect(BuildPage.snapshotFullscreen.isVisible).to.equal(false);
     });
   });
 
   it('toggles between old/diff/new comparisons when interacting with comparison mode switcher', function() { // eslint-disable-line
-    let originalModeButton;
-    let diffModeButton;
-    let newModeButton;
+    BuildPage.visitFullPageSnapshot(urlParams);
 
-    const snapshot = this.comparisons.different.headSnapshot;
-    visit(`/${this.project.fullSlug}/builds/${this.build.id}/view/${snapshot.id}/1280?mode=diff`);
+    BuildPage.snapshotFullscreen.clickBaseComparisonMode();
 
     andThen(() => {
-      originalModeButton = find('[data-test-comparison-mode-switcher] button:contains(Original)');
-      diffModeButton = find('[data-test-comparison-mode-switcher] button:contains(Diff)');
-      newModeButton = find('[data-test-comparison-mode-switcher] button:contains(New)');
-
-      click(originalModeButton);
+      expect(BuildPage.snapshotFullscreen.comparisonImageUrl).to.equal(TEST_IMAGE_URLS.V1);
     });
 
-    andThen(() => {
-      expect(find('[data-test-snapshotviewerfull-comparison-viewer] img').attr('src')).to.equal(
-        '/images/test/bs-base.png',
-      );
+    BuildPage.snapshotFullscreen.clickHeadComparisonMode();
 
-      click(newModeButton);
+    andThen(() => {
+      expect(BuildPage.snapshotFullscreen.comparisonImageUrl).to.equal(TEST_IMAGE_URLS.V2);
     });
 
-    andThen(() => {
-      expect(find('[data-test-snapshotviewerfull-comparison-viewer] img').attr('src')).to.equal(
-        '/images/test/bs-head.png',
-      );
-      click(diffModeButton);
-    });
+    BuildPage.snapshotFullscreen.clickDiffComparisonMode();
 
     andThen(() => {
-      expect(find('[data-test-snapshotviewerfull-comparison-viewer] img').attr('src')).to.equal(
-        '/images/test/bs-pdiff-base-head.png',
-      );
+      expect(BuildPage.snapshotFullscreen.diffImageUrl).to.equal(TEST_IMAGE_URLS.DIFF_URL);
     });
   });
 });

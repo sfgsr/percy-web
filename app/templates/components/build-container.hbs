@@ -10,23 +10,17 @@
     showSupport=showSupport
   }}
 
-  {{#if showComparisons}}
-    {{#if build.comparisons.isPending}}
-      {{loading-page}}
-    {{else}}
-      {{snapshot-list
-        snapshots=build.snapshots
-        buildContainerSelectedWidth=buildContainerSelectedWidth
-        buildWidths=build.comparisonWidths
-        activeSnapshotId=activeSnapshotId
-        updateActiveSnapshotId=(action "updateActiveSnapshotId")
-        selectedWidth=selectedWidth
-        snapshotWidthChangeTriggered=(action "snapshotWidthChangeTriggered")
-        build=build
-        showSnapshotFullModalTriggered=(action 'showSnapshotFullModalTriggered')
-        isShowingModal=isShowingModal
-        createReview=createReview
-      }}
-    {{/if}}
+  {{#if showSnapshots}}
+    {{snapshot-list
+      snapshots=snapshots
+      activeSnapshotId=activeSnapshotId
+      updateActiveSnapshotId=(action "updateActiveSnapshotId")
+      build=build
+      showSnapshotFullModalTriggered=(action 'showSnapshotFullModalTriggered')
+      isShowingModal=isShowingModal
+      createReview=createReview
+    }}
+  {{else}}
+    {{loading-page}}
   {{/if}}
 </div>
