@@ -72,15 +72,11 @@ export default DS.Model.extend({
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),
   hasDiffs: computed('totalComparisonsDiff', 'isFinished', function() {
-    console.log('recalculating hasDiffs. isFinished is ', this.get('isFinished')); // eslint-disable-line
-    console.log('before any logic, totalComparisonsDiff=', this.get('totalComparisonsDiff')); // eslint-disable-line
-
     // Only have the chance to return true if the build is finished.
     if (!this.get('isFinished')) {
-      console.log('returning out of `hasDiffs` early because `isFinished` is false'); // eslint-disable-line
       return false;
     }
-    console.log('totalComparisonsDiff=', this.get('totalComparisonsDiff')); // eslint-disable-line
+
     return this.get('totalComparisonsDiff') > 0;
   }),
 
