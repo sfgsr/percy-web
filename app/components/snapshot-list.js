@@ -52,17 +52,6 @@ export default Component.extend({
     'snapshotsWithDiffs.@each.isApproved',
     'snapshotsWithoutDiffs.@each.isApproved',
     function() {
-      // don't do any sorting or caching if the build is not finished
-      if (!this.get('build.isFinished')) {
-        return;
-      }
-
-      // If the build is finished, we should have all the snapshots.
-      // Now we can look at the cached snapshots.
-      if (this.get('cachedSnapshotOrder').shouldUseCachedSnapshots()) {
-        return this.get('cachedSnapshotOrder').getOrderedSnapshots();
-      }
-
       // sort snapshots, then sort by approved vs unapproved
       const snapshots = this.get('hideNoDiffs')
         ? this.get('snapshotsWithDiffs')
@@ -79,8 +68,6 @@ export default Component.extend({
 
       // recombine approved/unapproved into one list
       const orderedSnapshots = [].concat(unapprovedSnapshots, approvedSnapshots);
-      // cache approve/unapprove order for the current page load
-      this.get('cachedSnapshotOrder').setOrderedSnapshots(orderedSnapshots);
       return orderedSnapshots;
     },
   ),
