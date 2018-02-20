@@ -1,4 +1,4 @@
-{{#if organization.isGithubIntegrated}}
+{{#if organization.isVersionControlIntegrated}}
   <p>
     You can optionally link this project to a GitHub repository. This enables {{#link-to "docs.page" "learn/github-integration"}}Pull Request integration{{/link-to}} for this project.
   </p>
@@ -11,15 +11,14 @@
   {{/if}}
   <p>
     {{saving-indicator isSaving=isSaving isSaveSuccessful=isSaveSuccessful}}
-    {{! TODO: stop relying on private .content API on the proxied object. }}
     {{#power-select
-      selected=project.repo
+      selected=selectedRepo
       searchField="slug"
       placeholder="Select GitHub repository (optional)"
       renderInPlace=true
       matchTriggerWidth=false
       allowClear=true
-      options=organization.repos.content
+      options=organization.groupedRepos
       onchange=(action "chooseRepo")
       as |repo|
     }}
