@@ -149,6 +149,29 @@ describe('Acceptance: Project', function() {
       });
       server.create('build', {
         project,
+        createdAt: moment().subtract(5, 'minutes'),
+        state: 'finished',
+        review_state: 'approved',
+        review_state_reason: 'all_snapshots_approved',
+      });
+      server.create('build', {
+        project,
+        createdAt: moment().subtract(4, 'minutes'),
+        state: 'finished',
+        review_state: 'approved',
+        review_state_reason: 'all_snapshots_approved_previously',
+      });
+      server.create('build', {
+        project,
+        createdAt: moment().subtract(2, 'minutes'),
+        state: 'finished',
+        review_state: 'approved',
+        review_state_reason: 'no_diffs',
+        totalComparisonsDiff: 0,
+        totalComparisonsFinished: 1588,
+      });
+      server.create('build', {
+        project,
         createdAt: moment().subtract(10, 'seconds'),
         state: 'processing',
       });
