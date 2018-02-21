@@ -22,6 +22,12 @@
   --status-background-color: var(--green-000) !important;
 }
 
+.is-unchanged {
+  --status-color: var(--blue-500) !important;
+  --status-text-color: var(--blue-500) !important;
+  --status-background-color: var(--blue-000) !important;
+}
+
 .is-failed {
   --status-color: var(--red-500) !important;
   --status-text-color: var(--red-500) !important;

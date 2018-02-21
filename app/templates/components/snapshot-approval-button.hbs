@@ -1,5 +1,5 @@
 {{#if snapshot.isApproved}}
-  <div class="status-pill is-approved" data-test-snapshot-approved-pill>
+  <div class="status-pill {{if (eq snapshot.reviewStateReason 'no_diffs') 'is-unchanged' 'is-approved'}}" data-test-snapshot-approved-pill>
     {{#if (eq snapshot.reviewStateReason 'no_diffs')}}
       No Changes
     {{else}}
