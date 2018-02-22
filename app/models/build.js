@@ -44,7 +44,7 @@ export default DS.Model.extend({
       return 'Timed out';
     }
   }),
-  isRunning: or('isFinished', 'isFailed', 'isExpired'),
+  isRunning: or('isPending', 'isProcessing'),
 
   // Review state, aggregated across all reviews. This will only be set for finished builds.
   reviewState: DS.attr(),

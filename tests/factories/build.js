@@ -32,7 +32,10 @@ FactoryGuy.define('build', {
     },
     pending: {state: 'pending'},
     processing: {state: 'processing'},
-    failed: {state: 'failed'},
+    failed: {
+      state: 'failed',
+      failureReason: 'render_timeout',
+    },
     expired: {state: 'expired'},
     noDiffs: {
       totalComparisonsDiff: 0,

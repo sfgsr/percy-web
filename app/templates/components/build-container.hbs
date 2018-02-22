@@ -10,7 +10,9 @@
     showSupport=showSupport
   }}
 
-  {{#if showSnapshots}}
+  {{#if (or build.isRunning isSnapshotsPending)}}
+    {{loading-page}}
+  {{else if build.isFinished}}
     {{snapshot-list
       snapshots=snapshots
       activeSnapshotId=activeSnapshotId
@@ -20,7 +22,5 @@
       isShowingModal=isShowingModal
       createReview=createReview
     }}
-  {{else}}
-    {{loading-page}}
   {{/if}}
 </div>
