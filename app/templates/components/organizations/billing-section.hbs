@@ -32,13 +32,13 @@
       <strong>
         Current usage:
         {{#if organization.subscription.currentUsageStats}}
-          {{format-number organization.subscription.currentUsageStats.total}} snapshots
+          {{format-number organization.subscription.currentUsageStats.total}} visual validations
         {{else}}
           ...
         {{/if}}
       </strong>
       <br>
-      Snapshot usage is calculated across all projects in this organization.
+      Visual validation usage is calculated across all projects in this organization.
     </p>
     {{#if organization.subscription.plan.isTrial}}
       <div class="Alert Alert--warning">
@@ -51,7 +51,7 @@
     <h4>Subscription</h4>
     {{#if organization.subscription.plan.isFree}}
       <div class="Alert Alert--warning">
-        <strong>Your trial has expired.</strong> You're currently on the limited-use free plan, which provides {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} snapshots. You can sign up for a plan below or feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions!
+        <strong>Your trial has expired.</strong> You're currently on the limited-use free plan, which provides {{subscriptionData.PLANS.[0].numWorkersTitle}} and {{subscriptionData.PLANS.[0].numDiffs}} visual validations. You can sign up for a plan below or feel free to <a href="#" {{action "showSupport"}}>reach out</a> with any questions!
       </div>
     {{/if}}
 
@@ -66,10 +66,10 @@
               <strong>
                 {{plan.workerLimit}} concurrent renderers
                 <br>
-                {{format-number plan.usageIncluded}} snapshots included
+                {{format-number plan.usageIncluded}} visual validations
                 <br>
               </strong>
-              {{#if plan.allowOverages}}${{plan.overageUnitCost}} / extra snapshot{{else}}No overages allowed{{/if}}
+              {{#if plan.allowOverages}}${{plan.overageUnitCost}} / extra validation{{else}}No overages allowed{{/if}}
               <br>
               {{plan.historyLimitDays}} day history
             {{/with}}
@@ -99,12 +99,12 @@
                 <br>
                 {{planData.numWorkersTitle}}
                 <br>
-                {{format-number planData.numDiffs}} snapshots included
+                {{format-number planData.numDiffs}} visual validations
               </div>
               <div class="three columns">
                 <strong><span>$</span>{{format-number planData.monthlyPrice precision=0}}</strong> / month
                 <br>
-                ${{planData.extraDiffPrice}} / extra snapshot
+                ${{planData.extraDiffPrice}} / extra validation
               </div>
               <div class="three columns">
                 {{#if (eq organization.subscription.plan.id planData.id)}}
@@ -141,7 +141,7 @@
             <br>
             Custom concurrent renderers
             <br>
-            Unlimited snapshots
+            Unlimited visual validations
           </div>
           <div class="three columns">
             &nbsp;
