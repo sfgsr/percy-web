@@ -10,18 +10,6 @@
   box-shadow: $modal-shadow;
   z-index: 1000000;
 
-  .fa-caret-up {
-    position: absolute;
-    top: -14px;
-    right: 18px;
-    padding: 1px 5px 0;
-    font-size: 4rem;
-    line-height: 13px;
-    color: white;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-  }
-
   .BuildStateBadge {
     float: right;
   }
@@ -100,7 +88,7 @@
 
     .BuildInfoDropdown-commitMessage {
       display: -webkit-box;
-      max-height: 70px;
+      max-height: 48px;
       text-overflow: ellipsis;
       overflow: hidden;
       -webkit-line-clamp: 3;

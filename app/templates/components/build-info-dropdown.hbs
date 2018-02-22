@@ -1,19 +1,18 @@
-<button {{action "toggleModal"}} id="BuildInfo" class="Button Button--small u-pull-right" data-test-build-info-dropdown-toggle>
-  Build Info
+<button {{action "toggleModal"}} data-test-build-info-dropdown-toggle class="build-info-toggle flex center btn-icon-only">
+  {{inline-svg 'build-info-icon'}}
 </button>
+
 {{#if isShowingModal}}
   {{#modal-dialog onClose="toggleModal"
                   hasOverlay=false
                   clickOutsideToClose=true
                   translucentOverlay=true
-                  targetAttachment="bottom right"
-                  attachment="top right"
-                  tetherTarget="#BuildInfo"
-                  containerClass="BuildInfoDropdown-modal"
+                  targetAttachment="bottom left"
+                  attachment="top left"
+                  tetherTarget=".build-info-toggle"
+                  containerClass="BuildInfoDropdown-modal rounded f5"
                   renderInPlace=renderInPlace
                   build=build}}
-
-    {{fa-icon "caret-up"}}
 
     {{build-state-badge build=build}}
 
@@ -36,7 +35,6 @@
         <tr>
           <td>Pull Request</td>
           <td>
-            {{build-overview-icon icon='pull-request'}}
             {{#if build.pullRequestTitle}}
               <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">{{build.pullRequestTitle}}</a>
             {{/if}}

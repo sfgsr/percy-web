@@ -1,33 +1,27 @@
-{{#if build.isGithubLinked}}
-  {{#if build.isPullRequest}}
-    <h2>
-      {{build-overview-icon icon='pull-request'}}
-      {{#if build.pullRequestTitle}}
-        <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">{{build.pullRequestTitle}}</a>
+<div class="">
+  <div class="flex align-center f2 lh-1 text-weight-semibold mb-1">
+    <div class="text-light">
+      Build <span class="text-mono text-dark mr-1">{{build.buildNumber}}</span>
+    </div>
+    {{build-info-dropdown build=build}}
+  </div>
+  <div class="grid col-auto gap-1 align-center">
+    {{#if build.commit}}
+      {{#if build.isPullRequest}}
+        {{inline-svg "pull-request-icon"}}
+        <span class="text-weight-semibold">#{{build.pullRequestNumber}}</span>
+        <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="no-wrap truncate text-weight-semibold">{{build.pullRequestTitle}}</a>
+      {{else}}
+        {{inline-svg "commit-icon"}}
+        <code class="truncate">
+          {{build.branch}}
+        </code>
+        {{#if build.isGithubLinked}}
+          <a class="f6 text-mono" href="{{build.repo.htmlUrl}}/commit/{{build.commit.sha}}">{{build.commit.shaShort}}</a>
+        {{else}}
+          <span class="f6 text-mono">{{build.commit.shaShort}}</span>
+        {{/if}}
       {{/if}}
-      {{#if build.pullRequestNumber}}
-        <span class="BuildOverviewInfo-prNumber">
-          {{#if build.pullRequestTitle}}
-            #{{build.pullRequestNumber}}
-          {{else}}
-            <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}">#{{build.pullRequestNumber}}</a>                  
-          {{/if}}
-        </span>
-      {{/if}}
-    </h2>
-  {{else}}
-    <h2>
-      {{build-overview-icon icon='branch'}}
-      <a href="{{build.repo.htmlUrl}}/tree/{{build.branch}}">
-        {{build.branch}}
-      </a>
-    </h2>
-  {{/if}}
-{{else}}
-  <h2>
-    {{build-overview-icon icon='branch'}}
-    {{build.branch}}
-  </h2>
-{{/if}}
-
-{{build-info-dropdown build=build}}
+    {{/if}}
+  </div>
+</div>
