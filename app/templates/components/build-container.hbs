@@ -10,7 +10,7 @@
     showSupport=showSupport
   }}
 
-  {{#if (or build.isRunning isSnapshotsPending)}}
+  {{#if shouldShowLoadingSpinner}}
     {{loading-page}}
   {{else if build.isFinished}}
     {{snapshot-list

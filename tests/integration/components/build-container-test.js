@@ -5,6 +5,8 @@ import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {make, makeList, manualSetup} from 'ember-data-factory-guy';
 import sinon from 'sinon';
+import DS from 'ember-data';
+import {defer} from 'rsvp';
 import BuildPage from 'percy-web/tests/pages/build-page';
 
 describe('Integration: BuildContainer', function() {
@@ -94,19 +96,14 @@ describe('Integration: BuildContainer', function() {
 
   it('does not display snapshots when the snapshots are pending', function() {
     const build = make('build', 'finished');
-    const snapshots = makeList('snapshot', ['withComparisons', 'withNoDiffs'], {build});
+    const snapshots = DS.PromiseArray.create({promise: defer().promise});
     const stub = sinon.stub();
 
-    // We don't pass `isSnapshotsPending` in ever in the app but override this property
-    // to imitate the fetch of snapshots in the `then` of the build fetch.
-    const isSnapshotsPending = true;
-
-    this.setProperties({build, snapshots, stub, isSnapshotsPending});
+    this.setProperties({build, snapshots, stub});
 
     this.render(hbs`{{build-container
       build=build
       snapshots=snapshots
-      isSnapshotsPending=true
       createReview=stub
     }}`);
 
