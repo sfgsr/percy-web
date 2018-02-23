@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import {equal} from '@ember/object/computed';
-import {alias, mapBy, max, sort} from '@ember/object/computed';
+import {alias, mapBy, max, sort, or} from '@ember/object/computed';
 import {computed} from '@ember/object';
 
 export const SNAPSHOT_APPROVED_STATE = 'approved';
@@ -35,6 +35,9 @@ export default DS.Model.extend({
   isApprovedByUser: equal('reviewStateReason', 'user_approved'),
   isApprovedByUserPreviously: equal('reviewStateReason', 'user_approved_previously'),
   isUnchanged: equal('reviewStateReason', 'no_diffs'),
+
+  // Is true for both approved in build and approved by carry-forward.
+  isApprovedByUserEver: or('isApprovedByUser', 'isApprovedByUserPreviously'),
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),

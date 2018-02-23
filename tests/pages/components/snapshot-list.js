@@ -6,7 +6,7 @@ const UP_ARROW_KEY = 38;
 
 const SELECTORS = {
   SNAPSHOT_LIST: '[data-test-snapshot-list]',
-  NO_DIFFS_TOGGLE: '[data-test-toggle-no-diffs]',
+  NO_DIFFS_TOGGLE: '[data-test-toggle-unchanged]',
 };
 
 export const SnapshotList = {

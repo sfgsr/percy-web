@@ -249,7 +249,7 @@ describe('Acceptance: Build', function() {
     BuildPage.visitBuild(urlParams);
 
     andThen(() => {
-      expect(BuildPage.isNoDiffsPanelVisible).to.equal(true);
+      expect(BuildPage.isUnchangedPanelVisible).to.equal(true);
       expect(BuildPage.findSnapshotByName(snapshotName)).to.not.exist;
     });
 
@@ -268,7 +268,7 @@ describe('Acceptance: Build', function() {
     lastSnapshot.expandSnapshot();
 
     andThen(() => {
-      expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
+      expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
       expect(lastSnapshot.isExpanded).to.equal(true);
       expect(lastSnapshot.isUnchangedComparisonsVisible).to.equal(true);
     });
