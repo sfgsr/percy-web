@@ -23,7 +23,10 @@ export default Component.extend(PollingMixin, {
       .reload()
       .then(build => {
         if (build.get('isFinished')) {
-          // this.set('snapshots', build.get('snapshots').reload());
+          let snapshotsPromise = build.get('snapshots').reload();
+          snapshotsPromise.then(snapshots => {
+            this.get('setInitialSnapshots')(snapshots);
+          });
         }
       });
   },
