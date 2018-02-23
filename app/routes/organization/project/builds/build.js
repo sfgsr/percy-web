@@ -8,16 +8,15 @@ export default Route.extend(AuthenticatedRouteMixin, {
   afterModel(model) {
     if (model.get('isFinished')) {
       model.get('snapshots').then(snapshots => {
-        this.send('setInitialSnapshots', snapshots);
+        this.send('initializeSnapshotOrdering', snapshots);
       });
     }
   },
 
   actions: {
-    setInitialSnapshots(snapshots) {
+    initializeSnapshotOrdering(snapshots) {
       let controller = this.controllerFor(this.routeName);
-      controller.set('snapshots', snapshots);
-      controller.initializeSnapshotOrdering();
+      controller.initializeSnapshotOrdering(snapshots);
     },
     didTransition() {
       this._super.apply(this, arguments);

@@ -50,22 +50,6 @@ export default Component.extend({
   }),
 >>>>>>> 40af86ef... caching works for reload case
 
-  // didRender() {
-  //   let snapshotsLoading = this.get('snapshots.isPending');
-  //   if (
-  //     this.get('build.isFinished') &&
-  //     !snapshotsLoading &&
-  //     !this.get('_hasInitializedSnapshotLists')
-  //   ) {
-  //     this.set('_hasInitializedSnapshotLists', true);
-  //     let snapshots = [].concat(
-  //       this.get('snapshotsUnreviewed').toArray(),
-  //       this.get('snapshotsApproved').toArray(),
-  //     );
-  //     this.set('snapshotsChanged', snapshots);
-  //   }
-  // },
-
   didInsertElement() {
     $(document).bind(
       'keydown.snapshots',

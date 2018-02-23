@@ -25,7 +25,7 @@ export default Component.extend(PollingMixin, {
         if (build.get('isFinished')) {
           let snapshotsPromise = build.get('snapshots').reload();
           snapshotsPromise.then(snapshots => {
-            this.get('setInitialSnapshots')(snapshots);
+            this.get('initializeSnapshotOrdering')(snapshots);
           });
         }
       });

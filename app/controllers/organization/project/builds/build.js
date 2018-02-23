@@ -4,10 +4,6 @@ import {filterBy} from '@ember/object/computed';
 import {computed} from '@ember/object';
 
 export default Controller.extend({
-  // Set by route when entered and snapshots load.
-  // Set by the polling when snapshots load after build is finished.
-  snapshots: null,
-
   sortedSnapshots: computed('snapshots.[]', function() {
     if (!this.get('snapshots')) {
       return [];
@@ -17,14 +13,21 @@ export default Controller.extend({
   snapshotsUnreviewed: filterBy('sortedSnapshots', 'isUnreviewed', true),
   snapshotsApproved: filterBy('sortedSnapshots', 'isApprovedByUserEver', true),
 
-  snapshotsChanged: null,
+  snapshotsChanged: null, // Manually managed by initializeSnapshotOrdering.
   snapshotsUnchanged: filterBy('sortedSnapshots', 'isUnchanged', true),
 
-  initializeSnapshotOrdering() {
+  // This breaks the binding for snapshotsChanged, specifically so that when a user clicks
+  // approve, the snapshot stays in place until reload.
+  //
+  // Called by the route when entered and snapshots load.
+  // Called by polling when snapshots reload after build is finished.
+  initializeSnapshotOrdering(snapshots) {
+    this.set('snapshots', snapshots);
     let orderedSnapshots = [].concat(
       this.get('snapshotsUnreviewed'),
       this.get('snapshotsApproved'),
     );
+
     this.set('snapshotsChanged', orderedSnapshots);
   },
 });
