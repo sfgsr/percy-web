@@ -41,18 +41,4 @@
       </div>
     </div>
   </div>
-{{else}}
-  {{#each snapshotsUnchanged as |snapshot index|}}
-    {{snapshot-viewer
-      build=build
-      snapshot=snapshot
-      listIndex=index
-      isDefaultExpanded=isDefaultExpanded
-      selectChild=(action 'selectChild')
-      registerChild=(action 'registerChild')
-      unregisterChild=(action 'unregisterChild')
-      showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-      createReview=createReview
-    }}
-  {{/each}}
 {{/if}}

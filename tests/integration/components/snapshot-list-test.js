@@ -70,7 +70,6 @@ describe('Integration: SnapshotList', function() {
 
     this.render(hbs`{{snapshot-list
       snapshots=snapshots
-      hideNoDiffs=true
       build=build
       createReview=stub
       showSnapshotFullModalTriggered=stub

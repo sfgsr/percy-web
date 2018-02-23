@@ -10,7 +10,7 @@
     showSupport=showSupport
   }}
 
-  {{#if shouldShowLoadingSpinner}}
+  {{#if build.isRunning}}
     {{loading-page}}
   {{else if build.isFinished}}
     {{snapshot-list

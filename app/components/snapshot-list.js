@@ -33,6 +33,22 @@ export default Component.extend({
     },
   },
 
+  didRender() {
+    let snapshotsLoading = this.get('snapshots.isPending');
+    if (
+      this.get('build.isFinished') &&
+      !snapshotsLoading &&
+      !this.get('_hasInitializedSnapshotLists')
+    ) {
+      this.set('_hasInitializedSnapshotLists', true);
+      let snapshots = [].concat(
+        this.get('snapshotsUnreviewed').toArray(),
+        this.get('snapshotsApproved').toArray(),
+      );
+      this.set('snapshotsTopPanel', snapshots);
+    }
+  },
+
   didInsertElement() {
     $(document).bind(
       'keydown.snapshots',

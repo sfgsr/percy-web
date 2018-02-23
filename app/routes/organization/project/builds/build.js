@@ -8,20 +8,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
     return this.store.findRecord('build', params.build_id);
   },
 
-  afterModel(model) {
-    model.reload().then(build => {
-      if (!build.get('isExpired')) {
-        // Force reload because these async-hasMany's won't reload themselves if the build's
-        // state has changed, such as going from processing --> finished and we don't want to show
-        // fewer comparisons than there are.
-        build.get('snapshots').reload();
-      }
-    });
-  },
-  resetController() {
-    // Clear cached snapshot order between route transitions.
-    this.get('cachedSnapshotOrder').resetCachedSnapshotOrder();
-  },
   actions: {
     didTransition() {
       this._super.apply(this, arguments);
