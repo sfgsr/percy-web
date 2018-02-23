@@ -11,6 +11,8 @@ export default Component.extend(PollingMixin, {
   ],
 
   currentPosition: null,
+  snapshotsChanged: null,
+  snapshotsUnchanged: null,
 
   shouldShowLoadingSpinner: or('build.isRunning', 'snapshots.isPending'),
 
@@ -21,7 +23,7 @@ export default Component.extend(PollingMixin, {
       .reload()
       .then(build => {
         if (build.get('isFinished')) {
-          this.set('snapshots', build.get('snapshots').reload());
+          // this.set('snapshots', build.get('snapshots').reload());
         }
       });
   },

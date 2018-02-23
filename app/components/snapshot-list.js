@@ -1,8 +1,10 @@
 import $ from 'jquery';
 import {computed} from '@ember/object';
+<<<<<<< HEAD
 import {alias, lt, filterBy, mapBy} from '@ember/object/computed';
+=======
+>>>>>>> 40af86ef... caching works for reload case
 import Component from '@ember/component';
-import snapshotSort from 'percy-web/lib/snapshot-sort';
 
 export default Component.extend({
   classNames: ['SnapshotList'],
@@ -10,9 +12,19 @@ export default Component.extend({
   'data-test-snapshot-list': true,
   isUnchangedSnapshotsVisible: false,
 
+<<<<<<< HEAD
+=======
+  snapshotsChanged: null,
+  snapshotsUnchanged: null,
+
+  activeSnapshotId: null,
+  lastSnapshotIndex: null,
+  selectedSnapshotIndex: -1,
+>>>>>>> 40af86ef... caching works for reload case
   snapshotComponents: null,
   activeSnapshotId: null,
 
+<<<<<<< HEAD
   sortedSnapshots: computed('snapshots.[]', function() {
     return snapshotSort(this.get('snapshots').toArray());
   }),
@@ -32,22 +44,27 @@ export default Component.extend({
       this.get('cachedSnapshotOrder').setHideNoDiffsChanged();
     },
   },
+=======
+  isDefaultExpanded: computed('snapshotsChanged', function() {
+    return this.get('snapshotsChanged.length') < 150;
+  }),
+>>>>>>> 40af86ef... caching works for reload case
 
-  didRender() {
-    let snapshotsLoading = this.get('snapshots.isPending');
-    if (
-      this.get('build.isFinished') &&
-      !snapshotsLoading &&
-      !this.get('_hasInitializedSnapshotLists')
-    ) {
-      this.set('_hasInitializedSnapshotLists', true);
-      let snapshots = [].concat(
-        this.get('snapshotsUnreviewed').toArray(),
-        this.get('snapshotsApproved').toArray(),
-      );
-      this.set('snapshotsTopPanel', snapshots);
-    }
-  },
+  // didRender() {
+  //   let snapshotsLoading = this.get('snapshots.isPending');
+  //   if (
+  //     this.get('build.isFinished') &&
+  //     !snapshotsLoading &&
+  //     !this.get('_hasInitializedSnapshotLists')
+  //   ) {
+  //     this.set('_hasInitializedSnapshotLists', true);
+  //     let snapshots = [].concat(
+  //       this.get('snapshotsUnreviewed').toArray(),
+  //       this.get('snapshotsApproved').toArray(),
+  //     );
+  //     this.set('snapshotsChanged', snapshots);
+  //   }
+  // },
 
   didInsertElement() {
     $(document).bind(

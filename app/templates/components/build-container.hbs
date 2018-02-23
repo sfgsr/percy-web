@@ -10,11 +10,14 @@
     showSupport=showSupport
   }}
 
-  {{#if build.isRunning}}
+  {{#if (or build.isRunning snapshots.isPending)}}
     {{loading-page}}
   {{else if build.isFinished}}
     {{snapshot-list
-      snapshots=snapshots
+      snapshotsChanged=snapshotsChanged
+      snapshotsUnchanged=snapshotsUnchanged
+      activeSnapshotId=activeSnapshotId
+      updateActiveSnapshotId=(action "updateActiveSnapshotId")
       build=build
       showSnapshotFullModalTriggered=(action 'showSnapshotFullModalTriggered')
       isShowingModal=isShowingModal

@@ -1,14 +1,24 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import {inject as service} from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  cachedSnapshotOrder: service(),
   model(params) {
     return this.store.findRecord('build', params.build_id);
   },
+  afterModel(model) {
+    if (model.get('isFinished')) {
+      model.get('snapshots').then(snapshots => {
+        this.send('setInitialSnapshots', snapshots);
+      });
+    }
+  },
 
   actions: {
+    setInitialSnapshots(snapshots) {
+      let controller = this.controllerFor(this.routeName);
+      controller.set('snapshots', snapshots);
+      controller.initializeSnapshotOrdering();
+    },
     didTransition() {
       this._super.apply(this, arguments);
 
