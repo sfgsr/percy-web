@@ -38,6 +38,8 @@ export const SnapshotViewer = {
   isActionable: hasClass('SnapshotViewer--actionable'),
 
   isUnchangedComparisonsVisible: isVisible(SELECTORS.SHOW_UNCHANGED_COMPARISONS),
+
+  clickApprove: alias('header.clickApprove'),
 };
 
 export default create(SnapshotViewer);

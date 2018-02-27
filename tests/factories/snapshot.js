@@ -18,6 +18,7 @@ FactoryGuy.define('snapshot', {
   traits: {
     approved: {
       reviewState: SNAPSHOT_APPROVED_STATE,
+      reviewStateReason: 'user_approved',
     },
 
     withBuild: {

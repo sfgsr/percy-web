@@ -83,6 +83,78 @@ describe('Integration: SnapshotList', function() {
     expect(SnapshotList.snapshots().count).to.equal(numSnapshots);
   });
 
+  it('does not display unchanged snapshots batch when there are no unchanged snapshots', function() { // eslint-disable-line
+    this.setProperties({
+      stub: sinon.stub(),
+      snapshotsChanged: makeList('snapshot', 2, 'withComparisons'),
+      snapshotsUnchanged: [],
+    });
+    this.render(hbs`{{snapshot-list
+        snapshotsChanged=snapshotsChanged
+        snapshotsUnchanged=snapshotsUnchanged
+        build=build
+        createReview=stub
+        updateActiveSnapshotId=stub
+        showSnapshotFullModalTriggered=stub
+      }}`);
+
+    expect(SnapshotList.isNoDiffsBatchVisible).to.equal(false);
+  });
+
+  describe('when there are more than 150 snapshots with diffs', function() {
+    const numSnapshots = 151;
+
+    beforeEach(function() {
+      const stub = sinon.stub();
+      const build = make('build', 'finished');
+
+      const snapshotsChanged = makeList('snapshot', numSnapshots, 'withComparisons', {build});
+      this.set('snapshotsChanged', snapshotsChanged);
+
+      this.setProperties({
+        snapshotsChanged,
+        build,
+        stub,
+      });
+
+      this.render(hbs`{{snapshot-list
+        snapshotsChanged=snapshotsChanged
+        build=build
+        createReview=stub
+        showSnapshotFullModalTriggered=stub
+      }}`);
+    });
+
+    it('collapses all snapshots by default', function() {
+      expect(SnapshotList.snapshots().count).to.equal(numSnapshots);
+      SnapshotList.snapshots().forEach(snapshot => {
+        expect(snapshot.isCollapsed).to.equal(true);
+      });
+      percySnapshot(this.test);
+    });
+
+    it('allows keyboard nav with up and down arrows', function() {
+      SnapshotList.typeDownArrow();
+      expect(SnapshotList.snapshots(0).isExpanded).to.equal(true);
+      expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
+      expect(SnapshotList.snapshots(1).isExpanded).to.equal(false);
+      expect(SnapshotList.snapshots(1).isFocused).to.equal(false);
+      percySnapshot(this.test);
+
+      SnapshotList.typeDownArrow();
+      expect(SnapshotList.snapshots(0).isExpanded).to.equal(false);
+      expect(SnapshotList.snapshots(0).isFocused).to.equal(false);
+      expect(SnapshotList.snapshots(1).isExpanded).to.equal(true);
+      expect(SnapshotList.snapshots(1).isFocused).to.equal(true);
+
+      SnapshotList.typeUpArrow();
+      expect(SnapshotList.snapshots(0).isExpanded).to.equal(true);
+      expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
+      expect(SnapshotList.snapshots(1).isExpanded).to.equal(false);
+      expect(SnapshotList.snapshots(1).isFocused).to.equal(false);
+    });
+  });
+
   describe('keyboard nav behavior', function() {
     const numSnapshots = 3;
     beforeEach(function() {

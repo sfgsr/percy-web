@@ -18,7 +18,7 @@
     createReview=createReview
   }}
 {{/each}}
-{{#if (not isUnchangedSnapshotsVisible)}}
+{{#if (and (not isUnchangedSnapshotsVisible) snapshotsUnchanged.length)}}
   <div class="SnapshotViewer SnapshotViewer--actionable">
     <div class="SnapshotViewer-header flex align-center justify-center text-weight-bold p-2 mx-2 mb-2 bg-gray-000 rounded border border-gray-100 c-pointer" data-test-toggle-unchanged {{action "toggleUnchangedSnapshotsVisible"}}>
       <figure class="svg-container">
