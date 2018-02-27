@@ -174,8 +174,8 @@ describe('Acceptance: Build', function() {
 
    it('displays snapshots in the correct order, before and after approval when build is finished', function() { // eslint-disable-line
 
-      const firstSnapshotExpectedName = 'Exemplifying Test Snapshot That Shows Things 0';
-      const secondSnapshotExpectedName = 'Two widths snapshot';
+      const firstSnapshotExpectedName = defaultSnapshot.name;
+      const secondSnapshotExpectedName = twoWidthsSnapshot.name;
 
       BuildPage.visitBuild(urlParams);
 

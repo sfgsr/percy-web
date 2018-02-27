@@ -161,13 +161,13 @@ describe('Integration: SnapshotList', function() {
       const stub = sinon.stub();
       const build = make('build', 'finished');
 
-      const snapshotsWithDiffs = makeList('snapshot', numSnapshots, 'withComparisons', {build});
-      const snapshotsNoDiffs = makeList('snapshot', 3, 'withNoDiffs', {build});
-      const snapshots = snapshotsWithDiffs.concat(snapshotsNoDiffs);
-      this.setProperties({build, snapshots, stub});
+      const snapshotsChanged = makeList('snapshot', numSnapshots, 'withComparisons', {build});
+      const snapshotsUnchanged = makeList('snapshot', 3, 'withNoDiffs', {build});
+      this.setProperties({build, snapshotsChanged, snapshotsUnchanged, stub});
 
       this.render(hbs`{{snapshot-list
-        snapshots=snapshots
+        snapshotsChanged=snapshotsChanged
+        snapshotsUnchanged=snapshotsUnchanged
         build=build
         createReview=stub
         showSnapshotFullModalTriggered=stub

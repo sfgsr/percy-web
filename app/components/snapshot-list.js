@@ -70,8 +70,26 @@ export default Component.extend({
     $(document).unbind('keydown.snapshots');
   },
 
+<<<<<<< HEAD
   _snapshotIds: mapBy('computedSnapshots', 'id'),
   _numSnapshots: alias('computedSnapshots.length'),
+=======
+  _allVisibleSnapshots: computed(
+    'snapshotsChanged.[]',
+    'snapshotsUnchanged.[]',
+    'isUnchangedSnapshotsVisible',
+    function() {
+      if (this.get('isUnchangedSnapshotsVisible')) {
+        return [].concat(this.get('snapshotsChanged'), this.get('snapshotsUnchanged'));
+      } else {
+        return this.get('snapshotsChanged');
+      }
+    },
+  ),
+
+  _snapshotIds: mapBy('_allVisibleSnapshots', 'id'),
+  _numSnapshots: alias('_allVisibleSnapshots.length'),
+>>>>>>> 3246cbf2... clean up
   _calculateNewActiveSnapshotId({isNext = true} = {}) {
     let currentIndex = this.get('_snapshotIds').indexOf(this.get('activeSnapshotId'));
 
