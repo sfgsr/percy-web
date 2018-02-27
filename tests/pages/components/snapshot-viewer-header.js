@@ -24,6 +24,7 @@ const SELECTORS = {
   COMPARISON_MODE_SWITCHER_NEW: '[data-test-comparison-mode-switcher-new]',
   DROPDOWN_TOGGLE: '[data-test-snapshot-header-dropdown-toggle]',
   DROPDOWN_PANE: '[data-test-snapshot-header-dropdown-pane]',
+  DROPDOWN_PANE_ITEMS: '[data-test-snapshot-header-dropdown-pane] li',
   DROPDOWN_TOGGLE_WIDTHS_OPTION: '[data-test-toggle-widths-option]',
   APPROVAL_BUTTON_SCOPE: '[data-test-snapshot-approval-button]',
 };
@@ -64,9 +65,8 @@ export const SnapshotViewerHeader = {
   isDropdownToggleVisible: isVisible(SELECTORS.DROPDOWN_TOGGLE),
   isDropdownPaneVisible: isVisible(SELECTORS.DROPDOWN_PANE),
   dropdownOptions: collection({
-    itemScope: SELECTORS.DROPDOWN_PANE,
+    itemScope: SELECTORS.DROPDOWN_PANE_ITEMS,
     item: {
-      scope: 'li',
       text: text(),
     },
   }),

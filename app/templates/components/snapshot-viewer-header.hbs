@@ -52,6 +52,16 @@
                   {{inline-svg "link-icon"}}
                 {{/copy-button}}
               </li>
+              {{#if selectedComparison.baseSnapshot}}
+                <li class="dropdown-menu-list-item c-pointer f6 text-weight-semibold py-1 pl-2 pr-1" {{action 'downloadHTML' 'base' selectedComparison.baseSnapshot}}>
+                    <span>Download original HTML</span>
+                </li>
+              {{/if}}
+              {{#if selectedComparison.headSnapshot}}
+                <li class="dropdown-menu-list-item c-pointer f6 text-weight-semibold py-1 pl-2 pr-1" {{action 'downloadHTML' 'head' selectedComparison.headSnapshot}}>
+                  <span>Download new HTML</span>
+                </li>
+              {{/if}}
             </ul>
           </div>
         </div>

@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import {inject as service} from '@ember/service';
 import {computed} from '@ember/object';
 import {alias, equal, filterBy, not, or} from '@ember/object/computed';
+import utils from 'percy-web/lib/utils';
 
 export default Component.extend({
   // required params
@@ -49,6 +50,12 @@ export default Component.extend({
     },
 
     closeDropdown() {
+      this.set('dropdownVisible', false);
+    },
+
+    downloadHTML(type, snapshot) {
+      const url = utils.buildApiUrl(`${type}Asset`, snapshot.get('id'));
+      window.location.replace(url);
       this.set('dropdownVisible', false);
     },
   },

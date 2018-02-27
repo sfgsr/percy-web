@@ -20,18 +20,23 @@ describe('Integration: SnapshotViewerHeader', function() {
   describe('dropdown', function() {
     beforeEach(function() {
       this.set('stub', sinon.stub());
+    });
 
+    it('shows dropdown toggle', function() {
       this.render(hbs`{{snapshot-viewer-header
         toggleViewMode=stub
         updateSelectedWidth=stub
       }}`);
-    });
 
-    it('shows dropdown toggle', function() {
       expect(SnapshotViewerHeaderPO.isDropdownToggleVisible).to.equal(true);
     });
 
     it('toggles dropdown pane when dropdown toggle is clicked', function() {
+      this.render(hbs`{{snapshot-viewer-header
+        toggleViewMode=stub
+        updateSelectedWidth=stub
+      }}`);
+
       expect(SnapshotViewerHeaderPO.isDropdownPaneVisible).to.equal(false);
       SnapshotViewerHeaderPO.clickDropdownToggle();
       expect(SnapshotViewerHeaderPO.isDropdownPaneVisible).to.equal(true);
@@ -40,9 +45,50 @@ describe('Integration: SnapshotViewerHeader', function() {
     });
 
     it('shows copy url option', function() {
+      this.render(hbs`{{snapshot-viewer-header
+        toggleViewMode=stub
+        updateSelectedWidth=stub
+      }}`);
+
       SnapshotViewerHeaderPO.clickDropdownToggle();
       expect(SnapshotViewerHeaderPO.dropdownOptions(0).text).to.equal('Copy snapshot URL');
       percySnapshot(this.test);
+    });
+
+    describe('download HTML options', function() {
+      let comparison;
+      let baseSnapshot;
+      let headSnapshot;
+      beforeEach(function() {
+        comparison = make('comparison');
+        baseSnapshot = make('snapshot');
+        headSnapshot = make('snapshot');
+        this.set('comparison', comparison);
+
+        this.render(hbs`{{snapshot-viewer-header
+          toggleViewMode=stub
+          updateSelectedWidth=stub
+          selectedComparison=comparison
+        }}`);
+      });
+
+      it('shows download original and new HTML option', function() {
+        this.set('comparison.headSnapshot', headSnapshot);
+        this.set('comparison.baseSnapshot', baseSnapshot);
+
+        SnapshotViewerHeaderPO.clickDropdownToggle();
+        expect(SnapshotViewerHeaderPO.dropdownOptions(1).text).to.equal('Download original HTML');
+        expect(SnapshotViewerHeaderPO.dropdownOptions(2).text).to.equal('Download new HTML');
+        percySnapshot(this.test);
+      });
+
+      it('shows download new HTML option', function() {
+        this.set('comparison.headSnapshot', headSnapshot);
+
+        SnapshotViewerHeaderPO.clickDropdownToggle();
+        expect(SnapshotViewerHeaderPO.dropdownOptions(1).text).to.equal('Download new HTML');
+        percySnapshot(this.test);
+      });
     });
   });
 

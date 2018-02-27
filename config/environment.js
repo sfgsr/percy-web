@@ -44,6 +44,8 @@ module.exports = function(environment) {
         user: '/api/v1/user',
         userIdentity: '/api/v1/user/identities/%@',
         emailVerifications: '/api/v1/email-verifications/%@',
+        baseAsset: '/api/v1/snapshots/%@/assets/base.html',
+        headAsset: '/api/v1/snapshots/%@/assets/head.html',
       },
       githubUrls: {
         integration: 'https://github.com/apps/percy/installations/new',
