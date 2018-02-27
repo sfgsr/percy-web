@@ -6,6 +6,8 @@ import sinon from 'sinon';
 import BuildPage from 'percy-web/tests/pages/build-page';
 import {TEST_IMAGE_URLS} from 'percy-web/mirage/factories/screenshot';
 import adminMode from 'percy-web/lib/admin-mode';
+import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_REVIEW_STATE_REASONS} from 'percy-web/models/snapshot';
+import {BUILD_STATES} from 'percy-web/models/build';
 
 describe('Acceptance: Pending Build', function() {
   freezeMoment('2018-05-22');
@@ -186,6 +188,25 @@ describe('Acceptance: Build', function() {
       andThen(() => {
         expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
         expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
+      });
+    });
+
+    // This tests the initializeSnapshotOrdering method in builds/build controller.
+    it('sorts snapshots correctly when a build moves from processing to finished', function() {
+      const build = server.schema.db.builds[0];
+      build.state = BUILD_STATES.processing;
+
+      defaultSnapshot.reviewState = SNAPSHOT_APPROVED_STATE;
+      defaultSnapshot.reviewStateReason = SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED;
+
+      BuildPage.visitBuild(urlParams);
+      andThen(() => {
+        build.state = BUILD_STATES.FINISHED;
+      });
+      andThen(() => {
+        expect(BuildPage.snapshotList.lastSnapshot.name).to.equal(defaultSnapshot.name);
+        expect(BuildPage.snapshots(0).name).to.equal(twoWidthsSnapshot.name);
+        percySnapshot(this.test);
       });
     });
   });

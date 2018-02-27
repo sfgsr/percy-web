@@ -1,6 +1,6 @@
 {{#if snapshot.isApproved}}
-  <div class="status-pill {{if (eq snapshot.reviewStateReason 'no_diffs') 'is-unchanged' 'is-approved'}}" data-test-snapshot-approved-pill>
-    {{#if (eq snapshot.reviewStateReason 'no_diffs')}}
+  <div class="status-pill {{if snapshot.isUnchanged 'is-unchanged' 'is-approved'}}" data-test-snapshot-approved-pill>
+    {{#if snapshot.isUnchanged}}
       No Changes
     {{else}}
       Approved

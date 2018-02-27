@@ -3,6 +3,14 @@ import {bool, and, equal, not, or} from '@ember/object/computed';
 import DS from 'ember-data';
 import moment from 'moment';
 
+export const BUILD_STATES = {
+  FINISHED: 'finished',
+  PENDING: 'pending',
+  PROCESSING: 'processing',
+  FAILED: 'failed',
+  EXPIRED: 'expired',
+};
+
 const PENDING_LABEL = 'Receiving';
 const PROCESSING_LABEL = 'Processing';
 const UNREVIEWED_LABEL = 'Unreviewed';

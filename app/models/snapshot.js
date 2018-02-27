@@ -6,6 +6,13 @@ import {computed} from '@ember/object';
 export const SNAPSHOT_APPROVED_STATE = 'approved';
 export const SNAPSHOT_UNAPPROVED_STATE = 'unreviewed';
 
+export const SNAPSHOT_REVIEW_STATE_REASONS = {
+  UNREVIEWED: 'unreviewed_comparisons',
+  USER_APPROVED: 'user_approved',
+  USER_APPROVED_PREVIOUSLY: 'user_approved_previously',
+  NO_DIFFS: 'no_diffs',
+};
+
 export default DS.Model.extend({
   comparisons: DS.hasMany('comparisons', {
     async: false,
@@ -32,9 +39,12 @@ export default DS.Model.extend({
   // - 'approved' --> 'no_diffs': automatically approved because there were no visual differences
   //    when compared the baseline.
   reviewStateReason: DS.attr(),
-  isApprovedByUser: equal('reviewStateReason', 'user_approved'),
-  isApprovedByUserPreviously: equal('reviewStateReason', 'user_approved_previously'),
-  isUnchanged: equal('reviewStateReason', 'no_diffs'),
+  isApprovedByUser: equal('reviewStateReason', SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED),
+  isApprovedByUserPreviously: equal(
+    'reviewStateReason',
+    SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED_PREVIOUSLY,
+  ),
+  isUnchanged: equal('reviewStateReason', SNAPSHOT_REVIEW_STATE_REASONS.NO_DIFFS),
 
   // Is true for both approved in build and approved by carry-forward.
   isApprovedByUserEver: or('isApprovedByUser', 'isApprovedByUserPreviously'),
