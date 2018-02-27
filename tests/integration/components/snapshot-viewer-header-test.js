@@ -26,6 +26,7 @@ describe('Integration: SnapshotViewerHeader', function() {
       this.render(hbs`{{snapshot-viewer-header
         toggleViewMode=stub
         updateSelectedWidth=stub
+        expandSnapshot=stub
       }}`);
 
       expect(SnapshotViewerHeaderPO.isDropdownToggleVisible).to.equal(true);
@@ -102,6 +103,7 @@ describe('Integration: SnapshotViewerHeader', function() {
           snapshot=snapshot
           toggleViewMode=stub
           updateSelectedWidth=stub
+          expandSnapshot=stub
         }}`);
       });
 
@@ -140,6 +142,7 @@ describe('Integration: SnapshotViewerHeader', function() {
           snapshot=snapshot
           toggleViewMode=stub
           updateSelectedWidth=stub
+          expandSnapshot=stub
         }}`);
       });
 
@@ -184,6 +187,7 @@ describe('Integration: SnapshotViewerHeader', function() {
           snapshot=snapshot
           toggleViewMode=stub
           updateSelectedWidth=stub
+          expandSnapshot=stub
         }}`);
       });
 

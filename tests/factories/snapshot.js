@@ -34,6 +34,8 @@ FactoryGuy.define('snapshot', {
     },
 
     withNoDiffs: {
+      reviewState: SNAPSHOT_APPROVED_STATE,
+      reviewStateReason: 'no_diffs',
       comparisons: () => {
         const widths = [375, 550, 1024];
         return widths.map(width => {

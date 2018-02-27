@@ -1,5 +1,8 @@
-import {create, collection, clickable, isVisible} from 'ember-cli-page-object';
+import {create, collection, clickable, isVisible, triggerable} from 'ember-cli-page-object';
 import {SnapshotViewer} from 'percy-web/tests/pages/components/snapshot-viewer';
+
+const DOWN_ARROW_KEY = 40;
+const UP_ARROW_KEY = 38;
 
 const SELECTORS = {
   SNAPSHOT_LIST: '[data-test-snapshot-list]',
@@ -21,6 +24,14 @@ export const SnapshotList = {
     },
   },
 
+  lastSnapshot: {
+    isDescriptor: true,
+    get() {
+      const numSnapshots = this.snapshots().count;
+      return this.snapshots(numSnapshots - 1);
+    },
+  },
+
   indexOfSnapshot(snapshot) {
     return this.snapshots.indexOf(snapshot);
   },
@@ -37,8 +48,23 @@ export const SnapshotList = {
       .filterBy('isUnapproved', true);
   },
 
+  noDiffSnapshots() {
+    return this.snapshots()
+      .toArray()
+      .filter(snapshot => {
+        return snapshot.isApproved && snapshot.isUnchanged;
+      });
+  },
+
   isNoDiffsBatchVisible: isVisible(SELECTORS.NO_DIFFS_TOGGLE),
   clickToggleNoDiffsSection: clickable(SELECTORS.NO_DIFFS_TOGGLE),
+
+  typeDownArrow: triggerable('keydown', '', {
+    eventProperties: {keyCode: DOWN_ARROW_KEY},
+  }),
+  typeUpArrow: triggerable('keydown', '', {
+    eventProperties: {keyCode: UP_ARROW_KEY},
+  }),
 };
 
 export default create(SnapshotList);

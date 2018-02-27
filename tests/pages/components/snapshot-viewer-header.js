@@ -34,6 +34,8 @@ export const SnapshotViewerHeader = {
   isTitleVisible: isVisible(SELECTORS.TITLE),
   titleText: text(SELECTORS.TITLE),
 
+  expandSnapshot: clickable(),
+
   isComparisonModeSwitcherVisible: {
     isDescriptor: true,
     get() {
@@ -85,6 +87,7 @@ export const SnapshotViewerHeader = {
   clickApprove: alias('snapshotApprovalButton.clickButton'),
   isApproved: alias('snapshotApprovalButton.isApproved'),
   isUnapproved: alias('snapshotApprovalButton.isUnapproved'),
+  isUnchanged: alias('snapshotApprovalButton.isUnchanged'),
 
   isBaseComparisonModeButtonVisible: isVisible(SELECTORS.COMPARISON_MODE_SWITCHER_BASE),
   isDiffComparisonModeButtonVisible: isVisible(SELECTORS.COMPARISON_MODE_SWITCHER_DIFF),

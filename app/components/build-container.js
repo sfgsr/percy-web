@@ -4,8 +4,6 @@ import PollingMixin from 'percy-web/mixins/polling';
 
 export default Component.extend(PollingMixin, {
   build: null,
-  activeSnapshotId: null,
-  updateActiveSnapshotId: null,
   classNames: ['BuildContainer'],
   classNameBindings: [
     'classes',
@@ -31,9 +29,6 @@ export default Component.extend(PollingMixin, {
   actions: {
     showSnapshotFullModalTriggered(snapshotId, snapshotSelectedWidth) {
       this.sendAction('openSnapshotFullModal', snapshotId, snapshotSelectedWidth);
-    },
-    updateActiveSnapshotId(comparisonId) {
-      this.get('updateActiveSnapshotId')(comparisonId);
     },
 
     showSupport() {

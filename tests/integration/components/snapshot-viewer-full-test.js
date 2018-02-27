@@ -144,10 +144,7 @@ describe('Integration: SnapshotViewerFull', function() {
 
     it('sends closeSnapshotFullModal when toggle fullscreen button is clicked', function() {
       FullSnapshotPage.header.clickToggleFullscreen();
-      expect(closeSnapshotFullModalStub).to.have.been.calledWith(
-        this.get('build.id'),
-        this.get('snapshotId'),
-      );
+      expect(closeSnapshotFullModalStub).to.have.been.calledWith(this.get('build.id'));
     });
   });
 });

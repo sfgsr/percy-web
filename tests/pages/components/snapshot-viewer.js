@@ -7,6 +7,7 @@ const SELECTORS = {
   DIFF_IMAGE: '[data-test-comparison-viewer-full-diff-image-overlay] img',
   DIFF_IMAGE_BOX: '[data-test-comparison-viewer-diff-image-container] img',
   NO_DIFF_BOX: '[data-test-comparison-viewer-unchanged]',
+  SHOW_UNCHANGED_COMPARISONS: '[data-test-comaprison-viewer-show-unchanged-comparisons]',
 };
 
 export const SnapshotViewer = {
@@ -15,9 +16,11 @@ export const SnapshotViewer = {
   header: SnapshotViewerHeader,
   widthSwitcher: alias('header.widthSwitcher'),
   name: alias('header.titleText'),
+  expandSnapshot: alias('header.expandSnapshot'),
 
   isApproved: alias('header.isApproved'),
   isUnapproved: alias('header.isUnapproved'),
+  isUnchanged: alias('header.isUnchanged'),
 
   isCollapsed: hasClass('SnapshotViewer--collapsed'),
   isExpanded: notHasClass('SnapshotViewer--collapsed'),
@@ -33,6 +36,8 @@ export const SnapshotViewer = {
   isFocused: hasClass('SnapshotViewer--focus'),
 
   isActionable: hasClass('SnapshotViewer--actionable'),
+
+  isUnchangedComparisonsVisible: isVisible(SELECTORS.SHOW_UNCHANGED_COMPARISONS),
 };
 
 export default create(SnapshotViewer);

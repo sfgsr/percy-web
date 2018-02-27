@@ -4,9 +4,6 @@ import {inject as service} from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
   cachedSnapshotOrder: service(),
-  queryParams: {
-    activeSnapshotId: {as: 'snapshot', replace: true},
-  },
   model(params) {
     return this.store.findRecord('build', params.build_id);
   },
@@ -21,13 +18,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
       }
     });
   },
-  resetController(controller, isExiting) {
+  resetController() {
     // Clear cached snapshot order between route transitions.
     this.get('cachedSnapshotOrder').resetCachedSnapshotOrder();
-    if (isExiting) {
-      // Clear the query parameter when exiting the route.
-      controller.set('activeSnapshotId', undefined);
-    }
   },
   actions: {
     didTransition() {
@@ -44,9 +37,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       };
       this.analytics.track('Build Viewed', organization, eventProperties);
     },
-    updateActiveSnapshotId(snapshotId) {
-      this.set('controller.activeSnapshotId', snapshotId);
-    },
+
     updateModalState(state) {
       this.get('currentModel').set('isShowingModal', state);
     },
@@ -71,11 +62,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
         },
       );
     },
-    closeSnapshotFullModal(buildId, snapshotId) {
+    closeSnapshotFullModal(buildId) {
       this.send('updateModalState', false);
-      this.transitionTo('organization.project.builds.build', buildId, {
-        queryParams: {activeSnapshotId: snapshotId},
-      });
+      this.transitionTo('organization.project.builds.build', buildId);
     },
 
     createReview(action, build, snapshots) {

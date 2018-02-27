@@ -133,6 +133,7 @@ describe('Integration: SnapshotViewer', function() {
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
         userSelectedWidth=userSelectedWidth
         createReview=createReview
+        updateActiveSnapshotId=stub
       }}`);
 
       SnapshotViewerPO.header.widthSwitcher.buttons(0).click();
@@ -160,6 +161,7 @@ describe('Integration: SnapshotViewer', function() {
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
         userSelectedWidth=userSelectedWidth
         createReview=createReview
+        updateActiveSnapshotId=stub
       }}`);
     });
 
@@ -181,12 +183,16 @@ describe('Integration: SnapshotViewer', function() {
 
   describe('expand/collapse', function() {
     beforeEach(function() {
+      this.set('activeSnapshotId', null);
+
       this.render(hbs`{{snapshot-viewer
         snapshot=snapshot
         build=build
         showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
         userSelectedWidth=userSelectedWidth
         createReview=createReview
+        activeSnapshotId=activeSnapshotId
+        updateActiveSnapshotId=stub
       }}`);
     });
 
@@ -214,6 +220,24 @@ describe('Integration: SnapshotViewer', function() {
       this.set('build.isApproved', true);
 
       expect(SnapshotViewerPO.isExpanded).to.equal(true);
+    });
+
+    it("is expanded when activeSnapshotId is equal to the snapshot's id", function() {
+      this.set('snapshot.reviewState', SNAPSHOT_APPROVED_STATE);
+      this.set('activeSnapshotId', snapshot.get('id'));
+      return wait(() => {
+        expect(SnapshotViewerPO.isExpanded).to.equal(true);
+      });
+    });
+
+    it('expands when the snapshot is collapsed and a user clicks the header ', function() {
+      this.set('snapshot.reviewState', SNAPSHOT_APPROVED_STATE);
+
+      SnapshotViewerPO.header.click();
+
+      return wait(() => {
+        expect(SnapshotViewerPO.isExpanded).to.equal(true);
+      });
     });
   });
 });
@@ -259,6 +283,7 @@ describe('Integration: SnapshotViewer with per snapshot approval', function() {
       build=build
       showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
       createReview=createReview
+      updateActiveSnapshotId=stub
     }}`);
   });
 

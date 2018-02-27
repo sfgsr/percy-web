@@ -32,6 +32,9 @@ export default DS.Model.extend({
   // - 'approved' --> 'no_diffs': automatically approved because there were no visual differences
   //    when compared the baseline.
   reviewStateReason: DS.attr(),
+  isApprovedByUser: equal('reviewStateReason', 'user_approved'),
+  isApprovedByUserPreviously: equal('reviewStateReason', 'user_approved_previously'),
+  isUnchanged: equal('reviewStateReason', 'no_diffs'),
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),

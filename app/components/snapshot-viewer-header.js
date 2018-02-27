@@ -21,10 +21,11 @@ export default Component.extend({
   updateSelectedWidth: null,
 
   // optional actions
+  expandSnapshot() {},
   registerChild() {},
   updateComparisonMode() {},
 
-  dropdownVisible: false,
+  isDropdownVisible: false,
   isShowingFilteredComparisons: true,
   isNotShowingFilteredComparisons: not('isShowingFilteredComparisons'),
   comparisons: alias('snapshot.comparisons'),
@@ -41,22 +42,22 @@ export default Component.extend({
     },
 
     toggleDropdownVisibility() {
-      this.toggleProperty('dropdownVisible');
+      this.toggleProperty('isDropdownVisible');
     },
 
     toggleFilteredComparisons() {
       this.toggleProperty('isShowingFilteredComparisons');
-      this.set('dropdownVisible', false);
+      this.set('isDropdownVisible', false);
     },
 
     closeDropdown() {
-      this.set('dropdownVisible', false);
+      this.set('isDropdownVisible', false);
     },
 
     downloadHTML(type, snapshot) {
       const url = utils.buildApiUrl(`${type}Asset`, snapshot.get('id'));
       window.location.replace(url);
-      this.set('dropdownVisible', false);
+      this.set('isDropdownVisible', false);
     },
   },
 });

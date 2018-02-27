@@ -1,10 +1,7 @@
-import {visitable, create, clickable, isVisible, triggerable} from 'ember-cli-page-object';
+import {visitable, create, clickable, isVisible} from 'ember-cli-page-object';
 import {SnapshotViewerFull} from 'percy-web/tests/pages/components/snapshot-viewer-full';
 import {SnapshotList} from 'percy-web/tests/pages/components/snapshot-list';
 import {alias} from 'ember-cli-page-object/macros';
-
-const DOWN_ARROW_KEY = 40;
-const UP_ARROW_KEY = 38;
 
 const SELECTORS = {
   BUILD_LIST: '[data-test-project-container-build-list]',
@@ -51,12 +48,8 @@ const BuildPage = {
     return `/${build.project.fullSlug}/builds/${build.id}?snapshot=${snapshot.id}`;
   },
 
-  typeDownArrow: triggerable('keydown', SELECTORS.SNAPSHOT_LIST, {
-    eventProperties: {keyCode: DOWN_ARROW_KEY},
-  }),
-  typeUpArrow: triggerable('keydown', SELECTORS.SNAPSHOT_LIST, {
-    eventProperties: {keyCode: UP_ARROW_KEY},
-  }),
+  typeDownArrow: alias('snapshotList.typeDownArrow'),
+  typeUpArrow: alias('snapshotList.typeUpArrow'),
 
   snapshotFullscreen: SnapshotViewerFull,
   isFullscreenModalVisible: isVisible(SELECTORS.SNAPSHOT_FULL_MODAL),

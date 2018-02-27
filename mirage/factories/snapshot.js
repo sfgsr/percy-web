@@ -1,4 +1,5 @@
 import {Factory, trait} from 'ember-cli-mirage';
+import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_UNAPPROVED_STATE} from 'percy-web/models/snapshot';
 
 export default Factory.extend({
   id(i) {
@@ -9,6 +10,8 @@ export default Factory.extend({
   },
 
   withComparison: trait({
+    reviewState: SNAPSHOT_UNAPPROVED_STATE,
+    reviewStateReason: 'unreviewed_comparisons',
     afterCreate(snapshot, server) {
       const comparison = server.create('comparison', 'default');
       _addComparisonIds(comparison, snapshot);
@@ -16,6 +19,8 @@ export default Factory.extend({
   }),
 
   noDiffs: trait({
+    reviewState: SNAPSHOT_APPROVED_STATE,
+    reviewStateReason: 'no_diffs',
     afterCreate(snapshot, server) {
       const comparison = server.create('comparison', 'same');
       _addComparisonIds(comparison, snapshot);
@@ -23,6 +28,8 @@ export default Factory.extend({
   }),
 
   withMobile: trait({
+    reviewState: SNAPSHOT_UNAPPROVED_STATE,
+    reviewStateReason: 'unreviewed_comparisons',
     afterCreate(snapshot, server) {
       const comparison = server.create('comparison', 'mobile');
       _addComparisonIds(comparison, snapshot);

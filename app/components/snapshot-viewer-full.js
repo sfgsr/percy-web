@@ -65,10 +65,9 @@ export default Component.extend({
 
   keyDown(event) {
     let buildId = this.get('build.id');
-    let snapshotId = this.get('snapshot.id');
 
     if (event.keyCode === 27) {
-      this.sendAction('closeSnapshotFullModal', buildId, snapshotId);
+      this.sendAction('closeSnapshotFullModal', buildId);
     }
 
     if (event.keyCode === 39 || event.keyCode === 37) {

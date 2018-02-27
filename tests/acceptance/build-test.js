@@ -217,7 +217,6 @@ describe('Acceptance: Build', function() {
 
     andThen(() => {
       expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
-      expect(currentURL()).to.equal(`${urlBase}?snapshot=${defaultSnapshot.id}`);
       expect(firstSnapshot.isFocused).to.equal(true);
       expect(secondSnapshot.isFocused).to.equal(false);
       expect(thirdSnapshot.isFocused).to.equal(false);
@@ -228,7 +227,6 @@ describe('Acceptance: Build', function() {
 
     andThen(() => {
       expect(BuildPage.focusedSnapshot().name).to.equal(twoWidthsSnapshot.name);
-      expect(currentURL()).to.equal(`${urlBase}?snapshot=${twoWidthsSnapshot.id}`);
       expect(firstSnapshot.isFocused).to.equal(false);
       expect(secondSnapshot.isFocused).to.equal(true);
       expect(thirdSnapshot.isFocused).to.equal(false);
@@ -239,52 +237,10 @@ describe('Acceptance: Build', function() {
 
     andThen(() => {
       expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
-      expect(currentURL()).to.equal(`${urlBase}?snapshot=${defaultSnapshot.id}`);
       expect(firstSnapshot.isFocused).to.equal(true);
       expect(secondSnapshot.isFocused).to.equal(false);
       expect(thirdSnapshot.isFocused).to.equal(false);
     });
-  });
-
-  it('adds query param when clicking on snapshot header', function() {
-    let snapshot;
-    BuildPage.visitBuild(urlParams);
-    andThen(() => {
-      snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
-      snapshot.header.click();
-    });
-
-    andThen(() => {
-      expect(currentURL()).to.equal(
-        BuildPage.urlWithSnapshotQueryParam(defaultSnapshot, defaultSnapshot.build),
-      );
-    });
-  });
-
-  it('jumps to snapshot for query params', function() {
-    BuildPage.visitBuild(Object.assign(urlParams, {snapshot: twoWidthsSnapshot.id}));
-
-    andThen(() => {
-      const focusedSnapshot = BuildPage.focusedSnapshot();
-
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(focusedSnapshot.isFocused).to.equal(true);
-      expect(focusedSnapshot.name).to.equal(twoWidthsSnapshot.name);
-    });
-
-    percySnapshot(this.test.fullTitle());
-  });
-
-  it('jumps to snapshot for query params when snapshot has no diffs ', function() {
-    BuildPage.visitBuild(Object.assign(urlParams, {snapshot: noDiffsSnapshot.id}));
-    andThen(() => {
-      const focusedSnapshot = BuildPage.focusedSnapshot();
-
-      expect(focusedSnapshot.name).to.equal(noDiffsSnapshot.name);
-      expect(focusedSnapshot.isExpanded).to.equal(true);
-    });
-
-    percySnapshot(this.test.fullTitle());
   });
 
   it('shows and hides unchanged diffs', function() {
@@ -300,12 +256,21 @@ describe('Acceptance: Build', function() {
     percySnapshot(this.test.fullTitle() + ' | shows batched no diffs');
 
     BuildPage.clickToggleNoDiffsSection();
+
     andThen(() => {
       const snapshot = BuildPage.findSnapshotByName(snapshotName);
-
       expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
-      expect(snapshot.isExpanded, 'three').to.equal(true);
-      expect(snapshot.isNoDiffBoxVisible).to.equal(true);
+      expect(snapshot.isExpanded).to.equal(false);
+      expect(snapshot.isNoDiffBoxVisible).to.equal(false);
+    });
+
+    const lastSnapshot = BuildPage.snapshotList.lastSnapshot;
+    lastSnapshot.expandSnapshot();
+
+    andThen(() => {
+      expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
+      expect(lastSnapshot.isExpanded).to.equal(true);
+      expect(lastSnapshot.isUnchangedComparisonsVisible).to.equal(true);
     });
 
     percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
