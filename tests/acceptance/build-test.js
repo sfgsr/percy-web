@@ -191,19 +191,40 @@ describe('Acceptance: Build', function() {
       });
     });
 
-    // This tests the initializeSnapshotOrdering method in builds/build controller.
-    it('sorts snapshots correctly when a build moves from processing to finished', function() {
-      const build = server.schema.db.builds[0];
-      build.state = BUILD_STATES.processing;
+    // This tests the polling behavior in build-container and that initializeSnapshotOrdering method
+    // is called and works correctly in builds/build controller.
+    it('sorts snapshots correctly when a build moves from processing to finished via polling', function() { // eslint-disable-line
+      // Get the mirage build object, set it to pending
+      const build = server.schema.builds.where({id: '1'}).models[0];
+      build.update({state: BUILD_STATES.PROCESSING});
 
+      // Set a defaultSnapshot (which would normally display first)
+      // to approved so we an have some sort behavior.
       defaultSnapshot.reviewState = SNAPSHOT_APPROVED_STATE;
       defaultSnapshot.reviewStateReason = SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED;
 
-      BuildPage.visitBuild(urlParams);
-      andThen(() => {
-        build.state = BUILD_STATES.FINISHED;
+      // Overwrite the build endpoint so the first time it will return the processing build
+      // and the second time it will return a finished build.
+      // This mocks the polling behavior (since the poller runs once in tests) and mocks the effect
+      // of a build transitioning from processing to finished.
+      const url = `/builds/${build.id}`;
+      let hasVisitedBuildPage = false;
+      server.get(url, () => {
+        if (!hasVisitedBuildPage) {
+          hasVisitedBuildPage = true;
+          return build;
+        } else {
+          build.update({state: BUILD_STATES.FINISHED});
+          return build;
+        }
       });
+
+      BuildPage.visitBuild(urlParams);
+
       andThen(() => {
+        // We approved the snapshot that would normally be seen as first (default snapshot).
+        // So the normal second snapshot (twoWidthsSnapshot) will now be first, and defaultSnapshot
+        // will be second.
         expect(BuildPage.snapshotList.lastSnapshot.name).to.equal(defaultSnapshot.name);
         expect(BuildPage.snapshots(0).name).to.equal(twoWidthsSnapshot.name);
         percySnapshot(this.test);
