@@ -70,7 +70,7 @@ describe('Integration: BuildContainer', function() {
     });
   });
 
-  it('does not display snapshots when the snapshots are pending', function() {
+  it('does not display snapshots when isSnapshotsLoading is true', function() {
     const build = make('build', 'finished');
     const snapshotsChanged = DS.PromiseArray.create({promise: defer().promise});
     const stub = sinon.stub();
@@ -81,7 +81,7 @@ describe('Integration: BuildContainer', function() {
     // but we can't have the component make requests in this integration test
     this.render(hbs`{{build-container
       build=build
-      snapshotsChanged=snapshotsChanged
+      isSnapshotsLoading=true
       createReview=stub
       pollRefresh=stub
     }}`);

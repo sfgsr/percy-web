@@ -7,6 +7,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
   afterModel(model) {
     if (model.get('isFinished')) {
+      let controller = this.controllerFor('organization.project.builds.build');
+      controller.set('isSnapshotsLoading', true);
+
       model.get('snapshots').then(snapshots => {
         this._initializeSnapshotOrdering(snapshots);
       });

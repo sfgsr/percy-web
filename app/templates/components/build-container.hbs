@@ -10,7 +10,7 @@
     showSupport=showSupport
   }}
 
-  {{#if (or build.isRunning snapshotsChanged.isPending snapshotsUnchanged.isPending)}}
+  {{#if (or build.isRunning isSnapshotsLoading)}}
     {{loading-page}}
   {{else if build.isFinished}}
     {{snapshot-list

@@ -4,6 +4,8 @@ import {filterBy} from '@ember/object/computed';
 import {computed} from '@ember/object';
 
 export default Controller.extend({
+  // set by initializeSnapshotOrdering
+  snapshots: null,
   sortedSnapshots: computed('snapshots.[]', function() {
     if (!this.get('snapshots')) {
       return [];
@@ -29,5 +31,6 @@ export default Controller.extend({
     );
 
     this.set('snapshotsChanged', orderedSnapshots);
+    this.set('isSnapshotsLoading', false);
   },
 });
