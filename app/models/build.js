@@ -36,11 +36,11 @@ export default DS.Model.extend({
 
   // Processing state.
   state: DS.attr(),
-  isPending: equal('state', 'pending'),
-  isProcessing: equal('state', 'processing'),
-  isFinished: equal('state', 'finished'),
-  isFailed: equal('state', 'failed'),
-  isExpired: equal('state', 'expired'),
+  isPending: equal('state', BUILD_STATES.PENDING),
+  isProcessing: equal('state', BUILD_STATES.PROCESSING),
+  isFinished: equal('state', BUILD_STATES.FINISHED),
+  isFailed: equal('state', BUILD_STATES.FAILED),
+  isExpired: equal('state', BUILD_STATES.EXPIRED),
   failureReason: DS.attr(),
   failureReasonHumanized: computed('failureReason', function() {
     let failureReason = this.get('failureReason');
