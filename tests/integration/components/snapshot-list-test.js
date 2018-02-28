@@ -101,6 +101,7 @@ describe('Integration: SnapshotList', function() {
 
     it('allows keyboard nav with up and down arrows', function() {
       SnapshotList.typeDownArrow();
+      wait();
       expect(SnapshotList.snapshots(0).isExpanded).to.equal(true);
       expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
       expect(SnapshotList.snapshots(1).isExpanded).to.equal(false);
@@ -108,12 +109,14 @@ describe('Integration: SnapshotList', function() {
       percySnapshot(this.test);
 
       SnapshotList.typeDownArrow();
+      wait();
       expect(SnapshotList.snapshots(0).isExpanded).to.equal(false);
       expect(SnapshotList.snapshots(0).isFocused).to.equal(false);
       expect(SnapshotList.snapshots(1).isExpanded).to.equal(true);
       expect(SnapshotList.snapshots(1).isFocused).to.equal(true);
 
       SnapshotList.typeUpArrow();
+      wait();
       expect(SnapshotList.snapshots(0).isExpanded).to.equal(true);
       expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
       expect(SnapshotList.snapshots(1).isExpanded).to.equal(false);
