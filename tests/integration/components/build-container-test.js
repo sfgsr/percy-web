@@ -36,6 +36,7 @@ describe('Integration: BuildContainer', function() {
         snapshotsUnchanged=snapshotsUnchanged
         createReview=stub
         pollRefresh=stub
+        showSupport=stub
       }}`);
     });
 
@@ -54,7 +55,8 @@ describe('Integration: BuildContainer', function() {
     });
 
     it('does not display snapshots when build is failed', function() {
-      this.set('build.state', 'failed');
+      const failedBuild = make('build', 'failed');
+      this.set('build', failedBuild);
 
       percySnapshot(this.test.fullTitle());
       expect(BuildPage.snapshotList.isVisible).to.equal(false);
