@@ -20,56 +20,22 @@ describe('Integration: SnapshotList', function() {
     SnapshotList.setContext(this);
   });
 
-  it('displays snapshots in the correct order, before approval when build is finished', function() {
-    const approvedSnapshotTitle = 'Approved snapshot!!';
-    const unapprovedSnapshotTitle = 'Unapproved snapshot!!';
-    const stub = sinon.stub();
-    const build = make('build', 'finished');
-
-    const unapprovedSnapshot = make('snapshot', 'withComparisons', {
-      build,
-      name: unapprovedSnapshotTitle,
-    });
-    const approvedSnapshot = make('snapshot', 'approved', 'withComparisons', {
-      build,
-      name: approvedSnapshotTitle,
-    });
-    const snapshots = [approvedSnapshot, unapprovedSnapshot];
-    this.setProperties({
-      snapshots,
-      build,
-      stub,
-    });
-
-    this.render(hbs`{{snapshot-list
-        snapshots=snapshots
-        build=build
-        createReview=stub
-        showSnapshotFullModalTriggered=stub
-      }}`);
-
-    const titlesBeforeApproval = SnapshotList.snapshotTitles;
-
-    expect(titlesBeforeApproval[0]).to.equal(unapprovedSnapshotTitle);
-    expect(titlesBeforeApproval[1]).to.equal(approvedSnapshotTitle);
-  });
-
   it('expands batched hidden snapshots', function() {
     const stub = sinon.stub();
     const build = make('build', 'finished');
 
     const numSnapshots = 3;
-    const snapshots = makeList('snapshot', numSnapshots, 'withNoDiffs');
-    this.set('snapshots', snapshots);
+    const snapshotsUnchanged = makeList('snapshot', numSnapshots, 'withNoDiffs');
+    this.set('snapshotsUnchanged', snapshotsUnchanged);
 
     this.setProperties({
-      snapshots,
+      snapshotsUnchanged,
       build,
       stub,
     });
 
     this.render(hbs`{{snapshot-list
-      snapshots=snapshots
+      snapshotsUnchanged=snapshotsUnchanged
       build=build
       createReview=stub
       showSnapshotFullModalTriggered=stub
@@ -251,67 +217,6 @@ describe('Integration: SnapshotList', function() {
       expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
       expect(SnapshotList.snapshots(1).isFocused).to.equal(false);
       expect(SnapshotList.snapshots(numRenderedSnapshots - 1).isFocused).to.equal(false);
-    });
-  });
-
-  describe('when there are more than 150 snapshots with diffs', function() {
-    const numSnapshots = 151;
-
-    beforeEach(function() {
-      const stub = sinon.stub();
-      const build = make('build', 'finished');
-
-      const snapshots = makeList('snapshot', numSnapshots, 'withComparisons', {build});
-      this.set('snapshots', snapshots);
-
-      this.setProperties({
-        snapshots,
-        build,
-        stub,
-      });
-
-      this.render(hbs`{{snapshot-list
-        snapshots=snapshots
-        build=build
-        createReview=stub
-        showSnapshotFullModalTriggered=stub
-        updateActiveSnapshotId=stub
-      }}`);
-    });
-
-    it('collapses all snapshots by default', function() {
-      expect(SnapshotList.snapshots().count).to.equal(numSnapshots);
-      SnapshotList.snapshots().forEach(snapshot => {
-        expect(snapshot.isCollapsed).to.equal(true);
-      });
-      percySnapshot(this.test);
-    });
-
-    it('allows keyboard nav with up and down arrows', function() {
-      SnapshotList.typeDownArrow();
-      wait();
-
-      expect(SnapshotList.snapshots(0).isExpanded).to.equal(true);
-      expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
-      expect(SnapshotList.snapshots(1).isExpanded).to.equal(false);
-      expect(SnapshotList.snapshots(1).isFocused).to.equal(false);
-      percySnapshot(this.test);
-
-      SnapshotList.typeDownArrow();
-      wait();
-
-      expect(SnapshotList.snapshots(0).isExpanded).to.equal(false);
-      expect(SnapshotList.snapshots(0).isFocused).to.equal(false);
-      expect(SnapshotList.snapshots(1).isExpanded).to.equal(true);
-      expect(SnapshotList.snapshots(1).isFocused).to.equal(true);
-
-      SnapshotList.typeUpArrow();
-      wait();
-
-      expect(SnapshotList.snapshots(0).isExpanded).to.equal(true);
-      expect(SnapshotList.snapshots(0).isFocused).to.equal(true);
-      expect(SnapshotList.snapshots(1).isExpanded).to.equal(false);
-      expect(SnapshotList.snapshots(1).isFocused).to.equal(false);
     });
   });
 });

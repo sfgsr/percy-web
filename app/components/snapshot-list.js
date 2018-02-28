@@ -1,9 +1,6 @@
 import $ from 'jquery';
+import {alias, lt, mapBy} from '@ember/object/computed';
 import {computed} from '@ember/object';
-<<<<<<< HEAD
-import {alias, lt, filterBy, mapBy} from '@ember/object/computed';
-=======
->>>>>>> 40af86ef... caching works for reload case
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -12,43 +9,21 @@ export default Component.extend({
   'data-test-snapshot-list': true,
   isUnchangedSnapshotsVisible: false,
 
-<<<<<<< HEAD
-=======
   snapshotsChanged: null,
   snapshotsUnchanged: null,
 
   activeSnapshotId: null,
-  lastSnapshotIndex: null,
-  selectedSnapshotIndex: -1,
->>>>>>> 40af86ef... caching works for reload case
-  snapshotComponents: null,
-  activeSnapshotId: null,
 
-<<<<<<< HEAD
-  sortedSnapshots: computed('snapshots.[]', function() {
-    return snapshotSort(this.get('snapshots').toArray());
-  }),
-  snapshotsUnreviewed: filterBy('sortedSnapshots', 'isUnreviewed', true),
-  snapshotsApproved: filterBy('sortedSnapshots', 'isApprovedByUserEver', true),
-  snapshotsUnchanged: filterBy('sortedSnapshots', 'isUnchanged', true),
-
-  isDefaultExpanded: lt('snapshotsUnreviewed.length', 150),
+  isDefaultExpanded: lt('snapshotsChanged.length', 150),
 
   actions: {
     updateActiveSnapshotId(newSnapshotId) {
       this.set('activeSnapshotId', newSnapshotId);
     },
-
-    toggleNoDiffSnapshots() {
-      this.toggleProperty('hideNoDiffs');
-      this.get('cachedSnapshotOrder').setHideNoDiffsChanged();
+    toggleUnchangedSnapshotsVisible() {
+      this.toggleProperty('isUnchangedSnapshotsVisible');
     },
   },
-=======
-  isDefaultExpanded: computed('snapshotsChanged', function() {
-    return this.get('snapshotsChanged.length') < 150;
-  }),
->>>>>>> 40af86ef... caching works for reload case
 
   didInsertElement() {
     $(document).bind(
@@ -70,10 +45,6 @@ export default Component.extend({
     $(document).unbind('keydown.snapshots');
   },
 
-<<<<<<< HEAD
-  _snapshotIds: mapBy('computedSnapshots', 'id'),
-  _numSnapshots: alias('computedSnapshots.length'),
-=======
   _allVisibleSnapshots: computed(
     'snapshotsChanged.[]',
     'snapshotsUnchanged.[]',
@@ -89,7 +60,6 @@ export default Component.extend({
 
   _snapshotIds: mapBy('_allVisibleSnapshots', 'id'),
   _numSnapshots: alias('_allVisibleSnapshots.length'),
->>>>>>> 3246cbf2... clean up
   _calculateNewActiveSnapshotId({isNext = true} = {}) {
     let currentIndex = this.get('_snapshotIds').indexOf(this.get('activeSnapshotId'));
 

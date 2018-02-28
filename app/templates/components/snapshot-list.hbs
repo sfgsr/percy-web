@@ -5,17 +5,15 @@
   </div>
 {{/unless}}
 
-{{#each snapshotsChanged as |snapshot index|}}
+{{#each snapshotsChanged as |snapshot|}}
   {{snapshot-viewer
     build=build
     snapshot=snapshot
-    listIndex=index
+    activeSnapshotId=activeSnapshotId
     isDefaultExpanded=isDefaultExpanded
-    selectChild=(action 'selectChild')
-    registerChild=(action 'registerChild')
-    unregisterChild=(action 'unregisterChild')
     showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
     createReview=createReview
+    updateActiveSnapshotId=(action "updateActiveSnapshotId")
   }}
 {{/each}}
 {{#if (and (not isUnchangedSnapshotsVisible) snapshotsUnchanged.length)}}
@@ -30,17 +28,15 @@
     </div>
   </div>
 {{else}}
-  {{#each snapshotsUnchanged as |snapshot index|}}
+  {{#each snapshotsUnchanged as |snapshot|}}
     {{snapshot-viewer
       build=build
       snapshot=snapshot
-      listIndex=index
+      activeSnapshotId=activeSnapshotId
       isDefaultExpanded=isDefaultExpanded
-      selectChild=(action 'selectChild')
-      registerChild=(action 'registerChild')
-      unregisterChild=(action 'unregisterChild')
       showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
       createReview=createReview
+      updateActiveSnapshotId=(action "updateActiveSnapshotId")
     }}
   {{/each}}
 {{/if}}

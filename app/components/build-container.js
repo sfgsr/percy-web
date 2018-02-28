@@ -10,11 +10,8 @@ export default Component.extend(PollingMixin, {
     'isShowingModal:BuildContainer--snapshotModalOpen:BuildContainer--snapshotModalClosed',
   ],
 
-  currentPosition: null,
   snapshotsChanged: null,
   snapshotsUnchanged: null,
-
-  shouldShowLoadingSpinner: or('build.isRunning', 'snapshots.isPending'),
 
   shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 

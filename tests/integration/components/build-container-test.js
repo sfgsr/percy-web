@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, makeList, manualSetup} from 'ember-data-factory-guy';
+import {make, manualSetup} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import DS from 'ember-data';
 import {defer} from 'rsvp';
@@ -19,91 +19,62 @@ describe('Integration: BuildContainer', function() {
     BuildPage.setContext(this);
   });
 
-  it('does not display snapshots while build is processing', function() {
-    const build = make('build', 'processing');
-    const snapshots = makeList('snapshot', ['withComparisons', 'withNoDiffs'], {build});
-    const stub = sinon.stub();
-    // override the pollRefresh method for the test. This does not happen IRL, but we can't have
-    // the component make requests in this integration test.
-    const pollRefreshStub = sinon.stub();
-    this.setProperties({build, snapshots, stub, pollRefreshStub});
+  describe('snapshot display during different build states', function() {
+    beforeEach(function() {
+      const build = make('build');
+      const snapshotsChanged = [make('snapshot', 'withComparisons', {build})];
+      const snapshotsUnchanged = [make('snapshot', 'withNoDiffs', {build})];
+      const stub = sinon.stub();
 
-    this.render(hbs`{{build-container
-      build=build
-      snapshots=snapshots
-      createReview=stub
-      pollRefresh=pollRefreshStub
-    }}`);
+      this.setProperties({build, snapshotsChanged, snapshotsUnchanged, stub});
 
-    percySnapshot(this.test.fullTitle());
-    expect(BuildPage.snapshotList.isVisible).to.equal(false);
-  });
+      this.render(hbs`{{build-container
+        build=build
+        snapshotsChanged=snapshotsChanged
+        snapshotsUnchanged=snapshotsUnchanged
+        createReview=stub
+      }}`);
+    });
 
-  it('does not display snapshots while build is pending', function() {
-    const build = make('build', 'pending');
-    const snapshots = makeList('snapshot', ['withComparisons', 'withNoDiffs'], {build});
-    const stub = sinon.stub();
-    // override the pollRefresh method for the test. This does not happen IRL, but we can't have
-    // the component make requests in this integration test.
-    const pollRefreshStub = sinon.stub();
-    this.setProperties({build, snapshots, stub, pollRefreshStub});
+    it('does not display snapshots while build is processing', function() {
+      this.set('build.state', 'processing');
 
-    this.render(hbs`{{build-container
-      build=build
-      snapshots=snapshots
-      createReview=stub
-      pollRefresh=pollRefreshStub
-    }}`);
+      percySnapshot(this.test.fullTitle());
+      expect(BuildPage.snapshotList.isVisible).to.equal(false);
+    });
 
-    percySnapshot(this.test.fullTitle());
-    expect(BuildPage.snapshotList.isVisible).to.equal(false);
-  });
+    it('does not display snapshots while build is pending', function() {
+      this.set('build.state', 'pending');
 
-  it('does not display snapshots when build is failed', function() {
-    const build = make('build', 'failed');
-    const snapshots = makeList('snapshot', ['withComparisons', 'withNoDiffs'], {build});
-    const stub = sinon.stub();
+      percySnapshot(this.test.fullTitle());
+      expect(BuildPage.snapshotList.isVisible).to.equal(false);
+    });
 
-    this.setProperties({build, snapshots, stub});
+    it('does not display snapshots when build is failed', function() {
+      this.set('build.state', 'failed');
 
-    this.render(hbs`{{build-container
-      build=build
-      snapshots=snapshots
-      createReview=stub
-      showSupport=stub
-    }}`);
+      percySnapshot(this.test.fullTitle());
+      expect(BuildPage.snapshotList.isVisible).to.equal(false);
+    });
 
-    percySnapshot(this.test.fullTitle());
-    expect(BuildPage.snapshotList.isVisible).to.equal(false);
-  });
+    it('does not display snapshots when build is expired', function() {
+      this.set('build.state', 'expired');
 
-  it('does not display snapshots when build is expired', function() {
-    const build = make('build', 'expired');
-    const snapshots = makeList('snapshot', ['withComparisons', 'withNoDiffs'], {build});
-    const stub = sinon.stub();
-
-    this.setProperties({build, snapshots, stub});
-
-    this.render(hbs`{{build-container
-      build=build
-      snapshots=snapshots
-      createReview=stub
-    }}`);
-
-    percySnapshot(this.test.fullTitle());
-    expect(BuildPage.snapshotList.isVisible).to.equal(false);
+      percySnapshot(this.test.fullTitle());
+      expect(BuildPage.snapshotList.isVisible).to.equal(false);
+    });
   });
 
   it('does not display snapshots when the snapshots are pending', function() {
     const build = make('build', 'finished');
-    const snapshots = DS.PromiseArray.create({promise: defer().promise});
+    const snapshotsChanged = DS.PromiseArray.create({promise: defer().promise});
     const stub = sinon.stub();
 
-    this.setProperties({build, snapshots, stub});
+    this.setProperties({build, snapshotsChanged, stub});
 
     this.render(hbs`{{build-container
       build=build
-      snapshots=snapshots
+      snapshotsChanged=snapshotsChanged
       createReview=stub
     }}`);
 
@@ -116,11 +87,17 @@ describe('Integration: BuildContainer', function() {
     const diffSnapshot = make('snapshot', 'withComparisons', {build});
     const sameSnapshot = make('snapshot', 'withNoDiffs', {build});
     const stub = sinon.stub();
-    this.setProperties({build, stub, snapshots: [sameSnapshot, diffSnapshot]});
+    this.setProperties({
+      build,
+      stub,
+      snapshotsChanged: [diffSnapshot],
+      snapshotsUnchanged: [sameSnapshot],
+    });
 
     this.render(hbs`{{build-container
       build=build
-      snapshots=snapshots
+      snapshotsChanged=snapshotsChanged
+      snapshotsUnchanged=snapshotsUnchanged
       createReview=stub
     }}`);
     percySnapshot(this.test.fullTitle());

@@ -332,7 +332,7 @@ describe('Acceptance: Build', function() {
 
     andThen(() => {
       const snapshot = BuildPage.findSnapshotByName(snapshotName);
-      expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
+      expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
       expect(snapshot.isExpanded).to.equal(false);
       expect(snapshot.isNoDiffBoxVisible).to.equal(false);
     });

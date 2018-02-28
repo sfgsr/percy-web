@@ -8,15 +8,20 @@ export default Route.extend(AuthenticatedRouteMixin, {
   afterModel(model) {
     if (model.get('isFinished')) {
       model.get('snapshots').then(snapshots => {
-        this.send('initializeSnapshotOrdering', snapshots);
+        this._initializeSnapshotOrdering(snapshots);
       });
     }
   },
 
+  _initializeSnapshotOrdering(snapshots) {
+    // this route path needs to be explicit so it will work with fullscreen snapshots.
+    let controller = this.controllerFor('organization.project.builds.build');
+    controller.initializeSnapshotOrdering(snapshots);
+  },
+
   actions: {
     initializeSnapshotOrdering(snapshots) {
-      let controller = this.controllerFor(this.routeName);
-      controller.initializeSnapshotOrdering(snapshots);
+      this._initializeSnapshotOrdering(snapshots);
     },
     didTransition() {
       this._super.apply(this, arguments);
