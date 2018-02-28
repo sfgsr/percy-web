@@ -1,8 +1,16 @@
 import $ from 'jquery';
 import Ember from 'ember';
 import config from '../config/environment';
+import AdminMode from 'percy-web/lib/admin-mode';
 
 export default {
+  // Example Usage:
+  //
+  // buildApiUrl('identities');
+  // buildApiUrl('userIdentity', 1);
+  // buildApiUrl('userIdentity', 1, {includePercyMode: true});
+  //
+  // keys that can be used to build a URL are located in /config/environment.js
   buildApiUrl() {
     var key = arguments[0];
     var otherArgs = Array.prototype.slice.call(arguments, 1);
@@ -14,7 +22,12 @@ export default {
     } else {
       options = {};
     }
-    var params = options.params;
+    var params = options.params || {};
+
+    if (options['includePercyMode'] && this.percyMode()) {
+      params['percy-mode'] = this.percyMode();
+    }
+
     var queryParams = params ? '?' + $.param(params) : '';
 
     var path = config.APP.apiUrls[key];
@@ -35,7 +48,14 @@ export default {
         path = path.replace('%@', arg);
       });
     }
+
     return window.location.origin + path + queryParams;
+  },
+
+  percyMode() {
+    if (AdminMode.isAdmin()) {
+      return AdminMode.getAdminMode();
+    }
   },
 
   setWindowLocation(url) {

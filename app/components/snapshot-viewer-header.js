@@ -55,8 +55,10 @@ export default Component.extend({
     },
 
     downloadHTML(type, snapshot) {
-      const url = utils.buildApiUrl(`${type}Asset`, snapshot.get('id'));
-      window.location.replace(url);
+      const options = {includePercyMode: true};
+      const url = utils.buildApiUrl(`${type}Asset`, snapshot.get('id'), options);
+
+      utils.setWindowLocation(url);
       this.set('isDropdownVisible', false);
     },
   },
