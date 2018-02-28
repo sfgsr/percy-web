@@ -28,11 +28,14 @@ describe('Integration: BuildContainer', function() {
 
       this.setProperties({build, snapshotsChanged, snapshotsUnchanged, stub});
 
+      // Override the pollRefresh method for the test. This does not happen IRL,
+      // but we can't have the component make requests in this integration test
       this.render(hbs`{{build-container
         build=build
         snapshotsChanged=snapshotsChanged
         snapshotsUnchanged=snapshotsUnchanged
         createReview=stub
+        pollRefresh=stub
       }}`);
     });
 
@@ -72,10 +75,13 @@ describe('Integration: BuildContainer', function() {
 
     this.setProperties({build, snapshotsChanged, stub});
 
+    // Override the pollRefresh method for the test. This does not happen IRL,
+    // but we can't have the component make requests in this integration test
     this.render(hbs`{{build-container
       build=build
       snapshotsChanged=snapshotsChanged
       createReview=stub
+      pollRefresh=stub
     }}`);
 
     percySnapshot(this.test.fullTitle());
@@ -94,11 +100,14 @@ describe('Integration: BuildContainer', function() {
       snapshotsUnchanged: [sameSnapshot],
     });
 
+    // Override the pollRefresh method for the test. This does not happen IRL,
+    // but we can't have the component make requests in this integration test
     this.render(hbs`{{build-container
       build=build
       snapshotsChanged=snapshotsChanged
       snapshotsUnchanged=snapshotsUnchanged
       createReview=stub
+      pollRefresh=stub
     }}`);
     percySnapshot(this.test.fullTitle());
 
