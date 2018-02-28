@@ -73,21 +73,21 @@ describe('Integration: SnapshotViewerHeader', function() {
         }}`);
       });
 
-      it('shows download original and new HTML option', function() {
+      it('shows download original and new source option', function() {
         this.set('comparison.headSnapshot', headSnapshot);
         this.set('comparison.baseSnapshot', baseSnapshot);
 
         SnapshotViewerHeaderPO.clickDropdownToggle();
-        expect(SnapshotViewerHeaderPO.dropdownOptions(1).text).to.equal('Download original HTML');
-        expect(SnapshotViewerHeaderPO.dropdownOptions(2).text).to.equal('Download new HTML');
+        expect(SnapshotViewerHeaderPO.dropdownOptions(1).text).to.equal('Download original source');
+        expect(SnapshotViewerHeaderPO.dropdownOptions(2).text).to.equal('Download new source');
         percySnapshot(this.test);
       });
 
-      it('shows download new HTML option', function() {
+      it('shows download new source option', function() {
         this.set('comparison.headSnapshot', headSnapshot);
 
         SnapshotViewerHeaderPO.clickDropdownToggle();
-        expect(SnapshotViewerHeaderPO.dropdownOptions(1).text).to.equal('Download new HTML');
+        expect(SnapshotViewerHeaderPO.dropdownOptions(1).text).to.equal('Download new source');
         percySnapshot(this.test);
       });
     });
