@@ -3695,8 +3695,8 @@ ember-page-title@^4.0.0:
     ember-cli-htmlbars "^2.0.1"
 
 ember-percy@^1.2.21:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.3.0.tgz#5eb3d0f78bc2c5a71c3947ed9dbc631d16dde688"
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/ember-percy/-/ember-percy-1.3.1.tgz#0c8e2f4ef53bf3ef259118e844dc1a5b94dfbfab"
   dependencies:
     body-parser "^1.15.0"
     ember-cli-babel "^6.10.0"
@@ -4497,8 +4497,8 @@ faker@^3.0.0:
   resolved "git+https://github.com/Marak/faker.js.git#220e5cbff3ac8bd437619c5df712bbfb8622895d"
 
 fast-deep-equal@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
 
 fast-diff@^1.1.1:
   version "1.1.2"
@@ -9435,7 +9435,13 @@ to-iso-string@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/to-iso-string/-/to-iso-string-0.0.2.tgz#4dc19e664dfccbe25bd8db508b00c6da158255d1"
 
-tough-cookie@>=2.3.3, tough-cookie@~2.3.0, tough-cookie@~2.3.3:
+tough-cookie@>=2.3.3, tough-cookie@~2.3.3:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.4.tgz#ec60cee38ac675063ffc97a5c18970578ee83655"
+  dependencies:
+    punycode "^1.4.1"
+
+tough-cookie@~2.3.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"
   dependencies:
