@@ -36,7 +36,7 @@
     "ember-ajax": "^3.0.0",
     "ember-changeset": "^1.4.1",
     "ember-changeset-validations": "^1.2.9",
-    "ember-cli": "^2.16.1",
+    "ember-cli": "^3.0.0",
     "ember-cli-app-version": "^3.1.1",
     "ember-cli-autoprefixer": "^0.8.1",
     "ember-cli-babel": "^6.10.0",
