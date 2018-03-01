@@ -20,7 +20,7 @@ describe('Integration: GithubIntegratorComponent', function() {
     beforeEach(function() {
       const project = make('project');
       const organization = make('organization', 'withGithubIntegration', 'withGithubRepos');
-      project.organization = organization;
+      project.set('organization', organization);
 
       this.setProperties({project});
     });
@@ -50,7 +50,7 @@ describe('Integration: GithubIntegratorComponent', function() {
         'withGithubEnterpriseIntegration',
         'withGithubEnterpriseRepos',
       );
-      project.organization = organization;
+      project.set('organization', organization);
       this.setProperties({project});
     });
 
@@ -75,7 +75,7 @@ describe('Integration: GithubIntegratorComponent', function() {
     beforeEach(function() {
       const project = make('project');
       const organization = make('organization', 'withMultipleIntegrations');
-      project.organization = organization;
+      project.set('organization', organization);
       this.setProperties({project});
     });
 

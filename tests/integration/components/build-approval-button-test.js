@@ -17,20 +17,19 @@ describe('Integration: BuildApprovalButton', function() {
   });
 
   let build;
-  let createReview;
 
   beforeEach(function() {
     manualSetup(this.container);
     BuildApprovalButton.setContext(this);
     build = make('build', {snapshots: makeList('snapshot', 4)});
-    createReview = sinon.stub().returns(resolve());
-    this.setProperties({build, createReview});
+    const stub = sinon.stub().returns(resolve());
+    this.setProperties({build, stub});
   });
 
   it('displays correctly when build is not approved ', function() {
     this.render(hbs`{{build-approval-button
       build=build
-      createReview=createReview
+      createReview=stub
     }}`);
     percySnapshot(this.test);
   });
@@ -38,20 +37,25 @@ describe('Integration: BuildApprovalButton', function() {
   it('displays correctly when build is approved', function() {
     this.render(hbs`{{build-approval-button
       build=build
-      createReview=createReview
+      createReview=stub
     }}`);
     this.set('build.reviewState', 'approved');
     percySnapshot(this.test);
   });
 
   it('calls createReview with correct args when clicked', function() {
+    // This stub needs to return a promise AND we need to stub the `then` block
+    // because the `then` block makes a server call that we don't want to happen in tests.
+    let createReviewStub = sinon.stub().returns(resolve({then: sinon.stub()}));
+    this.set('createReviewStub', createReviewStub);
+
     this.render(hbs`{{build-approval-button
       build=build
-      createReview=createReview
+      createReview=createReviewStub
     }}`);
     BuildApprovalButton.clickButton();
 
-    expect(createReview).to.have.been.calledWith('approve', build, build.get('snapshots'));
+    expect(createReviewStub).to.have.been.calledWith('approve', build, build.get('snapshots'));
   });
 
   it('displays correctly when in loading state ', function() {
@@ -60,7 +64,7 @@ describe('Integration: BuildApprovalButton', function() {
     this.set('createReview', createReview);
     this.render(hbs`{{build-approval-button
       build=build
-      createReview=(action createReview)
+      createReview=(action stub)
     }}`);
 
     BuildApprovalButton.clickButton();

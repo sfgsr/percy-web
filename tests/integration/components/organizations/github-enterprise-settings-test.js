@@ -19,7 +19,7 @@ describe('Integration: Github Enterprise Settings', function() {
     beforeEach(function() {
       const user = make('user');
       const organization = make('organization', 'withGithubEnterpriseIntegration');
-      user.organizations = [organization];
+      user.set('organizations', [organization]);
       this.setProperties({user, organization});
     });
 
@@ -40,7 +40,7 @@ describe('Integration: Github Enterprise Settings', function() {
     beforeEach(function() {
       const user = make('user');
       const organization = make('organization');
-      user.organizations = [organization];
+      user.set('organizations', [organization]);
       this.setProperties({user, organization});
     });
 
