@@ -1,11 +1,9 @@
 import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
-import {beforeEach, afterEach} from 'mocha';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 import sinon from 'sinon';
 import BuildPage from 'percy-web/tests/pages/build-page';
 import {TEST_IMAGE_URLS} from 'percy-web/mirage/factories/screenshot';
-import adminMode from 'percy-web/lib/admin-mode';
 import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_REVIEW_STATE_REASONS} from 'percy-web/models/snapshot';
 import {BUILD_STATES} from 'percy-web/models/build';
 
@@ -163,15 +161,7 @@ describe('Acceptance: Build', function() {
     };
   });
 
-  describe('with per-snapshot approval on', function() {
-    beforeEach(function() {
-      adminMode.setAdminMode();
-    });
-
-    afterEach(function() {
-      adminMode.clear();
-    });
-
+  describe('snapshot order/caching', function() {
    it('displays snapshots in the correct order, before and after approval when build is finished', function() { // eslint-disable-line
 
       const firstSnapshotExpectedName = defaultSnapshot.name;
@@ -200,7 +190,7 @@ describe('Acceptance: Build', function() {
       build.update({state: BUILD_STATES.PROCESSING});
 
       // Set a defaultSnapshot (which would normally display first)
-      // to approved so we an have some sort behavior.
+      // to approved so we have some sort behavior.
       defaultSnapshot.reviewState = SNAPSHOT_APPROVED_STATE;
       defaultSnapshot.reviewStateReason = SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED;
 

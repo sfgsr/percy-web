@@ -91,7 +91,7 @@
         </button>
       </div>
 
-      {{#if (and (is-admin) isBuildFinished)}}
+      {{#if isBuildFinished}}
         <div class="btn-group" data-test-snapshot-approval-button>
           {{snapshot-approval-button
             snapshot=snapshot

@@ -2,14 +2,13 @@
 /* eslint-disable no-unused-expressions */
 import {setupComponentTest} from 'ember-mocha';
 import {expect} from 'chai';
-import {it, describe, beforeEach, afterEach} from 'mocha';
+import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {make, manualSetup} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import SnapshotViewerPO from 'percy-web/tests/pages/components/snapshot-viewer';
 import {resolve} from 'rsvp';
-import adminMode from 'percy-web/lib/admin-mode';
 import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_UNAPPROVED_STATE} from 'percy-web/models/snapshot';
 import wait from 'ember-test-helpers/wait';
 
@@ -31,7 +30,7 @@ describe('Integration: SnapshotViewer', function() {
     createReviewStub = sinon.stub().returns(resolve());
     snapshotTitle = 'Awesome snapshot title';
     snapshot = make('snapshot', 'withComparisons', {name: snapshotTitle});
-    const build = make('build');
+    const build = make('build', 'finished');
     build.set('snapshots', [snapshot]);
     const stub = sinon.stub();
 
@@ -240,55 +239,21 @@ describe('Integration: SnapshotViewer', function() {
       });
     });
   });
-});
 
-describe('Integration: SnapshotViewer with per snapshot approval', function() {
-  setupComponentTest('snapshot-viewer', {
-    integration: true,
-  });
+  describe('approve snapshot button', function() {
+    beforeEach(function() {
+      manualSetup(this.container);
+      SnapshotViewerPO.setContext(this);
 
-  let snapshotTitle;
-  let showSnapshotFullModalTriggeredStub;
-  let createReviewStub;
-
-  beforeEach(function() {
-    adminMode.setAdminMode();
-  });
-  afterEach(function() {
-    adminMode.clear();
-  });
-
-  beforeEach(function() {
-    manualSetup(this.container);
-    SnapshotViewerPO.setContext(this);
-
-    showSnapshotFullModalTriggeredStub = sinon.stub();
-    createReviewStub = sinon.stub().returns(resolve());
-    snapshotTitle = 'Awesome snapshot title';
-    const snapshot = make('snapshot', {name: snapshotTitle});
-    const build = make('build', 'finished');
-    build.set('snapshots', [snapshot]);
-    const stub = sinon.stub();
-
-    this.setProperties({
-      stub,
-      snapshot,
-      build,
-      showSnapshotFullModalTriggered: showSnapshotFullModalTriggeredStub,
-      createReview: createReviewStub,
+      this.render(hbs`{{snapshot-viewer
+        snapshot=snapshot
+        build=build
+        showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+        createReview=createReview
+        updateActiveSnapshotId=stub
+      }}`);
     });
 
-    this.render(hbs`{{snapshot-viewer
-      snapshot=snapshot
-      build=build
-      showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
-      createReview=createReview
-      updateActiveSnapshotId=stub
-    }}`);
-  });
-
-  // TODO: move this test into main block when the feature ships for real
-  describe('approve snapshot button', function() {
     it('sends createReview with correct arguments when approve button is clicked', function() {
       SnapshotViewerPO.header.clickApprove();
       expect(createReviewStub).to.have.been.calledWith('approve', this.get('build'), [

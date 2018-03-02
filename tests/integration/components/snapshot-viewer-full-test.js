@@ -1,13 +1,12 @@
 /* jshint expr:true */
 import {setupComponentTest} from 'ember-mocha';
 import {expect} from 'chai';
-import {it, describe, beforeEach, afterEach} from 'mocha';
+import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, makeList, manualSetup} from 'ember-data-factory-guy';
+import {make, manualSetup} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import {resolve} from 'rsvp';
-import adminMode from 'percy-web/lib/admin-mode';
 import FullSnapshotPage from 'percy-web/tests/pages/components/snapshot-viewer-full';
 
 describe('Integration: SnapshotViewerFull', function() {
@@ -25,7 +24,7 @@ describe('Integration: SnapshotViewerFull', function() {
     manualSetup(this.container);
     FullSnapshotPage.setContext(this);
 
-    const build = make('build');
+    const build = make('build', 'finished');
     const snapshot = make('snapshot', 'withComparisons', {
       build,
       name: snapshotTitle,
@@ -147,66 +146,7 @@ describe('Integration: SnapshotViewerFull', function() {
       expect(closeSnapshotFullModalStub).to.have.been.calledWith(this.get('build.id'));
     });
   });
-});
 
-describe('Integration: SnapshotViewerFull with per snapshot approval', function() {
-  setupComponentTest('snapshot-viewer-full', {
-    integration: true,
-  });
-
-  let closeSnapshotFullModalStub;
-  let updateComparisonModeStub;
-  let createReviewStub;
-  const snapshotTitle = 'Awesome snapshot title';
-
-  beforeEach(function() {
-    adminMode.setAdminMode();
-  });
-  afterEach(function() {
-    adminMode.clear();
-  });
-
-  beforeEach(function() {
-    manualSetup(this.container);
-    FullSnapshotPage.setContext(this);
-
-    const snapshots = makeList('snapshot', 5, 'withComparisons');
-    snapshots[0].set('name', snapshotTitle);
-    const build = make('build', 'finished');
-    build.set('snapshots', snapshots);
-    const snapshotSelectedWidth = snapshots[0]
-      .get('comparisons')
-      .sortBy('width')
-      .get('lastObject.width');
-
-    closeSnapshotFullModalStub = sinon.stub();
-    updateComparisonModeStub = sinon.stub();
-    createReviewStub = sinon.stub().returns(resolve());
-
-    this.setProperties({
-      build,
-      snapshotSelectedWidth,
-      snapshotId: build.get('snapshots.firstObject.id'),
-      comparisonMode: 'diff',
-      closeSnapshotFullModal: closeSnapshotFullModalStub,
-      updateComparisonMode: updateComparisonModeStub,
-      createReview: createReviewStub,
-      stub: sinon.stub(),
-    });
-
-    this.render(hbs`{{snapshot-viewer-full
-      snapshotId=snapshotId
-      build=build
-      snapshotSelectedWidth=snapshotSelectedWidth
-      comparisonMode=comparisonMode
-      transitionRouteToWidth=stub
-      updateComparisonMode=updateComparisonMode
-      closeSnapshotFullModal=closeSnapshotFullModal
-      createReview=createReview
-    }}`);
-  });
-
-  // TODO: move this test into main block when the feature ships for real
   describe('approve snapshot button', function() {
     it('sends createReview with correct arguments when approve button is clicked', function() {
       FullSnapshotPage.header.clickApprove();
