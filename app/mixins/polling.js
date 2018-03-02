@@ -13,6 +13,13 @@ const MAX_UPDATE_POLLING_REQUESTS = 2000;
 // OPTIONAL:
 // POLLING_INTERVAL_SECONDS
 // MAX_UPDATE_POLLING_REQUESTS
+//
+// FOR INTEGRATION TESTS:
+// ====YOU MUST=== override either `pollRefresh` action OR `shouldPollForUpdates` property
+// in integration tests. The `Ember.testing` check passes only for acceptance tests.
+// If you do not, a random other test will fail on buildkite because the integration test
+// that includes the poller will have returned a 404 not found for whatever you are polling for.
+// See build-container-test for an example.
 
 var Polling = Mixin.create({
   POLLING_INTERVAL_SECONDS,

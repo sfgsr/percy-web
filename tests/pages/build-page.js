@@ -5,7 +5,7 @@ import {alias} from 'ember-cli-page-object/macros';
 
 const SELECTORS = {
   BUILD_LIST: '[data-test-project-container-build-list]',
-  NO_DIFFS_PANEL: '[data-test-toggle-no-diffs]',
+  UNCHANGED_PANEL: '[data-test-toggle-unchanged]',
   SNAPSHOT_LIST: '[data-test-snapshot-list]',
   BUILD_INFO_DROPDOWN_TOGGLE: '[data-test-build-info-dropdown-toggle]',
   SHOW_SUPPORT_LINK: '[data-test-build-overview-show-support]',
@@ -19,8 +19,8 @@ const BuildPage = {
 
   toggleBuildInfoDropdown: clickable(SELECTORS.BUILD_INFO_DROPDOWN_TOGGLE),
 
-  isNoDiffsPanelVisible: isVisible(SELECTORS.NO_DIFFS_PANEL),
-  clickToggleNoDiffsSection: clickable(SELECTORS.NO_DIFFS_PANEL),
+  isUnchangedPanelVisible: isVisible(SELECTORS.UNCHANGED_PANEL),
+  clickToggleNoDiffsSection: clickable(SELECTORS.UNCHANGED_PANEL),
 
   snapshotList: SnapshotList,
   snapshots: alias('snapshotList.snapshots'),

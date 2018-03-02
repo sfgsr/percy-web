@@ -4,27 +4,39 @@
     are collapsed below. <strong>Tip:</strong> use the arrow keys <code>↓</code> and <code>↑</code> to move around.
   </div>
 {{/unless}}
-{{#each computedSnapshots as |snapshot index|}}
+
+{{#each snapshotsChanged as |snapshot|}}
   {{snapshot-viewer
     build=build
     snapshot=snapshot
-    listIndex=index
     activeSnapshotId=activeSnapshotId
-    updateActiveSnapshotId=(action "updateActiveSnapshotId")
     isDefaultExpanded=isDefaultExpanded
     showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
     createReview=createReview
+    updateActiveSnapshotId=(action "updateActiveSnapshotId")
   }}
 {{/each}}
-{{#if hideNoDiffs}}
+{{#if (and (not isUnchangedSnapshotsVisible) snapshotsUnchanged.length)}}
   <div class="SnapshotViewer SnapshotViewer--actionable">
-    <div class="SnapshotViewer-header flex align-center justify-center text-weight-bold p-2 mx-2 mb-2 bg-gray-000 rounded border border-gray-100 c-pointer" data-test-toggle-no-diffs {{action "toggleNoDiffSnapshots"}}>
+    <div class="SnapshotViewer-header flex align-center justify-center text-weight-bold p-2 mx-2 mb-2 bg-gray-000 rounded border border-gray-100 c-pointer" data-test-toggle-unchanged {{action "toggleUnchangedSnapshotsVisible"}}>
       <figure class="svg-container">
         {{inline-svg "no-comparison-group-icon" class="mr-1"}}
       </figure>
       <div class="text-blue mr-sm">
-        {{pluralize noDiffSnapshotsCount "unchanged snapshot"}} for all widths.
+        {{pluralize snapshotsUnchanged.length "unchanged snapshot"}} for all widths.
       </div>
     </div>
   </div>
+{{else}}
+  {{#each snapshotsUnchanged as |snapshot|}}
+    {{snapshot-viewer
+      build=build
+      snapshot=snapshot
+      activeSnapshotId=activeSnapshotId
+      isDefaultExpanded=isDefaultExpanded
+      showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
+      createReview=createReview
+      updateActiveSnapshotId=(action "updateActiveSnapshotId")
+    }}
+  {{/each}}
 {{/if}}

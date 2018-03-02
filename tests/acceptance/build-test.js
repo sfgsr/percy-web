@@ -1,9 +1,13 @@
 import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
+import {beforeEach, afterEach} from 'mocha';
 import freezeMoment from '../helpers/freeze-moment';
 import moment from 'moment';
 import sinon from 'sinon';
 import BuildPage from 'percy-web/tests/pages/build-page';
 import {TEST_IMAGE_URLS} from 'percy-web/mirage/factories/screenshot';
+import adminMode from 'percy-web/lib/admin-mode';
+import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_REVIEW_STATE_REASONS} from 'percy-web/models/snapshot';
+import {BUILD_STATES} from 'percy-web/models/build';
 
 describe('Acceptance: Pending Build', function() {
   freezeMoment('2018-05-22');
@@ -159,6 +163,76 @@ describe('Acceptance: Build', function() {
     };
   });
 
+  describe('with per-snapshot approval on', function() {
+    beforeEach(function() {
+      adminMode.setAdminMode();
+    });
+
+    afterEach(function() {
+      adminMode.clear();
+    });
+
+   it('displays snapshots in the correct order, before and after approval when build is finished', function() { // eslint-disable-line
+
+      const firstSnapshotExpectedName = defaultSnapshot.name;
+      const secondSnapshotExpectedName = twoWidthsSnapshot.name;
+
+      BuildPage.visitBuild(urlParams);
+
+      andThen(() => {
+        expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
+        expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
+      });
+
+      BuildPage.snapshots(0).clickApprove();
+
+      andThen(() => {
+        expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
+        expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
+      });
+    });
+
+    // This tests the polling behavior in build-container and that initializeSnapshotOrdering method
+    // is called and works correctly in builds/build controller.
+    it('sorts snapshots correctly when a build moves from processing to finished via polling', function() { // eslint-disable-line
+      // Get the mirage build object, set it to pending
+      const build = server.schema.builds.where({id: '1'}).models[0];
+      build.update({state: BUILD_STATES.PROCESSING});
+
+      // Set a defaultSnapshot (which would normally display first)
+      // to approved so we an have some sort behavior.
+      defaultSnapshot.reviewState = SNAPSHOT_APPROVED_STATE;
+      defaultSnapshot.reviewStateReason = SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED;
+
+      // Overwrite the build endpoint so the first time it will return the processing build
+      // and the second time it will return a finished build.
+      // This mocks the polling behavior (since the poller runs once in tests) and mocks the effect
+      // of a build transitioning from processing to finished.
+      const url = `/builds/${build.id}`;
+      let hasVisitedBuildPage = false;
+      server.get(url, () => {
+        if (!hasVisitedBuildPage) {
+          hasVisitedBuildPage = true;
+          return build;
+        } else {
+          build.update({state: BUILD_STATES.FINISHED});
+          return build;
+        }
+      });
+
+      BuildPage.visitBuild(urlParams);
+
+      andThen(() => {
+        // We approved the snapshot that would normally be seen as first (default snapshot).
+        // So the normal second snapshot (twoWidthsSnapshot) will now be first, and defaultSnapshot
+        // will be second.
+        expect(BuildPage.snapshotList.lastSnapshot.name).to.equal(defaultSnapshot.name);
+        expect(BuildPage.snapshots(0).name).to.equal(twoWidthsSnapshot.name);
+      });
+      percySnapshot(this.test);
+    });
+  });
+
   // TODO: test number of snapshots, expanded, actionable status for all
   it('shows build overview info dropdown', function() {
     BuildPage.visitBuild(urlParams);
@@ -249,7 +323,7 @@ describe('Acceptance: Build', function() {
     BuildPage.visitBuild(urlParams);
 
     andThen(() => {
-      expect(BuildPage.isNoDiffsPanelVisible).to.equal(true);
+      expect(BuildPage.isUnchangedPanelVisible).to.equal(true);
       expect(BuildPage.findSnapshotByName(snapshotName)).to.not.exist;
     });
 
@@ -259,7 +333,7 @@ describe('Acceptance: Build', function() {
 
     andThen(() => {
       const snapshot = BuildPage.findSnapshotByName(snapshotName);
-      expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
+      expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
       expect(snapshot.isExpanded).to.equal(false);
       expect(snapshot.isNoDiffBoxVisible).to.equal(false);
     });
@@ -268,7 +342,7 @@ describe('Acceptance: Build', function() {
     lastSnapshot.expandSnapshot();
 
     andThen(() => {
-      expect(BuildPage.isNoDiffsPanelVisible).to.equal(false);
+      expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
       expect(lastSnapshot.isExpanded).to.equal(true);
       expect(lastSnapshot.isUnchangedComparisonsVisible).to.equal(true);
     });

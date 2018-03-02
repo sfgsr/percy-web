@@ -1,28 +1,31 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import {inject as service} from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  cachedSnapshotOrder: service(),
   model(params) {
     return this.store.findRecord('build', params.build_id);
   },
-
   afterModel(model) {
-    model.reload().then(build => {
-      if (!build.get('isExpired')) {
-        // Force reload because these async-hasMany's won't reload themselves if the build's
-        // state has changed, such as going from processing --> finished and we don't want to show
-        // fewer comparisons than there are.
-        build.get('snapshots').reload();
-      }
-    });
+    if (model.get('isFinished')) {
+      let controller = this.controllerFor('organization.project.builds.build');
+      controller.set('isSnapshotsLoading', true);
+
+      model.get('snapshots').then(snapshots => {
+        this._initializeSnapshotOrdering(snapshots);
+      });
+    }
   },
-  resetController() {
-    // Clear cached snapshot order between route transitions.
-    this.get('cachedSnapshotOrder').resetCachedSnapshotOrder();
+
+  _initializeSnapshotOrdering(snapshots) {
+    // this route path needs to be explicit so it will work with fullscreen snapshots.
+    let controller = this.controllerFor('organization.project.builds.build');
+    controller.initializeSnapshotOrdering(snapshots);
   },
+
   actions: {
+    initializeSnapshotOrdering(snapshots) {
+      this._initializeSnapshotOrdering(snapshots);
+    },
     didTransition() {
       this._super.apply(this, arguments);
 

@@ -1,79 +1,27 @@
 import $ from 'jquery';
+import {alias, lt, mapBy} from '@ember/object/computed';
 import {computed} from '@ember/object';
-import {alias, gt, mapBy} from '@ember/object/computed';
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import snapshotSort from 'percy-web/lib/snapshot-sort';
 
 export default Component.extend({
   classNames: ['SnapshotList'],
   attributeBindings: ['data-test-snapshot-list'],
   'data-test-snapshot-list': true,
+  isUnchangedSnapshotsVisible: false,
 
-  snapshotComponents: null,
+  snapshotsChanged: null,
+  snapshotsUnchanged: null,
+
   activeSnapshotId: null,
 
-  sortedSnapshots: computed('snapshots.[]', function() {
-    return snapshotSort(this.get('snapshots').toArray());
-  }),
-
-  hideNoDiffs: gt('noDiffSnapshotsCount', 0),
-
-  snapshotsWithDiffs: computed('sortedSnapshots', function() {
-    return this.get('sortedSnapshots').filter(snapshot => {
-      return snapshot.get('comparisons').isAny('isDifferent');
-    });
-  }),
-  snapshotsWithoutDiffs: computed('snapshots', function() {
-    return this.get('snapshots').filter(snapshot => {
-      return snapshot.get('comparisons').isEvery('isSame');
-    });
-  }),
-  noDiffSnapshotsCount: computed('snapshotsWithoutDiffs', function() {
-    return this.get('snapshotsWithoutDiffs').reduce((total, snapshot) => {
-      return total + snapshot.get('comparisons.length');
-    }, 0);
-  }),
-
-  cachedSnapshotOrder: service(),
-  computedSnapshots: computed(
-    'build.isFinished',
-    'hideNoDiffs',
-    'snapshotsWithDiffs.@each.isApproved',
-    'snapshotsWithoutDiffs.@each.isApproved',
-    function() {
-      // sort snapshots, then sort by approved vs unapproved
-      const snapshots = this.get('hideNoDiffs')
-        ? this.get('snapshotsWithDiffs')
-        : [].concat(this.get('snapshotsWithDiffs'), this.get('snapshotsWithoutDiffs'));
-      const approvedSnapshots = [];
-      const unapprovedSnapshots = [];
-      snapshots.forEach(snapshot => {
-        if (snapshot.get('isApproved')) {
-          approvedSnapshots.push(snapshot);
-        } else {
-          unapprovedSnapshots.push(snapshot);
-        }
-      });
-
-      // recombine approved/unapproved into one list
-      const orderedSnapshots = [].concat(unapprovedSnapshots, approvedSnapshots);
-      return orderedSnapshots;
-    },
-  ),
-
-  isDefaultExpanded: computed('snapshotsWithDiffs', function() {
-    return this.get('snapshotsWithDiffs.length') < 150;
-  }),
+  isDefaultExpanded: lt('snapshotsChanged.length', 150),
 
   actions: {
     updateActiveSnapshotId(newSnapshotId) {
       this.set('activeSnapshotId', newSnapshotId);
     },
-
-    toggleNoDiffSnapshots() {
-      this.toggleProperty('hideNoDiffs');
-      this.get('cachedSnapshotOrder').setHideNoDiffsChanged();
+    toggleUnchangedSnapshotsVisible() {
+      this.toggleProperty('isUnchangedSnapshotsVisible');
     },
   },
 
@@ -97,8 +45,21 @@ export default Component.extend({
     $(document).unbind('keydown.snapshots');
   },
 
-  _snapshotIds: mapBy('computedSnapshots', 'id'),
-  _numSnapshots: alias('computedSnapshots.length'),
+  _allVisibleSnapshots: computed(
+    'snapshotsChanged.[]',
+    'snapshotsUnchanged.[]',
+    'isUnchangedSnapshotsVisible',
+    function() {
+      if (this.get('isUnchangedSnapshotsVisible')) {
+        return [].concat(this.get('snapshotsChanged'), this.get('snapshotsUnchanged'));
+      } else {
+        return this.get('snapshotsChanged');
+      }
+    },
+  ),
+
+  _snapshotIds: mapBy('_allVisibleSnapshots', 'id'),
+  _numSnapshots: alias('_allVisibleSnapshots.length'),
   _calculateNewActiveSnapshotId({isNext = true} = {}) {
     let currentIndex = this.get('_snapshotIds').indexOf(this.get('activeSnapshotId'));
 

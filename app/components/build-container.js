@@ -10,9 +10,8 @@ export default Component.extend(PollingMixin, {
     'isShowingModal:BuildContainer--snapshotModalOpen:BuildContainer--snapshotModalClosed',
   ],
 
-  currentPosition: null,
-
-  shouldShowLoadingSpinner: or('build.isRunning', 'snapshots.isPending'),
+  snapshotsChanged: null,
+  snapshotsUnchanged: null,
 
   shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 
@@ -21,7 +20,10 @@ export default Component.extend(PollingMixin, {
       .reload()
       .then(build => {
         if (build.get('isFinished')) {
-          this.set('snapshots', build.get('snapshots').reload());
+          let snapshotsPromise = build.get('snapshots').reload();
+          snapshotsPromise.then(snapshots => {
+            this.get('initializeSnapshotOrdering')(snapshots);
+          });
         }
       });
   },

@@ -1,6 +1,10 @@
 import FactoryGuy from 'ember-data-factory-guy';
 import {make} from 'ember-data-factory-guy';
-import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_UNAPPROVED_STATE} from 'percy-web/models/snapshot';
+import {
+  SNAPSHOT_APPROVED_STATE,
+  SNAPSHOT_UNAPPROVED_STATE,
+  SNAPSHOT_REVIEW_STATE_REASONS,
+} from 'percy-web/models/snapshot';
 import {TEST_COMPARISON_WIDTHS} from 'percy-web/tests/factories/comparison';
 
 FactoryGuy.define('snapshot', {
@@ -18,6 +22,7 @@ FactoryGuy.define('snapshot', {
   traits: {
     approved: {
       reviewState: SNAPSHOT_APPROVED_STATE,
+      reviewStateReason: SNAPSHOT_REVIEW_STATE_REASONS.USER_APPROVED,
     },
 
     withBuild: {

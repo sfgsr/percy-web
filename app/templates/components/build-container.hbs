@@ -10,11 +10,12 @@
     showSupport=showSupport
   }}
 
-  {{#if shouldShowLoadingSpinner}}
+  {{#if (or build.isRunning isSnapshotsLoading)}}
     {{loading-page}}
   {{else if build.isFinished}}
     {{snapshot-list
-      snapshots=snapshots
+      snapshotsChanged=snapshotsChanged
+      snapshotsUnchanged=snapshotsUnchanged
       build=build
       showSnapshotFullModalTriggered=(action 'showSnapshotFullModalTriggered')
       isShowingModal=isShowingModal
