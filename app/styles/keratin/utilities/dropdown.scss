@@ -30,10 +30,12 @@
     }
   }
 
-  .dropdown-toggle {
+  .dropdown-toggle,
+  .ember-basic-dropdown-trigger {
     &:focus,
     &:focus:active {
       background: var(--white);
+      outline: none;
     }
 
     &:hover svg {
@@ -52,10 +54,6 @@
 }
 
 .dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
   width: 220px;
   background: var(--white);
   border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);

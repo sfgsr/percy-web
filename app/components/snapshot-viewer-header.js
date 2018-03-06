@@ -25,7 +25,6 @@ export default Component.extend({
   registerChild() {},
   updateComparisonMode() {},
 
-  isDropdownVisible: false,
   isShowingFilteredComparisons: true,
   isNotShowingFilteredComparisons: not('isShowingFilteredComparisons'),
   comparisons: alias('snapshot.comparisons'),
@@ -41,17 +40,8 @@ export default Component.extend({
       this.get('flashMessages').success('Snapshot URL was copied to your clipboard');
     },
 
-    toggleDropdownVisibility() {
-      this.toggleProperty('isDropdownVisible');
-    },
-
     toggleFilteredComparisons() {
       this.toggleProperty('isShowingFilteredComparisons');
-      this.set('isDropdownVisible', false);
-    },
-
-    closeDropdown() {
-      this.set('isDropdownVisible', false);
     },
 
     downloadHTML(type, snapshot) {
@@ -59,7 +49,6 @@ export default Component.extend({
       const url = utils.buildApiUrl(`${type}Asset`, snapshot.get('id'), options);
 
       utils.setWindowLocation(url);
-      this.set('isDropdownVisible', false);
     },
   },
 });
