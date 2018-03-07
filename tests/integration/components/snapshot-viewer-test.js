@@ -85,7 +85,7 @@ describe('Integration: SnapshotViewer', function() {
       }}`);
     });
 
-    it('does does not display', function() {
+    it('does not display', function() {
       expect(
         SnapshotViewerPO.header.isComparisonModeSwitcherVisible,
         'comparison mode switcher should not be visible',
@@ -94,7 +94,15 @@ describe('Integration: SnapshotViewer', function() {
   });
 
   describe('width switcher', function() {
+    beforeEach(function() {
+      // set the widest width comparison to have no diffs to have interesting test behavior.
+      this.get('snapshot.comparisons')
+        .findBy('width', 1024)
+        .set('diffRatio', 0);
+    });
+
     it('shows widest width with diff as active by default when some comparisons have diffs', function() { // eslint-disable-line
+
       this.render(hbs`{{snapshot-viewer
         snapshot=snapshot
         build=build
@@ -104,8 +112,7 @@ describe('Integration: SnapshotViewer', function() {
       }}`);
 
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(true);
+      expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(true);
     });
 
     it('shows widest width with diff as active by default when no comparisons have diffs', function() { // eslint-disable-line
@@ -138,8 +145,9 @@ describe('Integration: SnapshotViewer', function() {
       SnapshotViewerPO.header.widthSwitcher.buttons(0).click();
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(true);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);
-      expect(SnapshotViewerPO.header.widthSwitcher.buttons(2).isActive).to.equal(false);
 
+      SnapshotViewerPO.header.clickDropdownToggle();
+      SnapshotViewerPO.header.clickToggleAllWidths();
       SnapshotViewerPO.header.widthSwitcher.buttons(2).click();
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(0).isActive).to.equal(false);
       expect(SnapshotViewerPO.header.widthSwitcher.buttons(1).isActive).to.equal(false);

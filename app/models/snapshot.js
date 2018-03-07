@@ -64,7 +64,7 @@ export default DS.Model.extend({
       .filterBy('isDifferent')
       .get('lastObject');
   }),
-  maxComparisonWidthWithDiff: alias('maxWidthComparisonWidthDiff.width'),
+  maxComparisonWidthWithDiff: alias('maxWidthComparisonWithDiff.width'),
 
   comparisonForWidth(width) {
     return this.get('comparisons').findBy('width', parseInt(width, 10));
