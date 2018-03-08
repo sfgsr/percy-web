@@ -434,4 +434,13 @@ describe('Acceptance: Fullscreen Snapshot', function() {
       expect(BuildPage.snapshotFullscreen.diffImageUrl).to.equal(TEST_IMAGE_URLS.DIFF_URL);
     });
   });
+
+  it('displays the dropdown', function() {
+    BuildPage.visitFullPageSnapshot(urlParams);
+
+    andThen(() => {
+      BuildPage.snapshotFullscreen.header.clickDropdownToggle();
+    });
+    percySnapshot(this.test);
+  });
 });
