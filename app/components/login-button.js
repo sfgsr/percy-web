@@ -5,8 +5,8 @@ export default Component.extend({
   text: 'Sign In',
 
   showIcon: true,
-  tagName: 'a',
-  classNames: ['LoginButton', 'Button', 'Button--primary', 'Button--onDark'],
+  tagName: 'button',
+  classNames: ['LoginButton btn py-1 px-4 btn-app-access text-white f5 c-pointer'],
   attributeBindings: ['tabindex'],
   tabindex: 0,
 

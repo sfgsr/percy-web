@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="526" viewBox="0 0 1024 526">
+  <defs>
+    <linearGradient id="hero-background-a" x1="100%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5EEF7"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <linearGradient id="hero-background-b" x1="0%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#F5EEF7"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <linearGradient id="hero-background-e" x1="0%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#5C007B"/>
+      <stop offset="100%" stop-color="#9E66BF"/>
+    </linearGradient>
+    <path id="hero-background-d" d="M64.8287361,45.3937266 L1084.93211,134.641207 L1052.75359,502.443294 C955.32725,514.313736 786.867679,520.248957 547.374881,520.248957 C307.882084,520.248957 133.63862,515.066553 24.6444914,504.701745 L64.8287361,45.3937266 Z"/>
+    <filter id="hero-background-c" width="110.2%" height="122.7%" x="-5.1%" y="-7.6%" filterUnits="objectBoundingBox">
+      <feOffset dy="12" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="12"/>
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0.15290481   0 0 0 0 0   0 0 0 0 0.204427083  0 0 0 0.118744339 0"/>
+      <feOffset dy="6" in="SourceAlpha" result="shadowOffsetOuter2"/>
+      <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="6"/>
+      <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0.18140676   0 0 0 0 0   0 0 0 0 0.242532951  0 0 0 0.237064085 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="shadowMatrixOuter2"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-46 -89)">
+    <path fill="url(#hero-background-a)" d="M67.6177199,45.5154963 L1087.72109,134.762977 L1049.96461,566.321525 C952.538266,578.191966 784.078695,584.127187 544.585898,584.127187 C305.0931,584.127187 130.849636,578.944783 21.8555077,568.579975 L67.6177199,45.5154963 Z" transform="rotate(-5 554.788 314.821)"/>
+    <path fill="url(#hero-background-b)" d="M66.223228,45.4546114 L1086.3266,134.702092 L1051.3591,534.382409 C953.932758,546.252851 785.473187,552.188072 545.98039,552.188072 C306.487592,552.188072 132.244128,547.005668 23.2499996,536.64086 L66.223228,45.4546114 Z" transform="rotate(-5 554.788 298.821)"/>
+    <g transform="rotate(-5 554.788 282.821)">
+      <use fill="#000" filter="url(#hero-background-c)" xlink:href="#hero-background-d"/>
+      <use fill="url(#hero-background-e)" xlink:href="#hero-background-d"/>
+    </g>
+  </g>
+</svg>

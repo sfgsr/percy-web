@@ -73,7 +73,6 @@
   "components/marketing_num_diffs",
   "components/menu_icon",
   "components/mock_approval_flow",
-  "components/mock_build_page",
   "components/note",
   "components/organizations/billing_section",
   "components/organizations/github_integration",
@@ -95,4 +94,6 @@
   "components/user_avatar",
   "components/user_menu";
 
+// Page specific styles.
 @import "pages/team";
+@import "pages/home";

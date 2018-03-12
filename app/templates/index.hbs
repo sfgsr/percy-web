@@ -1,65 +1,125 @@
-<header class="container Header Header--large Header--dark">
-  {{#if session.isAuthenticated}}
-    <div class="flex justify-end pt-2 mb-2">
-      {{nav-menu user=session.currentUser}}
+<header class="primary-hero bg-purple-gradient text-white pb-9" style="margin-bottom: -128px">
+  <div class="container container-xl">
+    <div class="flex justify-between align-center mb-9">
+      {{inline-svg "percy-full-horizontal-on-dark"}}
+      <div class="flex justify-end pt-2 mb-2 text-white text-weight-semibold">
+        {{#if session.isAuthenticated}}
+          {{nav-menu user=session.currentUser}}
+        {{else}}
+          <div class="flex justify-end pt-2 mb-4">
+            {{nav-menu}}
+          </div>
+        {{/if}}
+      </div>
     </div>
-  {{else}}
-    <div class="flex justify-end pt-2 mb-4">
-      {{nav-menu}}
-    </div>
-  {{/if}}
-  <div class="px-4">
-    {{inline-svg "logo-vertical-on-dark" class="scalable-svg mt-4 mb-3"}}
   </div>
-  <h1 class="f3 text-weight-regular mb-4">Solving visual testing across design, development, and deployment.</h1>
-  {{#if session.isAuthenticated}}
-    {{goto-app
-      redirectToDefaultOrganization="redirectToDefaultOrganization"
-      data-test-index-goto-app=true
-    }}
-  {{else}}
-    {{login-button showLoginModal="showLoginModal"}}
-  {{/if}}
+  <div class="container container-lg mb-9">
+    <div class="w-75 mb-9">
+      <h1 class="f0 text-weight-regular mb-2">Solving visual testing across design, development, and deployment.</h1>
+      <div class="w-50">
+        <h2 class="f3 text-weight-regular mb-3"><strong>Stop doing QA in the dark.</strong> See every pixel changed on every pull request.</h2>
+      </div>
+      <div class="mb-2">
+        {{#if session.isAuthenticated}}
+          {{goto-app
+            redirectToDefaultOrganization="redirectToDefaultOrganization"
+            data-test-index-goto-app=true
+          }}
+        {{else}}
+          {{login-button showLoginModal="showLoginModal"}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
 </header>
-<div class="container container--marketing InviteContainer">
-  Blog: <a href="https://blog.percy.io/turbocharge-your-react-development-with-storybook-and-percy-d9bff19c187e">Turbocharge your React development with Storybook and Percy</a> <sup>new!</sup>
-</div>
-<div class="container container--marketing container--light">
-  <div class="container container--fixedWidth container--forContent">
-    <h2>Stop doing QA in the dark</h2>
-    <h3 class="alt u-no-margin">See every pixel changed on every PR</h3>
-  </div>
-</div>
-<div class="container container--marketing container--light MockPageContainer">
-  {{mock-build-page}}
-</div>
-<div class="container container--marketing">
-  <div class="container container--fixedWidth container--forContent u-text-center">
-    <div class="row u-text-center">
-      <h2>GitHub PR integration</h2>
-      <h3>Shows up with your tests in GitHub</h3>
-      <p>
-        Approve visual changes in one click as part of your code review process.
-      </p>
-    </div>
-    <div class="row">
-      {{mock-approval-flow}}
+
+<section class="homepage-gallery pt-4 border-bottom border-gray-100 overflow-hidden">
+  <div class="container-lg">
+    <div class="gallery-container grid">
+      <div class="gallery-container-item rounded-top overflow-hidden">
+        <img src="images/examples/sentry-diff.jpg" srcset="images/examples/sentry-diff@2x.jpg 1916w" alt="sentry diff example" class="d-block">
+      </div>
+      <div class="gallery-container-item rounded-top overflow-hidden">
+        <img src="images/examples/canva-diff.jpg" srcset="images/examples/canva-diff@2x.jpg 1916w" alt="sentry diff example" class="d-block">
+      </div>
+      <div class="gallery-container-item rounded-top overflow-hidden">
+        <img src="images/examples/dsc-diff.jpg" srcset="images/examples/dsc-diff@2x.jpg 1916w" alt="sentry diff example" class="d-block">
+      </div>
     </div>
   </div>
+</section>
+
+<div class="gallery-logos grid justify-center mb-9">
+  <div class="gallery-logo rounded-circle bg-white border mx z-top flex justify-center align-center">
+    <img src="images/examples/sentry-logo.svg" alt="Sentry logo">
+  </div>
+  <div class="gallery-logo rounded-circle bg-white border mx z-top flex justify-center align-center">
+    <img src="images/examples/canva-logo.svg" alt="Sentry logo">
+  </div>
+  <div class="gallery-logo rounded-circle bg-white border mx z-top flex justify-center align-center">
+    <img src="images/examples/dsc-logo.svg" alt="Sentry logo">
+  </div>
+
 </div>
-<div class="container container--marketing container--light">
+
+<section class="container-lg grid col-2 gap-5 border-bottom border-gray-100 pb-9 mb-4" style="grid-row-gap: var(--spacing-9) !important;">
+  <div>
+    <figure class="svg-container mb-2">
+      {{inline-svg "comparison-icon-lg"}}
+    </figure>
+    <h3 class="f2 mb-1">Pixel-by-pixel comparisons</h3>
+    <p class="f4 text-light">
+      Percy shows you exactly what visual changes are happening in your UI—down to a single pixel of change. Percy is built from the ground up to handle modern web apps and components, from the simplest to the most complex.
+    </p>
+  </div>
+  <div>
+    <figure class="svg-container mb-2">
+      {{inline-svg "approval-ship"}}
+    </figure>
+    <h3 class="f2 mb-1">Approve changes before shipping</h3>
+    <p class="f4 text-light">Ship only the visual changes you expect to and stop worrying about visual regressions. Percy gives your team the simplest way to review and approve visual changes. Approve the entire build, or one diff at a time—whatever works best for you.</p>
+  </div>
+  <div>
+    <figure class="svg-container mb-2">
+      {{inline-svg "responsive"}}
+    </figure>
+    <h3 class="f2 mb-1">Responsive visual validations</h3>
+    <p class="f4 text-light">Test your responsive designs — simply provide a list of breakpoint widths and we take care of the rest. See how CSS changes will affect your entire site, including on mobile devices. Easily catch mobile visual bugs before launch.</p>
+  </div>
+  <div>
+    <figure class="svg-container mb-2">
+      {{inline-svg "fast"}}
+    </figure>
+    <h3 class="f2 mb-1">Simple and fast</h3>
+    <p class="f4 text-light">
+      We handle all the heavy lifting of consistent screenshot rendering and visual diffing in our systems, so you don't have to. Percy comes with drop-in open source clients for many Ruby, Python, and JavaScript frameworks, plus a command-line client for static websites.
+      See the {{#link-to "docs.index"}}docs{{/link-to}} to get started.
+    </p>
+  </div>
+
+</section>
+
+<section class="container container--marketing container--forContent container--fixedWidth TrustedByContainer">
+  <div class="text-center f4 text-weight-semibold">Trusted by:</div>
+  <div class="row">
+    <img class="u-show-if-desktop" src="/images/trusted-by.jpg">
+    <img class="u-show-if-mobile" src="/images/trusted-by-mobile.jpg">
+  </div>
+</section>
+
+<section class="container container--marketing bg-purple-000 border-top border-bottom">
   <div class="container container--fixedWidth container--forContent">
     <h2>Visual regression testing</h2>
-    <h3 class="alt">in your development workflow</h3>
+    <h3 class="f2">in your development workflow</h3>
     <div class="row">
       <div class="one-half column">
-        <p>
-          We believe visual testing is only truly useful for developers if it fits into your day-to-day workflow.
+        <p class="text-light">
+          Visual testing should fit in to your day-to-day tools and development workflow.
         </p>
-        <p>
+        <p class="text-light">
           Unlike other services that are limited to only testing staging servers or live sites, <strong>Percy integrates directly into your test suite and development workflow</strong> to provide iterative and fast feedback about visual changes. We call this <strong>continuous visual integration</strong>.
         </p>
-        <p>
+        <p class="text-light">
           Percy runs with your test suite, takes DOM snapshots, and uploads them to our service where they are rendered in a modern browser, stored, and compared to your master branch. We <strong>support most CI services</strong> and custom environments.
         </p>
       </div>
@@ -69,91 +129,84 @@
       </div>
     </div>
   </div>
-</div>
-<div class="container container--marketing">
+</section>
+
+<section class="container container--marketing">
+  <div class="container container--fixedWidth container--forContent u-text-center">
+    <div class="row u-text-center">
+      <h2>GitHub PR integration</h2>
+      <h3 class="f2">Shows up with your tests in GitHub</h3>
+      <p class="text-light">
+        Approve visual changes in one click as part of your code review process.
+      </p>
+    </div>
+    <div class="row">
+      {{mock-approval-flow}}
+    </div>
+  </div>
+</section>
+
+<section class="container container--marketing">
   <div class="container container--fixedWidth container--forContent u-text-center">
     <h2>Responsive visual diffs</h2>
     <div class="row">
-      <p>
+      <p class="text-light">
         Test your responsive designs—simply provide a list of breakpoint widths and we take care of the rest. See how CSS changes will affect your entire site, including on mobile devices. Catch mobile visual bugs before launch.
         <br>
-        {{#link-to "docs.page" "learn/responsive"}}See docs »{{/link-to}}
+        {{#link-to "docs.page" "learn/responsive"}}See docs{{/link-to}}
       </p>
       <p>
         <img class="u-capped-width" style="border: 1px solid #ddd" src="/images/example-responsive-375.jpg">
       </p>
     </div>
   </div>
-</div>
-<div class="container container--marketing container--dark">
-  <div class="container container--fixedWidth container--forContent PerformanceContainer">
-    <h2>Simple and fast</h2>
-    <h3 class="alt">Integrates in minutes. No impact on the performance of your tests.</h3>
-    <div class="row">
-      <div class="four columns">
-        <img src="/images/percy.svg">
-      </div>
-      <div class="eight columns">
-        <p>
-          We handle all the heavy lifting of consistent screenshot rendering and visual diffing in our systems, so you don't have to.
-        </p>
-        <p>
-          Percy comes with drop-in open source clients for many Ruby, Python, and JavaScript frameworks, plus a command-line client for static websites.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container container--marketing container--forContent container--fixedWidth TrustedByContainer">
-  <div class="row">
-    <h4>Trusted by:</h4>
-  </div>
-  <div class="row">
-    <img class="u-show-if-desktop" src="/images/trusted-by.jpg">
-    <img class="u-show-if-mobile" src="/images/trusted-by-mobile.jpg">
-  </div>
-</div>
-<div class="container container--marketing container--light">
+</section>
+
+<section class="container container--marketing bg-purple-gradient text-white">
   <div class="container container--fixedWidth container--forContent">
     <h2>Get started</h2>
     <div class="row">
       <div class="six columns">
       <h3>{{#link-to "docs.page" "clients/ruby/capybara"}}Rails »{{/link-to}}</h3>
 {{#code-block lang="ruby"}}
-gem 'percy-capybara'
+  gem 'percy-capybara'
 {{/code-block}}
 
 {{#code-block}}
-<span class="dim">describe 'app features', type: :feature do
-  it 'shows the dropdown menu when clicked' do
-    visit '/'
-    first('.dropdown-toggle').click</span>
-    <strong>Percy::Capybara.snapshot(page, name: 'homepage')</strong>
-  <span class="dim">end
-end</span>
+
+  <span class="dim">describe 'app features', type: :feature do
+    it 'shows the dropdown menu when clicked' do
+      visit '/'
+      first('.dropdown-toggle').click</span>
+      <strong>Percy::Capybara.snapshot(page, name: 'homepage')</strong>
+    <span class="dim">end
+  end</span>
+
 {{/code-block}}
 
-        <h3>{{#link-to "docs.page" "clients/ruby/cli"}}Static websites »{{/link-to}}</h3>
+      <h3>{{#link-to "docs.page" "clients/ruby/cli"}}Static websites »{{/link-to}}</h3>
+
 {{#code-block lang="bash"}}
-$ gem install percy-cli
-$ <strong>percy snapshot _site/</strong>
+  $ gem install percy-cli
+  $ <strong>percy snapshot _site/</strong>
 {{/code-block}}
-      </div>
-      <div class="six columns">
-        <h3>{{#link-to "docs.page" "clients/javascript/ember"}}Ember »{{/link-to}}</h3>
+    </div>
+    <div class="six columns">
+      <h3>{{#link-to "docs.page" "clients/javascript/ember"}}Ember »{{/link-to}}</h3>
 {{#code-block lang="bash"}}
-$ ember install ember-percy
+  $ ember install ember-percy
 {{/code-block}}
 {{#code-block lang="javascript"}}
-<span class="dim">describe('Acceptance: Marketing pages', function() {
-  it('can visit /about', function() {
-    visit('/about');
-    click('#person1');</span>
-    <strong>percySnapshot('about page (person details)');</strong>
-  <span class="dim">});
-});</span>
+
+  <span class="dim">describe('Acceptance: Marketing pages', function() {
+    it('can visit /about', function() {
+      visit('/about');
+      click('#person1');</span>
+      <strong>percySnapshot('about page (person details)');</strong>
+    <span class="dim">});
+  });</span>
+
 {{/code-block}}
-        <hr>
         <div class="u-text-center">
           <p>
             <strong>{{#link-to "docs.index"}}And more!{{/link-to}}</strong> It's easy to get started:
@@ -175,5 +228,5 @@ $ ember install ember-percy
       </div>
     </div>
   </div>
-</div>
+</section>
 {{main-footer}}

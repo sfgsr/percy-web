@@ -3,13 +3,13 @@ import Component from '@ember/component';
 
 export default Component.extend({
   session: service(),
-  tagName: 'a',
+  tagName: 'button',
   attributeBindings: ['tabindex'],
   tabindex: 0,
 
   redirectToDefaultOrganization: null,
 
-  classNames: ['Button', 'Button--primary', 'Button--onDark'],
+  classNames: ['btn py-1 px-4 btn-app-access f5 c-pointer text-white'],
   classNameBindings: ['classes'],
 
   click() {

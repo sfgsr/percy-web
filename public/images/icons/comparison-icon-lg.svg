@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="40" viewBox="0 0 35 40">
+  <defs>
+    <path id="comparison-icon-lg-b" d="M14.363182,1.03506753 L30.453425,1.03506753 C32.2160359,1.03506753 33.6449144,2.46394599 33.6449144,4.22655689 L33.6449144,26.9933757 C33.6449144,28.7559866 32.2160359,30.1848651 30.453425,30.1848651 L14.363182,30.1848651 C12.6005711,30.1848651 11.1716926,28.7559866 11.1716926,26.9933757 L11.1716926,4.22655689 C11.1716926,2.46394599 12.6005711,1.03506753 14.363182,1.03506753 Z"/>
+    <filter id="comparison-icon-lg-a" width="251.3%" height="216.6%" x="-75.6%" y="-51.4%" filterUnits="objectBoundingBox">
+      <feMorphology in="SourceAlpha" operator="dilate" radius=".997" result="shadowSpreadOuter1"/>
+      <feOffset dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.905882353   0 0 0 0 0.305882353   0 0 0 0 0.243137255  0 0 0 0.1 0"/>
+    </filter>
+    <rect id="comparison-icon-lg-d" width="22.477" height="29.15" x="1.284" y="9.879" rx="3.191"/>
+    <filter id="comparison-icon-lg-c" width="242.4%" height="209.8%" x="-71.2%" y="-48%" filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.11372549   0 0 0 0 0.552941176   0 0 0 0 0.858823529  0 0 0 0.2 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g stroke-dasharray=".181 .181 3.438 4.343" stroke-linecap="round" transform="rotate(5 22.408 15.61)">
+      <use fill="#000" filter="url(#comparison-icon-lg-a)" xlink:href="#comparison-icon-lg-b"/>
+      <use fill="#E74E3E" fill-opacity=".1" stroke="#E74E3E" stroke-width="1.995" xlink:href="#comparison-icon-lg-b"/>
+    </g>
+    <g transform="rotate(-5 12.523 24.453)">
+      <use fill="#000" filter="url(#comparison-icon-lg-c)" xlink:href="#comparison-icon-lg-d"/>
+      <use fill="#1D8DDB" fill-opacity=".1" xlink:href="#comparison-icon-lg-d"/>
+      <rect width="20.482" height="27.155" x="2.282" y="10.876" stroke="#1D8DDB" stroke-width="1.995" rx="3.191"/>
+    </g>
+  </g>
+</svg>
