@@ -87,7 +87,13 @@ export default DS.Model.extend({
   totalComparisonsFinished: DS.attr('number'),
   totalComparisonsDiff: DS.attr('number'),
   buildCompletionPercent: computed('totalComparisons', 'totalComparisonsFinished', function() {
-    return this.get('totalComparisonsFinished') / this.get('totalComparisons') * 100;
+    if (!this.get('isProcessing')) {
+      return 0;
+    }
+
+    const totalComparisons = this.get('totalComparisons') || 0;
+    const totalComparisonsFinished = this.get('totalComparisonsFinished') || 0;
+    return totalComparisonsFinished / totalComparisons * 100;
   }),
   hasDiffs: computed('totalComparisonsDiff', 'isFinished', function() {
     // Only have the chance to return true if the build is finished.
