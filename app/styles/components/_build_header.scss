@@ -1,3 +1,9 @@
 .build-header {
   box-shadow: inset 4px 0 0 var(--status-color, transparent);
+
+  &.is-loading {
+    background-image: linear-gradient(-45deg, var(--white) 25%, var(--gray-000) 25%, var(--gray-000) 50%, var(--white) 50%, var(--white) 75%, var(--gray-000) 75%, var(--gray-000));
+    background-size: 20px 20px;
+    animation: loading 2s linear infinite;
+  }
 }
