@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="72" viewBox="0 0 10 72">
+  <defs>
+    <linearGradient id="build-column-separation-icon-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#F7F7F7"/>
+      <stop offset="100%" stop-color="#E1DFE2"/>
+    </linearGradient>
+  </defs>
+  <polyline fill="none" stroke="url(#build-column-separation-icon-a)" points="512.5 131 512.5 159 504.5 167 512.5 175 512.5 203" transform="translate(-503 -131)"/>
+</svg>

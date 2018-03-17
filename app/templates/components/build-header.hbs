@@ -1,7 +1,44 @@
-<div class="build-header flex justify-between align-center py-3 pr-2 pl-3 is-{{dasherize build.state}} is-{{if build.isFinished (dasherize build.reviewState)}}">
+<div class="build-header flex justify-between align-center py-3 pr-2 pl-3 is-{{dasherize build.state}} is-{{if build.isFinished (dasherize build.reviewState)}} border-bottom border-gray-000">
   {{build-overview-info build=build}}
   <div class="text-right">
     {{build-overview build=build}}
+  </div>
+</div>
+<div class="flex">
+  <div class="w-50 text-light text-weight-semibold p-2">
+    <div class="flex align-center no-wrap">
+      Baseline from
+      <code class="ml-sm truncate">
+        {{build.baseBuild.branch}}
+      </code>
+    </div>
+    <div class="f6">
+      Build {{#link-to "organization.project.builds.build" build.project.organization.slug build.project.slug build.baseBuild.id class="text-mono"}}{{build.baseBuild.buildNumber}}{{/link-to}}
+      -
+      {{moment-from-now build.baseBuild.createdAt interval=60000}}
+    </div>
+  </div>
+  <div style="margin-left: -8px">
+    <figure class="svg-container">
+      {{inline-svg "build-column-separation-icon"}}
+    </figure>
+  </div>
+  <div class="w-50 text-light text-weight-semibold p-2">
+    <div class="flex align-center no-wrap">
+      Changes from
+      {{#if build.commit}}
+        {{#if build.isPullRequest}}
+          <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="text-weight-semibold truncate ml-sm">#{{build.pullRequestNumber}} - {{build.pullRequestTitle}}</a>
+        {{else}}
+          <code class="ml-sm truncate">
+            {{build.branch}}
+          </code>
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="f6">
+      {{moment-from-now build.createdAt interval=60000}}
+    </div>
   </div>
 </div>
 
