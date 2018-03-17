@@ -94,7 +94,7 @@
     "lint-staged": "^7.0.0",
     "loader.js": "^4.6.0",
     "morgan": "^1.9.0",
-    "percy-docs": "git+https://github.com/percy/percy-docs.git#2161f5a431eb830ff9f2708f0f0b4e529fc715e6",
+    "percy-docs": "git+https://github.com/percy/percy-docs.git#26adafffd5e055573b3c6915a09171d1b52e9c03",
     "prettier": "^1.11.0",
     "prettier-eslint-cli": "^4.7.0",
     "stylelint-config-standard": "^18.2.0"
