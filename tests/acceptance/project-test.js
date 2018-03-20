@@ -6,7 +6,7 @@ import ProjectPage from 'percy-web/tests/pages/project-page';
 describe('Acceptance: Project', function() {
   setupAcceptance();
 
-  context('organization has no projects', function() {
+  describe('organization has no projects', function() {
     setupSession(function(server) {
       this.organization = server.create('organization', 'withUser');
     });
@@ -26,7 +26,7 @@ describe('Acceptance: Project', function() {
     });
   });
 
-  context('waiting for first snapshot', function() {
+  describe('waiting for first snapshot', function() {
     setupSession(function(server) {
       let organization = server.create('organization', 'withUser');
       let project = server.create('project', {
@@ -49,20 +49,20 @@ describe('Acceptance: Project', function() {
     });
   });
 
-  context('settings', function() {
+  describe('settings', function() {
     let organization;
     let versionControlIntegration;
     let repos;
     setupSession(function(server) {
       organization = server.create('organization', 'withUser');
       versionControlIntegration = server.create('versionControlIntegration', 'github');
-      repos = [server.create('repo'), server.create('repo'), server.create('repo')];
-      let enabled = server.create('project', {name: 'Enabled', organization});
+      repos = server.createList('repo', 3);
       let disabled = server.create('project', {
-        name: 'Disabled',
+        name: 'Disabled Project',
         isEnabled: false,
         organization,
       });
+      let enabled = server.create('project', {name: 'Enabled Project', organization});
 
       this.enabledProject = enabled;
       this.disabledProject = disabled;
@@ -72,6 +72,15 @@ describe('Acceptance: Project', function() {
       visit(`/${this.disabledProject.fullSlug}/settings`);
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.settings');
+        expect(find('[data-test-sidenav-list-projects] li:eq(0)').text()).to.match(
+          /Disabled Project/,
+        );
+        expect(find('[data-test-sidenav-list-projects] li:eq(1)').text()).to.match(
+          /Enabled Project/,
+        );
+        expect(find('[data-test-sidenav-list-projects] li:eq(2)').text()).to.match(
+          /Start new project/,
+        );
       });
       percySnapshot(this.test);
     });
@@ -80,6 +89,15 @@ describe('Acceptance: Project', function() {
       visit(`/${this.enabledProject.fullSlug}/settings`);
       andThen(() => {
         expect(currentPath()).to.equal('organization.project.settings');
+        expect(find('[data-test-sidenav-list-projects] li:eq(0)').text()).to.match(
+          /Disabled Project/,
+        );
+        expect(find('[data-test-sidenav-list-projects] li:eq(1)').text()).to.match(
+          /Enabled Project/,
+        );
+        expect(find('[data-test-sidenav-list-projects] li:eq(2)').text()).to.match(
+          /Start new project/,
+        );
       });
       percySnapshot(this.test);
     });
@@ -93,7 +111,7 @@ describe('Acceptance: Project', function() {
     });
   });
 
-  context('builds', function() {
+  describe('builds', function() {
     freezeMoment('2018-05-22');
 
     let urlParams;
@@ -101,7 +119,11 @@ describe('Acceptance: Project', function() {
     setupSession(function(server) {
       let organization = server.create('organization', 'withUser');
       let project = server.create('project', {
-        name: 'with builds',
+        name: 'project with builds',
+        organization,
+      });
+      server.create('project', {
+        name: 'project without builds',
         organization,
       });
 

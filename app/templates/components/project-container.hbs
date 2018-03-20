@@ -40,7 +40,7 @@
     {{/if}}
   </div>
 </header>
-{{#if project.builds.isPending}}
+{{#if (and project.builds.isPending (not isRefreshing))}}
   {{loading-page}}
 {{else}}
   {{#if project.builds}}

@@ -18,14 +18,12 @@
         </section>
         <section class="sidenav-group">
           <header class="sidenav-header">Project Settings</header>
-          <ul class="sidenav-list">
-            {{#if organization.projects}}
-              {{#each organization.projects as |project|}}
-                <li class="sidenav-list-item">
-                  {{#link-to "organization.project.settings" organization.slug project.slug classNames="sidenav-list-item-link truncate"}}{{project.name}}{{/link-to}}
-                </li>
-              {{/each}}
-            {{/if}}
+          <ul class="sidenav-list" data-test-sidenav-list-projects>
+            {{#each organization.projects as |project|}}
+              <li class="sidenav-list-item">
+                {{#link-to "organization.project.settings" organization.slug project.slug classNames="sidenav-list-item-link truncate"}}{{project.name}}{{/link-to}}
+              </li>
+            {{/each}}
             <li class="sidenav-list-item">
               {{#link-to "organizations.organization.projects.new" organization.slug classNames="sidenav-list-item-link text-weight-semibold"}}Start new project{{/link-to}}
             </li>
