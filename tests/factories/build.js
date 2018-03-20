@@ -4,7 +4,7 @@ import faker from 'faker';
 
 FactoryGuy.define('build', {
   sequences: {
-    buildNumber: num => num,
+    buildNumber: num => 5000 + num,
   },
   default: {
     buildNumber: FactoryGuy.generate('buildNumber'),

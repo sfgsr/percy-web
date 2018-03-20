@@ -21,7 +21,7 @@ describe('Integration: BuildContainer', function() {
 
   describe('snapshot display during different build states', function() {
     beforeEach(function() {
-      const build = make('build');
+      const build = make('build', {buildNumber: 1});
       const snapshotsChanged = [make('snapshot', 'withComparisons', {build})];
       const snapshotsUnchanged = [make('snapshot', 'withNoDiffs', {build})];
       const stub = sinon.stub();
