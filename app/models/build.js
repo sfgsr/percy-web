@@ -52,6 +52,11 @@ export default DS.Model.extend({
       return 'Timed out';
     }
   }),
+
+  // failureDetails will be a POJO of form `{something: [strings, strings, etc]}` and therefore
+  // will not be able to trigger computed property recomputes
+  failureDetails: DS.attr(),
+
   isRunning: or('isPending', 'isProcessing'),
 
   // Review state, aggregated across all reviews. This will only be set for finished builds.

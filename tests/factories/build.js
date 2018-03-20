@@ -35,6 +35,7 @@ FactoryGuy.define('build', {
     failed: {
       state: 'failed',
       failureReason: 'render_timeout',
+      failureDetails: {failed_snapshots: ['The snapshot that failed']},
     },
     expired: {state: 'expired'},
     noDiffs: {
@@ -43,7 +44,10 @@ FactoryGuy.define('build', {
     },
     missingResources: {failureReason: 'missing_resources'},
     noSnapshots: {failureReason: 'no_snapshots'},
-    renderTimeout: {failureReason: 'render_timeout'},
+    renderTimeout: {
+      failureReason: 'render_timeout',
+      failureDetails: {failed_snapshots: ['The snapshot that failed']},
+    },
     hasPullRequest: {
       isPullRequest: true,
       pullRequestNumber: 123,

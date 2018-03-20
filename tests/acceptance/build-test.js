@@ -88,6 +88,7 @@ describe('Acceptance: Failed Build', function() {
       createdAt: moment().subtract(2, 'minutes'),
       state: 'failed',
       failureReason: 'render_timeout',
+      failureDetails: {failed_snapshots: ['Home page that pops open a dialog']},
     });
 
     urlParams = {
