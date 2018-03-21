@@ -210,20 +210,27 @@ describe('Acceptance: Build', function() {
     await percySnapshot(this.test.fullTitle());
   });
 
-  it('toggles the image and pdiff', async function() {
+  it('toggles the image and pdiff for all images when clicking a diff or the toggle diffs button', async function() { // eslint-disable-line
     await BuildPage.visitBuild(urlParams);
-    const snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
     expect(currentPath()).to.equal('organization.project.builds.build.index');
-    expect(BuildPage.snapshots(0).isDiffImageVisible).to.equal(true);
 
+    const snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
     await snapshot.clickDiffImage();
-    expect(snapshot.isDiffImageVisible).to.equal(false);
+    expect(BuildPage.isDiffsHiddenForAllSnapshots).to.equal(true);
 
     await percySnapshot(this.test.fullTitle() + ' | hides overlay');
     await snapshot.clickDiffImageBox();
-    expect(snapshot.isDiffImageVisible).to.equal(true);
+    expect(BuildPage.isDiffsVisibleForAllSnapshots).to.equal(true);
+
+    await BuildPage.clickToggleDiffsButton();
+    expect(BuildPage.isDiffsHiddenForAllSnapshots).to.equal(true);
+
+    await BuildPage.clickToggleDiffsButton();
+    expect(BuildPage.isDiffsVisibleForAllSnapshots).to.equal(true);
 
     await percySnapshot(this.test.fullTitle() + ' | shows overlay');
+    await BuildPage.typeSpace();
+    expect(BuildPage.isDiffsHiddenForAllSnapshots).to.equal(true);
   });
 
   it('walk across snapshots with arrow keys', async function() {

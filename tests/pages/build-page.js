@@ -9,6 +9,7 @@ const SELECTORS = {
   SNAPSHOT_LIST: '[data-test-snapshot-list]',
   BUILD_INFO_DROPDOWN_TOGGLE: '[data-test-build-info-dropdown-toggle]',
   SHOW_SUPPORT_LINK: '[data-test-build-overview-show-support]',
+  TOGGLE_DIFFS_BUTTON: '[data-test-toggle-diffs-button]',
 };
 
 const BuildPage = {
@@ -50,11 +51,16 @@ const BuildPage = {
 
   typeDownArrow: alias('snapshotList.typeDownArrow'),
   typeUpArrow: alias('snapshotList.typeUpArrow'),
+  typeSpace: alias('snapshotList.typeSpace'),
 
   snapshotFullscreen: SnapshotViewerFull,
   isFullscreenModalVisible: isVisible(SELECTORS.SNAPSHOT_FULL_MODAL),
 
   clickShowSupportLink: clickable(SELECTORS.SHOW_SUPPORT_LINK),
+
+  clickToggleDiffsButton: clickable(SELECTORS.TOGGLE_DIFFS_BUTTON),
+  isDiffsVisibleForAllSnapshots: alias('snapshotList.isDiffsVisibleForAllSnapshots'),
+  isDiffsHiddenForAllSnapshots: alias('snapshotList.isDiffsHiddenForAllSnapshots'),
 };
 
 export default create(BuildPage);
