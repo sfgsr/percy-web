@@ -2,16 +2,18 @@
   Choose your organization:
 </header>
 <div class="OrganizationsJumpToBilling-pageClickOverlay" {{action "hide"}}></div>
-{{#power-select
+{{#with (await orgs) as |organizations|}}
+  {{#power-select
     searchField="slug"
     placeholder="Select organization..."
     renderInPlace=true
     initiallyOpened=true
     close=(action "hide")
     matchTriggerWidth=false
-    options=currentUser.organizations
+    options=organizations
     onchange=(action "chooseOrganization")
     as |organization|
     }}
     {{organization.name}}
-{{/power-select}}
+  {{/power-select}}
+{{/with}}

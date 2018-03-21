@@ -7,6 +7,7 @@ export default Component.extend({
 
   isExpanded: false,
 
+  store: service(),
   session: service(),
   currentUser: alias('session.currentUser'),
 
@@ -15,7 +16,11 @@ export default Component.extend({
 
   actions: {
     toggleSwitcher() {
-      this.get('currentUser.organizations').reload();
+      this.get('session')
+        .forceReloadUser()
+        .then(user => {
+          user.get('organizations');
+        });
       this.toggleProperty('isExpanded');
     },
     hideSwitcher() {
