@@ -7,6 +7,8 @@ import {next} from '@ember/runloop';
 export default Component.extend({
   snapshot: null,
   activeSnapshotId: null,
+  showDiffs: null,
+  toggleShowDiffs: null,
 
   classNames: ['SnapshotViewer mb-2'],
   classNameBindings: [

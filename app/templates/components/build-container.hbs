@@ -2,6 +2,8 @@
   build=build
   project=build.project
   organization=build.project.organization
+  showDiffs=showDiffs
+  toggleShowDiffs=toggleShowDiffs
   createReview=createReview
 }}
 <div class="BuildContainer-body w-full">
@@ -14,6 +16,8 @@
     {{loading-page}}
   {{else if build.isFinished}}
     {{snapshot-list
+      showDiffs=showDiffs
+      toggleShowDiffs=toggleShowDiffs
       snapshotsChanged=snapshotsChanged
       snapshotsUnchanged=snapshotsUnchanged
       build=build

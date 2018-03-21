@@ -9,6 +9,8 @@
   {{snapshot-viewer
     build=build
     snapshot=snapshot
+    showDiffs=showDiffs
+    toggleShowDiffs=toggleShowDiffs
     activeSnapshotId=activeSnapshotId
     isDefaultExpanded=isDefaultExpanded
     showSnapshotFullModalTriggered=showSnapshotFullModalTriggered
@@ -31,6 +33,8 @@
   {{#each snapshotsUnchanged as |snapshot|}}
     {{snapshot-viewer
       build=build
+      showDiffs=showDiffs
+      toggleShowDiffs=toggleShowDiffs
       snapshot=snapshot
       activeSnapshotId=activeSnapshotId
       isDefaultExpanded=isDefaultExpanded

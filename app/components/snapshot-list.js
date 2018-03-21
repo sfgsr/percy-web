@@ -11,8 +11,9 @@ export default Component.extend({
 
   snapshotsChanged: null,
   snapshotsUnchanged: null,
-
   activeSnapshotId: null,
+  showDiffs: null,
+  toggleShowDiffs: null,
 
   isDefaultExpanded: lt('snapshotsChanged.length', 150),
 
@@ -36,6 +37,10 @@ export default Component.extend({
           } else if (e.keyCode === 38) {
             // up arrow
             this.set('activeSnapshotId', this._calculateNewActiveSnapshotId({isNext: false}));
+          } else if (e.keyCode === 32) {
+            // space
+            e.preventDefault();
+            this.get('toggleShowDiffs')();
           }
         }
       }.bind(this),

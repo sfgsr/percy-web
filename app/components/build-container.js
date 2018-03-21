@@ -12,6 +12,8 @@ export default Component.extend(PollingMixin, {
 
   snapshotsChanged: null,
   snapshotsUnchanged: null,
+  showDiffs: null,
+  toggleShowDiffs: null,
 
   shouldPollForUpdates: or('build.isPending', 'build.isProcessing'),
 
