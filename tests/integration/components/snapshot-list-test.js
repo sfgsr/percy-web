@@ -4,11 +4,12 @@ import {setupComponentTest} from 'ember-mocha';
 import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
-import {make, makeList, manualSetup} from 'ember-data-factory-guy';
+import {make, makeList} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import {percySnapshot} from 'ember-percy';
 import SnapshotList from 'percy-web/tests/pages/components/snapshot-list';
 import wait from 'ember-test-helpers/wait';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: SnapshotList', function() {
   setupComponentTest('snapshot-list', {
@@ -16,7 +17,7 @@ describe('Integration: SnapshotList', function() {
   });
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     SnapshotList.setContext(this);
   });
 

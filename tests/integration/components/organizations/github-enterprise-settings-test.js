@@ -2,8 +2,9 @@ import {it, describe, beforeEach} from 'mocha';
 import {setupComponentTest} from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import {percySnapshot} from 'ember-percy';
-import {manualSetup, make} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import GithubEnterpriseSettings from 'percy-web/tests/pages/components/github-enterprise-settings';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: Github Enterprise Settings', function() {
   setupComponentTest('github-enterprise-settings', {
@@ -11,7 +12,7 @@ describe('Integration: Github Enterprise Settings', function() {
   });
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     GithubEnterpriseSettings.setContext(this);
   });
 
@@ -19,7 +20,7 @@ describe('Integration: Github Enterprise Settings', function() {
     beforeEach(function() {
       const user = make('user');
       const organization = make('organization', 'withGithubEnterpriseIntegration');
-      user.organizations = [organization];
+      user.set('organizations', [organization]);
       this.setProperties({user, organization});
     });
 
@@ -40,7 +41,7 @@ describe('Integration: Github Enterprise Settings', function() {
     beforeEach(function() {
       const user = make('user');
       const organization = make('organization');
-      user.organizations = [organization];
+      user.set('organizations', [organization]);
       this.setProperties({user, organization});
     });
 

@@ -5,9 +5,10 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import CAPPageObject from 'percy-web/tests/pages/components/connected-accounts-panel';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: ConnectedAccountsPanel', function() {
   setupComponentTest('connected-accounts-panel', {
@@ -15,7 +16,7 @@ describe('Integration: ConnectedAccountsPanel', function() {
   });
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     CAPPageObject.setContext(this);
   });
 

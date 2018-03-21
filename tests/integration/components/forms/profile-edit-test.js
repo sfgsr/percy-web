@@ -1,8 +1,9 @@
 import {it, describe, beforeEach} from 'mocha';
 import {setupComponentTest} from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import {manualSetup, make} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import ProfileEditForm from '../../../pages/components/forms/profile-edit';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: ProfileEditForm', function() {
   setupComponentTest('forms/profile-edit', {
@@ -11,7 +12,7 @@ describe('Integration: ProfileEditForm', function() {
 
   let user;
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     ProfileEditForm.setContext(this);
 
     user = make('user', {name: 'Jamie Lannister', email: 'jamie@lannisters.net'});

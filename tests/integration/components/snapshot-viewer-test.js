@@ -5,12 +5,13 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import SnapshotViewerPO from 'percy-web/tests/pages/components/snapshot-viewer';
 import {resolve} from 'rsvp';
 import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_UNAPPROVED_STATE} from 'percy-web/models/snapshot';
 import wait from 'ember-test-helpers/wait';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: SnapshotViewer', function() {
   setupComponentTest('snapshot-viewer', {
@@ -23,7 +24,7 @@ describe('Integration: SnapshotViewer', function() {
   let createReviewStub;
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     SnapshotViewerPO.setContext(this);
 
     showSnapshotFullModalTriggeredStub = sinon.stub();
@@ -250,7 +251,7 @@ describe('Integration: SnapshotViewer', function() {
 
   describe('approve snapshot button', function() {
     beforeEach(function() {
-      manualSetup(this.container);
+      setupFactoryGuy(this.container);
       SnapshotViewerPO.setContext(this);
 
       this.render(hbs`{{snapshot-viewer

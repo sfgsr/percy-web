@@ -2,9 +2,10 @@ import {it, describe, beforeEach} from 'mocha';
 import {setupComponentTest} from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import {percySnapshot} from 'ember-percy';
-import {manualSetup, make} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import {clickTrigger} from 'ember-power-select/test-support/helpers';
 import GithubIntegrator from 'percy-web/tests/pages/components/github-integrator';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: GithubIntegratorComponent', function() {
   setupComponentTest('github-integrator', {
@@ -13,14 +14,14 @@ describe('Integration: GithubIntegratorComponent', function() {
 
   beforeEach(function() {
     GithubIntegrator.setContext(this);
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
   });
 
   describe('with a github integration', function() {
     beforeEach(function() {
       const project = make('project');
       const organization = make('organization', 'withGithubIntegration', 'withGithubRepos');
-      project.organization = organization;
+      project.set('organization', organization);
 
       this.setProperties({project});
     });
@@ -50,7 +51,7 @@ describe('Integration: GithubIntegratorComponent', function() {
         'withGithubEnterpriseIntegration',
         'withGithubEnterpriseRepos',
       );
-      project.organization = organization;
+      project.set('organization', organization);
       this.setProperties({project});
     });
 
@@ -75,7 +76,7 @@ describe('Integration: GithubIntegratorComponent', function() {
     beforeEach(function() {
       const project = make('project');
       const organization = make('organization', 'withMultipleIntegrations');
-      project.organization = organization;
+      project.set('organization', organization);
       this.setProperties({project});
     });
 

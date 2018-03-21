@@ -2,10 +2,11 @@
 import {expect} from 'chai';
 import {it, describe, beforeEach, afterEach} from 'mocha';
 import {setupTest} from 'ember-mocha';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import {resolve, reject} from 'rsvp';
 import sinon from 'sinon';
 import utils from 'percy-web/lib/utils';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('SessionService', function() {
   setupTest('service:session', {
@@ -21,7 +22,7 @@ describe('SessionService', function() {
       subject = this.subject();
       store = subject.get('store');
 
-      manualSetup(this.container);
+      setupFactoryGuy(this.container);
       user = make('user', {id: 'foo'});
     });
 

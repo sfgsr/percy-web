@@ -2,7 +2,8 @@ import {it, describe, beforeEach} from 'mocha';
 import {setupComponentTest} from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import {percySnapshot} from 'ember-percy';
-import {manualSetup, make} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 import {resolve} from 'rsvp';
 import Service from '@ember/service';
 import wait from 'ember-test-helpers/wait';
@@ -13,7 +14,7 @@ describe('Integration: JumpToBillingComponent', function() {
   });
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     const user = make('user', 'withOrganizations');
     const sessionServiceStub = Service.extend({
       forceReloadUser() {

@@ -3,8 +3,9 @@ import {setupComponentTest} from 'ember-mocha';
 import {beforeEach, it, describe} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import seedFaker from '../../helpers/seed-faker';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: BuildOverviewInfoComponent', function() {
   setupComponentTest('build-overview-info', {
@@ -13,7 +14,7 @@ describe('Integration: BuildOverviewInfoComponent', function() {
 
   beforeEach(function() {
     seedFaker();
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
   });
 
   let states = [

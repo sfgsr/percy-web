@@ -3,9 +3,10 @@ import {setupComponentTest} from 'ember-mocha';
 import {beforeEach, it, describe} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import SnapshotViewerHeaderPO from 'percy-web/tests/pages/components/snapshot-viewer-header';
 import sinon from 'sinon';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: SnapshotViewerHeader', function() {
   setupComponentTest('snapshot-viewer-header', {
@@ -13,7 +14,7 @@ describe('Integration: SnapshotViewerHeader', function() {
   });
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     SnapshotViewerHeaderPO.setContext(this);
   });
 

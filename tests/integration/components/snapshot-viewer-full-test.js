@@ -4,10 +4,11 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import {resolve} from 'rsvp';
 import FullSnapshotPage from 'percy-web/tests/pages/components/snapshot-viewer-full';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: SnapshotViewerFull', function() {
   setupComponentTest('snapshot-viewer-full', {
@@ -21,7 +22,7 @@ describe('Integration: SnapshotViewerFull', function() {
   const snapshotTitle = 'Awesome snapshot title';
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     FullSnapshotPage.setContext(this);
 
     const build = make('build', 'finished');

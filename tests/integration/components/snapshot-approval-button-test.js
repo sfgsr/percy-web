@@ -5,10 +5,11 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import {resolve, defer} from 'rsvp';
 import SnapshotApprovalButton from 'percy-web/tests/pages/components/snapshot-approval-button';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: SnapshotApprovalButton', function() {
   setupComponentTest('snapshot-approval-button', {
@@ -19,7 +20,7 @@ describe('Integration: SnapshotApprovalButton', function() {
   let createReview;
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     SnapshotApprovalButton.setContext(this);
     snapshot = make('snapshot');
     createReview = sinon.stub().returns(resolve());

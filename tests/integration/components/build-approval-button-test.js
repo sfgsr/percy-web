@@ -5,11 +5,12 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup, makeList} from 'ember-data-factory-guy';
+import {make, makeList} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import {resolve, defer} from 'rsvp';
 import wait from 'ember-test-helpers/wait';
 import BuildApprovalButton from 'percy-web/tests/pages/components/build-approval-button';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: BuildApprovalButton', function() {
   setupComponentTest('build-approval-button', {
@@ -20,7 +21,7 @@ describe('Integration: BuildApprovalButton', function() {
   let createReview;
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     BuildApprovalButton.setContext(this);
     build = make('build', {snapshots: makeList('snapshot', 4)});
     createReview = sinon.stub().returns(resolve());

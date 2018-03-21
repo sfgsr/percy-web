@@ -4,8 +4,8 @@ import {beforeEach, it, describe} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
 import {make} from 'ember-data-factory-guy';
-import {manualSetup} from 'ember-data-factory-guy';
 import seedFaker from '../../helpers/seed-faker';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: BuildInfoDropdownComponent', function() {
   setupComponentTest('build-info-dropdown', {
@@ -14,7 +14,7 @@ describe('Integration: BuildInfoDropdownComponent', function() {
 
   beforeEach(function() {
     seedFaker();
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
   });
 
   let states = [

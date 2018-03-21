@@ -3,11 +3,12 @@ import {expect} from 'chai';
 import {it, describe, beforeEach} from 'mocha';
 import {percySnapshot} from 'ember-percy';
 import hbs from 'htmlbars-inline-precompile';
-import {make, manualSetup} from 'ember-data-factory-guy';
+import {make} from 'ember-data-factory-guy';
 import sinon from 'sinon';
 import DS from 'ember-data';
 import {defer} from 'rsvp';
 import BuildPage from 'percy-web/tests/pages/build-page';
+import setupFactoryGuy from 'percy-web/tests/helpers/setup-factory-guy';
 
 describe('Integration: BuildContainer', function() {
   setupComponentTest('build-container', {
@@ -15,7 +16,7 @@ describe('Integration: BuildContainer', function() {
   });
 
   beforeEach(function() {
-    manualSetup(this.container);
+    setupFactoryGuy(this.container);
     BuildPage.setContext(this);
   });
 
