@@ -32,7 +32,7 @@
     {{/if}}
   </div>
   <div class="build-list-header px-4 border-bottom border-gray-100">
-    {{#if project.builds}}
+    {{#if builds}}
       <div class="f6 text-light text-weight-semibold pb-sm">Build #</div>
       <div class="f6 text-light text-weight-semibold pb-sm">Details</div>
       <div class="f6 text-light text-weight-semibold pb-sm">Diffs</div>
@@ -40,12 +40,12 @@
     {{/if}}
   </div>
 </header>
-{{#if (and project.builds.isPending (not isRefreshing))}}
+{{#if (and builds.isPending (not isRefreshing))}}
   {{loading-page}}
 {{else}}
-  {{#if project.builds}}
+  {{#if builds}}
     <div class="build-list">
-      {{#each project.builds as |build|}}
+      {{#each builds as |build|}}
         {{build-card build=build}}
       {{/each}}
     </div>

@@ -9,11 +9,13 @@ export default Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
     const organization = this.modelFor('organization');
     const projects = this.store.query('project', {organization: organization});
     const sortedProjects = projects.then(projects => projects.sortBy('isDisabled', 'name'));
+    const builds = project.get('builds');
 
     return hash({
       organization,
       project,
       sortedProjects,
+      builds,
     });
   },
 
