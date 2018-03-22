@@ -39,14 +39,12 @@
       {{else}}
         Changes from
       {{/if}}
-      {{#if build.commit}}
-        {{#if build.isPullRequest}}
-          <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="text-weight-semibold truncate ml-sm">#{{build.pullRequestNumber}} - {{build.pullRequestTitle}}</a>
-        {{else}}
-          <code class="ml-sm truncate">
-            {{build.branch}}
-          </code>
-        {{/if}}
+      {{#if build.isPullRequest}}
+        <a href="{{build.repo.htmlUrl}}/pull/{{build.pullRequestNumber}}" class="text-weight-semibold truncate ml-sm">#{{build.pullRequestNumber}} - {{build.pullRequestTitle}}</a>
+      {{else}}
+        <code class="ml-sm truncate">
+          {{build.branch}}
+        </code>
       {{/if}}
     </div>
     <div class="f6">
