@@ -5,15 +5,13 @@ import PasswordUpdatedPageObject from 'percy-web/tests/pages/password-updated';
 describe('Acceptance: PasswordUpdated when user is not logged in', function() {
   setupAcceptance({authenticate: false});
 
-  it('displays password update message and login button when success is true', function() {
+  it('displays password update message and login button when success is true', async function() {
     stubLockModal(this.application);
 
-    PasswordUpdatedPageObject.visitSuccessfulPasswordReset();
-    percySnapshot(this.test.fullTitle());
-    PasswordUpdatedPageObject.PasswordUpdatedStatusPanel.clickSignin();
-    andThen(() => {
-      expect(currentURL()).to.equal('/login');
-    });
+    await PasswordUpdatedPageObject.visitSuccessfulPasswordReset();
+    await percySnapshot(this.test.fullTitle());
+    await PasswordUpdatedPageObject.PasswordUpdatedStatusPanel.clickSignin();
+    expect(currentURL()).to.equal('/login');
   });
 });
 
@@ -24,14 +22,12 @@ describe('Acceptance: PasswordUpdated when user is logged in', function() {
     server.create('user');
   });
 
-  it('displays failure message and continue to profile button when success is false', function() {
+  it('displays failure message and continue to profile button when success is false', async function() { // eslint-disable-line
     stubLockModal(this.application);
 
-    PasswordUpdatedPageObject.visitFailedPasswordReset();
-    percySnapshot(this.test.fullTitle());
-    PasswordUpdatedPageObject.PasswordUpdatedStatusPanel.clickSettings();
-    andThen(() => {
-      expect(currentURL()).to.equal('/settings/profile');
-    });
+    await PasswordUpdatedPageObject.visitFailedPasswordReset();
+    await percySnapshot(this.test.fullTitle());
+    await PasswordUpdatedPageObject.PasswordUpdatedStatusPanel.clickSettings();
+    expect(currentURL()).to.equal('/settings/profile');
   });
 });

@@ -9,26 +9,20 @@ describe('Acceptance: PasswordChangeRequest', function() {
     this.user = user;
   });
 
-  it('shows page with change password button', function() {
-    PasswordChangeRequest.visitUserSettingsPage();
-    andThen(() => {
-      expect(PasswordChangeRequest.isPasswordChangeMessagePresent).to.equal(false);
-      expect(PasswordChangeRequest.isPasswordChangeButtonPresent).to.equal(true);
-    });
+  it('shows page with change password button', async function() {
+    await PasswordChangeRequest.visitUserSettingsPage();
+    expect(PasswordChangeRequest.isPasswordChangeMessagePresent).to.equal(false);
+    expect(PasswordChangeRequest.isPasswordChangeButtonPresent).to.equal(true);
 
-    percySnapshot(this.test.fullTitle());
+    await percySnapshot(this.test.fullTitle());
   });
 
-  it('shows page with change password sent message', function() {
-    PasswordChangeRequest.visitUserSettingsPage();
-    andThen(() => {
-      PasswordChangeRequest.submitRequest();
-    });
-    andThen(() => {
-      expect(PasswordChangeRequest.isPasswordChangeMessagePresent).to.equal(true);
-      expect(PasswordChangeRequest.changePasswordMessageContains(this.user.email)).to.equal(true);
-    });
+  it('shows page with change password sent message', async function() {
+    await PasswordChangeRequest.visitUserSettingsPage();
+    await PasswordChangeRequest.submitRequest();
+    expect(PasswordChangeRequest.isPasswordChangeMessagePresent).to.equal(true);
+    expect(PasswordChangeRequest.changePasswordMessageContains(this.user.email)).to.equal(true);
 
-    percySnapshot(this.test.fullTitle());
+    await percySnapshot(this.test.fullTitle());
   });
 });

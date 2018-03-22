@@ -28,16 +28,13 @@ describe('Acceptance: Pending Build', function() {
     };
   });
 
-  it('shows as pending', function() {
-    BuildPage.visitBuild(urlParams);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the build page');
+  it('shows as pending', async function() {
+    await BuildPage.visitBuild(urlParams);
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
 
-    BuildPage.toggleBuildInfoDropdown();
-
-    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
+    await percySnapshot(this.test.fullTitle() + ' on the build page');
+    await BuildPage.toggleBuildInfoDropdown();
+    await percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 });
 
@@ -62,16 +59,13 @@ describe('Acceptance: Processing Build', function() {
     };
   });
 
-  it('shows as processing', function() {
-    BuildPage.visitBuild(urlParams);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the build page');
+  it('shows as processing', async function() {
+    await BuildPage.visitBuild(urlParams);
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
 
-    BuildPage.toggleBuildInfoDropdown();
-
-    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
+    await percySnapshot(this.test.fullTitle() + ' on the build page');
+    await BuildPage.toggleBuildInfoDropdown();
+    await percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
   });
 });
 
@@ -98,24 +92,16 @@ describe('Acceptance: Failed Build', function() {
     };
   });
 
-  it('shows as failed', function() {
-    BuildPage.visitBuild(urlParams);
-
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' on the build page');
-
-    BuildPage.toggleBuildInfoDropdown();
-
-    percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
-
+  it('shows as failed', async function() {
+    await BuildPage.visitBuild(urlParams);
     window.Intercom = sinon.stub();
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
 
-    BuildPage.clickShowSupportLink();
-    andThen(() => {
-      expect(window.Intercom).to.have.been.calledWith('show');
-    });
+    await percySnapshot(this.test.fullTitle() + ' on the build page');
+    await BuildPage.toggleBuildInfoDropdown();
+    await percySnapshot(this.test.fullTitle() + ' on the build page with build info open');
+    await BuildPage.clickShowSupportLink();
+    expect(window.Intercom).to.have.been.calledWith('show');
   });
 });
 
@@ -163,29 +149,23 @@ describe('Acceptance: Build', function() {
   });
 
   describe('snapshot order/caching', function() {
-   it('displays snapshots in the correct order, before and after approval when build is finished', function() { // eslint-disable-line
+   it('displays snapshots in the correct order, before and after approval when build is finished', async function() { // eslint-disable-line
 
       const firstSnapshotExpectedName = defaultSnapshot.name;
       const secondSnapshotExpectedName = twoWidthsSnapshot.name;
 
-      BuildPage.visitBuild(urlParams);
+      await BuildPage.visitBuild(urlParams);
+      expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
+      expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
 
-      andThen(() => {
-        expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
-        expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
-      });
-
-      BuildPage.snapshots(0).clickApprove();
-
-      andThen(() => {
-        expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
-        expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
-      });
+      await BuildPage.snapshots(0).clickApprove();
+      expect(BuildPage.snapshots(0).name).to.equal(firstSnapshotExpectedName);
+      expect(BuildPage.snapshots(1).name).to.equal(secondSnapshotExpectedName);
     });
 
     // This tests the polling behavior in build-container and that initializeSnapshotOrdering method
     // is called and works correctly in builds/build controller.
-    it('sorts snapshots correctly when a build moves from processing to finished via polling', function() { // eslint-disable-line
+    it('sorts snapshots correctly when a build moves from processing to finished via polling', async function() { // eslint-disable-line
       // Get the mirage build object, set it to pending
       const build = server.schema.builds.where({id: '1'}).models[0];
       build.update({state: BUILD_STATES.PROCESSING});
@@ -211,151 +191,108 @@ describe('Acceptance: Build', function() {
         }
       });
 
-      BuildPage.visitBuild(urlParams);
+      await BuildPage.visitBuild(urlParams);
 
-      andThen(() => {
-        // We approved the snapshot that would normally be seen as first (default snapshot).
-        // So the normal second snapshot (twoWidthsSnapshot) will now be first, and defaultSnapshot
-        // will be second.
-        expect(BuildPage.snapshotList.lastSnapshot.name).to.equal(defaultSnapshot.name);
-        expect(BuildPage.snapshots(0).name).to.equal(twoWidthsSnapshot.name);
-      });
-      percySnapshot(this.test);
+      // We approved the snapshot that would normally be seen as first (default snapshot).
+      // So the normal second snapshot (twoWidthsSnapshot) will now be first, and defaultSnapshot
+      // will be second.
+      expect(BuildPage.snapshotList.lastSnapshot.name).to.equal(defaultSnapshot.name);
+      expect(BuildPage.snapshots(0).name).to.equal(twoWidthsSnapshot.name);
+
+      await percySnapshot(this.test);
     });
   });
 
   // TODO: test number of snapshots, expanded, actionable status for all
-  it('shows build overview info dropdown', function() {
-    BuildPage.visitBuild(urlParams);
-    BuildPage.toggleBuildInfoDropdown();
-    percySnapshot(this.test.fullTitle());
+  it('shows build overview info dropdown', async function() {
+    await BuildPage.visitBuild(urlParams);
+    await BuildPage.toggleBuildInfoDropdown();
+    await percySnapshot(this.test.fullTitle());
   });
 
-  it('toggles the image and pdiff', function() {
-    let snapshot;
-    BuildPage.visitBuild(urlParams);
+  it('toggles the image and pdiff', async function() {
+    await BuildPage.visitBuild(urlParams);
+    const snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
+    expect(BuildPage.snapshots(0).isDiffImageVisible).to.equal(true);
 
-    andThen(() => {
-      snapshot = BuildPage.findSnapshotByName(defaultSnapshot.name);
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(BuildPage.snapshots(0).isDiffImageVisible).to.equal(true);
+    await snapshot.clickDiffImage();
+    expect(snapshot.isDiffImageVisible).to.equal(false);
 
-      snapshot.clickDiffImage();
-    });
+    await percySnapshot(this.test.fullTitle() + ' | hides overlay');
+    await snapshot.clickDiffImageBox();
+    expect(snapshot.isDiffImageVisible).to.equal(true);
 
-    andThen(() => {
-      expect(snapshot.isDiffImageVisible).to.equal(false);
-    });
-
-    percySnapshot(this.test.fullTitle() + ' | hides overlay');
-
-    andThen(() => {
-      snapshot.clickDiffImageBox();
-    });
-
-    andThen(() => {
-      expect(snapshot.isDiffImageVisible).to.equal(true);
-    });
-
-    percySnapshot(this.test.fullTitle() + ' | shows overlay');
+    await percySnapshot(this.test.fullTitle() + ' | shows overlay');
   });
 
-  it('walk across snapshots with arrow keys', function() {
+  it('walk across snapshots with arrow keys', async function() {
     let firstSnapshot;
     let secondSnapshot;
     let thirdSnapshot;
     const urlBase = `/${project.fullSlug}/builds/1`;
 
-    BuildPage.visitBuild(urlParams);
+    await BuildPage.visitBuild(urlParams);
+    firstSnapshot = BuildPage.snapshots(0);
+    secondSnapshot = BuildPage.snapshots(1);
+    thirdSnapshot = BuildPage.snapshots(2);
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
+    expect(currentURL()).to.equal(urlBase);
 
-    andThen(() => {
-      firstSnapshot = BuildPage.snapshots(0);
-      secondSnapshot = BuildPage.snapshots(1);
-      thirdSnapshot = BuildPage.snapshots(2);
+    await BuildPage.typeDownArrow();
+    await percySnapshot(this.test.fullTitle() + ' | Down');
+    expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
+    expect(firstSnapshot.isFocused).to.equal(true);
+    expect(secondSnapshot.isFocused).to.equal(false);
+    expect(thirdSnapshot.isFocused).to.equal(false);
 
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(currentURL()).to.equal(urlBase);
-    });
+    await BuildPage.typeDownArrow();
+    await percySnapshot(this.test.fullTitle() + ' | Down > Down');
+    expect(BuildPage.focusedSnapshot().name).to.equal(twoWidthsSnapshot.name);
+    expect(firstSnapshot.isFocused).to.equal(false);
+    expect(secondSnapshot.isFocused).to.equal(true);
+    expect(thirdSnapshot.isFocused).to.equal(false);
 
-    BuildPage.typeDownArrow();
-    percySnapshot(this.test.fullTitle() + ' | Down');
-
-    andThen(() => {
-      expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
-      expect(firstSnapshot.isFocused).to.equal(true);
-      expect(secondSnapshot.isFocused).to.equal(false);
-      expect(thirdSnapshot.isFocused).to.equal(false);
-    });
-
-    BuildPage.typeDownArrow();
-    percySnapshot(this.test.fullTitle() + ' | Down > Down');
-
-    andThen(() => {
-      expect(BuildPage.focusedSnapshot().name).to.equal(twoWidthsSnapshot.name);
-      expect(firstSnapshot.isFocused).to.equal(false);
-      expect(secondSnapshot.isFocused).to.equal(true);
-      expect(thirdSnapshot.isFocused).to.equal(false);
-    });
-
-    BuildPage.typeUpArrow();
-    percySnapshot(this.test.fullTitle() + ' | Down > Down > Up');
-
-    andThen(() => {
-      expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
-      expect(firstSnapshot.isFocused).to.equal(true);
-      expect(secondSnapshot.isFocused).to.equal(false);
-      expect(thirdSnapshot.isFocused).to.equal(false);
-    });
+    await BuildPage.typeUpArrow();
+    await percySnapshot(this.test.fullTitle() + ' | Down > Down > Up');
+    expect(BuildPage.focusedSnapshot().name).to.equal(defaultSnapshot.name);
+    expect(firstSnapshot.isFocused).to.equal(true);
+    expect(secondSnapshot.isFocused).to.equal(false);
+    expect(thirdSnapshot.isFocused).to.equal(false);
   });
 
-  it('shows and hides unchanged diffs', function() {
+  it('shows and hides unchanged diffs', async function() {
     const snapshotName = noDiffsSnapshot.name;
 
-    BuildPage.visitBuild(urlParams);
+    await BuildPage.visitBuild(urlParams);
+    expect(BuildPage.isUnchangedPanelVisible).to.equal(true);
+    expect(BuildPage.findSnapshotByName(snapshotName)).to.not.exist;
 
-    andThen(() => {
-      expect(BuildPage.isUnchangedPanelVisible).to.equal(true);
-      expect(BuildPage.findSnapshotByName(snapshotName)).to.not.exist;
-    });
-
-    percySnapshot(this.test.fullTitle() + ' | shows batched no diffs');
-
-    BuildPage.clickToggleNoDiffsSection();
-
-    andThen(() => {
-      const snapshot = BuildPage.findSnapshotByName(snapshotName);
-      expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
-      expect(snapshot.isExpanded).to.equal(false);
-      expect(snapshot.isNoDiffBoxVisible).to.equal(false);
-    });
+    await percySnapshot(this.test.fullTitle() + ' | shows batched no diffs');
+    await BuildPage.clickToggleNoDiffsSection();
+    const snapshot = BuildPage.findSnapshotByName(snapshotName);
+    expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
+    expect(snapshot.isExpanded).to.equal(false);
+    expect(snapshot.isNoDiffBoxVisible).to.equal(false);
 
     const lastSnapshot = BuildPage.snapshotList.lastSnapshot;
-    lastSnapshot.expandSnapshot();
+    await lastSnapshot.expandSnapshot();
+    expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
+    expect(lastSnapshot.isExpanded).to.equal(true);
+    expect(lastSnapshot.isUnchangedComparisonsVisible).to.equal(true);
 
-    andThen(() => {
-      expect(BuildPage.isUnchangedPanelVisible).to.equal(false);
-      expect(lastSnapshot.isExpanded).to.equal(true);
-      expect(lastSnapshot.isUnchangedComparisonsVisible).to.equal(true);
-    });
-
-    percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
+    await percySnapshot(this.test.fullTitle() + ' | shows expanded no diffs');
   });
 
-  it('toggles full view', function() {
-    BuildPage.visitBuild(urlParams);
-    BuildPage.snapshots(0).header.clickToggleFullscreen();
+  it('toggles full view', async function() {
+    await BuildPage.visitBuild(urlParams);
+    await BuildPage.snapshots(0).header.clickToggleFullscreen();
+    expect(currentPath()).to.equal('organization.project.builds.build.snapshot');
+    expect(BuildPage.snapshotFullscreen.isVisible).to.equal(true);
 
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.snapshot');
-      expect(BuildPage.snapshotFullscreen.isVisible).to.equal(true);
-    });
-
-    BuildPage.snapshotFullscreen.header.clickToggleFullscreen();
-
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(BuildPage.snapshotFullscreen.isVisible).to.equal(false);
-    });
+    await BuildPage.snapshotFullscreen.header.clickToggleFullscreen();
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
+    expect(BuildPage.snapshotFullscreen.isVisible).to.equal(false);
   });
 });
 
@@ -387,61 +324,38 @@ describe('Acceptance: Fullscreen Snapshot', function() {
     };
   });
 
-  it('responds to keystrokes and click in full view', function() {
-    BuildPage.visitFullPageSnapshot(urlParams);
+  it('responds to keystrokes and click in full view', async function() {
+    await BuildPage.visitFullPageSnapshot(urlParams);
+    await BuildPage.snapshotFullscreen.typeRightArrow();
+    expect(currentURL()).to.include('mode=head');
 
-    BuildPage.snapshotFullscreen.typeRightArrow();
+    await BuildPage.snapshotFullscreen.typeLeftArrow();
+    expect(currentURL()).to.include('mode=diff');
 
-    andThen(() => {
-      expect(currentURL()).to.include('mode=head');
-    });
+    await BuildPage.snapshotFullscreen.clickComparisonViewer();
+    expect(currentURL()).to.include('mode=head');
 
-    BuildPage.snapshotFullscreen.typeLeftArrow();
-
-    andThen(() => {
-      expect(currentURL()).to.include('mode=diff');
-    });
-
-    BuildPage.snapshotFullscreen.clickComparisonViewer();
-    andThen(() => {
-      expect(currentURL()).to.include('mode=head');
-    });
-
-    BuildPage.snapshotFullscreen.typeEscape();
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.project.builds.build.index');
-      expect(BuildPage.snapshotFullscreen.isVisible).to.equal(false);
-    });
+    await BuildPage.snapshotFullscreen.typeEscape();
+    expect(currentPath()).to.equal('organization.project.builds.build.index');
+    expect(BuildPage.snapshotFullscreen.isVisible).to.equal(false);
   });
 
-  it('toggles between old/diff/new comparisons when interacting with comparison mode switcher', function() { // eslint-disable-line
-    BuildPage.visitFullPageSnapshot(urlParams);
+  it('toggles between old/diff/new comparisons when interacting with comparison mode switcher', async function() { // eslint-disable-line
+    await BuildPage.visitFullPageSnapshot(urlParams);
+    await BuildPage.snapshotFullscreen.clickBaseComparisonMode();
+    expect(BuildPage.snapshotFullscreen.comparisonImageUrl).to.equal(TEST_IMAGE_URLS.V1);
 
-    BuildPage.snapshotFullscreen.clickBaseComparisonMode();
+    await BuildPage.snapshotFullscreen.clickHeadComparisonMode();
+    expect(BuildPage.snapshotFullscreen.comparisonImageUrl).to.equal(TEST_IMAGE_URLS.V2);
 
-    andThen(() => {
-      expect(BuildPage.snapshotFullscreen.comparisonImageUrl).to.equal(TEST_IMAGE_URLS.V1);
-    });
-
-    BuildPage.snapshotFullscreen.clickHeadComparisonMode();
-
-    andThen(() => {
-      expect(BuildPage.snapshotFullscreen.comparisonImageUrl).to.equal(TEST_IMAGE_URLS.V2);
-    });
-
-    BuildPage.snapshotFullscreen.clickDiffComparisonMode();
-
-    andThen(() => {
-      expect(BuildPage.snapshotFullscreen.diffImageUrl).to.equal(TEST_IMAGE_URLS.DIFF_URL);
-    });
+    await BuildPage.snapshotFullscreen.clickDiffComparisonMode();
+    expect(BuildPage.snapshotFullscreen.diffImageUrl).to.equal(TEST_IMAGE_URLS.DIFF_URL);
   });
 
-  it('displays the dropdown', function() {
-    BuildPage.visitFullPageSnapshot(urlParams);
+  it('displays the dropdown', async function() {
+    await BuildPage.visitFullPageSnapshot(urlParams);
+    BuildPage.snapshotFullscreen.header.clickDropdownToggle();
 
-    andThen(() => {
-      BuildPage.snapshotFullscreen.header.clickDropdownToggle();
-    });
-    percySnapshot(this.test);
+    await percySnapshot(this.test);
   });
 });

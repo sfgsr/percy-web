@@ -2,51 +2,51 @@ import setupAcceptance, {setupSession} from '../helpers/setup-acceptance';
 
 describe('Acceptance: Marketing pages', function() {
   function visitAllMarketingPages({takeSnapshot = false}) {
-    it('can visit /', function() {
-      visit('/');
-      andThen(() => expect(currentPath()).to.equal('index'));
-      percySnapshot(this.test);
+    it('can visit /', async function() {
+      await visit('/');
+      expect(currentPath()).to.equal('index');
+      await percySnapshot(this.test);
     });
-    it('can visit /pricing', function() {
-      visit('/pricing');
-      andThen(() => expect(currentPath()).to.equal('pricing'));
+    it('can visit /pricing', async function() {
+      await visit('/pricing');
+      expect(currentPath()).to.equal('pricing');
       if (takeSnapshot) {
-        percySnapshot(this.test);
+        await percySnapshot(this.test);
       }
     });
-    it('can visit /docs', function() {
-      visit('/docs');
-      andThen(() => expect(currentPath()).to.equal('docs.index'));
+    it('can visit /docs', async function() {
+      await visit('/docs');
+      expect(currentPath()).to.equal('docs.index');
       if (takeSnapshot) {
-        percySnapshot(this.test);
+        await percySnapshot(this.test);
       }
     });
-    it('can visit /team', function() {
-      visit('/team');
-      andThen(() => expect(currentPath()).to.equal('team'));
+    it('can visit /team', async function() {
+      await visit('/team');
+      expect(currentPath()).to.equal('team');
       if (takeSnapshot) {
-        percySnapshot(this.test);
+        await percySnapshot(this.test);
       }
     });
-    it('can visit /security', function() {
-      visit('/security');
-      andThen(() => expect(currentPath()).to.equal('security'));
+    it('can visit /security', async function() {
+      await visit('/security');
+      expect(currentPath()).to.equal('security');
       if (takeSnapshot) {
-        percySnapshot(this.test);
+        await percySnapshot(this.test);
       }
     });
-    it('can visit /terms', function() {
-      visit('/terms');
-      andThen(() => expect(currentPath()).to.equal('terms'));
+    it('can visit /terms', async function() {
+      await visit('/terms');
+      expect(currentPath()).to.equal('terms');
       if (takeSnapshot) {
-        percySnapshot(this.test);
+        await percySnapshot(this.test);
       }
     });
-    it('can visit /privacy', function() {
-      visit('/privacy');
-      andThen(() => expect(currentPath()).to.equal('privacy'));
+    it('can visit /privacy', async function() {
+      await visit('/privacy');
+      expect(currentPath()).to.equal('privacy');
       if (takeSnapshot) {
-        percySnapshot(this.test);
+        await percySnapshot(this.test);
       }
     });
   }

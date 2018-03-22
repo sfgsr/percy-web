@@ -11,18 +11,15 @@ describe('Acceptance: Project', function() {
       this.organization = server.create('organization', 'withUser');
     });
 
-    it('can create', function() {
-      visit(`/${this.organization.slug}`);
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.index');
-      });
-      percySnapshot(this.test.fullTitle() + ' | index');
+    it('can create', async function() {
+      await visit(`/${this.organization.slug}`);
+      expect(currentPath()).to.equal('organization.index');
+      await percySnapshot(this.test.fullTitle() + ' | index');
 
-      click('a:contains("Create your first project")');
-      andThen(() => {
-        expect(currentPath()).to.equal('organizations.organization.projects.new');
-      });
-      percySnapshot(this.test.fullTitle() + ' | new project');
+      await click('a:contains("Create your first project")');
+      expect(currentPath()).to.equal('organizations.organization.projects.new');
+
+      await percySnapshot(this.test.fullTitle() + ' | new project');
     });
   });
 
@@ -37,15 +34,13 @@ describe('Acceptance: Project', function() {
       this.project = project;
     });
 
-    it('shows environment variables and demo project instructions', function() {
-      visit(`/${this.project.fullSlug}`);
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.project.index');
-      });
-      percySnapshot(this.test);
+    it('shows environment variables and demo project instructions', async function() {
+      await visit(`/${this.project.fullSlug}`);
+      expect(currentPath()).to.equal('organization.project.index');
 
-      click('a:contains("Demo Project Instructions")');
-      percySnapshot(this.test.fullTitle() + ' | demo project instructions are visible');
+      await percySnapshot(this.test);
+      await click('a:contains("Demo Project Instructions")');
+      await percySnapshot(this.test.fullTitle() + ' | demo project instructions are visible');
     });
   });
 
@@ -68,46 +63,39 @@ describe('Acceptance: Project', function() {
       this.disabledProject = disabled;
     });
 
-    it('for disabled', function() {
-      visit(`/${this.disabledProject.fullSlug}/settings`);
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.project.settings');
-        expect(find('[data-test-sidenav-list-projects] li:eq(0)').text()).to.match(
-          /Disabled Project/,
-        );
-        expect(find('[data-test-sidenav-list-projects] li:eq(1)').text()).to.match(
-          /Enabled Project/,
-        );
-        expect(find('[data-test-sidenav-list-projects] li:eq(2)').text()).to.match(
-          /Start new project/,
-        );
-      });
-      percySnapshot(this.test);
+    it('for disabled', async function() {
+      await visit(`/${this.disabledProject.fullSlug}/settings`);
+      expect(currentPath()).to.equal('organization.project.settings');
+      expect(find('[data-test-sidenav-list-projects] li:eq(0)').text()).to.match(
+        /Disabled Project/,
+      );
+      expect(find('[data-test-sidenav-list-projects] li:eq(1)').text()).to.match(/Enabled Project/);
+      expect(find('[data-test-sidenav-list-projects] li:eq(2)').text()).to.match(
+        /Start new project/,
+      );
+
+      await percySnapshot(this.test);
     });
 
-    it('for enabled', function() {
-      visit(`/${this.enabledProject.fullSlug}/settings`);
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.project.settings');
-        expect(find('[data-test-sidenav-list-projects] li:eq(0)').text()).to.match(
-          /Disabled Project/,
-        );
-        expect(find('[data-test-sidenav-list-projects] li:eq(1)').text()).to.match(
-          /Enabled Project/,
-        );
-        expect(find('[data-test-sidenav-list-projects] li:eq(2)').text()).to.match(
-          /Start new project/,
-        );
-      });
-      percySnapshot(this.test);
+    it('for enabled', async function() {
+      await visit(`/${this.enabledProject.fullSlug}/settings`);
+      expect(currentPath()).to.equal('organization.project.settings');
+      expect(find('[data-test-sidenav-list-projects] li:eq(0)').text()).to.match(
+        /Disabled Project/,
+      );
+      expect(find('[data-test-sidenav-list-projects] li:eq(1)').text()).to.match(/Enabled Project/);
+      expect(find('[data-test-sidenav-list-projects] li:eq(2)').text()).to.match(
+        /Start new project/,
+      );
+
+      await percySnapshot(this.test);
     });
 
-    it('displays github integration select menu', function() {
+    it('displays github integration select menu', async function() {
       organization.update({versionControlIntegrations: [versionControlIntegration], repos});
-      andThen(() => {
-        visit(`/${this.enabledProject.fullSlug}/settings`);
-      });
-      percySnapshot(this.test);
+
+      await visit(`/${this.enabledProject.fullSlug}/settings`);
+      await percySnapshot(this.test);
     });
   });
 
@@ -203,26 +191,20 @@ describe('Acceptance: Project', function() {
       this.project = project;
     });
 
-    it('shows builds on index', function() {
-      ProjectPage.visitProject(urlParams);
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.project.index');
-      });
-      percySnapshot(this.test);
+    it('shows builds on index', async function() {
+      await ProjectPage.visitProject(urlParams);
+      await percySnapshot(this.test);
+      expect(currentPath()).to.equal('organization.project.index');
     });
 
-    it('navigates to build page after clicking build', function() {
-      ProjectPage.visitProject(urlParams);
+    it('navigates to build page after clicking build', async function() {
+      await ProjectPage.visitProject(urlParams);
+      expect(currentPath()).to.equal('organization.project.index');
 
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.project.index');
-        ProjectPage.finishedBuilds[0].click();
-      });
+      await ProjectPage.finishedBuilds[0].click();
+      expect(currentPath()).to.equal('organization.project.builds.build.index');
 
-      andThen(() => {
-        expect(currentPath()).to.equal('organization.project.builds.build.index');
-      });
-      percySnapshot(this.test.fullTitle());
+      await percySnapshot(this.test.fullTitle());
     });
   });
 });

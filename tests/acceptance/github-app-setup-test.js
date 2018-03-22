@@ -13,30 +13,25 @@ describe('Acceptance: GitHub App Setup', function() {
     expect(githubInstallationId).to.be.ok; // eslint-disable-line no-unused-expressions
   });
 
-  it('shows GitHub integration processing page', function() {
-    visit('/setup/github-app?installation_id=123');
-    andThen(() => {
-      expect(currentPath()).to.equal('setup.github-app');
-    });
-    percySnapshot(this.test);
+  it('shows GitHub integration processing page', async function() {
+    await visit('/setup/github-app?installation_id=123');
+    expect(currentPath()).to.equal('setup.github-app');
+
+    await percySnapshot(this.test);
   });
 
-  it('redirects to organization page when the installation_id is present', function() {
-    visit(`/setup/github-app?installation_id=${githubInstallationId}`);
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.index');
-    });
+  it('redirects to organization page when the installation_id is present', async function() {
+    await visit(`/setup/github-app?installation_id=${githubInstallationId}`);
+    expect(currentPath()).to.equal('organization.index');
   });
 
   context('with a project', function() {
     setupSession(function(server) {
       server.create('project', {organization: this.organization});
     });
-    it('redirects to settings when the installation_id and project present', function() {
-      visit(`/setup/github-app?installation_id=${githubInstallationId}`);
-      andThen(() => {
-        expect(currentPath()).to.equal('organizations.organization.settings');
-      });
+    it('redirects to settings when the installation_id and project present', async function() {
+      await visit(`/setup/github-app?installation_id=${githubInstallationId}`);
+      expect(currentPath()).to.equal('organizations.organization.settings');
     });
   });
 });

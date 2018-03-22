@@ -29,11 +29,9 @@ export default function setupAcceptance({authenticate = true} = {}) {
 // aborts the tests. This helper lets you pass those errors to the application
 // so we can verify the error pages rendered.
 // Example:
-//   renderAdapterErrorsAsPage(() => {
-//     visit('/join/invalid-code');
-//     return andThen(() => {
-//       expect(currentPath()).to.equal('error');
-//     });
+//   renderAdapterErrorsAsPage(async () => {
+//     await visit('/join/invalid-code');
+//     expect(currentPath()).to.equal('error');
 //   );
 // See https://github.com/emberjs/ember.js/issues/12791
 export function renderAdapterErrorsAsPage(callbackThatReturnsAPromise) {

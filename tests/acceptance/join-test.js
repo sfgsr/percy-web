@@ -18,35 +18,29 @@ describe('Acceptance: Join', function() {
     server.create('invite', {id: 'expired-code', isExpired: true});
   });
 
-  it('expired rejected', function() {
-    visit('/join/expired-code');
-    andThen(() => {
-      expect(currentPath()).to.equal('join');
-    });
-    return percySnapshot(this.test);
+  it('expired rejected', async function() {
+    await visit('/join/expired-code');
+    expect(currentPath()).to.equal('join');
+
+    await percySnapshot(this.test);
   });
 
-  it('invalid rejected', function() {
-    renderAdapterErrorsAsPage(() => {
-      visit('/join/invalid-code');
-      andThen(() => {
-        expect(currentPath()).to.equal('error');
-      });
-      return percySnapshot(this.test);
+  it('invalid rejected', async function() {
+    await renderAdapterErrorsAsPage(async () => {
+      await visit('/join/invalid-code');
+      expect(currentPath()).to.equal('error');
+      await percySnapshot(this.test);
     });
   });
 
-  it('valid accepted', function() {
-    visit('/join/valid-code');
-    andThen(() => {
-      expect(currentPath()).to.equal('join');
-    });
-    percySnapshot(this.test);
+  it('valid accepted', async function() {
+    await visit('/join/valid-code');
+    expect(currentPath()).to.equal('join');
 
-    click('.InvitationHandler button:contains("Accept invitation")');
-    andThen(() => {
-      expect(currentPath()).to.equal('organization.index');
-    });
-    percySnapshot(this.test.fullTitle() + ' | Into organization');
+    await percySnapshot(this.test);
+    await click('.InvitationHandler button:contains("Accept invitation")');
+    expect(currentPath()).to.equal('organization.index');
+
+    await percySnapshot(this.test.fullTitle() + ' | Into organization');
   });
 });

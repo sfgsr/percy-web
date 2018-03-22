@@ -15,22 +15,14 @@ describe('Acceptance: Login', function() {
     this.server = server;
   });
 
-  it('should login and logout user', function() {
-    visit('/');
+  it('should login and logout user', async function() {
+    await visit('/');
     percySnapshot(this.test.fullTitle() + ' | Logged out');
 
-    andThen(() => {
-      this.server.create('user', {_currentLoginInTest: true});
-    });
+    this.server.create('user', {_currentLoginInTest: true});
+    await authenticateSession(this.application);
+    expect(currentPath()).to.equal('organizations.new');
 
-    andThen(() => {
-      authenticateSession(this.application);
-    });
-
-    andThen(() => {
-      expect(currentPath()).to.equal('organizations.new');
-    });
-
-    percySnapshot(this.test.fullTitle() + ' | Logged in');
+    await percySnapshot(this.test.fullTitle() + ' | Logged in');
   });
 });
