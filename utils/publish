@@ -39,21 +39,14 @@ echo "Deployed $IMAGE:$TAG"
 
 echo 'Publishing sourcemaps to Sentry...'
 
-# This publish script is run inside of Alpine linux so sentry-cli does not work since there are
-# there are missing system dependencies. Use the sentry-cli docker image instead.
-docker pull getsentry/sentry-cli
-docker run \
-  --rm \
-  -v $(pwd)/dist/assets:/mnt/data \
-  -e SENTRY_AUTH_TOKEN \
-  -it getsentry/sentry-cli \
-  sh -c "
-    sentry-cli releases -o $SENTRY_ORG new -p $SENTRY_PROJECT $BUILDKITE_COMMIT;
-    sentry-cli releases \
-      -o $SENTRY_ORG \
-      -p $SENTRY_PROJECT \
-      files $BUILDKITE_COMMIT upload-sourcemaps \
-        --url-prefix '~/static/assets' \
-        --validate \
-        /mnt/data
-  "
+SENTRY_ORG=percy
+SENTRY_PROJECT=prod-web
+VERSION="$BUILDKITE_COMMIT"
+
+sentry-cli releases -o "$SENTRY_ORG" new -p "$SENTRY_PROJECT" "$VERSION"
+sentry-cli releases \
+  -o "$SENTRY_ORG" -p "$SENTRY_PROJECT" files \
+  "$VERSION" upload-sourcemaps \
+  --url-prefix "~/static/assets" \
+  --validate \
+  dist/assets
