@@ -9,11 +9,11 @@ TAG="$BUILDKITE_COMMIT"
 echo "Building: $IMAGE:$TAG"
 
 # Make sure parent baseimage is available locally and up to date.
-gcloud docker -- pull $(grep '^FROM' Dockerfile | grep -o ' .*' | tr -d ' ')
+gcloud docker -- pull "$(grep '^FROM' Dockerfile | grep -o ' .*' | tr -d ' ')"
 
 # Build assets in the container, then copy them into dist/.
 # We have to do this with "docker cp" and not a mounted volume due to CI constraints.
-docker build -t $IMAGE:$TAG .
+docker build --build-arg version="$BUILDKITE_COMMIT" -t $IMAGE:$TAG .
 
 # Run container temporarily, then cleanup on exit or error.
 CONTAINER_ID=$(docker run -d -i $IMAGE:$TAG)
@@ -23,8 +23,6 @@ function cleanup() {
 }
 trap cleanup EXIT
 
-docker exec $CONTAINER_ID yarn build-production
-rm -rf dist/
 docker cp $CONTAINER_ID:/app/src/dist/ dist/
 
 # Upload new assets to GCS.
@@ -38,3 +36,17 @@ gsutil -m -h "Cache-Control: public,max-age=2678400" cp \
 gcloud docker -- push $IMAGE:$TAG
 
 echo "Deployed $IMAGE:$TAG"
+
+echo 'Publishing sourcemaps to Sentry...'
+
+SENTRY_ORG=percy
+SENTRY_PROJECT=prod-web
+VERSION="$BUILDKITE_COMMIT"
+
+sentry-cli releases -o "$SENTRY_ORG" new -p "$SENTRY_PROJECT" "$VERSION"
+sentry-cli releases \
+  -o "$SENTRY_ORG" -p "$SENTRY_PROJECT" files \
+  "$VERSION" upload-sourcemaps \
+  --url-prefix "~/static/assets" \
+  --validate \
+  dist/assets

@@ -30,7 +30,7 @@ module.exports = function(defaults) {
       optimize: false,
     },
     sourcemaps: {
-      enable: true,
+      enabled: true,
     },
   });
 
