@@ -39,14 +39,10 @@ echo "Deployed $IMAGE:$TAG"
 
 echo 'Publishing sourcemaps to Sentry...'
 
-SENTRY_ORG=percy
-SENTRY_PROJECT=prod-web
-VERSION="$BUILDKITE_COMMIT"
-
-sentry-cli releases -o "$SENTRY_ORG" new -p "$SENTRY_PROJECT" "$VERSION"
+sentry-cli releases -o "$SENTRY_ORG" new -p "$SENTRY_PROJECT" "$BUILDKITE_COMMIT"
 sentry-cli releases \
   -o "$SENTRY_ORG" -p "$SENTRY_PROJECT" files \
-  "$VERSION" upload-sourcemaps \
+  "$BUILDKITE_COMMIT" upload-sourcemaps \
   --url-prefix "~/static/assets" \
   --validate \
   dist/assets
