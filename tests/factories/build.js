@@ -26,12 +26,18 @@ FactoryGuy.define('build', {
         moment()
           .add(2, 'minutes')
           .add(31, 'seconds'),
+      totalComparisons: 15,
       totalComparisonsDiff: 10,
       totalComparisonsFinished: 15,
+      totalSnapshots: 10,
       totalSnapshotsUnreviewed: 8,
     },
     pending: {state: 'pending'},
-    processing: {state: 'processing'},
+    processing: {
+      state: 'processing',
+      totalComparisons: 2312,
+      totalComparisonsFinished: 1543,
+    },
     failed: {
       state: 'failed',
       failureReason: 'render_timeout',

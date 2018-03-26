@@ -43,6 +43,8 @@ describe('Integration: BuildContainer', function() {
 
     it('does not display snapshots while build is processing', function() {
       this.set('build.state', 'processing');
+      this.set('build.totalComparisons', 2312);
+      this.set('build.totalComparisonsFinished', 2187);
 
       percySnapshot(this.test.fullTitle());
       expect(BuildPage.snapshotList.isVisible).to.equal(false);
