@@ -5,10 +5,6 @@ import PollingMixin from 'percy-web/mixins/polling';
 export default Component.extend(PollingMixin, {
   build: null,
   classNames: ['BuildContainer'],
-  classNameBindings: [
-    'classes',
-    'isShowingModal:BuildContainer--snapshotModalOpen:BuildContainer--snapshotModalClosed',
-  ],
 
   snapshotsChanged: null,
   snapshotsUnchanged: null,
