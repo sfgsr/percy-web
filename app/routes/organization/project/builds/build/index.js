@@ -16,10 +16,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
     }
   },
 
-  resetController(controller) {
-    controller.set('showDiffs', true);
-  },
-
   _initializeSnapshotOrdering(snapshots) {
     // this route path needs to be explicit so it will work with fullscreen snapshots.
     let controller = this.controllerFor('organization.project.builds.build.index');
@@ -56,7 +52,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
       };
       this.analytics.track('Snapshot Fullscreen Selected', organization, eventProperties);
 
-      // this.send('updateModalState', true);
       this.transitionTo(
         'organization.project.builds.build.snapshot',
         snapshotId,
