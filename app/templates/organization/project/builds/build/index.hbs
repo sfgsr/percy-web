@@ -1,6 +1,8 @@
-{{!-- {{title model.buildTitle}}
+{{title model.buildTitle}}
 {{build-container
   build=model
+  showDiffs=showDiffs
+  toggleShowDiffs=(action "toggleShowDiffs")
   isSnapshotsLoading=isSnapshotsLoading
   openSnapshotFullModal='openSnapshotFullModal'
   isShowingModal=model.isShowingModal
@@ -9,5 +11,5 @@
   snapshotsUnchanged=snapshotsUnchanged
   initializeSnapshotOrdering=(route-action "initializeSnapshotOrdering")
   showSupport=(route-action "showSupport")
-}} --}}
+}}
 {{outlet}}
