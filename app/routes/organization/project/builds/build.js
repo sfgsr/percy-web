@@ -16,6 +16,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
     }
   },
 
+  resetController(controller) {
+    controller.set('showDiffs', true);
+  },
+
   _initializeSnapshotOrdering(snapshots) {
     // this route path needs to be explicit so it will work with fullscreen snapshots.
     let controller = this.controllerFor('organization.project.builds.build');

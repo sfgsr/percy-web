@@ -10,6 +10,7 @@ const SELECTORS = {
   BUILD_INFO_DROPDOWN_TOGGLE: '[data-test-build-info-dropdown-toggle]',
   SHOW_SUPPORT_LINK: '[data-test-build-overview-show-support]',
   TOGGLE_DIFFS_BUTTON: '[data-test-toggle-diffs-button]',
+  PROJECT_LINK: '[data-test-build-toolbar-project-link]',
 };
 
 const BuildPage = {
@@ -48,6 +49,8 @@ const BuildPage = {
   urlWithSnapshotQueryParam(snapshot, build) {
     return `/${build.project.fullSlug}/builds/${build.id}?snapshot=${snapshot.id}`;
   },
+
+  clickProject: clickable(SELECTORS.PROJECT_LINK),
 
   typeDownArrow: alias('snapshotList.typeDownArrow'),
   typeUpArrow: alias('snapshotList.typeUpArrow'),

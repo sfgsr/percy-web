@@ -6,6 +6,7 @@ import BuildPage from 'percy-web/tests/pages/build-page';
 import {TEST_IMAGE_URLS} from 'percy-web/mirage/factories/screenshot';
 import {SNAPSHOT_APPROVED_STATE, SNAPSHOT_REVIEW_STATE_REASONS} from 'percy-web/models/snapshot';
 import {BUILD_STATES} from 'percy-web/models/build';
+import ProjectPage from 'percy-web/tests/pages/project-page';
 
 describe('Acceptance: Pending Build', function() {
   freezeMoment('2018-05-22');
@@ -231,6 +232,27 @@ describe('Acceptance: Build', function() {
     await percySnapshot(this.test.fullTitle() + ' | shows overlay');
     await BuildPage.typeSpace();
     expect(BuildPage.isDiffsHiddenForAllSnapshots).to.equal(true);
+  });
+
+  it('always shows diffs when navigating to a new route', async function() {
+    // Add another build so we can transition to it.
+    server.create('build', {
+      project,
+      createdAt: moment().subtract(5, 'minutes'),
+      finishedAt: moment().subtract(10, 'seconds'),
+      totalSnapshotsUnreviewed: 1,
+      totalSnapshots: 1,
+    });
+
+    await BuildPage.visitBuild(urlParams);
+    expect(BuildPage.isDiffsVisibleForAllSnapshots).to.equal(true);
+
+    await BuildPage.clickToggleDiffsButton();
+    expect(BuildPage.isDiffsHiddenForAllSnapshots).to.equal(true);
+
+    await BuildPage.clickProject();
+    await ProjectPage.builds(1).click();
+    expect(BuildPage.isDiffsVisibleForAllSnapshots).to.equal(true);
   });
 
   it('walk across snapshots with arrow keys', async function() {
