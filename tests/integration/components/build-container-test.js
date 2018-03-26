@@ -33,6 +33,7 @@ describe('Integration: BuildContainer', function() {
       // but we can't have the component make requests in this integration test
       this.render(hbs`{{build-container
         build=build
+        toggleShowDiffs=stub
         snapshotsChanged=snapshotsChanged
         snapshotsUnchanged=snapshotsUnchanged
         createReview=stub
@@ -82,6 +83,7 @@ describe('Integration: BuildContainer', function() {
     // but we can't have the component make requests in this integration test
     this.render(hbs`{{build-container
       build=build
+      toggleShowDiffs=stub
       isSnapshotsLoading=true
       createReview=stub
       pollRefresh=stub
@@ -107,6 +109,7 @@ describe('Integration: BuildContainer', function() {
     // but we can't have the component make requests in this integration test
     this.render(hbs`{{build-container
       build=build
+      toggleShowDiffs=stub
       snapshotsChanged=snapshotsChanged
       snapshotsUnchanged=snapshotsUnchanged
       createReview=stub
