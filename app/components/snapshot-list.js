@@ -27,7 +27,7 @@ export default Component.extend({
     toggleUnchangedSnapshotsVisible() {
       this.set('isUnchangedSnapshotsLoading', true);
       this.get('snapshotQuery')
-        .getUnchangedSnapshots()
+        .getUnchangedSnapshots(this.get('build.id'))
         .then(snapshots => {
           this.set('snapshotsUnchanged', snapshots);
           this.set('isUnchangedSnapshotsLoading', false);

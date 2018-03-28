@@ -2,19 +2,19 @@ import Service, {inject as service} from '@ember/service';
 
 export default Service.extend({
   store: service(),
-  getUnchangedSnapshots() {
+  getUnchangedSnapshots(buildId) {
     return this.get('store').query('snapshot', {
       filter: {
-        build: this.get('build.id'),
+        build: buildId,
         with_diffs: false,
       },
     });
   },
 
-  getChangedSnapshots() {
+  getChangedSnapshots(buildId) {
     return this.get('store').query('snapshot', {
       filter: {
-        build: this.get('build.id'),
+        build: buildId,
         with_diffs: true,
       },
     });

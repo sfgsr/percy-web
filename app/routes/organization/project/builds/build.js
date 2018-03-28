@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       controller.set('isSnapshotsLoading', true);
 
       this.get('snapshotQuery')
-        .getChangedSnapshots()
+        .getChangedSnapshots(model.get('id'))
         .then(snapshots => {
           return this._initializeSnapshotOrdering(snapshots);
         });
