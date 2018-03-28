@@ -15,6 +15,8 @@ export default Route.extend(AuthenticatedRouteMixin, {
       this.get('snapshotQuery')
         .getChangedSnapshots(model.get('id'))
         .then(snapshots => {
+          const numSnapshotsMissing = model.get('totalSnapshots') - snapshots.get('length');
+          controller.set('numSnapshotsMissing', numSnapshotsMissing);
           return this._initializeSnapshotOrdering(snapshots);
         });
     }

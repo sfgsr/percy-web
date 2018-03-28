@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import snapshotSort from 'percy-web/lib/snapshot-sort';
-import {filterBy} from '@ember/object/computed';
+import {filterBy, alias} from '@ember/object/computed';
 import {computed} from '@ember/object';
 
 export default Controller.extend({
@@ -16,6 +16,9 @@ export default Controller.extend({
   snapshotsApproved: filterBy('sortedSnapshots', 'isApprovedByUserEver', true),
 
   snapshotsChanged: null, // Manually managed by initializeSnapshotOrdering.
+
+  numSnapshotsMissing: 0,
+  numSnapshotsUnchanged: alias('numSnapshotsMissing'),
 
   // This breaks the binding for snapshotsChanged, specifically so that when a user clicks
   // approve, the snapshot stays in place until reload.

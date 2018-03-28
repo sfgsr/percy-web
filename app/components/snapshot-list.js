@@ -12,6 +12,7 @@ export default Component.extend({
   snapshotQuery: service(),
   isUnchangedSnapshotsVisible: false,
   isUnchangedSnapshotsLoading: false,
+  numSnapshotsUnchanged: 0,
 
   snapshotsChanged: null,
   snapshotsUnchanged: null,
