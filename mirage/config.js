@@ -241,8 +241,20 @@ export default function() {
     return invite;
   });
 
+  this.get('/builds/:build_id/snapshots', function(schema, request) {
+    const build = schema.builds.findBy({id: request.params.build_id});
+    if (request.queryParams['filter[with_diffs]'] === 'true') {
+      return schema.snapshots.where(snapshot => {
+        return snapshot.buildId === build.id && snapshot.reviewStateReason !== 'no_diffs';
+      });
+    } else if (request.queryParams['filter[with_diffs]'] === 'false') {
+      return schema.snapshots.where({buildId: build.id, reviewStateReason: 'no_diffs'});
+    } else {
+      return schema.snapshots.where({buildId: build.id});
+    }
+  });
+
   this.get('/builds/:id');
-  this.get('/builds/:build_id/snapshots');
   this.get('/builds/:build_id/comparisons');
   this.get('/repos/:id');
   this.post('/reviews');
