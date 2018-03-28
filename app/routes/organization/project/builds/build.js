@@ -10,9 +10,16 @@ export default Route.extend(AuthenticatedRouteMixin, {
       let controller = this.controllerFor('organization.project.builds.build');
       controller.set('isSnapshotsLoading', true);
 
-      model.get('snapshots').then(snapshots => {
-        this._initializeSnapshotOrdering(snapshots);
-      });
+      this.store
+        .query('snapshot', {
+          filter: {
+            build: model.get('id'),
+            with_diffs: true,
+          },
+        })
+        .then(snapshots => {
+          return this._initializeSnapshotOrdering(snapshots);
+        });
     }
   },
 

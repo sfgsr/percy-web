@@ -16,7 +16,6 @@ export default Controller.extend({
   snapshotsApproved: filterBy('sortedSnapshots', 'isApprovedByUserEver', true),
 
   snapshotsChanged: null, // Manually managed by initializeSnapshotOrdering.
-  snapshotsUnchanged: filterBy('sortedSnapshots', 'isUnchanged', true),
 
   // This breaks the binding for snapshotsChanged, specifically so that when a user clicks
   // approve, the snapshot stays in place until reload.
