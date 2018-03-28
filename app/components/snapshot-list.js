@@ -9,6 +9,7 @@ export default Component.extend({
   attributeBindings: ['data-test-snapshot-list'],
   'data-test-snapshot-list': true,
   store: service(),
+  snapshotQuery: service(),
   isUnchangedSnapshotsVisible: false,
   isUnchangedSnapshotsLoading: false,
 
@@ -25,13 +26,8 @@ export default Component.extend({
     },
     toggleUnchangedSnapshotsVisible() {
       this.set('isUnchangedSnapshotsLoading', true);
-      this.get('store')
-        .query('snapshot', {
-          filter: {
-            build: this.get('build.id'),
-            with_diffs: false,
-          },
-        })
+      this.get('snapshotQuery')
+        .getUnchangedSnapshots()
         .then(snapshots => {
           this.set('snapshotsUnchanged', snapshots);
           this.set('isUnchangedSnapshotsLoading', false);

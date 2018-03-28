@@ -1,7 +1,9 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import {inject as service} from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
+  snapshotQuery: service(),
   model(params) {
     return this.store.findRecord('build', params.build_id);
   },
@@ -10,13 +12,8 @@ export default Route.extend(AuthenticatedRouteMixin, {
       let controller = this.controllerFor('organization.project.builds.build');
       controller.set('isSnapshotsLoading', true);
 
-      this.store
-        .query('snapshot', {
-          filter: {
-            build: model.get('id'),
-            with_diffs: true,
-          },
-        })
+      this.get('snapshotQuery')
+        .getChangedSnapshots()
         .then(snapshots => {
           return this._initializeSnapshotOrdering(snapshots);
         });
