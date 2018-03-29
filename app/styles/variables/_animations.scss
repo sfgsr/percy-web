@@ -137,3 +137,13 @@
     transform: translate3d(0, 0%, 0);
   }
 }
+
+@keyframes progress-bar {
+  0% {
+    background-position: -30vw 0;
+  }
+
+  100% {
+    background-position: 70vw 0;
+  }
+}

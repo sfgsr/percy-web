@@ -47,10 +47,9 @@ describe('Acceptance: Processing Build', function() {
   setupSession(function(server) {
     let organization = server.create('organization', 'withUser');
     let project = server.create('project', {name: 'project-with-processing-build', organization});
-    let build = server.create('build', {
+    let build = server.create('build', 'processing', {
       project,
       createdAt: moment().subtract(2, 'minutes'),
-      state: 'processing',
     });
 
     urlParams = {

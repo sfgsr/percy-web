@@ -25,8 +25,14 @@
   </div>
 </div>
 <div class="f5 text-weight-semibold text-light">
-  {{#if (or build.isPending build.isProcessing)}}
+  {{#if build.isPending}}
     Hang tight&hellip;
+  {{else if build.isProcessing}}
+    {{#if (eq progressBarWidth "0%")}}
+      Finishing up&hellip;
+    {{else}}
+      <span class="text-dark">{{build.totalComparisonsFinished}}</span> of <span class="text-dark">{{build.totalComparisons}}</span> screenshots processed
+    {{/if}}
   {{else if build.isFinished}}
     <div>
       {{#if build.isApproved}}
