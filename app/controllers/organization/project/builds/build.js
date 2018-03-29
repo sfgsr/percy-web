@@ -2,8 +2,10 @@ import Controller from '@ember/controller';
 import snapshotSort from 'percy-web/lib/snapshot-sort';
 import {filterBy} from '@ember/object/computed';
 import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
 
 export default Controller.extend({
+  analytics: service(),
   // set by initializeSnapshotOrdering
   snapshots: null,
   sortedSnapshots: computed('snapshots.[]', function() {
@@ -21,8 +23,19 @@ export default Controller.extend({
   showDiffs: true,
 
   actions: {
-    toggleShowDiffs() {
+    toggleShowDiffs(options = {}) {
+      let eventTrigger = options.eventTrigger;
       this.toggleProperty('showDiffs');
+
+      let build = this.get('build');
+      let organization = build.get('project.organization');
+      let eventProperties = {
+        project_id: build.get('project.id'),
+        project_slug: build.get('project.slug'),
+        build_id: build.get('id'),
+        trigger: eventTrigger,
+      };
+      this.get('analytics').track('Diff Toggled', organization, eventProperties);
     },
   },
 

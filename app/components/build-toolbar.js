@@ -6,4 +6,10 @@ export default Component.extend({
   toggleShowDiffs: null,
 
   classNames: ['BuildToolbar'],
+
+  actions: {
+    toggleOverlay() {
+      this.get('toggleShowDiffs')({eventTrigger: 'clicked_toggle'});
+    },
+  },
 });

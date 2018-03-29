@@ -16,6 +16,11 @@ export default Route.extend(AuthenticatedRouteMixin, {
     }
   },
 
+  setupController(controller, model) {
+    this._super(...arguments);
+    controller.set('build', model);
+  },
+
   resetController(controller) {
     controller.set('showDiffs', true);
   },

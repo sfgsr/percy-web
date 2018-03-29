@@ -41,6 +41,8 @@ export default Component.extend({
             // d key
             e.preventDefault();
             this.get('toggleShowDiffs')();
+            // console.log('Diff toggled with keyboard');
+            this.analytics.track('Diff toggled with keyboard');
           }
         }
       }.bind(this),
