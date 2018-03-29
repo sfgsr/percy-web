@@ -13,15 +13,17 @@
   </div>
   {{trial-bar organization=organization}}
   <div class="flex align-center">
-    <button type="button" class="btn btn-square hint--bottom hint--rounded hint--bounce" aria-label="Toggle diffs (d)" {{action toggleShowDiffs}} data-test-toggle-diffs-button>
-      <figure class="svg-container">
-        {{#if showDiffs}}
-          {{inline-svg "diff-toggle-on"}}
-        {{else}}
-          {{inline-svg "diff-toggle-off"}}
-        {{/if}}
-      </figure>
-    </button>
+    {{#if build.isFinished}}
+      <button type="button" class="btn btn-square hint--bottom hint--rounded hint--bounce" aria-label="Toggle diffs (d)" {{action toggleShowDiffs}} data-test-toggle-diffs-button>
+        <figure class="svg-container">
+          {{#if showDiffs}}
+            {{inline-svg "diff-toggle-on"}}
+          {{else}}
+            {{inline-svg "diff-toggle-off"}}
+          {{/if}}
+        </figure>
+      </button>
+    {{/if}}
     {{approval-section build=build createReview=createReview}}
   </div>
 </header>
