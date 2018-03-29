@@ -3,7 +3,7 @@ import {SnapshotViewer} from 'percy-web/tests/pages/components/snapshot-viewer';
 
 const DOWN_ARROW_KEY = 40;
 const UP_ARROW_KEY = 38;
-const SPACEBAR_KEY = 32;
+const D_KEY = 68;
 
 const SELECTORS = {
   SNAPSHOT_LIST: '[data-test-snapshot-list]',
@@ -89,7 +89,7 @@ export const SnapshotList = {
     eventProperties: {keyCode: UP_ARROW_KEY},
   }),
   typeSpace: triggerable('keydown', '', {
-    eventProperties: {keyCode: SPACEBAR_KEY},
+    eventProperties: {keyCode: D_KEY},
   }),
 };
 
