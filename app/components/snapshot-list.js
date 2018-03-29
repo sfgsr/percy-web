@@ -37,8 +37,8 @@ export default Component.extend({
           } else if (e.keyCode === 38) {
             // up arrow
             this.set('activeSnapshotId', this._calculateNewActiveSnapshotId({isNext: false}));
-          } else if (e.keyCode === 32) {
-            // space
+          } else if (e.keyCode === 68) {
+            // d key
             e.preventDefault();
             this.get('toggleShowDiffs')();
           }
