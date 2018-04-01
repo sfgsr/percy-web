@@ -1,4 +1,4 @@
-FROM gcr.io/percy_dev/baseimage-web:2017-12-10-181906
+FROM gcr.io/percy_dev/baseimage-web:2018-03-31-223908
 
 # Configure nginx.
 ADD config/nginx-main.conf /etc/nginx/nginx.conf
@@ -8,13 +8,6 @@ ADD config/nginx-default-site.conf /etc/nginx/sites-enabled/default
 ADD config/run-nginx.sh /etc/service/nginx/run
 RUN chmod +x /etc/service/*/run
 
-# Global npm packages.
-RUN yarn global add bower
-
-# Global test/development packages.
-# TODO: if these get much bigger, split out to separate Dockerfile so we don't bloat the prod image.
-RUN yarn global add phantomjs-prebuilt
-
 # Setup the app directory and build the ember app.
 ADD package.json yarn.lock bower.json /app/src/
 WORKDIR /app/src/
@@ -23,7 +16,13 @@ RUN bower install --allow-root
 # Setup the full app directory (do this after package install to speed up docker builds).
 ADD . /app/src/
 
+ARG testing="false"
 ARG version
+
 ENV VERSION=$version
 
-RUN yarn run build-production
+RUN if [ "$testing" = "true" ] ; then \
+  yarn run build --environment=test -o dist; \
+else \
+  yarn run build-production; \
+fi

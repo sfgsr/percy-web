@@ -5,7 +5,9 @@ services:
     image: gcr.io/percy_dev/web:local
     ports:
       - "8080:8080"
+    shm_size: 1G
     environment:
+      - DOCKER=true
       - BUILDKITE
       - BUILDKITE_COMMIT
       - BUILDKITE_BRANCH

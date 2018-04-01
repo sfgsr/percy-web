@@ -98,6 +98,10 @@ module.exports = function(environment) {
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
+    // TODO: false is the default, but ember-mocha compatibility currently requires
+    // this to be true.
+    ENV.APP.autoboot = true;
+
     ENV.APP.rootElement = '#ember-testing';
     ENV['ember-tether'] = {bodyElementId: 'ember-testing'};
 

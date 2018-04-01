@@ -3,6 +3,20 @@ module.exports = {
   framework: 'mocha',
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
-  launch_in_ci: ['PhantomJS'],
-  launch_in_dev: ['PhantomJS'],
+  launch_in_ci: ['Chrome'],
+  launch_in_dev: ['Chrome'],
+  browser_args: {
+    Chrome: {
+      mode: 'ci',
+      args: [
+        // --no-sandbox is needed when running Chrome inside a container
+        process.env.DOCKER ? '--no-sandbox' : null,
+
+        '--headless',
+        '--disable-gpu',
+        '--remote-debugging-port=0',
+        '--window-size=1440,900',
+      ].filter(Boolean),
+    },
+  },
 };
