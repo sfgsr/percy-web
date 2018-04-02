@@ -67,6 +67,7 @@
     "ember-fakerjs": "^0.2.0",
     "ember-font-awesome": "^3.0.5",
     "ember-inflector": "^2.0.1",
+    "ember-inline-svg": "^0.1.11",
     "ember-load-initializers": "^1.0.0",
     "ember-modal-dialog": "^2.4.0",
     "ember-moment": "^7.6.0",
@@ -97,16 +98,14 @@
     "percy-docs": "git+https://github.com/percy/percy-docs.git#2195ca2b7f51886bfcff04e1ad1121e9ab61f1c9",
     "prettier": "^1.11.0",
     "prettier-eslint-cli": "^4.7.0",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint": "^8.3.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^0.8.0",
+    "stylelint-scss": "^2.5.0"
   },
   "engines": {
     "node": ">= 6.9.1"
   },
   "private": true,
-  "dependencies": {
-    "ember-inline-svg": "^0.1.11",
-    "stylelint": "^8.3.1",
-    "stylelint-order": "^0.8.0",
-    "stylelint-scss": "^2.5.0"
-  }
+  "dependencies": {}
 }
