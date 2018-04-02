@@ -22,7 +22,7 @@ ARG version
 ENV VERSION=$version
 
 RUN if [ "$testing" = "true" ] ; then \
-  yarn run build --environment=test -o dist; \
+  yarn run build-test; \
 else \
   yarn run build-production; \
 fi
