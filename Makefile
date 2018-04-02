@@ -4,7 +4,7 @@ _pull_parent_image:
 build: _pull_parent_image
 	docker-compose build
 
-build-test:
+build-test: _pull_parent_image
 	docker-compose build --build-arg testing="true" web
 
 test: _pull_parent_image
